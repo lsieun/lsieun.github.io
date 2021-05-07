@@ -1,0 +1,93 @@
+---
+layout: default
+---
+
+<div class="home w3-row">
+  {%- if page.title -%}
+    <h1 class="page-heading">{{ page.title }}</h1>
+  {%- endif -%}
+
+  {{ content }}
+
+  <!-- Blog entries -->
+  <div class="w3-col l8 s12">
+  {%- if site.posts.size > 0 -%}
+  {%- for post in site.posts -%}
+  {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+  <!-- Blog entry -->
+  <div class="w3-card-4 w3-margin w3-white">
+    {%- if post.image -%}
+    <img src="{{ post.image }}" style="width:100%"/>
+    {%- endif -%}
+
+    <div class="w3-container">
+      <h2><b>{{ post.title | escape }}</b></h2>
+    </div>
+
+    <div class="w3-container">
+      {%- if site.show_excerpts -%}
+      <p>
+        {{ post.excerpt }}
+      </p>
+      {%- endif -%}
+
+      <div class="w3-row">
+        <div class="w3-col m8 s12">
+          <p><a class="w3-button w3-padding-large w3-white w3-border" href="{{ post.url | relative_url }}"><b>READ MORE »</b></a></p>
+        </div>
+        <div class="w3-col m4 w3-hide-small">
+          <p><span class="w3-padding-large w3-right"><b>{{ post.date | date: date_format }}</b></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  {%- endfor -%}
+
+  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+  {%- endif -%}
+  </div>
+
+  <!-- Introduction menu -->
+  <div class="w3-col l4">
+    <!-- About Card -->
+    <div class="w3-card w3-margin w3-margin-top">
+      <img src="/assets/images/avatar_g.jpg" style="width:100%">
+      <div class="w3-container w3-white">
+        <h4><b>靡不有初，鲜克有终</b></h4>
+        <p>
+          博学之，审问之，慎思之，明辨之，笃行之。<br/>
+          有弗学，学之弗能，弗措也；<br/>
+          有弗问，问之弗知，弗措也；<br/>
+          有弗思，思之弗得，弗措也；<br/>
+          有弗辨，辨之弗明，弗措也；<br/>
+          有弗行，行之弗笃，弗措也。<br/>
+          人一能之，己百之，人十能之，己千之。<br/>
+          果能此道矣，虽愚必明，虽柔必强。--《礼记·中庸》
+        </p>
+      </div>
+    </div><hr>
+
+    <!-- Labels / tags -->
+    <div class="w3-card w3-margin">
+      <div class="w3-container w3-padding">
+        <h4>Tags</h4>
+      </div>
+      <div class="w3-container w3-white">
+        <p>
+          {%- if site.tags.size > 0 -%}
+          {%- assign sorted_tags = site.tags | sort -%}
+          {%- for tag in sorted_tags -%}
+          {%- assign tagName = tag | first | downcase -%}
+          <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">{{ tagName | escape }}</span>
+          {%- endfor -%}
+          {%- endif -%}
+
+        </p>
+      </div>
+
+    <!-- END Introduction Menu -->
+    </div>
+
+  </div>
+</div>
