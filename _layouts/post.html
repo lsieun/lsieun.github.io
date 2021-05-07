@@ -25,3 +25,15 @@ layout: default
 
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 </article>
+
+<div id="toc_div" class="w3-card" style="position:fixed;padding:7px;bottom:50px;left:0;max-width:450px;z-index:999;display:none;">
+        <span onclick="document.getElementById('toc_div').style.display='none'"
+              class="w3-button w3-display-topright">&times;</span>
+  <div class="at">
+    <!-- at == auto table of content -->
+    <!-- https://www.jqueryscript.net/menu/TOC-Generator-Smooth-Scroll-autoToc.html -->
+  </div>
+  <span onclick="document.getElementById('toc_div').style.display='none'"
+        class="w3-button w3-display-bottomleft" style="font-size: 10px">CLOSE</span>
+</div>
+<div class="w3-clear"></div>

@@ -36,3 +36,26 @@ Check if Jekyll has been installed properly:
 $ jekyll -v
 jekyll 4.2.0
 {% endhighlight %}
+
+## Run Jekyll
+
+CentOS 7.6
+
+{% highlight bash %}
+$ bundle exec jekyll serve --detach
+$ bundle exec jekyll serve --detach --ssl-key private.key --ssl-cert cert.pem
+{% endhighlight %}
+
+## Exit Jekyll
+
+CentOS 7.6
+
+{% highlight bash %}
+# 查看哪些端口正在运行
+$ netstat -nltp
+
+$ pkill -f jekyll
+# 或者
+$ kill -9 process_id
+{% endhighlight %}
+

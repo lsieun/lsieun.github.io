@@ -530,6 +530,10 @@ Code_attribute {
 }
 {% endhighlight %}
 
+因为instruction的内容（对应于`visitXxxInsn()`方法的调用）存储于`Code`结构当中的`code[]`内，而try-catch的内容（对应于`visitTryCatchBlock()`方法的调用），存储在`Code`结构当中的`exception_table[]`内，所以`visitTryCatchBlock()`方法的调用时机，可以早一点，也可以晚一点，只要整体上遵循`MethodVisitor`类对就于`visitXxx()`方法调用的顺序要求就可以了。
+
+对于`test()`方法，在`.class`文件存储的`Code`结构如下：
+
 {% highlight text %}
 attribute_name_index='000F' (#15)
 attribute_length='00000080' (128)
@@ -549,6 +553,8 @@ attributes_count='0003' (3)
     LocalVariableTable: 0011000000160002001A00040015001600010000001F001200130000
     StackMapTable: 00170000000700025907001804
 {% endhighlight %}
+
+虽然上面的内容符合`Code`结构，但是对于其中`code`的展示并不直观，我们可以转换成如下的表示形式：
 
 {% highlight text %}
 === === ===  === === ===  === === ===
@@ -577,3 +583,65 @@ from    to  target  type
 0030: return               // B1
 === === ===  === === ===  === === ===
 {% endhighlight %}
+
+第二个问题，刚才的示例当中只有try...catch，而没有`finally`，那出现`finally`会怎么样处理呢？
+
+{% highlight java %}
+{% raw %}
+public class HelloWorld {
+    public void test() {
+        try {
+            System.out.println("try clause");
+        }
+        catch (Exception ex) {
+            System.out.println("catch clause");
+        }
+        finally {
+            System.out.println("finally Clause");
+        }
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+实际上，当一个Java文件编译成Class文件过程中，`finally`代码块里的语句，会被“复制”到`try`代码块和`catch`代码块中，因此在bytecode中不存在`finally`对应的opcode，在ASM代码中也不存在`visitXxx()`方法来生成`finally`内容。
+
+{% highlight text %}
+=== === ===  === === ===  === === ===
+Method test:()V
+=== === ===  === === ===  === === ===
+max_stack = 2
+max_locals = 3
+code_length = 51
+code = B200021203B60004B200021205B60004A700224CB200021207B60004B200021205B60004A7000E4DB200021205B600042CBFB1
+Exception Table:
+from    to  target  type
+   0     8      19  java/lang/Exception
+   0     8      39  All Exceptions(catch_type = 0)
+  19    28      39  All Exceptions(catch_type = 0)
+=== === ===  === === ===  === === ===
+0000: getstatic       #2   // B20002     || java/lang/System.out:Ljava/io/PrintStream;
+0003: ldc             #3   // 1203       || try clause
+0005: invokevirtual   #4   // B60004     || java/io/PrintStream.println:(Ljava/lang/String;)V
+0008: getstatic       #2   // B20002     || java/lang/System.out:Ljava/io/PrintStream;
+0011: ldc             #5   // 1205       || finally Clause
+0013: invokevirtual   #4   // B60004     || java/io/PrintStream.println:(Ljava/lang/String;)V
+0016: goto            34   // A70022
+0019: astore_1             // 4C
+0020: getstatic       #2   // B20002     || java/lang/System.out:Ljava/io/PrintStream;
+0023: ldc             #7   // 1207       || catch clause
+0025: invokevirtual   #4   // B60004     || java/io/PrintStream.println:(Ljava/lang/String;)V
+0028: getstatic       #2   // B20002     || java/lang/System.out:Ljava/io/PrintStream;
+0031: ldc             #5   // 1205       || finally Clause
+0033: invokevirtual   #4   // B60004     || java/io/PrintStream.println:(Ljava/lang/String;)V
+0036: goto            14   // A7000E
+0039: astore_2             // 4D
+0040: getstatic       #2   // B20002     || java/lang/System.out:Ljava/io/PrintStream;
+0043: ldc             #5   // 1205       || finally Clause
+0045: invokevirtual   #4   // B60004     || java/io/PrintStream.println:(Ljava/lang/String;)V
+0048: aload_2              // 2C
+0049: athrow               // BF
+0050: return               // B1
+=== === ===  === === ===  === === ===
+{% endhighlight %}
+
