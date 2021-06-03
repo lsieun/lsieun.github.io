@@ -1,13 +1,38 @@
 ---
-title:  "使用Maven搭建ASM开发环境"
-sequence: "003"
+title:  "搭建ASM开发环境"
+sequence: "103"
 ---
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
-## Maven配置
+## 开发环境
 
-新建一个maven项目，取名为`asm-maven`，修改`pom.xml`文件，添加如下内容：
+- 操作系统：Windows 7 Service Pack 1（64位）
+- JDK版本：1.8.0_261
+- Maven版本：3.8.1
+- IDEA：2021.1.1 （Community Edition）
+
+{% highlight text %}
+$ java -version
+java version "1.8.0_261"
+Java(TM) SE Runtime Environment (build 1.8.0_261-b12)
+Java HotSpot(TM) 64-Bit Server VM (build 25.261-b12, mixed mode)
+
+$ mvn -version
+Apache Maven 3.8.1 (05c21c65bdfed0f71a2f2ada8b84da59348c4c5d)
+Maven home: D:\Software\apache-maven
+Java version: 1.8.0_261, vendor: Oracle Corporation, runtime: C:\Program Files\Java\jdk1.8.0_261\jre
+Default locale: zh_CN, platform encoding: GBK
+OS name: "windows 7", version: "6.1", arch: "amd64", family: "windows"
+{% endhighlight %}
+
+## 创建Maven项目
+
+新建一个maven项目，取名为`asm-maven`。
+
+### 修改pom.xml
+
+我们需要添加对ASM相关的Jar依赖，因此需要修改`pom.xml`文件。打开`pom.xml`文件，并添加如下内容：
 
 {% highlight xml %}
 {% raw %}
@@ -69,7 +94,9 @@ sequence: "003"
 {% endraw %}
 {% endhighlight %}
 
-## 示例代码
+### 使用ASM
+
+#### 预期目标
 
 {% highlight java %}
 {% raw %}
@@ -84,7 +111,7 @@ public class HelloWorld {
 {% endraw %}
 {% endhighlight %}
 
-### HelloWorldDump.java
+#### 编码实现
 
 {% highlight java %}
 {% raw %}
@@ -124,7 +151,7 @@ public class HelloWorldDump implements Opcodes {
 {% endraw %}
 {% endhighlight %}
 
-### MyClassLoader.java
+#### 验证结果
 
 {% highlight java %}
 {% raw %}
@@ -144,8 +171,6 @@ public class MyClassLoader extends ClassLoader {
 }
 {% endraw %}
 {% endhighlight %}
-
-### HelloWorldRun.java
 
 {% highlight java %}
 {% raw %}
@@ -172,3 +197,4 @@ This is a HelloWorld object.
 
 本文的主要目的是，希望通过一个简单的示例，能够快速搭建起ASM的开发环境。
 
+这里面涉及到的代码，并不需要大家记忆和理解，主要是为了让大家对ASM的使用有一个初步的认识，验证ASM的开发环境能够正常使用；这些代码的含义，我们后续会讲解。

@@ -1,19 +1,19 @@
 ---
 title:  "ClassWriter代码示例"
-sequence: "010"
+sequence: "204"
 ---
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
-The ASM core API for **generating** and **transforming** compiled Java classes is based on the `ClassVisitor` abstract class.
-
-![](/assets/images/java/asm/what-asm-can-do.png)
+{:refdef: style="text-align: center;"}
+![What ASM Can Do](/assets/images/java/asm/what-asm-can-do.png)
+{: refdef}
 
 在当前阶段，我们只能进行Class Generation的操作。
 
-## 示例一：接口
+## 示例一：生成接口
 
-预期结果：
+### 预期目标
 
 {% highlight java %}
 {% raw %}
@@ -22,7 +22,7 @@ public interface HelloWorld {
 {% endraw %}
 {% endhighlight %}
 
-实现代码：
+### 编码实现
 
 {% highlight java %}
 {% raw %}
@@ -70,7 +70,7 @@ public class HelloWorldGenerateCore {
 
 由于`sample.HelloWorld`这个接口中，并没有定义任何的字段和方法，因此，在上述代码中没有调用`visitField()`方法和`visitMethod()`方法。
 
-验证结果：
+### 验证结果
 
 {% highlight java %}
 {% raw %}
@@ -82,6 +82,8 @@ public class HelloWorldRun {
 }
 {% endraw %}
 {% endhighlight %}
+
+### visit()方法
 
 在这里，我们重点介绍一下`visit(version, access, name, signature, superName, interfaces)`方法的各个参数：
 
@@ -128,9 +130,9 @@ public class HelloWorldRun {
 
 > For example, the normal binary name of class `Thread` is `java.lang.Thread`. In the **internal form** used in descriptors in the **class file format**, a reference to the name of class `Thread` is implemented using a `CONSTANT_Utf8_info` structure representing the string `java/lang/Thread`.
 
-## 示例二：接口+字段+方法
+## 示例二：生成接口+字段+方法
 
-预期结果：
+### 预期目标
 
 {% highlight java %}
 {% raw %}
@@ -143,7 +145,7 @@ public interface HelloWorld extends Cloneable {
 {% endraw %}
 {% endhighlight %}
 
-实现代码：
+### 编码实现
 
 {% highlight java %}
 {% raw %}
@@ -190,7 +192,7 @@ public class HelloWorldGenerateCore {
 
 在上述代码中，我们调用了`visit()`方法、`visitField()`方法、`visitMethod()`方法、`visitEnd()`方法和`toByteArray()`方法。
 
-验证结果：
+### 验证结果
 
 {% highlight java %}
 {% raw %}
@@ -230,6 +232,8 @@ fields:
 methods:
     compareTo
 {% endhighlight %}
+
+### visitField()和visitMethod()方法
 
 在这里，我们重点说一下`visitField()`方法和`visitMethod()`方法的各个参数：
 
@@ -353,9 +357,9 @@ public class HelloWorld {
 - `boolean compare(Object obj)`: `(Ljava/lang/Object;)Z`
 - `void main(String[] args)`: `([Ljava/lang/String;)V`
 
-## 示例三：类
+## 示例三：生成类
 
-预期结果：
+### 预期目标
 
 {% highlight java %}
 {% raw %}
@@ -364,7 +368,7 @@ public class HelloWorld {
 {% endraw %}
 {% endhighlight %}
 
-实现代码：
+### 编码实现
 
 {% highlight java %}
 {% raw %}
@@ -410,7 +414,7 @@ public class HelloWorldGenerateCore {
 {% endraw %}
 {% endhighlight %}
 
-验证结果：
+### 验证结果
 
 {% highlight java %}
 {% raw %}
@@ -423,9 +427,11 @@ public class HelloWorldRun {
 {% endraw %}
 {% endhighlight %}
 
-对于一个类（Class）来说，如果没有提供任何构造方法，Java编译器会自动生成一个默认构造方法。在所有的`.class`文件中，构造方法的名字是`<init>`。
+### &lt;init&gt;()和&lt;clinit&gt;()方法
 
-另外，如果在`.class`文件中包含静态代码块，那么就会有一个`<clinit>`方法。
+对于一个类（Class）来说，如果没有提供任何构造方法，Java编译器会自动生成一个默认构造方法。在所有的`.class`文件中，构造方法的名字是`<init>()`。
+
+另外，如果在`.class`文件中包含静态代码块，那么就会有一个`<clinit>()`方法。
 
 {% highlight java %}
 {% raw %}
@@ -443,10 +449,11 @@ public class HelloWorld {
 
 ## 总结
 
-本篇文章的目的是为了介绍几个关于`ClassWriter`类的代码示例，希望大家能够对`ClassWriter`类熟悉起来。
+本文主要对`ClassWriter`类的代码示例进行介绍，主要目的是希望大家能够对`ClassWriter`类熟悉起来，内容总结如下：
 
-同时，我们对于`visit()`方法、`visitField()`方法和`visitMethod()`方法的参数进行了介绍。但是，我们并没有特别介绍`visitEnd()`方法和`toByteArray()`方法，并不表示这两个方法不重要，只是因为这两个方法不接收任何参数。
-
-在示例当中，我们也涉及到了Internal Name和Descriptor（描述符）这两个概念，需要我们在使用时候加以注意，因为它们与我们在使用Java语言编写代码时是不一样的。
+- 第一点，我们需要注意`ClassWriter`/`ClassVisitor`中`visit()`、`visitField()`、`visitMethod()`和`visitEnd()`方法的调用顺序。
+- 第二点，我们对于`visit()`方法、`visitField()`方法和`visitMethod()`方法接收的参数进行了介绍。虽然我们并没有特别介绍`visitEnd()`方法和`toByteArray()`方法，并不表示这两个方法不重要，只是因为这两个方法不接收任何参数。
+- 第三点，我们介绍了Internal Name和Descriptor（描述符）这两个概念，在使用时候需要加以注意，因为它们与我们在使用Java语言编写代码时是不一样的。
+- 第四点，在`.class`文件中，构造方法的名字是`<init>()`，表示instance initialization method；静态代码块的名字是`<clinit>()`，表示class initialization method。
 
 另外，`visitField()`方法会返回一个`FieldVisitor`对象，而`visitMethod()`方法会返回一个`MethodVisitor`对象；在后续的内容当中，我们会分别介绍`FieldVisitor`类和`MethodVisitor`类。

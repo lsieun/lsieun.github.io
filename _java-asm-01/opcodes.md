@@ -1,6 +1,6 @@
 ---
 title:  "Opcodes介绍"
-sequence: "018"
+sequence: "212"
 ---
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
@@ -351,7 +351,7 @@ public class HelloWorld {
 
 ## 总结
 
-本篇文章主要介绍`Opcodes`接口里定义的字段成员，总结为如下两点：
+本文主要对`Opcodes`接口里定义的字段进行介绍，内容总结如下：
 
 - 第一点，在`Opcodes`内定义的字段，主要应用于`ClassVisitor`和`MethodVisitor`的方法。
 - 第二点，在ASM的编程过程中，`Opcodes`的角色是一个辅助类。其中，有些字段，我们可能暂时不了解其含义，不必一一深究，等用到的该字段的时候，再去研究它的具体含义。

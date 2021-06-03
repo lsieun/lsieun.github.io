@@ -1,27 +1,29 @@
 ---
 title:  "frame介绍"
-sequence: "017"
+sequence: "211"
 ---
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
-本篇文章的目的介绍frame是什么，但是并不推荐使用与frame相关的方法。
+## JVM当中的frame
 
-## 为什么不使用visitFrame()方法
+JVM Architecture由Class Loader System、Runtime Data Areas和Execution Engine组成，如下图所示。
 
-我们知道，在`MethodVisitor`类当中，有一个`visitFrame()`方法。但是，在前面所有的代码示例当中，并没有明确调用过`MethodVisitor.visitFrame()`方法。
+{:refdef: style="text-align: center;"}
+![JVM Architecture](/assets/images/java/jvm/jvm-architecture.png)
+{: refdef}
 
-为什么我们不去调用`MethodVisitor.visitFrame()`方法呢？原因是因为我们在创建`ClassWriter`对象的时候，使用了`ClassWriter.COMPUTE_FRAMES`参数：
+在上图当中，Runtime Data Areas包括Method Area、Heap Area、Stack Area、PC Registers和Native Method Stack等部分。
 
-{% highlight java %}
-{% raw %}
-ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
-{% endraw %}
-{% endhighlight %}
+在程序运行的过程中，每一个线程（Thread）都对应一个属于自己的JVM Stack。当一个新线程（Thread）开始的时候，就会在内存上分配一个属于自己的JVM Stack；当该线程（Thread）执行结束的时候，相应的JVM Stack内存空间也就被回收了。
 
-在使用了`ClassWriter.COMPUTE_FRAMES`参数之后，ASM会忽略代码当中对于`MethodVisitor.visitFrame()`方法的调用，并且自动帮助我们计算stack map frame的具体内容。
+在JVM Stack当中，是栈的结构，里面存储的是frames；每一个frame空间可以称之为Stack Frame。当调用一个新方法的时候，就会在JVM Stack上分配一个frame空间，当方法退出时，相应的frame空间也会JVM Stack上进行清除掉（出栈操作）。在frame空间当中，有两个重要的结构，即loca variables和operand stack。
 
-## frame是什么
+{:refdef: style="text-align: center;"}
+![JVM Stack Frame](/assets/images/java/asm/frame-local-variables-operand-stack.png)
+{: refdef}
+
+## ASM当中的frame
 
 ### 查看instruction
 
@@ -39,22 +41,17 @@ public class HelloWorld {
 {% endraw %}
 {% endhighlight %}
 
-当生成`HelloWorld.class`文件后，可以使用`javap -v sample.HelloWorld`来查看instruction的内容：
+当生成`HelloWorld.class`文件后，可以使用`ASMPrint`类来查看instruction的内容：
 
 {% highlight bash %}
 {% raw %}
-$ javap -v sample.HelloWorld
-......
-  public int test(int, int);
-    descriptor: (II)I
-    flags: ACC_PUBLIC
-    Code:
-      stack=2, locals=3, args_size=3
-         0: iload_1           这里的每一行就是一条instruction。本例当中，共4条。
-         1: iload_2
-         2: iadd
-         3: ireturn
-......
+public test(II)I
+  ILOAD 1
+  ILOAD 2
+  IADD
+  IRETURN
+  MAXSTACK = 2
+  MAXLOCALS = 3
 {% endraw %}
 {% endhighlight %}
 
@@ -62,56 +59,52 @@ $ javap -v sample.HelloWorld
 
 在方法当中，每一条instruction都有对应的frame。
 
-那么，frame到底是什么呢？简单来说，frame就是将local variables和operand stack放到一起，可以表示成如下这样：
+那么，ASM当中的frame到底是什么呢？简单来说，frame就是某一条instruction所对应的local variables和operand stack的状态。
+
+要注意，JVM中的frame和ASM中的frame之间的差别：
+
+- JVM中的frame是指一段内存空间，里面包含local variables和operand stack结构。
+- ASM中的frame是指在某一条instruction所对应的local variables和operand stack的状态。
 
 {% highlight text %}
-frame = local variables + operand stack
+JVM中的frame：frame内存空间 = local variables内存空间 + operand stack内存空间
+ASM中的frame：instruction frame = local variables状态 + operand stack状态
 {% endhighlight %}
 
-那么，我们可以使用`HelloWorldFrame`来查看它的frames的情况：
+我们可以使用`HelloWorldFrameCore`来查看frames的情况：
 
 {% highlight java %}
 {% raw %}
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.MethodNode;
-import org.objectweb.asm.tree.analysis.*;
 
-import java.util.List;
-
-public class HelloWorldFrame {
+public class HelloWorldFrameCore {
     public static void main(String[] args) {
         String relative_path = "sample/HelloWorld.class";
         String filepath = FileUtils.getFilePath(relative_path);
         byte[] bytes1 = FileUtils.readBytes(filepath);
 
-        // (1)构建ClassReader
+        //（1）构建ClassReader
         ClassReader cr = new ClassReader(bytes1);
 
-        // (2) 构建ClassNode
-        int api = Opcodes.ASM9;
-        ClassNode cn = new ClassNode(api);
-        cr.accept(cn, ClassReader.SKIP_FRAMES | ClassReader.SKIP_DEBUG);
+        //（2）构建ClassWriter
+        ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 
-        String owner = cn.name;
-        List<MethodNode> methods = cn.methods;
-        for (MethodNode mn : methods) {
-            if (!"test".equals(mn.name)) continue;
-            System.out.println(mn.name + ":" + mn.desc);
-            Analyzer<BasicValue> analyzer = new Analyzer<>(new SimpleVerifier());
-            try {
-                analyzer.analyze(owner, mn);
-                Frame<BasicValue>[] frames = analyzer.getFrames();
-                for (Frame<?> frame : frames) {
-                    System.out.println(frame);
-                }
-            } catch (AnalyzerException e) {
-                e.printStackTrace();
-            }
-            System.out.println("====================================================");
-        }
+        //（3）串连ClassVisitor
+        int api = Opcodes.ASM9;
+        ClassVisitor cv = new MethodStackMapFrameVisitor(api, cw);
+
+        //（4）结合ClassReader和ClassVisitor
+        int parsingOptions = ClassReader.EXPAND_FRAMES; // 注意，这里使用了EXPAND_FRAMES
+        cr.accept(cv, parsingOptions);
+
+        //（5）生成byte[]
+        byte[] bytes2 = cw.toByteArray();
+
+        FileUtils.writeBytes(filepath, bytes2);
     }
 }
 {% endraw %}
@@ -120,36 +113,25 @@ public class HelloWorldFrame {
 在这里，我们不用太关心上面代码的含义，而是关注它的运行结果。运行`HelloWorldFrame`类，得到如下结果：
 
 {% highlight text %}
-test:(II)I
-Lsample/HelloWorld;II 
-Lsample/HelloWorld;II I
-Lsample/HelloWorld;II II
-Lsample/HelloWorld;II I
+test(II)I
+[sample/HelloWorld, int, int] []
+[sample/HelloWorld, int, int] [int]
+[sample/HelloWorld, int, int] [int, int]
+[sample/HelloWorld, int, int] [int]
+[] []
 {% endhighlight %}
 
 这个运行结果，需要结合instruction来理解。
 
 {% highlight bash %}
 {% raw %}
-$ javap -v sample.HelloWorld
-......
-  public int test(int, int);
-    descriptor: (II)I
-    flags: ACC_PUBLIC
-    Code:
-      stack=2, locals=3, args_size=3
-         0: iload_1
-         1: iload_2
-         2: iadd
-         3: ireturn
-      LineNumberTable:
-        line 5: 0
-      LocalVariableTable:
-        Start  Length  Slot  Name   Signature
-            0       4     0  this   Lsample/HelloWorld;
-            0       4     1     a   I
-            0       4     2     b   I
-......
+public test(II)I
+  ILOAD 1
+  ILOAD 2
+  IADD
+  IRETURN
+  MAXSTACK = 2
+  MAXLOCALS = 3
 {% endraw %}
 {% endhighlight %}
 
@@ -173,41 +155,38 @@ public class HelloWorld {
 `test()`方法所对应的frames如下：
 
 {% highlight text %}
-test:(I)V
-Lsample/HelloWorld;I 
-Lsample/HelloWorld;I I
-Lsample/HelloWorld;I 
-Lsample/HelloWorld;I Ljava/io/PrintStream;
-Lsample/HelloWorld;I Ljava/io/PrintStream;Ljava/lang/String;
-Lsample/HelloWorld;I 
-Lsample/HelloWorld;I 
-Lsample/HelloWorld;I 
-Lsample/HelloWorld;I Ljava/io/PrintStream;
-Lsample/HelloWorld;I Ljava/io/PrintStream;Ljava/lang/String;
-Lsample/HelloWorld;I 
-Lsample/HelloWorld;I 
+test(I)V
+[sample/HelloWorld, int] []
+[sample/HelloWorld, int] [int]
+[sample/HelloWorld, int] []
+[sample/HelloWorld, int] [java/io/PrintStream]
+[sample/HelloWorld, int] [java/io/PrintStream, java/lang/String]
+[sample/HelloWorld, int] []
+[] []
+[sample/HelloWorld, int] [java/io/PrintStream]
+[sample/HelloWorld, int] [java/io/PrintStream, java/lang/String]
+[sample/HelloWorld, int] []
+[] []
 {% endhighlight %}
 
 `test()`方法所对应的instructions如下：
 
 {% highlight text %}
-$ javap -v sample.HelloWorld
-......
-  public void test(int);
-    descriptor: (I)V
-    flags: ACC_PUBLIC
-    Code:
-      stack=2, locals=2, args_size=2
-         0: iload_1
-         1: ifne          15
-         4: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
-         7: ldc           #3                  // String value is 0
-         9: invokevirtual #4                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
-        12: goto          23
-        15: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
-        18: ldc           #5                  // String value is not 0
-        20: invokevirtual #4                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
-        23: return
+public test(I)V
+  ILOAD 1
+  IFNE L0
+  GETSTATIC java/lang/System.out : Ljava/io/PrintStream;
+  LDC "value is 0"
+  INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V
+  GOTO L1
+ L0
+  GETSTATIC java/lang/System.out : Ljava/io/PrintStream;
+  LDC "value is not 0"
+  INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V
+ L1
+  RETURN
+  MAXSTACK = 2
+  MAXLOCALS = 2
 ......
 {% endhighlight %}
 
@@ -227,9 +206,9 @@ $ javap -v sample.HelloWorld
 
 如果当前的instruction是从某个地方跳转过来的，就必须要记录它执行之前的frame的情况，否则就没有办法计算它执行之后的frame的情况。
 
-## 如何使用visitFrame()方法
+### 如何使用visitFrame()方法
 
-预期结果：
+#### 预期目标
 
 {% highlight java %}
 {% raw %}
@@ -246,7 +225,7 @@ public class HelloWorld {
 {% endraw %}
 {% endhighlight %}
 
-实现代码：
+#### 编码实现
 
 {% highlight java %}
 {% raw %}
@@ -327,7 +306,7 @@ public class HelloWorldGenerateCore {
 
 在上面的代码中，我们创建`ClassWriter`对象时，使用了`ClassWriter.COMPUTE_MAXS`参数，这样ASM就会只计算max locals和max stack的值；在实现`test()`方法的时候，就需要明确的调用`MethodVisitor.visitFrame()`方法来添加相应的frame信息。
 
-验证结果：
+#### 验证结果
 
 {% highlight java %}
 {% raw %}
@@ -346,9 +325,23 @@ public class HelloWorldRun {
 {% endraw %}
 {% endhighlight %}
 
+### 不推荐使用visitFrame()方法
+
+我们知道，在`MethodVisitor`类当中，有一个`visitFrame()`方法。但是，在前面所有的代码示例当中，并没有明确调用过`MethodVisitor.visitFrame()`方法。
+
+为什么我们不去调用`MethodVisitor.visitFrame()`方法呢？原因是因为我们在创建`ClassWriter`对象的时候，使用了`ClassWriter.COMPUTE_FRAMES`参数：
+
+{% highlight java %}
+{% raw %}
+ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
+{% endraw %}
+{% endhighlight %}
+
+在使用了`ClassWriter.COMPUTE_FRAMES`参数之后，ASM会忽略代码当中对于`MethodVisitor.visitFrame()`方法的调用，并且自动帮助我们计算stack map frame的具体内容。
+
 ## 总结
 
-在本篇文章中，主要想说明以下两点：
+本文主要对frame进行了介绍，内容总结如下：
 
-- 第一点，frame是什么。在这里，我们希望大家对于frame有一个大概的了解。因为这里也只是进行了简单的介绍，一些技术细节也没有谈到，如果大家能够理解，那是最好，如果大家不能理解，也不会对后续的学习有什么影响。
-- 第二点，就是推荐大家不要去使用与frame相关的方法。更具体的来说，就是不要去调用`MethodVisitor.visitFrame()`方法。因为如果要使用`MethodVisitor.visitFrame()`方法，就要计算出哪些需要记录frame、frame的具体内容是什么，如果对于Frame的算法不太了解，那就容易出错。反而，我们推荐大家在创建`ClassWriter`对象的时候，使用`ClassWriter.COMPUTE_FRAMES`参数，这样ASM就会帮助我们计算frame的值到底是多少。
+- 第一点，要区分开JVM中的frame和ASM中的frame这两个概念。JVM当中的frame是一段实实在的内存空间，在这个frame内存空间里有两个重要的结构，分别是local variables和operand stack。而ASM中的frame是指，某一条instruction所对应的local variables和operand stack的状态。
+- 第二点，就是推荐大家不要去使用与frame相关的方法。更具体的来说，就是不要去调用`MethodVisitor.visitFrame()`方法。因为如果要使用`MethodVisitor.visitFrame()`方法，就要计算出哪些需要记录frame、frame的具体内容是什么。如果我们对于frame的算法不太了解，那就容易出错。因而，我们推荐大家在创建`ClassWriter`对象的时候，使用`ClassWriter.COMPUTE_FRAMES`参数，这样ASM就会帮助我们计算frame的值到底是多少。

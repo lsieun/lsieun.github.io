@@ -1,0 +1,250 @@
+---
+title:  "修改已有的方法（修改－替换方法调用）"
+sequence: "310"
+---
+
+[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+
+## 如何替换Instruction
+
+有的时候，我们想替换掉某一条instruction，那应该如何实现呢？其实，实现起来也很简单，就是先找到该instruction，然后在同样的位置替换成另一个instruction就可以了。
+
+{:refdef: style="text-align: center;"}
+![多个FieldVisitor和MethodVisitor串联到一起](/assets/images/java/asm/multiple-field-method-vistors-connected.png)
+{: refdef}
+
+同样，在替换instruction的过程当中，我们也应该注意**operand stack在修改前和修改后是一致的**。
+
+替换Instruction，有什么样的使用场景呢？第三方提供的jar包当中，可能在某一个`.class`文件当中调用了一个方法。这个方法，从某种程度上来说，你可能对它“不满意”，就比如说，它是一个验证逻辑的方法，你想替换成自己的验证逻辑，又或者说，它实现的功能比较简单，你想替换成功能更完善的功能，就可以把这个方法对应的Instruction替换掉。
+
+## 示例：替换方法调用
+
+### 预期目标
+
+假如有下面的一个类：
+
+{% highlight java %}
+{% raw %}
+public class HelloWorld {
+    public void test(int a, int b) {
+        int c = Math.max(a, b);
+        System.out.println(c);
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+`test()`方法对应的指令如下：
+
+{% highlight text %}
+  public test(II)V
+    ILOAD 1
+    ILOAD 2
+    INVOKESTATIC java/lang/Math.max (II)I
+    ISTORE 3
+    GETSTATIC java/lang/System.out : Ljava/io/PrintStream;
+    ILOAD 3
+    INVOKEVIRTUAL java/io/PrintStream.println (I)V
+    RETURN
+    MAXSTACK = 2
+    MAXLOCALS = 4
+{% endhighlight %}
+
+我们预期的目标有两个：
+
+- 第一个，就是将静态方法`Math.max()`方法替换掉。
+- 第二个，就是将非静态方法`PrintStream.println()`方法替换掉。
+
+### 编码实现
+
+{% highlight java %}
+{% raw %}
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.MethodVisitor;
+
+import static org.objectweb.asm.Opcodes.ACC_ABSTRACT;
+import static org.objectweb.asm.Opcodes.ACC_NATIVE;
+
+public class MethodReplaceInvokeVisitor extends ClassVisitor {
+    private final String oldOwner;
+    private final String oldMethodName;
+    private final String oldMethodDesc;
+
+    private final int newOpcode;
+    private final String newOwner;
+    private final String newMethodName;
+    private final String newMethodDesc;
+
+    public MethodReplaceInvokeVisitor(int api, ClassVisitor classVisitor,
+                                      String oldOwner, String oldMethodName, String oldMethodDesc,
+                                      int newOpcode, String newOwner, String newMethodName, String newMethodDesc) {
+        super(api, classVisitor);
+        this.oldOwner = oldOwner;
+        this.oldMethodName = oldMethodName;
+        this.oldMethodDesc = oldMethodDesc;
+
+        this.newOpcode = newOpcode;
+        this.newOwner = newOwner;
+        this.newMethodName = newMethodName;
+        this.newMethodDesc = newMethodDesc;
+    }
+
+    @Override
+    public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
+        MethodVisitor mv = super.visitMethod(access, name, descriptor, signature, exceptions);
+        if (mv != null && !"<init>".equals(name) && !"<clinit>".equals(name)) {
+            boolean isAbstractMethod = (access & ACC_ABSTRACT) != 0;
+            boolean isNativeMethod = (access & ACC_NATIVE) != 0;
+            if (!isAbstractMethod && !isNativeMethod) {
+                mv = new MethodReplaceInvokeAdapter(api, mv);
+            }
+        }
+        return mv;
+    }
+
+    private class MethodReplaceInvokeAdapter extends MethodVisitor {
+        public MethodReplaceInvokeAdapter(int api, MethodVisitor methodVisitor) {
+            super(api, methodVisitor);
+        }
+
+        @Override
+        public void visitMethodInsn(int opcode, String owner, String name, String descriptor, boolean isInterface) {
+            if (oldOwner.equals(owner) && oldMethodName.equals(name) && oldMethodDesc.equals(descriptor)) {
+                // 注意，最后一个参数是false，会不会太武断呢？
+                super.visitMethodInsn(newOpcode, newOwner, newMethodName, newMethodDesc, false);
+            }
+            else {
+                super.visitMethodInsn(opcode, owner, name, descriptor, isInterface);
+            }
+        }
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+在`MethodReplaceInvokeAdapter`类当中，`visitMethodInsn()`方法有这么一行代码：
+
+{% highlight java %}
+{% raw %}
+// 注意，最后一个参数是false，会不会太武断呢？
+super.visitMethodInsn(newOpcode, newOwner, newMethodName, newMethodDesc, false);
+{% endraw %}
+{% endhighlight %}
+
+在`visitMethodInsn()`方法中，最后一个参数是`boolean isInterface`，它可以取值为`true`，也可以取值为`false`。如果它的值为`true`，表示调用的方法是一个接口里的方法；如果它的值为`false`，则表示调用的方法是类里面的方法。换句话说，这个`boolean isInterface`参数，本来可以有两个可选值，即`true`或`false`；但是，我们直接提供一个固定值`false`，完成没有考虑`true`的情况，这么做是不是太过武断了呢？
+
+之所以要这么做，是因为一般情况下，替换后的方法是“自己写的某一个方法”，那么对于“这个方法”，我们有很大的“自主权”，可以把它放到一个接口里，也可以放在一个类里，可以把它写成一个non-static方法，也可以写成一个static方法。这样，我们完全可以把“这个方法”写成一个在类里的static方法。
+
+### 进行转换
+
+#### 替换static方法
+
+在替换static方法的时候，要保护一点：替换方法前，和替换方法后，要保持“方法接收的参数”和“方法的返回类型”是一致的。
+
+{% highlight java %}
+{% raw %}
+import lsieun.utils.FileUtils;
+import org.objectweb.asm.*;
+
+public class HelloWorldTransformCore {
+    public static void main(String[] args) {
+        String relative_path = "sample/HelloWorld.class";
+        String filepath = FileUtils.getFilePath(relative_path);
+        byte[] bytes1 = FileUtils.readBytes(filepath);
+
+        //（1）构建ClassReader
+        ClassReader cr = new ClassReader(bytes1);
+
+        //（2）构建ClassWriter
+        ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
+
+        //（3）串连ClassVisitor
+        int api = Opcodes.ASM9;
+        ClassVisitor cv = new MethodReplaceInvokeVisitor(api, cw,
+                "java/lang/Math", "max", "(II)I",
+                Opcodes.INVOKESTATIC, "java/lang/Math", "min", "(II)I");
+
+        //（4）结合ClassReader和ClassVisitor
+        int parsingOptions = ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES;
+        cr.accept(cv, parsingOptions);
+
+        //（5）生成byte[]
+        byte[] bytes2 = cw.toByteArray();
+
+        FileUtils.writeBytes(filepath, bytes2);
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+#### 替换non-static方法
+
+对于non-static方法来说，它有一个隐藏的`this`变量。我们在替换non-static方法的时候，要把`this`变量给“消耗”掉。
+
+{% highlight java %}
+{% raw %}
+public class ParameterUtils {
+    public static void output(PrintStream printStream, int val) {
+        printStream.println(val);
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+{% highlight java %}
+{% raw %}
+import lsieun.utils.FileUtils;
+import org.objectweb.asm.*;
+
+public class HelloWorldTransformCore {
+    public static void main(String[] args) {
+        String relative_path = "sample/HelloWorld.class";
+        String filepath = FileUtils.getFilePath(relative_path);
+        byte[] bytes1 = FileUtils.readBytes(filepath);
+
+        //（1）构建ClassReader
+        ClassReader cr = new ClassReader(bytes1);
+
+        //（2）构建ClassWriter
+        ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
+
+        //（3）串连ClassVisitor
+        int api = Opcodes.ASM9;
+        ClassVisitor cv = new MethodReplaceInvokeVisitor(api, cw,
+                "java/io/PrintStream", "println", "(I)V",
+                Opcodes.INVOKESTATIC, "sample/ParameterUtils", "printValueOnStack", "(I)V");
+
+        //（4）结合ClassReader和ClassVisitor
+        int parsingOptions = ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES;
+        cr.accept(cv, parsingOptions);
+
+        //（5）生成byte[]
+        byte[] bytes2 = cw.toByteArray();
+
+        FileUtils.writeBytes(filepath, bytes2);
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+### 验证结果
+
+{% highlight java %}
+{% raw %}
+public class HelloWorldRun {
+    public static void main(String[] args) throws Exception {
+        HelloWorld instance = new HelloWorld();
+        instance.test(10, 20);
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+## 总结
+
+本文主要对替换Instruction进行了介绍，内容总结如下：
+
+- 第一点，替换Instruction，实现思路是，先找到该instruction，然后在同样的位置替换成另一个instruction就可以了。
+- 第二点，替换Instruction，要注意的地方是，保持operand stack在修改前和修改后是一致的。对于static方法和non-static方法，我们需要考虑是否要处理`this`变量。
+
+其实，按照相同的思路，我们也可以将“对于字段的调用”替换成“对于方法的调用”。

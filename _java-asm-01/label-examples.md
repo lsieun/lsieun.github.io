@@ -1,13 +1,13 @@
 ---
 title:  "Label代码示例"
-sequence: "016"
+sequence: "210"
 ---
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 ## 示例一：if语句
 
-预期结果：
+### 预期目标
 
 {% highlight java %}
 {% raw %}
@@ -24,7 +24,7 @@ public class HelloWorld {
 {% endraw %}
 {% endhighlight %}
 
-实现代码：
+### 编码实现
 
 {% highlight java %}
 {% raw %}
@@ -99,7 +99,7 @@ public class HelloWorldGenerateCore {
 {% endraw %}
 {% endhighlight %}
 
-验证结果：
+### 验证结果
 
 {% highlight java %}
 {% raw %}
@@ -120,7 +120,7 @@ public class HelloWorldRun {
 
 ## 示例二：switch语句
 
-预期目标：
+### 预期目标
 
 {% highlight java %}
 {% raw %}
@@ -147,7 +147,7 @@ public class HelloWorld {
 {% endraw %}
 {% endhighlight %}
 
-编码实现：
+### 编码实现
 
 {% highlight java %}
 {% raw %}
@@ -250,7 +250,7 @@ public class HelloWorldGenerateCore {
 {% endraw %}
 {% endhighlight %}
 
-验证结果：
+### 验证结果
 
 {% highlight java %}
 {% raw %}
@@ -272,7 +272,7 @@ public class HelloWorldRun {
 
 ## 示例三：for语句
 
-预期结果：
+### 预期目标
 
 {% highlight java %}
 {% raw %}
@@ -286,7 +286,7 @@ public class HelloWorld {
 {% endraw %}
 {% endhighlight %}
 
-实现代码：
+### 编码实现
 
 {% highlight java %}
 {% raw %}
@@ -362,7 +362,7 @@ public class HelloWorldGenerateCore {
 {% endraw %}
 {% endhighlight %}
 
-验证结果：
+### 验证结果
 
 {% highlight java %}
 {% raw %}
@@ -382,7 +382,7 @@ public class HelloWorldRun {
 
 ## 示例四：try-catch语句
 
-预期结果：
+### 预期目标
 
 {% highlight java %}
 {% raw %}
@@ -400,7 +400,7 @@ public class HelloWorld {
 {% endraw %}
 {% endhighlight %}
 
-实现代码：
+### 编码实现
 
 {% highlight java %}
 {% raw %}
@@ -489,7 +489,7 @@ public class HelloWorldGenerateCore {
 {% endraw %}
 {% endhighlight %}
 
-验证结果：
+### 验证结果
 
 {% highlight java %}
 {% raw %}
@@ -645,3 +645,9 @@ from    to  target  type
 === === ===  === === ===  === === ===
 {% endhighlight %}
 
+## 总结
+
+本文主要对`Label`类的示例进行介绍，内容总结如下：
+
+- 第一点，`Label`类的主要作用是实现程序代码的跳转，例如，if语句、switch语句、for语句和try-catch语句。
+- 第二点，在生成try-catch语句时，`visitTryCatchBlock()`方法的调用时机，可以早一点，也可以晚一点，只要整体上遵循`MethodVisitor`类对就于`visitXxx()`方法调用的顺序就可以了。

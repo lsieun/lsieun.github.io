@@ -1,9 +1,15 @@
 ---
 title:  "ClassVisitor介绍"
-sequence: "007"
+sequence: "202"
 ---
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+
+{:refdef: style="text-align: center;"}
+![ASM里的核心类](/assets/images/java/asm/asm_core_classes.png)
+{: refdef}
+
+在进行Class Generation操作的时候，`ClassVisitor`和`ClassWriter`这两个类起着重要作用，而并不需要`ClassReader`类的参与。在本文当中，将对`ClassVisitor`类进行介绍。
 
 ## ClassVisitor类
 
@@ -62,15 +68,6 @@ public abstract class ClassVisitor {
 随着时间的发展，Java语言也在不断发展，从原来的Java 1.0到Java 5，再到Java 8，再到Java 16。作为每一次新的Java版本的出现，它多多少少都会带有新的特性，例如，Java 5引入泛型、枚举，Java 8引入Lambda等内容。我们可以编写`.java`文件内容时，可以使用这些新的Java语言特性，这些`.java`文件当中的语言特性会被编译到相应的`.class`文件当中。为了能够让`.class`文件支持这些新的语言特性，那么其相应的Java ClassFile结构也需要不断扩展。相应的，ASM作为一个操作字节码的类库，为了跟上时代的变迁，也在不断演进，所以ASM就会有不同版本之间的变化。不同的ASM版本之间，它的变迁并不是一帆风顺的，可能就会存在某种不兼容的情况，就需要给ASM指定一个明确的版本信息。
 
 我们使用的ASM版本是9.0，因此我们在给`api`字段赋值的时候，选择`Opcodes.ASM9`就可以了。
-
-下面，我们来看一下ASM版本与Java版本之间的对应关系：
-
-- 2011, ASM 4.0, full support of Java 7
-- 2014, ASM 5.0, full support of Java 8
-- 2017, ASM 6.0, Codebase migrated to gitlab
-- 2018, ASM 7.0, support of JDK 11
-- 2020.03, ASM 8.0, Java 14 support
-- 2020.09, ASM 9.0, JDK 16 support
 
 ### constructors
 
@@ -352,7 +349,7 @@ public void visitEnd() {
 {% endraw %}
 {% endhighlight %}
    
-## ClassVisitor类遵循访问者模式
+## 访问者模式
 
 在ASM当中，使用到了Visitor Pattern（访问者模式）。Visitor Pattern的一个主要作用就是将“算法”和“数据”进行分离。
 
@@ -407,7 +404,7 @@ visitEnd
 
 ## 总结
 
-本篇文章的内容总结如下：
+本文主要对`ClassVisitor`类进行介绍，内容总结如下：
 
 - 第一，介绍了`ClassVisitor`类的成员有哪些。我们去了解这些类成员的目的，是为了让大家去熟悉`ClassVisitor`这个类。
 - 第二，从总体设计上来说，在ASM当中，许多类都采用了Visitor Pattern，因此我们会遇到许多的`visitXxx()`方法。

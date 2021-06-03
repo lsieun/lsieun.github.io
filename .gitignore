@@ -4,3 +4,15 @@ _site
 .jekyll-cache
 .jekyll-metadata
 vendor
+
+# IDEA
+
+*.iml
+*.kotlin_module
+target/
+lib/
+build/
+dist/
+.*
+!.gitignore
+google.txt

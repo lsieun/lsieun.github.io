@@ -1,13 +1,14 @@
 ---
 title:  "Java ClassFile快速参考"
-sequence: "008"
+sequence: "201"
 ---
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 ## Java ClassFile Format
 
-对于一个具体的`.class`而言，它是遵循ClassFile结构的。
+对于一个具体的`.class`而言，它是遵循ClassFile结构的。这个数据结构位于[Java Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)的
+[The class File Format](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html)部分。
 
 {% highlight text %}
 ClassFile {
@@ -39,7 +40,7 @@ ClassFile {
 
 而`cp_info`、`field_info`、`method_info`和`attribute_info`表示较为复杂的结构，但它们也是由`u1`、`u2`、`u4`和`u8`组成的。
 
-相应的，在`.class`文件当中，定义的字段，也要遵循`field_info`的结构。
+相应的，在`.class`文件当中，定义的字段，要遵循`field_info`的结构。
 
 {% highlight text %}
 field_info {
@@ -51,7 +52,7 @@ field_info {
 }
 {% endhighlight %}
 
-同样的，在`.class`文件当中，定义的方法，也要遵循`method_info`的结构。
+同样的，在`.class`文件当中，定义的方法，要遵循`method_info`的结构。
 
 {% highlight text %}
 method_info {
@@ -63,15 +64,9 @@ method_info {
 }
 {% endhighlight %}
 
-## 项目源码
-
-这里使用到的项目源码位于[https://gitee.com/lsieun/java8-classfile-tutorial](https://gitee.com/lsieun/java8-classfile-tutorial)，我们可以使用git命令下载：
-
-{% highlight bash %}
-git clone https://gitee.com/lsieun/java8-classfile-tutorial
-{% endhighlight %}
-
 ## 示例演示
+
+在下面内容中，我们会使用到《[Java 8 ClassFile](https://edu.51cto.com/course/25908.html)》课程的源码[java8-classfile-tutorial](https://gitee.com/lsieun/java8-classfile-tutorial)。
 
 假如，我们有一个`sample.HelloWorld`类，它的内容如下：
 
@@ -103,10 +98,11 @@ public class HelloWorld implements Cloneable {
 
 ## 总结
 
-本篇文章的主要目的，希望大家能够对这一点有更直观的理解：一个具体的`.class`文件，它是要遵循ClassFile结构的。
+本文主要是对Java ClassFile Format进行了介绍，内容总结如下：
 
-当然，我们这里只是简略地进行了说明，让大家对于`.class`文件和ClassFile结构有初步的认识。如果大家想了解更多的关于ClassFile的知识，可以去参考[The Java Virtual Machine Specification, Java SE 8 Edition](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)。
+- 第一点，一个具体的`.class`文件，它是要遵循ClassFile结构的；而ClassFile的结构是定义在[The Java Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)文档中。
+- 第二点，示例演示，主要是希望大家能够把`.class`文件里的内容与ClassFile结构之间对应起来。
 
-另外，我针对ClassFile的结构单独录制了一个课程《[Java 8 ClassFile](https://edu.51cto.com/course/25908.html)》，有兴趣的同学可以进行查看。
+当然，我们这里也只是简单的说明了ClassFile结构的内容，让大家有一个直观的认知；如果要细究起来，其实里面也会包含非常多的内容。对ClassFile的结构，我有一个相关的课程《[Java 8 ClassFile](https://edu.51cto.com/course/25908.html)》，前面的一些内容是免费的，有兴趣的同学可以进行查看。
 
 

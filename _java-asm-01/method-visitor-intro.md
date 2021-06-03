@@ -1,13 +1,11 @@
 ---
 title:  "MethodVisitor介绍"
-sequence: "013"
+sequence: "207"
 ---
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
-在前面的讲解当中，我们知道，调用`ClassVisitor`类的`visitMethod()`方法，会返回一个`MethodVisitor`类型的对象。
-
-那么，我们在这篇文章中，就对`MethodVisitor`类来进行一个介绍。
+在前面的当中，我们知道，调用`ClassVisitor`类的`visitMethod()`方法，会返回一个`MethodVisitor`类型的对象。在本文中，我们就来对`MethodVisitor`类来进行一个介绍。
 
 ## MethodVisitor类
 
@@ -160,14 +158,176 @@ visitEnd
 我们可以按照下面来记忆`visitXxx()`方法的调用顺序：
 
 - 第一步，调用`visitCode()`方法，调用一次
-- 第二步，调用`visitXxxInsn()`方法，可以调用多次
+- 第二步，调用`visitXxxInsn()`方法，可以调用多次。对这些方法的调用，就是在构建方法的“方法体”。
 - 第三步，调用`visitMaxs()`方法，调用一次
 - 第四步，调用`visitEnd()`方法，调用一次
 
+## MethodWriter类
+
+`MethodWriter`类是`MethodVisitor`类的子类。
+
+与`FieldWriter`类一样，`MethodWriter`类也不带有`public`修饰，因此也不能像其它`public`类一样被外部所使用。
+
+### fields
+
+在`MethodWriter`类当中，定义了很多的字段。下面的几个字段，是与方法名、方法参数类型和返回值类型、修改符直接相关的字段：
+
+{% highlight java %}
+{% raw %}
+final class MethodWriter extends MethodVisitor {
+    private final int accessFlags;
+    private final int nameIndex;
+    private final String name;
+    private final int descriptorIndex;
+    private final String descriptor;
+}
+{% endraw %}
+{% endhighlight %}
+
+上面的这几个字段，与ClassFile当中的`method_info`也是对应的：
+
+{% highlight text %}
+method_info {
+    u2             access_flags;
+    u2             name_index;
+    u2             descriptor_index;
+    u2             attributes_count;
+    attribute_info attributes[attributes_count];
+}
+{% endhighlight %}
+
+下面的几个字段，是与“方法体”直接相关的几个字段：
+
+{% highlight java %}
+{% raw %}
+final class MethodWriter extends MethodVisitor {
+    private int maxStack;
+    private int maxLocals;
+    private final ByteVector code = new ByteVector();
+    private Handler firstHandler;
+    private Handler lastHandler;
+    private final int numberOfExceptions;
+    private final int[] exceptionIndexTable;
+}
+{% endraw %}
+{% endhighlight %}
+
+对于一个方法来说，它的方法体的代码，则对应`Code`属性结构：
+
+{% highlight text %}
+Code_attribute {
+    u2 attribute_name_index;
+    u4 attribute_length;
+    u2 max_stack;
+    u2 max_locals;
+    u4 code_length;
+    u1 code[code_length];
+    u2 exception_table_length;
+    {   u2 start_pc;
+        u2 end_pc;
+        u2 handler_pc;
+        u2 catch_type;
+    } exception_table[exception_table_length];
+    u2 attributes_count;
+    attribute_info attributes[attributes_count];
+}
+{% endhighlight %}
+
+### methods
+
+在`MethodWriter`类当中，也有两个重要的方法：`computeMethodInfoSize()`和`putMethodInfo()`方法。这两个方法也是在`ClassWriter`类的`toByteArray()`方法内使用到。
+
+{% highlight java %}
+{% raw %}
+final class MethodWriter extends MethodVisitor {
+    int computeMethodInfoSize() {
+        // ......
+        // 2 bytes each for access_flags, name_index, descriptor_index and attributes_count.
+        int size = 8;
+        // For ease of reference, we use here the same attribute order as in Section 4.7 of the JVMS.
+        if (code.length > 0) {
+            if (code.length > 65535) {
+                throw new MethodTooLargeException(symbolTable.getClassName(), name, descriptor, code.length);
+            }
+            symbolTable.addConstantUtf8(Constants.CODE);
+            // The Code attribute has 6 header bytes, plus 2, 2, 4 and 2 bytes respectively for max_stack,
+            // max_locals, code_length and attributes_count, plus the bytecode and the exception table.
+            size += 16 + code.length + Handler.getExceptionTableSize(firstHandler);
+            if (stackMapTableEntries != null) {
+                boolean useStackMapTable = symbolTable.getMajorVersion() >= Opcodes.V1_6;
+                symbolTable.addConstantUtf8(useStackMapTable ? Constants.STACK_MAP_TABLE : "StackMap");
+                // 6 header bytes and 2 bytes for number_of_entries.
+                size += 8 + stackMapTableEntries.length;
+            }
+            // ......
+        }
+        if (numberOfExceptions > 0) {
+            symbolTable.addConstantUtf8(Constants.EXCEPTIONS);
+            size += 8 + 2 * numberOfExceptions;
+        }
+        //......
+        return size;
+    }
+
+    void putMethodInfo(final ByteVector output) {
+        boolean useSyntheticAttribute = symbolTable.getMajorVersion() < Opcodes.V1_5;
+        int mask = useSyntheticAttribute ? Opcodes.ACC_SYNTHETIC : 0;
+        output.putShort(accessFlags & ~mask).putShort(nameIndex).putShort(descriptorIndex);
+        // ......
+        // For ease of reference, we use here the same attribute order as in Section 4.7 of the JVMS.
+        int attributeCount = 0;
+        if (code.length > 0) {
+            ++attributeCount;
+        }
+        if (numberOfExceptions > 0) {
+            ++attributeCount;
+        }
+        // ......
+        // For ease of reference, we use here the same attribute order as in Section 4.7 of the JVMS.
+        output.putShort(attributeCount);
+        if (code.length > 0) {
+            // 2, 2, 4 and 2 bytes respectively for max_stack, max_locals, code_length and
+            // attributes_count, plus the bytecode and the exception table.
+            int size = 10 + code.length + Handler.getExceptionTableSize(firstHandler);
+            int codeAttributeCount = 0;
+            if (stackMapTableEntries != null) {
+                // 6 header bytes and 2 bytes for number_of_entries.
+                size += 8 + stackMapTableEntries.length;
+                ++codeAttributeCount;
+            }
+            // ......
+            output
+                .putShort(symbolTable.addConstantUtf8(Constants.CODE))
+                .putInt(size)
+                .putShort(maxStack)
+                .putShort(maxLocals)
+                .putInt(code.length)
+                .putByteArray(code.data, 0, code.length);
+            Handler.putExceptionTable(firstHandler, output);
+            output.putShort(codeAttributeCount);
+            // ......
+        }
+        if (numberOfExceptions > 0) {
+            output
+                .putShort(symbolTable.addConstantUtf8(Constants.EXCEPTIONS))
+                .putInt(2 + 2 * numberOfExceptions)
+                .putShort(numberOfExceptions);
+            for (int exceptionIndex : exceptionIndexTable) {
+              output.putShort(exceptionIndex);
+            }
+        }
+        // ......
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
 ## 总结
 
-本篇文章主要讲述以下两点内容：
+本文主要是对`MethodVisitor`类和`MethodWriter`类进行介绍，内容总结如下：
 
-- 第一点，`MethodVisitor`类的成员有哪些。
+- 第一点，在`MethodVisitor`类当中，它的成员有哪些。
 - 第二点，在`MethodVisitor`类当中，`visitXxx()`方法之间的调用顺序是什么样的。
+- 第三点，相对而言，`MethodWriter`类要比`FieldWriter`要复杂的多。一般情况下，我们不会直接用到`MethodWriter`类；如果要研究ASM源码，我们再去关注它。
 
+另外，需要大家注意，`ClassVisitor`类有自己的`visitXxx()`方法，`MethodVisitor`类也有自己的`visitXxx()`方法，两者是不一样的，要注意区分。

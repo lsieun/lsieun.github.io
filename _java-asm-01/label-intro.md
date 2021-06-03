@@ -1,6 +1,6 @@
 ---
 title:  "Label介绍"
-sequence: "015"
+sequence: "209"
 ---
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
@@ -123,7 +123,9 @@ index  start_pc  length  name_and_type
 
 举个形象的例子，在《火影忍者》当中，黄色闪光水门会使用飞雷神之术，如下图。飞雷神之术的特点：先扔出带有飞雷神标记的苦无，再跳转到苦无的位置。
 
-![](/assets/images/manga/naruto/yellow-flash-minato-teleportation.gif)
+{:refdef: style="text-align: center;"}
+![飞雷神之术](/assets/images/manga/naruto/yellow-flash-minato-teleportation.gif)
+{: refdef}
 
 相对而言，`Label`类就是“带有飞雷神标记的苦无”，它的`bytecodeOffset`字段就是“苦无的具体位置”。
 
@@ -206,9 +208,9 @@ mv2.visitEnd();
 
 ## 总结
 
-本篇文章的内容主要想讲述两个内容：
+本文主要对`Label`类进行了介绍，内容总结如下：
 
-- 第一个，就是简单化之后的`Label`类。为什么要进行简化呢？简化的目的，是为了便于大家的理解。
-- 第二个，就是`Label`类的作用是什么。简而言之，就是为了方便程序的跳转。
+- 第一点，将`Label`类精简之后，就只剩下一个`bytecodeOffset`字段。换句话说，这个`bytecodeOffset`字段就是`Label`类最精髓的内容。
+- 第二点，`Label`类的作用是什么。简单来说，就是为了方便程序的跳转，例如实现if、switch、goto和try-catch等语句。
 
 在`Label`类当中，定义了很多的字段和方法，但是我们都忽略了。如果我们想要明白ASM的工作原理，那么这些字段和方法，就需要搞明白它们是什么意思；但是，如果我们是想要应用ASM，实现某种任务，就不需要去理解它们的具体含义。我们也可以从一个“概括”的角度来把握这些字段：虽然我们可能不明白、不理解其中定义的具体的字段和方法到底是什么意思，但是这些字段和方法的存在，就是为了方便程序的跳转。

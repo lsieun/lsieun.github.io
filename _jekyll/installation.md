@@ -43,6 +43,7 @@ CentOS 7.6
 
 {% highlight bash %}
 $ bundle exec jekyll serve --detach
+$ bundle exec jekyll serve --detach --port 80
 $ bundle exec jekyll serve --detach --ssl-key private.key --ssl-cert cert.pem
 {% endhighlight %}
 

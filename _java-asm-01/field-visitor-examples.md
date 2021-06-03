@@ -1,19 +1,19 @@
 ---
 title:  "FieldVisitor代码示例"
-sequence: "012"
+sequence: "206"
 ---
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
-The ASM core API for **generating** and **transforming** compiled Java classes is based on the `ClassVisitor` abstract class.
-
-![](/assets/images/java/asm/what-asm-can-do.png)
+{:refdef: style="text-align: center;"}
+![What ASM Can Do](/assets/images/java/asm/what-asm-can-do.png)
+{: refdef}
 
 在当前阶段，我们只能进行Class Generation的操作。
 
 ## 示例
 
-预期结果：
+### 预期目标
 
 {% highlight java %}
 {% raw %}
@@ -24,7 +24,7 @@ public interface HelloWorld {
 {% endraw %}
 {% endhighlight %}
 
-实现代码：
+### 编码实现
 
 {% highlight java %}
 {% raw %}
@@ -50,17 +50,14 @@ public class HelloWorldGenerateCore {
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 
         // (2) 调用visitXxx()方法
-        cw.visit(V1_8, ACC_PUBLIC + ACC_ABSTRACT + ACC_INTERFACE, "sample/HelloWorld",
-                null, "java/lang/Object", null);
+        cw.visit(V1_8, ACC_PUBLIC + ACC_ABSTRACT + ACC_INTERFACE, "sample/HelloWorld", null, "java/lang/Object", null);
 
         {
-            FieldVisitor fv1 = cw.visitField(ACC_PUBLIC + ACC_FINAL + ACC_STATIC, "intValue",
-                    "I", null, Integer.valueOf(100));
+            FieldVisitor fv1 = cw.visitField(ACC_PUBLIC + ACC_FINAL + ACC_STATIC, "intValue", "I", null, Integer.valueOf(100));
             fv1.visitEnd();
         }
         {
-            FieldVisitor fv2 = cw.visitField(ACC_PUBLIC + ACC_FINAL + ACC_STATIC, "strValue",
-                    "Ljava/lang/String;", null, "ABC");
+            FieldVisitor fv2 = cw.visitField(ACC_PUBLIC + ACC_FINAL + ACC_STATIC, "strValue", "Ljava/lang/String;", null, "ABC");
             fv2.visitEnd();
         }
 
@@ -73,7 +70,7 @@ public class HelloWorldGenerateCore {
 {% endraw %}
 {% endhighlight %}
 
-验证结果：
+### 验证结果
 
 {% highlight java %}
 {% raw %}
@@ -97,7 +94,7 @@ public class HelloWorldRun {
 
 ## 总结
 
-这里主要演示了一个代码示例，需要着重注意的地方有两点：
+本文主要介绍了`FieldVisitor`的代码示例，内容总结如下：
 
 - 第一点，在调用`visitField()`方法时，它的输入参数中，描述符（descriptor）的格式应该怎么写。
 - 第二点，在调用`visitField()`方法后，它的返回结果是一个`FieldVisitor`类型的对象，要记得调用该对象的`visitEnd()`方法。

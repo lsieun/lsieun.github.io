@@ -1,0 +1,200 @@
+---
+title:  "本章内容总结"
+sequence: "213"
+---
+
+[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+
+{:refdef: style="text-align: center;"}
+![What ASM Can Do](/assets/images/java/asm/what-asm-can-do.png)
+{: refdef}
+
+本章内容是围绕着Class Generation（生成新的类）来展开，在这个过程当中，我们介绍了ASM Core API当中的一些类和接口。在本文当中，我们对这些内容进行一个总结。
+
+## Java ClassFile Format
+
+如果我们想要生成一个`.class`文件，就需要先对`.class`文件所遵循的文件格式（或者说是数据结构）有所了解。`.class`文件所遵循的数据结构是由[Java Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)定义的，其结构如下：
+
+{% highlight text %}
+ClassFile {
+    u4             magic;
+    u2             minor_version;
+    u2             major_version;
+    u2             constant_pool_count;
+    cp_info        constant_pool[constant_pool_count-1];
+    u2             access_flags;
+    u2             this_class;
+    u2             super_class;
+    u2             interfaces_count;
+    u2             interfaces[interfaces_count];
+    u2             fields_count;
+    field_info     fields[fields_count];
+    u2             methods_count;
+    method_info    methods[methods_count];
+    u2             attributes_count;
+    attribute_info attributes[attributes_count];
+}
+{% endhighlight %}
+
+对上面的条目来进行一个简单的介绍：
+
+- `magic`：表示magic number，是一个固定值`CAFEBABE`，它是一个标识信息，用来判断当前文件是否为ClassFile。其实，不只是`.class`文件有magic number。例如，`.pdf`文件的magic number是`%PDF`，`.png`文件的magic number是`PNG`。
+- `minor_version`和`major_version`：表示当前`.class`文件的版本信息。因为Java语言不断发展，就存在不同版本之间的差异；记录`.class`文件的版本信息，是为了判断JVM的版本的`.class`文件的版本是否兼容。高版本的JVM可以执行低版本的`.class`文件，但是低版本的JVM不能执行高版本的`.class`文件。
+- `constant_pool_count`和`constant_pool`：表示“常量池”信息，它是一个“资源仓库”。在这里面，存放了当前类的类名、父类的类名、所实现的接口名字，后面的`this_class`、`super_class`和`interfaces[]`存放的是一个索引值，该索引值指向常量池。
+- `access_flags`、`this_class`、`super_class`、`interfaces_count`和`interfaces`：表示当前类的访问标识、类名、父类、实现接口的数量和具体的接口。
+- `fields_count`和`fields`：表示字段的数量和具体的字段内容。
+- `methods_count`和`methods`：表示方法的数量和具体的方法内容。
+- `attributes_count`和`attributes`：表示属性的数量和具体的属性内容。
+
+总结一下就是，magic number是为了区分不同产品（PDF、PNG、ClassFile）之间的差异，而version则是为了区分同一个产品在不同版本之间的差异。 接下来的Constant Pool、Class Info、Fields、Methods和Attributes则是实实在在的映射`.class`文件当中的内容。
+
+我们可以把这个Java ClassFile Format和一个Java文件的内容来做一个对照：
+
+{% highlight java %}
+{% raw %}
+public class HelloWorld extends Object implements Cloneable {
+    private int intValue = 10;
+    private String strValue = "ABC";
+
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public int sub(int a, int b) {
+        return a - b;
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+## ASM Core API
+
+我们要生成一个`.class`文件，直接使用十六进制编辑器是“不太可靠的”，所以我们借助于ASM这个类库，使用其中Core API的部分来帮助我们实现。
+
+讲到任何的API，其实就是讲它的类、接口、方法等内容，所以，谈到ASM Core API就是讲其中涉及到的类、接口和里面的方法。在ASM Core API中，有三个非常重要的类，即`ClassReader`、`ClassVisitor`和`ClassWriter`类。但是，在Class Generation过程中，不会用到`ClassReader`，所以我们就主要关注`ClassVisitor`和`ClassWriter`类。
+
+{:refdef: style="text-align: center;"}
+![ASM里的核心类](/assets/images/java/asm/asm_core_classes.png)
+{: refdef}
+
+### ClassVisitor和ClassWriter
+
+在`ClassVisitor`类当中，定义了许多的`visitXxx()`方法，并且这些`visitXxx()`方法要遵循一定的调用顺序。我们把这些`visitXxx()`方法进行精简，得到4个`visitXxx()`方法：
+
+{% highlight java %}
+{% raw %}
+public abstract class ClassVisitor {
+    public void visit(
+        final int version,
+        final int access,
+        final String name,
+        final String signature,
+        final String superName,
+        final String[] interfaces);
+    public FieldVisitor visitField( // 访问字段
+        final int access,
+        final String name,
+        final String descriptor,
+        final String signature,
+        final Object value);
+    public MethodVisitor visitMethod( // 访问方法
+        final int access,
+        final String name,
+        final String descriptor,
+        final String signature,
+        final String[] exceptions);
+    public void visitEnd();
+    // ......
+}
+{% endraw %}
+{% endhighlight %}
+
+我们可以将这4个`visitXxx()`方法，与Java ClassFile Format进行比对，这样我们就能够更加“为什么会有这4个方法”以及“方法要接收参数的含义是什么”。
+
+但是，`ClassVisitor`类是一个抽象类，我们需要它的一个具体子类。这时候，就引出了`ClassWriter`类，它是`ClassVisitor`类的子类，继承了`visitXxx()`方法。同时，`ClassWriter`类也定义了一个`toByteArray()`方法，它可以将`visitXxx()`方法执行后的结果转换成`byte[]`。
+
+使用`ClassWriter`生成一个Class文件，可以大致分成三个步骤：
+
+- 第一步，创建`ClassWriter`对象。
+- 第二步，调用`ClassWriter`对象的`visitXxx()`方法。
+- 第三步，调用`ClassWriter`对象的`toByteArray()`方法。
+
+示例代码如下：
+
+{% highlight java %}
+{% raw %}
+import org.objectweb.asm.ClassWriter;
+
+import static org.objectweb.asm.Opcodes.*;
+
+public class HelloWorldGenerateCore {
+    public static byte[] dump () throws Exception {
+        // (1) 创建ClassWriter对象
+        ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
+
+        // (2) 调用visitXxx()方法
+        cw.visit(...);
+        cw.visitField(...);
+        cw.visitMethod(...);
+        cw.visitEnd();       // 注意，最后要调用visitEnd()方法
+
+        // (3) 调用toByteArray()方法
+        byte[] bytes = cw.toByteArray();
+        return bytes;
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+我们在介绍Class Generation示例的时候，直接使用`ClassWriter`类就可以了。但是，除了`ClassVisitor`和`ClassWriter`类，我们还需要更多的类来“丰富”这个类的“细节信息”，比如说`FieldVisitor`和`MethodVisitor`，它们分别是为了“丰富”字段和方法的具体信息。
+
+### FieldVisitor和MethodVisitor
+
+在`ClassVisitor`类当中，`visitField()`方法会返回一个`FieldVisitor`对象，`visitMethod()`方法会返回一个`MethodVisitor`对象。其实，`FieldVisitor`对象和`MethodVisitor`对象是为了让生成的字段和方法内容更“丰富、充实”。
+
+相对来说，`FieldVisitor`类比较简单，在刚开始学的时候，我们只需要关注它的`visitEnd()`方法就可以了。`MethodVisitor`类就比较复杂，因为在调用`visitMethod()`方法的时候，只是说明了方法的名字、方法的参数类型、方法的描述符等信息，并没有说明方法的“方法体”信息，所以我们需要使用具体的`MethodVisitor`对象来实现具体的方法体。
+
+在`MethodVisitor`类当中，也定义了许多的`visitXxx()`方法。这里要注意一下，要注意与`ClassVisitor`类里定义的`visitXxx()`方法区分。`ClassVisitor`类里的`visitXxx()`方法是提供类层面的信息，而`MethodVisitor`类里的`visitXxx()`方法是提供某一个具体方法里的信息。
+
+`MethodVisitor`类里的`visitXxx()`方法，也需要遵循一定的调用顺序，精简之后，如下：
+
+{% highlight text %}
+[
+    visitCode
+    (
+        visitFrame |
+        visitXxxInsn |
+        visitLabel |
+        visitTryCatchBlock
+    )*
+    visitMaxs
+]
+visitEnd
+{% endhighlight %}
+
+我们可以按照下面来记忆`visitXxx()`方法的调用顺序：
+
+- 第一步，调用`visitCode()`方法，调用一次
+- 第二步，调用`visitXxxInsn()`方法，可以调用多次。对这些方法的调用，就是在构建方法的“方法体”。
+- 第三步，调用`visitMaxs()`方法，调用一次
+- 第四步，调用`visitEnd()`方法，调用一次
+
+另外，我们也需要特别注意一些特殊的方法名字，例如，构造方法的名字是`<init>`，而静态初始化方法的名字是`<clinit>`。
+
+我们在使用`MethodVisitor`来编写方法体的代码逻辑时，不可避免的会遇到程序逻辑`true`和`false`判断和执行流程的跳转，而`Label`在ASM代码中就标志着跳转的位置。借助于`Label`类，我们可以实现if语句、switch语句、for语句和try-catch语句。添加label位置，是通过`MethodVisitor.visitLabel()`方法实现的。
+
+在Java 6之后，为了对方法的代码进行校验，于是就增加了`StackMapTable`属性。谈到`StackMapTable`属性，其实就是我们讲到的frame，就是记录某一条instruction所对应的local variables和operand stack的状态。我们不推荐大家自己计算frame，因此不推荐使用`MethodVisitor.visitFrame()`方法。
+
+无论是`Label`类，还是frame，它们都是`MethodVisitor`在实现“方法体”过程当中的“细节信息”，所以我们把这两者放到`MethodVisitor`一起来说明。
+
+### 常量池去哪儿了？
+
+有的细心的同学，可能会发现这样的问题：在ASM当中，常量池去哪儿了？为什么没有常量池相关的类和方法呢？
+
+其实，在ASM源码中，与常量池对应的是`SymbolTable`类，但我们并没有对它进行介绍。为什么没有介绍呢？是因为我们在调用`ClassVisitor.visitXxx()`方法和`MethodVisitor.visitXxx()`方法的过程中，ASM会自动帮助我们去构建`SymbolTable`类里面具体的内容。另一方面，`SymbolTable`类，也是一个内部类，没有带有`public`修饰，不能被外界所使用。还有一个原因就是，常量池中包含十几种具体的常量类型，而且`SymbolTable`类还包括BootstrapMethod的信息，讲起来也比较复杂，要完全讲清楚，也不太容易，需要结合Java ClassFile的完整知识体系才能理解。
+
+我们的关注点还是在于如何使用Core API来进行Class Generation操作，ASM的内部实现会帮助我们处理好`SymbolTable`类的内容。
+
+## 总结
+
+本文是对第二章的整体内容进行总结，大家可以从两方面进行把握：一个是Java ClassFile的格式是什么的，另一个就是ASM Core API里的具体类和方法的作用。

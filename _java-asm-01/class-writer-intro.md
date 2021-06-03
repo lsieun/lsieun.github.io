@@ -1,6 +1,6 @@
 ---
 title:  "ClassWriter介绍"
-sequence: "009"
+sequence: "203"
 ---
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
@@ -231,7 +231,7 @@ public class ClassWriter extends ClassVisitor {
 
 ## 创建ClassWriter对象
 
-### 推荐使用ClassWriter.COMPUTE_FRAMES
+### 推荐使用COMPUTE_FRAMES
 
 在创建`ClassWriter`对象的时候，要指定一个`flag`参数，它可以选择的值有3个：
 
@@ -265,7 +265,7 @@ ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 {% endraw %}
 {% endhighlight %}
 
-### 为什么推荐使用ClassWriter.COMPUTE_FRAMES
+### 为什么推荐使用COMPUTE_FRAMES
 
 首先，我们来看一下max stacks和max locals。
 
@@ -356,8 +356,8 @@ public class HelloWorldGenerateCore {
 
 ## 总结
 
-本章内容总结如下：
+本文主要对`ClassWriter`类进行介绍，内容总结如下：
 
-- 第一，`ClassWriter`类有哪些成员信息。
-- 第二，创建`ClassWriter`对象，推荐使用`COMPUTE_FRAMES`。即`ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);`
-- 第三，使用`ClassWriter`类，分为三个步骤。另外，要注意`visitXxxx()`方法的调用顺序，以及最后的时候要记得调用`visitEnd()`方法。
+- 第一点，`ClassWriter`类有哪些成员信息。
+- 第二点，创建`ClassWriter`对象，推荐使用`COMPUTE_FRAMES`。即`ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);`
+- 第三点，如何使用`ClassWriter`类。另外，要注意`visitXxxx()`方法的调用顺序，以及最后的时候要记得调用`visitEnd()`方法。

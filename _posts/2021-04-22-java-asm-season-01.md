@@ -15,7 +15,7 @@ ASM is an open source java library for manipulating java byte code.
 <ol>
     {% for post in filtered_posts %}
     {% assign num = post.sequence | abs %}
-    {% if num > 0 and num < 7 %}
+    {% if num > 100 and num < 200 %}
     <li>
         <a href="{{ post.url }}">{{ post.title }}</a>
     </li>
@@ -30,7 +30,7 @@ ASM is an open source java library for manipulating java byte code.
 <ol>
     {% for post in filtered_posts %}
     {% assign num = post.sequence | abs %}
-    {% if num >= 7 and num < 19 %}
+    {% if num > 200 and num < 300 %}
     <li>
         <a href="{{ post.url }}">{{ post.title }}</a>
     </li>
@@ -41,21 +41,61 @@ ASM is an open source java library for manipulating java byte code.
 
 ### 第三章 修改已有的类
 
-### 所有章节
+{% assign filtered_posts = site.java-asm-01 | sort: "sequence" %}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    {% if num > 300 and num < 400 %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endif %}
+    
+    {% endfor %}
+</ol>
+
+### 第四章 工具类和常用类
 
 {% assign filtered_posts = site.java-asm-01 | sort: "sequence" %}
 <ol>
     {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    {% if num > 400 and num < 500 %}
     <li>
         <a href="{{ post.url }}">{{ post.title }}</a>
     </li>
+    {% endif %}
+    
     {% endfor %}
 </ol>
 
 
+[comment]: <> (### 所有章节)
+
+[comment]: <> ({% assign filtered_posts = site.java-asm-01 | sort: "sequence" %})
+
+[comment]: <> (<ol>)
+
+[comment]: <> (    {% for post in filtered_posts %})
+
+[comment]: <> (    <li>)
+
+[comment]: <> (        <a href="{{ post.url }}">{{ post.title }}</a>)
+
+[comment]: <> (    </li>)
+
+[comment]: <> (    {% endfor %})
+
+[comment]: <> (</ol>)
+
+
 ## 参考资料
 
-- [ASM](https://asm.ow2.io/)
-- [GitLab: asm source code](https://gitlab.ow2.org/asm/asm)
+- 课程源码：[learn-java-asm](https://gitee.com/lsieun/learn-java-asm)
+- [ASM官网](https://asm.ow2.io/)
+- ASM源码：[GitLab](https://gitlab.ow2.org/asm/asm)
+- ASM使用手册：[英文版](https://asm.ow2.io/asm4-guide.pdf)、[中文版](https://www.yuque.com/mikaelzero/asm)
+- 参考文献
+    - 2002年，[ASM: a code manipulation tool to implement adaptable systems(PDF)](/assets/pdf/asm-eng.pdf)
+    - 2007年，[Using the ASM framework to implement common Java bytecode transformation patterns(PDF)](/assets/pdf/asm-transformations.pdf)
 - [Oracle: The Java Virtual Machine Specification, Java SE 8 Edition](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)
-

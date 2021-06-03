@@ -1,0 +1,306 @@
+---
+title:  "GeneratorAdapter介绍"
+sequence: "406"
+---
+
+[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+
+对于`GeneratorAdapter`类来说，它非常重要的一个特点：将一些`visitXxx()`方法封装成一些常用的方法。
+
+## GeneratorAdapter类
+
+### class info
+
+`GeneratorAdapter`类继承自`LocalVariablesSorter`类。
+
+- org.objectweb.asm.MethodVisitor
+    - org.objectweb.asm.commons.LocalVariablesSorter
+        - org.objectweb.asm.commons.GeneratorAdapter
+            - org.objectweb.asm.commons.AdviceAdapter
+
+{% highlight java %}
+{% raw %}
+public class GeneratorAdapter extends LocalVariablesSorter {
+}
+{% endraw %}
+{% endhighlight %}
+
+### fields
+
+{% highlight java %}
+{% raw %}
+public class GeneratorAdapter extends LocalVariablesSorter {
+    private final int access;
+    private final String name;
+    private final Type returnType;
+    private final Type[] argumentTypes;
+    private final List<Type> localTypes = new ArrayList<>();
+}
+{% endraw %}
+{% endhighlight %}
+
+### constructors
+
+{% highlight java %}
+{% raw %}
+public class GeneratorAdapter extends LocalVariablesSorter {
+    public GeneratorAdapter(final MethodVisitor methodVisitor,
+                            final int access, final String name, final String descriptor) {
+        this(Opcodes.ASM9, methodVisitor, access, name, descriptor);
+    }
+
+    protected GeneratorAdapter(final int api, final MethodVisitor methodVisitor,
+                               final int access, final String name, final String descriptor) {
+        super(api, access, descriptor, methodVisitor);
+        this.access = access;
+        this.name = name;
+        this.returnType = Type.getReturnType(descriptor);
+        this.argumentTypes = Type.getArgumentTypes(descriptor);
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+### methods
+
+#### loadThis method
+
+{% highlight java %}
+{% raw %}
+public class GeneratorAdapter extends LocalVariablesSorter {
+    public void loadThis() {
+        if ((access & Opcodes.ACC_STATIC) != 0) { // 注意，静态方法没有this
+            throw new IllegalStateException("no 'this' pointer within static method");
+        }
+        mv.visitVarInsn(Opcodes.ALOAD, 0);
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+#### arg methods
+
+{% highlight java %}
+{% raw %}
+public class GeneratorAdapter extends LocalVariablesSorter {
+    private int getArgIndex(final int arg) {
+        int index = (access & Opcodes.ACC_STATIC) == 0 ? 1 : 0;
+        for (int i = 0; i < arg; i++) {
+            index += argumentTypes[i].getSize();
+        }
+        return index;
+    }
+
+    private void loadInsn(final Type type, final int index) {
+        mv.visitVarInsn(type.getOpcode(Opcodes.ILOAD), index);
+    }
+
+    private void storeInsn(final Type type, final int index) {
+        mv.visitVarInsn(type.getOpcode(Opcodes.ISTORE), index);
+    }
+
+    public void loadArg(final int arg) {
+        loadInsn(argumentTypes[arg], getArgIndex(arg));
+    }
+
+    public void loadArgs(final int arg, final int count) {
+        int index = getArgIndex(arg);
+        for (int i = 0; i < count; ++i) {
+            Type argumentType = argumentTypes[arg + i];
+            loadInsn(argumentType, index);
+            index += argumentType.getSize();
+        }
+    }
+
+    public void loadArgs() {
+        loadArgs(0, argumentTypes.length);
+    }
+
+    public void loadArgArray() {
+        push(argumentTypes.length);
+        newArray(OBJECT_TYPE);
+        for (int i = 0; i < argumentTypes.length; i++) {
+            dup();
+            push(i);
+            loadArg(i);
+            box(argumentTypes[i]);
+            arrayStore(OBJECT_TYPE);
+        }
+    }
+
+    public void storeArg(final int arg) {
+        storeInsn(argumentTypes[arg], getArgIndex(arg));
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+#### boxing and unboxing methods
+
+{% highlight java %}
+{% raw %}
+public class GeneratorAdapter extends LocalVariablesSorter {
+    public void box(final Type type) {
+        if (type.getSort() == Type.OBJECT || type.getSort() == Type.ARRAY) {
+            return;
+        }
+        if (type == Type.VOID_TYPE) {
+            push((String) null);
+        } else {
+            Type boxedType = getBoxedType(type);
+            newInstance(boxedType);
+            if (type.getSize() == 2) {
+                dupX2();
+                dupX2();
+                pop();
+            } else {
+                dupX1();
+                swap();
+            }
+            invokeConstructor(boxedType, new Method("<init>", Type.VOID_TYPE, new Type[] {type}));
+        }
+    }
+
+    public void unbox(final Type type) {
+        Type boxedType = NUMBER_TYPE;
+        Method unboxMethod;
+        switch (type.getSort()) {
+            case Type.VOID:
+                return;
+            case Type.CHAR:
+                boxedType = CHARACTER_TYPE;
+                unboxMethod = CHAR_VALUE;
+                break;
+            case Type.BOOLEAN:
+                boxedType = BOOLEAN_TYPE;
+                unboxMethod = BOOLEAN_VALUE;
+                break;
+            case Type.DOUBLE:
+                unboxMethod = DOUBLE_VALUE;
+                break;
+            case Type.FLOAT:
+                unboxMethod = FLOAT_VALUE;
+                break;
+            case Type.LONG:
+                unboxMethod = LONG_VALUE;
+                break;
+            case Type.INT:
+            case Type.SHORT:
+            case Type.BYTE:
+                unboxMethod = INT_VALUE;
+                break;
+            default:
+                unboxMethod = null;
+                break;
+        }
+        if (unboxMethod == null) {
+            checkCast(type);
+        } else {
+            checkCast(boxedType);
+            invokeVirtual(boxedType, unboxMethod);
+        }
+    }
+
+    public void valueOf(final Type type) {
+        if (type.getSort() == Type.OBJECT || type.getSort() == Type.ARRAY) {
+            return;
+        }
+        if (type == Type.VOID_TYPE) {
+            push((String) null);
+        } else {
+            Type boxedType = getBoxedType(type);
+            invokeStatic(boxedType, new Method("valueOf", boxedType, new Type[] {type}));
+        }
+    }
+
+    private static Type getBoxedType(final Type type) {
+        switch (type.getSort()) {
+            case Type.BYTE:
+                return BYTE_TYPE;
+            case Type.BOOLEAN:
+                return BOOLEAN_TYPE;
+            case Type.SHORT:
+                return SHORT_TYPE;
+            case Type.CHAR:
+                return CHARACTER_TYPE;
+            case Type.INT:
+                return INTEGER_TYPE;
+            case Type.FLOAT:
+                return FLOAT_TYPE;
+            case Type.LONG:
+                return LONG_TYPE;
+            case Type.DOUBLE:
+                return DOUBLE_TYPE;
+            default:
+                return type;
+        }
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+## 如何使用
+
+{% highlight java %}
+{% raw %}
+import lsieun.utils.FileUtils;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Type;
+import org.objectweb.asm.commons.GeneratorAdapter;
+import org.objectweb.asm.commons.Method;
+import org.objectweb.asm.util.TraceClassVisitor;
+
+import java.io.PrintStream;
+import java.io.PrintWriter;
+
+import static org.objectweb.asm.Opcodes.*;
+
+public class HelloWorldGenerateCommons {
+    public static void main(String[] args) throws Exception {
+        String relative_path = "sample/HelloWorld.class";
+        String filepath = FileUtils.getFilePath(relative_path);
+
+        // (1) 生成byte[]内容
+        byte[] bytes = dump();
+
+        // (2) 保存byte[]到文件
+        FileUtils.writeBytes(filepath, bytes);
+    }
+
+    public static byte[] dump() throws Exception {
+        ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
+        PrintWriter printWriter = new PrintWriter(System.out);
+        TraceClassVisitor cv = new TraceClassVisitor(cw, printWriter);
+
+        cv.visit(V1_8, ACC_PUBLIC + ACC_SUPER, "sample/HelloWorld",
+                null, "java/lang/Object", null);
+
+        {
+            Method m1 = Method.getMethod("void <init> ()");
+            GeneratorAdapter mg = new GeneratorAdapter(ACC_PUBLIC, m1, null, null, cv);
+            mg.loadThis();
+            mg.invokeConstructor(Type.getType(Object.class), m1);
+            mg.returnValue();
+            mg.endMethod();
+        }
+
+        {
+            Method m2 = Method.getMethod("void main (String[])");
+            GeneratorAdapter mg = new GeneratorAdapter(ACC_PUBLIC + ACC_STATIC, m2, null, null, cv);
+            mg.getStatic(Type.getType(System.class), "out", Type.getType(PrintStream.class));
+            mg.push("Hello world!");
+            mg.invokeVirtual(Type.getType(PrintStream.class), Method.getMethod("void println (String)"));
+            mg.returnValue();
+            mg.endMethod();
+        }
+
+        cv.visitEnd();
+
+        return cw.toByteArray();
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+## 总结
+

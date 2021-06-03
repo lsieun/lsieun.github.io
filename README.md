@@ -22,7 +22,17 @@ bundle exec jekyll serve --unpublished --drafts
 {% endhighlight %}
 ```
 
+```text
+{% highlight text %}
 
+{% endhighlight %}
+```
+
+```text
+{:refdef: style="text-align: center;"}
+![My Image]({{ site.baseimg }}/images/example1.png)
+{: refdef}
+```
 
 
 

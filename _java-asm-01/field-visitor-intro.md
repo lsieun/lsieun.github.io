@@ -1,11 +1,13 @@
 ---
 title:  "FieldVisitor介绍"
-sequence: "011"
+sequence: "205"
 ---
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 ## FieldVisitor类
+
+### class members
 
 在学习`FieldVisitor`类的时候，可以与`ClassVisitor`类进行对比，这两个类之间有很大的相似性。因为这两个类之间有相似性，所以学习起来就会相对容易一些。
 
@@ -40,6 +42,8 @@ public abstract class FieldVisitor {
 {% endraw %}
 {% endhighlight %}
 
+### visitEnd()方法
+
 在`FieldVisitor`类内，定义了多个`visitXxx()`方法，这些方法的调用也要遵循一定的调用顺序：
 
 {% highlight text %}
@@ -55,7 +59,13 @@ visitEnd
 
 为什么我们只关注`visitEnd()`方法呢？因为我们刚开始学习ASM，有许多东西不太熟悉，为了减少我们的学习和认知“负担”，那么对于一些非必要的方法，我们就暂时忽略它；将`visitXxx()`方法精简到一个最小的认知集合，那么就只剩下`visitEnd()`方法了。
 
-随着而来的一个问题就是，对于其它的`visitXxx()`方法，我们什么时候学习呢？我们在学习ASM的时候，其实就是学习它的API；换句话说，就是学习使用ASM编写代码的思路。那么，这个思路是什么呢？这个思路，就是告诉我们，在使用ASM API的时候，要先做什么，后做什么。举例来说明，对于`ClassWriter`类而言，我们要先调用`visit()`方法，接着可能会调用`visitField()`方法或`visitMethod()`方法，最后要调用`visitEnd()`方法，我们不能扰乱顺序而随便调用某个方法，因为ASM对于我们调用方法的顺序是有要求的，这就是我们所说的学习使用ASM的思路，去遵循它的各个方法调用的顺序。当我们熟悉ASM的使用思路之后，针对某一个特定的`visitXxx()`方法，可能之前时候，我们没有使用过，我们只要找一、两个代码示例，就能够对这个`visitXxx()`方法熟悉起来，并把这个方法纳入到已经形成的“如何使用ASM”的整体思路当中。
+### 其它visitXxx()方法
+
+随着而来的一个问题就是，对于其它的`visitXxx()`方法，我们什么时候学习呢？我们在学习ASM的时候，其实就是学习它的API；换句话说，就是学习使用ASM编写代码的思路。那么，这个思路是什么呢？这个思路，就是告诉我们，在使用ASM API的时候，要先做什么，后做什么。
+
+举例来说明，对于`ClassWriter`类而言，我们要先调用`visit()`方法，接着可能会调用`visitField()`方法或`visitMethod()`方法，最后要调用`visitEnd()`方法，我们不能打乱顺序而随便调用某个方法。因为ASM对于我们调用方法的顺序是有要求的，这就是我们所说的学习使用ASM的思路，去遵循它的各个方法调用的顺序。
+
+当我们熟悉ASM的使用思路之后，针对某一个特定的`visitXxx()`方法，可能之前时候，我们没有使用过，我们只要找一、两个代码示例，就能够对这个`visitXxx()`方法熟悉起来，并把这个方法纳入到已经形成的“如何使用ASM”的整体思路当中。
 
 假如说，将来的某一时刻，我们想看一下`visitAnnotation()`方法如何使用，可以编写一个类，让其中某个字段带有注解信息，例如：
 
@@ -84,7 +94,9 @@ annotationVisitor0.visitEnd();
 
 `FieldWriter`类是`FieldVisitor`类的一个子类。
 
-需要注意的是，`FieldWriter`类并不带有`public`关键字修饰，因此它的有效访问范围，只局限于它所处的package当中，不能像其它的`public`类一样被外部所使用。
+需要注意的是，`FieldWriter`类并不带有`public`修饰，因此它的有效访问范围只局限于它所处的package当中，不能像其它的`public`类一样被外部所使用。
+
+### fields
 
 {% highlight java %}
 {% raw %}
@@ -109,7 +121,56 @@ field_info {
 }
 {% endhighlight %}
 
-其实，对于`FieldWriter`类，我们不会去直接使用它，也并不需要我们花费太多的时间去了解它。在这里，我们把它介绍出来，很大原因是出于一种“对称性”：
+### methods
+
+在`FieldWriter`类当中，有两个重要的方法：`computeFieldInfoSize()`和`putFieldInfo()`方法。这两个方法在哪里用到呢？在`ClassWriter`类的`toByteArray()`方法内。
+
+{% highlight java %}
+{% raw %}
+final class FieldWriter extends FieldVisitor {
+    int computeFieldInfoSize() {
+        // The access_flags, name_index, descriptor_index and attributes_count fields use 8 bytes.
+        int size = 8;
+        // For ease of reference, we use here the same attribute order as in Section 4.7 of the JVMS.
+        if (constantValueIndex != 0) {
+            // ConstantValue attributes always use 8 bytes.
+            symbolTable.addConstantUtf8(Constants.CONSTANT_VALUE);
+            size += 8;
+        }
+        // ......
+        return size;
+    }
+
+    void putFieldInfo(final ByteVector output) {
+        boolean useSyntheticAttribute = symbolTable.getMajorVersion() < Opcodes.V1_5;
+        // Put the access_flags, name_index and descriptor_index fields.
+        int mask = useSyntheticAttribute ? Opcodes.ACC_SYNTHETIC : 0;
+        output.putShort(accessFlags & ~mask).putShort(nameIndex).putShort(descriptorIndex);
+        // Compute and put the attributes_count field.
+        // For ease of reference, we use here the same attribute order as in Section 4.7 of the JVMS.
+        int attributesCount = 0;
+        if (constantValueIndex != 0) {
+            ++attributesCount;
+        }
+        // ......
+        output.putShort(attributesCount);
+        // Put the field_info attributes.
+        // For ease of reference, we use here the same attribute order as in Section 4.7 of the JVMS.
+        if (constantValueIndex != 0) {
+            output
+              .putShort(symbolTable.addConstantUtf8(Constants.CONSTANT_VALUE))
+              .putInt(2)
+              .putShort(constantValueIndex);
+        }
+        // ......
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+## ASM类名的对称性
+
+其实，对于`FieldWriter`类，我们不会去直接使用它。如果不是为了理解源码，我们也并不需要花费太多的时间去研究它。在这里，我们把它介绍出来，很大原因是出于一种“对称性”：
 
 - 在`ClassVisitor`类中，调用`visitField()`方法会返回一个`FieldVisitor`对象
 - 在`ClassWriter`类中，调用`visitField()`方法会返回一个`FieldWriter`对象
@@ -141,4 +202,12 @@ field_info {
 </tr>
 </tbody>
 </table>
+
+## 总结
+
+本文主要对`FieldVisitor`类和`FieldWriter`类进行了介绍，内容总结如下：
+
+- 第一点，`FieldVisitor`类，从结构上来说，与`ClassVisitor`很相似；但是，我们只需要关心`FieldVisitor.visitEnd()`方法就可以了。
+- 第二点，`FieldWriter`类是继承自`FieldVisitor`类。我们平常写ASM代码的时候，不会用到它；但是，如果想研究ASM的源代码，那么可以重点关注一下`computeFieldInfoSize()`和`putFieldInfo()`这两个方法。
+- 第三点，ASM在设计类的时候，在“类名”层面，有一些“对称性”的特征。
 
