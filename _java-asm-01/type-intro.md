@@ -5,6 +5,8 @@ sequence: "304"
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
+## 为什么会存在Type类
+
 在ASM的代码中，有一个`Type`类（`org.objectweb.asm.Type`）。为什么会有这样一个`Type`类呢？
 
 大家知道，在JDK当中有一个`java.lang.reflect.Type`类。对于`java.lang.reflect.Type`类来说，它是一个接口，它有一个我们经常使用的子类，即`java.lang.Class`；相应的，在ASM当中有一个`org.objectweb.asm.Type`类。
@@ -31,13 +33,23 @@ sequence: "304"
 </tbody>
 </table>
 
-针对这两个类，联系现实生活中的例子，如果有两个人同名同姓，如果你不能很好的区分他们两个人，那么你就不可能很好的和他们打交道。相应的，在编写代码层面，如果我们不能区分出`java.lang.reflect.Type`类和`org.objectweb.asm.Type`类，我们也不能很好的使用它们。
+在编写代码层面，如果我们不能区分出`java.lang.reflect.Type`类和`org.objectweb.asm.Type`类，我们也不能很好的使用它们。
 
 - Java File：具体表现为`.java`文件，在里面使用Java语言编写代码，它是属于Java Language Specification的范畴。
 - Class File：具体表现为`.class`文件，它里面的内容遵循ClassFile的结构，它是属于JVM Specification的范畴。
 - ASM：它是一个类库。我们在编写ASM代码的时候，是在`.java`文件中编写，使用的是Java语言，而它所操作的对象却是`.class`文件。
 
-换句话说，ASM实现，从本质上来说，是一只脚踩在Java Language Specification的范畴，而另一只脚却踩在JVM Specification的范畴。这两个范畴，是相关的，但是又不是那种密不可分的关系。比如说，Java语言编写的程序可以运行在JVM上，Scala语言编写的程序也可以运行在JVM上，甚至Python语言编写的程序也可以编写在JVM上；也就是说，某一种编程语言和JVM之间，并不是一种非常强的依赖关系。ASM，在这两个范畴中，扮演的一个非常重要的角色，就是将Java Language Specification范畴的概念和JVM Specification范畴的概念进行转换。
+换句话说，ASM实现，从本质上来说，是一只脚踩在Java Language Specification的范畴，而另一只脚却踩在JVM Specification的范畴。ASM，在这两个范畴中，扮演的一个非常重要的角色，就是将Java Language Specification范畴的概念和JVM Specification范畴的概念进行转换。
+
+{:refdef: style="text-align: center;"}
+![JLS与JVM之间的关系](/assets/images/java/jls-jvms.png)
+{: refdef}
+
+这两个范畴，是相关的，但是又不是那种密不可分的关系。比如说，Java语言编写的程序可以运行在JVM上，Scala语言编写的程序也可以运行在JVM上，甚至Python语言编写的程序也可以编写在JVM上；也就是说，某一种编程语言和JVM之间，并不是一种非常强的依赖关系。
+
+{:refdef: style="text-align: center;"}
+![各种语言与JVM之间的关系](/assets/images/java/java-scala-python-jvm.png)
+{: refdef}
 
 <table>
 <thead>
@@ -68,7 +80,10 @@ sequence: "304"
 
 在`.java`文件中，我们经常使用`java.lang.Class`类；而在`.class`文件中，需要经常用到internal name、type descriptor和method descriptor；而在ASM中，`org.objectweb.asm.Type`类就是帮助我们进行两者之间的转换。
 
-![](/assets/images/java/asm/asm_type_relation.png)
+{:refdef: style="text-align: center;"}
+![](/assets/images/java/asm/asm-type-relation.png)
+{: refdef}
+
 
 ## Type类
 
@@ -122,6 +137,8 @@ public final class Type {
 {% endhighlight %}
 
 ### methods
+
+在`Type`类里，定义了一些方法，这些方法是与字段有直接关系的。
 
 {% highlight java %}
 {% raw %}
@@ -181,6 +198,8 @@ public final class Type {
 {% endraw %}
 {% endhighlight %}
 
+关于这些方法的使用，示例如下：
+
 {% highlight java %}
 {% raw %}
 import org.objectweb.asm.Type;
@@ -203,9 +222,11 @@ public class HelloWorldRun {
 {% endraw %}
 {% endhighlight %}
 
-## Static Members
+## 静态成员
 
-### static fields
+### 静态字段
+
+在`Type`类里，定义了一些常量字段，有`int`类型，也有`String`类型。
 
 {% highlight java %}
 {% raw %}
@@ -225,7 +246,15 @@ public final class Type {
     private static final int INTERNAL = 12;
 
     private static final String PRIMITIVE_DESCRIPTORS = "VZCBSIFJD";
+}
+{% endraw %}
+{% endhighlight %}
 
+在`Type`类里，也定义了一些`Type`类型的字段，这些字段是由上面的`int`和`String`类型的字段组合得到。
+
+{% highlight java %}
+{% raw %}
+public final class Type {
     public static final Type VOID_TYPE = new Type(VOID, PRIMITIVE_DESCRIPTORS, VOID, VOID + 1);
     public static final Type BOOLEAN_TYPE = new Type(BOOLEAN, PRIMITIVE_DESCRIPTORS, BOOLEAN, BOOLEAN + 1);
     public static final Type CHAR_TYPE = new Type(CHAR, PRIMITIVE_DESCRIPTORS, CHAR, CHAR + 1);
@@ -239,7 +268,7 @@ public final class Type {
 {% endraw %}
 {% endhighlight %}
 
-### static methods
+### 静态方法
 
 这里介绍的几个`get*Type()`方法，是静态（`static`）方法。这几个方法的主要目的就是得到一个`Type`对象。
 
@@ -303,7 +332,7 @@ public final class Type {
 
 #### 方式一：java.lang.Class
 
-这是从一个`java.lang.Class`对象来获取`Type`对象：
+从一个`java.lang.Class`对象来获取`Type`对象：
 
 {% highlight java %}
 {% raw %}
@@ -320,7 +349,7 @@ public class HelloWorldRun {
 
 #### 方式二：descriptor
 
-这是从一个描述符（descriptor）来获取`Type`对象：
+从一个描述符（descriptor）来获取`Type`对象：
 
 {% highlight java %}
 {% raw %}
@@ -341,6 +370,8 @@ public class HelloWorldRun {
 
 #### 方式三：internal name
 
+从一个internal name来获取`Type`对象：
+
 {% highlight java %}
 {% raw %}
 import org.objectweb.asm.Type;
@@ -356,6 +387,8 @@ public class HelloWorldRun {
 
 #### 方式四：static field
 
+从一个`Type`类的静态字段来获取`Type`对象：
+
 {% highlight java %}
 {% raw %}
 import org.objectweb.asm.Type;
@@ -369,7 +402,7 @@ public class HelloWorldRun {
 {% endraw %}
 {% endhighlight %}
 
-## Specialized Methods
+## 特殊的方法
 
 ### array-related methods
 
@@ -719,4 +752,4 @@ IRETURN --- FRETURN
 - 第一点，`Type`类的作用是什么？`Type`类是一个工具类，它的一个主要目的是将Java语言当中的概念转换成ClassFile当中的概念。
 - 第二点，学习`Type`类的方式就是“分而治之”。在`Type`类当中，定义了许多的字段和方法，它们是一个整体，内容也很繁杂；于是，我们将`Type`类分成不同的部分来讲解，就是希望大家能循序渐进的理解这个类的各个部分，方便以后对该类的使用。
 
-当然，我们也不要求大家一下子把这个类的内容全部掌握，因为这里面的很多方法都是和ClassFile的结构密切相关的；如果大家对于ClassFile的结构不太了解，那么理解这些方法也会有一定的困难。总的来说，我们是希望大家在以后使用的过程中，对这些方法慢慢熟悉起来。
+当然，也不要求大家一下子把这个类的内容全部掌握，因为这里面的很多方法都是和ClassFile的结构密切相关的；如果大家对于ClassFile的结构不太了解，那么理解这些方法也会有一定的困难。总的来说，希望大家在以后使用的过程中，对这些方法慢慢熟悉起来。

@@ -36,7 +36,3 @@ bundle exec jekyll serve --unpublished --drafts
 
 
 
-
-
-
-

@@ -13,17 +13,15 @@ Indeed, `visitFrame` is only called before some specific instructions in a metho
 and because "the other frames can be easily and quickly inferred from these ones".
 This is what this adapter does.
 
-`AnalyzerAdapter`类是将
-
+{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/frame-local-variables-operand-stack.png)
-
-在画图的时候，我习惯将operand stack放在左边，将local variables放在右边。但是，当考虑某一条instruction所对应的frame状态的时候，我习惯于先描述local variables的状态，再去描述operand stack的状态。
+{: refdef}
 
 ## AnalyzerAdapter类
 
 ### class info
 
-`AnalyzerAdapter`类的父类是`MethodVisitor`类。
+第一个部分，`AnalyzerAdapter`类的父类是`MethodVisitor`类。
 
 {% highlight java %}
 {% raw %}
@@ -33,6 +31,8 @@ public class AnalyzerAdapter extends MethodVisitor {
 {% endhighlight %}
 
 ### fields
+
+第二个部分，`AnalyzerAdapter`类定义的字段有哪些。
 
 我们将以下列出的字段分成3个组：
 
@@ -59,25 +59,12 @@ public class AnalyzerAdapter extends MethodVisitor {
 {% endraw %}
 {% endhighlight %}
 
-对于“未初始化的对象类型”，我们来举个例子，比如说`new String()`会创建一个`String`类型的对象，但是对应到bytecode层面是3条instruction：
 
-{% highlight text %}
-NEW java/lang/String
-DUP
-INVOKESPECIAL java/lang/String.<init> ()V
-{% endhighlight %}
-
-- 第1条instruction，是`NEW java/lang/String`，会为即将创建的对象分配内存空间，确切的说是在堆（heap）上分配内存空间，同时将一个`reference`放到operand stack上，这个`reference`就指向这块内存空间。由于这块内存空间还没有进行初始化，所以这个`reference`对应的内容并不能确切的叫作“对象”，只能叫作“未初始化的对象”，也就是“uninitialized object”。
-- 第2条instruction，是`DUP`，会将operand stack上的原有的`reference`复制一份，这时候operand stack上就有两个`reference`，这两个`reference`都指向那块未初始化的内存空间，这两个`reference`的内容都对应于同一个“uninitialized object”。
-- 第3条instruction，是`INVOKESPECIAL java/lang/String.<init> ()V`，会将那块内存空间进行初始化，同时会“消耗”掉operand stack最上面的`reference`，那么就只剩下一个`reference`了。由于那块内存空间进行了初始化操作，那么剩下的`reference`对应的内容就是一个“经过初始化的对象”，就是一个平常所说的“对象”了。
 
 ### constructors
 
-这里列出了两个构造方法，但这两个构造方法本质上是同一个。
+第三个部分，`AnalyzerAdapter`类定义的构造方法有哪些。
 
-大家知道，local variables和operand stack会随着后续instruction的执行而发生变化，但是它们总得有一个初始状态。那么，local variables和operand stack的初始状态怎么得来的呢？operand stack的初始状态是，栈里的元素是空的；而local variables的初始状态，主要是通过方法接收的参数得到的，同时要考虑当前方法是不是static方法、当前方法是不是`<init>()`方法。
-
-构造方法的主要作用就是对local variables的内容进行初始化，为local variables赋予一个初始状态。
 
 {% highlight java %}
 {% raw %}
@@ -141,51 +128,25 @@ public class AnalyzerAdapter extends MethodVisitor {
 
 ### methods
 
-#### visitFrame方法
+第四个部分，`AnalyzerAdapter`类定义的方法有哪些。
 
-我们知道，构造方法（`<init>()`）会为local variables和operand stack赋予一个初始状态，但是在后续执行instruction的时候，可能会发生跳转，那跳转之后的local variables和operand stack的状态就不连贯了，这个时候就需要给local variables和operand stack重新设置一个新的状态。
+#### execute方法
 
-`visitFrame()`方法，是将local variables和operand stack设置成某一个状态；后续的instruction在这个状态的基础上，local variables和operand stack一步一步的发生变化。
+在`AnalyzerAdapter`类当中，多数的`visitXxxInsn()`方法都会去调用`execute()`方法；而`execute()`方法是模拟每一条instruction对于local variables和operand stack的影响。
 
 {% highlight java %}
 {% raw %}
 public class AnalyzerAdapter extends MethodVisitor {
-    public void visitFrame(int type, int numLocal, Object[] local, int numStack, Object[] stack) {
-        if (type != Opcodes.F_NEW) { // Uncompressed frame.
-            throw new IllegalArgumentException("AnalyzerAdapter only accepts expanded frames (see ClassReader.EXPAND_FRAMES)");
-        }
-        
-        super.visitFrame(type, numLocal, local, numStack, stack);
-        
-        if (this.locals != null) {
-            this.locals.clear();
-            this.stack.clear();
-        } else {
-            this.locals = new ArrayList<>();
-            this.stack = new ArrayList<>();
-        }
-            visitFrameTypes(numLocal, local, this.locals);
-            visitFrameTypes(numStack, stack, this.stack);
-            maxLocals = Math.max(maxLocals, this.locals.size());
-            maxStack = Math.max(maxStack, this.stack.size());
-    }
-
-    private static void visitFrameTypes(int numTypes, Object[] frameTypes, List<Object> result) {
-        for (int i = 0; i < numTypes; ++i) {
-            Object frameType = frameTypes[i];
-            result.add(frameType);
-            if (frameType == Opcodes.LONG || frameType == Opcodes.DOUBLE) {
-                result.add(Opcodes.TOP);
-            }
-        }
+    private void execute(final int opcode, final int intArg, final String stringArg) {
+        // ......
     }
 }
 {% endraw %}
 {% endhighlight %}
 
-#### return和jump
+#### return和throw
 
-当遇到`return`、`goto`、`switch`（`tableswitch`和`lookupswitch`）时，会将`locals`字段和`stack`字段设置为`null`。
+当遇到`return`或`throw`时，会将`locals`字段和`stack`字段设置为`null`。如果遇到`return`之后，就代表了“正常结束”，方法的代码执行结束了；如果遇到`throw`之后，就代表了“出现异常”，方法处理不了某种情况而退出。
 
 {% highlight java %}
 {% raw %}
@@ -199,7 +160,17 @@ public class AnalyzerAdapter extends MethodVisitor {
             this.stack = null;
         }
     }
+}
+{% endraw %}
+{% endhighlight %}
 
+#### jump
+
+当遇到`goto`、`switch`（`tableswitch`和`lookupswitch`）时，也会将`locals`字段和`stack`字段设置为`null`。遇到jump相关的指令，意味着代码的逻辑要进行“跳转”，从一个地方跳转到另一个地方执行。
+
+{% highlight java %}
+{% raw %}
+public class AnalyzerAdapter extends MethodVisitor {
     // 这里对应goto语句
     public void visitJumpInsn(final int opcode, final Label label) {
         super.visitJumpInsn(opcode, label);
@@ -229,9 +200,53 @@ public class AnalyzerAdapter extends MethodVisitor {
 {% endraw %}
 {% endhighlight %}
 
+#### visitFrame方法
+
+当遇到jump相关的指令后，程序的代码会发生跳转。那么，跳转到新位置之后，就需要给local variables和operand stack重新设置一个新的状态；而`visitFrame()`方法，是将local variables和operand stack设置成某一个状态。跳转之后的代码，就是在这个新状态的基础上发生变化。
+
+{% highlight java %}
+{% raw %}
+public class AnalyzerAdapter extends MethodVisitor {
+    public void visitFrame(int type, int numLocal, Object[] local, int numStack, Object[] stack) {
+        if (type != Opcodes.F_NEW) { // Uncompressed frame.
+            throw new IllegalArgumentException("AnalyzerAdapter only accepts expanded frames (see ClassReader.EXPAND_FRAMES)");
+        }
+        
+        super.visitFrame(type, numLocal, local, numStack, stack);
+        
+        if (this.locals != null) {
+            this.locals.clear();
+            this.stack.clear();
+        } else {
+            this.locals = new ArrayList<>();
+            this.stack = new ArrayList<>();
+        }
+
+        visitFrameTypes(numLocal, local, this.locals);
+        visitFrameTypes(numStack, stack, this.stack);
+        maxLocals = Math.max(maxLocals, this.locals.size());
+        maxStack = Math.max(maxStack, this.stack.size());
+    }
+
+    private static void visitFrameTypes(int numTypes, Object[] frameTypes, List<Object> result) {
+        for (int i = 0; i < numTypes; ++i) {
+            Object frameType = frameTypes[i];
+            result.add(frameType);
+            if (frameType == Opcodes.LONG || frameType == Opcodes.DOUBLE) {
+                result.add(Opcodes.TOP);
+            }
+        }
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
 #### new和invokespecial
 
-当遇到`new`时，会创建`Label`对象来表示“未初始化的对象”，并将label存储到`uninitializedTypes`字段内；当遇到`invokespecial`时，会把“未初始化的对象”从`uninitializedTypes`字段内取出来，转换成“经过初始化之后的对象”，然后同步到`locals`字段和`stack`字段内。
+在执行程序代码的时候，有些特殊的情况需要处理：
+
+- 当遇到`new`时，会创建`Label`对象来表示“未初始化的对象”，并将label存储到`uninitializedTypes`字段内；
+- 当遇到`invokespecial`时，会把“未初始化的对象”从`uninitializedTypes`字段内取出来，转换成“经过初始化之后的对象”，然后同步到`locals`字段和`stack`字段内。
 
 {% highlight java %}
 {% raw %}
@@ -293,9 +308,109 @@ public class AnalyzerAdapter extends MethodVisitor {
 {% endraw %}
 {% endhighlight %}
 
-#### execute方法
+## 工作原理
 
-`execute()`方法是模拟每一条instruction对于local variables和operand stack的影响。
+在上面的内容，我们分别介绍了`AnalyzerAdapter`类的各个部分的信息，那么在这里，我们的目标是按照一个抽象的逻辑顺序来将各个部分组织到一起。那么，这个抽象的逻辑是什么呢？就是local variables和operand stack的状态变化，从初始状态，到中间状态，再到结束状态。
+
+一个类能够为外界提供什么样的“信息”，只要看它的`public`成员就可以了。如果我们仔细观察一下`AnalyzerAdapter`类，就会发现：除了从`MethodVisitor`类继承的`visitXxxInsn()`方法，`AnalyzerAdapter`类自己只定义了三个`public`类型的字段，即`locals`、`stack`和`uninitializedTypes`。如果我们想了解和使用`AnalyzerAdapter`类，只要把握住这三个字段就可以了。
+
+`AnalyzerAdapter`类的主要作用就是记录stack map frame的变化情况；在frame当中，有两个重要的结构，即local variables和operand stack。结合刚才的三个字段，其中`locals`和`stack`分别表示local variables和operand stack；而`uninitializedTypes`则是记录一种特殊的状态，这个状态就是“对象已经通过new创建了，但是还没有调用它的构造方法”，这个状态只是一个“临时”的状态，等后续调用它的构造方法之后，它就是一个真正意义上的对象了。举一个例子，一个人拿到了大学录取通知书，可以笼统的叫作”大学生“，但是还不是真正意义上的”大学生“，是一种”临时“的过渡状态，等到去大学报到之后，才成为真正意义上的大学生。
+
+{% highlight java %}
+{% raw %}
+public class AnalyzerAdapter extends MethodVisitor {
+    // 第1组字段：local variables和operand stack
+    public List<Object> locals;
+    public List<Object> stack;
+
+    // 第2组字段：uninitialized类型
+    private List<Label> labels;
+    public Map<Object, Object> uninitializedTypes;
+}
+{% endraw %}
+{% endhighlight %}
+
+我们在研究local variables和operand stack的变化时，遵循下面的思路就可以了：
+
+- 首先，初始状态。也就是说，最开始的时候，local variables和operand stack是如何布局的。
+- 其次，中间状态。local variables和operand stack会随着Instruction的执行而发生变化。按照Instruction执行的顺序，我们这里又分成两种情况：
+    - 第一种情况，Instruction按照顺序一条一条的向下执行。在这第一种情况里，还有一种特殊情况，就是new对象时，出现的特殊状态下的对象，也就是“已经分配内存空间，但还没有调用构造方法的对象”。
+    - 第二种情况，遇到jump相关的Instruction，程序代码逻辑要发生跳转。
+- 最后，结束状态。方法退出，可以是正常退出（return），也可以异常退出（throw）。
+
+这三种状态，可以与“生命体”作一个类比。在这个世界上，大多数的生命体，都会经历出生、成长、衰老和死亡的变化。
+
+### 初始状态
+
+首先，就是local variables和operand stack的初始状态，它是通过`AnalyzerAdapter`类的构造方法来为`locals`和`stack`字段赋值。
+
+{% highlight java %}
+{% raw %}
+public class AnalyzerAdapter extends MethodVisitor {
+    protected AnalyzerAdapter(int api, String owner, int access, String name, String descriptor, MethodVisitor methodVisitor) {
+        super(api, methodVisitor);
+        this.owner = owner;
+        locals = new ArrayList<>();
+        stack = new ArrayList<>();
+        uninitializedTypes = new HashMap<>();
+        
+        // 首先，判断是不是static方法、是不是构造方法，来更新local variables的初始状态
+        if ((access & Opcodes.ACC_STATIC) == 0) {
+            if ("<init>".equals(name)) {
+                locals.add(Opcodes.UNINITIALIZED_THIS);
+            } else {
+                locals.add(owner);
+            }
+        }
+
+        // 其次，根据方法接收的参数，来更新local variables的初始状态
+        for (Type argumentType : Type.getArgumentTypes(descriptor)) {
+            switch (argumentType.getSort()) {
+                case Type.BOOLEAN:
+                case Type.CHAR:
+                case Type.BYTE:
+                case Type.SHORT:
+                case Type.INT:
+                    locals.add(Opcodes.INTEGER);
+                    break;
+                case Type.FLOAT:
+                    locals.add(Opcodes.FLOAT);
+                    break;
+                case Type.LONG:
+                    locals.add(Opcodes.LONG);
+                    locals.add(Opcodes.TOP);
+                    break;
+                case Type.DOUBLE:
+                    locals.add(Opcodes.DOUBLE);
+                    locals.add(Opcodes.TOP);
+                    break;
+                case Type.ARRAY:
+                    locals.add(argumentType.getDescriptor());
+                    break;
+                case Type.OBJECT:
+                    locals.add(argumentType.getInternalName());
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+        }
+        maxLocals = locals.size();
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+
+在上面的构造方法中，operand stack的初始状态是空的；而local variables的初始状态需要考虑两方面的内容：
+
+- 第一方面，当前方法是不是static方法、当前方法是不是`<init>()`方法。
+- 第二方面，方法接收的参数。
+
+### 中间状态
+
+#### 顺序执行
+
+接着，就是instruction的执行会使得local variables和operand stack状态发生变化。在这个过程中，`visitXxxInsn()`方法大多是通过调用`execute(opcode, intArg, stringArg)`方法来完成。
 
 {% highlight java %}
 {% raw %}
@@ -307,7 +422,38 @@ public class AnalyzerAdapter extends MethodVisitor {
 {% endraw %}
 {% endhighlight %}
 
-## 示例
+#### 发生跳转
+
+当遇到jump相关的指令时，程序代码会从一个地方跳转到另一个地方。
+
+当程序跳转完成之后，需要通过`visitFrame()`方法为`locals`和`stack`字段赋一个新的初始值。再往下执行，可能就进入到“顺序执行”的过程了。
+
+#### 特殊情况：new对象
+
+对于“未初始化的对象类型”，我们来举个例子，比如说`new String()`会创建一个`String`类型的对象，但是对应到ByteCode层面是3条instruction：
+
+{% highlight text %}
+NEW java/lang/String
+DUP
+INVOKESPECIAL java/lang/String.<init> ()V
+{% endhighlight %}
+
+- 第1条instruction，是`NEW java/lang/String`，会为即将创建的对象分配内存空间，确切的说是在堆（heap）上分配内存空间，同时将一个`reference`放到operand stack上，这个`reference`就指向这块内存空间。由于这块内存空间还没有进行初始化，所以这个`reference`对应的内容并不能确切的叫作“对象”，只能叫作“未初始化的对象”，也就是“uninitialized object”。
+- 第2条instruction，是`DUP`，会将operand stack上的原有的`reference`复制一份，这时候operand stack上就有两个`reference`，这两个`reference`都指向那块未初始化的内存空间，这两个`reference`的内容都对应于同一个“uninitialized object”。
+- 第3条instruction，是`INVOKESPECIAL java/lang/String.<init> ()V`，会将那块内存空间进行初始化，同时会“消耗”掉operand stack最上面的`reference`，那么就只剩下一个`reference`了。由于那块内存空间进行了初始化操作，那么剩下的`reference`对应的内容就是一个“经过初始化的对象”，就是一个平常所说的“对象”了。
+
+### 结束状态
+
+从JVM内存空间的角度来说，每一个方法都有对应的frame内存空间：当方法开始的时候，就会创建相应的frame内存空间；当方法结束的时候，就会清空相应的frame内存空间。换句话说，当方法结束的时候，frame内存空间的local variables和operand stack也就被清空了。所以，从JVM内存空间的角度来说，结束状态，就是local variables和operand stack所占用的内存空间都“消失了”。
+
+从Java代码的角度来说，方法的退出，就对应于`visitInsn(opcode)`方法中`return`和`throw`的情况。
+
+对于local variables和operand stack的结束状态，它又重要，又不重要：
+
+- 它不重要，是因为它的内存空间被回收了或“消失了”，不需要我们花费太多的时间去思考它，这是从“自身所包含内容的多与少”的角度来考虑。
+- 它重要，是因为它在“初始状态－中间状态－结束状态”这个环节当中是必不可少的一部分，这是从“整体性”的角度上来考虑。
+
+## 示例：打印方法的Frame
 
 ### 编码实现
 
@@ -335,10 +481,7 @@ public class MethodStackMapFrameVisitor extends ClassVisitor {
     @Override
     public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
         MethodVisitor mv = super.visitMethod(access, name, descriptor, signature, exceptions);
-        if (mv != null) {
-            mv = new MethodStackMapFrameAdapter(api, owner, access, name, descriptor, mv);
-        }
-        return mv;
+        return new MethodStackMapFrameAdapter(api, owner, access, name, descriptor, mv);
     }
 
     private static class MethodStackMapFrameAdapter extends AnalyzerAdapter {
@@ -386,12 +529,6 @@ public class MethodStackMapFrameVisitor extends ClassVisitor {
         @Override
         public void visitFieldInsn(int opcode, String owner, String name, String descriptor) {
             super.visitFieldInsn(opcode, owner, name, descriptor);
-            printStackMapFrame();
-        }
-
-        @Override
-        public void visitMethodInsn(int opcode, String owner, String name, String descriptor) {
-            super.visitMethodInsn(opcode, owner, name, descriptor);
             printStackMapFrame();
         }
 
@@ -450,8 +587,8 @@ public class MethodStackMapFrameVisitor extends ClassVisitor {
         }
 
         private void printStackMapFrame() {
-            String locals_str = locals == null ? "[]": list2Str(locals);
-            String stack_str = locals == null ? "[]": list2Str(stack);
+            String locals_str = locals == null ? "[]" : list2Str(locals);
+            String stack_str = locals == null ? "[]" : list2Str(stack);
             String line = String.format("%s %s", locals_str, stack_str);
             System.out.println(line);
         }
@@ -552,10 +689,12 @@ public class HelloWorldFrameCore {
 
 ## 总结
 
-这篇文章主要介绍`AnalyzerAdapter`类。首先，我们介绍了`AnalyzerAdapter`类的成员信息；其次，介绍了`AnalyzerAdapter`类的示例，在这个示例当中演示了一下local variables和operand stack是如何变化的。
+本文对`AnalyzerAdapter`类进行介绍，内容总结如下：
 
-需要注意的一点是，在使用`AnalyzerAdapter`类时，要记得用`ClassReader.EXPAND_FRAMES`选项。
+- 第一点，了解`AnalyzerAdapter`类的各个不同部分。
+- 第二点，理解`AnalyzerAdapter`类的代码原理，它是围绕着local variables和operand stack如何变化来展开的。
+- 第三点，需要注意的一点是，在使用`AnalyzerAdapter`类时，要记得用`ClassReader.EXPAND_FRAMES`选项。
 
-对于我个人来说，`AnalyzerAdapter`类，更多的是具有“学习特性”，而不是“实用特性”。所谓的“学习特性”，具体来说，就是`AnalyzerAdapter`类让我们能够去学习local variables和operand stack随着instruction的向下执行而发生变化。所谓的“实用特性”，就是像`AdviceAdapter`类那样，它有明确的使用场景，也就是在“方法进入”的时候和“方法退出”的时候来添加一些代码。
+`AnalyzerAdapter`类，更多的是具有“学习特性”，而不是“实用特性”。所谓的“学习特性”，具体来说，就是`AnalyzerAdapter`类让我们能够去学习local variables和operand stack随着instruction的向下执行而发生变化。所谓的“实用特性”，就是像`AdviceAdapter`类那样，它有明确的使用场景，能够在“方法进入”的时候和“方法退出”的时候来添加一些代码逻辑。
 
 

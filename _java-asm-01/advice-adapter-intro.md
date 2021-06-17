@@ -5,13 +5,13 @@ sequence: "405"
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
-对于`AdviceAdapter`类来说，它的特点：引入了`onMethodEnter()`方法和`onMethodExit()`方法。
+对于`AdviceAdapter`类来说，能够很容易的实现在“方法进入”和“方法退出”时添加代码。`AdviceAdapter`类的特点：引入了`onMethodEnter()`方法和`onMethodExit()`方法。
 
 ## AdviceAdapter类
 
 ### class info
 
-概括地来说，`AdviceAdapter`类是一个抽象的（`abstract`）、特殊的`MethodVisitor`类。
+第一个部分，`AdviceAdapter`类是一个抽象的（`abstract`）、特殊的`MethodVisitor`类。
 
 具体来说，`AdviceAdapter`类继承自`GeneratorAdapter`类，而`GeneratorAdapter`类继承自`LocalVariablesSorter`类，`LocalVariablesSorter`类继承自`MethodVisitor`类。
 
@@ -31,6 +31,8 @@ public abstract class AdviceAdapter extends GeneratorAdapter implements Opcodes 
 
 ### fields
 
+第二个部分，`AdviceAdapter`类定义的字段有哪些。其中，`isConstructor`是判断当前方法是不是构造方法。如果当前方法是构造方法，在“方法进入”时添加代码，需要特殊处理。
+
 {% highlight java %}
 {% raw %}
 public abstract class AdviceAdapter extends GeneratorAdapter implements Opcodes {
@@ -44,7 +46,7 @@ public abstract class AdviceAdapter extends GeneratorAdapter implements Opcodes 
 
 ### constructors
 
-注意：`AdviceAdapter`的构造方法是用`protected`修饰，因此这个构造方法只能在子类当中访问。换句话说，在外界不能用`new`关键字来创建对象。
+第三个部分，`AdviceAdapter`类定义的构造方法有哪些。需要注意的是，`AdviceAdapter`的构造方法是用`protected`修饰，因此这个构造方法只能在子类当中访问。换句话说，在外界不能用`new`关键字来创建对象。
 
 {% highlight java %}
 {% raw %}
@@ -62,12 +64,12 @@ public abstract class AdviceAdapter extends GeneratorAdapter implements Opcodes 
 
 ### methods
 
+第四个部分，`AdviceAdapter`类定义的方法有哪些。
+
 在`AdviceAdapter`类的方法中，定义了两个重要的方法：`onMethodEnter()`方法和`onMethodExit()`方法。
 
-- `onMethodEnter()`方法：在方法进入的时候，添加一些“代码逻辑”。
-- `onMethodExit()`方法：在方法退出的时候，添加一些“代码逻辑”。
-
-如果我们查看一下在哪些地方使用了`onMethodEnter()`和`onMethodExit()`这两个方法，就会发现它们分别在`visitCode()`方法和`visitInsn(int opcode)`方法中调用。使用`onMethodEnter()`和`onMethodExit()`这两个方法，相对于直接使用`visitCode()`方法和`visitInsn(int opcode)`这两个方法，是有一定的优势的：`onMethodEnter()`方法能够处理`<init>()`的复杂情况，而直接使用`visitCode()`方法则可能导致`<init>()`方法出现错误。
+- `onMethodEnter()`方法：在“方法进入”的时候，添加一些代码逻辑。
+- `onMethodExit()`方法：在“方法退出”的时候，添加一些代码逻辑。
 
 {% highlight java %}
 {% raw %}
@@ -89,7 +91,11 @@ public abstract class AdviceAdapter extends GeneratorAdapter implements Opcodes 
 {% endraw %}
 {% endhighlight %}
 
+如果我们查看一下在哪些地方使用了`onMethodEnter()`和`onMethodExit()`这两个方法，就会发现它们分别在`visitCode()`方法和`visitInsn(int opcode)`方法中调用。使用`onMethodEnter()`和`onMethodExit()`这两个方法，相对于直接使用`visitCode()`方法和`visitInsn(int opcode)`这两个方法，是有一定的优势的：`onMethodEnter()`方法能够处理`<init>()`的复杂情况，而直接使用`visitCode()`方法则可能导致`<init>()`方法出现错误。
+
 ## 示例: 打印方法参数
+
+在使用`AdviceAdapter`的时候，需要注意：Subclasses can use or change all the local variables, but should not change state of the stack.
 
 ### 预期目标
 
@@ -110,6 +116,7 @@ public class HelloWorld {
         hashCode += age;
         hashCode += (int) (idCard % Integer.MAX_VALUE);
         hashCode += obj.hashCode();
+        hashCode = Math.abs(hashCode);
         System.out.println("Hash Code is " + hashCode);
         if (hashCode % 2 == 1) {
             throw new RuntimeException("illegal");
@@ -190,21 +197,18 @@ public class ClassPrintParameterVisitor extends ClassVisitor {
 
             Type methodType = Type.getMethodType(methodDesc);
             Type[] argumentTypes = methodType.getArgumentTypes();
-            for (Type t : argumentTypes) {
-                int size = t.getSize();
-                int opcode = t.getOpcode(ILOAD);
-                super.visitVarInsn(opcode, slotIndex);
+            for (int i = 0; i < argumentTypes.length; i++) {
+                Type t = argumentTypes[i];
+                loadArg(i);
                 box(t);
                 printValueOnStack("(Ljava/lang/Object;)V");
-
-                slotIndex += size;
             }
         }
 
         @Override
         protected void onMethodExit(int opcode) {
             printMessage("Method Exit: " + getName() + methodDesc);
-            
+
             if (opcode == ATHROW) {
                 super.visitLdcInsn("abnormal return");
             }
@@ -295,11 +299,9 @@ public class HelloWorldRun {
 
 ## 总结
 
-这里主要是介绍`AdviceAdapter`类，重点把握以下两点：
+本文对`AdviceAdapter`类进行介绍，内容总结如下：
 
-- 第一，`AdviceAdapter`类有两个关键的方法，即`onMethodEnter()`和`onMethodExit()`方法。
-- 第二，Subclasses can use or change all the local variables, but should not change state of the stack.
-
-总的来说，使用`AdviceAdapter`类是比较方便的，能够比较容易的在“方法进入”时和“方法退出”时添加一些代码。
-
-但是，根据我个人的经验，还是会有一些很特殊的情况，`AdviceAdapter`类是不能正常处理的。就比如说，一些代码经过混淆（obfuscate）之后，bytecode的内容就会变得复杂，就会出现处理不了的情况。这个时候，我们还是应该回归到`visitCode()`和`visitInsn()`方法来解决问题。
+- 第一点，从使用场景的角度来说，`AdviceAdapter`类能够很容易的在“方法进入”时和“方法退出”时添加一些代码。
+- 第二点，在`AdviceAdapter`类当中，有两个关键的方法，即`onMethodEnter()`和`onMethodExit()`方法。
+- 第三点，Subclasses can use or change all the local variables, but should not change state of the stack.
+- 第四点，有一些很特殊的情况，`AdviceAdapter`类是不能正常处理的。比如说，一些代码经过混淆（obfuscate）之后，ByteCode的内容就会变得复杂，就会出现处理不了的情况。这个时候，我们还是应该回归到`visitCode()`和`visitInsn(opcode)`方法来解决问题。

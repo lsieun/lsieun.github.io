@@ -11,7 +11,7 @@ sequence: "407"
 
 ### class info
 
-`LocalVariablesSorter`类继承自`MethodVisitor`类。
+第一个部分，`LocalVariablesSorter`类继承自`MethodVisitor`类。
 
 - org.objectweb.asm.MethodVisitor
     - org.objectweb.asm.commons.LocalVariablesSorter
@@ -26,6 +26,8 @@ public class LocalVariablesSorter extends MethodVisitor {
 {% endhighlight %}
 
 ### fields
+
+第二个部分，`LocalVariablesSorter`类定义的字段有哪些。
 
 {% highlight java %}
 {% raw %}
@@ -45,6 +47,8 @@ public class LocalVariablesSorter extends MethodVisitor {
 {% endhighlight %}
 
 ### constructors
+
+第三个部分，`LocalVariablesSorter`类定义的构造方法有哪些。
 
 {% highlight java %}
 {% raw %}
@@ -67,6 +71,8 @@ public class LocalVariablesSorter extends MethodVisitor {
 {% endhighlight %}
 
 ### methods
+
+第四个部分，`LocalVariablesSorter`类定义的方法有哪些。
 
 #### newLocal method
 
@@ -207,13 +213,162 @@ public class LocalVariablesSorter extends MethodVisitor {
 {% endraw %}
 {% endhighlight %}
 
-## 如何使用
+## 工作原理
 
-This method adapter **renumbers the local variables** used in a method **in the order they appear in this method**.
+对于`LocalVariablesSorter`类的工作原理，主要依赖于三个字段：`firstLocal`、`nextLocal`和`remappedVariableIndices`字段。
 
-This adapter is useful to insert **new local variables** in a method.
-Without this adapter it would be necessary to add new local variables after all the existing ones,
-but unfortunately their number is not known until the end of the method, in `visitMaxs()`.
+{% highlight java %}
+{% raw %}
+public class LocalVariablesSorter extends MethodVisitor {
+    // The mapping from old to new local variable indices.
+    // A local variable at index i of size 1 is remapped to 'mapping[2*i]',
+    // while a local variable at index i of size 2 is remapped to 'mapping[2*i+1]'.
+    private int[] remappedVariableIndices = new int[40];
+
+    protected final int firstLocal;
+    protected int nextLocal;
+}
+{% endraw %}
+{% endhighlight %}
+
+首先，我们来看一下`firstLocal`和`nextLocal`初始化，它发生在`LocalVariablesSorter`类的构造方法中。其中，`firstLocal`是一个`final`类型的字段，一次赋值之后就不能变化了；而`nextLocal`字段的取值可以继续变化。
+
+{% highlight java %}
+{% raw %}
+public class LocalVariablesSorter extends MethodVisitor {
+    protected LocalVariablesSorter(final int api, final int access, final String descriptor,
+                                   final MethodVisitor methodVisitor) {
+        super(api, methodVisitor);
+        nextLocal = (Opcodes.ACC_STATIC & access) == 0 ? 1 : 0; // 首先，判断是不是静态方法
+        for (Type argumentType : Type.getArgumentTypes(descriptor)) { // 接着，循环方法接收的参数
+            nextLocal += argumentType.getSize();
+        }
+        firstLocal = nextLocal; // 最后，为firstLocal字段赋值。
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+对于上面的代码，主要是对两方面内容进行判断：
+
+- 第一方面，是否需要处理`this`变量。
+- 第二方面，对方法接收的参数进行处理。
+
+在执行完`LocalVariablesSorter`类的构造方法后，`firstLocal`和`nextLocal`的值是一样的，其值表示下一个方法体中的变量在local variables当中的位置。接下来，就是该考虑第三方面的事情了：
+
+- 第三方面，方法体内定义的变量。对于这些变量，又分成两种情况：
+    - 第一种情况，程序代码中原来定义的变量。
+    - 第二种情况，程序代码中新定义的变量。
+
+对于`LocalVariablesSorter`类来说，它要处理的一个关键性的工作，就是处理好“旧变量”和“新变量”之间的关系。其实，不管是“新变量”，还是“旧变量”，它都是通过`newLocalMapping(type)`方法来找到自己的位置。`newLocalMapping(type)`方法的逻辑就是“先到先得”。
+
+有一个形象的例子，可以帮助我们理解`newLocalMapping(type)`方法的作用。三国的故事，大家可能很熟悉，刘备进入益州之后，人们经常会讨论荆襄集团与益州集团之间的相对平衡、互相制约。那么，益州集团就相当于“旧变量”，而荆襄集团就相当于“新变量”。那么，作为一个国君，应该如何去融合益州集团和荆襄集团呢？其实，只要遵循统一的选贤与能的标准就可以了，无论是来自于益州，还是来自于荆襄，只要符合选拔的标准，根据能力大小的不同而分配不同等级的官职。`newLocalMapping(type)`方法，就像是这个统一的“选贤与能”的标准，无论是“旧变量”，还是“新变量”，都是通过这个方法来获取自己的“官职”或位置，不会出现冲突（不会出现“旧变量”和“新变量”占用同一个位置）的情况。
+
+我们先来说明第二种情况，也就是在程序代码中添加新的变量。
+    
+### 添加新变量
+
+如果要添加新的变量，那么需要调用`newLocal(type)`方法。在`newLocal(type)`方法中，它会进一步调用`newLocalMapping(type)`方法；在`newLocalMapping(type)`方法中，首先会记录`newLocal`的值，接着会更新`newLocal`的值，最后返回`newLocal`的初始值。
+
+{% highlight java %}
+{% raw %}
+public class LocalVariablesSorter extends MethodVisitor {
+    public int newLocal(final Type type) {
+        int local = newLocalMapping(type);
+        return local;
+    }
+
+    protected int newLocalMapping(final Type type) {
+        int local = nextLocal;
+        nextLocal += type.getSize();
+        return local;
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+### 处理旧变量
+
+如果要处理“旧”的变量，那么需要调用`visitVarInsn(opcode, var)`或`visitIincInsn(var, increment)`方法。在这两个方法中，会进一步调用`remap(var, type)`方法。其中，`remap(var, type)`方法的主要作用，就是实现“旧变量”的原位置向新位置的映射。
+
+{% highlight java %}
+{% raw %}
+public class LocalVariablesSorter extends MethodVisitor {
+    @Override
+    public void visitVarInsn(final int opcode, final int var) {
+        Type varType;
+        switch (opcode) {
+            case Opcodes.LLOAD:
+            case Opcodes.LSTORE:
+                varType = Type.LONG_TYPE;
+                break;
+            case Opcodes.DLOAD:
+            case Opcodes.DSTORE:
+                varType = Type.DOUBLE_TYPE;
+                break;
+            case Opcodes.FLOAD:
+            case Opcodes.FSTORE:
+                varType = Type.FLOAT_TYPE;
+                break;
+            case Opcodes.ILOAD:
+            case Opcodes.ISTORE:
+                varType = Type.INT_TYPE;
+                break;
+            case Opcodes.ALOAD:
+            case Opcodes.ASTORE:
+            case Opcodes.RET:
+                varType = OBJECT_TYPE;
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid opcode " + opcode);
+        }
+        super.visitVarInsn(opcode, remap(var, varType));
+    }
+
+    @Override
+    public void visitIincInsn(final int var, final int increment) {
+        super.visitIincInsn(remap(var, Type.INT_TYPE), increment);
+    }
+
+    private int remap(final int var, final Type type) {
+        // 第一部分，处理方法的输入参数
+        if (var + type.getSize() <= firstLocal) {
+            return var;
+        }
+
+        // 第二部分，处理方法体内定义的局部变量
+        int key = 2 * var + type.getSize() - 1;
+        int value = remappedVariableIndices[key];
+        if (value == 0) { // 如果是0，则表示还没有记录下来
+            value = newLocalMapping(type);
+            remappedVariableIndices[key] = value + 1;
+        } else { // 如果不是0，则表示有具体的值
+            value--;
+        }
+        return value;
+    }
+
+    protected int newLocalMapping(final Type type) {
+        int local = nextLocal;
+        nextLocal += type.getSize();
+        return local;
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+在`remap(var, type)`方法中，有两部分主要逻辑：
+
+- 第一部分，是处理方法的输入参数。方法接收的参数，它们在local variables当中的索引位置是不会变化的，所以处理起来也比较简单，直接返回`var`的值。
+- 第二部分，是处理方法体内定义的局部变量。在这个部分，就是`remappedVariableIndices`字段发挥作用的地方，也会涉及到`nextLocal`字段。
+
+在`remap(var, type)`方法中，我们重点关注第二部分，代码处理的步骤是：
+
+- 第一步，计算出`remappedVariableIndices`字段的一个索引值`key`，即`int key = 2 * var + type.getSize() - 1`。假设有一个变量的索引是`i`，如果该变量的大小是1，那么它在`remappedVariableIndices`字段中的索引位置是`2*i`；如果该变量（`long`或`double`类型）的大小是2，那么它在`remappedVariableIndices`字段中的索引位置是`2*i+1`。
+- 第二步，根据`key`值，取出`remappedVariableIndices`字段当中的`value`值。大家注意，`int[] remappedVariableIndices = new int[40]`，也就是说，`remappedVariableIndices`字段是一个数组，所有元素的默认值是`0`。
+    - 如果`value`的值是`0`，说明还没有记录“旧变量”的新位置；那么，就通过`value = newLocalMapping(type)`计算出新的位置，将`value + 1`赋值给`remappedVariableIndices`字段中`key`位置。
+    - 如果`value`的值不是`0`，说明已经记录“旧变量”的新位置；这个时候，要进行`value--`操作。
+- 第三步，返回`value`的值。那么，这个`value`值就是“旧变量”的新位置。
 
 ## 示例
 
@@ -262,6 +417,8 @@ public class HelloWorld {
 
 ### 编码实现
 
+下面的`MethodTimerAdapter3`类继承自`LocalVariablesSorter`类。
+
 {% highlight java %}
 {% raw %}
 import org.objectweb.asm.ClassVisitor;
@@ -305,8 +462,8 @@ public class MethodTimerVisitor3 extends ClassVisitor {
         public void visitCode() {
             // 首先，实现自己的逻辑
             slotIndex = newLocal(Type.LONG_TYPE);
-            super.visitMethodInsn(INVOKESTATIC, "java/lang/System", "currentTimeMillis", "()J", false);
-            super.visitVarInsn(LSTORE, slotIndex);
+            mv.visitMethodInsn(INVOKESTATIC, "java/lang/System", "currentTimeMillis", "()J", false);
+            mv.visitVarInsn(LSTORE, slotIndex);
 
             // 其次，调用父类的实现
             super.visitCode();
@@ -316,20 +473,20 @@ public class MethodTimerVisitor3 extends ClassVisitor {
         public void visitInsn(int opcode) {
             // 首先，实现自己的逻辑
             if ((opcode >= IRETURN && opcode <= RETURN) || opcode == ATHROW) {
-                super.visitMethodInsn(INVOKESTATIC, "java/lang/System", "currentTimeMillis", "()J", false);
-                super.visitVarInsn(LLOAD, slotIndex);
-                super.visitInsn(LSUB);
-                super.visitVarInsn(LSTORE, slotIndex);
-                super.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
-                super.visitTypeInsn(NEW, "java/lang/StringBuilder");
-                super.visitInsn(DUP);
-                super.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "()V", false);
-                super.visitLdcInsn(methodName + methodDesc + " method execute: ");
-                super.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;", false);
-                super.visitVarInsn(LLOAD, slotIndex);
-                super.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(J)Ljava/lang/StringBuilder;", false);
-                super.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "toString", "()Ljava/lang/String;", false);
-                super.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
+                mv.visitMethodInsn(INVOKESTATIC, "java/lang/System", "currentTimeMillis", "()J", false);
+                mv.visitVarInsn(LLOAD, slotIndex);
+                mv.visitInsn(LSUB);
+                mv.visitVarInsn(LSTORE, slotIndex);
+                mv.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
+                mv.visitTypeInsn(NEW, "java/lang/StringBuilder");
+                mv.visitInsn(DUP);
+                mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "()V", false);
+                mv.visitLdcInsn(methodName + methodDesc + " method execute: ");
+                mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;", false);
+                mv.visitVarInsn(LLOAD, slotIndex);
+                mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(J)Ljava/lang/StringBuilder;", false);
+                mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "toString", "()Ljava/lang/String;", false);
+                mv.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
             }
 
             // 其次，调用父类的实现
@@ -339,6 +496,10 @@ public class MethodTimerVisitor3 extends ClassVisitor {
 }
 {% endraw %}
 {% endhighlight %}
+
+需要注意的是，我们使用的是`mv.visitVarInsn(opcode, var)`方法，而不是使用`super.visitVarInsn(opcode, var)`方法。为什么要使用`mv`，而不使用`super`呢？因为使用`super.visitVarInsn(opcode, var)`方法，实质上是调用了`LocalVariablesSorter.visitVarInsn(opcode, var)`，它会进一步调用`remap(var, type)`方法，这就可能导致新添加的变量在local variables中的位置发生“位置偏移”。
+
+下面的`MethodTimerAdapter4`类继承自`AdviceAdapter`类。
 
 {% highlight java %}
 {% raw %}
@@ -453,4 +614,8 @@ public class HelloWorldRun {
 
 ## 总结
 
+本文对`LocalVariablesSorter`类进行介绍，内容总结如下：
 
+- 第一点，了解`LocalVariablesSorter`类的各个部分，都有哪些信息。
+- 第二点，理解`LocalVariablesSorter`类的工作原理。
+- 第二点，如何使用`LocalVariablesSorter`类添加新的变量。

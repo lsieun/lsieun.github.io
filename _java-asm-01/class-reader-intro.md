@@ -63,7 +63,7 @@ public class ClassReader {
 
 ### constructors
 
-在`ClassReader`类当中定义了多个构造函数。但是，从本质上来说，这多个构造函数本质上是同一个构造函数的不同表现形式。其中，最常用的构造函数有两个：
+在`ClassReader`类当中定义了多个构造方法。但是，从本质上来说，这多个构造方法本质上是同一个构造方法的不同表现形式。其中，最常用的构造方法有两个：
 
 - 第一个是`ClassReader cr = new ClassReader("sample.HelloWorld");`
 - 第二个是`ClassReader cr = new ClassReader(bytes);`
@@ -72,13 +72,13 @@ public class ClassReader {
 {% raw %}
 public class ClassReader {
 
-    public ClassReader(final String className) throws IOException { // 第一个构造函数（常用）
+    public ClassReader(final String className) throws IOException { // 第一个构造方法（常用）
         this(
             readStream(ClassLoader.getSystemResourceAsStream(className.replace('.', '/') + ".class"), true)
         );
     }
 
-    public ClassReader(final byte[] classFile) { // 第二个构造函数（常用）
+    public ClassReader(final byte[] classFile) { // 第二个构造方法（常用）
         this(classFile, 0, classFile.length);
     }
 
@@ -89,7 +89,7 @@ public class ClassReader {
         this(classFileBuffer, classFileOffset, true);
     }
 
-    ClassReader( // 这是最根本、最本质的构造函数
+    ClassReader( // 这是最根本、最本质的构造方法
         final byte[] classFileBuffer,
         final int classFileOffset,
         final boolean checkClassVersion) {
@@ -362,8 +362,6 @@ interfaces: [java/io/Serializable, java/lang/Cloneable]
 
 在`ClassReader`类当中，有一个`accept()`方法，这个方法接收一个`ClassVisitor`类型的参数，因此`accept()`方法是将`ClassReader`和`ClassVisitor`进行连接的“桥梁”。`accept()`方法的代码逻辑就是按照一定的顺序来调用`ClassVisitor`当中的`visitXxx()`方法。
 
-
-
 {% highlight java %}
 {% raw %}
 public class ClassReader {
@@ -412,43 +410,8 @@ public class ClassReader {
 
         // Visit the class declaration. The minor_version and major_version fields start 6 bytes before
         // the first constant pool entry, which itself starts at cpInfoOffsets[1] - 1 (by definition).
-        classVisitor.visit(
-            readInt(cpInfoOffsets[1] - 7), accessFlags, thisClass, signature, superClass, interfaces);
+        classVisitor.visit(readInt(cpInfoOffsets[1] - 7), accessFlags, thisClass, signature, superClass, interfaces);
 
-        // Visit the SourceFile and SourceDebugExtenstion attributes.
-        if ((parsingOptions & SKIP_DEBUG) == 0
-            && (sourceFile != null || sourceDebugExtension != null)) {
-          classVisitor.visitSource(sourceFile, sourceDebugExtension);
-        }
-
-        // Visit the Module, ModulePackages and ModuleMainClass attributes.
-        // ......
-
-        // Visit the NestHost attribute.
-        // ......
-
-        // Visit the EnclosingMethod attribute.
-        // ......
-
-        // Visit the RuntimeVisibleAnnotations attribute.
-        // Visit the RuntimeInvisibleAnnotations attribute.
-        // Visit the RuntimeVisibleTypeAnnotations attribute.
-        // Visit the RuntimeInvisibleTypeAnnotations attribute.
-        // ......
-
-        // Visit the non standard attributes.
-        while (attributes != null) {
-          // Copy and reset the nextAttribute field so that it can also be used in ClassWriter.
-          Attribute nextAttribute = attributes.nextAttribute;
-          attributes.nextAttribute = null;
-          classVisitor.visitAttribute(attributes);
-          attributes = nextAttribute;
-        }
-
-        // Visit the NestedMembers attribute.
-        // Visit the PermittedSubclasses attribute.
-        // Visit the InnerClasses attribute.
-        // Visit Record components.
         // ......
 
         // Visit the fields and methods.
@@ -495,7 +458,9 @@ visitEnd
 
 The ASM core API for **generating** and **transforming** compiled Java classes is based on the `ClassVisitor` abstract class.
 
+{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/what-asm-can-do.png)
+{: refdef}
 
 在现阶段，我们接触了`ClassVisitor`、`ClassWriter`和`ClassReader`类，因此可以介绍Class Transformation的操作。
 
@@ -550,9 +515,11 @@ public class HelloWorldTransformCore {
 - 第四步，结合`ClassReader`和`ClassVisitor`。在`ClassReader`类上，有一个`accept()`方法，它接收一个`ClassVisitor`类型的对象；换句话说，就是将“河流”的“源头”和后续的“水库”连接起来。
 - 第五步，生成`byte[]`。到这一步，就是所有的“河水”都流入`ClassWriter`这个“大海”当中，这个时候我们调用`ClassWriter.toByteArray()`方法，就能够得到`byte[]`内容。
 
-![](/assets/images/java/asm/asm_core_classes.png)
+{:refdef: style="text-align: center;"}
+![](/assets/images/java/asm/asm-core-classes.png)
+{: refdef}
 
-## accept()方法的parsingOptions参数
+## parsingOptions参数
 
 在`ClassReader`类当中，`accept()`方法接收一个`int`类型的`parsingOptions`参数。
 

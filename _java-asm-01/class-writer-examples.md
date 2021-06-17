@@ -1,6 +1,6 @@
 ---
 title:  "ClassWriter代码示例"
-sequence: "204"
+sequence: "203"
 ---
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
@@ -83,16 +83,20 @@ public class HelloWorldRun {
 {% endraw %}
 {% endhighlight %}
 
-### visit()方法
+### 小总结
+
+#### visit()方法
 
 在这里，我们重点介绍一下`visit(version, access, name, signature, superName, interfaces)`方法的各个参数：
 
 - `version`: 表示当前类的版本信息。在上述示例代码中，其取值为`Opcodes.V1_8`，表示使用Java 8版本。
-- `access`: 表示当前类的访问标识（access flag）信息。如果想进一步了解，可以参考[Java Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)的Chapter 4. The class File Format部分
+- `access`: 表示当前类的访问标识（access flag）信息。在上面的示例中，`access`的取值是`ACC_PUBLIC + ACC_ABSTRACT + ACC_INTERFACE`，也可以写成`ACC_PUBLIC | ACC_ABSTRACT | ACC_INTERFACE`。如果想进一步了解这些标识的含义，可以参考[Java Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)的Chapter 4. The class File Format部分。
 - `name`: 表示当前类的名字，它采用的格式是Internal Name的形式。
 - `signature`: 表示当前类的泛型信息。因为在这个接口当中不包含任何的泛型信息，因此它的值为`null`。
 - `superName`: 表示当前类的父类信息，它采用的格式是Internal Name的形式。
 - `interfaces`: 表示当前类实现了哪些接口信息。
+
+#### Internal Name
 
 同时，我们也要介绍一下Internal Name的概念：在`.java`文件中，我们使用Java语言来编写代码，使用类名的形式是**Fully Qualified Class Name**，例如`java.lang.String`；将`.java`文件编译之后，就会生成`.class`文件；在`.class`文件中，类名的形式会发生变化，称之为**Internal Name**，例如`java/lang/String`。因此，将**Fully Qualified Class Name**转换成**Internal Name**的方式就是，将`.`字符转换成`/`字符。
 
@@ -123,13 +127,6 @@ public class HelloWorldRun {
 </tbody>
 </table>
 
-在[Java Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)文档中，是这样描述的：
-
-> For historical reasons, **the syntax of binary names** that appear in **class file structures** differs from the syntax of binary names documented in Java Language Specification.
-> In this internal form, the ASCII periods (`.`) that normally separate the identifiers which make up the binary name are replaced by ASCII forward slashes (`/`).
-
-> For example, the normal binary name of class `Thread` is `java.lang.Thread`. In the **internal form** used in descriptors in the **class file format**, a reference to the name of class `Thread` is implemented using a `CONSTANT_Utf8_info` structure representing the string `java/lang/Thread`.
-
 ## 示例二：生成接口+字段+方法
 
 ### 预期目标
@@ -151,6 +148,8 @@ public interface HelloWorld extends Cloneable {
 {% raw %}
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.FieldVisitor;
+import org.objectweb.asm.MethodVisitor;
 
 import static org.objectweb.asm.Opcodes.*;
 
@@ -166,21 +165,35 @@ public class HelloWorldGenerateCore {
         FileUtils.writeBytes(filepath, bytes);
     }
 
-    public static byte[] dump () throws Exception {
+    public static byte[] dump() throws Exception {
         // (1) 创建ClassWriter对象
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 
         // (2) 调用visitXxx()方法
         cw.visit(V1_8, ACC_PUBLIC + ACC_ABSTRACT + ACC_INTERFACE, "sample/HelloWorld",
                 null, "java/lang/Object", new String[]{"java/lang/Cloneable"});
-        cw.visitField(ACC_PUBLIC + ACC_FINAL + ACC_STATIC, "LESS", "I",
-                null, Integer.valueOf(-1)).visitEnd();
-        cw.visitField(ACC_PUBLIC + ACC_FINAL + ACC_STATIC, "EQUAL", "I",
-                null, Integer.valueOf(0)).visitEnd();
-        cw.visitField(ACC_PUBLIC + ACC_FINAL + ACC_STATIC, "GREATER", "I",
-                null, Integer.valueOf(1)).visitEnd();
-        cw.visitMethod(ACC_PUBLIC + ACC_ABSTRACT, "compareTo", "(Ljava/lang/Object;)I",
-                null, null).visitEnd();
+
+        {
+            FieldVisitor fv1 = cw.visitField(ACC_PUBLIC + ACC_FINAL + ACC_STATIC, "LESS", "I", null, -1);
+            fv1.visitEnd();
+        }
+
+        {
+            FieldVisitor fv2 = cw.visitField(ACC_PUBLIC + ACC_FINAL + ACC_STATIC, "EQUAL", "I", null, 0);
+            fv2.visitEnd();
+        }
+
+        {
+            FieldVisitor fv3 = cw.visitField(ACC_PUBLIC + ACC_FINAL + ACC_STATIC, "GREATER", "I", null, 1);
+            fv3.visitEnd();
+        }
+
+        {
+            MethodVisitor mv1 = cw.visitMethod(ACC_PUBLIC + ACC_ABSTRACT, "compareTo", "(Ljava/lang/Object;)I", null, null);
+            mv1.visitEnd();
+        }
+
+
         cw.visitEnd();
 
         // (3) 调用toByteArray()方法
@@ -233,7 +246,9 @@ methods:
     compareTo
 {% endhighlight %}
 
-### visitField()和visitMethod()方法
+### 小总结
+
+#### visitField()和visitMethod()方法
 
 在这里，我们重点说一下`visitField()`方法和`visitMethod()`方法的各个参数：
 
@@ -277,10 +292,12 @@ public class HelloWorld {
 - `non_constant_field`字段：对应于`visitField(ACC_PUBLIC, "non_constant_field", "I", null, null)`
 - `test()`方法：对应于`visitMethod(ACC_PUBLIC, "test", "()V", null, new String[] { "java/io/FileNotFoundException", "java/io/IOException" })`
 
-在ClassFile当中，描述符（descriptor）是对“类型”的简单化描述。为什么要进行“简单化”描述呢？是为了节省占用的磁盘空间，比如说`int`类型，如果使用“int”表示，就使用3个字母，占用3个byte空间；如果使用“I”来表示，就只使用1个字母，占用1byte空间，相对而言节省了2个byte的空间。
+#### 描述符（descriptor）
+
+在ClassFile当中，描述符（descriptor）是对“类型”的简单化描述。
 
 - 对于字段（field）来说，描述符就是对字段本身的类型进行简单化描述。
-- 对于方法（method）来说，描述符就是对方法的输入参数的类型和输出参数的类型进行简单化描述。
+- 对于方法（method）来说，描述符就是对方法的接收参数的类型和返回值的类型进行简单化描述。
 
 <table>
 <thead>

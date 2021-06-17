@@ -13,5 +13,5 @@ $ bundle exec jekyll serve --detach
 # 在80端口运行
 $ bundle exec jekyll serve --detach --port 80
 # 使用https协议
-$ bundle exec jekyll serve --detach --ssl-key private.key --ssl-cert cert.pem
+$ bundle exec jekyll serve --detach --port 443 --ssl-key private.key --ssl-cert cert.pem
 {% endhighlight %}

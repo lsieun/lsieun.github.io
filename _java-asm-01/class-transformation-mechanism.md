@@ -16,7 +16,7 @@ ClassReader --> ClassVisitor(1) --> ... --> ClassVisitor(N) --> ClassWriter
 其中，`ClassReader`类负责“读”Class，`ClassWriter`负责“写”Class，而`ClassVisitor`则负责进行“转换”（Transformation）。在Class Transformation过程中，可以有多个`ClassVisitor`参与。不过要注意，`ClassVisitor`类是一个抽象类，我们需要写代码来实现一个`ClassVisitor`类的子类才能使用。
 
 {:refdef: style="text-align: center;"}
-![ASM Core Classes](/assets/images/java/asm/asm_core_classes.png)
+![ASM Core Classes](/assets/images/java/asm/asm-core-classes.png)
 {: refdef}
 
 为了解释清楚Class Transformation是如何工作的，我们从两个问题来入手：

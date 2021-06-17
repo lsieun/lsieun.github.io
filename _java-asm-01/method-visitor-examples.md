@@ -1,6 +1,6 @@
 ---
 title:  "MethodVisitor代码示例"
-sequence: "208"
+sequence: "209"
 ---
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
@@ -13,7 +13,7 @@ sequence: "208"
 
 ## 示例一：`<init>()`方法
 
-在`.class`文件中，构造方法的名字是`<init>`。其实，`<init>`是instance initialization method的缩写。
+在`.class`文件中，构造方法的名字是`<init>`，它表示instance **init**ialization method的缩写。
 
 ### 预期目标
 
@@ -41,7 +41,8 @@ public class HelloWorld {
 {% highlight java %}
 {% raw %}
 import lsieun.utils.FileUtils;
-import org.objectweb.asm.*;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.MethodVisitor;
 
 import static org.objectweb.asm.Opcodes.*;
 
@@ -62,16 +63,17 @@ public class HelloWorldGenerateCore {
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 
         // (2) 调用visitXxx()方法
-        cw.visit(V1_8, ACC_PUBLIC + ACC_SUPER, "sample/HelloWorld",
-                null, "java/lang/Object", null);
+        cw.visit(V1_8, ACC_PUBLIC + ACC_SUPER, "sample/HelloWorld", null, "java/lang/Object", null);
 
-        MethodVisitor mv = cw.visitMethod(ACC_PUBLIC, "<init>", "()V", null, null);
-        mv.visitCode();
-        mv.visitVarInsn(ALOAD, 0);
-        mv.visitMethodInsn(INVOKESPECIAL, "java/lang/Object", "<init>", "()V", false);
-        mv.visitInsn(RETURN);
-        mv.visitMaxs(1, 1);
-        mv.visitEnd();
+        {
+            MethodVisitor mv1 = cw.visitMethod(ACC_PUBLIC, "<init>", "()V", null, null);
+            mv1.visitCode();
+            mv1.visitVarInsn(ALOAD, 0);
+            mv1.visitMethodInsn(INVOKESPECIAL, "java/lang/Object", "<init>", "()V", false);
+            mv1.visitInsn(RETURN);
+            mv1.visitMaxs(1, 1);
+            mv1.visitEnd();
+        }
 
         cw.visitEnd();
 
@@ -95,55 +97,49 @@ public class HelloWorldRun {
 {% endraw %}
 {% endhighlight %}
 
-通过上面的示例，我们强调3个关注点：
+### Frame的变化
 
-- 第一个关注点，在创建`ClassWriter`对象时，我们使用了`ClassWriter.COMPUTE_FRAMES`。
-- 第二个关注点，在使用`MethodVisitor`类时，其中`visitXxx()`方法的调用顺序。
-- 第三个关注点，在`.class`文件中，构造方法的名字是`<init>`。
-
-第一个关注点，详细说明。使用`ClassWriter.COMPUTE_FRAMES`的效果，会自动计算max stacks、max locals和stack map frames的具体值。从代码的角度来说，使用`ClassWriter.COMPUTE_FRAMES`，会忽略我们在代码中`visitMaxs()`方法和`visitFrame()`方法传入的具体参数值；换句话说，无论我们传入的参数值是否正确，ASM会帮助我们从新计算一个正确的值，代替我们在代码中传入的参数。
-
-- 第1种情况，在创建`ClassWriter`对象时，`flags`参数使用`ClassWriter.COMPUTE_FRAMES`值，在调用`mv.visitMaxs(0, 0)`方法之后，仍然能得到一个正确的`.class`文件。
-- 第2种情况，在创建`ClassWriter`对象时，`flags`参数使用`0`值，在调用`mv.visitMaxs(0, 0)`方法之后，得到的`.class`文件就不能正确运行。
-
-第二个关注点，详细说明。在使用`MethodVisitor`类时，其中`visitXxx()`方法调用应该遵循以下顺序：
-
-- 第一步，调用`visitCode()`方法，调用一次
-- 第二步，调用`visitXxxInsn()`方法，可以调用多次
-- 第三步，调用`visitMaxs()`方法，调用一次
-- 第四步，调用`visitEnd()`方法，调用一次
-
-如果我们省略掉`visitCode()`和`visitEnd()`方法，生成的`.class`文件也不会出错；当然，我们不建议这么做。但是，如果我们省略掉对于`visitMaxs()`方法的调用，生成的`.class`文件就会出错。
-
-## 示例二：不调用`visitMaxs()`方法
-
-在创建`ClassWriter`对象时，`flags`参数使用`ClassWriter.COMPUTE_FRAMES`值，我们可以给`visitMaxs()`方法传入一个错误的值，但是不能省略对于`visitMaxs()`方法的调用。
-
-如果省略对于`visitMaxs()`方法的调用，会出现如下错误：
+对于`HelloWorld`类中`<init>()`方法对应的Instruction内容如下：
 
 {% highlight text %}
-Exception in thread "main" java.lang.VerifyError: Operand stack overflow
-Exception Details:
-  Location:
-    sample/HelloWorld.<init>()V @0: aload_0
-  Reason:
-    Exceeded max stack size.
-  Current Frame:
-    bci: @0
-    flags: { flagThisUninit }
-    locals: { uninitializedThis }
-    stack: { }
-  Bytecode:
-    0x0000000: 2ab7 0008 b1                           
-
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at sample.HelloWorldRun.main(HelloWorldRun.java:5)
+public sample.HelloWorld();
+  Code:
+     0: aload_0
+     1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+     4: return
 {% endhighlight %}
 
-## 示例三：`<clinit>`方法
+该方法对应的Frame变化情况如下：
 
-静态初始化方法的名字是`<clinit>`，它表示class initialization method的缩写。
+{% highlight text %}
+<init>()V
+[uninitialized_this] []
+[uninitialized_this] [uninitialized_this]
+[sample/HelloWorld] []
+[] []
+{% endhighlight %}
+
+在这里，我们看到一个很“不一样”的变量，就是`uninitialized_this`，它就是一个“引用”，它指向的内存空间还没有初始化；等经过初始化之后，`uninitialized_this`变量就变成`this`变量。
+
+### 小总结
+
+通过上面的示例，我们注意四个知识点：
+
+- 第一点，如何使用`ClassWriter`类。
+    - 第一步，创建`ClassWriter`类的实例。
+    - 第二步，调用`ClassWriter`类的`visitXxx()`方法。
+    - 第三步，调用`ClassWriter`类的`toByteArray()`方法。
+- 第二点，在使用`MethodVisitor`类时，其中`visitXxx()`方法需要遵循的调用顺序。
+    - 第一步，调用`visitCode()`方法，调用一次
+    - 第二步，调用`visitXxxInsn()`方法，可以调用多次
+    - 第三步，调用`visitMaxs()`方法，调用一次
+    - 第四步，调用`visitEnd()`方法，调用一次
+- 第三点，在`.class`文件中，构造方法的名字是`<init>`。从Instruction的角度来讲，调用构造方法会用到`invokespecial`指令。
+- 第四点，从Frame的角度来讲，在构造方法`<init>()`中，local variables当中索引为`0`的位置存储的是什么呢？如果还没有进行初始化操作，就是`uninitialized_this`变量；如果已经进行了初始化操作，就是`this`变量。
+
+## 示例二：`<clinit>`方法
+
+静态初始化方法的名字是`<clinit>`，它表示**cl**ass **init**ialization method的缩写。
 
 ### 预期目标
 
@@ -161,6 +157,10 @@ public class HelloWorld {
 
 {% highlight java %}
 {% raw %}
+import lsieun.utils.FileUtils;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.MethodVisitor;
+
 import static org.objectweb.asm.Opcodes.*;
 
 public class HelloWorldGenerateCore {
@@ -180,25 +180,28 @@ public class HelloWorldGenerateCore {
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 
         // (2) 调用visitXxx()方法
-        cw.visit(V1_8, ACC_PUBLIC + ACC_SUPER, "sample/HelloWorld",
-                null, "java/lang/Object", null);
+        cw.visit(V1_8, ACC_PUBLIC + ACC_SUPER, "sample/HelloWorld", null, "java/lang/Object", null);
 
-        MethodVisitor mv1 = cw.visitMethod(ACC_PUBLIC, "<init>", "()V", null, null);
-        mv1.visitCode();
-        mv1.visitVarInsn(ALOAD, 0);
-        mv1.visitMethodInsn(INVOKESPECIAL, "java/lang/Object", "<init>", "()V", false);
-        mv1.visitInsn(RETURN);
-        mv1.visitMaxs(1, 1);
-        mv1.visitEnd();
+        {
+            MethodVisitor mv1 = cw.visitMethod(ACC_PUBLIC, "<init>", "()V", null, null);
+            mv1.visitCode();
+            mv1.visitVarInsn(ALOAD, 0);
+            mv1.visitMethodInsn(INVOKESPECIAL, "java/lang/Object", "<init>", "()V", false);
+            mv1.visitInsn(RETURN);
+            mv1.visitMaxs(1, 1);
+            mv1.visitEnd();
+        }
 
-        MethodVisitor mv2 = cw.visitMethod(ACC_STATIC, "<clinit>", "()V", null, null);
-        mv2.visitCode();
-        mv2.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
-        mv2.visitLdcInsn("class initialization method");
-        mv2.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
-        mv2.visitInsn(RETURN);
-        mv2.visitMaxs(2, 0);
-        mv2.visitEnd();
+        {
+            MethodVisitor mv2 = cw.visitMethod(ACC_STATIC, "<clinit>", "()V", null, null);
+            mv2.visitCode();
+            mv2.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
+            mv2.visitLdcInsn("class initialization method");
+            mv2.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
+            mv2.visitInsn(RETURN);
+            mv2.visitMaxs(2, 0);
+            mv2.visitEnd();
+        }
 
         cw.visitEnd();
 
@@ -222,19 +225,65 @@ public class HelloWorldRun {
 {% endraw %}
 {% endhighlight %}
 
-## 示例四：try catch clause
+### Frame的变化
+
+对于`HelloWorld`类中`<clinit>()`方法对应的Instruction内容如下：
+
+{% highlight text %}
+static {};
+  Code:
+     0: getstatic     #18                 // Field java/lang/System.out:Ljava/io/PrintStream;
+     3: ldc           #20                 // String class initialization method
+     5: invokevirtual #26                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+     8: return
+{% endhighlight %}
+
+该方法对应的Frame变化情况如下：
+
+{% highlight text %}
+<clinit>()V
+[] []
+[] [java/io/PrintStream]
+[] [java/io/PrintStream, java/lang/String]
+[] []
+[] []
+{% endhighlight %}
+
+### 小总结
+
+通过上面的示例，我们注意三个知识点：
+
+- 第一点，如何使用`ClassWriter`类。
+- 第二点，在使用`MethodVisitor`类时，其中`visitXxx()`方法需要遵循的调用顺序。
+- 第三点，在`.class`文件中，静态初始化方法的名字是`<clinit>`，它的方法描述符是`()V`。
+
+## 示例三：创建对象
 
 ### 预期目标
+
+假如有一个`GoodChild`类，内容如下：
+
+{% highlight java %}
+{% raw %}
+public class GoodChild {
+    public String name;
+    public int age;
+
+    public GoodChild(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+我们的预期目标是生成一个`HelloWorld`类：
 
 {% highlight java %}
 {% raw %}
 public class HelloWorld {
     public void test() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
+        GoodChild child = new GoodChild("Lucy", 8);
     }
 }
 {% endraw %}
@@ -245,7 +294,8 @@ public class HelloWorld {
 {% highlight java %}
 {% raw %}
 import lsieun.utils.FileUtils;
-import org.objectweb.asm.*;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.MethodVisitor;
 
 import static org.objectweb.asm.Opcodes.*;
 
@@ -266,8 +316,7 @@ public class HelloWorldGenerateCore {
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 
         // (2) 调用visitXxx()方法
-        cw.visit(V1_8, ACC_PUBLIC + ACC_SUPER, "sample/HelloWorld",
-                null, "java/lang/Object", null);
+        cw.visit(V1_8, ACC_PUBLIC + ACC_SUPER, "sample/HelloWorld", null, "java/lang/Object", null);
 
         {
             MethodVisitor mv1 = cw.visitMethod(ACC_PUBLIC, "<init>", "()V", null, null);
@@ -275,40 +324,21 @@ public class HelloWorldGenerateCore {
             mv1.visitVarInsn(ALOAD, 0);
             mv1.visitMethodInsn(INVOKESPECIAL, "java/lang/Object", "<init>", "()V", false);
             mv1.visitInsn(RETURN);
-            mv1.visitMaxs(0, 0);
+            mv1.visitMaxs(1, 1);
             mv1.visitEnd();
         }
 
         {
             MethodVisitor mv2 = cw.visitMethod(ACC_PUBLIC, "test", "()V", null, null);
-            Label tryStartLabel = new Label();
-            Label tryEndLabel = new Label();
-            Label handlerLabel = new Label();
-            Label returnLabel = new Label();
-
-            // 第1段
             mv2.visitCode();
-            mv2.visitTryCatchBlock(tryStartLabel, tryEndLabel, handlerLabel, "java/lang/InterruptedException");
-
-            // 第2段
-            mv2.visitLabel(tryStartLabel);
-            mv2.visitLdcInsn(new Long(1000L));
-            mv2.visitMethodInsn(INVOKESTATIC, "java/lang/Thread", "sleep", "(J)V", false);
-
-            // 第3段
-            mv2.visitLabel(tryEndLabel);
-            mv2.visitJumpInsn(GOTO, returnLabel);
-
-            // 第4段
-            mv2.visitLabel(handlerLabel);
+            mv2.visitTypeInsn(NEW, "sample/GoodChild");
+            mv2.visitInsn(DUP);
+            mv2.visitLdcInsn("Lucy");
+            mv2.visitIntInsn(BIPUSH, 8);
+            mv2.visitMethodInsn(INVOKESPECIAL, "sample/GoodChild", "<init>", "(Ljava/lang/String;I)V", false);
             mv2.visitVarInsn(ASTORE, 1);
-            mv2.visitVarInsn(ALOAD, 1);
-            mv2.visitMethodInsn(INVOKEVIRTUAL, "java/lang/InterruptedException", "printStackTrace", "()V", false);
-
-            // 第5段
-            mv2.visitLabel(returnLabel);
             mv2.visitInsn(RETURN);
-            mv2.visitMaxs(0, 0);
+            mv2.visitMaxs(4, 2);
             mv2.visitEnd();
         }
 
@@ -339,7 +369,209 @@ public class HelloWorldRun {
 {% endraw %}
 {% endhighlight %}
 
-## 示例五：不同的MethodVisitor交叉使用
+### Frame的变化
+
+对于`HelloWorld`类中`test()`方法对应的Instruction内容如下：
+
+{% highlight text %}
+public void test();
+  Code:
+     0: new           #11                 // class sample/GoodChild
+     3: dup
+     4: ldc           #13                 // String Lucy
+     6: bipush        8
+     8: invokespecial #16                 // Method sample/GoodChild."<init>":(Ljava/lang/String;I)V
+    11: astore_1
+    12: return
+{% endhighlight %}
+
+该方法对应的Frame变化情况如下：
+
+{% highlight text %}
+test()V
+[sample/HelloWorld] []
+[sample/HelloWorld] [uninitialized_sample/GoodChild]
+[sample/HelloWorld] [uninitialized_sample/GoodChild, uninitialized_sample/GoodChild]
+[sample/HelloWorld] [uninitialized_sample/GoodChild, uninitialized_sample/GoodChild, java/lang/String]
+[sample/HelloWorld] [uninitialized_sample/GoodChild, uninitialized_sample/GoodChild, java/lang/String, int]
+[sample/HelloWorld] [sample/GoodChild]
+[sample/HelloWorld, sample/GoodChild] []
+[] []
+{% endhighlight %}
+
+### 小总结
+
+通过上面的示例，我们注意四个知识点：
+
+- 第一点，如何使用`ClassWriter`类。
+- 第二点，在使用`MethodVisitor`类时，其中`visitXxx()`方法需要遵循的调用顺序。
+- 第三点，从Instruction的角度来讲，创建对象的指令集合：
+    - `new`
+    - `dup`
+    - `invokespecial`
+- 第四点，从Frame的角度来讲，在创建新对象的时候，执行`new`指令之后，它是uninitialized状态，执行`invokespecial`指令之后，它是一个“合格”的对象。
+
+## 示例四：调用方法
+
+### 预期目标
+
+{% highlight java %}
+{% raw %}
+public class HelloWorld {
+    public void test(int a, int b) {
+        int val = Math.max(a, b); // 对static方法进行调用
+        System.out.println(val);  // 对non-static方法进行调用
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+### 编码实现
+
+{% highlight java %}
+{% raw %}
+import lsieun.utils.FileUtils;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.MethodVisitor;
+
+import static org.objectweb.asm.Opcodes.*;
+
+public class HelloWorldGenerateCore {
+    public static void main(String[] args) throws Exception {
+        String relative_path = "sample/HelloWorld.class";
+        String filepath = FileUtils.getFilePath(relative_path);
+
+        // (1) 生成byte[]内容
+        byte[] bytes = dump();
+
+        // (2) 保存byte[]到文件
+        FileUtils.writeBytes(filepath, bytes);
+    }
+
+    public static byte[] dump() throws Exception {
+        // (1) 创建ClassWriter对象
+        ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
+
+        // (2) 调用visitXxx()方法
+        cw.visit(V1_8, ACC_PUBLIC + ACC_SUPER, "sample/HelloWorld", null, "java/lang/Object", null);
+
+        {
+            MethodVisitor mv1 = cw.visitMethod(ACC_PUBLIC, "<init>", "()V", null, null);
+            mv1.visitCode();
+            mv1.visitVarInsn(ALOAD, 0);
+            mv1.visitMethodInsn(INVOKESPECIAL, "java/lang/Object", "<init>", "()V", false);
+            mv1.visitInsn(RETURN);
+            mv1.visitMaxs(1, 1);
+            mv1.visitEnd();
+        }
+
+        {
+            MethodVisitor mv2 = cw.visitMethod(ACC_PUBLIC, "test", "(II)V", null, null);
+            mv2.visitCode();
+            mv2.visitVarInsn(ILOAD, 1);
+            mv2.visitVarInsn(ILOAD, 2);
+            mv2.visitMethodInsn(INVOKESTATIC, "java/lang/Math", "max", "(II)I", false);
+            mv2.visitVarInsn(ISTORE, 3);
+            mv2.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
+            mv2.visitVarInsn(ILOAD, 3);
+            mv2.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(I)V", false);
+            mv2.visitInsn(RETURN);
+            mv2.visitMaxs(2, 4);
+            mv2.visitEnd();
+        }
+
+        cw.visitEnd();
+
+        // (3) 调用toByteArray()方法
+        return cw.toByteArray();
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+### 验证结果
+
+{% highlight java %}
+{% raw %}
+import java.lang.reflect.Method;
+
+public class HelloWorldRun {
+    public static void main(String[] args) throws Exception {
+        Class<?> clazz = Class.forName("sample.HelloWorld");
+        Object obj = clazz.newInstance();
+
+        Method m = clazz.getDeclaredMethod("test", int.class, int.class);
+        m.invoke(obj, 10, 20);
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+### Frame的变化
+
+对于`HelloWorld`类中`test()`方法对应的Instruction内容如下：
+
+{% highlight text %}
+public void test(int, int);
+  Code:
+     0: iload_1
+     1: iload_2
+     2: invokestatic  #21                 // Method java/lang/Math.max:(II)I
+     5: istore_3
+     6: getstatic     #27                 // Field java/lang/System.out:Ljava/io/PrintStream;
+     9: iload_3
+    10: invokevirtual #33                 // Method java/io/PrintStream.println:(I)V
+    13: return
+{% endhighlight %}
+
+该方法对应的Frame变化情况如下：
+
+{% highlight text %}
+test(II)V
+[sample/HelloWorld, int, int] []
+[sample/HelloWorld, int, int] [int]
+[sample/HelloWorld, int, int] [int, int]
+[sample/HelloWorld, int, int] [int]
+[sample/HelloWorld, int, int, int] []
+[sample/HelloWorld, int, int, int] [java/io/PrintStream]
+[sample/HelloWorld, int, int, int] [java/io/PrintStream, int]
+[sample/HelloWorld, int, int, int] []
+[] []
+{% endhighlight %}
+
+### 小总结
+
+通过上面的示例，我们注意四个知识点：
+
+- 第一点，如何使用`ClassWriter`类。
+- 第二点，在使用`MethodVisitor`类时，其中`visitXxx()`方法需要遵循的调用顺序。
+- 第三点，从Instruction的角度来讲，调用static方法是使用`invokestatic`指令，调用non-static方法一般使用`invokevirtual`指令。
+- 第四点，从Frame的角度来讲，实现方法的调用，需要先将`this`变量和方法接收的参数放到operand stack上。
+
+## 示例五：不调用`visitMaxs()`方法
+
+在创建`ClassWriter`对象时，使用了`ClassWriter.COMPUTE_FRAMES`选项。
+
+{% highlight java %}
+{% raw %}
+ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
+{% endraw %}
+{% endhighlight %}
+
+使用`ClassWriter.COMPUTE_FRAMES`后，ASM会自动计算max stacks、max locals和stack map frames的具体值。从代码的角度来说，使用`ClassWriter.COMPUTE_FRAMES`，会忽略我们在代码中`visitMaxs()`方法和`visitFrame()`方法传入的具体参数值；换句话说，无论我们传入的参数值是否正确，ASM会帮助我们从新计算一个正确的值，代替我们在代码中传入的参数。
+
+- 第1种情况，在创建`ClassWriter`对象时，`flags`参数使用`ClassWriter.COMPUTE_FRAMES`值，在调用`mv.visitMaxs(0, 0)`方法之后，仍然能得到一个正确的`.class`文件。
+- 第2种情况，在创建`ClassWriter`对象时，`flags`参数使用`0`值，在调用`mv.visitMaxs(0, 0)`方法之后，得到的`.class`文件就不能正确运行。
+
+需要注意的是，在创建`ClassWriter`对象时，`flags`参数使用`ClassWriter.COMPUTE_FRAMES`值，我们可以给`visitMaxs()`方法传入一个错误的值，但是不能省略对于`visitMaxs()`方法的调用。如果我们省略掉`visitCode()`和`visitEnd()`方法，生成的`.class`文件也不会出错；当然，并不建议这么做。但是，如果我们省略掉对于`visitMaxs()`方法的调用，生成的`.class`文件就会出错。
+
+如果省略对于`visitMaxs()`方法的调用，会出现如下错误：
+
+{% highlight text %}
+Exception in thread "main" java.lang.VerifyError: Operand stack overflow
+{% endhighlight %}
+
+## 示例六：不同的MethodVisitor交叉使用
 
 假如我们有两个`MethodVisitor`对象`mv1`和`mv2`，如下所示：
 
@@ -609,13 +841,9 @@ public class HelloWorldRun {
     - 第二步，调用`visitXxxInsn()`方法，可以调用多次
     - 第三步，调用`visitMaxs()`方法，调用一次
     - 第四步，调用`visitEnd()`方法，调用一次
-- 第二点，在使用`COMPUTE_FRAMES`的前提下，我们可以给`visitMaxs()`方法参数传入错误的值，但不能忽略对于`visitMaxs()`方法的调用。
-- 第三点，构造方法的名字是`<init>`，静态初始化方法是`<clinit>`。
-- 
-其中的一个主要目的就是熟悉其中，即：
+- 第二点，在`.class`文件当中，构造方法的名字是`<init>`，静态初始化方法的名字是`<clinit>`。
+- 第三点，针对方法里包含的Instruction内容，需要放到Frame当中才能更好的理解。对每一条Instruction来说，它都有可能引起local variables和operand stack的变化。
+- 第四点，在使用`COMPUTE_FRAMES`的前提下，我们可以给`visitMaxs()`方法参数传入错误的值，但不能忽略对于`visitMaxs()`方法的调用。
+- 第五点，不同的`MethodVisitor`对象，它们的`visitXxx()`方法是彼此独立的，只要各自遵循方法的调用顺序，就能够得到正确的结果。
 
-
-
-针对于某一个具体的`visitXxx()`方法，我们可能不太了解它的作用和如何使用它，这个是需要我们在日后的使用过程中一点一点熟悉起来的。
-
-因此，通过这几个示例，我们应重点关注多个`visitXxx()`方法之间的调用顺序，而具体某一个`visitXxx()`方法如何使用，需要我们慢慢积累经验，才能熟练使用。
+最后，本文列举的代码示例是有限的，能够讲到`visitXxxInsn()`方法也是有限的。针对于某一个具体的`visitXxxInsn()`方法，我们可能不太了解它的作用和如何使用它，这个是需要我们在日后的使用过程中一点一点积累和熟悉起来的。

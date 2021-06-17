@@ -1,11 +1,11 @@
 ---
-title:  "Java ClassFile快速参考"
-sequence: "201"
+title:  "ClassFile快速参考"
+sequence: "104"
 ---
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
-## Java ClassFile Format
+## Java ClassFile
 
 对于一个具体的`.class`而言，它是遵循ClassFile结构的。这个数据结构位于[Java Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)的
 [The class File Format](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html)部分。
@@ -64,6 +64,27 @@ method_info {
 }
 {% endhighlight %}
 
+在`method_info`结构中，方法当中方法体的代码，是存在于`Code`属性结构中，其结构如下：
+
+{% highlight text %}
+Code_attribute {
+    u2 attribute_name_index;
+    u4 attribute_length;
+    u2 max_stack;
+    u2 max_locals;
+    u4 code_length;
+    u1 code[code_length];
+    u2 exception_table_length;
+    {   u2 start_pc;
+        u2 end_pc;
+        u2 handler_pc;
+        u2 catch_type;
+    } exception_table[exception_table_length];
+    u2 attributes_count;
+    attribute_info attributes[attributes_count];
+}
+{% endhighlight %}
+
 ## 示例演示
 
 在下面内容中，我们会使用到《[Java 8 ClassFile](https://edu.51cto.com/course/25908.html)》课程的源码[java8-classfile-tutorial](https://gitee.com/lsieun/java8-classfile-tutorial)。
@@ -82,10 +103,6 @@ public class HelloWorld implements Cloneable {
         int b = 2;
         int c = a + b;
     }
-
-    public static void main(String[] args) {
-        System.out.println("HelloWorld");
-    }
 }
 {% endraw %}
 {% endhighlight %}
@@ -94,15 +111,14 @@ public class HelloWorld implements Cloneable {
 
 - 第一，运行`run.A_File_Hex`类，查看`sample.HelloWorld`类当中包含的数据，以十六进制进行呈现。
 - 第二，运行`run.B_ClassFile_Raw`类，能够对`sample.HelloWorld`类当中包含的数据进行拆分。这样做的目的，是为了与ClassFile的结构进行对照，进行参考。
-- 第三，运行`run.K_Code_Locals`类，能够对`sample.HelloWorld`类当中某个方法里面包含的opcode进行查看。
+- 第三，运行`run.I_Attributes_Method`类，能够对`sample.HelloWorld`类当中方法的Code属性结构进行查看。
+- 第四，运行`run.K_Code_Locals`类，能够对`sample.HelloWorld`类当中`Code`属性包含的instruction进行查看。
 
 ## 总结
 
-本文主要是对Java ClassFile Format进行了介绍，内容总结如下：
+本文主要是对Java ClassFile进行了介绍，内容总结如下：
 
 - 第一点，一个具体的`.class`文件，它是要遵循ClassFile结构的；而ClassFile的结构是定义在[The Java Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)文档中。
 - 第二点，示例演示，主要是希望大家能够把`.class`文件里的内容与ClassFile结构之间对应起来。
 
-当然，我们这里也只是简单的说明了ClassFile结构的内容，让大家有一个直观的认知；如果要细究起来，其实里面也会包含非常多的内容。对ClassFile的结构，我有一个相关的课程《[Java 8 ClassFile](https://edu.51cto.com/course/25908.html)》，前面的一些内容是免费的，有兴趣的同学可以进行查看。
-
-
+在后续内容当中，我们会讲到从“无”到“有”的生成新的Class文件，以及对已有的Class文件进行转换；此时，我们对ClassFile进行介绍，目的就是为了对生成Class或转换Class的过程有一个较深刻的理解。

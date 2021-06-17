@@ -11,7 +11,7 @@ sequence: "406"
 
 ### class info
 
-`GeneratorAdapter`类继承自`LocalVariablesSorter`类。
+第一个部分，`GeneratorAdapter`类继承自`LocalVariablesSorter`类。
 
 - org.objectweb.asm.MethodVisitor
     - org.objectweb.asm.commons.LocalVariablesSorter
@@ -27,6 +27,8 @@ public class GeneratorAdapter extends LocalVariablesSorter {
 
 ### fields
 
+第二个部分，`GeneratorAdapter`类定义的字段有哪些。
+
 {% highlight java %}
 {% raw %}
 public class GeneratorAdapter extends LocalVariablesSorter {
@@ -40,6 +42,8 @@ public class GeneratorAdapter extends LocalVariablesSorter {
 {% endhighlight %}
 
 ### constructors
+
+第三个部分，`GeneratorAdapter`类定义的构造方法有哪些。
 
 {% highlight java %}
 {% raw %}
@@ -63,7 +67,11 @@ public class GeneratorAdapter extends LocalVariablesSorter {
 
 ### methods
 
-#### loadThis method
+第四个部分，`GeneratorAdapter`类定义的方法有哪些。
+
+#### loadThis
+
+在`GeneratorAdapter`类当中，`loadThis()`方法的本质是`mv.visitVarInsn(Opcodes.ALOAD, 0)`；但是，要注意static方法并不需要`this`变量。
 
 {% highlight java %}
 {% raw %}
@@ -78,7 +86,9 @@ public class GeneratorAdapter extends LocalVariablesSorter {
 {% endraw %}
 {% endhighlight %}
 
-#### arg methods
+#### arg
+
+在`GeneratorAdapter`类当中，定义了一些与方法参数相关的方法。
 
 {% highlight java %}
 {% raw %}
@@ -135,7 +145,9 @@ public class GeneratorAdapter extends LocalVariablesSorter {
 {% endraw %}
 {% endhighlight %}
 
-#### boxing and unboxing methods
+#### boxing and unboxing
+
+在`GeneratorAdapter`类当中，定义了一些与boxing和unboxing相关的操作。
 
 {% highlight java %}
 {% raw %}
@@ -239,7 +251,21 @@ public class GeneratorAdapter extends LocalVariablesSorter {
 {% endraw %}
 {% endhighlight %}
 
-## 如何使用
+## 示例：生成类
+
+### 预期目标
+
+{% highlight java %}
+{% raw %}
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+### 编码实现
 
 {% highlight java %}
 {% raw %}
@@ -255,7 +281,7 @@ import java.io.PrintWriter;
 
 import static org.objectweb.asm.Opcodes.*;
 
-public class HelloWorldGenerateCommons {
+public class GeneratorAdapterExample01 {
     public static void main(String[] args) throws Exception {
         String relative_path = "sample/HelloWorld.class";
         String filepath = FileUtils.getFilePath(relative_path);
@@ -272,8 +298,7 @@ public class HelloWorldGenerateCommons {
         PrintWriter printWriter = new PrintWriter(System.out);
         TraceClassVisitor cv = new TraceClassVisitor(cw, printWriter);
 
-        cv.visit(V1_8, ACC_PUBLIC + ACC_SUPER, "sample/HelloWorld",
-                null, "java/lang/Object", null);
+        cv.visit(V1_8, ACC_PUBLIC + ACC_SUPER, "sample/HelloWorld", null, "java/lang/Object", null);
 
         {
             Method m1 = Method.getMethod("void <init> ()");
@@ -288,7 +313,7 @@ public class HelloWorldGenerateCommons {
             Method m2 = Method.getMethod("void main (String[])");
             GeneratorAdapter mg = new GeneratorAdapter(ACC_PUBLIC + ACC_STATIC, m2, null, null, cv);
             mg.getStatic(Type.getType(System.class), "out", Type.getType(PrintStream.class));
-            mg.push("Hello world!");
+            mg.push("Hello World!");
             mg.invokeVirtual(Type.getType(PrintStream.class), Method.getMethod("void println (String)"));
             mg.returnValue();
             mg.endMethod();
@@ -304,3 +329,7 @@ public class HelloWorldGenerateCommons {
 
 ## 总结
 
+本文对`GeneratorAdapter`类进行介绍，内容总结如下：
+
+- 第一点，`GeneratorAdapter`类的特点是将一些`visitXxx()`方法封装成一些常用的方法。
+- 第二点，`GeneratorAdapter`类定义的新方法，并不是十分必要的；如果熟悉`MethodVisitor.visitXxx()`方法，可以完全不考虑使用`GeneratorAdapter`类。

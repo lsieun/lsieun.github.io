@@ -1,21 +1,21 @@
 ---
 title:  "ClassVisitor介绍"
-sequence: "202"
+sequence: "201"
 ---
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
-{:refdef: style="text-align: center;"}
-![ASM里的核心类](/assets/images/java/asm/asm_core_classes.png)
-{: refdef}
+在ASM Core API中，最重要的三个类就是`ClassReader`、`ClassVisitor`和`ClassWriter`类。在进行Class Generation操作的时候，`ClassVisitor`和`ClassWriter`这两个类起着重要作用，而并不需要`ClassReader`类的参与。在本文当中，我们将对`ClassVisitor`类进行介绍。
 
-在进行Class Generation操作的时候，`ClassVisitor`和`ClassWriter`这两个类起着重要作用，而并不需要`ClassReader`类的参与。在本文当中，将对`ClassVisitor`类进行介绍。
+{:refdef: style="text-align: center;"}
+![ASM里的核心类](/assets/images/java/asm/asm-core-classes.png)
+{: refdef}
 
 ## ClassVisitor类
 
 ### class info
 
-第一个要注意的地方，`ClassVisitor`是一个抽象类。
+第一个部分，`ClassVisitor`是一个抽象类。
 由于`ClassVisitor类`是一个`abstract`类，所以不能直接使用`new`关键字创建`ClassVisitor`对象。
 
 {% highlight java %}
@@ -25,7 +25,7 @@ public abstract class ClassVisitor {
 {% endraw %}
 {% endhighlight %}
 
-同时，由于`ClassVisitor类`是一个`abstract`类，要想使用它，就必须有具体的子类来继承它。比较常见的`ClassVisitor`子类有`ClassWriter`类（Core API）和`ClassNode`类（Tree API）。
+同时，由于`ClassVisitor`类是一个`abstract`类，要想使用它，就必须有具体的子类来继承它。比较常见的`ClassVisitor`子类有`ClassWriter`类（Core API）和`ClassNode`类（Tree API）。
 
 {% highlight java %}
 {% raw %}
@@ -49,7 +49,7 @@ public class ClassNode extends ClassVisitor {
 
 ### fields
 
-第二个要注意的地方，就是`ClassVisitor`定义的字段有哪些。
+第二个部分，`ClassVisitor`类定义的字段有哪些。
 
 {% highlight java %}
 {% raw %}
@@ -60,18 +60,16 @@ public abstract class ClassVisitor {
 {% endraw %}
 {% endhighlight %}
 
-- `api`字段：它是一个`int`类型的数据，指出了当前使用的ASM API版本，其取值有`Opcodes.ASM4`、`Opcodes.ASM5`、`Opcodes.ASM6`、`Opcodes.ASM7`、`Opcodes.ASM8`和`Opcodes.ASM9`。
+- `api`字段：它是一个`int`类型的数据，指出了当前使用的ASM API版本，其取值有`Opcodes.ASM4`、`Opcodes.ASM5`、`Opcodes.ASM6`、`Opcodes.ASM7`、`Opcodes.ASM8`和`Opcodes.ASM9`。我们使用的ASM版本是9.0，因此我们在给`api`字段赋值的时候，选择`Opcodes.ASM9`就可以了。
 - `cv`字段：它是一个`ClassVisitor`类型的数据，它的作用是将多个`ClassVisitor`串连起来。
 
+{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/class-visitor-cv-field.png)
-  
-随着时间的发展，Java语言也在不断发展，从原来的Java 1.0到Java 5，再到Java 8，再到Java 16。作为每一次新的Java版本的出现，它多多少少都会带有新的特性，例如，Java 5引入泛型、枚举，Java 8引入Lambda等内容。我们可以编写`.java`文件内容时，可以使用这些新的Java语言特性，这些`.java`文件当中的语言特性会被编译到相应的`.class`文件当中。为了能够让`.class`文件支持这些新的语言特性，那么其相应的Java ClassFile结构也需要不断扩展。相应的，ASM作为一个操作字节码的类库，为了跟上时代的变迁，也在不断演进，所以ASM就会有不同版本之间的变化。不同的ASM版本之间，它的变迁并不是一帆风顺的，可能就会存在某种不兼容的情况，就需要给ASM指定一个明确的版本信息。
-
-我们使用的ASM版本是9.0，因此我们在给`api`字段赋值的时候，选择`Opcodes.ASM9`就可以了。
+{: refdef}
 
 ### constructors
 
-第三个要注意的地方，就是`ClassVisitor`定义的构造函数。
+第三个部分，`ClassVisitor`类定义的构造方法有哪些。
 
 {% highlight java %}
 {% raw %}
@@ -90,15 +88,9 @@ public abstract class ClassVisitor {
 
 ### methods
 
-第四个要注意的地方，就是`ClassVisitor`定义的方法。
+第四个部分，`ClassVisitor`类定义的方法有哪些。在ASM当中，使用到了Visitor Pattern（访问者模式），所以`ClassVisitor`当中许多的`visitXxx()`方法。
 
-Each method in this class corresponds to the class file structure.
-
-- **Simple sections** are visited with a single method call whose arguments describe their content, and which returns `void`.
-- **Sections whose content can be of arbitrary length and complexity** are visited with a initial method call that returns an auxiliary visitor class.
-  This is the case of the `visitField` and `visitMethod` methods, which return a `FieldVisitor` and a `MethodVisitor` respectively.
-
-在`ClassVisitor`类当中，定义许多`visitXxx`方法，我们目前只关注这4个方法：`visit()`、`visitField()`、`visitMethod()`和`visitEnd()`。
+虽然，在`ClassVisitor`类当中，有许多`visitXxx()`方法，但是，我们只需要关注这4个方法：`visit()`、`visitField()`、`visitMethod()`和`visitEnd()`。
 
 {% highlight java %}
 {% raw %}
@@ -132,7 +124,7 @@ public abstract class ClassVisitor {
 
 如果大家对`signature`参数感兴趣，我们可以使用之前介绍的`ASMPrint`类去打印一下某个泛型类的ASM代码。例如，`java.lang.Comparable`是一个泛型接口，我们就可以使用`ASMPrint`类来打印一下它的ASM代码，从来查看`signature`参数的值是什么。
 
-`ClassVisitor`的`visitXxx`方法与`ClassFile`之间存在对应关系。在`ClassVisitor`中定义的`visitXxx`方法，并不是凭空产生的，这些方法存在的目的就是为了生成一个合法的`.class`文件，而这个`.class`文件要符合ClassFile的结构，所以这些`visitXxx`方法与ClassFile的结构密切相关。
+`ClassVisitor`的`visitXxx()`方法与`ClassFile`之间存在对应关系。在`ClassVisitor`中定义的`visitXxx()`方法，并不是凭空产生的，这些方法存在的目的就是为了生成一个合法的`.class`文件，而这个`.class`文件要符合ClassFile的结构，所以这些`visitXxx()`方法与ClassFile的结构密切相关。
 
 #### visit()方法
 
@@ -348,18 +340,6 @@ public void visitEnd() {
 }
 {% endraw %}
 {% endhighlight %}
-   
-## 访问者模式
-
-在ASM当中，使用到了Visitor Pattern（访问者模式）。Visitor Pattern的一个主要作用就是将“算法”和“数据”进行分离。
-
-> the visitor design pattern is a way of separating an algorithm from an object structure on which it operates.
-
-在`ClassVisitor`类当中，我们可以看到定义了许多的`visitXxx()`方法。另外，在`FieldVisitor`类和`MethodVisitor`类当中，也定义了许多的`visitXxx()`方法。那么，这些`visitXxx()`方法，就是Visitor Pattern当中“算法”的部分（algorithm）。
-
-相对而言，Visitor Pattern当中“数据”的部分（an object structure），它在ASM的源码当中表现的比较模糊。因为在ASM源码当中，它并没有将Visitor Pattern当中“数据”的部分，去具体化的呈现为某一个具体的类。但是，这个“数据”的部分到底是什么呢？这个“数据”的部分其实就是一个class file，就是一个符合ClassFile的数据。我们这里所说的class file，是一个泛化的概念、抽象的概念，它可能表现为一个具体的`.class`文件，也可能是一个符合ClassFile的字节数组（`byte[]`）。
-
-这几段内容的一个目的，就是想说明这样一个事情：因为ASM遵循了Visitor Pattern的设计模式，所以`ClassVisitor`当中定义了那么的`visitXxx()`方法，也是为什么会有这么多`visitXxx()`方法的原因。
 
 ## ClassVisitor类的方法调用顺序
 
@@ -386,10 +366,10 @@ visitEnd
 其中，涉及到一些符号，它们的含义如下：
 
 - `[]`: 表示最多调用一次，可以不调用，但最多调用一次。
-- `()`和`|`: 表示在多个方法之间，可以选择任意一个，并且多个方法之间不分前后顺序
-- `*`: 表示方法可以调用0次或多次，
+- `()`和`|`: 表示在多个方法之间，可以选择任意一个，并且多个方法之间不分前后顺序。
+- `*`: 表示方法可以调用0次或多次。
 
-因为在本次课程当中，我们只关注`ClassVisitor`类当中的`visit()`方法、`visitField()`方法、`visitMethod()`方法和`visitEnd()`方法这4个方法，所以我们可以将上面的调用顺序简化如下：
+在本次课程当中，我们只关注`ClassVisitor`类当中的`visit()`方法、`visitField()`方法、`visitMethod()`方法和`visitEnd()`方法这4个方法，所以上面的方法调用顺序可以简化如下：
 
 {% highlight text %}
 visit
@@ -406,7 +386,5 @@ visitEnd
 
 本文主要对`ClassVisitor`类进行介绍，内容总结如下：
 
-- 第一，介绍了`ClassVisitor`类的成员有哪些。我们去了解这些类成员的目的，是为了让大家去熟悉`ClassVisitor`这个类。
-- 第二，从总体设计上来说，在ASM当中，许多类都采用了Visitor Pattern，因此我们会遇到许多的`visitXxx()`方法。
-- 第三，在`ClassVisitor`类当中，定义了许多`visitXxx()`方法，这些方法的调用要遵循一定的顺序。
-
+- 第一点，介绍了`ClassVisitor`类的不同部分。我们去了解这个类不同的部分，是为了能够熟悉`ClassVisitor`这个类。
+- 第二点，在`ClassVisitor`类当中，定义了许多`visitXxx()`方法，这些方法的调用要遵循一定的顺序。

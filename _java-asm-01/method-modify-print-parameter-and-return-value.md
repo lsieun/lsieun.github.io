@@ -124,6 +124,8 @@ public class MethodAroundVisitor extends ClassVisitor {
 {% endraw %}
 {% endhighlight %}
 
+### 进行转换
+
 {% highlight java %}
 {% raw %}
 import lsieun.utils.FileUtils;
@@ -158,7 +160,7 @@ public class HelloWorldTransformCore {
 {% endraw %}
 {% endhighlight %}
 
-验证结果：
+### 验证结果
 
 {% highlight java %}
 {% raw %}
@@ -179,13 +181,11 @@ public class HelloWorldRun {
 {% endraw %}
 {% endhighlight %}
 
-### 缺点
+### 小总结
 
 缺点：不灵活。如果方法的参数的数量和类型发生改变，这种方法就会失效。
 
 那么，有没有办法来自动适应方法的数量和类型变化呢？答案是“有”。这个时候，就是`Type`类（`org.objectweb.asm.Type`）来发挥作用的地方。
-
-
 
 ## 第二个版本
 
@@ -375,6 +375,8 @@ public class MethodParameterVisitor extends ClassVisitor {
 {% endraw %}
 {% endhighlight %}
 
+### 进行转换
+
 {% highlight java %}
 {% raw %}
 import lsieun.utils.FileUtils;
@@ -409,7 +411,9 @@ public class HelloWorldTransformCore {
 {% endraw %}
 {% endhighlight %}
 
-### local variables
+### 小总结
+
+#### Frame的初始状态
 
 在JVM执行的过程中，在内存空间中，每一个运行的方法（method）都对应一个frame空间；在frame空间当中，有两个重要的结构，即local variables和operand stack，如下图所示。其中，local variables是一个数组结构，它通过索引来读取或设置数据；而operand stack是一个栈结构，符合“后进先出”（LIFO, Last in, First out）的规则。
 
@@ -430,7 +434,7 @@ public class HelloWorldTransformCore {
     - 对于静态方法（static method）来说，索引位置为`0`的位置则不需要存储`this`变量。
 - 第三点，在local variables中，`boolean`、`byte`、`char`、`short`、`int`、`float`和`reference`类型占用1个slot，而`long`和`double`类型占用2个slot。
 
-### 打印语句
+#### 打印语句
 
 一般情况下，我们想打印一个字符串，可以如下写ASM代码：
 
@@ -459,6 +463,8 @@ private void printString() {
 ## 第三个版本
 
 ### 编码实现
+
+首先，我们添加一个`ParameterUtils`类，在这个类定义了许多print方法，这些print方法可以打印不同类型的数据。
 
 {% highlight java %}
 {% raw %}
@@ -526,6 +532,8 @@ public class ParameterUtils {
 }
 {% endraw %}
 {% endhighlight %}
+
+在下面的`MethodParameterVisitor2`类当中，我们将使用`ParameterUtils`类帮助我们打印信息。
 
 {% highlight java %}
 {% raw %}
@@ -643,6 +651,8 @@ public class MethodParameterVisitor2 extends ClassVisitor {
 {% endraw %}
 {% endhighlight %}
 
+### 进行转换
+
 {% highlight java %}
 {% raw %}
 import lsieun.utils.FileUtils;
@@ -677,7 +687,7 @@ public class HelloWorldTransformCore {
 {% endraw %}
 {% endhighlight %}
 
-### 优点
+### 小总结
 
 这种方式的特点就是将“打印工作”放到一个单独的类里面。在这个单独的类里面，我们可以把内容打印出来，也可以输出到文件中，可以根据自己的需要进行修改。
 
@@ -687,7 +697,7 @@ public class HelloWorldTransformCore {
 
 - 第一个版本，代码是固定的，不够灵活。
 - 第二个版本，为方法参数的“类型”和“数量”赋予“灵魂”，让方法灵活起来。
-- 第二个版本，将“打印工作”移交给“专业人员”来处理。
+- 第三个版本，将“打印工作”移交给“专业人员”来处理。
 
 本文内容总结如下：
 

@@ -5,13 +5,13 @@ sequence: "403"
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
-This `TraceClassVisitor` class, as its name implies, extends the `ClassVisitor` class, and builds **a textual representation of the visited class**.
-
-
+`TraceClassVisitor` class extends the `ClassVisitor` class, and builds **a textual representation of the visited class**.
 
 ## TraceClassVisitor类
 
 ### class info
+
+第一个部分，`TraceClassVisitor`类继承自`ClassVisitor`类，而且有`final`修饰，因此不会存在子类。
 
 {% highlight java %}
 {% raw %}
@@ -21,6 +21,8 @@ public final class TraceClassVisitor extends ClassVisitor {
 {% endhighlight %}
 
 ### fields
+
+第二个部分，`TraceClassVisitor`类定义的字段有哪些。`TraceClassVisitor`类有两个重要的字段，一个是`PrintWriter printWriter`用于打印；另一个是`Printer p`将class转换成文字信息。
 
 {% highlight java %}
 {% raw %}
@@ -32,6 +34,8 @@ public final class TraceClassVisitor extends ClassVisitor {
 {% endhighlight %}
 
 ### constructors
+
+第三个部分，`TraceClassVisitor`类定义的构造方法有哪些。
 
 {% highlight java %}
 {% raw %}
@@ -54,6 +58,8 @@ public final class TraceClassVisitor extends ClassVisitor {
 {% endhighlight %}
 
 ### methods
+
+第四个部分，`TraceClassVisitor`类定义的方法有哪些。对于`TraceClassVisitor`类的`visit()`、`visitField()`、`visitMethod()`和`visitEnd()`方法，会分别调用`Printer.visit()`、`Printer.visitField()`、`Printer.visitMethod()`和`Printer.visitClassEnd()`方法。
 
 {% highlight java %}
 {% raw %}
@@ -92,18 +98,7 @@ public final class TraceClassVisitor extends ClassVisitor {
 {% endraw %}
 {% endhighlight %}
 
-## 如何使用
-
-In order to check that a generated or transformed class is conforming to what you expect,
-the byte array returned by a `ClassWriter` is not really helpful because it is unreadable by humans.
-**A textual representation would be much easier to use**.
-This is what the `TraceClassVisitor` class provides.
-
-So, instead of using a `ClassWriter` to generate your classes, you can use a `TraceClassVisitor`,
-in order to get a readable trace of what is actually generated.
-Or, even better, you can use both at the same time.
-Indeed, the `TraceClassVisitor` can, in addition to its default behavior,
-delegate all calls to its methods to another visitor, for instance a `ClassWriter`.
+## 如何使用TraceClassVisitor类
 
 使用`TraceClassVisitor`类，很重点的一点就是选择`Printer`类的具体实现，可以选择`ASMifier`类，也可以选择`Textifier`类（默认）：
 
@@ -130,7 +125,7 @@ import java.io.PrintWriter;
 
 import static org.objectweb.asm.Opcodes.*;
 
-public class HelloWorldGenerateCore {
+public class TraceClassVisitorExample01Generate {
     public static void main(String[] args) throws Exception {
         String relative_path = "sample/HelloWorld.class";
         String filepath = FileUtils.getFilePath(relative_path);
@@ -149,13 +144,13 @@ public class HelloWorldGenerateCore {
         TraceClassVisitor cv = new TraceClassVisitor(cw, printWriter);
 
         // (2) 调用visitXxx()方法
-        cv.visit(V1_8, ACC_PUBLIC + ACC_SUPER, "sample/HelloWorld",
-                null, "java/lang/Object", null);
+        cv.visit(V1_8, ACC_PUBLIC + ACC_SUPER, "sample/HelloWorld", null, "java/lang/Object", null);
 
         {
             FieldVisitor fv1 = cv.visitField(ACC_PRIVATE, "intValue", "I", null, null);
             fv1.visitEnd();
         }
+
         {
             FieldVisitor fv2 = cv.visitField(ACC_PRIVATE, "strValue", "Ljava/lang/String;", null, null);
             fv2.visitEnd();
@@ -174,13 +169,9 @@ public class HelloWorldGenerateCore {
         {
             MethodVisitor mv2 = cv.visitMethod(ACC_PUBLIC, "test", "()V", null, null);
             mv2.visitCode();
-            mv2.visitInsn(NOP);
             mv2.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
-            mv2.visitInsn(NOP);
             mv2.visitLdcInsn("Hello World");
-            mv2.visitInsn(NOP);
             mv2.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
-            mv2.visitInsn(NOP);
             mv2.visitInsn(RETURN);
             mv2.visitMaxs(2, 1);
             mv2.visitEnd();
@@ -200,12 +191,15 @@ public class HelloWorldGenerateCore {
 {% highlight java %}
 {% raw %}
 import lsieun.utils.FileUtils;
-import org.objectweb.asm.*;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.util.TraceClassVisitor;
 
 import java.io.PrintWriter;
 
-public class HelloWorldTransformCore {
+public class TraceClassVisitorExample02Transform {
     public static void main(String[] args) {
         String relative_path = "sample/HelloWorld.class";
         String filepath = FileUtils.getFilePath(relative_path);
@@ -271,4 +265,8 @@ public class ASMPrint {
 
 ## 总结
 
+本文对`TraceClassVisitor`类进行了介绍，内容总结如下：
 
+- 第一点，从整体上来说，`TraceClassVisitor`类的作用是什么。它能够将class文件的内容转换成文字输出。
+- 第二点，从结构上来说，`TraceClassVisitor`类的各个部分包含哪些信息。
+- 第三点，从使用上来说，`TraceClassVisitor`类的输出结果依赖于`Printer`类的具体实现，可以选择`ASMifier`类输出ASM代码，也可以选择`Textifier`类输出Instruction信息。

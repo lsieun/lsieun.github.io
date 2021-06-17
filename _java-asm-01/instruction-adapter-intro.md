@@ -5,6 +5,8 @@ sequence: "409"
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
+## 为什么有InstructionAdapter类
+
 `InstructionAdapter`类继承自`MethodVisitor`类，它提供了更详细的API用于generate和transform instruction。
 
 在JVM Specification中，一共定义了200多个opcode，在ASM的`MethodVisitor`类当中定义了20多个`visitXxxInsn()`方法。这说明一个问题，也就是在`MethodVisitor`类的每个`visitXxxInsn()`方法都会对应JVM Specification当中多个opcode。
@@ -12,6 +14,92 @@ sequence: "409"
 那么，`InstructionAdapter`类起到一个什么样的作用呢？`InstructionAdapter`类继承了`MethodVisitor`类，也就继承了那些`visitXxxInsn()`方法，同时它也添加了80多个新的方法，这些新的方法与opcode更加接近。
 
 从功能上来说，`InstructionAdapter`类和`MethodVisitor`类是一样的，两者没有差异。对于`InstructionAdapter`类来说，它可能更适合于熟悉opcode的人来使用。但是，如果我们已经熟悉`MethodVisitor`类里的`visitXxxIns()`方法，那就完全可以不去使用`InstructionAdapter`类。
+
+## InstructionAdapter类
+
+### class info
+
+第一个部分，`InstructionAdapter`类的父类是`MethodVisitor`类。
+
+{% highlight java %}
+{% raw %}
+public class InstructionAdapter extends MethodVisitor {
+}
+{% endraw %}
+{% endhighlight %}
+
+### fields
+
+第二个部分，`InstructionAdapter`类定义的字段有哪些。我们可以看到，`InstructionAdapter`类定义了一个`OBJECT_TYPE`静态字段。
+
+{% highlight java %}
+{% raw %}
+public class InstructionAdapter extends MethodVisitor {
+    public static final Type OBJECT_TYPE = Type.getType("Ljava/lang/Object;");
+}
+{% endraw %}
+{% endhighlight %}
+
+### constructors
+
+第三个部分，`InstructionAdapter`类定义的构造方法有哪些。
+
+{% highlight java %}
+{% raw %}
+public class InstructionAdapter extends MethodVisitor {
+    public InstructionAdapter(final MethodVisitor methodVisitor) {
+        this(Opcodes.ASM9, methodVisitor);
+        if (getClass() != InstructionAdapter.class) {
+            throw new IllegalStateException();
+        }
+    }
+
+    protected InstructionAdapter(final int api, final MethodVisitor methodVisitor) {
+        super(api, methodVisitor);
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+### methods
+
+第四个部分，`InstructionAdapter`类定义的方法有哪些。除了从`MethodVisitor`类继承的`visitXxxInsn()`方法，`InstructionAdapter`类还定义了许多与opcode相关的新方法，这些新方法本质上又是调用`visitXxxInsn()`方法来实现的。
+
+{% highlight java %}
+{% raw %}
+public class InstructionAdapter extends MethodVisitor {
+    public void nop() {
+        mv.visitInsn(Opcodes.NOP);
+    }
+
+    public void aconst(final Object value) {
+        if (value == null) {
+            mv.visitInsn(Opcodes.ACONST_NULL);
+        } else {
+            mv.visitLdcInsn(value);
+        }
+    }
+
+    // ......
+}
+{% endraw %}
+{% endhighlight %}
+
+## 示例
+
+### 预期目标
+
+{% highlight java %}
+{% raw %}
+public class HelloWorld {
+    public void test() {
+        System.out.println("Hello World");
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+### 编码实现
 
 接下来，我们来看一个使用`InstructionAdapter`生成类的示例：
 
@@ -76,3 +164,10 @@ public class InstructionAdapterExample01 {
 }
 {% endraw %}
 {% endhighlight %}
+
+## 总结
+
+本文对`InstructionAdapter`类进行了介绍，内容总结如下：
+
+- 第一点，`InstructionAdapter`类的特点就是引入了一些与opcode有关的新方法，这些新方法本质上还是调用`MethodVisitor.visitXxxInsn()`来实现的。
+- 第二点，如果已经熟悉`MethodVisitor`类的使用，可以完全不考虑使用`InstructionAdapter`类。

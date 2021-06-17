@@ -9,7 +9,7 @@ sequence: "404"
 
 ### class info
 
-`Printer`类是一个`abstract`类，它有两个子类：`ASMifier`类和`Textifier`类。
+第一个部分，`Printer`类是一个`abstract`类，它有两个子类：`ASMifier`类和`Textifier`类。
 
 {% highlight java %}
 {% raw %}
@@ -19,6 +19,8 @@ public abstract class Printer {
 {% endhighlight %}
 
 ### fields
+
+第二个部分，`Printer`类定义的字段有哪些。
 
 {% highlight java %}
 {% raw %}
@@ -36,6 +38,8 @@ public abstract class Printer {
 
 ### constructors
 
+第三个部分，`Printer`类定义的构造方法有哪些。
+
 {% highlight java %}
 {% raw %}
 public abstract class Printer {
@@ -50,16 +54,15 @@ public abstract class Printer {
 
 ### methods
 
+第四个部分，`Printer`类定义的方法有哪些。`Printer`类定义的方法是与`ClassVisitor`和`MethodVisitor`类里定义的方法有很大的相似性。
+
 {% highlight java %}
 {% raw %}
 public abstract class Printer {
     // Classes，这部分方法可与ClassVisitor内定义的方法进行对比
-    public abstract void visit(int version, int access, String name, String signature,
-                               String superName, String[] interfaces);
-    public abstract void visitSource(String source, String debug);
+    public abstract void visit(int version, int access, String name, String signature, String superName, String[] interfaces);
     public abstract Printer visitField(int access, String name, String descriptor, String signature, Object value);
-    public abstract Printer visitMethod(int access, String name, String descriptor,
-                                        String signature, String[] exceptions);
+    public abstract Printer visitMethod(int access, String name, String descriptor, String signature, String[] exceptions);
     public abstract void visitClassEnd();
     // ......
 
@@ -71,8 +74,7 @@ public abstract class Printer {
     public abstract void visitVarInsn(int opcode, int var);
     public abstract void visitTypeInsn(int opcode, String type);
     public abstract void visitFieldInsn(int opcode, String owner, String name, String descriptor);
-    public void visitMethodInsn(final int opcode, final String owner, final String name,
-                                final String descriptor, final boolean isInterface);
+    public void visitMethodInsn(final int opcode, final String owner, final String name, final String descriptor, final boolean isInterface);
     public abstract void visitJumpInsn(int opcode, Label label);
     // ......
     public abstract void visitMaxs(int maxStack, int maxLocals);
@@ -99,7 +101,7 @@ public class Textifier extends Printer {
 {% endraw %}
 {% endhighlight %}
 
-在这里，我们不对`ASMifier`类和`Textifier`类的成员信息进行展开，因为它们的内容非常多。但是，这么多的内容都是为了一个共同的目的：通过对`visitXxx()`方法的调用，将class的内容转换成字符串的表示形式。
+在这里，我们不对`ASMifier`类和`Textifier`类的成员信息进行展开，因为它们的内容非常多。但是，这么多的内容都是为了一个共同的目的：通过对`visitXxx()`方法的调用，将class的内容转换成文字的表示形式。
 
 除了`ASMifier`和`Textifier`这两个类，如果有什么好的想法，我们也可以写一个自定义的`Printer`类进行使用。
 
@@ -129,6 +131,8 @@ $ java -classpath asm.jar\;asm-util.jar org.objectweb.asm.util.ASMifier java.lan
 
 ### 从代码中使用
 
+无论是`ASMifier`类里的`main()`方法，还是`Textifier`类里的`main()`方法，它们本质上都是调用了`Printer`类里的`main()`方法。在`Printer`类里的`main()`方法里，代码的功能也是通过`TraceClassVisitor`类来实现的。
+
 {% highlight java %}
 {% raw %}
 import org.objectweb.asm.util.ASMifier;
@@ -147,10 +151,9 @@ public class HelloWorldRun {
 {% endraw %}
 {% endhighlight %}
 
-无论是`ASMifier`类里的`main()`方法，还是`Textifier`类里的`main()`方法，它们本质上都是调用了`Printer`类里的`main()`方法。在`Printer`类里的`main()`方法里，代码的功能也是通过`TraceClassVisitor`类来实现的。
-
 ## 总结
 
-在这篇文章中，我们主要介绍了`Printer`、`ASMifier`和`Textifier`这三个类；介绍这三个类的主要目的是为了方便理解`TraceClassVisitor`类的工作原理。
+本文对`Printer`、`ASMifier`和`Textifier`这三个类进行介绍，内容总结如下：
 
-有些场景下，我们手边可能没有Java的开发工具（例如，IDEA或Eclipse），因此就不能直接来写ASM代码；那么，我们就可以从命令行使用`ASMifier`类和`Textifier`类。
+- 第一点，了解这三个类的主要目的是为了方便理解`TraceClassVisitor`类的工作原理。
+- 第二点，如何从命令行使用`ASMifier`类和`Textifier`类。

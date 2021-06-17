@@ -28,7 +28,7 @@ sequence: "411"
 
 ### class info
 
-`StaticInitMerger`类继承自`ClassVisitor`类。
+第一个部分，`StaticInitMerger`类继承自`ClassVisitor`类。
 
 {% highlight java %}
 {% raw %}
@@ -38,6 +38,8 @@ public class StaticInitMerger extends ClassVisitor {
 {% endhighlight %}
 
 ### fields
+
+第二个部分，`StaticInitMerger`类定义的字段有哪些。
 
 在`StaticInitMerger`类里面，定义了4个字段：
 
@@ -63,6 +65,8 @@ public class StaticInitMerger extends ClassVisitor {
 
 ### constructors
 
+第三个部分，`StaticInitMerger`类定义的构造方法有哪些。
+
 {% highlight java %}
 {% raw %}
 public class StaticInitMerger extends ClassVisitor {
@@ -79,6 +83,8 @@ public class StaticInitMerger extends ClassVisitor {
 {% endhighlight %}
 
 ### methods
+
+第四个部分，`StaticInitMerger`类定义的方法有哪些。
 
 在`StaticInitMerger`类里面，定义了3个`visitXxx()`方法：
 
@@ -180,7 +186,7 @@ public class GoodChild implements Serializable {
 
 ### 编码实现
 
-下面的`ClassMergeVisitor`类的作用是负责加两个类合并到一起。我们需要注意以下三点：
+下面的`ClassMergeVisitor`类的作用是负责将两个类合并到一起。我们需要注意以下三点：
 
 - 第一点，`ClassNode`、`FieldNode`和`MethodNode`都是属于ASM的Tree API部分。
 - 第二点，将两个类进行合并的代码逻辑，放在了`visitEnd()`方法内。为什么要把代码逻辑放在`visitEnd()`方法内呢？因为参照`ClassVisitor`类里的`visitXxx()`方法调用的顺序，`visitField()`方法和`visitMethod()`方法正好位于`visitEnd()`方法的前面。
@@ -401,7 +407,7 @@ public class HelloWorldRun {
 
 ## 总结
 
-本篇文章主要介绍了`StaticInitMerger`类，内容总结如下：
+本文对`StaticInitMerger`类进行了介绍，内容总结如下：
 
 - 第一点，`StaticInitMerger`类的主要作用是将多个`<clinit>()`方法合并成为一个。
 - 第二点，`StaticInitMerger`类的成员有哪些。

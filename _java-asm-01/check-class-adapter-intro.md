@@ -39,7 +39,7 @@ import java.io.PrintWriter;
 
 import static org.objectweb.asm.Opcodes.*;
 
-public class HelloWorldGenerateCoreCheck {
+public class CheckClassAdapterExample01Generate {
     public static void main(String[] args) throws Exception {
         // (1) 生成byte[]内容
         byte[] bytes = dump();
@@ -105,7 +105,7 @@ import org.objectweb.asm.util.CheckClassAdapter;
 
 import java.io.PrintWriter;
 
-public class HelloWorldTransformCoreCheck {
+public class CheckClassAdapterExample02Transform {
     public static void main(String[] args) {
         String relative_path = "sample/HelloWorld.class";
         String filepath = FileUtils.getFilePath(relative_path);
@@ -229,6 +229,7 @@ test()V
 
 ## 总结
 
-作为一个工具类，`CheckClassAdapter`类的主要作用是检查生成的`byte[]`内容是否合法，但是它能够实现的检查功能是有限的，有一些问题是无法检测出来的。
+本文对`CheckClassAdapter`进行了介绍，内容总结如下：
 
-在编写ASM代码的过程中，除了使用`CheckClassAdapter`类帮助检查，我们自身所具备的“细心认真的态度”和“缜密的思考”是一个非常重要的、不可替代的因素。
+- 第一点，作为一个工具类，`CheckClassAdapter`类的主要作用是检查生成的`byte[]`内容是否合法，但是它能够实现的检查功能是有限的，有一些问题是无法检测出来的。
+- 第二点，在编写ASM代码的过程中，除了使用`CheckClassAdapter`类帮助检查，我们自身所具备的“细心认真的态度”和“缜密的思考”是非常重要的、不可替代的因素。

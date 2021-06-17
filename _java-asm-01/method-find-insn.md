@@ -20,7 +20,7 @@ sequence: "311"
 在Class Transformation当中，我们需要用到`ClassReader`、`ClassVisitor`和`ClassWriter`类；但是，在Class Analysis中，我们只需要用到`ClassReader`和`ClassVisitor`类，而不需要用到`ClassWriter`类。
 
 {:refdef: style="text-align: center;"}
-![ASM Core Classes](/assets/images/java/asm/asm_core_classes.png)
+![ASM Core Classes](/assets/images/java/asm/asm-core-classes.png)
 {: refdef}
 
 ## 示例：调用了哪些方法

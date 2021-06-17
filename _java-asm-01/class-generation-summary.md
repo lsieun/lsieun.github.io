@@ -1,6 +1,6 @@
 ---
 title:  "本章内容总结"
-sequence: "213"
+sequence: "214"
 ---
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
@@ -11,7 +11,7 @@ sequence: "213"
 
 本章内容是围绕着Class Generation（生成新的类）来展开，在这个过程当中，我们介绍了ASM Core API当中的一些类和接口。在本文当中，我们对这些内容进行一个总结。
 
-## Java ClassFile Format
+## Java ClassFile
 
 如果我们想要生成一个`.class`文件，就需要先对`.class`文件所遵循的文件格式（或者说是数据结构）有所了解。`.class`文件所遵循的数据结构是由[Java Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)定义的，其结构如下：
 
@@ -48,7 +48,7 @@ ClassFile {
 
 总结一下就是，magic number是为了区分不同产品（PDF、PNG、ClassFile）之间的差异，而version则是为了区分同一个产品在不同版本之间的差异。 接下来的Constant Pool、Class Info、Fields、Methods和Attributes则是实实在在的映射`.class`文件当中的内容。
 
-我们可以把这个Java ClassFile Format和一个Java文件的内容来做一个对照：
+我们可以把这个Java ClassFile和一个Java文件的内容来做一个对照：
 
 {% highlight java %}
 {% raw %}
@@ -69,12 +69,12 @@ public class HelloWorld extends Object implements Cloneable {
 
 ## ASM Core API
 
-我们要生成一个`.class`文件，直接使用十六进制编辑器是“不太可靠的”，所以我们借助于ASM这个类库，使用其中Core API的部分来帮助我们实现。
+要生成一个`.class`文件，直接使用记事本或十六进制编辑器，这是“不可靠的”，所以我们借助于ASM这个类库，使用其中Core API部分来帮助我们实现。
 
-讲到任何的API，其实就是讲它的类、接口、方法等内容，所以，谈到ASM Core API就是讲其中涉及到的类、接口和里面的方法。在ASM Core API中，有三个非常重要的类，即`ClassReader`、`ClassVisitor`和`ClassWriter`类。但是，在Class Generation过程中，不会用到`ClassReader`，所以我们就主要关注`ClassVisitor`和`ClassWriter`类。
+讲到任何的API，其实就是讲它的类、接口、方法等内容；谈到ASM Core API就是讲其中涉及到的类、接口和里面的方法。在ASM Core API中，有三个非常重要的类，即`ClassReader`、`ClassVisitor`和`ClassWriter`类。但是，在Class Generation过程中，不会用到`ClassReader`，所以我们就主要关注`ClassVisitor`和`ClassWriter`类。
 
 {:refdef: style="text-align: center;"}
-![ASM里的核心类](/assets/images/java/asm/asm_core_classes.png)
+![ASM里的核心类](/assets/images/java/asm/asm-core-classes.png)
 {: refdef}
 
 ### ClassVisitor和ClassWriter
@@ -109,9 +109,9 @@ public abstract class ClassVisitor {
 {% endraw %}
 {% endhighlight %}
 
-我们可以将这4个`visitXxx()`方法，与Java ClassFile Format进行比对，这样我们就能够更加“为什么会有这4个方法”以及“方法要接收参数的含义是什么”。
+我们可以将这4个`visitXxx()`方法，与Java ClassFile进行比对，这样我们就能够理解“为什么会有这4个方法”以及“方法要接收参数的含义是什么”。
 
-但是，`ClassVisitor`类是一个抽象类，我们需要它的一个具体子类。这时候，就引出了`ClassWriter`类，它是`ClassVisitor`类的子类，继承了`visitXxx()`方法。同时，`ClassWriter`类也定义了一个`toByteArray()`方法，它可以将`visitXxx()`方法执行后的结果转换成`byte[]`。
+但是，`ClassVisitor`类是一个抽象类，我们需要它的一个具体子类。这时候，就引出了`ClassWriter`类，它是`ClassVisitor`类的子类，继承了`visitXxx()`方法。同时，`ClassWriter`类也定义了一个`toByteArray()`方法，它可以将`visitXxx()`方法执行后的结果转换成`byte[]`。在创建`ClassWriter(flags)`对象的时候，对于`flags`参数，我们推荐使用`ClassWriter.COMPUTE_FRAMES`。
 
 使用`ClassWriter`生成一个Class文件，可以大致分成三个步骤：
 
@@ -152,7 +152,7 @@ public class HelloWorldGenerateCore {
 
 在`ClassVisitor`类当中，`visitField()`方法会返回一个`FieldVisitor`对象，`visitMethod()`方法会返回一个`MethodVisitor`对象。其实，`FieldVisitor`对象和`MethodVisitor`对象是为了让生成的字段和方法内容更“丰富、充实”。
 
-相对来说，`FieldVisitor`类比较简单，在刚开始学的时候，我们只需要关注它的`visitEnd()`方法就可以了。`MethodVisitor`类就比较复杂，因为在调用`visitMethod()`方法的时候，只是说明了方法的名字、方法的参数类型、方法的描述符等信息，并没有说明方法的“方法体”信息，所以我们需要使用具体的`MethodVisitor`对象来实现具体的方法体。
+相对来说，`FieldVisitor`类比较简单，在刚开始学的时候，我们只需要关注它的`visitEnd()`方法就可以了。`MethodVisitor`类就比较复杂，因为在调用`ClassVisitor.visitMethod()`方法的时候，只是说明了方法的名字、方法的参数类型、方法的描述符等信息，并没有说明方法的“方法体”信息，所以我们需要使用具体的`MethodVisitor`对象来实现具体的方法体。
 
 在`MethodVisitor`类当中，也定义了许多的`visitXxx()`方法。这里要注意一下，要注意与`ClassVisitor`类里定义的`visitXxx()`方法区分。`ClassVisitor`类里的`visitXxx()`方法是提供类层面的信息，而`MethodVisitor`类里的`visitXxx()`方法是提供某一个具体方法里的信息。
 
@@ -187,13 +187,43 @@ visitEnd
 
 无论是`Label`类，还是frame，它们都是`MethodVisitor`在实现“方法体”过程当中的“细节信息”，所以我们把这两者放到`MethodVisitor`一起来说明。
 
+<table>
+<thead>
+<tr>
+    <th>XxxVisitor类（父类）</th>
+    <th>XxxWriter类（子类）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td><code>ClassVisitor</code>类</td>
+    <td><code>ClassWriter</code>类</td>
+</tr>
+<tr>
+    <td><code>FieldVisitor</code>类</td>
+    <td><code>FieldWriter</code>类</td>
+</tr>
+<tr>
+    <td><code>MethodVisitor</code>类</td>
+    <td><code>MethodWriter</code>类</td>
+</tr>
+</tbody>
+</table>
+
 ### 常量池去哪儿了？
 
 有的细心的同学，可能会发现这样的问题：在ASM当中，常量池去哪儿了？为什么没有常量池相关的类和方法呢？
 
-其实，在ASM源码中，与常量池对应的是`SymbolTable`类，但我们并没有对它进行介绍。为什么没有介绍呢？是因为我们在调用`ClassVisitor.visitXxx()`方法和`MethodVisitor.visitXxx()`方法的过程中，ASM会自动帮助我们去构建`SymbolTable`类里面具体的内容。另一方面，`SymbolTable`类，也是一个内部类，没有带有`public`修饰，不能被外界所使用。还有一个原因就是，常量池中包含十几种具体的常量类型，而且`SymbolTable`类还包括BootstrapMethod的信息，讲起来也比较复杂，要完全讲清楚，也不太容易，需要结合Java ClassFile的完整知识体系才能理解。
+其实，在ASM源码中，与常量池对应的是`SymbolTable`类，但我们并没有对它进行介绍。为什么没有介绍呢？是因为我们在调用`ClassVisitor.visitXxx()`方法和`MethodVisitor.visitXxx()`方法的过程中，ASM会自动帮助我们去构建`SymbolTable`类里面具体的内容。另一方面，`SymbolTable`类，也是一个内部类，没有带有`public`修饰，不能被外界所使用。还有一个原因就是，常量池中包含十几种具体的常量类型，而且`SymbolTable`类还包括BootstrapMethod的信息，讲起来也比较复杂，要完全讲清楚，也不太容易，需要结合Java ClassFile相关的知识才能理解。
 
 我们的关注点还是在于如何使用Core API来进行Class Generation操作，ASM的内部实现会帮助我们处理好`SymbolTable`类的内容。
+
+---
+
+`ClassVisitor`类里的`visitXxx()`方法需要遵循一定的调用顺序，`MethodVisitor`类里的`visitXxx()`方法也需要遵循一定的调用顺序。
+
+---
+
 
 ## 总结
 

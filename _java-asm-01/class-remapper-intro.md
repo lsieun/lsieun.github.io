@@ -5,13 +5,17 @@ sequence: "410"
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
-这里应该有一张图：原图-->目标图 之间的映射
+使用`ClassRemapper`类，我们可以将class文件进行简单的混淆处理：
+
+{:refdef: style="text-align: center;"}
+![](/assets/images/java/asm/class-remap.png)
+{: refdef}
 
 ## ClassRemapper类
 
 ### class info
 
-`ClassRemapper`类继承自`ClassVisitor`类。
+第一个部分，`ClassRemapper`类继承自`ClassVisitor`类。
 
 {% highlight java %}
 {% raw %}
@@ -22,7 +26,7 @@ public class ClassRemapper extends ClassVisitor {
 
 ### fields
 
-在`ClassRemapper`类当中，定义了两个字段：`Remapper remapper`字段和`String className`字段。其中，`Remapper remapper`字段是关键性的部分，它负责从“一个类”向“另一个类”的映射；而`String className`字段则表示当前类的名字。
+第二个部分，`ClassRemapper`类定义的字段有哪些。在`ClassRemapper`类当中，定义了两个字段：`Remapper remapper`字段和`String className`字段。其中，`Remapper remapper`字段是关键性的部分，它负责从“一个类”向“另一个类”的映射；而`String className`字段则表示当前类的名字。
 
 在ASM中，`Remapper`类是一个抽象类，它一个具体的子类`SimpleRemapper`；这个`SimpleRemapper`从本质上来说是一个`Map`，所以实现上也比较简单。
 
@@ -36,6 +40,8 @@ public class ClassRemapper extends ClassVisitor {
 {% endhighlight %}
 
 ### constructors
+
+第三个部分，`ClassRemapper`类定义的构造方法有哪些。
 
 {% highlight java %}
 {% raw %}
@@ -53,6 +59,8 @@ public class ClassRemapper extends ClassVisitor {
 {% endhighlight %}
 
 ### methods
+
+第四个部分，`ClassRemapper`类定义的方法有哪些。
 
 {% highlight java %}
 {% raw %}
@@ -436,9 +444,8 @@ public class HelloWorldRun {
 
 ## 总结
 
-这篇文章主要介绍`ClassRemapper`类，内容总结如下：
+本文对`ClassRemapper`类进行介绍，内容总结如下：
 
-- 第一，从类成员的角度上来说，它里面非常关键的一个部分是`Remapper`。`Remapper`类，从本质上来说，是一个`Map`，它记录的是从“一个类”向“另一个类”的映射关系。在ASM中，提供了一个`SimpleRemapper`类，这是一个比较简单`Remapper`类的实现。其实，我们也可以提供一个自己的`Remapper`类的子类，来完成一些特殊的转换规则。
-- 第二，从应用的角度来说，`ClassRemapper`类主要用于对class文件进行混淆处理。
-- 第三，需要注意的一点是，在使用过程中，`ClassRemapper`类也有自己的局限性。
+- 第一点，从类成员的角度上来说，它里面非常关键的一个部分是`Remapper`。`Remapper`类，从本质上来说，是一个`Map`，它记录的是从“一个类”向“另一个类”的映射关系。在ASM中，提供了一个`SimpleRemapper`类，这是一个比较简单`Remapper`类的实现。其实，我们也可以提供一个自己的`Remapper`类的子类，来完成一些特殊的转换规则。
+- 第二点，从应用的角度来说，`ClassRemapper`类主要用于对class文件进行混淆处理。但是，`ClassRemapper`类进行混淆处理的程度是比较低的，远不及一些专业的obfuscator。
 

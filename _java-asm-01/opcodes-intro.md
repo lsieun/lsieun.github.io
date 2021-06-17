@@ -1,13 +1,11 @@
 ---
 title:  "Opcodes介绍"
-sequence: "212"
+sequence: "213"
 ---
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
-`Opcodes`是一个接口，它定义了许多字段。在这里，将这些字段分成不同类别，来分开进行学习；每一个小的部分都相对容易，最终达成对`Opcodes`接口的整体认识。
-
-另外，在接口当中，例如`Opcodes`，定义的字段默认带有`public`、`static`和`final`标识。
+`Opcodes`是一个接口，它定义了许多字段。这些字段主要是在`ClassVisitor.visitXxx()`和`MethodVisitor.visitXxx()`方法中使用。
 
 ## ClassVisitor
 
@@ -15,7 +13,7 @@ sequence: "212"
 
 字段含义：`Opcodes.ASM4`~`Opcodes.ASM9`标识了ASM的版本信息。
 
-应用场景：用于创建具体的`ClassVisitor`实例，例如`ClassVisitor(int api, ClassVisitor classVisitor)`中的`api`取值。
+应用场景：用于创建具体的`ClassVisitor`实例，例如`ClassVisitor(int api, ClassVisitor classVisitor)`中的`api`参数。
 
 {% highlight java %}
 {% raw %}
@@ -35,7 +33,7 @@ public interface Opcodes {
 
 字段含义：`Opcodes.V1_1`~`Opcodes.V16`标识了`.class`文件的版本信息。
 
-应用场景：用于`ClassVisitor.visit(int version, int access, ...)`的`version`参数取值。
+应用场景：用于`ClassVisitor.visit(int version, int access, ...)`的`version`参数。
 
 {% highlight java %}
 {% raw %}
@@ -71,9 +69,9 @@ public interface Opcodes {
 
 应用场景：
 
-- `ClassVisitor.visit(int version, int access, ...)`的`access`取值。
-- `ClassVisitor.visitField(int access, String name, ...)`的`access`取值。
-- `ClassVisitor.visitMethod(int access, String name, ...)`的`access`取值。
+- `ClassVisitor.visit(int version, int access, ...)`的`access`参数。
+- `ClassVisitor.visitField(int access, String name, ...)`的`access`参数。
+- `ClassVisitor.visitMethod(int access, String name, ...)`的`access`参数。
 
 {% highlight java %}
 {% raw %}
@@ -109,9 +107,25 @@ public interface Opcodes {
 
 ### frame
 
+字段含义：`Opcodes.F_NEW`~`Opcodes.F_SAME1`标识了frame的状态，`Opcodes.TOP`~`Opcodes.UNINITIALIZED_THIS`标识了frame中某一个数据项的具体类型。
+
+应用场景：
+
+- `Opcodes.F_NEW`~`Opcodes.F_SAME1`用在`MethodVisitor.visitFrame(int type, int numLocal, Object[] local, int numStack, Object[] stack)`方法中的`type`参数。
+- `Opcodes.TOP`~`Opcodes.UNINITIALIZED_THIS`用在`MethodVisitor.visitFrame(int type, int numLocal, Object[] local, int numStack, Object[] stack)`方法中的`local`参数和`stack`参数。
+
 {% highlight java %}
 {% raw %}
 public interface Opcodes {
+    // ASM specific stack map frame types, used in {@link ClassVisitor#visitFrame}.
+    int F_NEW = -1;
+    int F_FULL = 0;
+    int F_APPEND = 1;
+    int F_CHOP = 2;
+    int F_SAME = 3;
+    int F_SAME1 = 4;
+
+
     // Standard stack map frame element types, used in {@link ClassVisitor#visitFrame}.
     Integer TOP = Frame.ITEM_TOP;
     Integer INTEGER = Frame.ITEM_INTEGER;
@@ -125,6 +139,10 @@ public interface Opcodes {
 {% endhighlight %}
 
 ### opcodes
+
+字段含义：`Opcodes.NOP`~`Opcodes.IFNONNULL`表示opcode的值。
+
+应用场景：在`MethodVisitor.visitXxxInsn(opcode)`方法中的`opcode`参数中使用。
 
 {% highlight java %}
 {% raw %}
@@ -292,6 +310,10 @@ public interface Opcodes {
 
 ### opcode: newarray
 
+字段含义：`Opcodes.T_BOOLEAN`~`Opcodes.T_LONG`表示数组的类型。
+
+应用场景：对于`MethodVisitor.visitIntInsn(opcode, operand)`方法，当`opcode`为`NEWARRAY`时，`operand`参数中使用。
+
 {% highlight java %}
 {% raw %}
 public interface Opcodes {
@@ -319,6 +341,10 @@ public class HelloWorld {
 {% endhighlight %}
 
 ### opcode: invokedynamic
+
+字段含义：`Opcodes.H_GETFIELD`~`Opcodes.H_INVOKEINTERFACE`表示MethodHandle的类型。
+
+应用场景：在创建`Handle(int tag, String owner, String name, String descriptor, boolean isInterface)`时，`tag`参数中使用；而该`Handle`实例会在`MethodVisitor.visitInvokeDynamicInsn()`方法使用到。
 
 {% highlight java %}
 {% raw %}
@@ -353,5 +379,5 @@ public class HelloWorld {
 
 本文主要对`Opcodes`接口里定义的字段进行介绍，内容总结如下：
 
-- 第一点，在`Opcodes`内定义的字段，主要应用于`ClassVisitor`和`MethodVisitor`的方法。
-- 第二点，在ASM的编程过程中，`Opcodes`的角色是一个辅助类。其中，有些字段，我们可能暂时不了解其含义，不必一一深究，等用到的该字段的时候，再去研究它的具体含义。
+- 第一点，在`Opcodes`内定义的字段，主要应用于`ClassVisitor`和`MethodVisitor`类的`visitXxx()`方法。
+- 第二点，在ASM的编程过程中，`Opcodes`类的角色是一个辅助类。我们可以分批次、分类别的了解`Opcodes`类字段的含义。

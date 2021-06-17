@@ -1,27 +1,56 @@
 ---
 title:  "FieldVisitor介绍"
-sequence: "205"
+sequence: "204"
 ---
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
+通过调用`ClassVisitor`类的`visitField()`方法，会返回一个`FieldVisitor`类型的对象。在本文当中，我们就对`FieldVisitor`类进行介绍。
+
+{% highlight text %}
+public FieldVisitor visitField(
+    final int access,
+    final String name,
+    final String descriptor,
+    final String signature,
+    final Object value);
+{% endhighlight %}
+
 ## FieldVisitor类
 
-### class members
+在学习`FieldVisitor`类的时候，可以与`ClassVisitor`类进行对比，这两个类在结构上有很大的相似性：两者都是抽象类，都定义了两个字段，都定义了两个构造方法，都定义了`visitXxx()`方法。
 
-在学习`FieldVisitor`类的时候，可以与`ClassVisitor`类进行对比，这两个类之间有很大的相似性。因为这两个类之间有相似性，所以学习起来就会相对容易一些。
+### class info
 
-- 第一，两者都是abstract类。
-- 第二，定义了哪些字段。
-- 第三，定义了哪些构造方法。
-- 第四，定义了哪些具体的`visitXxx()`方法。
+第一个部分，`FieldVisitor`类是一个`abstract`类。
+
+{% highlight java %}
+{% raw %}
+public abstract class FieldVisitor {
+}
+{% endraw %}
+{% endhighlight %}
+
+### fields
+
+第二个部分，`FieldVisitor`类定义的字段有哪些。
 
 {% highlight java %}
 {% raw %}
 public abstract class FieldVisitor {
     protected final int api;
     protected FieldVisitor fv;
+}
+{% endraw %}
+{% endhighlight %}
 
+### constructors
+
+第三个部分，`FieldVisitor`类定义的构造方法有哪些。
+
+{% highlight java %}
+{% raw %}
+public abstract class FieldVisitor {
     public FieldVisitor(final int api) {
         this(api, null);
     }
@@ -30,7 +59,17 @@ public abstract class FieldVisitor {
         this.api = api;
         this.fv = fieldVisitor;
     }
+}
+{% endraw %}
+{% endhighlight %}
 
+### methods
+
+第四个部分，`FieldVisitor`类定义的方法有哪些。在`FieldVisitor`类当中，一共定义了4个`visitXxx()`方法，但是，我们只需要关注其中的`visitEnd()`方法就可以了。我们为什么只关注`visitEnd()`方法呢？因为我们刚开始学习ASM，有许多东西不太熟悉，为了减少我们的学习和认知“负担”，那么对于一些非必要的方法，我们就暂时忽略它；将`visitXxx()`方法精简到一个最小的认知集合，那么就只剩下`visitEnd()`方法了。
+
+{% highlight java %}
+{% raw %}
+public abstract class FieldVisitor {
     // ......
 
     public void visitEnd() {
@@ -42,9 +81,7 @@ public abstract class FieldVisitor {
 {% endraw %}
 {% endhighlight %}
 
-### visitEnd()方法
-
-在`FieldVisitor`类内，定义了多个`visitXxx()`方法，这些方法的调用也要遵循一定的调用顺序：
+另外，在`FieldVisitor`类内定义的多个`visitXxx()`方法，也需要遵循一定的调用顺序，如下所示：
 
 {% highlight text %}
 (
@@ -55,157 +92,196 @@ public abstract class FieldVisitor {
 visitEnd
 {% endhighlight %}
 
-相对于`ClassVisitor`类而言，`FieldVisitor`类会更简单一些，对于其中定义的`visitXxx()`方法，我们只关注`visitEnd()`方法就可以了。
-
-为什么我们只关注`visitEnd()`方法呢？因为我们刚开始学习ASM，有许多东西不太熟悉，为了减少我们的学习和认知“负担”，那么对于一些非必要的方法，我们就暂时忽略它；将`visitXxx()`方法精简到一个最小的认知集合，那么就只剩下`visitEnd()`方法了。
-
-### 其它visitXxx()方法
-
-随着而来的一个问题就是，对于其它的`visitXxx()`方法，我们什么时候学习呢？我们在学习ASM的时候，其实就是学习它的API；换句话说，就是学习使用ASM编写代码的思路。那么，这个思路是什么呢？这个思路，就是告诉我们，在使用ASM API的时候，要先做什么，后做什么。
-
-举例来说明，对于`ClassWriter`类而言，我们要先调用`visit()`方法，接着可能会调用`visitField()`方法或`visitMethod()`方法，最后要调用`visitEnd()`方法，我们不能打乱顺序而随便调用某个方法。因为ASM对于我们调用方法的顺序是有要求的，这就是我们所说的学习使用ASM的思路，去遵循它的各个方法调用的顺序。
-
-当我们熟悉ASM的使用思路之后，针对某一个特定的`visitXxx()`方法，可能之前时候，我们没有使用过，我们只要找一、两个代码示例，就能够对这个`visitXxx()`方法熟悉起来，并把这个方法纳入到已经形成的“如何使用ASM”的整体思路当中。
-
-假如说，将来的某一时刻，我们想看一下`visitAnnotation()`方法如何使用，可以编写一个类，让其中某个字段带有注解信息，例如：
-
-{% highlight java %}
-{% raw %}
-package sample;
-
-public class HelloWorld {
-    @Deprecated
-    public int intValue;
-}
-{% endraw %}
-{% endhighlight %}
-
-这个时候，我们运行一下`ASMPrint`类，就可以查看到对于`visitAnnotation()`方法的调用。
-
-{% highlight java %}
-{% raw %}
-FieldVisitor fieldVisitor = classWriter.visitField(ACC_PUBLIC | ACC_DEPRECATED, "intValue", "I", null, null);
-AnnotationVisitor annotationVisitor0 = fieldVisitor.visitAnnotation("Ljava/lang/Deprecated;", true);
-annotationVisitor0.visitEnd();
-{% endraw %}
-{% endhighlight %}
-
-## FieldWriter类
-
-`FieldWriter`类是`FieldVisitor`类的一个子类。
-
-需要注意的是，`FieldWriter`类并不带有`public`修饰，因此它的有效访问范围只局限于它所处的package当中，不能像其它的`public`类一样被外部所使用。
-
-### fields
-
-{% highlight java %}
-{% raw %}
-final class FieldWriter extends FieldVisitor {
-    private final int accessFlags;
-    private final int nameIndex;
-    private final int descriptorIndex;
-    private int signatureIndex;
-}
-{% endraw %}
-{% endhighlight %}
-
-另外，在`FieldWriter`类当中，所定义的几个字段，与ClassFile当中的`field_info`也是对应的：
+由于我们只关注`visitEnd()`方法，那么，这个调用顺序就变成如下这样：
 
 {% highlight text %}
-field_info {
-    u2             access_flags;
-    u2             name_index;
-    u2             descriptor_index;
-    u2             attributes_count;
-    attribute_info attributes[attributes_count];
-}
+visitEnd
 {% endhighlight %}
 
-### methods
+## FieldVisitor类示例
 
-在`FieldWriter`类当中，有两个重要的方法：`computeFieldInfoSize()`和`putFieldInfo()`方法。这两个方法在哪里用到呢？在`ClassWriter`类的`toByteArray()`方法内。
+### 示例一：字段常量
+
+#### 预期目标
 
 {% highlight java %}
 {% raw %}
-final class FieldWriter extends FieldVisitor {
-    int computeFieldInfoSize() {
-        // The access_flags, name_index, descriptor_index and attributes_count fields use 8 bytes.
-        int size = 8;
-        // For ease of reference, we use here the same attribute order as in Section 4.7 of the JVMS.
-        if (constantValueIndex != 0) {
-            // ConstantValue attributes always use 8 bytes.
-            symbolTable.addConstantUtf8(Constants.CONSTANT_VALUE);
-            size += 8;
-        }
-        // ......
-        return size;
+public interface HelloWorld {
+    int intValue = 100;
+    String strValue = "ABC";
+}
+{% endraw %}
+{% endhighlight %}
+
+#### 编码实现
+
+{% highlight java %}
+{% raw %}
+import lsieun.utils.FileUtils;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.FieldVisitor;
+
+import static org.objectweb.asm.Opcodes.*;
+
+public class HelloWorldGenerateCore {
+    public static void main(String[] args) throws Exception {
+        String relative_path = "sample/HelloWorld.class";
+        String filepath = FileUtils.getFilePath(relative_path);
+
+        // (1) 生成byte[]内容
+        byte[] bytes = dump();
+
+        // (2) 保存byte[]到文件
+        FileUtils.writeBytes(filepath, bytes);
     }
 
-    void putFieldInfo(final ByteVector output) {
-        boolean useSyntheticAttribute = symbolTable.getMajorVersion() < Opcodes.V1_5;
-        // Put the access_flags, name_index and descriptor_index fields.
-        int mask = useSyntheticAttribute ? Opcodes.ACC_SYNTHETIC : 0;
-        output.putShort(accessFlags & ~mask).putShort(nameIndex).putShort(descriptorIndex);
-        // Compute and put the attributes_count field.
-        // For ease of reference, we use here the same attribute order as in Section 4.7 of the JVMS.
-        int attributesCount = 0;
-        if (constantValueIndex != 0) {
-            ++attributesCount;
+    public static byte[] dump() throws Exception {
+        // (1) 创建ClassWriter对象
+        ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
+
+        // (2) 调用visitXxx()方法
+        cw.visit(V1_8, ACC_PUBLIC + ACC_ABSTRACT + ACC_INTERFACE, "sample/HelloWorld", null, "java/lang/Object", null);
+
+        {
+            FieldVisitor fv1 = cw.visitField(ACC_PUBLIC | ACC_FINAL | ACC_STATIC, "intValue", "I", null, 100);
+            fv1.visitEnd();
         }
-        // ......
-        output.putShort(attributesCount);
-        // Put the field_info attributes.
-        // For ease of reference, we use here the same attribute order as in Section 4.7 of the JVMS.
-        if (constantValueIndex != 0) {
-            output
-              .putShort(symbolTable.addConstantUtf8(Constants.CONSTANT_VALUE))
-              .putInt(2)
-              .putShort(constantValueIndex);
+
+        {
+            FieldVisitor fv2 = cw.visitField(ACC_PUBLIC + ACC_FINAL + ACC_STATIC, "strValue", "Ljava/lang/String;", null, "ABC");
+            fv2.visitEnd();
         }
-        // ......
+
+        cw.visitEnd();
+
+        // (3) 调用toByteArray()方法
+        return cw.toByteArray();
     }
 }
 {% endraw %}
 {% endhighlight %}
 
-## ASM类名的对称性
+#### 验证结果
 
-其实，对于`FieldWriter`类，我们不会去直接使用它。如果不是为了理解源码，我们也并不需要花费太多的时间去研究它。在这里，我们把它介绍出来，很大原因是出于一种“对称性”：
+{% highlight java %}
+{% raw %}
+import java.lang.reflect.Field;
 
-- 在`ClassVisitor`类中，调用`visitField()`方法会返回一个`FieldVisitor`对象
-- 在`ClassWriter`类中，调用`visitField()`方法会返回一个`FieldWriter`对象
+public class HelloWorldRun {
+    public static void main(String[] args) throws Exception {
+        Class<?> clazz = Class.forName("sample.HelloWorld");
+        Field[] declaredFields = clazz.getDeclaredFields();
+        if (declaredFields.length > 0) {
+            System.out.println("fields:");
+            for (Field f : declaredFields) {
+                Object value = f.get(null);
+                System.out.println("    " + f.getName() + ": " + value);
+            }
+        }
+    }
+}
+{% endraw %}
+{% endhighlight %}
 
-同样的，`visitMethod()`也有相同的情况：
+输出结果：
 
-- 在`ClassVisitor`类中，调用`visitMethod()`方法会返回一个`MethodVisitor`对象
-- 在`ClassWriter`类中，调用`visitMethod()`方法会返回一个`MethodWriter`对象
+{% highlight text %}
+fields:
+    intValue: 100
+    strValue: ABC
+{% endhighlight %}
 
-<table>
-<thead>
-<tr>
-    <th>XxxVisitor类（父类）</th>
-    <th>XxxWriter类（子类）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-    <td><code>ClassVisitor</code>类</td>
-    <td><code>ClassWriter</code>类</td>
-</tr>
-<tr>
-    <td><code>FieldVisitor</code>类</td>
-    <td><code>FieldWriter</code>类</td>
-</tr>
-<tr>
-    <td><code>MethodVisitor</code>类</td>
-    <td><code>MethodWriter</code>类</td>
-</tr>
-</tbody>
-</table>
+#### 小总结
+
+通过这个示例，我们想说明：在得到一个`FieldVisitor`对象之后，要记得调用它的`visitEnd()`方法。
+
+### 示例二：visitAnnotation
+
+无论是`ClassVisitor`类，还是`FieldVisitor`类，又或者是`MethodVisitor`类，总会有一些`visitXxx()`方法是在课程当中不会涉及到的。但是，在日后的工作和学习当中，很可能，在某一天你突然就对一个`visitXxx()`方法产生了兴趣，那该如何学习这个`visitXxx()`方法呢？我们可以借助于`ASMPrint`类。
+
+#### 预期目标
+
+假如我们想生成如下`HelloWorld`类：
+
+{% highlight java %}
+{% raw %}
+public interface HelloWorld {
+    @MyTag(name = "tomcat", age = 10)
+    int intValue = 100;
+}
+{% endraw %}
+{% endhighlight %}
+
+其中，`MyTag`定义如下：
+
+{% highlight java %}
+{% raw %}
+public @interface MyTag {
+    String name();
+    int age();
+}
+{% endraw %}
+{% endhighlight %}
+
+#### 编码实现
+
+{% highlight java %}
+{% raw %}
+import lsieun.utils.FileUtils;
+import org.objectweb.asm.AnnotationVisitor;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.FieldVisitor;
+
+import static org.objectweb.asm.Opcodes.*;
+
+public class HelloWorldGenerateCore {
+    public static void main(String[] args) throws Exception {
+        String relative_path = "sample/HelloWorld.class";
+        String filepath = FileUtils.getFilePath(relative_path);
+
+        // (1) 生成byte[]内容
+        byte[] bytes = dump();
+
+        // (2) 保存byte[]到文件
+        FileUtils.writeBytes(filepath, bytes);
+    }
+
+    public static byte[] dump() throws Exception {
+        // (1) 创建ClassWriter对象
+        ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
+
+        // (2) 调用visitXxx()方法
+        cw.visit(V1_8, ACC_PUBLIC | ACC_ABSTRACT | ACC_INTERFACE, "sample/HelloWorld", null, "java/lang/Object", null);
+
+        {
+            FieldVisitor fv1 = cw.visitField(ACC_PUBLIC | ACC_FINAL | ACC_STATIC, "intValue", "I", null, 100);
+
+            {
+                AnnotationVisitor anno = fv1.visitAnnotation("Lsample/MyTag;", false);
+                anno.visit("name", "tomcat");
+                anno.visit("age", 10);
+                anno.visitEnd();
+            }
+
+            fv1.visitEnd();
+        }
+
+        cw.visitEnd();
+
+        // (3) 调用toByteArray()方法
+        return cw.toByteArray();
+    }
+}
+{% endraw %}
+{% endhighlight %}
+
+#### 小总结
+
+在这个示例当中，我们并不是想针对`visitAnnotation()`方法来讲解，而是想讲一下学习`visitXxx()`方法的通用思路。
 
 ## 总结
 
-本文主要对`FieldVisitor`类和`FieldWriter`类进行了介绍，内容总结如下：
+本文主要对`FieldVisitor`类进行了介绍，内容总结如下：
 
 - 第一点，`FieldVisitor`类，从结构上来说，与`ClassVisitor`很相似；但是，我们只需要关心`FieldVisitor.visitEnd()`方法就可以了。
 - 第二点，`FieldWriter`类是继承自`FieldVisitor`类。我们平常写ASM代码的时候，不会用到它；但是，如果想研究ASM的源代码，那么可以重点关注一下`computeFieldInfoSize()`和`putFieldInfo()`这两个方法。

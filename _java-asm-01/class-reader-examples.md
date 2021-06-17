@@ -5,11 +5,11 @@ sequence: "302"
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
+在现阶段，我们接触了`ClassVisitor`、`ClassWriter`和`ClassReader`类，因此可以介绍Class Transformation的操作。
+
 {:refdef: style="text-align: center;"}
 ![What ASM Can Do](/assets/images/java/asm/what-asm-can-do.png)
 {: refdef}
-
-在现阶段，我们接触了`ClassVisitor`、`ClassWriter`和`ClassReader`类，因此可以介绍Class Transformation的操作。
 
 ## 整体思路
 
@@ -23,7 +23,7 @@ ClassReader --> ClassVisitor(1) --> ... --> ClassVisitor(N) --> ClassWriter
 
 - `ClassReader`类，是ASM提供的一个类，可以直接拿来使用。
 - `ClassWriter`类，是ASM提供的一个类，可以直接拿来使用。
-- `ClassVisitor`类，是ASM提供的一个抽象类，因此需要写代码提供一个`ClassVisitor`的子类，在这个子类当中可以实现对`.class`文件进行各种处理操作。
+- `ClassVisitor`类，是ASM提供的一个抽象类，因此需要写代码提供一个`ClassVisitor`的子类，在这个子类当中可以实现对`.class`文件进行各种处理操作。换句话说，进行Class Transformation操作，编写`ClassVisitor`的子类是关键。
 
 ## 修改类的信息
 
@@ -206,7 +206,7 @@ public void visit(int version, int access, String name, String signature, String
 其实，在`visit()`方法当中的其它参数也可以修改：
 
 - 修改`access`参数，也就是修改了类的访问标识信息。
-- 修改`name`参数，也就是修改了类的名称。但是，在99%的情况下，不推荐修改`name`参数。因为调用类里的方法，都是先找到类，再找到相应的方法；如果将当前类的类名修改成别的名称，那么其它类当中可能就找不到原来的方法了，因为类名已经改了。
+- 修改`name`参数，也就是修改了类的名称。但是，在大多数的情况下，不推荐修改`name`参数。因为调用类里的方法，都是先找到类，再找到相应的方法；如果将当前类的类名修改成别的名称，那么其它类当中可能就找不到原来的方法了，因为类名已经改了。但是，也有少数的情况，可以修改`name`参数，比如说对代码进行混淆（obfuscate）操作。
 - 修改`superName`参数，也就是修改了当前类的父类信息。
 
 ## 修改字段信息

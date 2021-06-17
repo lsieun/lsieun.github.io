@@ -264,7 +264,7 @@ public class MethodRemoveAddZeroVisitor extends ClassVisitor {
         @Override
         protected void visitInsn() {
             if (state == SEEN_ICONST_0) {
-                super.visitInsn(ICONST_0);
+                mv.visitInsn(ICONST_0);
             }
             state = SEEN_NOTHING;
         }
@@ -337,7 +337,9 @@ public class sample.HelloWorld {
 
 ## 示例二：字段赋值
 
+{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/state_machine_for_aload0_aload0_getfield_putfield.png)
+{: refdef}
 
 ### 预期目标
 
@@ -648,7 +650,8 @@ public class MethodRemovePrintVisitor extends ClassVisitor {
         @Override
         public void visitFieldInsn(int opcode, String owner, String name, String descriptor) {
             // 第一，对于感兴趣的状态进行处理
-            boolean flag = (opcode == GETSTATIC && owner.equals("java/lang/System") && name.equals("out") && descriptor.equals("Ljava/io/PrintStream;"));
+            boolean flag = (opcode == GETSTATIC && owner.equals("java/lang/System") && name.equals("out") 
+                           && descriptor.equals("Ljava/io/PrintStream;"));
             switch (state) {
                 case SEEN_NOTHING:
                     if (flag) {
@@ -781,3 +784,8 @@ public class sample.HelloWorld {
 {% endhighlight %}
 
 ## 总结
+
+本文对stateful transformations进行介绍，内容总结如下：
+
+- 第一点，stateful transformations可以实现复杂的操作，它需要记录Instruction的状态信息。
+- 第二点，在`MethodPatternAdapter`类当中，最后一个方法是自定义的`visitInsn()`方法，它是一个抽象方法。在这个抽象方法中，我们要做的事情就是让所有的其它状态都回归“初始状态”。

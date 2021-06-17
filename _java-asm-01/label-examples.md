@@ -1,6 +1,6 @@
 ---
 title:  "Label代码示例"
-sequence: "210"
+sequence: "211"
 ---
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
@@ -118,7 +118,17 @@ public class HelloWorldRun {
 {% endraw %}
 {% endhighlight %}
 
+### 小总结
+
+通过上面的示例，我们注意三个知识点：
+
+- 第一点，如何使用`ClassWriter`类。
+- 第二点，在使用`MethodVisitor`类时，其中`visitXxx()`方法需要遵循的调用顺序。
+- 第三点，如何通过`Label`类来实现if语句。
+
 ## 示例二：switch语句
+
+从Instruction的角度来说，实现switch语句可以使用`lookupswitch`或`tableswitch`指令。
 
 ### 预期目标
 
@@ -270,6 +280,14 @@ public class HelloWorldRun {
 {% endraw %}
 {% endhighlight %}
 
+### 小总结
+
+通过上面的示例，我们注意三个知识点：
+
+- 第一点，如何使用`ClassWriter`类。
+- 第二点，在使用`MethodVisitor`类时，其中`visitXxx()`方法需要遵循的调用顺序。
+- 第三点，如何通过`Label`类来实现switch语句。在本示例当中，使用了`MethodVisitor.visitTableSwitchInsn()`方法，也可以使用`MethodVisitor.visitLookupSwitchInsn()`方法。
+
 ## 示例三：for语句
 
 ### 预期目标
@@ -380,6 +398,14 @@ public class HelloWorldRun {
 {% endraw %}
 {% endhighlight %}
 
+### 小总结
+
+通过上面的示例，我们注意三个知识点：
+
+- 第一点，如何使用`ClassWriter`类。
+- 第二点，在使用`MethodVisitor`类时，其中`visitXxx()`方法需要遵循的调用顺序。
+- 第三点，如何通过`Label`类来实现for语句。
+
 ## 示例四：try-catch语句
 
 ### 预期目标
@@ -405,7 +431,9 @@ public class HelloWorld {
 {% highlight java %}
 {% raw %}
 import lsieun.utils.FileUtils;
-import org.objectweb.asm.*;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Label;
+import org.objectweb.asm.MethodVisitor;
 
 import static org.objectweb.asm.Opcodes.*;
 
@@ -448,16 +476,18 @@ public class HelloWorldGenerateCore {
 
             // 第1段
             mv2.visitCode();
+            // visitTryCatchBlock可以在这里访问
+            mv2.visitTryCatchBlock(startLabel, endLabel, handlerLabel, "java/lang/InterruptedException");
 
             // 第2段
             mv2.visitLabel(startLabel);
             mv2.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
-            mv2.visitLdcInsn("Before Sleep -- ASM");
+            mv2.visitLdcInsn("Before Sleep");
             mv2.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
             mv2.visitLdcInsn(new Long(1000L));
             mv2.visitMethodInsn(INVOKESTATIC, "java/lang/Thread", "sleep", "(J)V", false);
             mv2.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
-            mv2.visitLdcInsn("After Sleep -- ASM");
+            mv2.visitLdcInsn("After Sleep");
             mv2.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
 
             // 第3段
@@ -475,7 +505,8 @@ public class HelloWorldGenerateCore {
             mv2.visitInsn(RETURN);
 
             // 第6段
-            mv2.visitTryCatchBlock(startLabel, endLabel, handlerLabel, "java/lang/InterruptedException");
+            // visitTryCatchBlock也可以在这里访问
+            // mv2.visitTryCatchBlock(startLabel, endLabel, handlerLabel, "java/lang/InterruptedException");
             mv2.visitMaxs(0, 0);
             mv2.visitEnd();
         }
@@ -507,9 +538,15 @@ public class HelloWorldRun {
 {% endraw %}
 {% endhighlight %}
 
-第一个问题，`visitTryCatchBlock()`方法为什么可以在后边的位置调用呢？
+### 小总结
 
-这与`Code`属性的结构有关系：
+通过上面的示例，我们注意三个知识点：
+
+- 第一点，如何使用`ClassWriter`类。
+- 第二点，在使用`MethodVisitor`类时，其中`visitXxx()`方法需要遵循的调用顺序。
+- 第三点，如何通过`Label`类来实现try-catch语句。
+
+有一个问题，`visitTryCatchBlock()`方法为什么可以在后边的位置调用呢？这与`Code`属性的结构有关系：
 
 {% highlight text %}
 Code_attribute {
@@ -532,117 +569,16 @@ Code_attribute {
 
 因为instruction的内容（对应于`visitXxxInsn()`方法的调用）存储于`Code`结构当中的`code[]`内，而try-catch的内容（对应于`visitTryCatchBlock()`方法的调用），存储在`Code`结构当中的`exception_table[]`内，所以`visitTryCatchBlock()`方法的调用时机，可以早一点，也可以晚一点，只要整体上遵循`MethodVisitor`类对就于`visitXxx()`方法调用的顺序要求就可以了。
 
-对于`test()`方法，在`.class`文件存储的`Code`结构如下：
-
 {% highlight text %}
-attribute_name_index='000F' (#15)
-attribute_length='00000080' (128)
-max_stack='0002' (2)
-max_locals='0002' (2)
-code_length='0000001F' (31)
-code: B200021203B60004140005B80007B200021208B60004A700084C2BB6000AB1
-exception_table_length='0001' (1)
-exception_table[0] {
-    start_pc='0000' (0)
-    end_pc='0016' (22)
-    handler_pc='0019' (25)
-    catch_type='0009' (#9)
-}
-attributes_count='0003' (3)
-    LineNumberTable: 00100000001E00070000000600080007000E00080016000B00190009001A000A001E000C
-    LocalVariableTable: 0011000000160002001A00040015001600010000001F001200130000
-    StackMapTable: 00170000000700025907001804
-{% endhighlight %}
-
-虽然上面的内容符合`Code`结构，但是对于其中`code`的展示并不直观，我们可以转换成如下的表示形式：
-
-{% highlight text %}
-=== === ===  === === ===  === === ===
-Method test:()V
-=== === ===  === === ===  === === ===
-max_stack = 2
-max_locals = 2
-code_length = 31
-code = B200021203B60004140005B80007B200021208B60004A700084C2BB6000AB1
-Exception Table:
-from    to  target  type
-   0    22      25  java/lang/InterruptedException
-=== === ===  === === ===  === === ===
-0000: getstatic       #2   // B20002     || java/lang/System.out:Ljava/io/PrintStream;
-0003: ldc             #3   // 1203       || Before Sleep
-0005: invokevirtual   #4   // B60004     || java/io/PrintStream.println:(Ljava/lang/String;)V
-0008: ldc2_w          #5   // 140005     || 1000
-0011: invokestatic    #7   // B80007     || java/lang/Thread.sleep:(J)V
-0014: getstatic       #2   // B20002     || java/lang/System.out:Ljava/io/PrintStream;
-0017: ldc             #8   // 1208       || After Sleep
-0019: invokevirtual   #4   // B60004     || java/io/PrintStream.println:(Ljava/lang/String;)V
-0022: goto            8    // A70008
-0025: astore_1             // 4C
-0026: aload_1              // 2B
-0027: invokevirtual   #10  // B6000A     || java/lang/InterruptedException.printStackTrace:()V
-0030: return               // B1
-=== === ===  === === ===  === === ===
-{% endhighlight %}
-
-第二个问题，刚才的示例当中只有try...catch，而没有`finally`，那出现`finally`会怎么样处理呢？
-
-{% highlight java %}
-{% raw %}
-public class HelloWorld {
-    public void test() {
-        try {
-            System.out.println("try clause");
-        }
-        catch (Exception ex) {
-            System.out.println("catch clause");
-        }
-        finally {
-            System.out.println("finally Clause");
-        }
-    }
-}
-{% endraw %}
-{% endhighlight %}
-
-实际上，当一个Java文件编译成Class文件过程中，`finally`代码块里的语句，会被“复制”到`try`代码块和`catch`代码块中，因此在bytecode中不存在`finally`对应的opcode，在ASM代码中也不存在`visitXxx()`方法来生成`finally`内容。
-
-{% highlight text %}
-=== === ===  === === ===  === === ===
-Method test:()V
-=== === ===  === === ===  === === ===
-max_stack = 2
-max_locals = 3
-code_length = 51
-code = B200021203B60004B200021205B60004A700224CB200021207B60004B200021205B60004A7000E4DB200021205B600042CBFB1
-Exception Table:
-from    to  target  type
-   0     8      19  java/lang/Exception
-   0     8      39  All Exceptions(catch_type = 0)
-  19    28      39  All Exceptions(catch_type = 0)
-=== === ===  === === ===  === === ===
-0000: getstatic       #2   // B20002     || java/lang/System.out:Ljava/io/PrintStream;
-0003: ldc             #3   // 1203       || try clause
-0005: invokevirtual   #4   // B60004     || java/io/PrintStream.println:(Ljava/lang/String;)V
-0008: getstatic       #2   // B20002     || java/lang/System.out:Ljava/io/PrintStream;
-0011: ldc             #5   // 1205       || finally Clause
-0013: invokevirtual   #4   // B60004     || java/io/PrintStream.println:(Ljava/lang/String;)V
-0016: goto            34   // A70022
-0019: astore_1             // 4C
-0020: getstatic       #2   // B20002     || java/lang/System.out:Ljava/io/PrintStream;
-0023: ldc             #7   // 1207       || catch clause
-0025: invokevirtual   #4   // B60004     || java/io/PrintStream.println:(Ljava/lang/String;)V
-0028: getstatic       #2   // B20002     || java/lang/System.out:Ljava/io/PrintStream;
-0031: ldc             #5   // 1205       || finally Clause
-0033: invokevirtual   #4   // B60004     || java/io/PrintStream.println:(Ljava/lang/String;)V
-0036: goto            14   // A7000E
-0039: astore_2             // 4D
-0040: getstatic       #2   // B20002     || java/lang/System.out:Ljava/io/PrintStream;
-0043: ldc             #5   // 1205       || finally Clause
-0045: invokevirtual   #4   // B60004     || java/io/PrintStream.println:(Ljava/lang/String;)V
-0048: aload_2              // 2C
-0049: athrow               // BF
-0050: return               // B1
-=== === ===  === === ===  === === ===
+|                |          |     instruction     |
+|                |  label1  |     instruction     |
+|                |          |     instruction     |
+|    try-catch   |  label2  |     instruction     |
+|                |          |     instruction     |
+|                |  label3  |     instruction     |
+|                |          |     instruction     |
+|                |  label4  |     instruction     |
+|                |          |     instruction     |
 {% endhighlight %}
 
 ## 总结

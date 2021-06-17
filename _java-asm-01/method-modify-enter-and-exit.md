@@ -47,21 +47,23 @@ public class HelloWorld {
 {% endraw %}
 {% endhighlight %}
 
-## 方法进入时
-
-### 实现思路
+## 实现思路
 
 我们有了想要达到的目标，接下来就是将这个目标转换成具体的代码，那么应该怎么实现呢？
 
 第一步，从`ClassVisitor`类开始。在`ClassVisitor`类当中，它里面的`visitXxx()`方法与类里面不同部分之间是有对应关系的，如下图：
 
+{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/class-visitor-visit-xxx-methods.png)
+{: refdef}
 
 既然，我们想要修改的是“方法”，那么“方法”就对应于ASM中的`MethodVisitor`类。换句话说，想要实现这样一个目标，就是通过操作`MethodVisitor`类来实现。
 
 第二步，从`MethodVisitor`类展开。在`MethodVisitor`类当中，它里面的`visitXxxInsn()`方法与方法里的方法体（method body）是对应的。
 
+{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/method-visitor-visit-xxx-insn-methods.png)
+{: refdef}
 
 我们想对“已有的方法”进行修改，从本质上来说，就是对`visitXxxInsn()`方法这部分对应的内容进行修改。
 
@@ -71,17 +73,19 @@ public class HelloWorld {
 
 另外，我们回顾一下，在`MethodVisitor`类中，`visitXxx()`方法的调用顺序，如下：
 
-- 第一步，调用`visitCode()`方法，调用一次
-- 第二步，调用`visitXxxInsn()`方法，可以调用多次
-- 第三步，调用`visitMaxs()`方法，调用一次
-- 第四步，调用`visitEnd()`方法，调用一次
+- 第一步，调用`visitCode()`方法，调用一次。
+- 第二步，调用`visitXxxInsn()`方法，可以调用多次。
+- 第三步，调用`visitMaxs()`方法，调用一次。
+- 第四步，调用`visitEnd()`方法，调用一次。
 
-将这些`Method.visitXxx()`方法与方法体（method body）对应起来：
+将这些`MethodVisitor.visitXxx()`方法与方法体（method body）对应起来：
 
-- `visitCode()`方法，是在方法体（method body）之前调用的方法
-- `visitXxxInsn()`方法，就对应方法体（method body）本身
-- `visitMaxs()`方法，是在方法体（method body）之后调用的方法
-- `visitEnd()`方法，是在`visitMaxs()`方法之后调用的方法
+- `visitCode()`方法，标志着方法体的开始，是在方法体之前调用的方法。
+- `visitXxxInsn()`方法，就对应方法体（method body）本身。
+- `visitMaxs()`方法，标志着方法体的结束，是在方法体之后调用的方法。
+- `visitEnd()`方法，是在`visitMaxs()`方法之后调用的方法。
+
+### 方法进入
 
 如果我们想在方法执行之前，添加一些打印语句，那么我们有两个位置可以添加打印语句：
 
@@ -89,6 +93,42 @@ public class HelloWorld {
 - 第二个位置，就是在第1个`visitXxxInsn()`方法中。
 
 在这两个位置当中，我们推荐使用`visitCode()`方法。因为`visitCode()`方法总是位于方法体（method body）的前面，而第1个`visitXxxInsn()`方法是不稳定的。
+
+{% highlight java %}
+{% raw %}
+public void visitCode() {
+    // 首先，处理自己的代码逻辑
+    // TODO: 添加“方法进入”时的代码
+
+    // 其次，调用父类的方法实现
+    super.visitCode();
+}
+{% endraw %}
+{% endhighlight %}
+
+### 方法退出
+
+如果我们在“退出方法时”想添加的代码，是否可以添加到`visitMaxs()`方法内呢？这样做是不行的。因为在执行`visitMaxs()`方法之前，方法体（method body）已经执行过了：在方法体（method body）当中，里面会包含return语句；如果return语句一执行，后面的任何语句都不会再执行了；换句话说，如果在`visitMaxs()`方法内添加的打印输出语句，由于前面方法体（method body）中已经执行了return语句，后面的任何语句就执行不到了。
+
+那么，到底是应该在哪里添加代码呢？为了回答这个问题，我们需要知道“方法退出”有哪几种情况。方法的退出，有两种情况，一种是正常退出（执行return语句），另一种是异常退出（执行throws语句）；接下来，就是将这两种退出情况应用到ASM的代码层面。
+
+在`MethodVisitor`类当中，无论是执行return语句，还是执行throws语句，都是通过`visitInsn(opcode)`方法来实现的。所以，如果我们想在方法退出时，添加一些语句，那么这些语句放到`visitInsn(opcode)`方法中就可以了。
+
+{% highlight java %}
+{% raw %}
+public void visitInsn(int opcode) {
+    // 首先，处理自己的代码逻辑
+    if (opcode == Opcodes.ATHROW || (opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {
+        // TODO: 添加“方法退出”时的代码
+    }
+
+    // 其次，调用父类的方法实现
+    super.visitInsn(opcode);
+}
+{% endraw %}
+{% endhighlight %}
+
+## 示例一：方法进入
 
 ### 编码实现
 
@@ -215,6 +255,8 @@ public abstract class MethodVisitor {
 {% endraw %}
 {% endhighlight %}
 
+### 进行转换
+
 {% highlight java %}
 {% raw %}
 import lsieun.utils.FileUtils;
@@ -249,7 +291,7 @@ public class HelloWorldTransformCore {
 {% endraw %}
 {% endhighlight %}
 
-验证结果：
+### 验证结果
 
 {% highlight java %}
 {% raw %}
@@ -309,26 +351,7 @@ super.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/io/PrintStream", "println", "
 {% endraw %}
 {% endhighlight %}
 
-## 方法退出时
-
-### 实现思路
-
-在实现“退出方法时”添加代码，与“进入方法时”添加代码，前两步的思路是一样的，我们重点来看第三步。
-
-第三步，在`MethodVisitor`类当中，要确定出要在哪个方法里进行修改。
-
-在`MethodVisitor`类中，`visitXxx()`方法的调用顺序，如下：
-
-- 第一步，调用`visitCode()`方法，调用一次
-- 第二步，调用`visitXxxInsn()`方法，可以调用多次，这里是方法体（method body）
-- 第三步，调用`visitMaxs()`方法，调用一次
-- 第四步，调用`visitEnd()`方法，调用一次
-
-如果我们在“退出方法时”想添加的代码，是否可以添加到`visitMaxs()`方法内呢？这样做是不行的。因为在执行`visitMaxs()`方法之前，方法体（method body）已经执行过了：在方法体（method body）当中，里面会包含return语句；如果return语句一执行，后面的任何语句都不会再执行了；换句话说，如果在`visitMaxs()`方法内添加的打印输出语句，由于前面方法体（method body）中已经执行了return语句，后面的任何语句就执行不到了。
-
-那么，到底是应该在哪里添加代码呢？为了回答这个问题，我们需要知道“方法退出”有哪几种情况。方法的退出，有两种情况，一种是正常退出（执行return语句），另一种是异常退出（执行throws语句）；接下来，就是将这两种退出情况应用到ASM的代码层面。
-
-在`MethodVisitor`类当中，无论是执行return语句，还是执行throws语句，都是通过`visitInsn()`方法来实现的。所以，如果我们想在方法退出时，添加一些语句，那么这些语句放到`visitInsn()`方法中就可以了。
+## 示例二：方法退出
 
 ### 编码实现
 
@@ -374,6 +397,8 @@ public class MethodExitVisitor extends ClassVisitor {
 {% endraw %}
 {% endhighlight %}
 
+### 进行转换
+
 {% highlight java %}
 {% raw %}
 import lsieun.utils.FileUtils;
@@ -408,7 +433,7 @@ public class HelloWorldTransformCore {
 {% endraw %}
 {% endhighlight %}
 
-验证结果：
+### 验证结果
 
 {% highlight java %}
 {% raw %}
@@ -435,7 +460,7 @@ Method Exit...
 {% endraw %}
 {% endhighlight %}
 
-## 合并：方法进入和方法退出
+## 示例三：方法进入和方法退出
 
 ### 第一种方式
 
@@ -481,6 +506,8 @@ public class HelloWorldTransformCore {
 ### 第二种方式
 
 第二种方式，就是将所有的代码都放到一个`ClassVisitor`类里面。
+
+编码实现：
 
 {% highlight java %}
 {% raw %}
@@ -539,6 +566,8 @@ public class MethodAroundVisitor extends ClassVisitor {
 {% endraw %}
 {% endhighlight %}
 
+进行转换：
+
 {% highlight java %}
 {% raw %}
 import lsieun.utils.FileUtils;
@@ -587,5 +616,7 @@ public class HelloWorldTransformCore {
         - 抽象方法，是否需要处理？不只是接口当中有抽象方法，抽象类里也可能有抽象方法。抽象方法，是没有方法体的。
         - native方法，是否需要处理？native方法是没有方法体的。
     - 名字特殊的方法，例如，构造方法（`<init>()`）和静态初始化方法（`<clinit>()`），是否需要处理？
+
+另外，在编写代码的时候，我们遵循一个“规则”：如果是`ClassVisitor`的子类，就取名为`XxxVisitor`类；如果是`MethodVisitor`的子类，就取名为`XxxAdapter`类。
 
 在后续的内容中，我们会介绍`AdviceAdapter`类，它能很容易帮助我们在“方法进入时”和“方法退出时”添加代码。那么，这就带来有一个问题，既然使用`AdviceAdapter`类实现起来很容易，那么为什么还要讲本文的实现方式呢？有两个原因。第一个原因，本文的方式侧重于理解“原理”，而`AdviceAdapter`则侧重于“应用”，`AdviceAdapter`的实现也是基于`visitCode()`和`visitInsn(opcode)`方法实现的，大家在理解上有一个步步递进的关系。第二个原因，虽然`AdviceAdapter`在“方法进入时”和“方法退出时”添加代码，大多数情况，都是能正常工作，但也有极其特殊的情况下，它会失败。这个时候，我们还是要回归到本文介绍的实现方式。
