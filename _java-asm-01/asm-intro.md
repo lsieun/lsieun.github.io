@@ -3,8 +3,6 @@ title:  "ASM介绍"
 sequence: "101"
 ---
 
-ASM is an open source java library for manipulating java byte code.
-
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 ## ASM是什么？
@@ -61,7 +59,7 @@ ASM provides a simple API for decomposing(将一个整体拆分成多个部分),
 对于ASM的现在，主要说明两个问题：
 
 - 第一个问题，ASM属于哪一个机构？
-- 第二个问题，ASM的Logo是息样的？
+- 第二个问题，ASM的Logo是什么样的？
 
 The ASM library is a project of the [OW2 Consortium](https://www.ow2.org/). OW2 is an independent, global, **open-source software community**.
 

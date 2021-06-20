@@ -24,5 +24,3 @@ Linking to a PDF for readers to download:
 ```text
 ... you can [get the PDF](/assets/mydoc.pdf) directly.
 ```
-
-{{ page.tags }}

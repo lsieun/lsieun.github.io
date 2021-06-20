@@ -90,7 +90,7 @@ public abstract class ClassVisitor {
 
 第四个部分，`ClassVisitor`类定义的方法有哪些。在ASM当中，使用到了Visitor Pattern（访问者模式），所以`ClassVisitor`当中许多的`visitXxx()`方法。
 
-虽然，在`ClassVisitor`类当中，有许多`visitXxx()`方法，但是，我们只需要关注这4个方法：`visit()`、`visitField()`、`visitMethod()`和`visitEnd()`。
+虽然，在`ClassVisitor`类当中，有许多`visitXxx()`方法，但是，我们只需要关注这4个方法：`visit()`、`visitField()`、`visitMethod()`和`visitEnd()`。为什么只关注这4个方法呢？因为这4个方法是`ClassVisitor`类的精髓或骨架，认识了这4个方法，其它的`visitXxx()`都容易扩展；同时，我们将`visitXxx()`方法缩小为4个，也能减少我们在学习ASM过程中的认知负担。
 
 {% highlight java %}
 {% raw %}
@@ -124,9 +124,52 @@ public abstract class ClassVisitor {
 
 如果大家对`signature`参数感兴趣，我们可以使用之前介绍的`ASMPrint`类去打印一下某个泛型类的ASM代码。例如，`java.lang.Comparable`是一个泛型接口，我们就可以使用`ASMPrint`类来打印一下它的ASM代码，从来查看`signature`参数的值是什么。
 
+## 方法的调用顺序
+
+在`ClassVisitor`类当中，定义了多个`visitXxx()`方法。这些`visitXxx()`方法，遵循一定的调用顺序。这个调用顺序，是参考自`ClassVisitor`类的API文档。
+
+{% highlight text %}
+visit
+[visitSource][visitModule][visitNestHost][visitPermittedSubclass][visitOuterClass]
+(
+ visitAnnotation |
+ visitTypeAnnotation |
+ visitAttribute
+)*
+(
+ visitNestMember |
+ visitInnerClass |
+ visitRecordComponent |
+ visitField |
+ visitMethod
+)* 
+visitEnd
+{% endhighlight %}
+
+其中，涉及到一些符号，它们的含义如下：
+
+- `[]`: 表示最多调用一次，可以不调用，但最多调用一次。
+- `()`和`|`: 表示在多个方法之间，可以选择任意一个，并且多个方法之间不分前后顺序。
+- `*`: 表示方法可以调用0次或多次。
+
+在本次课程当中，我们只关注`ClassVisitor`类当中的`visit()`方法、`visitField()`方法、`visitMethod()`方法和`visitEnd()`方法这4个方法，所以上面的方法调用顺序可以简化如下：
+
+{% highlight text %}
+visit
+(
+ visitField |
+ visitMethod
+)* 
+visitEnd
+{% endhighlight %}
+
+也就是说，先调用`visit()`方法，接着调用`visitField()`方法或`visitMethod()`方法，最后调用`visitEnd()`方法。
+
+## visitXxx()方法与ClassFile
+
 `ClassVisitor`的`visitXxx()`方法与`ClassFile`之间存在对应关系。在`ClassVisitor`中定义的`visitXxx()`方法，并不是凭空产生的，这些方法存在的目的就是为了生成一个合法的`.class`文件，而这个`.class`文件要符合ClassFile的结构，所以这些`visitXxx()`方法与ClassFile的结构密切相关。
 
-#### visit()方法
+### visit()方法
 
 {% highlight java %}
 {% raw %}
@@ -208,7 +251,7 @@ ClassFile {
 </tbody>
 </table>
 
-#### visitField()方法
+### visitField()方法
 
 {% highlight java %}
 {% raw %}
@@ -264,7 +307,7 @@ field_info {
 </tbody>
 </table>
 
-#### visitMethod()方法
+### visitMethod()方法
 
 {% highlight java %}
 {% raw %}
@@ -320,7 +363,7 @@ method_info {
 </tbody>
 </table>
 
-#### visitEnd()方法
+### visitEnd()方法
 
 `visitEnd()`方法，它是这些`visitXxx()`方法当中最后一个调用的方法。
 
@@ -341,46 +384,6 @@ public void visitEnd() {
 {% endraw %}
 {% endhighlight %}
 
-## ClassVisitor类的方法调用顺序
-
-在`ClassVisitor`类当中，定义了多个`visitXxx()`方法。这些`visitXxx()`方法，遵循一定的调用顺序。这个调用顺序，是参考自`ClassVisitor`类的API文档。
-
-{% highlight text %}
-visit
-[visitSource][visitModule][visitNestHost][visitPermittedSubclass][visitOuterClass]
-(
- visitAnnotation |
- visitTypeAnnotation |
- visitAttribute
-)*
-(
- visitNestMember |
- visitInnerClass |
- visitRecordComponent |
- visitField |
- visitMethod
-)* 
-visitEnd
-{% endhighlight %}
-
-其中，涉及到一些符号，它们的含义如下：
-
-- `[]`: 表示最多调用一次，可以不调用，但最多调用一次。
-- `()`和`|`: 表示在多个方法之间，可以选择任意一个，并且多个方法之间不分前后顺序。
-- `*`: 表示方法可以调用0次或多次。
-
-在本次课程当中，我们只关注`ClassVisitor`类当中的`visit()`方法、`visitField()`方法、`visitMethod()`方法和`visitEnd()`方法这4个方法，所以上面的方法调用顺序可以简化如下：
-
-{% highlight text %}
-visit
-(
- visitField |
- visitMethod
-)* 
-visitEnd
-{% endhighlight %}
-
-也就是说，先调用`visit()`方法，接着调用`visitField()`方法或`visitMethod()`方法，最后调用`visitEnd()`方法。
 
 ## 总结
 
@@ -388,3 +391,4 @@ visitEnd
 
 - 第一点，介绍了`ClassVisitor`类的不同部分。我们去了解这个类不同的部分，是为了能够熟悉`ClassVisitor`这个类。
 - 第二点，在`ClassVisitor`类当中，定义了许多`visitXxx()`方法，这些方法的调用要遵循一定的顺序。
+- 第三点，在`ClassVisitor`类当中，定义的`visitXxx()`方法中的参数与ClassFile结构密切相关。

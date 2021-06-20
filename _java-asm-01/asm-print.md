@@ -5,7 +5,7 @@ sequence: "105"
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
-在刚开始学习ASM的时候，编写ASM编写代码是不太容易的。或者，有些人原来对ASM很熟悉，但由于长时间不使用ASM，编写ASM代码也会有一些困难。在本文当中，我们介绍一个`ASMPrint`类，它能帮助我们将`.class`文件转换为ASM代码，这个功能非常实用。
+在刚开始学习ASM的时候，编写ASM代码是不太容易的。或者，有些人原来对ASM很熟悉，但由于长时间不使用ASM，编写ASM代码也会有一些困难。在本文当中，我们介绍一个`ASMPrint`类，它能帮助我们将`.class`文件转换为ASM代码，这个功能非常实用。
 
 ## ASMPrint类
 
@@ -66,7 +66,7 @@ public class HelloWorld {
 
 ## 总结
 
-本文主要介绍了`ASMPrint`类和它的使用场景，内容总结如下：
+本文主要介绍了`ASMPrint`类和它的使用示例，内容总结如下：
 
 - 第一点，`ASMPrint`类，是通过`org.objectweb.asm.util.TraceClassVisitor`实现的。
 - 第二点，`ASMPrint`类的作用，是帮助我们生成ASM代码。当我们想实现某一个功能时，不知道如何下手，可以使用`ASMPrint`类生成的ASM代码，作为思考的起点。
