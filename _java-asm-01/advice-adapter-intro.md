@@ -22,34 +22,29 @@ sequence: "405"
 
 由于`AdviceAdapter`类是抽象类（`abstract`），如果我们想使用这个类，那么就需要实现一个具体的子类。
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class AdviceAdapter extends GeneratorAdapter implements Opcodes {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### fields
 
 第二个部分，`AdviceAdapter`类定义的字段有哪些。其中，`isConstructor`是判断当前方法是不是构造方法。如果当前方法是构造方法，在“方法进入”时添加代码，需要特殊处理。
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class AdviceAdapter extends GeneratorAdapter implements Opcodes {
     protected int methodAccess;
     protected String methodDesc;
 
     private final boolean isConstructor;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### constructors
 
 第三个部分，`AdviceAdapter`类定义的构造方法有哪些。需要注意的是，`AdviceAdapter`的构造方法是用`protected`修饰，因此这个构造方法只能在子类当中访问。换句话说，在外界不能用`new`关键字来创建对象。
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class AdviceAdapter extends GeneratorAdapter implements Opcodes {
     protected AdviceAdapter(final int api, final MethodVisitor methodVisitor,
                             final int access, final String name, final String descriptor) {
@@ -59,8 +54,7 @@ public abstract class AdviceAdapter extends GeneratorAdapter implements Opcodes 
         isConstructor = "<init>".equals(name);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### methods
 
@@ -71,8 +65,7 @@ public abstract class AdviceAdapter extends GeneratorAdapter implements Opcodes 
 - `onMethodEnter()`方法：在“方法进入”的时候，添加一些代码逻辑。
 - `onMethodExit()`方法：在“方法退出”的时候，添加一些代码逻辑。
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class AdviceAdapter extends GeneratorAdapter implements Opcodes {
     // Generates the "before" advice for the visited method.
     // The default implementation of this method does nothing.
@@ -88,8 +81,7 @@ public abstract class AdviceAdapter extends GeneratorAdapter implements Opcodes 
     // The top element on the stack contains the return value or the exception instance.
     protected void onMethodExit(final int opcode) {}
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 如果我们查看一下在哪些地方使用了`onMethodEnter()`和`onMethodExit()`这两个方法，就会发现它们分别在`visitCode()`方法和`visitInsn(int opcode)`方法中调用。使用`onMethodEnter()`和`onMethodExit()`这两个方法，相对于直接使用`visitCode()`方法和`visitInsn(int opcode)`这两个方法，是有一定的优势的：`onMethodEnter()`方法能够处理`<init>()`的复杂情况，而直接使用`visitCode()`方法则可能导致`<init>()`方法出现错误。
 
@@ -99,8 +91,7 @@ public abstract class AdviceAdapter extends GeneratorAdapter implements Opcodes 
 
 ### 预期目标
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     private String name;
     private int age;
@@ -123,13 +114,11 @@ public class HelloWorld {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -160,11 +149,9 @@ public class ParameterUtils {
         System.out.println(str);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
@@ -240,13 +227,11 @@ public class ClassPrintParameterVisitor extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 进行转换
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -279,13 +264,11 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 import java.util.Date;
 
 public class HelloWorldRun {
@@ -294,8 +277,7 @@ public class HelloWorldRun {
         instance.test(441622197605122816L, new Date());
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 总结
 

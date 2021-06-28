@@ -17,19 +17,17 @@ sequence: "308"
 
 假如，有一条打印语句，如下：
 
-{% highlight java %}
-{% raw %}
+```text
 System.out.println("Hello World");
-{% endraw %}
-{% endhighlight %}
+```
 
 这条打印语句，对应着三个instruction，如下：
 
-{% highlight text %}
+```text
 GETSTATIC java/lang/System.out : Ljava/io/PrintStream;
 LDC "Hello World"
 INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V
-{% endhighlight %}
+```
 
 上面三条instruction的执行过程如下：
 
@@ -51,8 +49,7 @@ INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V
 
 首先，我们来生成一个包含`NOP`指令的`.class`文件，如下：
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
 
@@ -108,12 +105,11 @@ public class HelloWorldGenerateCore {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 查看生成后的效果：
 
-{% highlight text %}
+```text
   // access flags 0x1
   public test()V
     NOP
@@ -126,12 +122,11 @@ public class HelloWorldGenerateCore {
     RETURN
     MAXSTACK = 2
     MAXLOCALS = 1
-{% endhighlight %}
+```
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 
@@ -169,13 +164,11 @@ public class MethodRemoveNopVisitor extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 进行转换
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
 
@@ -205,12 +198,11 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight bash %}
+```text
 $ javap -c sample.HelloWorld
 public class sample.HelloWorld {
   public sample.HelloWorld();
@@ -226,7 +218,7 @@ public class sample.HelloWorld {
        5: invokevirtual #23                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
        8: return
 }
-{% endhighlight %}
+```
 
 ## 总结
 

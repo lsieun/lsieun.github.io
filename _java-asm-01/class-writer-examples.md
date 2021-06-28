@@ -15,17 +15,14 @@ sequence: "203"
 
 ### 预期目标
 
-{% highlight java %}
-{% raw %}
+```java
 public interface HelloWorld {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassWriter;
 
@@ -63,8 +60,7 @@ public class HelloWorldGenerateCore {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 在上述代码中，我们调用了`visit()`方法、`visitEnd()`方法和`toByteArray()`方法。
 
@@ -72,16 +68,14 @@ public class HelloWorldGenerateCore {
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorldRun {
     public static void main(String[] args) throws Exception {
         Class<?> clazz = Class.forName("sample.HelloWorld");
         System.out.println(clazz);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 小总结
 
@@ -131,21 +125,18 @@ public class HelloWorldRun {
 
 ### 预期目标
 
-{% highlight java %}
-{% raw %}
+```java
 public interface HelloWorld extends Cloneable {
     int LESS = -1;
     int EQUAL = 0;
     int GREATER = 1;
     int compareTo(Object o);
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.FieldVisitor;
@@ -200,15 +191,13 @@ public class HelloWorldGenerateCore {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 在上述代码中，我们调用了`visit()`方法、`visitField()`方法、`visitMethod()`方法、`visitEnd()`方法和`toByteArray()`方法。
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -232,19 +221,18 @@ public class HelloWorldRun {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 输出结果：
 
-{% highlight text %}
+```text
 fields:
     LESS
     EQUAL
     GREATER
 methods:
     compareTo
-{% endhighlight %}
+```
 
 ### 小总结
 
@@ -266,8 +254,7 @@ methods:
 
 我们可以使用`ASMPrint`类来查看下面的`sample.HelloWorld`类的ASM代码，从而观察`value`参数和`exceptions`参数的取值：
 
-{% highlight java %}
-{% raw %}
+```java
 package sample;
 
 import java.io.FileNotFoundException;
@@ -283,8 +270,7 @@ public class HelloWorld {
         // do nothing
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 对于上面的代码，
 
@@ -378,17 +364,14 @@ public class HelloWorld {
 
 ### 预期目标
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
 
@@ -428,21 +411,18 @@ public class HelloWorldGenerateCore {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorldRun {
     public static void main(String[] args) throws Exception {
         Class<?> clazz = Class.forName("sample.HelloWorld");
         System.out.println(clazz);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### &lt;init&gt;()和&lt;clinit&gt;()方法
 
@@ -450,8 +430,7 @@ public class HelloWorldRun {
 
 另外，如果在`.class`文件中包含静态代码块，那么就会有一个`<clinit>()`方法。
 
-{% highlight java %}
-{% raw %}
+```java
 package sample;
 
 public class HelloWorld {
@@ -459,8 +438,7 @@ public class HelloWorld {
         System.out.println("static code block");
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 上面的静态代码码，对应于`visitMethod(ACC_STATIC, "<clinit>", "()V", null, null)`的调用。
 

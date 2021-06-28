@@ -23,20 +23,18 @@ sequence: "310"
 
 假如有下面的一个类：
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void test(int a, int b) {
         int c = Math.max(a, b);
         System.out.println(c);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 `test()`方法对应的指令如下：
 
-{% highlight text %}
+```text
   public test(II)V
     ILOAD 1
     ILOAD 2
@@ -48,7 +46,7 @@ public class HelloWorld {
     RETURN
     MAXSTACK = 2
     MAXLOCALS = 4
-{% endhighlight %}
+```
 
 我们预期的目标有两个：
 
@@ -57,8 +55,7 @@ public class HelloWorld {
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 
@@ -119,17 +116,14 @@ public class MethodReplaceInvokeVisitor extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 在`MethodReplaceInvokeAdapter`类当中，`visitMethodInsn()`方法有这么一行代码：
 
-{% highlight java %}
-{% raw %}
+```text
 // 注意，最后一个参数是false，会不会太武断呢？
 super.visitMethodInsn(newOpcode, newOwner, newMethodName, newMethodDesc, false);
-{% endraw %}
-{% endhighlight %}
+```
 
 在`visitMethodInsn()`方法中，最后一个参数是`boolean isInterface`，它可以取值为`true`，也可以取值为`false`。如果它的值为`true`，表示调用的方法是一个接口里的方法；如果它的值为`false`，则表示调用的方法是类里面的方法。换句话说，这个`boolean isInterface`参数，本来可以有两个可选值，即`true`或`false`；但是，我们直接提供一个固定值`false`，完成没有考虑`true`的情况，这么做是不是太过武断了呢？
 
@@ -141,8 +135,7 @@ super.visitMethodInsn(newOpcode, newOwner, newMethodName, newMethodDesc, false);
 
 在替换static方法的时候，要保护一点：替换方法前，和替换方法后，要保持“方法接收的参数”和“方法的返回类型”是一致的。
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
 
@@ -174,25 +167,21 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### 替换non-static方法
 
 对于non-static方法来说，它有一个隐藏的`this`变量。我们在替换non-static方法的时候，要把`this`变量给“消耗”掉。
 
-{% highlight java %}
-{% raw %}
+```java
 public class ParameterUtils {
     public static void output(PrintStream printStream, int val) {
         printStream.println(val);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
 
@@ -224,21 +213,18 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorldRun {
     public static void main(String[] args) throws Exception {
         HelloWorld instance = new HelloWorld();
         instance.test(10, 20);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 总结
 

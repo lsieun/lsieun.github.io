@@ -9,9 +9,9 @@ sequence: "303"
 
 我们使用`ClassReader`、`ClassVisitor`和`ClassWriter`类来进行Class Transformation操作的整体思路是这样的：
 
-{% highlight text %}
+```text
 ClassReader --> ClassVisitor(1) --> ... --> ClassVisitor(N) --> ClassWriter
-{% endhighlight %}
+```
 
 其中，`ClassReader`类负责“读”Class，`ClassWriter`负责“写”Class，而`ClassVisitor`则负责进行“转换”（Transformation）。在Class Transformation过程中，可以有多个`ClassVisitor`参与。不过要注意，`ClassVisitor`类是一个抽象类，我们需要写代码来实现一个`ClassVisitor`类的子类才能使用。
 
@@ -29,8 +29,7 @@ ClassReader --> ClassVisitor(1) --> ... --> ClassVisitor(N) --> ClassWriter
 
 我们在进行Class Transformation操作时，一般是这样写代码的：
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -53,12 +52,12 @@ public class HelloWorldTransformCore {
         int api = Opcodes.ASM9;
         ClassVisitor cv1 = new ClassVisitor1(api, cw);
         ClassVisitor cv2 = new ClassVisitor2(api, cv1);
-        ...
+        // ...
         ClassVisitor cvn = new ClassVisitorN(api, cvm);
 
         //（4）结合ClassReader和ClassVisitor
         int parsingOptions = ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES;
-        cr.accept(cv, parsingOptions);
+        cr.accept(cvn, parsingOptions);
 
         //（5）生成byte[]
         byte[] bytes2 = cw.toByteArray();
@@ -66,23 +65,19 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### ClassReader-ClassVisitor
 
 第一步，将`ClassReader`类与`ClassVisitor`类建立联系是通过`ClassReader.accept()`方法实现的。
 
-{% highlight java %}
-{% raw %}
+```text
 public void accept(ClassVisitor classVisitor, int parsingOptions)
-{% endraw %}
-{% endhighlight %}
+```
 
 在`accept()`方法中，`ClassReader`类会不断调用`ClassVisitor`类当中的`visitXxx()`方法。
 
-{% highlight java %}
-{% raw %}
+```text
 public void accept(ClassVisitor classVisitor, int parsingOptions) {
     //......
     classVisitor.visit(readInt(cpInfoOffsets[1] - 7), accessFlags, thisClass, signature, superClass, interfaces);
@@ -104,8 +99,7 @@ public void accept(ClassVisitor classVisitor, int parsingOptions) {
     // Visit the end of the class.
     classVisitor.visitEnd();
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### ClassVisitor-ClassVisitor
 
@@ -113,8 +107,7 @@ public void accept(ClassVisitor classVisitor, int parsingOptions) {
 
 当前`ClassVisitor`类与下一个`ClassVisitor`类建立初步联系，是通过构造方法来实现的：
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class ClassVisitor {
     protected final int api;
     protected ClassVisitor cv;
@@ -124,13 +117,11 @@ public abstract class ClassVisitor {
         this.cv = classVisitor;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 当前`ClassVisitor`类与下一个`ClassVisitor`类建立后续联系，是通过`visitXxx()`方法来实现的：
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class ClassVisitor {
     public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
         if (cv != null) {
@@ -158,8 +149,7 @@ public abstract class ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### ClassVisitor-ClassWriter
 
@@ -197,8 +187,7 @@ public abstract class ClassVisitor {
 
 另外，在`InfoClassVisitor`类当中，也定义了一个`getAccess()`方法，为了简便，我们只判断了`public`、`protected`和`private`标识符。大家可以根据自己的兴趣，来对这个类进行扩展。
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
@@ -262,13 +251,11 @@ public class InfoClassVisitor extends ClassVisitor {
         return list.toString();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 接着，是我们的`InfoFieldVisitor`类，它继承自`FieldVisitor`类。这个类很简单，它只打印其中的`visitEnd()`方法。
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.FieldVisitor;
 
 public class InfoFieldVisitor extends FieldVisitor {
@@ -283,8 +270,7 @@ public class InfoFieldVisitor extends FieldVisitor {
         super.visitEnd();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 再接下来，是我们的`InfoMethodVisitor`类，它继承自`MethodVisitor`类。在这个类当中，我们打印的方法比较多，但是想将这些方法呈现为4个类型：
 
@@ -293,8 +279,7 @@ public class InfoFieldVisitor extends FieldVisitor {
 - `visitMaxs()`
 - `visitEnd()`
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.util.Printer;
@@ -397,13 +382,11 @@ public class InfoMethodVisitor extends MethodVisitor {
         super.visitEnd();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 现在，准备工作已经做好了，我们只需要将自定义的`InfoClassVisitor`类加入到Class Transformation的过程中就可以了：
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.core.info.InfoClassVisitor;
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
@@ -434,13 +417,11 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 准备一个示例代码：
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public int intValue;
     public String strValue;
@@ -453,12 +434,11 @@ public class HelloWorld {
         return a - b;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 输出结果：
 
-{% highlight text %}
+```text
 ClassVisitor.visit(52, [ACC_PUBLIC], sample/HelloWorld, null, java/lang/Object, []);
 ClassVisitor.visitField([ACC_PUBLIC], intValue, I, null, null);
     FieldVisitor.visitEnd();
@@ -488,7 +468,7 @@ ClassVisitor.visitMethod([ACC_PUBLIC], sub, (II)I, null, null);
     MethodVisitor.visitMaxs(2, 3);
     MethodVisitor.visitEnd();
 ClassVisitor.visitEnd();
-{% endhighlight %}
+```
 
 ## 串联的Field/MethodVisitors
 
@@ -506,9 +486,31 @@ ClassVisitor.visitEnd();
 
 我们在讲删除“字段”和删除“方法”的时候，就是其中的某一个`FieldVisitor`或`MethodVisitor`不工作了，也就是不向后“传递数据”了，那么，相应的“字段”和“方法”就丢失了，就达到了“删除”的效果。类似的，添加“字段”和“方法”，其实就是“传递了额外的数据”，那么就会出现新的字段和方法，就达到了添加字段和方法的效果。
 
+## Class Transformation的本质
+
+对于Class Transformation来说，它的本质就是“中间人攻击”（Man-in-the-middle attack）。
+
+在[Wiki](https://en.wikipedia.org/wiki/Man-in-the-middle_attack)当中，是这样描述Man-in-the-middle attack的：
+
+> In cryptography and computer security, a man-in-the-middle(MITM) attack is a cyberattack where the attacker secretly relays and possibly alters the communications between two parties who believe that they are directly communicating with each other.
+
+{:refdef: style="text-align: center;"}
+![Man-in-the-middle attack](/assets/images/network/man-in-the-middle-attack.png)
+{: refdef}
+
+在计算机安全领域，我们应该尽量的避免遭受到“中间人攻击”，这样我们的信息就不会被窃取和篡改。但是，在Java ASM当中，Class Transformation的本质就是利用了“中间人攻击”的方式来实现对已有的Class文件进行修改或转换。
+
+更详细的来说，我们自己定义的`ClassVisitor`类就是一个“中间人”，那么这个“中间人”可以做什么呢？可以做三种类型的事情：
+
+- 对“原有的信息”进行篡改，就可以实现“修改”的效果。对应到ASM代码层面，就是对`ClassVisitor.visitXxx()`和`MethodVisitor.visitXxx()`的参数值进行修改。
+- 对“原有的信息”进行扔掉，就可以实现“删除”的效果。对应到ASM代码层面，将原本的`FieldVisitor`和`MethodVisitor`对象实例替换成`null`值，或者对原本的一些`ClassVisitor.visitXxx()`和`MethodVisitor.visitXxx()`方法不去调用了。
+- 伪造一条“新的信息”，就可以实现“添加”的效果。对应到ASM代码层面，就是在原来的基础上，添加一些对于`ClassVisitor.visitXxx()`和`MethodVisitor.visitXxx()`方法的调用。
+
 ## 总结
 
-本文主要Class Transformation的工作原理的细节进行介绍，内容总结如下：
+本文主要对Class Transformation的工作原理进行介绍，内容总结如下：
 
-- 第一个点，在代码开始执行之前，`ClassReader`、`ClassVisitor`和`ClassWriter`这三者之间是如何建立最初的联系的。例如，`ClassReader`与`ClassVisitor`建立联系是通过`ClassReader.accept()`方法来实现的；而`ClassVisitor`与`ClassWriter`建立联系是通过`ClassVisitor`的构造方法来建立联系的。
-- 第二个点，在代码的执行过程中，其中涉及到`ClassVisitor.visitXxx()`和`MethodVisitor.visitXxx()`方法的执行顺序是什么样的。
+- 第一点，在代码开始执行之前，`ClassReader`、`ClassVisitor`和`ClassWriter`这三者之间是如何建立最初的联系的。例如，`ClassReader`与`ClassVisitor`建立联系是通过`ClassReader.accept()`方法来实现的；而`ClassVisitor`与`ClassWriter`建立联系是通过`ClassVisitor`的构造方法来建立联系的。
+- 第二点，在代码的执行过程中，其中涉及到`ClassVisitor.visitXxx()`和`MethodVisitor.visitXxx()`方法的执行顺序是什么样的。
+- 第三点，在进行Class Transformation的过程中，内在的多个FieldVisitor和MethodVisitor是串联到一起的。
+- 第四点，Class Transformation的本质就是“中间人攻击”（Man-in-the-middle attack）。

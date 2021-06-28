@@ -15,3 +15,9 @@ $ bundle exec jekyll serve --detach --port 80
 # 使用https协议
 $ bundle exec jekyll serve --detach --port 443 --ssl-key private.key --ssl-cert cert.pem
 {% endhighlight %}
+
+{% highlight text %}
+pkill -f jekyll
+kill -9 process_id
+{% endhighlight %}
+

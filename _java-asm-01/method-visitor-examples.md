@@ -17,29 +17,24 @@ sequence: "209"
 
 ### 预期目标
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 或者：
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public HelloWorld() {
         super();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
-### 编译实现
+### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
@@ -81,43 +76,40 @@ public class HelloWorldGenerateCore {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorldRun {
     public static void main(String[] args) throws Exception {
         Class<?> clazz = Class.forName("sample.HelloWorld");
         System.out.println(clazz);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### Frame的变化
 
 对于`HelloWorld`类中`<init>()`方法对应的Instruction内容如下：
 
-{% highlight text %}
+```text
 public sample.HelloWorld();
   Code:
      0: aload_0
      1: invokespecial #9                  // Method java/lang/Object."<init>":()V
      4: return
-{% endhighlight %}
+```
 
 该方法对应的Frame变化情况如下：
 
-{% highlight text %}
+```text
 <init>()V
 [uninitialized_this] []
 [uninitialized_this] [uninitialized_this]
 [sample/HelloWorld] []
 [] []
-{% endhighlight %}
+```
 
 在这里，我们看到一个很“不一样”的变量，就是`uninitialized_this`，它就是一个“引用”，它指向的内存空间还没有初始化；等经过初始化之后，`uninitialized_this`变量就变成`this`变量。
 
@@ -139,24 +131,21 @@ public sample.HelloWorld();
 
 ## 示例二：`<clinit>`方法
 
-静态初始化方法的名字是`<clinit>`，它表示**cl**ass **init**ialization method的缩写。
+在`.class`文件中，静态初始化方法的名字是`<clinit>`，它表示**cl**ass **init**ialization method的缩写。
 
 ### 预期目标
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     static {
         System.out.println("class initialization method");
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
@@ -209,45 +198,42 @@ public class HelloWorldGenerateCore {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorldRun {
     public static void main(String[] args) throws Exception {
         Class<?> clazz = Class.forName("sample.HelloWorld");
         System.out.println(clazz);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### Frame的变化
 
 对于`HelloWorld`类中`<clinit>()`方法对应的Instruction内容如下：
 
-{% highlight text %}
+```text
 static {};
   Code:
      0: getstatic     #18                 // Field java/lang/System.out:Ljava/io/PrintStream;
      3: ldc           #20                 // String class initialization method
      5: invokevirtual #26                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
      8: return
-{% endhighlight %}
+```
 
 该方法对应的Frame变化情况如下：
 
-{% highlight text %}
+```text
 <clinit>()V
 [] []
 [] [java/io/PrintStream]
 [] [java/io/PrintStream, java/lang/String]
 [] []
 [] []
-{% endhighlight %}
+```
 
 ### 小总结
 
@@ -263,8 +249,7 @@ static {};
 
 假如有一个`GoodChild`类，内容如下：
 
-{% highlight java %}
-{% raw %}
+```java
 public class GoodChild {
     public String name;
     public int age;
@@ -274,25 +259,21 @@ public class GoodChild {
         this.age = age;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 我们的预期目标是生成一个`HelloWorld`类：
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void test() {
         GoodChild child = new GoodChild("Lucy", 8);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
@@ -348,13 +329,11 @@ public class HelloWorldGenerateCore {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 import java.lang.reflect.Method;
 
 public class HelloWorldRun {
@@ -366,14 +345,13 @@ public class HelloWorldRun {
         m.invoke(obj);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### Frame的变化
 
 对于`HelloWorld`类中`test()`方法对应的Instruction内容如下：
 
-{% highlight text %}
+```text
 public void test();
   Code:
      0: new           #11                 // class sample/GoodChild
@@ -383,11 +361,11 @@ public void test();
      8: invokespecial #16                 // Method sample/GoodChild."<init>":(Ljava/lang/String;I)V
     11: astore_1
     12: return
-{% endhighlight %}
+```
 
 该方法对应的Frame变化情况如下：
 
-{% highlight text %}
+```text
 test()V
 [sample/HelloWorld] []
 [sample/HelloWorld] [uninitialized_sample/GoodChild]
@@ -397,7 +375,7 @@ test()V
 [sample/HelloWorld] [sample/GoodChild]
 [sample/HelloWorld, sample/GoodChild] []
 [] []
-{% endhighlight %}
+```
 
 ### 小总结
 
@@ -415,21 +393,18 @@ test()V
 
 ### 预期目标
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void test(int a, int b) {
         int val = Math.max(a, b); // 对static方法进行调用
         System.out.println(val);  // 对non-static方法进行调用
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
@@ -486,13 +461,11 @@ public class HelloWorldGenerateCore {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 import java.lang.reflect.Method;
 
 public class HelloWorldRun {
@@ -504,14 +477,13 @@ public class HelloWorldRun {
         m.invoke(obj, 10, 20);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### Frame的变化
 
 对于`HelloWorld`类中`test()`方法对应的Instruction内容如下：
 
-{% highlight text %}
+```text
 public void test(int, int);
   Code:
      0: iload_1
@@ -522,11 +494,11 @@ public void test(int, int);
      9: iload_3
     10: invokevirtual #33                 // Method java/io/PrintStream.println:(I)V
     13: return
-{% endhighlight %}
+```
 
 该方法对应的Frame变化情况如下：
 
-{% highlight text %}
+```text
 test(II)V
 [sample/HelloWorld, int, int] []
 [sample/HelloWorld, int, int] [int]
@@ -537,7 +509,7 @@ test(II)V
 [sample/HelloWorld, int, int, int] [java/io/PrintStream, int]
 [sample/HelloWorld, int, int, int] []
 [] []
-{% endhighlight %}
+```
 
 ### 小总结
 
@@ -552,11 +524,9 @@ test(II)V
 
 在创建`ClassWriter`对象时，使用了`ClassWriter.COMPUTE_FRAMES`选项。
 
-{% highlight java %}
-{% raw %}
+```text
 ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
-{% endraw %}
-{% endhighlight %}
+```
 
 使用`ClassWriter.COMPUTE_FRAMES`后，ASM会自动计算max stacks、max locals和stack map frames的具体值。从代码的角度来说，使用`ClassWriter.COMPUTE_FRAMES`，会忽略我们在代码中`visitMaxs()`方法和`visitFrame()`方法传入的具体参数值；换句话说，无论我们传入的参数值是否正确，ASM会帮助我们从新计算一个正确的值，代替我们在代码中传入的参数。
 
@@ -567,20 +537,18 @@ ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 
 如果省略对于`visitMaxs()`方法的调用，会出现如下错误：
 
-{% highlight text %}
+```text
 Exception in thread "main" java.lang.VerifyError: Operand stack overflow
-{% endhighlight %}
+```
 
 ## 示例六：不同的MethodVisitor交叉使用
 
 假如我们有两个`MethodVisitor`对象`mv1`和`mv2`，如下所示：
 
-{% highlight java %}
-{% raw %}
+```text
 MethodVisitor mv1 = cw.visitMethod(...);
 MethodVisitor mv2 = cw.visitMethod(...);
-{% endraw %}
-{% endhighlight %}
+```
 
 同时，我们也知道`MethodVisitor`类里的`visitXxx()`方法需要遵循一定的调用顺序：
 
@@ -593,8 +561,7 @@ MethodVisitor mv2 = cw.visitMethod(...);
 
 一般情况下，我们可以如下写代码，这样逻辑比较清晰：
 
-{% highlight java %}
-{% raw %}
+```text
 MethodVisitor mv1 = cw.visitMethod(...);
 mv1.visitCode(...);
 mv1.visitXxxInsn(...)
@@ -606,13 +573,11 @@ mv2.visitCode(...);
 mv2.visitXxxInsn(...)
 mv2.visitMaxs(...);
 mv2.visitEnd();
-{% endraw %}
-{% endhighlight %}
+```
 
 但是，我们也可以这样来写代码：
 
-{% highlight java %}
-{% raw %}
+```text
 MethodVisitor mv1 = cw.visitMethod(...);
 MethodVisitor mv2 = cw.visitMethod(...);
 
@@ -626,8 +591,7 @@ mv1.visitMaxs(...);
 mv1.visitEnd();
 mv2.visitMaxs(...);
 mv2.visitEnd();
-{% endraw %}
-{% endhighlight %}
+```
 
 在上面的代码中，`mv1`和`mv2`这两个对象的`visitXxx()`方法交叉调用，这是可以的。换句话说，只要每一个`MethodVisitor`对象在调用`visitXxx()`方法时，遵循了调用顺序，那结果就是正确的；不同的`MethodVisitor`对象，是相互独立的、不会彼此影响。
 
@@ -635,8 +599,7 @@ mv2.visitEnd();
 
 ### 预期目标
 
-{% highlight java %}
-{% raw %}
+```java
 import java.util.Date;
 
 public class HelloWorld {
@@ -649,13 +612,11 @@ public class HelloWorld {
         System.out.println(now);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 编码实现（第一种方式，顺序）
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
@@ -724,13 +685,11 @@ public class HelloWorldGenerateCore {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 编码实现（第二种方式，交叉）
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
@@ -807,13 +766,11 @@ public class HelloWorldGenerateCore {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 import java.lang.reflect.Method;
 
 public class HelloWorldRun {
@@ -829,8 +786,7 @@ public class HelloWorldRun {
         m.invoke(instance);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 总结
 

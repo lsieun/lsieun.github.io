@@ -11,8 +11,7 @@ sequence: "105"
 
 下面是`ASMPrint`类的代码，它是利用`org.objectweb.asm.util.TraceClassVisitor`类来实现的。在使用的时候，我们注意修改一下`className`、`parsingOptions`和`asmCode`参数就可以了。
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.util.ASMifier;
 import org.objectweb.asm.util.Printer;
@@ -39,8 +38,7 @@ public class ASMPrint {
         new ClassReader(className).accept(traceClassVisitor, parsingOptions);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
    
 在现在阶段，我们可能并不了解这段代码的含义，没有关系的。现在，我们主要是使用这个类，来帮助我们生成ASM代码；等后续内容中，我们会介绍到`TraceClassVisitor`类，也会讲到`ASMPrint`类的代码，到时候就明白这段代码的含义了。
 
@@ -48,15 +46,13 @@ public class ASMPrint {
 
 假如，有如下一个`HelloWorld`类：
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void test() {
         System.out.println("Test Method");
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 对于`ASMPrint`类来说，其中
 
@@ -72,5 +68,3 @@ public class HelloWorld {
 - 第二点，`ASMPrint`类的作用，是帮助我们生成ASM代码。当我们想实现某一个功能时，不知道如何下手，可以使用`ASMPrint`类生成的ASM代码，作为思考的起点。
 
 在当前的阶段，我们可能并不了解`ASMPrint`类里面代码的含义，但是并不影响我们使用它，让它来帮助我们生成ASM代码。在后续的课程当中，我们会逐步的介绍Core API的内容，到时候就能够去理解代码的含义了。
-
-

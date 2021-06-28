@@ -13,8 +13,7 @@ sequence: "306"
 
 例如，修改之前的示例代码：
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public int test(String name, int age, long idCard, Object obj) {
         int hashCode = 0;
@@ -25,13 +24,11 @@ public class HelloWorld {
         return hashCode;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 修改之后的示例代码：
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public int test(String name, int age, long idCard, Object obj) {
         System.out.println(name);
@@ -47,8 +44,7 @@ public class HelloWorld {
         return hashCode;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 第一个版本
 
@@ -56,8 +52,7 @@ public class HelloWorld {
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -121,13 +116,11 @@ public class MethodAroundVisitor extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 进行转换
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
 
@@ -157,13 +150,11 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorldRun {
     public static void main(String[] args) throws Exception {
         HelloWorld instance = new HelloWorld();
@@ -178,8 +169,7 @@ public class HelloWorldRun {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 小总结
 
@@ -191,8 +181,7 @@ public class HelloWorldRun {
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
@@ -372,13 +361,11 @@ public class MethodParameterVisitor extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 进行转换
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
 
@@ -408,8 +395,7 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 小总结
 
@@ -438,27 +424,23 @@ public class HelloWorldTransformCore {
 
 一般情况下，我们想打印一个字符串，可以如下写ASM代码：
 
-{% highlight java %}
-{% raw %}
+```text
 private void printMessage(String str) {
     super.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
     super.visitLdcInsn(str);
     super.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 但是，有些情况下，我们想要打印的值已经位于operand stack上了，此时可以这样：
 
-{% highlight java %}
-{% raw %}
+```text
 private void printString() {
     super.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
     super.visitInsn(SWAP);
     super.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 第三个版本
 
@@ -466,8 +448,7 @@ private void printString() {
 
 首先，我们添加一个`ParameterUtils`类，在这个类定义了许多print方法，这些print方法可以打印不同类型的数据。
 
-{% highlight java %}
-{% raw %}
+```java
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -530,13 +511,11 @@ public class ParameterUtils {
         System.out.println(str);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 在下面的`MethodParameterVisitor2`类当中，我们将使用`ParameterUtils`类帮助我们打印信息。
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -648,13 +627,11 @@ public class MethodParameterVisitor2 extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 进行转换
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
 
@@ -684,8 +661,7 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 小总结
 

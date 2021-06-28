@@ -89,24 +89,21 @@ sequence: "304"
 
 ### class info
 
-`Type`类，并没有特别的继承自某个特殊的类，它就是继承自`Object`类；而且它带有`final`标识，所以不会存在子类。
+第一个部分，`Type`类继承自`Object`类，而且带有`final`标识，所以不会存在子类。
 
-{% highlight java %}
-{% raw %}
+```java
 public final class Type {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### fields
 
-这里我们列出了4个字段，但是，这4个字段可以分成两组。
+第二个部分，`Type`类定义的字段有哪些。这里我们列出了4个字段，这4个字段可以分成两组。
 
-- 第一组，只包括`sort`字段，是`int`类型，它标识了`Type`类的类型。
+- 第一组，只包括`sort`字段，是`int`类型，它标识了`Type`类的类别。
 - 第二组，包括`valueBuffer`、`valueBegin`和`valueEnd`字段，这3个字段组合到一起表示一个value值，本质上就是一个字符串。
 
-{% highlight java %}
-{% raw %}
+```java
 public final class Type {
     // 标识类型
     private final int sort;
@@ -116,15 +113,13 @@ public final class Type {
     private final int valueBegin;
     private final int valueEnd;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### constructors
 
-因为`Type`类的构造方法用`private`修饰，因此“外界”不能使用`new`关键字创建`Type`对象。
+第三个部分，`Type`类定义的构造方法有哪些。由于`Type`类的构造方法用`private`修饰，因此“外界”不能使用`new`关键字创建`Type`对象。
 
-{% highlight java %}
-{% raw %}
+```java
 public final class Type {
     private Type(final int sort, final String valueBuffer, final int valueBegin, final int valueEnd) {
         this.sort = sort;
@@ -133,15 +128,13 @@ public final class Type {
         this.valueEnd = valueEnd;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### methods
 
-在`Type`类里，定义了一些方法，这些方法是与字段有直接关系的。
+第四个部分，`Type`类定义的方法有哪些。在`Type`类里，定义了一些方法，这些方法是与字段有直接关系的。
 
-{% highlight java %}
-{% raw %}
+```java
 public final class Type {
     public int getSort() {
         return sort == INTERNAL ? OBJECT : sort;
@@ -195,13 +188,11 @@ public final class Type {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 关于这些方法的使用，示例如下：
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.Type;
 
 public class HelloWorldRun {
@@ -219,8 +210,7 @@ public class HelloWorldRun {
         System.out.println(descriptor);   // Ljava/lang/String; 注意，分隔符是“/”，前有“L”，后有“;”
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 静态成员
 
@@ -228,8 +218,7 @@ public class HelloWorldRun {
 
 在`Type`类里，定义了一些常量字段，有`int`类型，也有`String`类型。
 
-{% highlight java %}
-{% raw %}
+```java
 public final class Type {
     public static final int VOID = 0;
     public static final int BOOLEAN = 1;
@@ -247,13 +236,11 @@ public final class Type {
 
     private static final String PRIMITIVE_DESCRIPTORS = "VZCBSIFJD";
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 在`Type`类里，也定义了一些`Type`类型的字段，这些字段是由上面的`int`和`String`类型的字段组合得到。
 
-{% highlight java %}
-{% raw %}
+```java
 public final class Type {
     public static final Type VOID_TYPE = new Type(VOID, PRIMITIVE_DESCRIPTORS, VOID, VOID + 1);
     public static final Type BOOLEAN_TYPE = new Type(BOOLEAN, PRIMITIVE_DESCRIPTORS, BOOLEAN, BOOLEAN + 1);
@@ -265,15 +252,13 @@ public final class Type {
     public static final Type LONG_TYPE = new Type(LONG, PRIMITIVE_DESCRIPTORS, LONG, LONG + 1);
     public static final Type DOUBLE_TYPE = new Type(DOUBLE, PRIMITIVE_DESCRIPTORS, DOUBLE, DOUBLE + 1);
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 静态方法
 
 这里介绍的几个`get*Type()`方法，是静态（`static`）方法。这几个方法的主要目的就是得到一个`Type`对象。
 
-{% highlight java %}
-{% raw %}
+```java
 public final class Type {
     public static Type getType(final Class clazz) {
         if (clazz.isPrimitive()) {
@@ -323,8 +308,7 @@ public final class Type {
         return new Type(internalName.charAt(0) == '[' ? ARRAY : INTERNAL, internalName, 0, internalName.length());
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 获取Type对象
 
@@ -334,8 +318,7 @@ public final class Type {
 
 从一个`java.lang.Class`对象来获取`Type`对象：
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.Type;
 
 public class HelloWorldRun {
@@ -344,15 +327,13 @@ public class HelloWorldRun {
         System.out.println(t);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### 方式二：descriptor
 
 从一个描述符（descriptor）来获取`Type`对象：
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.Type;
 
 public class HelloWorldRun {
@@ -365,15 +346,13 @@ public class HelloWorldRun {
         System.out.println(t2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### 方式三：internal name
 
 从一个internal name来获取`Type`对象：
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.Type;
 
 public class HelloWorldRun {
@@ -382,15 +361,13 @@ public class HelloWorldRun {
         System.out.println(t);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### 方式四：static field
 
 从一个`Type`类的静态字段来获取`Type`对象：
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.Type;
 
 public class HelloWorldRun {
@@ -399,8 +376,7 @@ public class HelloWorldRun {
         System.out.println(t);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 特殊的方法
 
@@ -411,8 +387,7 @@ public class HelloWorldRun {
 - `getDimensions()`方法，用于获取数组的维度
 - `getElementType()`方法，用于获取数组的元素的类型
 
-{% highlight java %}
-{% raw %}
+```java
 public final class Type {
     public int getDimensions() {
         int numDimensions = 1;
@@ -427,13 +402,11 @@ public final class Type {
         return getTypeInternal(valueBuffer, valueBegin + numDimensions, valueEnd);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 示例代码：
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.Type;
 
 public class HelloWorldRun {
@@ -447,8 +420,7 @@ public class HelloWorldRun {
         System.out.println(elementType);   // Ljava/lang/String;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### method-related methods
 
@@ -457,8 +429,7 @@ public class HelloWorldRun {
 - `getArgumentTypes()`方法，用于获取“方法”接收的参数类型
 - `getReturnType()`方法，用于获取“方法”返回值的类型
 
-{% highlight java %}
-{% raw %}
+```java
 public final class Type {
     public Type[] getArgumentTypes() {
         return getArgumentTypes(getDescriptor());
@@ -468,13 +439,11 @@ public final class Type {
         return getReturnType(getDescriptor());
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 示例代码：
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.Type;
 
 public class HelloWorldRun {
@@ -493,18 +462,17 @@ public class HelloWorldRun {
         System.out.println("Return Type: " + returnType);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 输出结果：
 
-{% highlight text %}
+```text
 Descriptor: (Ljava/lang/String;I)V
 Argument Types:
     Ljava/lang/String;
     I
 Return Type: V
-{% endhighlight %}
+```
 
 ### size-related methods
 
@@ -513,8 +481,7 @@ Return Type: V
 - `getSize()`方法，用于返回某一个类型所占用的slot空间的大小
 - `getArgumentsAndReturnSizes()`方法，用于返回方法所对应的slot空间的大小
 
-{% highlight java %}
-{% raw %}
+```java
 public final class Type {
     public int getSize() {
         switch (sort) {
@@ -574,13 +541,11 @@ public final class Type {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 示例代码：
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.Type;
 
 public class HelloWorldRun {
@@ -589,11 +554,9 @@ public class HelloWorldRun {
         System.out.println(t.getSize()); // 1
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.Type;
 
 public class HelloWorldRun {
@@ -602,11 +565,9 @@ public class HelloWorldRun {
         System.out.println(t.getSize()); // 2
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.Type;
 
 public class HelloWorldRun {
@@ -621,8 +582,7 @@ public class HelloWorldRun {
         System.out.println(returnSize);    // 1
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### opcode-related methods
 
@@ -630,8 +590,7 @@ public class HelloWorldRun {
 
 - `getOpcode()`方法，会让我们写代码的过程中更加方便。
 
-{% highlight java %}
-{% raw %}
+```java
 public final class Type {
     public int getOpcode(final int opcode) {
         if (opcode == Opcodes.IALOAD || opcode == Opcodes.IASTORE) {
@@ -695,13 +654,11 @@ public final class Type {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 示例代码：
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.util.Printer;
@@ -730,12 +687,11 @@ public class HelloWorldRun {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 输出结果：
 
-{% highlight text %}
+```text
 IALOAD  --- FALOAD
 IASTORE --- FASTORE
 ILOAD   --- FLOAD
@@ -743,7 +699,7 @@ ISTORE  --- FSTORE
 IADD    --- FADD
 ISUB    --- FSUB
 IRETURN --- FRETURN
-{% endhighlight %}
+```
 
 ## 总结
 

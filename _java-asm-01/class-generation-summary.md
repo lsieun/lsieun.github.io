@@ -15,7 +15,7 @@ sequence: "214"
 
 如果我们想要生成一个`.class`文件，就需要先对`.class`文件所遵循的文件格式（或者说是数据结构）有所了解。`.class`文件所遵循的数据结构是由[Java Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)定义的，其结构如下：
 
-{% highlight text %}
+```text
 ClassFile {
     u4             magic;
     u2             minor_version;
@@ -34,7 +34,7 @@ ClassFile {
     u2             attributes_count;
     attribute_info attributes[attributes_count];
 }
-{% endhighlight %}
+```
 
 对上面的条目来进行一个简单的介绍：
 
@@ -50,8 +50,7 @@ ClassFile {
 
 我们可以把这个Java ClassFile和一个Java文件的内容来做一个对照：
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld extends Object implements Cloneable {
     private int intValue = 10;
     private String strValue = "ABC";
@@ -64,8 +63,7 @@ public class HelloWorld extends Object implements Cloneable {
         return a - b;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## ASM Core API
 
@@ -81,8 +79,7 @@ public class HelloWorld extends Object implements Cloneable {
 
 在`ClassVisitor`类当中，定义了许多的`visitXxx()`方法，并且这些`visitXxx()`方法要遵循一定的调用顺序。我们把这些`visitXxx()`方法进行精简，得到4个`visitXxx()`方法：
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class ClassVisitor {
     public void visit(
         final int version,
@@ -106,8 +103,7 @@ public abstract class ClassVisitor {
     public void visitEnd();
     // ......
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 我们可以将这4个`visitXxx()`方法，与Java ClassFile进行比对，这样我们就能够理解“为什么会有这4个方法”以及“方法要接收参数的含义是什么”。
 
@@ -121,8 +117,7 @@ public abstract class ClassVisitor {
 
 示例代码如下：
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassWriter;
 
 import static org.objectweb.asm.Opcodes.*;
@@ -133,9 +128,9 @@ public class HelloWorldGenerateCore {
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 
         // (2) 调用visitXxx()方法
-        cw.visit(...);
-        cw.visitField(...);
-        cw.visitMethod(...);
+        cw.visit();
+        cw.visitField();
+        cw.visitMethod();
         cw.visitEnd();       // 注意，最后要调用visitEnd()方法
 
         // (3) 调用toByteArray()方法
@@ -143,8 +138,7 @@ public class HelloWorldGenerateCore {
         return bytes;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 我们在介绍Class Generation示例的时候，直接使用`ClassWriter`类就可以了。但是，除了`ClassVisitor`和`ClassWriter`类，我们还需要更多的类来“丰富”这个类的“细节信息”，比如说`FieldVisitor`和`MethodVisitor`，它们分别是为了“丰富”字段和方法的具体信息。
 
@@ -152,13 +146,13 @@ public class HelloWorldGenerateCore {
 
 在`ClassVisitor`类当中，`visitField()`方法会返回一个`FieldVisitor`对象，`visitMethod()`方法会返回一个`MethodVisitor`对象。其实，`FieldVisitor`对象和`MethodVisitor`对象是为了让生成的字段和方法内容更“丰富、充实”。
 
-相对来说，`FieldVisitor`类比较简单，在刚开始学的时候，我们只需要关注它的`visitEnd()`方法就可以了。`MethodVisitor`类就比较复杂，因为在调用`ClassVisitor.visitMethod()`方法的时候，只是说明了方法的名字、方法的参数类型、方法的描述符等信息，并没有说明方法的“方法体”信息，所以我们需要使用具体的`MethodVisitor`对象来实现具体的方法体。
+相对来说，`FieldVisitor`类比较简单，在刚开始学的时候，我们只需要关注它的`visitEnd()`方法就可以了。
 
-在`MethodVisitor`类当中，也定义了许多的`visitXxx()`方法。这里要注意一下，要注意与`ClassVisitor`类里定义的`visitXxx()`方法区分。`ClassVisitor`类里的`visitXxx()`方法是提供类层面的信息，而`MethodVisitor`类里的`visitXxx()`方法是提供某一个具体方法里的信息。
+相对来说，`MethodVisitor`类就比较复杂，因为在调用`ClassVisitor.visitMethod()`方法的时候，只是说明了方法的名字、方法的参数类型、方法的描述符等信息，并没有说明方法的“方法体”信息，所以我们需要使用具体的`MethodVisitor`对象来实现具体的方法体。在`MethodVisitor`类当中，也定义了许多的`visitXxx()`方法。这里要注意一下，要注意与`ClassVisitor`类里定义的`visitXxx()`方法区分。`ClassVisitor`类里的`visitXxx()`方法是提供类层面的信息，而`MethodVisitor`类里的`visitXxx()`方法是提供某一个具体方法里的信息。
 
 `MethodVisitor`类里的`visitXxx()`方法，也需要遵循一定的调用顺序，精简之后，如下：
 
-{% highlight text %}
+```text
 [
     visitCode
     (
@@ -170,7 +164,7 @@ public class HelloWorldGenerateCore {
     visitMaxs
 ]
 visitEnd
-{% endhighlight %}
+```
 
 我们可以按照下面来记忆`visitXxx()`方法的调用顺序：
 
@@ -178,6 +172,12 @@ visitEnd
 - 第二步，调用`visitXxxInsn()`方法，可以调用多次。对这些方法的调用，就是在构建方法的“方法体”。
 - 第三步，调用`visitMaxs()`方法，调用一次
 - 第四步，调用`visitEnd()`方法，调用一次
+
+---
+
+> `ClassVisitor`类里的`visitXxx()`方法需要遵循一定的调用顺序，`MethodVisitor`类里的`visitXxx()`方法也需要遵循一定的调用顺序。
+
+---
 
 另外，我们也需要特别注意一些特殊的方法名字，例如，构造方法的名字是`<init>`，而静态初始化方法的名字是`<clinit>`。
 
@@ -187,43 +187,18 @@ visitEnd
 
 无论是`Label`类，还是frame，它们都是`MethodVisitor`在实现“方法体”过程当中的“细节信息”，所以我们把这两者放到`MethodVisitor`一起来说明。
 
-<table>
-<thead>
-<tr>
-    <th>XxxVisitor类（父类）</th>
-    <th>XxxWriter类（子类）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-    <td><code>ClassVisitor</code>类</td>
-    <td><code>ClassWriter</code>类</td>
-</tr>
-<tr>
-    <td><code>FieldVisitor</code>类</td>
-    <td><code>FieldWriter</code>类</td>
-</tr>
-<tr>
-    <td><code>MethodVisitor</code>类</td>
-    <td><code>MethodWriter</code>类</td>
-</tr>
-</tbody>
-</table>
+
 
 ### 常量池去哪儿了？
 
-有的细心的同学，可能会发现这样的问题：在ASM当中，常量池去哪儿了？为什么没有常量池相关的类和方法呢？
+有细心的同学，可能会发现这样的问题：在ASM当中，常量池去哪儿了？为什么没有常量池相关的类和方法呢？
 
-其实，在ASM源码中，与常量池对应的是`SymbolTable`类，但我们并没有对它进行介绍。为什么没有介绍呢？是因为我们在调用`ClassVisitor.visitXxx()`方法和`MethodVisitor.visitXxx()`方法的过程中，ASM会自动帮助我们去构建`SymbolTable`类里面具体的内容。另一方面，`SymbolTable`类，也是一个内部类，没有带有`public`修饰，不能被外界所使用。还有一个原因就是，常量池中包含十几种具体的常量类型，而且`SymbolTable`类还包括BootstrapMethod的信息，讲起来也比较复杂，要完全讲清楚，也不太容易，需要结合Java ClassFile相关的知识才能理解。
+其实，在ASM源码中，与常量池对应的是`SymbolTable`类，但我们并没有对它进行介绍。为什么没有介绍呢？
+
+- 第一个原因，在调用`ClassVisitor.visitXxx()`方法和`MethodVisitor.visitXxx()`方法的过程中，ASM会自动帮助我们去构建`SymbolTable`类里面具体的内容。
+- 第二个原因，常量池中包含十几种具体的常量类型，内容多而复杂，需要结合Java ClassFile相关的知识才能理解。
 
 我们的关注点还是在于如何使用Core API来进行Class Generation操作，ASM的内部实现会帮助我们处理好`SymbolTable`类的内容。
-
----
-
-`ClassVisitor`类里的`visitXxx()`方法需要遵循一定的调用顺序，`MethodVisitor`类里的`visitXxx()`方法也需要遵循一定的调用顺序。
-
----
-
 
 ## 总结
 

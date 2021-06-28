@@ -16,8 +16,7 @@ sequence: "103"
 这个`.class`文件遵循的数据结构就是由[Java Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)中定义的
 [The class File Format](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html)，如下所示。
 
-{% highlight java %}
-{% raw %}
+```text
 ClassFile {
     u4             magic;
     u2             minor_version;
@@ -36,8 +35,7 @@ ClassFile {
     u2             attributes_count;
     attribute_info attributes[attributes_count];
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 字节码类库
 

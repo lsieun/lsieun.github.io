@@ -19,8 +19,7 @@ sequence: "210"
 
 在`Label`类当中，定义了很多的字段和方法。为了方便，将`Label`类简化一下，内容如下：
 
-{% highlight java %}
-{% raw %}
+```java
 public class Label {
     int bytecodeOffset;
 
@@ -32,14 +31,13 @@ public class Label {
         return bytecodeOffset;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 经过这样简单之后，`Label`类当中就只包含一个`bytecodeOffset`字段，那么这个字段代表什么含义呢？`bytecodeOffset`字段就是a position in the bytecode of a method。
 
 举例子来说明一下。假如有一个`test(boolean flag)`方法，它包含的Instruction内容如下：
 
-{% highlight text %}
+```text
 === === ===  === === ===  === === ===
 Method test:(Z)V
 === === ===  === === ===  === === ===
@@ -63,7 +61,7 @@ LocalVariableTable:
 index  start_pc  length  name_and_type
     0         0      24  this:Lsample/HelloWorld;
     1         0      24  flag:Z
-{% endhighlight %}
+```
 
 那么，`Label`类当中的`bytecodeOffset`字段，就表示当前Instruction“索引值”。
 
@@ -81,8 +79,7 @@ index  start_pc  length  name_and_type
 
 我们先来看一个简单的示例代码：
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void test(boolean flag) {
         if (flag) {
@@ -93,13 +90,11 @@ public class HelloWorld {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 那么，`test(boolean flag)`方法对应的ASM代码如下：
 
-{% highlight java %}
-{% raw %}
+```text
 MethodVisitor mv = cw.visitMethod(ACC_PUBLIC, "test", "(Z)V", null, null);
 Label elseLabel = new Label();      // 首先，准备两个Label对象
 Label returnLabel = new Label();
@@ -124,8 +119,7 @@ mv.visitLabel(returnLabel);      // 将第二个Label放到这里
 mv.visitInsn(RETURN);
 mv.visitMaxs(2, 2);
 mv.visitEnd();
-{% endraw %}
-{% endhighlight %}
+```
 
 如何使用`Label`类：
 
@@ -145,7 +139,7 @@ A label designates the instruction that is just after. Note however that there c
 
 上面这段英文描述，是在我们编写ASM代码过程中，label和instruction的位置关系：label在前，instruction在后。
 
-{% highlight text %}
+```text
 |          |     instruction     |
 |          |     instruction     |
 |  label1  |     instruction     |
@@ -153,13 +147,13 @@ A label designates the instruction that is just after. Note however that there c
 |          |     instruction     |
 |  label2  |     instruction     |
 |          |     instruction     |
-{% endhighlight %}
+```
 
 ## Frame的变化
 
 对于`HelloWorld`类中`test()`方法对应的Instruction内容如下：
 
-{% highlight text %}
+```text
 public void test(boolean);
   Code:
      0: iload_1
@@ -172,11 +166,11 @@ public void test(boolean);
     18: ldc           #5                  // String value is false
     20: invokevirtual #4                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
     23: return
-{% endhighlight %}
+```
 
 该方法对应的Frame变化情况如下：
 
-{% highlight text %}
+```text
 test(Z)V
 [sample/HelloWorld, int] []
 [sample/HelloWorld, int] [int]
@@ -189,7 +183,7 @@ test(Z)V
 [sample/HelloWorld, int] [java/io/PrintStream, java/lang/String]
 [sample/HelloWorld, int] []
 [] []
-{% endhighlight %}
+```
 
 通过上面的输出结果，我们希望大家能够看到：**由于程序代码逻辑发生了跳转，那么相应的local variables和operand stack结构也发生了“非线性”的变化**。这部分内容与`MethodVisitor.visitFrame()`方法有关系。
 

@@ -175,8 +175,7 @@ ASM的Logo设计很有特点，它在旋转的过程中，会分别呈现出“A
 - 方法：添加一个新的方法、删除已有的方法、修改已有的方法
 - ……（省略）
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld extends Object implements Cloneable {
     public int intValue;
     public String strValue;
@@ -194,8 +193,7 @@ public class HelloWorld extends Object implements Cloneable {
         return super.clone();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 专业的描述
 

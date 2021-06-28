@@ -5,39 +5,35 @@ sequence: "205"
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
-在`ClassWriter`类里，`visitField()`方法的实现就是通过`FieldWriter`类来实现的。在本文当中，我们就是介绍`FieldWriter`类。
+`FieldWriter`类继承自`FieldVisitor`类。在`ClassWriter`类里，`visitField()`方法的实现就是通过`FieldWriter`类来实现的。在本文当中，我们就是介绍`FieldWriter`类。
 
 ## FieldWriter类
 
 ### class info
 
-第一个部分，`FieldWriter`类是一个`abstract`类，它的父类是`FieldVisitor`类。需要注意的是，`FieldWriter`类并不带有`public`修饰，因此它的有效访问范围只局限于它所处的package当中，不能像其它的`public`类一样被外部所使用。
+第一个部分，`FieldWriter`类的父类是`FieldVisitor`类。需要注意的是，`FieldWriter`类并不带有`public`修饰，因此它的有效访问范围只局限于它所处的package当中，不能像其它的`public`类一样被外部所使用。
 
-{% highlight java %}
-{% raw %}
+```java
 final class FieldWriter extends FieldVisitor {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### fields
 
 第二个部分，`FieldWriter`类定义的字段有哪些。在`FieldWriter`类当中，一些字段如下：
 
-{% highlight java %}
-{% raw %}
+```java
 final class FieldWriter extends FieldVisitor {
     private final int accessFlags;
     private final int nameIndex;
     private final int descriptorIndex;
     private Attribute firstAttribute;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 这些字段与ClassFile当中的`field_info`是对应的：
 
-{% highlight text %}
+```text
 field_info {
     u2             access_flags;
     u2             name_index;
@@ -45,14 +41,13 @@ field_info {
     u2             attributes_count;
     attribute_info attributes[attributes_count];
 }
-{% endhighlight %}
+```
 
 ### constructors
 
 第三个部分，`FieldWriter`类定义的构造方法有哪些。在`FieldWriter`类当中，只定义了一个构造方法；同时，它也不带有`public`标识，只能在package内使用。
 
-{% highlight java %}
-{% raw %}
+```java
 final class FieldWriter extends FieldVisitor {
     FieldWriter(SymbolTable symbolTable, int access, String name, String descriptor, String signature, Object constantValue) {
         super(Opcodes.ASM9);
@@ -68,15 +63,13 @@ final class FieldWriter extends FieldVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### methods
 
 第四个部分，`FieldWriter`类定义的方法有哪些。在`FieldWriter`类当中，有两个重要的方法：`computeFieldInfoSize()`和`putFieldInfo()`方法。这两个方法会在`ClassWriter`类的`toByteArray()`方法内使用到。
 
-{% highlight java %}
-{% raw %}
+```java
 final class FieldWriter extends FieldVisitor {
     int computeFieldInfoSize() {
         // The access_flags, name_index, descriptor_index and attributes_count fields use 8 bytes.
@@ -115,8 +108,7 @@ final class FieldWriter extends FieldVisitor {
         // ......
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## FieldWriter类的使用
 
@@ -126,26 +118,25 @@ final class FieldWriter extends FieldVisitor {
 
 在`ClassWriter`类当中，`visitField()`方法代码如下：
 
-{% highlight java %}
-{% raw %}
-public final FieldVisitor visitField(int access, String name, String descriptor, String signature, Object value) {
-    FieldWriter fieldWriter = new FieldWriter(symbolTable, access, name, descriptor, signature, value);
-    if (firstField == null) {
-        firstField = fieldWriter;
-    } else {
-        lastField.fv = fieldWriter;
+```java
+public class ClassWriter extends ClassVisitor {
+    public final FieldVisitor visitField(int access, String name, String descriptor, String signature, Object value) {
+        FieldWriter fieldWriter = new FieldWriter(symbolTable, access, name, descriptor, signature, value);
+        if (firstField == null) {
+            firstField = fieldWriter;
+        } else {
+            lastField.fv = fieldWriter;
+        }
+        return lastField = fieldWriter;
     }
-    return lastField = fieldWriter;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### toByteArray方法
 
 在`ClassWriter`类当中，`toByteArray()`方法代码如下：
 
-{% highlight java %}
-{% raw %}
+```java
 public class ClassWriter extends ClassVisitor {
     public byte[] toByteArray() {
 
@@ -191,8 +182,7 @@ public class ClassWriter extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 
 ## 总结
@@ -201,4 +191,4 @@ public class ClassWriter extends ClassVisitor {
 
 - 第一点，对于`FieldWriter`类的各个不同部分进行介绍，以便从整体上来理解`FieldWriter`类。
 - 第二点，关于`FieldWriter`类的使用，它主要出现在`ClassWriter`类当中的`visitField()`和`toByteArray()`方法内。
-- 第三点，从应用ASM的角度来说，只需要知道`FieldWriter`类的存在就可以了，不需要深究；从理解ASM源码的角度来说，`FieldWriter`类则值得研究。
+- 第三点，从ASM应用的角度来说，只需要知道`FieldWriter`类的存在就可以了，不需要深究，我们平常写ASM代码的时候，由于它不带有`public`标识，所以不会直接用到它；从理解ASM源码的角度来说，`FieldWriter`类则值得研究，可以重点关注一下`computeFieldInfoSize()`和`putFieldInfo()`这两个方法。

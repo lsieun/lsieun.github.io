@@ -25,8 +25,7 @@ Therefore, it is not necessary for different classes to have unique values.
 
 修改前：
 
-{% highlight java %}
-{% raw %}
+```java
 import java.io.Serializable;
 
 public class HelloWorld implements Serializable {
@@ -43,13 +42,11 @@ public class HelloWorld implements Serializable {
         return String.format("HelloWorld { name='%s', age=%d }", name, age);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 修改后：
 
-{% highlight java %}
-{% raw %}
+```java
 import java.io.Serializable;
 
 public class HelloWorld implements Serializable {
@@ -70,13 +67,11 @@ public class HelloWorld implements Serializable {
         return String.format("HelloWorld { name='%s', age=%d }", name, age);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 进行转换
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -110,13 +105,11 @@ public class SerialVersionUIDAdderExample01 {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 
 import java.io.ByteArrayInputStream;
@@ -154,8 +147,7 @@ public class HelloWorldRun {
         FileUtils.writeBytes(filepath, bytes);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 总结
 

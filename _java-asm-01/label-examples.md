@@ -9,8 +9,7 @@ sequence: "211"
 
 ### 预期目标
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void test(int value) {
         if (value == 0) {
@@ -21,13 +20,11 @@ public class HelloWorld {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
 
@@ -96,13 +93,11 @@ public class HelloWorldGenerateCore {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 import java.lang.reflect.Method;
 
 public class HelloWorldRun {
@@ -115,8 +110,7 @@ public class HelloWorldRun {
         method.invoke(obj, 1);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 小总结
 
@@ -132,8 +126,7 @@ public class HelloWorldRun {
 
 ### 预期目标
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void test(int val) {
         switch (val) {
@@ -154,13 +147,11 @@ public class HelloWorld {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
 
@@ -257,13 +248,11 @@ public class HelloWorldGenerateCore {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 import java.lang.reflect.Method;
 
 public class HelloWorldRun {
@@ -277,8 +266,7 @@ public class HelloWorldRun {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 小总结
 
@@ -292,8 +280,7 @@ public class HelloWorldRun {
 
 ### 预期目标
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void test() {
         for (int i = 0; i < 10; i++) {
@@ -301,13 +288,11 @@ public class HelloWorld {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
 
@@ -377,13 +362,11 @@ public class HelloWorldGenerateCore {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 import java.lang.reflect.Method;
 
 public class HelloWorldRun {
@@ -395,8 +378,7 @@ public class HelloWorldRun {
         method.invoke(obj);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 小总结
 
@@ -410,8 +392,7 @@ public class HelloWorldRun {
 
 ### 预期目标
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void test() {
         try {
@@ -423,13 +404,11 @@ public class HelloWorld {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Label;
@@ -517,13 +496,11 @@ public class HelloWorldGenerateCore {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 import java.lang.reflect.Method;
 
 public class HelloWorldRun {
@@ -535,8 +512,7 @@ public class HelloWorldRun {
         method.invoke(obj);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 小总结
 
@@ -548,7 +524,7 @@ public class HelloWorldRun {
 
 有一个问题，`visitTryCatchBlock()`方法为什么可以在后边的位置调用呢？这与`Code`属性的结构有关系：
 
-{% highlight text %}
+```text
 Code_attribute {
     u2 attribute_name_index;
     u4 attribute_length;
@@ -565,11 +541,11 @@ Code_attribute {
     u2 attributes_count;
     attribute_info attributes[attributes_count];
 }
-{% endhighlight %}
+```
 
 因为instruction的内容（对应于`visitXxxInsn()`方法的调用）存储于`Code`结构当中的`code[]`内，而try-catch的内容（对应于`visitTryCatchBlock()`方法的调用），存储在`Code`结构当中的`exception_table[]`内，所以`visitTryCatchBlock()`方法的调用时机，可以早一点，也可以晚一点，只要整体上遵循`MethodVisitor`类对就于`visitXxx()`方法调用的顺序要求就可以了。
 
-{% highlight text %}
+```text
 |                |          |     instruction     |
 |                |  label1  |     instruction     |
 |                |          |     instruction     |
@@ -579,7 +555,7 @@ Code_attribute {
 |                |          |     instruction     |
 |                |  label4  |     instruction     |
 |                |          |     instruction     |
-{% endhighlight %}
+```
 
 ## 总结
 

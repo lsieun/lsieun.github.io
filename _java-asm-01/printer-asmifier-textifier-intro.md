@@ -11,19 +11,16 @@ sequence: "404"
 
 第一个部分，`Printer`类是一个`abstract`类，它有两个子类：`ASMifier`类和`Textifier`类。
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class Printer {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### fields
 
 第二个部分，`Printer`类定义的字段有哪些。
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class Printer {
     protected final int api;
 
@@ -33,15 +30,13 @@ public abstract class Printer {
     // The text to be printed.
     public final List<Object> text;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### constructors
 
 第三个部分，`Printer`类定义的构造方法有哪些。
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class Printer {
     protected Printer(final int api) {
         this.api = api;
@@ -49,15 +44,13 @@ public abstract class Printer {
         this.text = new ArrayList<>();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### methods
 
 第四个部分，`Printer`类定义的方法有哪些。`Printer`类定义的方法是与`ClassVisitor`和`MethodVisitor`类里定义的方法有很大的相似性。
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class Printer {
     // Classes，这部分方法可与ClassVisitor内定义的方法进行对比
     public abstract void visit(int version, int access, String name, String signature, String superName, String[] interfaces);
@@ -80,26 +73,21 @@ public abstract class Printer {
     public abstract void visitMaxs(int maxStack, int maxLocals);
     public abstract void visitMethodEnd();
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## ASMifier类和Textifier类
 
 对于`ASMifier`类和`Textifier`类来说，它们的父类是`Printer`类。
 
-{% highlight java %}
-{% raw %}
+```java
 public class ASMifier extends Printer {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
-{% highlight java %}
-{% raw %}
+```java
 public class Textifier extends Printer {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 在这里，我们不对`ASMifier`类和`Textifier`类的成员信息进行展开，因为它们的内容非常多。但是，这么多的内容都是为了一个共同的目的：通过对`visitXxx()`方法的调用，将class的内容转换成文字的表示形式。
 
@@ -113,28 +101,27 @@ public class Textifier extends Printer {
 
 Linux分隔符是“:”
 
-{% highlight text %}
+```text
 $ java -classpath asm.jar:asm-util.jar org.objectweb.asm.util.ASMifier java.lang.Runnable
-{% endhighlight %}
+```
 
 Windows分隔符是“;”
 
-{% highlight text %}
+```text
 $ java -classpath asm.jar;asm-util.jar org.objectweb.asm.util.ASMifier java.lang.Runnable
-{% endhighlight %}
+```
 
 Cygwin分隔符是“\;”
 
-{% highlight text %}
+```text
 $ java -classpath asm.jar\;asm-util.jar org.objectweb.asm.util.ASMifier java.lang.Runnable
-{% endhighlight %}
+```
 
 ### 从代码中使用
 
 无论是`ASMifier`类里的`main()`方法，还是`Textifier`类里的`main()`方法，它们本质上都是调用了`Printer`类里的`main()`方法。在`Printer`类里的`main()`方法里，代码的功能也是通过`TraceClassVisitor`类来实现的。
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.util.ASMifier;
 
 import java.io.IOException;
@@ -148,8 +135,7 @@ public class HelloWorldRun {
         ASMifier.main(array);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 总结
 

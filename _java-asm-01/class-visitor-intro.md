@@ -18,28 +18,22 @@ sequence: "201"
 第一个部分，`ClassVisitor`是一个抽象类。
 由于`ClassVisitor类`是一个`abstract`类，所以不能直接使用`new`关键字创建`ClassVisitor`对象。
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class ClassVisitor {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 同时，由于`ClassVisitor`类是一个`abstract`类，要想使用它，就必须有具体的子类来继承它。比较常见的`ClassVisitor`子类有`ClassWriter`类（Core API）和`ClassNode`类（Tree API）。
 
-{% highlight java %}
-{% raw %}
+```java
 public class ClassWriter extends ClassVisitor {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
-{% highlight java %}
-{% raw %}
+```java
 public class ClassNode extends ClassVisitor {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 三个类的关系如下：
 
@@ -51,14 +45,12 @@ public class ClassNode extends ClassVisitor {
 
 第二个部分，`ClassVisitor`类定义的字段有哪些。
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class ClassVisitor {
     protected final int api;
     protected ClassVisitor cv;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 - `api`字段：它是一个`int`类型的数据，指出了当前使用的ASM API版本，其取值有`Opcodes.ASM4`、`Opcodes.ASM5`、`Opcodes.ASM6`、`Opcodes.ASM7`、`Opcodes.ASM8`和`Opcodes.ASM9`。我们使用的ASM版本是9.0，因此我们在给`api`字段赋值的时候，选择`Opcodes.ASM9`就可以了。
 - `cv`字段：它是一个`ClassVisitor`类型的数据，它的作用是将多个`ClassVisitor`串连起来。
@@ -71,8 +63,7 @@ public abstract class ClassVisitor {
 
 第三个部分，`ClassVisitor`类定义的构造方法有哪些。
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class ClassVisitor {
     public ClassVisitor(final int api) {
         this(api, null);
@@ -83,8 +74,7 @@ public abstract class ClassVisitor {
         this.cv = classVisitor;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### methods
 
@@ -92,8 +82,7 @@ public abstract class ClassVisitor {
 
 虽然，在`ClassVisitor`类当中，有许多`visitXxx()`方法，但是，我们只需要关注这4个方法：`visit()`、`visitField()`、`visitMethod()`和`visitEnd()`。为什么只关注这4个方法呢？因为这4个方法是`ClassVisitor`类的精髓或骨架，认识了这4个方法，其它的`visitXxx()`都容易扩展；同时，我们将`visitXxx()`方法缩小为4个，也能减少我们在学习ASM过程中的认知负担。
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class ClassVisitor {
     public void visit(
         final int version,
@@ -117,8 +106,7 @@ public abstract class ClassVisitor {
     public void visitEnd();
     // ......
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 在`ClassVisitor`的`visit()`方法、`visitField()`方法和`visitMethod()`方法中都带有`signature`参数。这个`signature`参数“泛型”密切相关；换句话说，如果处理的是一个带有泛型信息的类、字段或方法，那么就需要给`signature`参数提供一定的值；如果处理的类、字段或方法不带有“泛型”信息，那么将`signature`参数设置为`null`就可以了。在本次课程当中，我们不去考虑“泛型”相关的内容，所以我们都将`signature`参数设置成`null`值。
 
@@ -128,7 +116,7 @@ public abstract class ClassVisitor {
 
 在`ClassVisitor`类当中，定义了多个`visitXxx()`方法。这些`visitXxx()`方法，遵循一定的调用顺序。这个调用顺序，是参考自`ClassVisitor`类的API文档。
 
-{% highlight text %}
+```text
 visit
 [visitSource][visitModule][visitNestHost][visitPermittedSubclass][visitOuterClass]
 (
@@ -144,7 +132,7 @@ visit
  visitMethod
 )* 
 visitEnd
-{% endhighlight %}
+```
 
 其中，涉及到一些符号，它们的含义如下：
 
@@ -154,14 +142,14 @@ visitEnd
 
 在本次课程当中，我们只关注`ClassVisitor`类当中的`visit()`方法、`visitField()`方法、`visitMethod()`方法和`visitEnd()`方法这4个方法，所以上面的方法调用顺序可以简化如下：
 
-{% highlight text %}
+```text
 visit
 (
  visitField |
  visitMethod
 )* 
 visitEnd
-{% endhighlight %}
+```
 
 也就是说，先调用`visit()`方法，接着调用`visitField()`方法或`visitMethod()`方法，最后调用`visitEnd()`方法。
 
@@ -171,8 +159,7 @@ visitEnd
 
 ### visit()方法
 
-{% highlight java %}
-{% raw %}
+```text
 public void visit(
     final int version,
     final int access,
@@ -180,10 +167,9 @@ public void visit(
     final String signature,
     final String superName,
     final String[] interfaces);
-{% endraw %}
-{% endhighlight %}
+```
 
-{% highlight text %}
+```text
 ClassFile {
     u4             magic;
     u2             minor_version;
@@ -202,7 +188,7 @@ ClassFile {
     u2             attributes_count;
     attribute_info attributes[attributes_count];
 }
-{% endhighlight %}
+```
 
 <table>
 <thead>
@@ -253,18 +239,16 @@ ClassFile {
 
 ### visitField()方法
 
-{% highlight java %}
-{% raw %}
+```text
 public FieldVisitor visitField( // 访问字段
     final int access,
     final String name,
     final String descriptor,
     final String signature,
     final Object value);
-{% endraw %}
-{% endhighlight %}
+```
 
-{% highlight text %}
+```text
 field_info {
     u2             access_flags;
     u2             name_index;
@@ -272,7 +256,7 @@ field_info {
     u2             attributes_count;
     attribute_info attributes[attributes_count];
 }
-{% endhighlight %}
+```
 
 <table>
 <thead>
@@ -309,18 +293,16 @@ field_info {
 
 ### visitMethod()方法
 
-{% highlight java %}
-{% raw %}
+```text
 public MethodVisitor visitMethod( // 访问方法
     final int access,
     final String name,
     final String descriptor,
     final String signature,
     final String[] exceptions);
-{% endraw %}
-{% endhighlight %}
+```
 
-{% highlight text %}
+```text
 method_info {
     u2             access_flags;
     u2             name_index;
@@ -328,7 +310,7 @@ method_info {
     u2             attributes_count;
     attribute_info attributes[attributes_count];
 }
-{% endhighlight %}
+```
 
 <table>
 <thead>
@@ -369,8 +351,7 @@ method_info {
 
 为什么`visitEnd()`方法是“最后一个调用的方法”呢？是因为在`ClassVisitor`当中，定义了多个`visitXxx()`方法，这些个`visitXxx()`方法之间要遵循一个先后调用的顺序，而`visitEnd()`方法是最后才去调用的。等到`visitEnd()`方法调用之后，就表示说再也不去调用其它的`visitXxx()`方法了，所有的“工作”已经做完了，到了要结束的时候了。
 
-{% highlight java %}
-{% raw %}
+```text
 /*
  * Visits the end of the class.
  * This method, which is the last one to be called,
@@ -381,8 +362,7 @@ public void visitEnd() {
         cv.visitEnd();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 
 ## 总结

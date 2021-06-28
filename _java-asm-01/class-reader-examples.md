@@ -15,9 +15,9 @@ sequence: "302"
 
 对于一个`.class`文件进行Class Transformation操作，整体思路是这样的：
 
-{% highlight text %}
+```text
 ClassReader --> ClassVisitor(1) --> ... --> ClassVisitor(N) --> ClassWriter
-{% endhighlight %}
+```
 
 其中，
 
@@ -31,17 +31,14 @@ ClassReader --> ClassVisitor(1) --> ... --> ClassVisitor(N) --> ClassWriter
 
 预期目标：假如有一个`HelloWorld.java`文件，经过Java 8编译之后，生成的`HelloWorld.class`文件的版本就是Java 8的版本，我们的目标是将`HelloWorld.class`由Java 8版本转换成Java 7版本。
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 编码实现：
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
@@ -55,13 +52,11 @@ public class ClassChangeVersionVisitor extends ClassVisitor {
         super.visit(Opcodes.V1_7, access, name, signature, superName, interfaces);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 进行转换：
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -94,34 +89,30 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 验证结果：
 
-{% highlight bash %}
+```text
 $ javap -p -v sample.HelloWorld
-{% endhighlight %}
+```
 
 ### 示例二：修改类的接口
 
 预期目标：在下面的`HelloWorld`类中，我们定义了一个`clone()`方法，但存在一个问题，也就是，如果没有实现`Cloneable`接口，`clone()`方法就会出错，我们的目标是希望通过ASM为`HelloWorld`类添加上`Cloneable`接口。
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 编码实现：
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 
 public class ClassCloneVisitor extends ClassVisitor {
@@ -134,11 +125,9 @@ public class ClassCloneVisitor extends ClassVisitor {
         super.visit(version, access, name, signature, superName, new String[]{"java/lang/Cloneable"});
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -171,13 +160,11 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 验证结果：
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorldRun {
     public static void main(String[] args) throws Exception {
         HelloWorld obj = new HelloWorld();
@@ -185,18 +172,15 @@ public class HelloWorldRun {
         System.out.println(anotherObj);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 小总结
 
 我们看到上面的两个例子，一个是修改类的版本信息，另一个是修改类的接口信息，那么这两个示例都是基于`ClassVisitor.visit()`方法实现的：
 
-{% highlight java %}
-{% raw %}
+```text
 public void visit(int version, int access, String name, String signature, String superName, String[] interfaces)
-{% endraw %}
-{% endhighlight %}
+```
 
 这两个示例，就是通过修改`visit()`方法的参数实现的：
 
@@ -215,19 +199,16 @@ public void visit(int version, int access, String name, String signature, String
 
 预期目标：删除掉`HelloWorld`类里的`String strValue`字段。
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public int intValue;
     public String strValue; // 删除这个字段
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 编码实现：
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
 
@@ -249,8 +230,7 @@ public class ClassRemoveFieldVisitor extends ClassVisitor {
         return super.visitField(access, name, descriptor, signature, value);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 上面代码思路的关键就是`ClassVisitor.visitField()`方法。在正常的情况下，`ClassVisitor.visitField()`方法返回一个`FieldVisitor`对象；但是，如果`ClassVisitor.visitField()`方法返回的是`null`，就么能够达到删除该字段的效果。
 
@@ -258,8 +238,7 @@ public class ClassRemoveFieldVisitor extends ClassVisitor {
 
 或者说，换一种类比，用信件的传递作类比。将`ClassReader`类想像成信件的“发出地”，将`ClassVisitor`类想像成信件运送途中经过的“驿站”，将`ClassWriter`类想像成信件的“接收地”；如果是在某个“驿站”中将其中一封邮件丢失了，那么这封信件就抵达不了“接收地”了。
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -292,13 +271,11 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 验证结果：
 
-{% highlight java %}
-{% raw %}
+```java
 import java.lang.reflect.Field;
 
 public class HelloWorldRun {
@@ -312,27 +289,23 @@ public class HelloWorldRun {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 示例四：添加字段
 
 预期目标：为了`HelloWorld`类添加一个`Object objValue`字段。
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public int intValue;
     public String strValue;
     // 添加一个Object objValue字段
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 编码实现：
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
 
@@ -368,13 +341,11 @@ public class ClassAddFieldVisitor extends ClassVisitor {
         super.visitEnd();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 上面的代码思路：第一步，在`visitField()`方法中，判断某个字段是否已经存在，其结果存在于`isFieldPresent`字段当中；第二步，就是在`visitEnd()`方法中，根据`isFieldPresent`字段的值，来决定是否添加新的字段。
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -407,13 +378,11 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 验证结果：
 
-{% highlight java %}
-{% raw %}
+```java
 import java.lang.reflect.Field;
 
 public class HelloWorldRun {
@@ -427,18 +396,15 @@ public class HelloWorldRun {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 小总结
 
 对于字段的操作，都是基于`ClassVisitor.visitField()`方法来实现的：
 
-{% highlight java %}
-{% raw %}
+```text
 public FieldVisitor visitField(int access, String name, String descriptor, String signature, Object value);
-{% endraw %}
-{% endhighlight %}
+```
 
 那么，对于字段来说，可以进行哪些操作呢？有三种类型的操作：
 
@@ -459,8 +425,7 @@ public FieldVisitor visitField(int access, String name, String descriptor, Strin
 
 预期目标：删除掉`HelloWorld`类里的`add()`方法。
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public int add(int a, int b) { // 删除add方法
         return a + b;
@@ -470,13 +435,11 @@ public class HelloWorld {
         return a - b;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 编码实现：
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 
@@ -498,13 +461,11 @@ public class ClassRemoveMethodVisitor extends ClassVisitor {
         return super.visitMethod(access, name, descriptor, signature, exceptions);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 上面删除方法的代码思路，与删除字段的代码思路是一样的。
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -537,13 +498,11 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 验证结果：
 
-{% highlight java %}
-{% raw %}
+```java
 import java.lang.reflect.Method;
 
 public class HelloWorldRun {
@@ -557,15 +516,13 @@ public class HelloWorldRun {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 示例六：添加方法
 
 预期目标：为`HelloWorld`类添加一个`mul()`方法。
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public int add(int a, int b) {
         return a + b;
@@ -577,13 +534,11 @@ public class HelloWorld {
 
     // TODO: 添加一个乘法
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 编码实现：
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 
@@ -629,13 +584,11 @@ public abstract class ClassAddMethodVisitor extends ClassVisitor {
 
     protected abstract void generateMethodBody(MethodVisitor mv);
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 添加新的方法，和添加新的字段的思路，在前期，两者是一样的，都是先要判断该字段或该方法是否已经存在；但是，在后期，两者会有一些差异，因为方法需要有“方法体”，在上面的代码中，我们定义了一个`generateMethodBody()`方法，这个方法需要在子类当中进行实现。
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
 
@@ -678,13 +631,11 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 验证结果：
 
-{% highlight java %}
-{% raw %}
+```java
 import java.lang.reflect.Method;
 
 public class HelloWorldRun {
@@ -698,18 +649,15 @@ public class HelloWorldRun {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 小总结
 
 对于方法的操作，都是基于`ClassVisitor.visitMethod()`方法来实现的：
 
-{% highlight java %}
-{% raw %}
+```text
 public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions);
-{% endraw %}
-{% endhighlight %}
+```
 
 与字段操作类似，对于方法来说，可以进行的操作也有三种类型：
 

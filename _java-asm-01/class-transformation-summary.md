@@ -29,8 +29,7 @@ sequence: "313"
 - 字段：添加一个新的字段、删除已有的字段，通过`ClassVisitor.visitField()`方法实现。
 - 方法：添加一个新的方法、删除已有的方法，通过`ClassVisitor.visitMethod()`方法实现。
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld extends Object implements Cloneable {
     public int intValue;
     public String strValue;
@@ -48,8 +47,7 @@ public class HelloWorld extends Object implements Cloneable {
         return super.clone();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 为了让大家更明确的知道需要修改哪一个`visitXxx()`方法的参数，我们做了如下总结：
 
@@ -89,8 +87,7 @@ public class HelloWorld extends Object implements Cloneable {
 
 为了让大家更直观的理解，我们假设有如下代码：
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public int test(String name, int age) {
         int hashCode = name.hashCode();
@@ -98,12 +95,11 @@ public class HelloWorld {
         return hashCode;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 其中，`test()`方法的方法体包含的Instruction内容如下：
 
-{% highlight text %}
+```text
   public test(Ljava/lang/String;I)I
     ALOAD 1
     INVOKEVIRTUAL java/lang/String.hashCode ()I
@@ -118,7 +114,7 @@ public class HelloWorld {
     IRETURN
     MAXSTACK = 3
     MAXLOCALS = 4
-{% endhighlight %}
+```
 
 有的时候，我们想实现某个功能，但是感觉无从下手。这个时候，我们需要解决两个问题。第一个问题，就是要明确需要修改什么？第二个问题，就是“定位”方法，也就是要使用哪个方法进行修改。我们可以结合这两个问题，和下面的示例应用来理解。
 

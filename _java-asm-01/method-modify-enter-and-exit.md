@@ -9,43 +9,37 @@ sequence: "305"
 
 假如有一个`HelloWorld`类是如下这样的：
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void test() {
         System.out.println("this is a test method.");
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 我们看到上面的`test()`方法中，有一条打印语句。如果我们想在进入方法时和退出方法时，添加一条打印语句，该如何实现呢？
 
 第一种情况，我们想达成下面的效果：
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void test() {
         System.out.println("Method Enter...");
         System.out.println("this is a test method.");
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 第二种情况，我们想达成下面的效果：
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void test() {
         System.out.println("this is a test method.");
         System.out.println("Method Exit...");
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 实现思路
 
@@ -94,8 +88,7 @@ public class HelloWorld {
 
 在这两个位置当中，我们推荐使用`visitCode()`方法。因为`visitCode()`方法总是位于方法体（method body）的前面，而第1个`visitXxxInsn()`方法是不稳定的。
 
-{% highlight java %}
-{% raw %}
+```text
 public void visitCode() {
     // 首先，处理自己的代码逻辑
     // TODO: 添加“方法进入”时的代码
@@ -103,8 +96,7 @@ public void visitCode() {
     // 其次，调用父类的方法实现
     super.visitCode();
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 方法退出
 
@@ -114,8 +106,7 @@ public void visitCode() {
 
 在`MethodVisitor`类当中，无论是执行return语句，还是执行throws语句，都是通过`visitInsn(opcode)`方法来实现的。所以，如果我们想在方法退出时，添加一些语句，那么这些语句放到`visitInsn(opcode)`方法中就可以了。
 
-{% highlight java %}
-{% raw %}
+```text
 public void visitInsn(int opcode) {
     // 首先，处理自己的代码逻辑
     if (opcode == Opcodes.ATHROW || (opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {
@@ -125,15 +116,13 @@ public void visitInsn(int opcode) {
     // 其次，调用父类的方法实现
     super.visitInsn(opcode);
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 示例一：方法进入
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -169,8 +158,7 @@ public class MethodEnterVisitor extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 在上面`MethodEnterAdapter`类的`visitCode()`方法中，主要是做两件事情：
 
@@ -179,32 +167,27 @@ public class MethodEnterVisitor extends ClassVisitor {
 
 在处理自己的代码逻辑中，有3行代码。这3条语句的作用就是添加`System.out.println("Method Enter...");`语句：
 
-{% highlight java %}
-{% raw %}
+```text
 super.visitFieldInsn(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
 super.visitLdcInsn("Method Enter...");
 super.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
-{% endraw %}
-{% endhighlight %}
+```
 
 注意，上面的代码中使用了`super`关键字。
 
 事实上，在`MethodVisitor`类当中，定义了一个`protected MethodVisitor mv;`字段。我们也可以使用`mv`这个字段，代码也可以这样写：
 
-{% highlight java %}
-{% raw %}
+```text
 mv.visitFieldInsn(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
 mv.visitLdcInsn("Method Enter...");
 mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
-{% endraw %}
-{% endhighlight %}
+```
 
 但是这样写，可能会遇到`mv`为`null`的情况，这样就会出现`NullPointerException`异常。
 
 如果使用`super`，就会避免`NullPointerException`异常的情况。因为使用`super`的情况下，就是调用父类定义的方法，在本例中其实就是调用`MethodVisitor`类里定义的方法。在`MethodVisitor`类里的`visitXxx()`方法中，会先对`mv`进行是否为`null`的判断，所以就不会出现`NullPointerException`的情况。
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class MethodVisitor {
     protected MethodVisitor mv;
 
@@ -252,13 +235,11 @@ public abstract class MethodVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 进行转换
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
 
@@ -288,13 +269,11 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 import java.lang.reflect.Method;
 
 public class HelloWorldRun {
@@ -306,8 +285,7 @@ public class HelloWorldRun {
         m.invoke(instance);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 特殊情况：`<init>()`方法
 
@@ -315,48 +293,41 @@ public class HelloWorldRun {
 
 我们在“方法进入时”，有一个对于`<init>`的判断：
 
-{% highlight java %}
-{% raw %}
+```text
 if (mv != null && !"<init>".equals(name)) {
     // ......
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 为什么要对`<init>()`方法进行特殊处理呢？
 
 > Java requires that if you call this() or super() in a constructor, it must be the first statement.
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public HelloWorld() {
         System.out.println("Method Enter...");
         super(); // 报错：Call to 'super()' must be first statement in constructor body
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 大家可以做个实践，就是去掉对于`<init>()`方法的判断，会发现它好像也是可以正常执行的。
 
 但是，如果我们换一下添加的语句，就会出错了：
 
-{% highlight java %}
-{% raw %}
+```text
 super.visitFieldInsn(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
 super.visitVarInsn(Opcodes.ALOAD, 0);
 super.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/lang/Object", "toString", "()Ljava/lang/String;", false);
 super.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 示例二：方法退出
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -394,13 +365,11 @@ public class MethodExitVisitor extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 进行转换
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
 
@@ -430,13 +399,11 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 import java.lang.reflect.Method;
 
 public class HelloWorldRun {
@@ -448,17 +415,14 @@ public class HelloWorldRun {
         m.invoke(instance);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 输出结果：
 
-{% highlight java %}
-{% raw %}
+```text
 this is a test method.
 Method Exit...
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 示例三：方法进入和方法退出
 
@@ -466,8 +430,7 @@ Method Exit...
 
 第一种方式，就是将多个`ClassVisitor`类串联起来。
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
 
@@ -499,9 +462,7 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 第二种方式
 
@@ -509,8 +470,7 @@ public class HelloWorldTransformCore {
 
 编码实现：
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -563,13 +523,11 @@ public class MethodAroundVisitor extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 进行转换：
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
 
@@ -599,9 +557,7 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
-
+```
 
 ## 总结
 

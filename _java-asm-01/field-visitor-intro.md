@@ -7,14 +7,9 @@ sequence: "204"
 
 通过调用`ClassVisitor`类的`visitField()`方法，会返回一个`FieldVisitor`类型的对象。在本文当中，我们就对`FieldVisitor`类进行介绍。
 
-{% highlight text %}
-public FieldVisitor visitField(
-    final int access,
-    final String name,
-    final String descriptor,
-    final String signature,
-    final Object value);
-{% endhighlight %}
+```text
+public FieldVisitor visitField(int access, String name, String descriptor, String signature, Object value);
+```
 
 ## FieldVisitor类
 
@@ -24,32 +19,27 @@ public FieldVisitor visitField(
 
 第一个部分，`FieldVisitor`类是一个`abstract`类。
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class FieldVisitor {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### fields
 
 第二个部分，`FieldVisitor`类定义的字段有哪些。
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class FieldVisitor {
     protected final int api;
     protected FieldVisitor fv;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### constructors
 
 第三个部分，`FieldVisitor`类定义的构造方法有哪些。
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class FieldVisitor {
     public FieldVisitor(final int api) {
         this(api, null);
@@ -60,15 +50,13 @@ public abstract class FieldVisitor {
         this.fv = fieldVisitor;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### methods
 
 第四个部分，`FieldVisitor`类定义的方法有哪些。在`FieldVisitor`类当中，一共定义了4个`visitXxx()`方法，但是，我们只需要关注其中的`visitEnd()`方法就可以了。我们为什么只关注`visitEnd()`方法呢？因为我们刚开始学习ASM，有许多东西不太熟悉，为了减少我们的学习和认知“负担”，那么对于一些非必要的方法，我们就暂时忽略它；将`visitXxx()`方法精简到一个最小的认知集合，那么就只剩下`visitEnd()`方法了。
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class FieldVisitor {
     // ......
 
@@ -78,25 +66,24 @@ public abstract class FieldVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 另外，在`FieldVisitor`类内定义的多个`visitXxx()`方法，也需要遵循一定的调用顺序，如下所示：
 
-{% highlight text %}
+```text
 (
  visitAnnotation |
  visitTypeAnnotation |
  visitAttribute
 )*
 visitEnd
-{% endhighlight %}
+```
 
 由于我们只关注`visitEnd()`方法，那么，这个调用顺序就变成如下这样：
 
-{% highlight text %}
+```text
 visitEnd
-{% endhighlight %}
+```
 
 ## FieldVisitor类示例
 
@@ -104,19 +91,16 @@ visitEnd
 
 #### 预期目标
 
-{% highlight java %}
-{% raw %}
+```java
 public interface HelloWorld {
     int intValue = 100;
     String strValue = "ABC";
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.FieldVisitor;
@@ -158,13 +142,11 @@ public class HelloWorldGenerateCore {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 import java.lang.reflect.Field;
 
 public class HelloWorldRun {
@@ -180,16 +162,15 @@ public class HelloWorldRun {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 输出结果：
 
-{% highlight text %}
+```text
 fields:
     intValue: 100
     strValue: ABC
-{% endhighlight %}
+```
 
 #### 小总结
 
@@ -203,30 +184,25 @@ fields:
 
 假如我们想生成如下`HelloWorld`类：
 
-{% highlight java %}
-{% raw %}
+```java
 public interface HelloWorld {
     @MyTag(name = "tomcat", age = 10)
     int intValue = 100;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 其中，`MyTag`定义如下：
 
-{% highlight java %}
-{% raw %}
+```java
 public @interface MyTag {
     String name();
     int age();
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassWriter;
@@ -272,8 +248,7 @@ public class HelloWorldGenerateCore {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### 小总结
 
@@ -283,7 +258,7 @@ public class HelloWorldGenerateCore {
 
 本文主要对`FieldVisitor`类进行了介绍，内容总结如下：
 
-- 第一点，`FieldVisitor`类，从结构上来说，与`ClassVisitor`很相似；但是，我们只需要关心`FieldVisitor.visitEnd()`方法就可以了。
-- 第二点，`FieldWriter`类是继承自`FieldVisitor`类。我们平常写ASM代码的时候，不会用到它；但是，如果想研究ASM的源代码，那么可以重点关注一下`computeFieldInfoSize()`和`putFieldInfo()`这两个方法。
-- 第三点，ASM在设计类的时候，在“类名”层面，有一些“对称性”的特征。
+- 第一点，`FieldVisitor`类，从结构上来说，与`ClassVisitor`很相似；对于`FieldVisitor`类的各个不同部分进行介绍，以便从整体上来理解`FieldVisitor`类。
+- 第二点，对于`FieldVisitor`类定义的方法，我们只需要关心`FieldVisitor.visitEnd()`方法就可以了。
+- 第三点，我们可以借助于`ASMPrint`类来帮助我们学习新的`visitXxx()`方法。
 

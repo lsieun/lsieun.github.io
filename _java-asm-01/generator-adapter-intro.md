@@ -18,19 +18,16 @@ sequence: "406"
         - org.objectweb.asm.commons.GeneratorAdapter
             - org.objectweb.asm.commons.AdviceAdapter
 
-{% highlight java %}
-{% raw %}
+```java
 public class GeneratorAdapter extends LocalVariablesSorter {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### fields
 
 第二个部分，`GeneratorAdapter`类定义的字段有哪些。
 
-{% highlight java %}
-{% raw %}
+```java
 public class GeneratorAdapter extends LocalVariablesSorter {
     private final int access;
     private final String name;
@@ -38,15 +35,13 @@ public class GeneratorAdapter extends LocalVariablesSorter {
     private final Type[] argumentTypes;
     private final List<Type> localTypes = new ArrayList<>();
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### constructors
 
 第三个部分，`GeneratorAdapter`类定义的构造方法有哪些。
 
-{% highlight java %}
-{% raw %}
+```java
 public class GeneratorAdapter extends LocalVariablesSorter {
     public GeneratorAdapter(final MethodVisitor methodVisitor,
                             final int access, final String name, final String descriptor) {
@@ -62,8 +57,7 @@ public class GeneratorAdapter extends LocalVariablesSorter {
         this.argumentTypes = Type.getArgumentTypes(descriptor);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### methods
 
@@ -73,8 +67,7 @@ public class GeneratorAdapter extends LocalVariablesSorter {
 
 在`GeneratorAdapter`类当中，`loadThis()`方法的本质是`mv.visitVarInsn(Opcodes.ALOAD, 0)`；但是，要注意static方法并不需要`this`变量。
 
-{% highlight java %}
-{% raw %}
+```java
 public class GeneratorAdapter extends LocalVariablesSorter {
     public void loadThis() {
         if ((access & Opcodes.ACC_STATIC) != 0) { // 注意，静态方法没有this
@@ -83,15 +76,13 @@ public class GeneratorAdapter extends LocalVariablesSorter {
         mv.visitVarInsn(Opcodes.ALOAD, 0);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### arg
 
 在`GeneratorAdapter`类当中，定义了一些与方法参数相关的方法。
 
-{% highlight java %}
-{% raw %}
+```java
 public class GeneratorAdapter extends LocalVariablesSorter {
     private int getArgIndex(final int arg) {
         int index = (access & Opcodes.ACC_STATIC) == 0 ? 1 : 0;
@@ -142,15 +133,13 @@ public class GeneratorAdapter extends LocalVariablesSorter {
         storeInsn(argumentTypes[arg], getArgIndex(arg));
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### boxing and unboxing
 
 在`GeneratorAdapter`类当中，定义了一些与boxing和unboxing相关的操作。
 
-{% highlight java %}
-{% raw %}
+```java
 public class GeneratorAdapter extends LocalVariablesSorter {
     public void box(final Type type) {
         if (type.getSort() == Type.OBJECT || type.getSort() == Type.ARRAY) {
@@ -248,27 +237,23 @@ public class GeneratorAdapter extends LocalVariablesSorter {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 示例：生成类
 
 ### 预期目标
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public static void main(String[] args) {
         System.out.println("Hello World!");
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Type;
@@ -324,8 +309,7 @@ public class GeneratorAdapterExample01 {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 总结
 

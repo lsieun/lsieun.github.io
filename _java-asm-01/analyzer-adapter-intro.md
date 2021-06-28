@@ -23,12 +23,10 @@ This is what this adapter does.
 
 第一个部分，`AnalyzerAdapter`类的父类是`MethodVisitor`类。
 
-{% highlight java %}
-{% raw %}
+```java
 public class AnalyzerAdapter extends MethodVisitor {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### fields
 
@@ -40,8 +38,7 @@ public class AnalyzerAdapter extends MethodVisitor {
 - 第2组，包括`labels`和`uninitializedTypes`字段，它们记录的是未初始化的对象类型，是属于一些特殊情况。
 - 第3组，是`owner`字段，表示当前类的名字。
 
-{% highlight java %}
-{% raw %}
+```java
 public class AnalyzerAdapter extends MethodVisitor {
     // 第1组字段：local variables和operand stack
     public List<Object> locals;
@@ -56,8 +53,7 @@ public class AnalyzerAdapter extends MethodVisitor {
     // 第3组字段：类的名字
     private String owner;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 
 
@@ -66,8 +62,7 @@ public class AnalyzerAdapter extends MethodVisitor {
 第三个部分，`AnalyzerAdapter`类定义的构造方法有哪些。
 
 
-{% highlight java %}
-{% raw %}
+```java
 public class AnalyzerAdapter extends MethodVisitor {
     public AnalyzerAdapter(String owner, int access, String name, String descriptor, MethodVisitor methodVisitor) {
         this(Opcodes.ASM9, owner, access, name, descriptor, methodVisitor);
@@ -123,8 +118,7 @@ public class AnalyzerAdapter extends MethodVisitor {
         maxLocals = locals.size();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### methods
 
@@ -134,22 +128,19 @@ public class AnalyzerAdapter extends MethodVisitor {
 
 在`AnalyzerAdapter`类当中，多数的`visitXxxInsn()`方法都会去调用`execute()`方法；而`execute()`方法是模拟每一条instruction对于local variables和operand stack的影响。
 
-{% highlight java %}
-{% raw %}
+```java
 public class AnalyzerAdapter extends MethodVisitor {
     private void execute(final int opcode, final int intArg, final String stringArg) {
         // ......
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### return和throw
 
 当遇到`return`或`throw`时，会将`locals`字段和`stack`字段设置为`null`。如果遇到`return`之后，就代表了“正常结束”，方法的代码执行结束了；如果遇到`throw`之后，就代表了“出现异常”，方法处理不了某种情况而退出。
 
-{% highlight java %}
-{% raw %}
+```java
 public class AnalyzerAdapter extends MethodVisitor {
     // 这里对应return语句
     public void visitInsn(final int opcode) {
@@ -161,15 +152,13 @@ public class AnalyzerAdapter extends MethodVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### jump
 
 当遇到`goto`、`switch`（`tableswitch`和`lookupswitch`）时，也会将`locals`字段和`stack`字段设置为`null`。遇到jump相关的指令，意味着代码的逻辑要进行“跳转”，从一个地方跳转到另一个地方执行。
 
-{% highlight java %}
-{% raw %}
+```java
 public class AnalyzerAdapter extends MethodVisitor {
     // 这里对应goto语句
     public void visitJumpInsn(final int opcode, final Label label) {
@@ -197,15 +186,13 @@ public class AnalyzerAdapter extends MethodVisitor {
         this.stack = null;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### visitFrame方法
 
 当遇到jump相关的指令后，程序的代码会发生跳转。那么，跳转到新位置之后，就需要给local variables和operand stack重新设置一个新的状态；而`visitFrame()`方法，是将local variables和operand stack设置成某一个状态。跳转之后的代码，就是在这个新状态的基础上发生变化。
 
-{% highlight java %}
-{% raw %}
+```java
 public class AnalyzerAdapter extends MethodVisitor {
     public void visitFrame(int type, int numLocal, Object[] local, int numStack, Object[] stack) {
         if (type != Opcodes.F_NEW) { // Uncompressed frame.
@@ -238,8 +225,7 @@ public class AnalyzerAdapter extends MethodVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### new和invokespecial
 
@@ -248,8 +234,7 @@ public class AnalyzerAdapter extends MethodVisitor {
 - 当遇到`new`时，会创建`Label`对象来表示“未初始化的对象”，并将label存储到`uninitializedTypes`字段内；
 - 当遇到`invokespecial`时，会把“未初始化的对象”从`uninitializedTypes`字段内取出来，转换成“经过初始化之后的对象”，然后同步到`locals`字段和`stack`字段内。
 
-{% highlight java %}
-{% raw %}
+```java
 public class AnalyzerAdapter extends MethodVisitor {
     // 对应于new
     public void visitTypeInsn(final int opcode, final String type) {
@@ -305,8 +290,7 @@ public class AnalyzerAdapter extends MethodVisitor {
         labels = null;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 工作原理
 
@@ -316,8 +300,7 @@ public class AnalyzerAdapter extends MethodVisitor {
 
 `AnalyzerAdapter`类的主要作用就是记录stack map frame的变化情况；在frame当中，有两个重要的结构，即local variables和operand stack。结合刚才的三个字段，其中`locals`和`stack`分别表示local variables和operand stack；而`uninitializedTypes`则是记录一种特殊的状态，这个状态就是“对象已经通过new创建了，但是还没有调用它的构造方法”，这个状态只是一个“临时”的状态，等后续调用它的构造方法之后，它就是一个真正意义上的对象了。举一个例子，一个人拿到了大学录取通知书，可以笼统的叫作”大学生“，但是还不是真正意义上的”大学生“，是一种”临时“的过渡状态，等到去大学报到之后，才成为真正意义上的大学生。
 
-{% highlight java %}
-{% raw %}
+```java
 public class AnalyzerAdapter extends MethodVisitor {
     // 第1组字段：local variables和operand stack
     public List<Object> locals;
@@ -327,8 +310,7 @@ public class AnalyzerAdapter extends MethodVisitor {
     private List<Label> labels;
     public Map<Object, Object> uninitializedTypes;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 我们在研究local variables和operand stack的变化时，遵循下面的思路就可以了：
 
@@ -344,8 +326,7 @@ public class AnalyzerAdapter extends MethodVisitor {
 
 首先，就是local variables和operand stack的初始状态，它是通过`AnalyzerAdapter`类的构造方法来为`locals`和`stack`字段赋值。
 
-{% highlight java %}
-{% raw %}
+```java
 public class AnalyzerAdapter extends MethodVisitor {
     protected AnalyzerAdapter(int api, String owner, int access, String name, String descriptor, MethodVisitor methodVisitor) {
         super(api, methodVisitor);
@@ -397,8 +378,7 @@ public class AnalyzerAdapter extends MethodVisitor {
         maxLocals = locals.size();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 
 在上面的构造方法中，operand stack的初始状态是空的；而local variables的初始状态需要考虑两方面的内容：
@@ -412,15 +392,13 @@ public class AnalyzerAdapter extends MethodVisitor {
 
 接着，就是instruction的执行会使得local variables和operand stack状态发生变化。在这个过程中，`visitXxxInsn()`方法大多是通过调用`execute(opcode, intArg, stringArg)`方法来完成。
 
-{% highlight java %}
-{% raw %}
+```java
 public class AnalyzerAdapter extends MethodVisitor {
     private void execute(final int opcode, final int intArg, final String stringArg) {
         // ......
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### 发生跳转
 
@@ -432,11 +410,11 @@ public class AnalyzerAdapter extends MethodVisitor {
 
 对于“未初始化的对象类型”，我们来举个例子，比如说`new String()`会创建一个`String`类型的对象，但是对应到ByteCode层面是3条instruction：
 
-{% highlight text %}
+```text
 NEW java/lang/String
 DUP
 INVOKESPECIAL java/lang/String.<init> ()V
-{% endhighlight %}
+```
 
 - 第1条instruction，是`NEW java/lang/String`，会为即将创建的对象分配内存空间，确切的说是在堆（heap）上分配内存空间，同时将一个`reference`放到operand stack上，这个`reference`就指向这块内存空间。由于这块内存空间还没有进行初始化，所以这个`reference`对应的内容并不能确切的叫作“对象”，只能叫作“未初始化的对象”，也就是“uninitialized object”。
 - 第2条instruction，是`DUP`，会将operand stack上的原有的`reference`复制一份，这时候operand stack上就有两个`reference`，这两个`reference`都指向那块未初始化的内存空间，这两个`reference`的内容都对应于同一个“uninitialized object”。
@@ -457,8 +435,7 @@ INVOKESPECIAL java/lang/String.<init> ()V
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.*;
 import org.objectweb.asm.commons.AnalyzerAdapter;
 
@@ -645,13 +622,11 @@ public class MethodStackMapFrameVisitor extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -684,8 +659,7 @@ public class HelloWorldFrameCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 总结
 

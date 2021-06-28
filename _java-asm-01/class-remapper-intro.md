@@ -17,12 +17,10 @@ sequence: "410"
 
 第一个部分，`ClassRemapper`类继承自`ClassVisitor`类。
 
-{% highlight java %}
-{% raw %}
+```java
 public class ClassRemapper extends ClassVisitor {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### fields
 
@@ -30,21 +28,18 @@ public class ClassRemapper extends ClassVisitor {
 
 在ASM中，`Remapper`类是一个抽象类，它一个具体的子类`SimpleRemapper`；这个`SimpleRemapper`从本质上来说是一个`Map`，所以实现上也比较简单。
 
-{% highlight java %}
-{% raw %}
+```java
 public class ClassRemapper extends ClassVisitor {
     protected final Remapper remapper;
     protected String className;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### constructors
 
 第三个部分，`ClassRemapper`类定义的构造方法有哪些。
 
-{% highlight java %}
-{% raw %}
+```java
 public class ClassRemapper extends ClassVisitor {
     public ClassRemapper(final ClassVisitor classVisitor, final Remapper remapper) {
         this(Opcodes.ASM9, classVisitor, remapper);
@@ -55,15 +50,13 @@ public class ClassRemapper extends ClassVisitor {
         this.remapper = remapper;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### methods
 
 第四个部分，`ClassRemapper`类定义的方法有哪些。
 
-{% highlight java %}
-{% raw %}
+```java
 public class ClassRemapper extends ClassVisitor {
     public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
         this.className = name;
@@ -99,8 +92,7 @@ public class ClassRemapper extends ClassVisitor {
         return methodVisitor == null ? null : createMethodRemapper(methodVisitor);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 示例
 
@@ -110,32 +102,27 @@ public class ClassRemapper extends ClassVisitor {
 
 修改前：
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void test() {
         System.out.println("Hello World");
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 修改后：
 
-{% highlight java %}
-{% raw %}
+```java
 public class GoodChild {
     public void test() {
         System.out.println("Hello World");
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -177,13 +164,11 @@ public class ClassRemapperExample01 {
         return FileUtils.getFilePath(relative_path);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 import java.lang.reflect.Method;
 
 public class HelloWorldRun {
@@ -195,8 +180,7 @@ public class HelloWorldRun {
         m.invoke(instance);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 示例二：修改字段名和方法名
 
@@ -204,8 +188,7 @@ public class HelloWorldRun {
 
 修改前：
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     private int intValue;
 
@@ -217,13 +200,11 @@ public class HelloWorld {
         System.out.println("field value: " + intValue);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 修改后：
 
-{% highlight java %}
-{% raw %}
+```java
 public class GoodChild {
     private int a;
 
@@ -235,13 +216,11 @@ public class GoodChild {
         System.out.println("field value: " + this.a);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -290,13 +269,11 @@ public class ClassRemapperExample02 {
         return FileUtils.getFilePath(relative_path);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 import java.lang.reflect.Method;
 
 public class HelloWorldRun {
@@ -308,8 +285,7 @@ public class HelloWorldRun {
         m.invoke(instance);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 示例三：修改两个类
 
@@ -317,58 +293,49 @@ public class HelloWorldRun {
 
 修改前：
 
-{% highlight java %}
-{% raw %}
+```java
 public class GoodChild {
     public void study() {
         System.out.println("Start where you are. Use what you have. Do what you can. – Arthur Ashe");
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 修改后：
 
-{% highlight java %}
-{% raw %}
+```java
 public class BBB {
     public void b() {
         System.out.println("Start where you are. Use what you have. Do what you can. – Arthur Ashe");
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 修改前：
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void test() {
         GoodChild child = new GoodChild();
         child.study();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 修改后：
 
-{% highlight java %}
-{% raw %}
+```java
 public class AAA {
     public void a() {
         BBB var1 = new BBB();
         var1.b();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -421,13 +388,11 @@ public class ClassRemapperExample03 {
         return FileUtils.getFilePath(relative_path);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 import java.lang.reflect.Method;
 
 public class HelloWorldRun {
@@ -439,8 +404,7 @@ public class HelloWorldRun {
         m.invoke(instance);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 总结
 

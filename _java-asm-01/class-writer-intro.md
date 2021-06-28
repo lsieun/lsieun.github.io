@@ -11,19 +11,16 @@ sequence: "202"
 
 第一个部分，就是`ClassWriter`的父类是`ClassVisitor`，因此`ClassWriter`类继承了`visit()`、`visitField()`、`visitMethod()`和`visitEnd()`等方法。
 
-{% highlight java %}
-{% raw %}
+```java
 public class ClassWriter extends ClassVisitor {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### fields
 
 第二个部分，就是`ClassWriter`定义的字段有哪些。
 
-{% highlight java %}
-{% raw %}
+```java
 public class ClassWriter extends ClassVisitor {
     private int version;
     private final SymbolTable symbolTable;
@@ -44,12 +41,11 @@ public class ClassWriter extends ClassVisitor {
 
     //......
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 这些字段与ClassFile结构密切相关：
 
-{% highlight text %}
+```text
 ClassFile {
     u4             magic;
     u2             minor_version;
@@ -68,14 +64,13 @@ ClassFile {
     u2             attributes_count;
     attribute_info attributes[attributes_count];
 }
-{% endhighlight %}
+```
 
 ### constructors
 
 第三个部分，就是`ClassWriter`定义的构造方法。`ClassWriter`定义的构造方法有两个，这里只关注其中一个，也就是只接收一个`int`类型参数的构造方法。在使用`new`关键字创建`ClassWriter`对象时，推荐使用`COMPUTE_FRAMES`参数。
 
-{% highlight java %}
-{% raw %}
+```java
 public class ClassWriter extends ClassVisitor {
     /* A flag to automatically compute the maximum stack size and the maximum number of local variables of methods. */
     public static final int COMPUTE_MAXS = 1;
@@ -88,8 +83,7 @@ public class ClassWriter extends ClassVisitor {
         this(null, flags);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### methods
 
@@ -99,8 +93,7 @@ public class ClassWriter extends ClassVisitor {
 
 在`ClassWriter`这个类当中，我们仍然是只关注其中的`visit()`方法、`visitField()`方法、`visitMethod()`方法和`visitEnd()`方法。这些`visitXxx()`方法的调用，就是在为构建ClassFile提供“原材料”的过程。
 
-{% highlight java %}
-{% raw %}
+```java
 public class ClassWriter extends ClassVisitor {
     public void visit(
         final int version,
@@ -124,8 +117,7 @@ public class ClassWriter extends ClassVisitor {
     public void visitEnd();
     // ......
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### toByteArray()方法
 
@@ -137,8 +129,7 @@ public class ClassWriter extends ClassVisitor {
 - 第二步，将数据填充到`byte[]`当中。
 - 第三步，将`byte[]`数据返回。
 
-{% highlight java %}
-{% raw %}
+```java
 public class ClassWriter extends ClassVisitor {
     public byte[] toByteArray() {
 
@@ -220,8 +211,7 @@ public class ClassWriter extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 创建ClassWriter对象
 
@@ -235,11 +225,9 @@ public class ClassWriter extends ClassVisitor {
 
 创建`ClassWriter`对象，如下所示：
 
-{% highlight java %}
-{% raw %}
+```text
 ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 为什么推荐使用COMPUTE_FRAMES
 
@@ -247,7 +235,7 @@ ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 
 首先，来看一下max stacks和max locals。在ClassFile结构中，每一个方法都用`method_info`来表示，而方法里定义的代码则使用`Code`属性来表示，其结构如下：
 
-{% highlight text %}
+```text
 Code_attribute {
     u2 attribute_name_index;
     u4 attribute_length;
@@ -264,20 +252,20 @@ Code_attribute {
     u2 attributes_count;
     attribute_info attributes[attributes_count];
 }
-{% endhighlight %}
+```
 
 如果我们在创建`ClassWriter(flags)`对象的时候，将`flags`参数设置为`ClassWriter.COMPUTE_MAXS`或`ClassWriter.COMPUTE_FRAMES`，那么ASM会自动帮助我们计算`Code`结构中`max_stack`和`max_locals`的值。
 
 接着，来看一下stack map frames。在`Code`结构里，可能有多个`attributes`，其中一个可能就是`StackMapTable_attribute`。`StackMapTable_attribute`结构，就是stack map frame具体存储格式，它的主要作用是对ByteCode进行类型检查。
 
-{% highlight text %}
+```text
 StackMapTable_attribute {
     u2              attribute_name_index;
     u4              attribute_length;
     u2              number_of_entries;
     stack_map_frame entries[number_of_entries];
 }
-{% endhighlight %}
+```
 
 如果我们在创建`ClassWriter(flags)`对象的时候，将`flags`参数设置为`ClassWriter.COMPUTE_FRAMES`，那么ASM会自动帮助我们计算`StackMapTable_attribute`的内容。
 
@@ -304,8 +292,7 @@ StackMapTable_attribute {
 
 示例代码如下：
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassWriter;
 
 import static org.objectweb.asm.Opcodes.*;
@@ -316,9 +303,9 @@ public class HelloWorldGenerateCore {
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 
         // (2) 调用visitXxx()方法
-        cw.visit(...);
-        cw.visitField(...);
-        cw.visitMethod(...);
+        cw.visit();
+        cw.visitField();
+        cw.visitMethod();
         cw.visitEnd();       // 注意，最后要调用visitEnd()方法
 
         // (3) 调用toByteArray()方法
@@ -326,8 +313,7 @@ public class HelloWorldGenerateCore {
         return bytes;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 总结
 

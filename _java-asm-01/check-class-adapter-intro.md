@@ -17,18 +17,15 @@ before delegating to the next visitor.
 
 使用`CheckClassAdapter`类，其实很简单：
 
-{% highlight java %}
-{% raw %}
+```text
 byte[] bytes = ... // 这里是class file bytes
 PrintWriter printWriter = new PrintWriter(System.out);
 CheckClassAdapter.verify(new ClassReader(bytes), true, printWriter);
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 生成新的类
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.FieldVisitor;
@@ -89,13 +86,11 @@ public class CheckClassAdapterExample01Generate {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 修改已有的类
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -133,8 +128,7 @@ public class CheckClassAdapterExample02Transform {
         CheckClassAdapter.verify(new ClassReader(bytes2), true, printWriter);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 示例检测
 
@@ -142,7 +136,7 @@ public class CheckClassAdapterExample02Transform {
 
 如果注释掉`mv2.visitInsn(RETURN);`语句，会出现什么错误呢？
 
-{% highlight text %}
+```text
 org.objectweb.asm.tree.analysis.AnalyzerException: Execution can fall off the end of the code
 	at org.objectweb.asm.tree.analysis.Analyzer.findSubroutine(Analyzer.java:322)
 	at org.objectweb.asm.tree.analysis.Analyzer.analyze(Analyzer.java:138)
@@ -153,13 +147,13 @@ test()V
 00000 ?    :     GETSTATIC java/lang/System.out : Ljava/io/PrintStream;
 00001 ?    :     LDC "Hello World"
 00002 ?    :     INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V
-{% endhighlight %}
+```
 
 ### 检测：没有`visitMaxs()`方法
 
 如果注释掉`mv2.visitMaxs(2, 1);`语句，会出现什么错误呢？
 
-{% highlight text %}
+```text
 org.objectweb.asm.tree.analysis.AnalyzerException: Error at instruction 0: Insufficient maximum stack size.
 	at org.objectweb.asm.tree.analysis.Analyzer.analyze(Analyzer.java:295)
 	at org.objectweb.asm.util.CheckClassAdapter.verify(CheckClassAdapter.java:1063)
@@ -175,21 +169,19 @@ test()V
 00001 ?  :     LDC "Hello World"
 00002 ?  :     INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V
 00003 ?  :     RETURN
-{% endhighlight %}
+```
 
 ### 检测：方法描述符不对
 
 将下面方法的描述符（`(Ljava/lang/String;)V`）修改成`(I)V`，会出现什么错误呢？
 
-{% highlight java %}
-{% raw %}
+```text
 mv2.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
 mv2.visitLdcInsn("Hello World");
 mv2.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
-{% endraw %}
-{% endhighlight %}
+```
 
-{% highlight text %}
+```text
 org.objectweb.asm.tree.analysis.AnalyzerException: Error at instruction 2: Argument 1: expected I, but found Ljava/lang/String;
 	at org.objectweb.asm.tree.analysis.Analyzer.analyze(Analyzer.java:291)
 	at org.objectweb.asm.util.CheckClassAdapter.verify(CheckClassAdapter.java:1063)
@@ -207,14 +199,13 @@ test()V
 00001 HelloWorld  : PrintStream  :     LDC "Hello World"
 00002 HelloWorld  : PrintStream String  :     INVOKEVIRTUAL java/io/PrintStream.println (I)V
 00003 ?    :     RETURN
-{% endhighlight %}
+```
 
 ### 检测不出：重复类成员
 
 如果出现重复的字段或者重复的方法，`CheckClassAdapter`类是检测不出来的：
 
-{% highlight java %}
-{% raw %}
+```text
 {
 	FieldVisitor fv = cw.visitField(ACC_PRIVATE, "intValue", "I", null, null);
 	fv.visitEnd();
@@ -224,8 +215,7 @@ test()V
 	FieldVisitor fv = cw.visitField(ACC_PRIVATE, "intValue", "I", null, null);
 	fv.visitEnd();
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 总结
 

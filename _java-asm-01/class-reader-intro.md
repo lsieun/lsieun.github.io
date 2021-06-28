@@ -11,32 +11,27 @@ sequence: "301"
 
 ### class info
 
-与`ClassWriter`类不同的是，`ClassReader`类并没有继承自`ClassVisitor`类。
+第一个部分，`ClassReader`的父类是`Object`类。与`ClassWriter`类不同的是，`ClassReader`类并没有继承自`ClassVisitor`类。
 
 `ClassReader`类的定义如下：
 
-{% highlight java %}
-{% raw %}
+```java
 public class ClassReader {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 `ClassWriter`类的定义如下：
 
-{% highlight java %}
-{% raw %}
+```java
 public class ClassWriter extends ClassVisitor {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### fields
 
-在`ClassReader`类当中，定义了许多的字段，但是，我们选取出其中的3个字段进行介绍，即`classFileBuffer`字段、`cpInfoOffsets`字段和`header`字段。
+第二个部分，`ClassReader`类定义的字段有哪些。我们选取出其中的3个字段进行介绍，即`classFileBuffer`字段、`cpInfoOffsets`字段和`header`字段。
 
-{% highlight java %}
-{% raw %}
+```java
 public class ClassReader {
     //第1组，真实的数据部分
     final byte[] classFileBuffer;
@@ -45,31 +40,33 @@ public class ClassReader {
     private final int[] cpInfoOffsets;
     public final int header;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
-为什么选择这3个字段呢？因为这3个字段，从整体上来说，代表了`ClassReader`类代码处理的整体思路，而其它字段则是关注于一些实现的细节。
+为什么选择这3个字段呢？因为这3个字段能够体现出`ClassReader`类处理`.class`文件的整体思路：
 
 - 第1组，`classFileBuffer`字段：它里面包含的信息，就是从`.class`文件中读取出来的字节码数据。
 - 第2组，`cpInfoOffsets`字段和`header`字段：它们分别标识了`classFileBuffer`中数据里包含的常量池（constant pool）和访问标识（access flag）的位置信息。
 
-我们拿到`classFileBuffer`字段后，一个主要目的就是对它的内容进行修改，来实现一个新的功能。这样一个对已有的类进行修改的大体思路是这样的：
+我们拿到`classFileBuffer`字段后，一个主要目的就是对它的内容进行修改，来实现一个新的功能。它处理的大体思路是这样的：
 
-{% highlight text %}
+```text
 .class文件 --> ClassReader --> byte[] --> 经过各种转换 --> ClassWriter --> byte[] --> .class文件
-{% endhighlight %}
+```
 
-首先，从一个`.class`文件（例如`HelloWorld.class`）开始，它可能存储于磁盘的某个位置；接着，使用`ClassReader`类将这个`.class`文件的内容读取出来，其实这些内容（`byte[]`）就是`ClassReader`对象中的`classFileBuffer`字段的内容；再接着，为了增加某些功能，就对这些原始内容（`byte[]`）进行转换，后续我们会讲如何进行转换；等各种转换都完成之后，再交给`ClassWriter`类处理，调用它的`toByteArray()`方法，从而得到新的内容（`byte[]`）；最后，将新生成的内容（`byte[]`）存储到一个具体的`.class`文件中，那么这个新的`.class`文件就具备了一些新的功能。
+- 第一，从一个`.class`文件（例如`HelloWorld.class`）开始，它可能存储于磁盘的某个位置；
+- 第二，使用`ClassReader`类将这个`.class`文件的内容读取出来，其实这些内容（`byte[]`）就是`ClassReader`对象中的`classFileBuffer`字段的内容；
+- 第三，为了增加某些功能，就对这些原始内容（`byte[]`）进行转换；
+- 第四，等各种转换都完成之后，再交给`ClassWriter`类处理，调用它的`toByteArray()`方法，从而得到新的内容（`byte[]`）；
+- 第五，将新生成的内容（`byte[]`）存储到一个具体的`.class`文件中，那么这个新的`.class`文件就具备了一些新的功能。
 
 ### constructors
 
-在`ClassReader`类当中定义了多个构造方法。但是，从本质上来说，这多个构造方法本质上是同一个构造方法的不同表现形式。其中，最常用的构造方法有两个：
+第三个部分，`ClassReader`类定义的构造方法有哪些。在`ClassReader`类当中定义了5个构造方法。但是，从本质上来说，这5个构造方法本质上是同一个构造方法的不同表现形式。其中，最常用的构造方法有两个：
 
 - 第一个是`ClassReader cr = new ClassReader("sample.HelloWorld");`
 - 第二个是`ClassReader cr = new ClassReader(bytes);`
 
-{% highlight java %}
-{% raw %}
+```java
 public class ClassReader {
 
     public ClassReader(final String className) throws IOException { // 第一个构造方法（常用）
@@ -82,10 +79,7 @@ public class ClassReader {
         this(classFile, 0, classFile.length);
     }
 
-    public ClassReader(
-        final byte[] classFileBuffer,
-        final int classFileOffset,
-        final int classFileLength) {
+    public ClassReader(final byte[] classFileBuffer, final int classFileOffset, final int classFileLength) {
         this(classFileBuffer, classFileOffset, true);
     }
 
@@ -115,13 +109,11 @@ public class ClassReader {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 所有构造方法，本质上都执行下面的逻辑：
 
-{% highlight java %}
-{% raw %}
+```java
 public class ClassReader {
     ClassReader(final byte[] classFileBuffer, final int classFileOffset, final boolean checkClassVersion) {
         this.classFileBuffer = classFileBuffer;
@@ -137,7 +129,6 @@ public class ClassReader {
         // which use 4, 2 and 2 bytes respectively.
         int constantPoolCount = readUnsignedShort(classFileOffset + 8);
         cpInfoOffsets = new int[constantPoolCount];
-        constantUtf8Values = new String[constantPoolCount];
 
         // Compute the offset of each constant pool entry,
         // as well as a conservative estimate of the maximum length of the constant pool strings.
@@ -145,9 +136,6 @@ public class ClassReader {
         // which use 4, 2, 2 and 2 bytes respectively.
         int currentCpInfoIndex = 1;
         int currentCpInfoOffset = classFileOffset + 10;
-        int currentMaxStringLength = 0;
-        boolean hasBootstrapMethods = false;
-        boolean hasConstantDynamic = false;
 
         // The offset of the other entries depend on the total size of all the previous entries.
         while (currentCpInfoIndex < constantPoolCount) {
@@ -164,12 +152,9 @@ public class ClassReader {
                     break;
                 case Symbol.CONSTANT_DYNAMIC_TAG:
                     cpInfoSize = 5;
-                    hasBootstrapMethods = true;
-                    hasConstantDynamic = true;
                     break;
                 case Symbol.CONSTANT_INVOKE_DYNAMIC_TAG:
                     cpInfoSize = 5;
-                    hasBootstrapMethods = true;
                     break;
                 case Symbol.CONSTANT_LONG_TAG:
                 case Symbol.CONSTANT_DOUBLE_TAG:
@@ -178,12 +163,6 @@ public class ClassReader {
                     break;
                 case Symbol.CONSTANT_UTF8_TAG:
                     cpInfoSize = 3 + readUnsignedShort(currentCpInfoOffset + 1);
-                    if (cpInfoSize > currentMaxStringLength) {
-                        // The size in bytes of this CONSTANT_Utf8 structure provides a conservative estimate
-                        // of the length in characters of the corresponding string, and is much cheaper to
-                        // compute than this exact length.
-                        currentMaxStringLength = cpInfoSize;
-                    }
                     break;
                 case Symbol.CONSTANT_METHOD_HANDLE_TAG:
                     cpInfoSize = 4;
@@ -201,23 +180,15 @@ public class ClassReader {
             currentCpInfoOffset += cpInfoSize;
         }
 
-        maxStringLength = currentMaxStringLength;
         // The Classfile's access_flags field is just after the last constant pool entry.
         header = currentCpInfoOffset;
-
-        // Allocate the cache of ConstantDynamic values, if there is at least one.
-        constantDynamicValues = hasConstantDynamic ? new ConstantDynamic[constantPoolCount] : null;
-
-        // Read the BootstrapMethods attribute, if any (only get the offset of each method).
-        bootstrapMethodOffsets = hasBootstrapMethods ? readBootstrapMethodsAttribute(currentMaxStringLength) : null;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 上面的代码，要结合ClassFile的结构进行理解：
 
-{% highlight text %}
+```text
 ClassFile {
     u4             magic;
     u2             minor_version;
@@ -236,16 +207,17 @@ ClassFile {
     u2             attributes_count;
     attribute_info attributes[attributes_count];
 }
-{% endhighlight %}
+```
 
 ### methods
+
+第四个部分，`ClassReader`类定义的方法有哪些。
 
 #### getXxx()方法
 
 这里介绍的几个`getXxx()`方法，都是在`header`字段的基础上获得的：
 
-{% highlight java %}
-{% raw %}
+```java
 public class ClassReader {
     public int getAccess() {
         return readUnsignedShort(header);
@@ -276,12 +248,11 @@ public class ClassReader {
         return interfaces;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 同样，上面的几个`getXxx()`方法也需要参考ClassFile结构来理解：
 
-{% highlight text %}
+```text
 ClassFile {
     u4             magic;
     u2             minor_version;
@@ -300,24 +271,21 @@ ClassFile {
     u2             attributes_count;
     attribute_info attributes[attributes_count];
 }
-{% endhighlight %}
+```
 
 假如，有如下一个类：
 
-{% highlight java %}
-{% raw %}
+```java
 import java.io.Serializable;
 
 public class HelloWorld extends Exception implements Serializable, Cloneable {
 
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 我们可以使用`ClassReader`类中的`getXxx()`方法来获取相应的信息：
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 
@@ -346,24 +314,22 @@ public class HelloWorldRun {
         System.out.println("interfaces: " + Arrays.toString(interfaces));
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 输出结果：
 
-{% highlight text %}
+```text
 access: 33
 className: sample/HelloWorld
 superName: java/lang/Exception
 interfaces: [java/io/Serializable, java/lang/Cloneable]
-{% endhighlight %}
+```
 
 #### accept()方法
 
 在`ClassReader`类当中，有一个`accept()`方法，这个方法接收一个`ClassVisitor`类型的参数，因此`accept()`方法是将`ClassReader`和`ClassVisitor`进行连接的“桥梁”。`accept()`方法的代码逻辑就是按照一定的顺序来调用`ClassVisitor`当中的`visitXxx()`方法。
 
-{% highlight java %}
-{% raw %}
+```java
 public class ClassReader {
     // A flag to skip the Code attributes.
     public static final int SKIP_CODE = 1;
@@ -431,12 +397,11 @@ public class ClassReader {
     }
 
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 另外，我们也可以回顾一下`ClassVisitor`类中`visitXxx()`方法的调用顺序：
 
-{% highlight text %}
+```text
 visit
 [visitSource][visitModule][visitNestHost][visitPermittedSubclass][visitOuterClass]
 (
@@ -452,7 +417,7 @@ visit
  visitMethod
 )* 
 visitEnd
-{% endhighlight %}
+```
 
 ## 如何使用ClassReader类
 
@@ -464,8 +429,7 @@ The ASM core API for **generating** and **transforming** compiled Java classes i
 
 在现阶段，我们接触了`ClassVisitor`、`ClassWriter`和`ClassReader`类，因此可以介绍Class Transformation的操作。
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -498,14 +462,13 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 代码的整体处理流程是如下这样的：
 
-{% highlight text %}
+```text
 .class --> ClassReader --> ClassVisitor1 ... --> ClassVisitorN --> ClassWriter --> .class文件
-{% endhighlight %}
+```
 
 我们可以将整体的处理流程想像成一条河流，那么
 
@@ -523,11 +486,9 @@ public class HelloWorldTransformCore {
 
 在`ClassReader`类当中，`accept()`方法接收一个`int`类型的`parsingOptions`参数。
 
-{% highlight java %}
-{% raw %}
+```text
 public void accept(final ClassVisitor classVisitor, final int parsingOptions)
-{% endraw %}
-{% endhighlight %}
+```
 
 `parsingOptions`参数可以选取的值有以下5个：
 
@@ -544,15 +505,13 @@ public void accept(final ClassVisitor classVisitor, final int parsingOptions)
 
 示例代码如下：
 
-{% highlight java %}
-{% raw %}
+```text
 ClassReader cr = new ClassReader(bytes);
 int parsingOptions = ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES;
 cr.accept(cv, parsingOptions);
 
 ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
-{% endraw %}
-{% endhighlight %}
+```
 
 为什么我们推荐使用`ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES`呢？因为使用这样的一个值，可以生成最少的ASM代码，但是又能实现完整的功能。
 

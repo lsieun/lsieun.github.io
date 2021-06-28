@@ -7,9 +7,9 @@ sequence: "206"
 
 通过调用`ClassVisitor`类的`visitMethod()`方法，会返回一个`MethodVisitor`类型的对象。在本文当中，我们就对`MethodVisitor`类进行介绍。
 
-{% highlight text %}
+```text
 public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions);
-{% endhighlight %}
+```
 
 ## MethodVisitor类
 
@@ -19,32 +19,27 @@ public MethodVisitor visitMethod(int access, String name, String descriptor, Str
 
 第一个部分，`MethodVisitor`类是一个`abstract`类。
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class MethodVisitor {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### fields
 
 第二个部分，`MethodVisitor`类定义的字段有哪些。
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class MethodVisitor {
     protected final int api;
     protected MethodVisitor mv;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### constructors
 
 第三个部分，`MethodVisitor`类定义的构造方法有哪些。
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class MethodVisitor {
     public MethodVisitor(final int api) {
         this(api, null);
@@ -55,15 +50,13 @@ public abstract class MethodVisitor {
         this.mv = methodVisitor;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### methods
 
 第四个部分，`MethodVisitor`类定义的方法有哪些。在`MethodVisitor`类当中，定义了许多的`visitXxx()`方法，我们列出了其中的一些方法，内容如下：
 
-{% highlight java %}
-{% raw %}
+```java
 public abstract class MethodVisitor {
     public void visitCode();
 
@@ -91,8 +84,7 @@ public abstract class MethodVisitor {
 
     // ......
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 对于这些`visitXxx()`方法，它们分别有什么作用呢？我们有两方面的资料可能参阅：
 
@@ -103,7 +95,7 @@ public abstract class MethodVisitor {
 
 在`MethodVisitor`类当中，定义了许多的`visitXxx()`方法，这些方法的调用，也要遵循一定的顺序。
 
-{% highlight text %}
+```text
 (visitParameter)*
 [visitAnnotationDefault]
 (visitAnnotation | visitAnnotableParameterCount | visitParameterAnnotation | visitTypeAnnotation | visitAttribute)*
@@ -123,7 +115,7 @@ public abstract class MethodVisitor {
     visitMaxs
 ]
 visitEnd
-{% endhighlight %}
+```
 
 我们可以把这些`visitXxx()`方法分成三组：
 
@@ -133,7 +125,7 @@ visitEnd
 
 对这些`visitXxx()`方法进行精简之后，内容如下：
 
-{% highlight text %}
+```text
 [
     visitCode
     (
@@ -145,7 +137,7 @@ visitEnd
     visitMaxs
 ]
 visitEnd
-{% endhighlight %}
+```
 
 这些方法的调用顺序，可以记忆如下：
 
@@ -162,4 +154,4 @@ visitEnd
 - 第一点，对于`MethodVisitor`类的各个不同部分进行介绍，以便从整体上来理解`MethodVisitor`类。
 - 第二点，在`MethodVisitor`类当中，`visitXxx()`方法也需要遵循一定的调用顺序。
 
-另外，需要注意的一点，`ClassVisitor`类有自己的`visitXxx()`方法，`MethodVisitor`类也有自己的`visitXxx()`方法，两者是不一样的，要注意区分。
+需要注意的一点，`ClassVisitor`类有自己的`visitXxx()`方法，`MethodVisitor`类也有自己的`visitXxx()`方法，两者是不一样的，要注意区分。另外，`ClassVisitor.visitMethod()`方法提供的是“方法声明”所需要的信息，它会返回一个`MethodVisitor`对象，这个`MethodVisitor`对象就用来实现“方法体”里面的代码逻辑。

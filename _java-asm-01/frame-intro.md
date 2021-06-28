@@ -15,8 +15,7 @@ sequence: "212"
 
 假如有一个`HelloWorld`类，内容如下：
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void test(boolean flag) {
         if (flag) {
@@ -27,14 +26,13 @@ public class HelloWorld {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 查看Instruction
 
 在`.class`文件中，方法体的内容会被编译成一条一条的instruction。我们可以通过使用`javap -c sample.HelloWorld`来查看Instruction的内容。
 
-{% highlight text %}
+```text
 public void test(boolean);
   Code:
      0: iload_1
@@ -47,13 +45,13 @@ public void test(boolean);
     18: ldc           #5                  // String value is false
     20: invokevirtual #4                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
     23: return
-{% endhighlight %}
+```
 
 ### 查看Frame
 
 在方法当中，每一条Instruction都有对应的Frame。我们可以通过运行`HelloWorldFrameCore`来查看Frame的具体情况。
 
-{% highlight text %}
+```text
 test(Z)V
 [sample/HelloWorld, int] []
 [sample/HelloWorld, int] [int]
@@ -66,7 +64,7 @@ test(Z)V
 [sample/HelloWorld, int] [java/io/PrintStream, java/lang/String]
 [sample/HelloWorld, int] []
 [] []
-{% endhighlight %}
+```
 
 严格的来说，每一条Instruction都对应两个frame，一个是instruction执行之前的frame，另一个是instruction执行之后的frame。但是，当多个instruction放到一起的时候来说，第`n`个instruction执行之后的frame，就成为第`n+1`个instruction执行之前的frame，所以也可以理解成：每一条instruction对应一个frame。
 
@@ -86,8 +84,7 @@ test(Z)V
 
 ### 预期目标
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void test(boolean flag) {
         if (flag) {
@@ -98,13 +95,11 @@ public class HelloWorld {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Label;
@@ -177,8 +172,7 @@ public class HelloWorldGenerateCore {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 在上面的代码中，我们创建`ClassWriter`对象时，使用了`ClassWriter.COMPUTE_MAXS`参数，这样ASM就会只计算max locals和max stack的值；在实现`test()`方法的时候，就需要明确的调用`MethodVisitor.visitFrame()`方法来添加相应的frame信息。
 
@@ -186,8 +180,7 @@ public class HelloWorldGenerateCore {
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 import java.lang.reflect.Method;
 
 public class HelloWorldRun {
@@ -200,8 +193,7 @@ public class HelloWorldRun {
         method.invoke(obj, false);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 不推荐使用visitFrame()方法
 
@@ -209,11 +201,9 @@ public class HelloWorldRun {
 
 我们在创建`ClassWriter`对象的时候，使用了`ClassWriter.COMPUTE_FRAMES`参数：
 
-{% highlight java %}
-{% raw %}
+```text
 ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
-{% endraw %}
-{% endhighlight %}
+```
 
 在使用了`ClassWriter.COMPUTE_FRAMES`参数之后，ASM会忽略代码当中对于`MethodVisitor.visitFrame()`方法的调用，并且自动帮助我们计算stack map frame的具体内容。
 

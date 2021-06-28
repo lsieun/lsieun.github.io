@@ -5,27 +5,24 @@ sequence: "207"
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
-在`ClassWriter`类里，`visitMethod()`方法的实现就是通过`MethodWriter`类来实现的。在本文当中，我们就是介绍`MethodWriter`类。
+`MethodWriter`类的父类是`MethodVisitor`类。在`ClassWriter`类里，`visitMethod()`方法的实现就是通过`MethodWriter`类来实现的。在本文当中，我们就是介绍`MethodWriter`类。
 
 ## MethodWriter类
 
-第一个部分，`MethodWriter`类是一个`abstract`类，它的父类是`MethodVisitor`类。需要注意的是，`MethodWriter`类并不带有`public`修饰，因此它的有效访问范围只局限于它所处的package当中，不能像其它的`public`类一样被外部所使用。
-
 ### class info
 
-{% highlight java %}
-{% raw %}
+第一个部分，`MethodWriter`类的父类是`MethodVisitor`类。需要注意的是，`MethodWriter`类并不带有`public`修饰，因此它的有效访问范围只局限于它所处的package当中，不能像其它的`public`类一样被外部所使用。
+
+```java
 final class MethodWriter extends MethodVisitor {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### fields
 
 第二个部分，`MethodWriter`类定义的字段有哪些。在`MethodWriter`类当中，定义了很多的字段。下面的几个字段，是与方法的访问标识、方法名和描述符等直接相关的字段：
 
-{% highlight java %}
-{% raw %}
+```java
 final class MethodWriter extends MethodVisitor {
     private final int accessFlags;
     private final int nameIndex;
@@ -34,12 +31,11 @@ final class MethodWriter extends MethodVisitor {
     private final String descriptor;
     private Attribute firstAttribute;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
-这些字段与ClassFile当中的`method_info`也是对应的：
+这些字段与`ClassFile`当中的`method_info`也是对应的：
 
-{% highlight text %}
+```text
 method_info {
     u2             access_flags;
     u2             name_index;
@@ -47,12 +43,11 @@ method_info {
     u2             attributes_count;
     attribute_info attributes[attributes_count];
 }
-{% endhighlight %}
+```
 
 下面的几个字段，是与“方法体”直接相关的几个字段：
 
-{% highlight java %}
-{% raw %}
+```java
 final class MethodWriter extends MethodVisitor {
     private int maxStack;
     private int maxLocals;
@@ -63,12 +58,11 @@ final class MethodWriter extends MethodVisitor {
     private final int[] exceptionIndexTable;
     private Attribute firstCodeAttribute;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 这些字段对应于`Code`属性结构：
 
-{% highlight text %}
+```text
 Code_attribute {
     u2 attribute_name_index;
     u4 attribute_length;
@@ -85,14 +79,13 @@ Code_attribute {
     u2 attributes_count;
     attribute_info attributes[attributes_count];
 }
-{% endhighlight %}
+```
 
 ### constructors
 
 第三个部分，`MethodWriter`类定义的构造方法有哪些。
 
-{% highlight java %}
-{% raw %}
+```java
 final class MethodWriter extends MethodVisitor {
     MethodWriter(SymbolTable symbolTable, int access, String name, String descriptor, String signature, String[] exceptions, int compute) {
         super(Opcodes.ASM9);
@@ -128,16 +121,14 @@ final class MethodWriter extends MethodVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### methods
 
 第四个部分，`MethodWriter`类定义的方法有哪些。
 在`MethodWriter`类当中，也有两个重要的方法：`computeMethodInfoSize()`和`putMethodInfo()`方法。这两个方法也是在`ClassWriter`类的`toByteArray()`方法内使用到。
 
-{% highlight java %}
-{% raw %}
+```java
 final class MethodWriter extends MethodVisitor {
     int computeMethodInfoSize() {
         // ......
@@ -218,8 +209,7 @@ final class MethodWriter extends MethodVisitor {
         // ......
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## MethodWriter类的使用
 
@@ -229,24 +219,23 @@ final class MethodWriter extends MethodVisitor {
 
 在`ClassWriter`类当中，`visitMethod()`方法代码如下：
 
-{% highlight java %}
-{% raw %}
-public final MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
-    MethodWriter methodWriter = new MethodWriter(symbolTable, access, name, descriptor, signature, exceptions, compute);
-    if (firstMethod == null) {
-        firstMethod = methodWriter;
-    } else {
-        lastMethod.mv = methodWriter;
+```java
+public class ClassWriter extends ClassVisitor {
+    public final MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
+        MethodWriter methodWriter = new MethodWriter(symbolTable, access, name, descriptor, signature, exceptions, compute);
+        if (firstMethod == null) {
+            firstMethod = methodWriter;
+        } else {
+            lastMethod.mv = methodWriter;
+        }
+        return lastMethod = methodWriter;
     }
-    return lastMethod = methodWriter;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### toByteArray方法
 
-{% highlight java %}
-{% raw %}
+```java
 public class ClassWriter extends ClassVisitor {
     public byte[] toByteArray() {
 
@@ -255,7 +244,6 @@ public class ClassWriter extends ClassVisitor {
         // constant_pool_count, access_flags, this_class, super_class, interfaces_count, fields_count,
         // methods_count and attributes_count) use 2 bytes each, and each interface uses 2 bytes too.
         int size = 24 + 2 * interfaceCount;
-        int fieldsCount = 0;
         // ......
         int methodsCount = 0;
         MethodWriter methodWriter = firstMethod;
@@ -298,8 +286,7 @@ public class ClassWriter extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 总结
 

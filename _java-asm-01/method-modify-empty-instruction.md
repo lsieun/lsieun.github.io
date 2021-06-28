@@ -23,8 +23,7 @@ sequence: "309"
 
 我们的预期目标是，清空`verify`方法的方法体，无论输入什么样的值，它都不会报错。
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void verify(String username, String password) throws IllegalArgumentException {
         if ("tomcat".equals(username) && "123456".equals(password)) {
@@ -33,13 +32,11 @@ public class HelloWorld {
         throw new IllegalArgumentException("username or password is not correct");
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -111,13 +108,11 @@ public class MethodEmptyBodyVisitor extends ClassVisitor {
         mv.visitEnd();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 进行转换
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
 
@@ -147,21 +142,18 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorldRun {
     public static void main(String[] args) throws Exception {
         HelloWorld instance = new HelloWorld();
         instance.verify("jerry", "123");
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 总结
 

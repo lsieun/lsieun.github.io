@@ -15,8 +15,7 @@ sequence: "213"
 
 应用场景：用于创建具体的`ClassVisitor`实例，例如`ClassVisitor(int api, ClassVisitor classVisitor)`中的`api`参数。
 
-{% highlight java %}
-{% raw %}
+```java
 public interface Opcodes {
     // ASM API versions.
     int ASM4 = 4 << 16 | 0 << 8;
@@ -26,8 +25,7 @@ public interface Opcodes {
     int ASM8 = 8 << 16 | 0 << 8;
     int ASM9 = 9 << 16 | 0 << 8;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### Java Version
 
@@ -35,8 +33,7 @@ public interface Opcodes {
 
 应用场景：用于`ClassVisitor.visit(int version, int access, ...)`的`version`参数。
 
-{% highlight java %}
-{% raw %}
+```java
 public interface Opcodes {
     // Java ClassFile versions
     // (the minor version is stored in the 16 most significant bits, and
@@ -60,8 +57,7 @@ public interface Opcodes {
     int V15 = 0 << 16 | 59;
     int V16 = 0 << 16 | 60;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### Access Flags
 
@@ -73,8 +69,7 @@ public interface Opcodes {
 - `ClassVisitor.visitField(int access, String name, ...)`的`access`参数。
 - `ClassVisitor.visitMethod(int access, String name, ...)`的`access`参数。
 
-{% highlight java %}
-{% raw %}
+```java
 public interface Opcodes {
     int ACC_PUBLIC = 0x0001;       // class, field, method
     int ACC_PRIVATE = 0x0002;      // class, field, method
@@ -100,8 +95,7 @@ public interface Opcodes {
     int ACC_MANDATED = 0x8000;     // field, method, parameter, module, module *
     int ACC_MODULE = 0x8000;       // class
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## MethodVisitor
 
@@ -114,8 +108,7 @@ public interface Opcodes {
 - `Opcodes.F_NEW`~`Opcodes.F_SAME1`用在`MethodVisitor.visitFrame(int type, int numLocal, Object[] local, int numStack, Object[] stack)`方法中的`type`参数。
 - `Opcodes.TOP`~`Opcodes.UNINITIALIZED_THIS`用在`MethodVisitor.visitFrame(int type, int numLocal, Object[] local, int numStack, Object[] stack)`方法中的`local`参数和`stack`参数。
 
-{% highlight java %}
-{% raw %}
+```java
 public interface Opcodes {
     // ASM specific stack map frame types, used in {@link ClassVisitor#visitFrame}.
     int F_NEW = -1;
@@ -135,8 +128,7 @@ public interface Opcodes {
     Integer NULL = Frame.ITEM_NULL;
     Integer UNINITIALIZED_THIS = Frame.ITEM_UNINITIALIZED_THIS;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### opcodes
 
@@ -144,8 +136,7 @@ public interface Opcodes {
 
 应用场景：在`MethodVisitor.visitXxxInsn(opcode)`方法中的`opcode`参数中使用。
 
-{% highlight java %}
-{% raw %}
+```java
 public interface Opcodes {
     int NOP = 0; // visitInsn
     int ACONST_NULL = 1; // -
@@ -305,8 +296,7 @@ public interface Opcodes {
     int IFNULL = 198; // visitJumpInsn
     int IFNONNULL = 199; // -
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### opcode: newarray
 
@@ -314,8 +304,7 @@ public interface Opcodes {
 
 应用场景：对于`MethodVisitor.visitIntInsn(opcode, operand)`方法，当`opcode`为`NEWARRAY`时，`operand`参数中使用。
 
-{% highlight java %}
-{% raw %}
+```java
 public interface Opcodes {
     // Possible values for the type operand of the NEWARRAY instruction.
     int T_BOOLEAN = 4;
@@ -327,18 +316,15 @@ public interface Opcodes {
     int T_INT = 10;
     int T_LONG = 11;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void test() {
         byte[] bytes = new byte[10];
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### opcode: invokedynamic
 
@@ -346,8 +332,7 @@ public class HelloWorld {
 
 应用场景：在创建`Handle(int tag, String owner, String name, String descriptor, boolean isInterface)`时，`tag`参数中使用；而该`Handle`实例会在`MethodVisitor.visitInvokeDynamicInsn()`方法使用到。
 
-{% highlight java %}
-{% raw %}
+```java
 public interface Opcodes {
     // Possible values for the reference_kind field of CONSTANT_MethodHandle_info structures.
     int H_GETFIELD = 1;
@@ -360,11 +345,9 @@ public interface Opcodes {
     int H_NEWINVOKESPECIAL = 8;
     int H_INVOKEINTERFACE = 9;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
-{% highlight java %}
-{% raw %}
+```java
 import java.util.function.BiFunction;
 
 public class HelloWorld {
@@ -372,12 +355,11 @@ public class HelloWorld {
         BiFunction<Integer, Integer, Integer> func = Math::max;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 总结
 
 本文主要对`Opcodes`接口里定义的字段进行介绍，内容总结如下：
 
-- 第一点，在`Opcodes`内定义的字段，主要应用于`ClassVisitor`和`MethodVisitor`类的`visitXxx()`方法。
-- 第二点，在ASM的编程过程中，`Opcodes`类的角色是一个辅助类。我们可以分批次、分类别的了解`Opcodes`类字段的含义。
+- 第一点，在`Opcodes`类定义的字段，主要应用于`ClassVisitor`和`MethodVisitor`类的`visitXxx()`方法。
+- 第二点，记忆方法。由于`Opcodes`类定义的字段很多，我们可以分成不同的批次和类别来进行理解，慢慢去掌握。

@@ -29,8 +29,7 @@ if it is an `IADD` then remove both instructions, otherwise emit the `ICONST_0` 
 In order to implement transformations that remove or replace some instruction sequence,
 it is convenient to introduce a `MethodVisitor` subclass whose `visitXxxInsn()` methods call a common `visitInsn()` method:
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.Handle;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
@@ -153,8 +152,7 @@ public abstract class MethodPatternAdapter extends MethodVisitor {
 
     protected abstract void visitInsn();
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 在上面的代码中，最后一个方法是`visitInsn()`，它是一个抽象方法。在这个抽象方法中，我们要做的事情就是让所有的其它状态都回归“初始状态”。
 
@@ -162,8 +160,7 @@ public abstract class MethodPatternAdapter extends MethodVisitor {
 
 ### 预期目标
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void test(int a, int b) {
         int c = a + b;
@@ -171,10 +168,9 @@ public class HelloWorld {
         System.out.println(d);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
-{% highlight text %}
+```text
 $ javap -c sample.HelloWorld
 Compiled from "HelloWorld.java"
 public class sample.HelloWorld {
@@ -199,12 +195,11 @@ public class sample.HelloWorld {
       14: invokevirtual #3                  // Method java/io/PrintStream.println:(I)V
       17: return
 }
-{% endhighlight %}
+```
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 
@@ -270,13 +265,11 @@ public class MethodRemoveAddZeroVisitor extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 进行转换
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
 
@@ -306,12 +299,11 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight text %}
+```text
 $ javap -c sample.HelloWorld
 public class sample.HelloWorld {
   public sample.HelloWorld();
@@ -333,7 +325,7 @@ public class sample.HelloWorld {
       12: invokevirtual #22                 // Method java/io/PrintStream.println:(I)V
       15: return
 }
-{% endhighlight %}
+```
 
 ## 示例二：字段赋值
 
@@ -343,8 +335,7 @@ public class sample.HelloWorld {
 
 ### 预期目标
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public int val;
 
@@ -354,10 +345,9 @@ public class HelloWorld {
         System.out.println(c);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
-{% highlight text %}
+```text
 $ javap -c sample.HelloWorld
 Compiled from "HelloWorld.java"
 public class sample.HelloWorld {
@@ -384,12 +374,11 @@ public class sample.HelloWorld {
       16: invokevirtual #4                  // Method java/io/PrintStream.println:(I)V
       19: return
 }
-{% endhighlight %}
+```
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 
@@ -499,13 +488,11 @@ public class MethodRemoveGetFieldPutFieldVisitor extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 进行转换
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
 
@@ -535,12 +522,11 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight text %}
+```text
 $ javap -c sample.HelloWorld
 public class sample.HelloWorld {
   public int val;
@@ -562,14 +548,13 @@ public class sample.HelloWorld {
        8: invokevirtual #24                 // Method java/io/PrintStream.println:(I)V
       11: return
 }
-{% endhighlight %}
+```
 
 ## 示例三：删除打印语句
 
 ### 预期目标
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void test(int a, int b) {
         System.out.println("Before a + b");
@@ -578,10 +563,9 @@ public class HelloWorld {
         System.out.println(c);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
-{% highlight text %}
+```text
 $ javap -c sample.HelloWorld
 Compiled from "HelloWorld.java"
 public class sample.HelloWorld {
@@ -608,12 +592,11 @@ public class sample.HelloWorld {
       24: invokevirtual #6                  // Method java/io/PrintStream.println:(I)V
       27: return
 }
-{% endhighlight %}
+```
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 
@@ -720,13 +703,11 @@ public class MethodRemovePrintVisitor extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 进行转换
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
 
@@ -756,12 +737,11 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight text %}
+```text
 $ javap -c sample.HelloWorld
 public class sample.HelloWorld {
   public sample.HelloWorld();
@@ -781,7 +761,7 @@ public class sample.HelloWorld {
        8: invokevirtual #22                 // Method java/io/PrintStream.println:(I)V
       11: return
 }
-{% endhighlight %}
+```
 
 ## 总结
 

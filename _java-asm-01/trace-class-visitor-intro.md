@@ -13,32 +13,27 @@ sequence: "403"
 
 第一个部分，`TraceClassVisitor`类继承自`ClassVisitor`类，而且有`final`修饰，因此不会存在子类。
 
-{% highlight java %}
-{% raw %}
+```java
 public final class TraceClassVisitor extends ClassVisitor {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### fields
 
 第二个部分，`TraceClassVisitor`类定义的字段有哪些。`TraceClassVisitor`类有两个重要的字段，一个是`PrintWriter printWriter`用于打印；另一个是`Printer p`将class转换成文字信息。
 
-{% highlight java %}
-{% raw %}
+```java
 public final class TraceClassVisitor extends ClassVisitor {
     private final PrintWriter printWriter; // 真正打印输出的类
     public final Printer p; // 信息采集器
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### constructors
 
 第三个部分，`TraceClassVisitor`类定义的构造方法有哪些。
 
-{% highlight java %}
-{% raw %}
+```java
 public final class TraceClassVisitor extends ClassVisitor {
     public TraceClassVisitor(final PrintWriter printWriter) {
         this(null, printWriter);
@@ -54,15 +49,13 @@ public final class TraceClassVisitor extends ClassVisitor {
         this.p = printer;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### methods
 
 第四个部分，`TraceClassVisitor`类定义的方法有哪些。对于`TraceClassVisitor`类的`visit()`、`visitField()`、`visitMethod()`和`visitEnd()`方法，会分别调用`Printer.visit()`、`Printer.visitField()`、`Printer.visitMethod()`和`Printer.visitClassEnd()`方法。
 
-{% highlight java %}
-{% raw %}
+```java
 public final class TraceClassVisitor extends ClassVisitor {
     @Override
     public void visit(final int version, final int access, final String name, final String signature,
@@ -95,26 +88,22 @@ public final class TraceClassVisitor extends ClassVisitor {
         super.visitEnd();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 如何使用TraceClassVisitor类
 
 使用`TraceClassVisitor`类，很重点的一点就是选择`Printer`类的具体实现，可以选择`ASMifier`类，也可以选择`Textifier`类（默认）：
 
-{% highlight java %}
-{% raw %}
+```text
 boolean flag = true or false;
 Printer printer = flag ? new ASMifier() : new Textifier();
 PrintWriter printWriter = new PrintWriter(System.out, true);
 TraceClassVisitor traceClassVisitor = new TraceClassVisitor(null, printer, printWriter);
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 生成新的类
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.FieldVisitor;
@@ -183,13 +172,11 @@ public class TraceClassVisitorExample01Generate {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 修改已有的类
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -227,13 +214,11 @@ public class TraceClassVisitorExample02Transform {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 打印ASM代码
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.util.ASMifier;
 import org.objectweb.asm.util.Printer;
@@ -260,8 +245,7 @@ public class ASMPrint {
         new ClassReader(className).accept(traceClassVisitor, parsingOptions);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 总结
 

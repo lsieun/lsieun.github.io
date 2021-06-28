@@ -10,7 +10,7 @@ sequence: "104"
 对于一个具体的`.class`而言，它是遵循ClassFile结构的。这个数据结构位于[Java Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)的
 [The class File Format](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html)部分。
 
-{% highlight text %}
+```text
 ClassFile {
     u4             magic;
     u2             minor_version;
@@ -29,7 +29,7 @@ ClassFile {
     u2             attributes_count;
     attribute_info attributes[attributes_count];
 }
-{% endhighlight %}
+```
 
 其中，
 
@@ -42,7 +42,7 @@ ClassFile {
 
 相应的，在`.class`文件当中，定义的字段，要遵循`field_info`的结构。
 
-{% highlight text %}
+```text
 field_info {
     u2             access_flags;
     u2             name_index;
@@ -50,11 +50,11 @@ field_info {
     u2             attributes_count;
     attribute_info attributes[attributes_count];
 }
-{% endhighlight %}
+```
 
 同样的，在`.class`文件当中，定义的方法，要遵循`method_info`的结构。
 
-{% highlight text %}
+```text
 method_info {
     u2             access_flags;
     u2             name_index;
@@ -62,11 +62,11 @@ method_info {
     u2             attributes_count;
     attribute_info attributes[attributes_count];
 }
-{% endhighlight %}
+```
 
 在`method_info`结构中，方法当中方法体的代码，是存在于`Code`属性结构中，其结构如下：
 
-{% highlight text %}
+```text
 Code_attribute {
     u2 attribute_name_index;
     u4 attribute_length;
@@ -83,7 +83,7 @@ Code_attribute {
     u2 attributes_count;
     attribute_info attributes[attributes_count];
 }
-{% endhighlight %}
+```
 
 ## 示例演示
 
@@ -91,8 +91,7 @@ Code_attribute {
 
 假如，我们有一个`sample.HelloWorld`类，它的内容如下：
 
-{% highlight java %}
-{% raw %}
+```java
 package sample;
 
 public class HelloWorld implements Cloneable {
@@ -104,8 +103,7 @@ public class HelloWorld implements Cloneable {
         int c = a + b;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 针对`sample.HelloWorld`类，我们可以
 

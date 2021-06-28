@@ -18,19 +18,16 @@ sequence: "407"
         - org.objectweb.asm.commons.GeneratorAdapter
             - org.objectweb.asm.commons.AdviceAdapter
     
-{% highlight java %}
-{% raw %}
+```java
 public class LocalVariablesSorter extends MethodVisitor {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### fields
 
 第二个部分，`LocalVariablesSorter`类定义的字段有哪些。
 
-{% highlight java %}
-{% raw %}
+```java
 public class LocalVariablesSorter extends MethodVisitor {
     // The mapping from old to new local variable indices.
     // A local variable at index i of size 1 is remapped to 'mapping[2*i]',
@@ -43,15 +40,13 @@ public class LocalVariablesSorter extends MethodVisitor {
     protected final int firstLocal;
     protected int nextLocal;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### constructors
 
 第三个部分，`LocalVariablesSorter`类定义的构造方法有哪些。
 
-{% highlight java %}
-{% raw %}
+```java
 public class LocalVariablesSorter extends MethodVisitor {
     public LocalVariablesSorter(final int access, final String descriptor, final MethodVisitor methodVisitor) {
         this(Opcodes.ASM9, access, descriptor, methodVisitor);
@@ -67,8 +62,7 @@ public class LocalVariablesSorter extends MethodVisitor {
         firstLocal = nextLocal;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### methods
 
@@ -78,8 +72,7 @@ public class LocalVariablesSorter extends MethodVisitor {
 
 `LocalVariablesSorter`类要处理好“新添加的变量”与“原有变量”之间的关系。
 
-{% highlight java %}
-{% raw %}
+```java
 public class LocalVariablesSorter extends MethodVisitor {
     public int newLocal(final Type type) {
         Object localType;
@@ -135,13 +128,11 @@ public class LocalVariablesSorter extends MethodVisitor {
         remappedLocalTypes[local] = type; // 真正的处理逻辑只有这一句代码
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 #### local variables method
 
-{% highlight java %}
-{% raw %}
+```java
 public class LocalVariablesSorter extends MethodVisitor {
     @Override
     public void visitVarInsn(final int opcode, final int var) {
@@ -210,15 +201,13 @@ public class LocalVariablesSorter extends MethodVisitor {
         return local;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 工作原理
 
 对于`LocalVariablesSorter`类的工作原理，主要依赖于三个字段：`firstLocal`、`nextLocal`和`remappedVariableIndices`字段。
 
-{% highlight java %}
-{% raw %}
+```java
 public class LocalVariablesSorter extends MethodVisitor {
     // The mapping from old to new local variable indices.
     // A local variable at index i of size 1 is remapped to 'mapping[2*i]',
@@ -228,13 +217,11 @@ public class LocalVariablesSorter extends MethodVisitor {
     protected final int firstLocal;
     protected int nextLocal;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 首先，我们来看一下`firstLocal`和`nextLocal`初始化，它发生在`LocalVariablesSorter`类的构造方法中。其中，`firstLocal`是一个`final`类型的字段，一次赋值之后就不能变化了；而`nextLocal`字段的取值可以继续变化。
 
-{% highlight java %}
-{% raw %}
+```java
 public class LocalVariablesSorter extends MethodVisitor {
     protected LocalVariablesSorter(final int api, final int access, final String descriptor,
                                    final MethodVisitor methodVisitor) {
@@ -246,8 +233,7 @@ public class LocalVariablesSorter extends MethodVisitor {
         firstLocal = nextLocal; // 最后，为firstLocal字段赋值。
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 对于上面的代码，主要是对两方面内容进行判断：
 
@@ -270,8 +256,7 @@ public class LocalVariablesSorter extends MethodVisitor {
 
 如果要添加新的变量，那么需要调用`newLocal(type)`方法。在`newLocal(type)`方法中，它会进一步调用`newLocalMapping(type)`方法；在`newLocalMapping(type)`方法中，首先会记录`newLocal`的值，接着会更新`newLocal`的值，最后返回`newLocal`的初始值。
 
-{% highlight java %}
-{% raw %}
+```java
 public class LocalVariablesSorter extends MethodVisitor {
     public int newLocal(final Type type) {
         int local = newLocalMapping(type);
@@ -284,15 +269,13 @@ public class LocalVariablesSorter extends MethodVisitor {
         return local;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 处理旧变量
 
 如果要处理“旧”的变量，那么需要调用`visitVarInsn(opcode, var)`或`visitIincInsn(var, increment)`方法。在这两个方法中，会进一步调用`remap(var, type)`方法。其中，`remap(var, type)`方法的主要作用，就是实现“旧变量”的原位置向新位置的映射。
 
-{% highlight java %}
-{% raw %}
+```java
 public class LocalVariablesSorter extends MethodVisitor {
     @Override
     public void visitVarInsn(final int opcode, final int var) {
@@ -354,8 +337,7 @@ public class LocalVariablesSorter extends MethodVisitor {
         return local;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 在`remap(var, type)`方法中，有两部分主要逻辑：
 
@@ -376,8 +358,7 @@ public class LocalVariablesSorter extends MethodVisitor {
 
 修改前：
 
-{% highlight java %}
-{% raw %}
+```java
 import java.util.Random;
 
 public class HelloWorld {
@@ -389,13 +370,11 @@ public class HelloWorld {
         Thread.sleep(value);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 修改后：
 
-{% highlight java %}
-{% raw %}
+```java
 import java.util.Random;
 
 public class HelloWorld {
@@ -412,15 +391,13 @@ public class HelloWorld {
         System.out.println("test method execute: " + t);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 编码实现
 
 下面的`MethodTimerAdapter3`类继承自`LocalVariablesSorter`类。
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
@@ -494,15 +471,13 @@ public class MethodTimerVisitor3 extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 需要注意的是，我们使用的是`mv.visitVarInsn(opcode, var)`方法，而不是使用`super.visitVarInsn(opcode, var)`方法。为什么要使用`mv`，而不使用`super`呢？因为使用`super.visitVarInsn(opcode, var)`方法，实质上是调用了`LocalVariablesSorter.visitVarInsn(opcode, var)`，它会进一步调用`remap(var, type)`方法，这就可能导致新添加的变量在local variables中的位置发生“位置偏移”。
 
 下面的`MethodTimerAdapter4`类继承自`AdviceAdapter`类。
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
@@ -557,13 +532,11 @@ public class MethodTimerVisitor4 extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 进行转换
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -596,21 +569,18 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorldRun {
     public static void main(String[] args) throws Exception {
         HelloWorld instance = new HelloWorld();
         instance.test(10, 20);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 总结
 

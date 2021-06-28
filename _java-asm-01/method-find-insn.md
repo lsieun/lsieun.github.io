@@ -29,8 +29,7 @@ sequence: "311"
 
 我们想要实现的预期目标是，打印出`test()`方法当中调用了哪些方法。
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void test(int a, int b) {
         int c = Math.addExact(a, b);
@@ -38,12 +37,11 @@ public class HelloWorld {
         System.out.println(line);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 上面的`test()`方法对应的Instruction如下：
 
-{% highlight text %}
+```text
   public test(II)V
     ILOAD 1
     ILOAD 2
@@ -75,12 +73,11 @@ public class HelloWorld {
     RETURN
     MAXSTACK = 5
     MAXLOCALS = 5
-{% endhighlight %}
+```
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.util.Printer;
@@ -137,13 +134,11 @@ public class MethodFindInvokeVisitor extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 进行分析
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -167,17 +162,16 @@ public class HelloWorldAnalysisCore {
         cr.accept(cv, parsingOptions);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 输出结果：
 
-{% highlight text %}
+```text
 INVOKESTATIC java/lang/Math.addExact(II)I
 INVOKESTATIC java/lang/Integer.valueOf(I)Ljava/lang/Integer;
 INVOKESTATIC java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
 INVOKEVIRTUAL java/io/PrintStream.println(Ljava/lang/String;)V
-{% endhighlight %}
+```
 
 ## 示例：被哪些方法调用了
 
@@ -205,8 +199,7 @@ INVOKEVIRTUAL java/io/PrintStream.println(Ljava/lang/String;)V
 
 我们的预期目标是，找出是哪些方法对`test()`方法进行了调用。
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public int add(int a, int b) {
         int c = a + b;
@@ -233,13 +226,11 @@ public class HelloWorld {
         System.out.println(line);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 
@@ -316,13 +307,11 @@ public class MethodFindRefVisitor extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 进行分析
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -346,15 +335,14 @@ public class HelloWorldAnalysisCore {
         cr.accept(cv, parsingOptions);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 输出结果：
 
-{% highlight text %}
+```text
 sample/HelloWorld.add(II)I
 sample/HelloWorld.sub(II)I
-{% endhighlight %}
+```
 
 ## 总结
 

@@ -21,31 +21,26 @@ sequence: "409"
 
 第一个部分，`InstructionAdapter`类的父类是`MethodVisitor`类。
 
-{% highlight java %}
-{% raw %}
+```java
 public class InstructionAdapter extends MethodVisitor {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### fields
 
 第二个部分，`InstructionAdapter`类定义的字段有哪些。我们可以看到，`InstructionAdapter`类定义了一个`OBJECT_TYPE`静态字段。
 
-{% highlight java %}
-{% raw %}
+```java
 public class InstructionAdapter extends MethodVisitor {
     public static final Type OBJECT_TYPE = Type.getType("Ljava/lang/Object;");
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### constructors
 
 第三个部分，`InstructionAdapter`类定义的构造方法有哪些。
 
-{% highlight java %}
-{% raw %}
+```java
 public class InstructionAdapter extends MethodVisitor {
     public InstructionAdapter(final MethodVisitor methodVisitor) {
         this(Opcodes.ASM9, methodVisitor);
@@ -58,15 +53,13 @@ public class InstructionAdapter extends MethodVisitor {
         super(api, methodVisitor);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### methods
 
 第四个部分，`InstructionAdapter`类定义的方法有哪些。除了从`MethodVisitor`类继承的`visitXxxInsn()`方法，`InstructionAdapter`类还定义了许多与opcode相关的新方法，这些新方法本质上又是调用`visitXxxInsn()`方法来实现的。
 
-{% highlight java %}
-{% raw %}
+```java
 public class InstructionAdapter extends MethodVisitor {
     public void nop() {
         mv.visitInsn(Opcodes.NOP);
@@ -82,29 +75,25 @@ public class InstructionAdapter extends MethodVisitor {
 
     // ......
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 示例
 
 ### 预期目标
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     public void test() {
         System.out.println("Hello World");
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 编码实现
 
 接下来，我们来看一个使用`InstructionAdapter`生成类的示例：
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
@@ -162,8 +151,7 @@ public class InstructionAdapterExample01 {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 总结
 

@@ -11,8 +11,7 @@ sequence: "307"
 
 实现这个功能的思路：在“方法进入”的时候，记录一下时间；在“方法退出”的时候，记录一下时间。
 
-{% highlight java %}
-{% raw %}
+```java
 import java.util.Random;
 
 public class HelloWorld {
@@ -33,13 +32,11 @@ public class HelloWorld {
         return c;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 第一种计算方法运行时间的方式，将所有方法的运行时间都记录在同一个字段当中：
 
-{% highlight java %}
-{% raw %}
+```java
 import java.util.Random;
 
 public class HelloWorld {
@@ -65,13 +62,11 @@ public class HelloWorld {
         return c;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 第二种计算方法运行时间的方式，将每个方法的运行时间记录在自己对应的字段当中：
 
-{% highlight java %}
-{% raw %}
+```java
 import java.util.Random;
 
 public class HelloWorld {
@@ -98,15 +93,13 @@ public class HelloWorld {
         return c;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 第一种实现方式
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
@@ -187,13 +180,11 @@ public class MethodTimerVisitor extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 进行转换
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.*;
 
@@ -223,13 +214,11 @@ public class HelloWorldTransformCore {
         FileUtils.writeBytes(filepath, bytes2);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 import java.lang.reflect.Field;
 import java.util.Random;
 
@@ -267,15 +256,13 @@ public class HelloWorldRun {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 第二种实现方式
 
 ### 编码实现
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
@@ -359,12 +346,11 @@ public class MethodTimerVisitor2 extends ClassVisitor {
         }
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 输出结果：
 
-{% highlight text %}
+```text
 7 + 30 = 37
 19 - 26 = -7
 27 + 36 = 63
@@ -377,7 +363,7 @@ public class MethodTimerVisitor2 extends ClassVisitor {
 20 - 27 = -7
 timer_add = 1596
 timer_sub = 974
-{% endhighlight %}
+```
 
 ## 总结
 

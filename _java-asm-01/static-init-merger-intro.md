@@ -30,12 +30,10 @@ sequence: "411"
 
 第一个部分，`StaticInitMerger`类继承自`ClassVisitor`类。
 
-{% highlight java %}
-{% raw %}
+```java
 public class StaticInitMerger extends ClassVisitor {
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### fields
 
@@ -47,8 +45,7 @@ public class StaticInitMerger extends ClassVisitor {
 - `renamedClinitMethodPrefix`字段和`numClinitMethods`字段一起来确定方法的新名字。
 - `mergedClinitVisitor`字段，负责生成新的`<clinit>()`方法。
 
-{% highlight java %}
-{% raw %}
+```java
 public class StaticInitMerger extends ClassVisitor {
     // 当前类的名字
     private String owner;
@@ -60,15 +57,13 @@ public class StaticInitMerger extends ClassVisitor {
     // 生成新方法的MethodVisitor
     private MethodVisitor mergedClinitVisitor;
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### constructors
 
 第三个部分，`StaticInitMerger`类定义的构造方法有哪些。
 
-{% highlight java %}
-{% raw %}
+```java
 public class StaticInitMerger extends ClassVisitor {
     public StaticInitMerger(final String prefix, final ClassVisitor classVisitor) {
         this(Opcodes.ASM9, prefix, classVisitor);
@@ -79,8 +74,7 @@ public class StaticInitMerger extends ClassVisitor {
         this.renamedClinitMethodPrefix = prefix;
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### methods
 
@@ -92,8 +86,7 @@ public class StaticInitMerger extends ClassVisitor {
 - `visitMethod()`方法，负责将原来的`<clinit>()`方法进行重新命名成`renamedClinitMethodPrefix + numClinitMethods`，并在新的`<clinit>()`方法中对`renamedClinitMethodPrefix + numClinitMethods`方法进行调用。
 - `visitEnd()`方法，为新的`<clinit>()`方法添加`return`语句。
 
-{% highlight java %}
-{% raw %}
+```java
 public class StaticInitMerger extends ClassVisitor {
     public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
         super.visit(version, access, name, signature, superName, interfaces);
@@ -125,8 +118,7 @@ public class StaticInitMerger extends ClassVisitor {
         super.visitEnd();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 示例
 
@@ -134,8 +126,7 @@ public class StaticInitMerger extends ClassVisitor {
 
 我们的目标是将`HelloWorld`类和`GoodChild`类合并成一个新的`HelloWorld`类。
 
-{% highlight java %}
-{% raw %}
+```java
 public class HelloWorld {
     static {
         System.out.println("This is static initialization method");
@@ -162,11 +153,9 @@ public class HelloWorld {
         return String.format("HelloWorld { name='%s', age=%d }", name, age);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
-{% highlight java %}
-{% raw %}
+```java
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -181,8 +170,7 @@ public class GoodChild implements Serializable {
         System.out.println(str);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 编码实现
 
@@ -192,8 +180,7 @@ public class GoodChild implements Serializable {
 - 第二点，将两个类进行合并的代码逻辑，放在了`visitEnd()`方法内。为什么要把代码逻辑放在`visitEnd()`方法内呢？因为参照`ClassVisitor`类里的`visitXxx()`方法调用的顺序，`visitField()`方法和`visitMethod()`方法正好位于`visitEnd()`方法的前面。
 - 第三点，在`visitEnd()`方法的代码逻辑中，忽略掉了`<init>()`方法，这样就避免新生成的类当中包含重复的`<init>()`方法。
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
@@ -227,13 +214,11 @@ public class ClassMergeVisitor extends ClassVisitor {
         super.visitEnd();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 下面的`ClassAddInterfaceVisitor`类是负责为类添加“接口信息”。
 
-{% highlight java %}
-{% raw %}
+```java
 import org.objectweb.asm.ClassVisitor;
 
 import java.util.Arrays;
@@ -260,13 +245,11 @@ public class ClassAddInterfaceVisitor extends ClassVisitor {
         super.visit(version, access, name, signature, superName, set.toArray(new String[0]));
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 进行转换
 
-{% highlight java %}
-{% raw %}
+```java
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -379,13 +362,11 @@ public class StaticInitMergerExample01 {
         return cw.toByteArray();
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ### 验证结果
 
-{% highlight java %}
-{% raw %}
+```java
 import java.lang.reflect.Method;
 
 public class HelloWorldRun {
@@ -402,8 +383,7 @@ public class HelloWorldRun {
         m.invoke(instance);
     }
 }
-{% endraw %}
-{% endhighlight %}
+```
 
 ## 总结
 
