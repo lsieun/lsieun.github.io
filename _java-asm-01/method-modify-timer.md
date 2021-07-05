@@ -7,9 +7,7 @@ sequence: "307"
 
 ## 预期目标
 
-在有些应用场景中，我们想知道方法的运行时间是多少。如果我们想对现有的程序进行优化，那么需要程序的整体性能有所了解，而方法的运行时间是衡量程序性能的一个重要参考。
-
-实现这个功能的思路：在“方法进入”的时候，记录一下时间；在“方法退出”的时候，记录一下时间。
+假如有一个`HelloWorld`类，代码如下：
 
 ```java
 import java.util.Random;
@@ -34,7 +32,12 @@ public class HelloWorld {
 }
 ```
 
-第一种计算方法运行时间的方式，将所有方法的运行时间都记录在同一个字段当中：
+我们想实现的预期目标：计算出方法的运行时间。这里有两种实现方式：
+
+- 计算所有方法的运行时间
+- 计算每个方法的运行时间
+
+第一种方式，计算所有方法的运行时间，将该时间记录在`timer`字段当中：
 
 ```java
 import java.util.Random;
@@ -64,7 +67,7 @@ public class HelloWorld {
 }
 ```
 
-第二种计算方法运行时间的方式，将每个方法的运行时间记录在自己对应的字段当中：
+第二种方式，计算每个方法的运行时间，将每个方法的运行时间单独记录在对应的字段当中：
 
 ```java
 import java.util.Random;
@@ -94,6 +97,10 @@ public class HelloWorld {
     }
 }
 ```
+
+实现这个功能的思路：在“方法进入”的时候，减去一个时间戳；在“方法退出”的时候，加上一个时间戳，在这个过程当中就记录一个时间差。
+
+有一个问题，我们为什么要计算方法的运行时间呢？如果我们想对现有的程序进行优化，那么需要对程序的整体性能有所了解，而方法的运行时间是衡量程序性能的一个重要参考。
 
 ## 第一种实现方式
 
@@ -145,7 +152,7 @@ public class MethodTimerVisitor extends ClassVisitor {
         super.visitEnd();
     }
 
-    private class MethodTimerAdapter extends MethodVisitor {
+    private static class MethodTimerAdapter extends MethodVisitor {
         private final String owner;
 
         public MethodTimerAdapter(int api, MethodVisitor mv, String owner) {
@@ -369,7 +376,7 @@ timer_sub = 974
 
 本文主要介绍了如何计算方法的运行时间，内容总结如下：
 
-- 第一点，从实现思路的角度来说，计算方法的运行时间，是在“方法进入”和“方法退出”的基础上实现的。具体来说，在“方法进入”的时候，减去一个时间戳；在“方法退出”的时候，加上一个时间戳。
+- 第一点，从实现思路的角度来说，计算方法的运行时间，是在“方法进入”和“方法退出”的基础上实现的。在“方法进入”的时候，减去一个时间戳；在“方法退出”的时候，加上一个时间戳。
 - 第二点，我们提供了两种实现方式
     - 第一种实现方式，计算类里面所有方法的总运行时间
     - 第二种实现方式，计算类里面每个方法的单独运行时间

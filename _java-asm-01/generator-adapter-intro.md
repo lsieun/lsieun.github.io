@@ -5,7 +5,7 @@ sequence: "406"
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
-对于`GeneratorAdapter`类来说，它非常重要的一个特点：将一些`visitXxx()`方法封装成一些常用的方法。
+对于`GeneratorAdapter`类来说，它非常重要的一个特点：将一些`visitXxxInsn()`方法封装成一些常用的方法。
 
 ## GeneratorAdapter类
 
@@ -33,7 +33,6 @@ public class GeneratorAdapter extends LocalVariablesSorter {
     private final String name;
     private final Type returnType;
     private final Type[] argumentTypes;
-    private final List<Type> localTypes = new ArrayList<>();
 }
 ```
 
@@ -63,7 +62,31 @@ public class GeneratorAdapter extends LocalVariablesSorter {
 
 第四个部分，`GeneratorAdapter`类定义的方法有哪些。
 
-#### loadThis
+```java
+public class GeneratorAdapter extends LocalVariablesSorter {
+    public int getAccess() {
+        return access;
+    }
+  
+    public String getName() {
+        return name;
+    }
+  
+    public Type getReturnType() {
+        return returnType;
+    }
+  
+    public Type[] getArgumentTypes() {
+        return argumentTypes.clone();
+    }
+}
+```
+
+## 特殊方法举例
+
+`GeneratorAdapter`类的特点是将一些`visitXxxInsn()`方法封装成一些常用的方法。在这里，我们给大家举几个有代表性的例子，更多的方法可以参考`GeneratorAdapter`类的源码。
+
+### loadThis
 
 在`GeneratorAdapter`类当中，`loadThis()`方法的本质是`mv.visitVarInsn(Opcodes.ALOAD, 0)`；但是，要注意static方法并不需要`this`变量。
 
@@ -78,7 +101,7 @@ public class GeneratorAdapter extends LocalVariablesSorter {
 }
 ```
 
-#### arg
+### arg
 
 在`GeneratorAdapter`类当中，定义了一些与方法参数相关的方法。
 
@@ -135,7 +158,7 @@ public class GeneratorAdapter extends LocalVariablesSorter {
 }
 ```
 
-#### boxing and unboxing
+### boxing and unboxing
 
 在`GeneratorAdapter`类当中，定义了一些与boxing和unboxing相关的操作。
 
@@ -243,6 +266,8 @@ public class GeneratorAdapter extends LocalVariablesSorter {
 
 ### 预期目标
 
+我们想实现的预期目标：生成一个`HelloWorld`类，代码如下所示。
+
 ```java
 public class HelloWorld {
     public static void main(String[] args) {
@@ -315,5 +340,5 @@ public class GeneratorAdapterExample01 {
 
 本文对`GeneratorAdapter`类进行介绍，内容总结如下：
 
-- 第一点，`GeneratorAdapter`类的特点是将一些`visitXxx()`方法封装成一些常用的方法。
-- 第二点，`GeneratorAdapter`类定义的新方法，并不是十分必要的；如果熟悉`MethodVisitor.visitXxx()`方法，可以完全不考虑使用`GeneratorAdapter`类。
+- 第一点，`GeneratorAdapter`类的特点是将一些`visitXxxInsn()`方法封装成一些常用的方法。
+- 第二点，`GeneratorAdapter`类定义的新方法，并不是十分必要的；如果熟悉`MethodVisitor.visitXxxInsn()`方法，可以完全不考虑使用`GeneratorAdapter`类。

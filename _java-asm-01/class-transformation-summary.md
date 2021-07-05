@@ -13,13 +13,25 @@ sequence: "313"
 
 ## Class Transformation的原理
 
-在Class Transformation的过程中，我们主要使用到了`ClassReader`、`ClassVisitor`和`ClassWriter`三个类；其中`ClassReader`类负责“读”Class，`ClassWriter`负责“写”Class，而`ClassVisitor`则负责进行“转换”（Transformation）。
+在Class Transformation的过程中，主要使用到了`ClassReader`、`ClassVisitor`和`ClassWriter`三个类；其中`ClassReader`类负责“读”Class，`ClassWriter`负责“写”Class，而`ClassVisitor`则负责进行“转换”（Transformation）。
 
 {:refdef: style="text-align: center;"}
 ![多个ClassVisitor串联到一起](/assets/images/java/asm/multiple-class-vistors-connected.png)
 {: refdef}
 
-## ASM做了什么
+在Java ASM当中，Class Transformation的本质就是利用了“中间人攻击”的方式来实现对已有的Class文件进行修改或转换。
+
+{:refdef: style="text-align: center;"}
+![Man-in-the-middle attack](/assets/images/network/man-in-the-middle-attack.png)
+{: refdef}
+
+详细的来说，我们自己定义的`ClassVisitor`类就是一个“中间人”，那么这个“中间人”可以做什么呢？可以做三种类型的事情：
+
+- 对“原有的信息”进行篡改，就可以实现“修改”的效果。对应到ASM代码层面，就是对`ClassVisitor.visitXxx()`和`MethodVisitor.visitXxx()`的参数值进行修改。
+- 对“原有的信息”进行扔掉，就可以实现“删除”的效果。对应到ASM代码层面，将原本的`FieldVisitor`和`MethodVisitor`对象实例替换成`null`值，或者对原本的一些`ClassVisitor.visitXxx()`和`MethodVisitor.visitXxx()`方法不去调用了。
+- 伪造一条“新的信息”，就可以实现“添加”的效果。对应到ASM代码层面，就是在原来的基础上，添加一些对于`ClassVisitor.visitXxx()`和`MethodVisitor.visitXxx()`方法的调用。
+
+## ASM能够做哪些转换操作
 
 ### 类层面的修改
 

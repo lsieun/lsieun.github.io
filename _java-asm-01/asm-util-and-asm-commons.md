@@ -18,7 +18,7 @@ sequence: "401"
 
 ## asm-commons
 
-在`asm-commons.jar`当中，包含的类可以分成两组，一组是`ClassVisitor`的子类，另一组是`MethodVisitor`的子类。
+在`asm-commons.jar`当中，包括的类比较多，我们就不一一介绍每个类的作用了。但是，我们可以这些类可以分成两组，一组是`ClassVisitor`的子类，另一组是`MethodVisitor`的子类。
 
 - 其中，`ClassVisitor`的子类有`ClassRemapper`、`StaticInitMerger`和`SerialVersionUIDAdder`类；
 - 其中，`MethodVisitor`的子类有`LocalVariablesSorter`、`GeneratorAdapter`、`AdviceAdapter`、`AnalyzerAdapter`和`InstructionAdapter`类。
@@ -28,6 +28,15 @@ sequence: "401"
 {: refdef}
 
 那么，**asm-util.jar**与**asm-commons.jar**有什么区别呢？在`asm-util.jar`里，它提供的是通用性的功能，没有特别明确的应用场景；而在`asm-commons.jar`里，它提供的功能，都是为解决某一种特定场景中出现的问题而提出的解决思路。
+
+---
+
+再回顾，我有一个编程的习惯：在编写ASM代码的时候，如果写了一个类，它继承自`ClassVisitor`，那么就命名成`XxxVisitor`；如果写了一个类，它继承自`MethodVisitor`，那么就命名成`XxxAdapter`。通过类的名字，我就可以区分出哪些类是继承自`ClassVisitor`，哪些类是继承自`MethodVisitor`。
+
+其实，将`MethodVisitor`类的子类命名成`XxxAdapter`就是参考了`GeneratorAdapter`、`AdviceAdapter`、`AnalyzerAdapter`和`InstructionAdapter`类的名字。但是，`CheckClassAdapter`类是个例外，它是继承自`ClassVisitor`类。
+
+---
+
 
 ## 总结
 

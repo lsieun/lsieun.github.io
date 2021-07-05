@@ -7,7 +7,7 @@ sequence: "305"
 
 ## 预期目标
 
-假如有一个`HelloWorld`类是如下这样的：
+假如有一个`HelloWorld`类，代码如下：
 
 ```java
 public class HelloWorld {
@@ -17,9 +17,9 @@ public class HelloWorld {
 }
 ```
 
-我们看到上面的`test()`方法中，有一条打印语句。如果我们想在进入方法时和退出方法时，添加一条打印语句，该如何实现呢？
+我们想实现的预期目标：对于`test()`方法，在“方法进入”时和“方法退出”时，添加一条打印语句。
 
-第一种情况，我们想达成下面的效果：
+第一种情况，在“方法进入”时，预期目标如下所示：
 
 ```java
 public class HelloWorld {
@@ -30,7 +30,7 @@ public class HelloWorld {
 }
 ```
 
-第二种情况，我们想达成下面的效果：
+第二种情况，在“方法退出”时，预期目标如下所示：
 
 ```java
 public class HelloWorld {
@@ -41,47 +41,47 @@ public class HelloWorld {
 }
 ```
 
+现在，我们有了明确的预期目标；接下来，就是将这个预期目标转换成具体的ASM代码。那么，应该怎么实现呢？从哪里着手呢？
+
 ## 实现思路
 
-我们有了想要达到的目标，接下来就是将这个目标转换成具体的代码，那么应该怎么实现呢？
+我们知道，现在的内容是Class Transformation的操作，其中涉及到三个主要的类：`ClassReader`、`ClassVisitor`和`ClassWriter`。其中，`ClassReader`负责读取Class文件，`ClassWriter`负责生成Class文件，而具体的`ClassVisitor`负责进行Transformation的操作。换句话说，我们还是应该从`ClassVisitor`类开始。
 
-第一步，从`ClassVisitor`类开始。在`ClassVisitor`类当中，它里面的`visitXxx()`方法与类里面不同部分之间是有对应关系的，如下图：
+第一步，回顾一下`ClassVisitor`类当中主要的`visitXxx()`方法有哪些。在`ClassVisitor`类当中，有`visit()`、`visitField()`、`visitMethod()`和`visitEnd()`方法；这些`visitXxx()`方法与`.class`文件里的不同部分之间是有对应关系的，如下图：
 
 {:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/class-visitor-visit-xxx-methods.png)
 {: refdef}
 
-既然，我们想要修改的是“方法”，那么“方法”就对应于ASM中的`MethodVisitor`类。换句话说，想要实现这样一个目标，就是通过操作`MethodVisitor`类来实现。
+根据我们的预期目标，现在想要修改的是“方法”的部分，那么就对应着`ClassVisitor`类的`visitMethod()`方法。`ClassVisitor.visitMethod()`会返回一个`MethodVisitor`类的实例；而`MethodVisitor`类就是用来生成方法的“方法体”。
 
-第二步，从`MethodVisitor`类展开。在`MethodVisitor`类当中，它里面的`visitXxxInsn()`方法与方法里的方法体（method body）是对应的。
+第二步，回顾一下`MethodVisitor`类当中定义了哪些`visitXxx()`方法。
 
 {:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/method-visitor-visit-xxx-insn-methods.png)
 {: refdef}
 
-我们想对“已有的方法”进行修改，从本质上来说，就是对`visitXxxInsn()`方法这部分对应的内容进行修改。
+在`MethodVisitor`类当中，定义的`visitXxx()`方法比较多，但是我们可以将这些`visitXxx()`方法进行分组：
 
-到了这一步，我们基本上就知道要修改什么内容了；再接下来，就是将这些要修改的内容应用到类文件中去。
+- 第一组，`visitCode()`方法，标志着方法体（method body）的开始。
+- 第二组，`visitXxxInsn()`方法，对应方法体（method body）本身，这里包含多个方法。
+- 第三组，`visitMaxs()`方法，标志着方法体（method body）的结束。
+- 第四组，`visitEnd()`方法，是最后调用的方法。
 
-第三步，在`MethodVisitor`类当中，要确定出要在哪个方法里进行修改。
-
-另外，我们回顾一下，在`MethodVisitor`类中，`visitXxx()`方法的调用顺序，如下：
+另外，我们也回顾一下，在`MethodVisitor`类中，`visitXxx()`方法的调用顺序：
 
 - 第一步，调用`visitCode()`方法，调用一次。
 - 第二步，调用`visitXxxInsn()`方法，可以调用多次。
 - 第三步，调用`visitMaxs()`方法，调用一次。
 - 第四步，调用`visitEnd()`方法，调用一次。
 
-将这些`MethodVisitor.visitXxx()`方法与方法体（method body）对应起来：
+到了这一步，我们基本上就知道了：需要修改的内容就位于`visitCode()`和`visitMaxs()`方法之间，这是一个大概的范围。
 
-- `visitCode()`方法，标志着方法体的开始，是在方法体之前调用的方法。
-- `visitXxxInsn()`方法，就对应方法体（method body）本身。
-- `visitMaxs()`方法，标志着方法体的结束，是在方法体之后调用的方法。
-- `visitEnd()`方法，是在`visitMaxs()`方法之后调用的方法。
+第三步，精确定位。也就是说，在`MethodVisitor`类当中，要确定出要在哪一个`visitXxx()`方法里进行修改。
 
 ### 方法进入
 
-如果我们想在方法执行之前，添加一些打印语句，那么我们有两个位置可以添加打印语句：
+如果我们想在“方法进入”时，添加一些打印语句，那么我们有两个位置可以添加打印语句：
 
 - 第一个位置，就是在`visitCode()`方法中。
 - 第二个位置，就是在第1个`visitXxxInsn()`方法中。
@@ -100,11 +100,11 @@ public void visitCode() {
 
 ### 方法退出
 
-如果我们在“退出方法时”想添加的代码，是否可以添加到`visitMaxs()`方法内呢？这样做是不行的。因为在执行`visitMaxs()`方法之前，方法体（method body）已经执行过了：在方法体（method body）当中，里面会包含return语句；如果return语句一执行，后面的任何语句都不会再执行了；换句话说，如果在`visitMaxs()`方法内添加的打印输出语句，由于前面方法体（method body）中已经执行了return语句，后面的任何语句就执行不到了。
+如果我们在“方法退出”时想添加的代码，是否可以添加到`visitMaxs()`方法内呢？这样做是不行的。因为在执行`visitMaxs()`方法之前，方法体（method body）已经执行过了：在方法体（method body）当中，里面会包含return语句；如果return语句一执行，后面的任何语句都不会再执行了；换句话说，如果在`visitMaxs()`方法内添加的打印输出语句，由于前面方法体（method body）中已经执行了return语句，后面的任何语句就执行不到了。
 
-那么，到底是应该在哪里添加代码呢？为了回答这个问题，我们需要知道“方法退出”有哪几种情况。方法的退出，有两种情况，一种是正常退出（执行return语句），另一种是异常退出（执行throws语句）；接下来，就是将这两种退出情况应用到ASM的代码层面。
+那么，到底是应该在哪里添加代码呢？为了回答这个问题，我们需要知道“方法退出”有哪几种情况。方法的退出，有两种情况，一种是正常退出（执行return语句），另一种是异常退出（执行throw语句）；接下来，就是将这两种退出情况应用到ASM的代码层面。
 
-在`MethodVisitor`类当中，无论是执行return语句，还是执行throws语句，都是通过`visitInsn(opcode)`方法来实现的。所以，如果我们想在方法退出时，添加一些语句，那么这些语句放到`visitInsn(opcode)`方法中就可以了。
+在`MethodVisitor`类当中，无论是执行return语句，还是执行throw语句，都是通过`visitInsn(opcode)`方法来实现的。所以，如果我们想在“方法退出”时，添加一些语句，那么这些语句放到`visitInsn(opcode)`方法中就可以了。
 
 ```text
 public void visitInsn(int opcode) {
@@ -117,6 +117,12 @@ public void visitInsn(int opcode) {
     super.visitInsn(opcode);
 }
 ```
+
+---
+
+我有一个编程的习惯：在编写ASM代码的时候，如果写了一个类，它继承自`ClassVisitor`，那么就命名成`XxxVisitor`；如果写了一个类，它继承自`MethodVisitor`，那么就命名成`XxxAdapter`。通过类的名字，我就可以区分出哪些类是继承自`ClassVisitor`，哪些类是继承自`MethodVisitor`。
+
+---
 
 ## 示例一：方法进入
 
@@ -141,7 +147,7 @@ public class MethodEnterVisitor extends ClassVisitor {
         return mv;
     }
 
-    private class MethodEnterAdapter extends MethodVisitor {
+    private static class MethodEnterAdapter extends MethodVisitor {
         public MethodEnterAdapter(int api, MethodVisitor methodVisitor) {
             super(api, methodVisitor);
         }
@@ -291,7 +297,7 @@ public class HelloWorldRun {
 
 在`.class`文件中，`<init>()`方法，就表示类当中的构造方法。
 
-我们在“方法进入时”，有一个对于`<init>`的判断：
+我们在“方法进入”时，有一个对于`<init>`的判断：
 
 ```text
 if (mv != null && !"<init>".equals(name)) {
@@ -346,7 +352,7 @@ public class MethodExitVisitor extends ClassVisitor {
         return mv;
     }
 
-    private class MethodExitAdapter extends MethodVisitor {
+    private static class MethodExitAdapter extends MethodVisitor {
         public MethodExitAdapter(int api, MethodVisitor methodVisitor) {
             super(api, methodVisitor);
         }
@@ -493,7 +499,7 @@ public class MethodAroundVisitor extends ClassVisitor {
         return mv;
     }
 
-    private class MethodAroundAdapter extends MethodVisitor {
+    private static class MethodAroundAdapter extends MethodVisitor {
         public MethodAroundAdapter(int api, MethodVisitor methodVisitor) {
             super(api, methodVisitor);
         }
@@ -561,12 +567,12 @@ public class HelloWorldTransformCore {
 
 ## 总结
 
-本文主要是对“方法进入时”和“方法退出时”添加代码进行介绍，内容如下：
+本文主要是对“方法进入”和“方法退出”添加代码进行介绍，内容总结如下：
 
-- 第一点，在“方法进入时”和“方法退出时”添加代码，应该如何实现？
-    - 在“方法进入时”添加代码，是在`visitCode()`方法当中完成；
-    - 在“方法退出时”添加代码，是在`visitInsn(opcode)`方法中，判断`opcode`为return或throw的情况下完成。
-- 第二点，在“方法进入时”和“方法退出时”添加代码，有一些特殊的情况，需要小心处理：
+- 第一点，在“方法进入”时和“方法退出”时添加代码，应该如何实现？
+    - 在“方法进入”时添加代码，是在`visitCode()`方法当中完成；
+    - 在“方法退出”添加代码时，是在`visitInsn(opcode)`方法中，判断`opcode`为return或throw的情况下完成。
+- 第二点，在“方法进入”时和“方法退出”时添加代码，有一些特殊的情况，需要小心处理：
     - 接口，是否需要处理？接口当中的抽象方法没有方法体，但也可能有带有方法体的default方法。
     - 带有特殊修饰符的方法：
         - 抽象方法，是否需要处理？不只是接口当中有抽象方法，抽象类里也可能有抽象方法。抽象方法，是没有方法体的。
@@ -575,4 +581,8 @@ public class HelloWorldTransformCore {
 
 另外，在编写代码的时候，我们遵循一个“规则”：如果是`ClassVisitor`的子类，就取名为`XxxVisitor`类；如果是`MethodVisitor`的子类，就取名为`XxxAdapter`类。
 
-在后续的内容中，我们会介绍`AdviceAdapter`类，它能很容易帮助我们在“方法进入时”和“方法退出时”添加代码。那么，这就带来有一个问题，既然使用`AdviceAdapter`类实现起来很容易，那么为什么还要讲本文的实现方式呢？有两个原因。第一个原因，本文的方式侧重于理解“原理”，而`AdviceAdapter`则侧重于“应用”，`AdviceAdapter`的实现也是基于`visitCode()`和`visitInsn(opcode)`方法实现的，大家在理解上有一个步步递进的关系。第二个原因，虽然`AdviceAdapter`在“方法进入时”和“方法退出时”添加代码，大多数情况，都是能正常工作，但也有极其特殊的情况下，它会失败。这个时候，我们还是要回归到本文介绍的实现方式。
+在后续的内容中，我们会介绍`AdviceAdapter`类，它能很容易帮助我们在“方法进入”时和“方法退出”时添加代码。
+那么，这就带来有一个问题，既然使用`AdviceAdapter`类实现起来很容易，那么为什么还要讲本文的实现方式呢？有两个原因。
+
+- 第一个原因，本文的介绍方式侧重于让大家理解“工作原理”，而`AdviceAdapter`则侧重于“应用”，`AdviceAdapter`的实现也是基于`visitCode()`和`visitInsn(opcode)`方法实现的，在理解上有一个步步递进的关系。
+- 第二个原因，虽然`AdviceAdapter`在“方法进入”时和“方法退出”时添加代码比较容易，大多数情况，都是能正常工作，但也有极其特殊的情况下，它会失败。这个时候，我们还是要回归到本文介绍的实现方式。

@@ -5,29 +5,58 @@ sequence: "311"
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
-## 对现有方法进行分析
+## 查找Instruction
+
+### 如何查找Instruction
+
+在方法当中，查找某一个特定的Instruction，那么应该怎么做呢？简单来说，就是**通过`MethodVisitor`类当中定义的`visitXxxInsn()`方法来查找**。
+
+让我们回顾一下`MethodVisitor`类当中定义了哪些`visitXxx()`方法。
+
+{:refdef: style="text-align: center;"}
+![](/assets/images/java/asm/method-visitor-visit-xxx-insn-methods.png)
+{: refdef}
+
+在`MethodVisitor`类当中，定义的主要`visitXxx()`方法可以分成四组：
+
+- 第一组，`visitCode()`方法，标志着方法体（method body）的开始。
+- 第二组，`visitXxxInsn()`方法，对应方法体（method body）本身，这里包含多个方法。
+- 第三组，`visitMaxs()`方法，标志着方法体（method body）的结束。
+- 第四组，`visitEnd()`方法，是最后调用的方法。
+
+
+在方法当中，任何一条Instruction，放在ASM代码中，它都是通过调用`MethodVisitor.visitXxxInsn()`方法的形式来呈现的。换句话说，想去找某一条特定的Instruction，分成两个步骤：
+
+- 第一步，找到该Instruction对应的`visitXxxInsn()`方法。
+- 第二步，对该`visitXxxInsn()`方法接收的`opcode`和其它参数进行判断。
+
+**简而言之，查找Instruction的过程，就是对`visitXxxInsn()`方法接收的参数进行检查的过程。** 举一个形象的例子，平时我们坐地铁，随身物品要过安检，其实就是对书包（方法）里的物品（参数）进行检查，如下图：
+
+{:refdef: style="text-align: center;"}
+![安检机器](/assets/images/java/asm/security-instrument.jpg)
+{: refdef}
+
+### Class Analysis
+
+**查找Instruction的过程，** 并不属于Class Transformation（因为没有生成新的类），而**是属于Class Analysis。** 在下图当中，Class Analysis包括find potential bugs、detect unused code和reverse engineer code等操作。但是，这些分析操作（analysis）是比较困难的，它需要编程经验的积累和对问题模式的识别，需要编码处理各种不同情况，所以不太容易实现。
 
 {:refdef: style="text-align: center;"}
 ![What ASM Can Do](/assets/images/java/asm/what-asm-can-do.png)
 {: refdef}
 
-在前面的示例当中，我们都是对已有的`.class`文件进行转换，也就是由一个已有的`.class`文件经过Class Transformation操作生成一个新的`.class`文件。其实，我们也可以做一些分析操作（analysis），比如上图所示，包括find potential bugs、detect unused code和reverse engineer code等操作。但是，这些分析操作（analysis）是比较难的，它需要我们编程经验的积累和对问题模式的识别，需要编码处理各种不同情况，所以不太容易实现。
+但是，Class Analysis，并不是只包含复杂的分析操作，也包含一些简单的分析操作。例如，当前方法里调用了哪些其它的方法、当前的方法被哪些别的方法所调用。对于方法的调用，就对应着`MethodVisitor.visitMethodInsn(int opcode, String owner, String name, String descriptor, boolean isInterface)`方法。
 
-当然，Class Analysis，并不只是包含这些复杂的分析操作，也包含一些简单的分析操作，例如，当前方法里调用了哪些其它的方法、当前的方法被哪些别的方法所调用。那么，这些简单的分析操作，我们就可以通过Core API进行实现。再一步的说，分析之后的结果，也可以用于Class Transformation操作。比如说，先分析一下当前方法里调用了哪些方法，得到一个方法列表；在这个方法列表，是否有你想替换的方法呢；如果有，那就对该方法进行替换就可以了。
-
-另外，Class Analysis，虽然从“名字”上来说，我们是对“类”来进行分析，但是，我们在分析的时候，很多情况下是针对“方法”里的代码进行分析。比如说，find potential bugs是在方法里进行查找，不太可能是从字段层面查找bug。所以，我们这里的标题是“对现有方法进行分析”。
-
-在Class Transformation当中，我们需要用到`ClassReader`、`ClassVisitor`和`ClassWriter`类；但是，在Class Analysis中，我们只需要用到`ClassReader`和`ClassVisitor`类，而不需要用到`ClassWriter`类。
+另外，要注意一点：在Class Transformation当中，需要用到`ClassReader`、`ClassVisitor`和`ClassWriter`类；但是，在Class Analysis中，我们只需要用到`ClassReader`和`ClassVisitor`类，而不需要用到`ClassWriter`类。
 
 {:refdef: style="text-align: center;"}
 ![ASM Core Classes](/assets/images/java/asm/asm-core-classes.png)
 {: refdef}
 
-## 示例：调用了哪些方法
+## 示例一：调用了哪些方法
 
 ### 预期目标
 
-我们想要实现的预期目标是，打印出`test()`方法当中调用了哪些方法。
+假如有一个`HelloWorld`类，代码如下：
 
 ```java
 public class HelloWorld {
@@ -39,40 +68,46 @@ public class HelloWorld {
 }
 ```
 
-上面的`test()`方法对应的Instruction如下：
+我们想要实现的预期目标：打印出`test()`方法当中调用了哪些方法。
+
+在编写ASM代码之前，可以使用`javap`命令查看`test()`方法所包含的Instruction内容：
 
 ```text
-  public test(II)V
-    ILOAD 1
-    ILOAD 2
-    INVOKESTATIC java/lang/Math.addExact (II)I
-    ISTORE 3
-    LDC "%d + %d = %d"
-    ICONST_3
-    ANEWARRAY java/lang/Object
-    DUP
-    ICONST_0
-    ILOAD 1
-    INVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;
-    AASTORE
-    DUP
-    ICONST_1
-    ILOAD 2
-    INVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;
-    AASTORE
-    DUP
-    ICONST_2
-    ILOAD 3
-    INVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;
-    AASTORE
-    INVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
-    ASTORE 4
-    GETSTATIC java/lang/System.out : Ljava/io/PrintStream;
-    ALOAD 4
-    INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V
-    RETURN
-    MAXSTACK = 5
-    MAXLOCALS = 5
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test(int, int);
+    Code:
+       0: iload_1
+       1: iload_2
+       2: invokestatic  #2                  // Method java/lang/Math.addExact:(II)I
+       5: istore_3
+       6: ldc           #3                  // String %d + %d = %d
+       8: iconst_3
+       9: anewarray     #4                  // class java/lang/Object
+      12: dup
+      13: iconst_0
+      14: iload_1
+      15: invokestatic  #5                  // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      18: aastore
+      19: dup
+      20: iconst_1
+      21: iload_2
+      22: invokestatic  #5                  // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      25: aastore
+      26: dup
+      27: iconst_2
+      28: iload_3
+      29: invokestatic  #5                  // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      32: aastore
+      33: invokestatic  #6                  // Method java/lang/String.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+      36: astore        4
+      38: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
+      41: aload         4
+      43: invokevirtual #8                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      46: return
+}
 ```
 
 ### 编码实现
@@ -173,7 +208,7 @@ INVOKESTATIC java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava
 INVOKEVIRTUAL java/io/PrintStream.println(Ljava/lang/String;)V
 ```
 
-## 示例：被哪些方法调用了
+## 示例二：被哪些方法所调用
 
 在IDEA当中，有一个Find Usages功能：在类名、字段名、或方法名上，右键之后，选择Find Usages，就可以查看该项内容在哪些地方被使用了。
 
@@ -187,17 +222,11 @@ INVOKEVIRTUAL java/io/PrintStream.println(Ljava/lang/String;)V
 ![Find Usages Result](/assets/images/java/asm/find-usgaes-result.png)
 {: refdef}
 
-这样一个功能，我们也可以通过Core API来进行实现，它具体的实现思路是这样的：
-
-- 首先，读取一个`.class`文件，找到其中包含的所有方法，得到一个方法列表。
-- 其次，对方法列表进行一个过滤操作，例如，不考虑带有`abstract`和`native`标识的方法。
-- 接着，针对每一个单独的方法，遍历该方法包含的所有Instruction
-    - 如果在遍历过程当中，找到了对于`test()`方法的调用，那么就把这个方法记录下来
-    - 如果在遍历完之后，也没有找到对于`test()`方法的调用，那么跳过当前方法，从下一个方法查找
+这样一个功能，如果我们自己来实现，那该怎么编写ASM代码呢？
 
 ### 预期目标
 
-我们的预期目标是，找出是哪些方法对`test()`方法进行了调用。
+假如有一个`HelloWorld`类，代码如下：
 
 ```java
 public class HelloWorld {
@@ -228,6 +257,8 @@ public class HelloWorld {
 }
 ```
 
+我们想要实现的预期目标：找出是哪些方法对`test()`方法进行了调用。
+
 ### 编码实现
 
 ```java
@@ -245,7 +276,8 @@ public class MethodFindRefVisitor extends ClassVisitor {
     private final String methodName;
     private final String methodDesc;
 
-    private String currentOwner;
+    private String owner;
+    private final List<String> resultList = new ArrayList<>();
 
     public MethodFindRefVisitor(int api, ClassVisitor classVisitor, String methodOwner, String methodName, String methodDesc) {
         super(api, classVisitor);
@@ -257,7 +289,7 @@ public class MethodFindRefVisitor extends ClassVisitor {
     @Override
     public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
         super.visit(version, access, name, signature, superName, interfaces);
-        this.currentOwner = name;
+        this.owner = name;
     }
 
     @Override
@@ -265,18 +297,30 @@ public class MethodFindRefVisitor extends ClassVisitor {
         boolean isAbstractMethod = (access & ACC_ABSTRACT) != 0;
         boolean isNativeMethod = (access & ACC_NATIVE) != 0;
         if (!isAbstractMethod && !isNativeMethod) {
-            return new MethodFindRefAdaptor(api, null, name, descriptor);
+            return new MethodFindRefAdaptor(api, null, owner, name, descriptor);
         }
         return null;
     }
 
+    @Override
+    public void visitEnd() {
+        // 首先，处理自己的代码逻辑
+        for (String item : resultList) {
+            System.out.println(item);
+        }
+
+        // 其次，调用父类的方法实现
+        super.visitEnd();
+    }
+
     private class MethodFindRefAdaptor extends MethodVisitor {
-        private final List<String> list = new ArrayList<>();
+        private final String currentMethodOwner;
         private final String currentMethodName;
         private final String currentMethodDesc;
 
-        public MethodFindRefAdaptor(int api, MethodVisitor methodVisitor, String currentMethodName, String currentMethodDesc) {
+        public MethodFindRefAdaptor(int api, MethodVisitor methodVisitor, String currentMethodOwner, String currentMethodName, String currentMethodDesc) {
             super(api, methodVisitor);
+            this.currentMethodOwner = currentMethodOwner;
             this.currentMethodName = currentMethodName;
             this.currentMethodDesc = currentMethodDesc;
         }
@@ -285,25 +329,14 @@ public class MethodFindRefVisitor extends ClassVisitor {
         public void visitMethodInsn(int opcode, String owner, String name, String descriptor, boolean isInterface) {
             // 首先，处理自己的代码逻辑
             if (methodOwner.equals(owner) && methodName.equals(name) && methodDesc.equals(descriptor)) {
-                String info = String.format("%s.%s%s", currentOwner, currentMethodName, currentMethodDesc);
-                if (!list.contains(info)) {
-                    list.add(info);
+                String info = String.format("%s.%s%s", currentMethodOwner, currentMethodName, currentMethodDesc);
+                if (!resultList.contains(info)) {
+                    resultList.add(info);
                 }
             }
 
             // 其次，调用父类的方法实现
             super.visitMethodInsn(opcode, owner, name, descriptor, isInterface);
-        }
-
-        @Override
-        public void visitEnd() {
-            // 首先，处理自己的代码逻辑
-            for (String item : list) {
-                System.out.println(item);
-            }
-
-            // 其次，调用父类的方法实现
-            super.visitEnd();
         }
     }
 }
@@ -346,10 +379,9 @@ sample/HelloWorld.sub(II)I
 
 ## 总结
 
-本文主要对“调用了哪些方法”进行了介绍，是属于比较简单的分析`.class`文件的操作，内容总结如下：
+本文主要对查找Instruction进行了介绍，内容总结如下：
 
-- 第一点，Class Analysis，从难易程度上来说，可以有复杂的分析，也可以有简单的分析。本文示例，就是对方法进行简单的分析。复杂的分析，则需要长期的知识经验积累和对问题模式的识别。
-- 第二点，Class Analysis，从类的结构上来说，大多数的分析是对“方法代码”进行分析。在类里面，有当前类名、父类、实现的接口、字段和方法，其中，方法是进行分析的主要对象。
-- 第三点，Class Analysis，在编写代码过程中，我们只需要用到`ClassReader`和`ClassVisitor`类，而不需要用到`ClassWriter`类。
+- 第一点，查找Instruction的过程，就是对`MethodVisitor`类的`visitXxxInsn()`方法及参数进行判断的过程。
+- 第二点，查找Instruction，并不属于Class Transformation，而属于Class Analysis。Class Analysis，只需要用到`ClassReader`和`ClassVisitor`类，而不需要用到`ClassWriter`类。
+- 第三点，在两个代码示例中，都是围绕着“方法调用”展开，而“方法调用”就对应着`MethodVisitor.visitMethodInsn()`方法。
 
-当然，除了方法之外，我们也可以对别的内容进行分析。例如，对于一个“接口”来说，有哪些类实现了该接口；对于一个“类”来说，它有哪些父类和子类。

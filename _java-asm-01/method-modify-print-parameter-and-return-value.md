@@ -7,11 +7,7 @@ sequence: "306"
 
 ## 预期目标
 
-在有些应用场景中，我们想打印出“方法接收的参数值”和“方法的返回值”。
-
-实现这个功能的思路：在“方法进入”的时候，打印出“方法接收的参数值”；在“方法退出”的时候，打印出“方法的返回值”。
-
-例如，修改之前的示例代码：
+假如有一个`HelloWorld`类，代码如下：
 
 ```java
 public class HelloWorld {
@@ -26,7 +22,7 @@ public class HelloWorld {
 }
 ```
 
-修改之后的示例代码：
+我们想实现的预期目标：打印出“方法接收的参数值”和“方法的返回值”。
 
 ```java
 public class HelloWorld {
@@ -45,6 +41,8 @@ public class HelloWorld {
     }
 }
 ```
+
+实现这个功能的思路：在“方法进入”的时候，打印出“方法接收的参数值”；在“方法退出”的时候，打印出“方法的返回值”。
 
 ## 第一个版本
 
@@ -173,9 +171,9 @@ public class HelloWorldRun {
 
 ### 小总结
 
-缺点：不灵活。如果方法的参数的数量和类型发生改变，这种方法就会失效。
+缺点：不灵活。如果方法参数的数量和类型发生改变，这种方法就会失效。
 
-那么，有没有办法来自动适应方法的数量和类型变化呢？答案是“有”。这个时候，就是`Type`类（`org.objectweb.asm.Type`）来发挥作用的地方。
+那么，有没有办法来自动适应方法参数的数量和类型变化呢？答案是“有”。这个时候，就是`Type`类（`org.objectweb.asm.Type`）来发挥作用的地方。
 
 ## 第二个版本
 
@@ -197,28 +195,31 @@ public class MethodParameterVisitor extends ClassVisitor {
     public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
         MethodVisitor mv = super.visitMethod(access, name, descriptor, signature, exceptions);
         if (mv != null && !name.equals("<init>")) {
-            mv = new MethodParameterAdapter(api, mv, access, name, descriptor);
+            boolean isAbstractMethod = (access & ACC_ABSTRACT) != 0;
+            boolean isNativeMethod = (access & ACC_NATIVE) != 0;
+            if (!isAbstractMethod && !isNativeMethod) {
+                mv = new MethodParameterAdapter(api, mv, access, name, descriptor);
+            }
         }
         return mv;
     }
 
-    private class MethodParameterAdapter extends MethodVisitor {
+    private static class MethodParameterAdapter extends MethodVisitor {
         private final int methodAccess;
         private final String methodName;
         private final String methodDesc;
-        private final boolean isStatic;
 
         public MethodParameterAdapter(int api, MethodVisitor mv, int methodAccess, String methodName, String methodDesc) {
             super(api, mv);
             this.methodAccess = methodAccess;
             this.methodName = methodName;
             this.methodDesc = methodDesc;
-            this.isStatic = ((methodAccess & ACC_STATIC) != 0);
         }
 
         @Override
         public void visitCode() {
             // 首先，处理自己的代码逻辑
+            boolean isStatic = ((methodAccess & ACC_STATIC) != 0);
             int slotIndex = isStatic ? 0 : 1;
 
             printMessage("Method Enter: " + methodName + methodDesc);
@@ -399,6 +400,8 @@ public class HelloWorldTransformCore {
 
 ### 小总结
 
+这种方式的特点就是，结合着`Type`类来使用，为方法参数的“类型”和“数量”赋予“灵魂”，让方法灵活起来。
+
 #### Frame的初始状态
 
 在JVM执行的过程中，在内存空间中，每一个运行的方法（method）都对应一个frame空间；在frame空间当中，有两个重要的结构，即local variables和operand stack，如下图所示。其中，local variables是一个数组结构，它通过索引来读取或设置数据；而operand stack是一个栈结构，符合“后进先出”（LIFO, Last in, First out）的规则。
@@ -407,8 +410,6 @@ public class HelloWorldTransformCore {
 ![stack frame](/assets/images/java/asm/frame-local-variables-operand-stack.png)
 {: refdef}
 
-
-注意，这里介绍的frame是JVM在“运行过程”中一部分内存空间，而之前介绍的`visitFrame()`方法，是`.class`文件中`StackMapTable`结构的一部分。
 
 在方法刚进入时，operand stack的初始状态是什么样的呢？回答：operand stack是空的，换句话说，“栈上没有任何元素”。
 
@@ -518,7 +519,6 @@ public class ParameterUtils {
 ```java
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
 import static org.objectweb.asm.Opcodes.*;
@@ -532,28 +532,31 @@ public class MethodParameterVisitor2 extends ClassVisitor {
     public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
         MethodVisitor mv = super.visitMethod(access, name, descriptor, signature, exceptions);
         if (mv != null && !name.equals("<init>")) {
-            mv = new MethodParameterAdapter2(api, mv, access, name, descriptor);
+            boolean isAbstractMethod = (access & ACC_ABSTRACT) != 0;
+            boolean isNativeMethod = (access & ACC_NATIVE) != 0;
+            if (!isAbstractMethod && !isNativeMethod) {
+                mv = new MethodParameterAdapter2(api, mv, access, name, descriptor);
+            }
         }
         return mv;
     }
 
-    private class MethodParameterAdapter2 extends MethodVisitor {
+    private static class MethodParameterAdapter2 extends MethodVisitor {
         private final int methodAccess;
         private final String methodName;
         private final String methodDesc;
-        private final boolean isStatic;
 
         public MethodParameterAdapter2(int api, MethodVisitor mv, int methodAccess, String methodName, String methodDesc) {
             super(api, mv);
             this.methodAccess = methodAccess;
             this.methodName = methodName;
             this.methodDesc = methodDesc;
-            this.isStatic = ((methodAccess & Opcodes.ACC_STATIC) != 0);
         }
 
         @Override
         public void visitCode() {
             // 首先，处理自己的代码逻辑
+            boolean isStatic = ((methodAccess & ACC_STATIC) != 0);
             int slotIndex = isStatic ? 0 : 1;
 
             printMessage("Method Enter: " + methodName + methodDesc);
@@ -671,11 +674,11 @@ public class HelloWorldTransformCore {
 
 本文主要介绍了如何实现打印方法的参数和返回值，我们提供了三个版本：
 
-- 第一个版本，代码是固定的，不够灵活。
-- 第二个版本，为方法参数的“类型”和“数量”赋予“灵魂”，让方法灵活起来。
-- 第三个版本，将“打印工作”移交给“专业人员”来处理。
+- 第一个版本，它的特点是代码固定、不够灵活。
+- 第二个版本，它的特点是结合`Type`来使用，为方法参数的“类型”和“数量”赋予“灵魂”，让方法灵活起来。
+- 第三个版本，它的特点是将“打印工作”移交给“专业人员”来处理。
 
 本文内容总结如下：
 
-- 第一点，从实现思路的角度来说，打印方法的参数和返回，是在“方法进入”和“方法退出”的基础上实现的。具体来说，在“方法进入”的时候，先将方法的参数打印出来；在“方法退出”的时候，再将方法的返回值打印出来。
+- 第一点，从实现思路的角度来说，打印方法的参数和返回值，是在“方法进入”和“方法退出”的基础上实现的。在“方法进入”的时候，先将方法的参数打印出来；在“方法退出”的时候，再将方法的返回值打印出来。
 - 第二点，我们呈现三个版本的目的，是为了让大家理解一步一步迭代的过程。如果大家日后用到类似的功能，直接参照第三个版本实现就可以了。

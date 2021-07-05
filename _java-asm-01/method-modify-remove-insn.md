@@ -5,7 +5,7 @@ sequence: "308"
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
-## 如何移除instruction
+## 如何移除Instruction
 
 在修改方法体的代码时，**如何移除一条Instruction呢**？其实，很简单，就是**让中间的某一个`MethodVisitor`对象不向后“传递该instruction”就可以了**。
 
@@ -45,7 +45,7 @@ INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V
 
 ### 预期目标
 
-我们预期目标就是，删除代码当中的`NOP`指令。
+我们想实现的预期目标：删除代码当中的`NOP`指令。
 
 首先，我们来生成一个包含`NOP`指令的`.class`文件，如下：
 
@@ -110,18 +110,25 @@ public class HelloWorldGenerateCore {
 查看生成后的效果：
 
 ```text
-  // access flags 0x1
-  public test()V
-    NOP
-    GETSTATIC java/lang/System.out : Ljava/io/PrintStream;
-    NOP
-    LDC "Hello World"
-    NOP
-    INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V
-    NOP
-    RETURN
-    MAXSTACK = 2
-    MAXLOCALS = 1
+$ javap -c sample.HelloWorld
+public class sample.HelloWorld {
+  public sample.HelloWorld();
+    Code:
+       0: aload_0
+       1: invokespecial #8                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public void test();
+    Code:
+       0: nop
+       1: getstatic     #15                 // Field java/lang/System.out:Ljava/io/PrintStream;
+       4: nop
+       5: ldc           #17                 // String Hello World
+       7: nop
+       8: invokevirtual #23                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      11: nop
+      12: return
+}
 ```
 
 ### 编码实现
@@ -151,7 +158,7 @@ public class MethodRemoveNopVisitor extends ClassVisitor {
         return mv;
     }
 
-    private class MethodRemoveNopAdapter extends MethodVisitor {
+    private static class MethodRemoveNopAdapter extends MethodVisitor {
         public MethodRemoveNopAdapter(int api, MethodVisitor methodVisitor) {
             super(api, methodVisitor);
         }
@@ -222,7 +229,7 @@ public class sample.HelloWorld {
 
 ## 总结
 
-本文主要对移除instruction进行了介绍，内容总结如下：
+本文主要对移除Instruction进行了介绍，内容总结如下：
 
 - 第一点，移除Instruction方式，就是让中间的某一个`MethodVisitor`对象不向后“传递该instruction”就可以了。
 - 第二点，在移除instruction的过程中，要保证operand stack在修改前和修改后是一致的。

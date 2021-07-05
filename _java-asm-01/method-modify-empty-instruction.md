@@ -7,21 +7,39 @@ sequence: "309"
 
 ## 如何清空方法体
 
-在有些情况下，我们可能想清空整个方法体的内容，那该怎么做呢？其实，有两个思路。第一种思路，就是将instruction一条一条的移除掉，直到最后只剩下return语句，这种方式其实不是特别好。第二种思路，就是忽略原来的方法体，重新生成一个新的方法体，这是比较推荐的使用方式。
+在有些情况下，我们可能想清空整个方法体的内容，那该怎么做呢？其实，有两个思路。
+
+- 第一种思路，就是将instruction一条一条的移除掉，直到最后只剩下return语句。（不推荐）
+- 第二种思路，就是忽略原来的方法体，重新生成一个新的方法体。（推荐使用）
 
 {:refdef: style="text-align: center;"}
 ![多个FieldVisitor和MethodVisitor串联到一起](/assets/images/java/asm/multiple-field-method-vistors-connected.png)
 {: refdef}
 
-对于第二种思路，“忽略原来的方法体，重新生成一个新的方法体”，具体是如何实现的呢？假设有一个中间的`MethodVisitor`来负责清空方法体，那么，对于它“前面”的`MethodVisitor`，它返回`null`值，就相当于原来的方法丢失了；对于“后面”的`MethodVisitor`，它添加同名、同类型的方法，然后生成新的方法体，这就相当于又添加了一个新的方法。
+对于第二种思路，“忽略原来的方法体，重新生成一个新的方法体”，想法很好，具体如何实现呢？假设有一个中间的`MethodVisitor`来负责做这个工作，通过两个步骤来实现：
 
-但是，需要注意的一点是，清空方法体，并不是一条instruction也没有，它至少要有一条return语句。如果方法返回值是`void`类型，那至少要有一个return；如果方法返回值不是`void`类型（例如，`int`、`String`），这个时候，就要考虑返回一个什么样的值比较合适了。同时，我们也要计算local variables和operand stack的大小。因为local variables主要是用于存储`this`变量和方法的参数，因此需要计算local variables的大小。如果方法有返回值，则需要先放到operand stack上去，再进行返回，所以也要计算operand stack的大小；如果方法没有返回值，清空方法体后，我们可以将operand stack的大小设置为`0`。
+- 第一步，对于它“前面”的`MethodVisitor`，它返回`null`值，就相当于原来的方法丢失了；
+- 第二步，对于它“后面”的`MethodVisitor`，它添加同名、同类型的方法，然后生成新的方法体，这就相当于又添加了一个新的方法。
+
+需要注意的一点：**清空方法体，并不是一条instruction也没有，它至少要有一条return语句。** 
+
+- 如果方法返回值是`void`类型，那至少要有一个return；
+- 如果方法返回值不是`void`类型（例如，`int`、`String`），这个时候，就要考虑返回一个什么样的值比较合适了。
+  
+同时，我们也要**计算local variables和operand stack的大小**：
+
+- 计算local variables的大小。在local variables中，主要是用于存储`this`变量和方法的参数，只要计算`this`和方法参数的大小就可以了。
+- 计算operand stack的大小。
+    - 如果方法有返回值，则需要先放到operand stack上去，再进行返回，那么operand stack的大小与返回值的类型密切相关；
+    - 如果方法没有返回值，清空方法体后，那么operand stack的大小为`0`。
+
+计算local variables和operand stack的大小，可以由我们自己编码来实现，也可以由ASM帮助我们实现。
 
 ## 示例：绕过验证机制
 
 ### 预期目标
 
-我们的预期目标是，清空`verify`方法的方法体，无论输入什么样的值，它都不会报错。
+假如有一个`HelloWorld`类，代码如下：
 
 ```java
 public class HelloWorld {
@@ -30,6 +48,16 @@ public class HelloWorld {
             return;
         }
         throw new IllegalArgumentException("username or password is not correct");
+    }
+}
+```
+
+我们想实现的预期目标：清空`verify`方法的方法体，无论输入什么样的值，它都不会报错。
+
+```java
+public class HelloWorld {
+    public void verify(String username, String password) throws IllegalArgumentException {
+        return;
     }
 }
 ```

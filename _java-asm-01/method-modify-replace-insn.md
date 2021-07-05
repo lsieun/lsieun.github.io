@@ -7,21 +7,21 @@ sequence: "310"
 
 ## 如何替换Instruction
 
-有的时候，我们想替换掉某一条instruction，那应该如何实现呢？其实，实现起来也很简单，就是先找到该instruction，然后在同样的位置替换成另一个instruction就可以了。
+有的时候，我们想替换掉某一条instruction，那应该如何实现呢？其实，实现起来也很简单，就是**先找到该instruction，然后在同样的位置替换成另一个instruction就可以了**。
 
 {:refdef: style="text-align: center;"}
 ![多个FieldVisitor和MethodVisitor串联到一起](/assets/images/java/asm/multiple-field-method-vistors-connected.png)
 {: refdef}
 
-同样，在替换instruction的过程当中，我们也应该注意**operand stack在修改前和修改后是一致的**。
+同样，我们也要注意：**在替换instruction的过程当中，operand stack在修改前和修改后是一致的**。
 
-替换Instruction，有什么样的使用场景呢？第三方提供的jar包当中，可能在某一个`.class`文件当中调用了一个方法。这个方法，从某种程度上来说，你可能对它“不满意”，就比如说，它是一个验证逻辑的方法，你想替换成自己的验证逻辑，又或者说，它实现的功能比较简单，你想替换成功能更完善的功能，就可以把这个方法对应的Instruction替换掉。
+在方法当中，替换Instruction，有什么样的使用场景呢？比如说，第三方提供的jar包当中，可能在某一个`.class`文件当中调用了一个方法。这个方法，从某种程度上来说，你可能对它“不满意”。假如说，这个方法是一个验证逻辑的方法，你想替换成自己的验证逻辑，又或者说，它实现的功能比较简单，你想替换成功能更完善的方法，就可以把这个方法对应的Instruction替换掉。
 
 ## 示例：替换方法调用
 
 ### 预期目标
 
-假如有下面的一个类：
+假如有一个`HelloWorld`类，代码如下：
 
 ```java
 public class HelloWorld {
@@ -32,23 +32,27 @@ public class HelloWorld {
 }
 ```
 
-`test()`方法对应的指令如下：
+其中，`test()`方法对应的指令如下：
 
 ```text
-  public test(II)V
-    ILOAD 1
-    ILOAD 2
-    INVOKESTATIC java/lang/Math.max (II)I
-    ISTORE 3
-    GETSTATIC java/lang/System.out : Ljava/io/PrintStream;
-    ILOAD 3
-    INVOKEVIRTUAL java/io/PrintStream.println (I)V
-    RETURN
-    MAXSTACK = 2
-    MAXLOCALS = 4
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test(int, int);
+    Code:
+       0: iload_1
+       1: iload_2
+       2: invokestatic  #2                  // Method java/lang/Math.max:(II)I
+       5: istore_3
+       6: getstatic     #3                  // Field java/lang/System.out:Ljava/io/PrintStream;
+       9: iload_3
+      10: invokevirtual #4                  // Method java/io/PrintStream.println:(I)V
+      13: return
+}
 ```
 
-我们预期的目标有两个：
+我们想实现的预期目标有两个：
 
 - 第一个，就是将静态方法`Math.max()`方法替换掉。
 - 第二个，就是将非静态方法`PrintStream.println()`方法替换掉。
@@ -133,7 +137,7 @@ super.visitMethodInsn(newOpcode, newOwner, newMethodName, newMethodDesc, false);
 
 #### 替换static方法
 
-在替换static方法的时候，要保护一点：替换方法前，和替换方法后，要保持“方法接收的参数”和“方法的返回类型”是一致的。
+在替换static方法的时候，要保证一点：替换方法前，和替换方法后，要保持“方法接收的参数”和“方法的返回类型”是一致的。
 
 ```java
 import lsieun.utils.FileUtils;
@@ -176,7 +180,7 @@ public class HelloWorldTransformCore {
 ```java
 public class ParameterUtils {
     public static void output(PrintStream printStream, int val) {
-        printStream.println(val);
+        printStream.println("ParameterUtils: " + val);
     }
 }
 ```
@@ -201,7 +205,7 @@ public class HelloWorldTransformCore {
         int api = Opcodes.ASM9;
         ClassVisitor cv = new MethodReplaceInvokeVisitor(api, cw,
                 "java/io/PrintStream", "println", "(I)V",
-                Opcodes.INVOKESTATIC, "sample/ParameterUtils", "printValueOnStack", "(I)V");
+                Opcodes.INVOKESTATIC, "sample/ParameterUtils", "output", "(Ljava/io/PrintStream;I)V");
 
         //（4）结合ClassReader和ClassVisitor
         int parsingOptions = ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES;

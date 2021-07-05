@@ -25,7 +25,14 @@ public class LocalVariablesSorter extends MethodVisitor {
 
 ### fields
 
-第二个部分，`LocalVariablesSorter`类定义的字段有哪些。
+第二个部分，`LocalVariablesSorter`类定义的字段有哪些。在理解`LocalVariablesSorter`类时，一个要记住的核心点：处理好”新变量“与”旧变量“的位置关系。换句话说，要给”新变量“在local variables当中找一个位置存储，”旧变量“也要在local variables当中找一个位置存储，它们的位置不能发生冲突。对于local variables当中某一个具体的位置，要么存储的是”新变量“，要么存储的是”旧变量“，不可能在同一个位置既存储”新变量“，又存储”旧变量“。
+
+- `remappedVariableIndices`字段，是一个`int[]`数组，其中所有元素的初始值为`0`。
+    - `remappedVariableIndices`字段的作用：只关心“旧变量”，它记录“旧变量”的新位置。
+    - `remappedVariableIndices`字段使用的算法，有点奇怪和特别。
+- `remappedLocalTypes`字段，将“旧变量”和“新变量”整合到一起之后，记录它们的类型信息。
+- `firstLocal`字段，记录“方法体”中“第一个变量”在local variables当中的索引值，由于带有`final`标识，所以赋值之后，就不再发生变化了。
+- `nextLocal`字段，记录local variables中可以未分配变量的位置，无论是“新变量”，还是“旧变量”，它们都是由`nextLocal`字段来分配位置；分配变量之后，`nextLocal`字段值会发生变化，重新指向local variables中未分配变量的位置。
 
 ```java
 public class LocalVariablesSorter extends MethodVisitor {
@@ -66,11 +73,11 @@ public class LocalVariablesSorter extends MethodVisitor {
 
 ### methods
 
-第四个部分，`LocalVariablesSorter`类定义的方法有哪些。
+第四个部分，`LocalVariablesSorter`类定义的方法有哪些。`LocalVariablesSorter`类要处理好“新变量”与“旧变量”之间的关系。
 
 #### newLocal method
 
-`LocalVariablesSorter`类要处理好“新添加的变量”与“原有变量”之间的关系。
+`newLocal()`方法就是为“新变量”来分配位置。
 
 ```java
 public class LocalVariablesSorter extends MethodVisitor {
@@ -131,6 +138,8 @@ public class LocalVariablesSorter extends MethodVisitor {
 ```
 
 #### local variables method
+
+`visitVarInsn()`和`visitIincInsn()`方法就是为“旧变量”来重新分配位置，这两个方法都会去调用`remap(var, type)`方法。
 
 ```java
 public class LocalVariablesSorter extends MethodVisitor {
@@ -246,15 +255,16 @@ public class LocalVariablesSorter extends MethodVisitor {
     - 第一种情况，程序代码中原来定义的变量。
     - 第二种情况，程序代码中新定义的变量。
 
-对于`LocalVariablesSorter`类来说，它要处理的一个关键性的工作，就是处理好“旧变量”和“新变量”之间的关系。其实，不管是“新变量”，还是“旧变量”，它都是通过`newLocalMapping(type)`方法来找到自己的位置。`newLocalMapping(type)`方法的逻辑就是“先到先得”。
-
-有一个形象的例子，可以帮助我们理解`newLocalMapping(type)`方法的作用。三国的故事，大家可能很熟悉，刘备进入益州之后，人们经常会讨论荆襄集团与益州集团之间的相对平衡、互相制约。那么，益州集团就相当于“旧变量”，而荆襄集团就相当于“新变量”。那么，作为一个国君，应该如何去融合益州集团和荆襄集团呢？其实，只要遵循统一的选贤与能的标准就可以了，无论是来自于益州，还是来自于荆襄，只要符合选拔的标准，根据能力大小的不同而分配不同等级的官职。`newLocalMapping(type)`方法，就像是这个统一的“选贤与能”的标准，无论是“旧变量”，还是“新变量”，都是通过这个方法来获取自己的“官职”或位置，不会出现冲突（不会出现“旧变量”和“新变量”占用同一个位置）的情况。
+对于`LocalVariablesSorter`类来说，它要处理的一个关键性的工作，就是处理好“旧变量”和“新变量”之间的关系。其实，不管是“新变量”，还是“旧变量”，它都是通过`newLocalMapping(type)`方法来找到自己的位置。`newLocalMapping(type)`方法的逻辑就是“先到先得”。有一个形象的例子，可以帮助我们理解`newLocalMapping(type)`方法的作用。高考之后，过一段时间，大学就会开学，新生就会来报到；不管新学生来自于什么地方，第一个来到学校的学生就分配`001`的编号，第二个来到学校的学生就分配`002`的编号，依此类推。
 
 我们先来说明第二种情况，也就是在程序代码中添加新的变量。
     
 ### 添加新变量
 
-如果要添加新的变量，那么需要调用`newLocal(type)`方法。在`newLocal(type)`方法中，它会进一步调用`newLocalMapping(type)`方法；在`newLocalMapping(type)`方法中，首先会记录`newLocal`的值，接着会更新`newLocal`的值，最后返回`newLocal`的初始值。
+如果要添加新的变量，那么需要调用`newLocal(type)`方法。
+
+- 在`newLocal(type)`方法中，它会进一步调用`newLocalMapping(type)`方法；
+- 在`newLocalMapping(type)`方法中，首先会记录`nextLocal`的值到`local`局部变量中，接着会更新`nextLocal`的值（即加上`type.getSize()`的值），最后返回`local`的值。那么，`local`的值就是新变量在local variables当中存储的位置。
 
 ```java
 public class LocalVariablesSorter extends MethodVisitor {
@@ -273,7 +283,7 @@ public class LocalVariablesSorter extends MethodVisitor {
 
 ### 处理旧变量
 
-如果要处理“旧”的变量，那么需要调用`visitVarInsn(opcode, var)`或`visitIincInsn(var, increment)`方法。在这两个方法中，会进一步调用`remap(var, type)`方法。其中，`remap(var, type)`方法的主要作用，就是实现“旧变量”的原位置向新位置的映射。
+如果要处理“旧变量”，那么需要调用`visitVarInsn(opcode, var)`或`visitIincInsn(var, increment)`方法。在这两个方法中，会进一步调用`remap(var, type)`方法。其中，`remap(var, type)`方法的主要作用，就是实现“旧变量”的原位置向新位置的映射。
 
 ```java
 public class LocalVariablesSorter extends MethodVisitor {
@@ -356,7 +366,7 @@ public class LocalVariablesSorter extends MethodVisitor {
 
 ### 预期目标
 
-修改前：
+假如有一个`HelloWorld`类，代码如下：
 
 ```java
 import java.util.Random;
@@ -372,7 +382,7 @@ public class HelloWorld {
 }
 ```
 
-修改后：
+我们想实现的预期目标：添加一个新的局部变量`t`，然后使用变量`t`计算方法的运行时间。
 
 ```java
 import java.util.Random;
@@ -483,6 +493,9 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.AdviceAdapter;
 
+import static org.objectweb.asm.Opcodes.ACC_ABSTRACT;
+import static org.objectweb.asm.Opcodes.ACC_NATIVE;
+
 public class MethodTimerVisitor4 extends ClassVisitor {
     public MethodTimerVisitor4(int api, ClassVisitor classVisitor) {
         super(api, classVisitor);
@@ -492,12 +505,16 @@ public class MethodTimerVisitor4 extends ClassVisitor {
     public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
         MethodVisitor mv = super.visitMethod(access, name, descriptor, signature, exceptions);
         if (mv != null) {
-            mv = new MethodTimerAdapter4(api, mv, access, name, descriptor);
+            boolean isAbstractMethod = (access & ACC_ABSTRACT) != 0;
+            boolean isNativeMethod = (access & ACC_NATIVE) != 0;
+            if (!isAbstractMethod && !isNativeMethod) {
+                mv = new MethodTimerAdapter4(api, mv, access, name, descriptor);
+            }
         }
         return mv;
     }
 
-    private class MethodTimerAdapter4 extends AdviceAdapter {
+    private static class MethodTimerAdapter4 extends AdviceAdapter {
         private int slotIndex;
 
         public MethodTimerAdapter4(int api, MethodVisitor mv, int access, String name, String descriptor) {
@@ -588,4 +605,4 @@ public class HelloWorldRun {
 
 - 第一点，了解`LocalVariablesSorter`类的各个部分，都有哪些信息。
 - 第二点，理解`LocalVariablesSorter`类的工作原理。
-- 第二点，如何使用`LocalVariablesSorter`类添加新的变量。
+- 第三点，如何使用`LocalVariablesSorter`类添加新的变量。

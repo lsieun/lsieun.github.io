@@ -1,5 +1,5 @@
 ---
-title:  "修改已有的方法（优化－删除－去掉没有必要的Instruction）"
+title:  "修改已有的方法（优化－删除－复杂的变换）"
 sequence: "312"
 ---
 
@@ -7,27 +7,60 @@ sequence: "312"
 
 ## 复杂的变换
 
-The transformation seen in the previous section is local and
-does not depend on the instructions that have been visited before the current one:
-the code added at the beginning is always the same and is always added,
-and likewise for the code inserted before each `RETURN` instruction.
-Such transformations are called **stateless transformations**.
-They are simple to implement but only the simplest transformations verify this property.
+### stateless transformations
 
-More **complex transformations** require **memorizing some state about the instructions that have been visited before the current one**.
-Consider for example a transformation that removes all occurrences of the `ICONST_0 IADD` sequence, whose empty effect is to add `0`.
-It is clear that when an `IADD` instruction is visited, it must be removed only if the last visited instruction was an `ICONST_0`.
+The stateless transformation does not depend on **the instructions that have been visited before the current one**.
+
+举几个关于stateless transformation的例子：
+
+- 添加指令：在方法进入和方法退出时，打印方法的参数和返回值、计算方法的运行时间。
+- 删除指令：移除NOP、清空方法体。
+- 修改指令：替换调用的方法。
+
+这种stateless transformation实现起来比较容易，所以也被称为simple transformations。
+
+### stateful transformations
+
+The **stateful transformation** require memorizing **some state** about **the instructions that have been visited before the current one**.
 This requires storing state inside the method adapter.
-For this reason such transformations are called **stateful transformations**.
 
-Let’s look in more details at this example.
-When an `ICONST_0` is visited, it must be removed only if the next instruction is an `IADD`.
-**The problem is that the next instruction is not yet known**.
-**The solution is to postpone this decision to the next instruction**:
-if it is an `IADD` then remove both instructions, otherwise emit the `ICONST_0` and the current instruction.
+举几个关于stateful transformation的例子：
 
-In order to implement transformations that remove or replace some instruction sequence,
-it is convenient to introduce a `MethodVisitor` subclass whose `visitXxxInsn()` methods call a common `visitInsn()` method:
+- 删除指令：移除`ICONST_0 IADD`。例如，`int d = c + 0;`与`int d = c;`两者效果是一样的，所以`+ 0`的部分可以删除掉。
+- 删除指令：移除`ALOAD_0 ALOAD_0 GETFIELD PUTFIELD`。例如，`this.val = this.val;`，将字段的值赋值给字段本身，无实质意义。
+- 删除指令：移除`GETSTATIC LDC INVOKEVIRTUAL`。例如，`System.out.println("Hello World");`，删除打印信息。
+
+这种stateful transformation实现起来比较困难，所以也被称为complex transformations。
+
+那么，为什么stateless transformation实现起来比较容易，而stateful transformation会实现起来比较困难呢？做个类比，stateless transformation就类似于“一人吃饱，全家不饿”，不用考虑太多，所以实现起来就比较简单；而stateful transformation类似于“成家之后，要考虑一家人的生活状态”，考虑的事情就多一点，所以实现起来就比较困难。难归难，但是我们还是应该想办法进行实现。
+
+那么，stateful transformation到底该如何开始着手实现呢？在stateful transformation过程中，一般都是涉及到对多个指令（Instruction）同时判断，这多个指令是一个“组合”，不能轻易拆散。我们通过三个步骤来进行实现：
+
+- 第一步，就是将问题本身转换成Instruction指令，然后对多个指令组合的“特征”或遵循的“模式”进行总结。
+- 第二步，就是使用这个总结出来的“特征”或“模式”对指令进行识别。在识别的过程当中，每一条Instruction的加入，都会引起原有状态（state）的变化，这就对应着`stateful`的部分；
+- 第三步，识别成功之后，要对Class文件进行转换，这就对应着`transformation`的部分。谈到transformation，无非就是对Instruction的内容进行增加、删除和修改等操作。
+
+到这里，就有一个新的问题产生：如何去记录第二步当中的状态（state）变化呢？我们的回答就是，借助于state machine。
+
+### state machine
+
+首先，我们回答一个问题：什么是state machine？
+
+A state machine is a behavior model. It consists of **a finite number of states** and is therefore also called finite-state machine (FSM). Based on the **current state** and **a given input** the machine performs **state transitions** and produces outputs.
+
+对于state machine，我想到了这句话：“吾生也有涯，而知也无涯。以有涯随无涯，殆已”。这句话的意思是讲，人们的生命是有限的，而知识却是无限的。以有限的生命去追求无限的知识，势必体乏神伤。我觉得，state machine的聪明之处，就是将“无限”的操作步骤给限定在“有限”的状态里来思考。
+
+接下来，就是给出一个具体的state machine。也就是说，下面的`MethodPatternAdapter`类，就是一个原始的state machine，我们从三个层面来把握它：
+
+- 第一个层面，class info。`MethodPatternAdapter`类，继承自`MethodVisitor`类，本身也是一个抽象类。
+- 第二个层面，fields。`MethodPatternAdapter`类，定义了两个字段，其中`SEEN_NOTHING`字段，是一个常量值，表示一个“初始状态”，而`state`字段则是用于记录不断变化的状态。
+- 第三个层面，methods。`MethodPatternAdapter`类定义`visitXxxInsn()`方法，都会去调用一个自定义的`visitInsn()`方法。`visitInsn()`方法，是一个抽象方法，它的作用就是让所有的其它状态（state）都回归“初始状态”。
+
+那么，应该怎么使用`MethodPatternAdapter`类呢？我们就是写一个`MethodPatternAdapter`类的子类，这个子类就是一个更“先进”的state machine，它做以下三件事情：
+
+- 第一件事情，从字段层面，根据处理的问题，来定义更多的状态；也就是，类似于`SEEN_NOTHING`的字段。这里就是**对a finite number of states进行定义**。
+- 第二件事情，从方法层面，处理好`visitXxxInsn()`的调用，对于`state`字段状态的影响。也就是，输入新的指令（Instruction），都会对`state`字段产生影响。这里就是**构建状态（state）变化的机制**。
+- 第三件事情，从方法层面，实现`visitInsn()`方法，根据`state`字段的值，如何回归到“初始状态”。这里就是添加一个“恢复出厂设置”的功能，**让状态（state）归零**，回归到一个初始状态。**让状态（state）归零**，是**构建状态（state）变化的机制**一个比较特殊的环节。结合生活来说，生活中有不顺的地方，就从新开始，从零开始。
 
 ```java
 import org.objectweb.asm.Handle;
@@ -154,11 +187,11 @@ public abstract class MethodPatternAdapter extends MethodVisitor {
 }
 ```
 
-在上面的代码中，最后一个方法是`visitInsn()`，它是一个抽象方法。在这个抽象方法中，我们要做的事情就是让所有的其它状态都回归“初始状态”。
-
 ## 示例一：加零
 
 ### 预期目标
+
+假如有一个`HelloWorld`类，代码如下：
 
 ```java
 public class HelloWorld {
@@ -170,16 +203,13 @@ public class HelloWorld {
 }
 ```
 
+我们想要实现的预期目标：将`int d = c + 0;`转换成`int d = c;`。
+
 ```text
 $ javap -c sample.HelloWorld
 Compiled from "HelloWorld.java"
 public class sample.HelloWorld {
-  public sample.HelloWorld();
-    Code:
-       0: aload_0
-       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
-       4: return
-
+...
   public void test(int, int);
     Code:
        0: iload_1
@@ -306,12 +336,7 @@ public class HelloWorldTransformCore {
 ```text
 $ javap -c sample.HelloWorld
 public class sample.HelloWorld {
-  public sample.HelloWorld();
-    Code:
-       0: aload_0
-       1: invokespecial #8                  // Method java/lang/Object."<init>":()V
-       4: return
-
+...
   public void test(int, int);
     Code:
        0: iload_1
@@ -329,11 +354,9 @@ public class sample.HelloWorld {
 
 ## 示例二：字段赋值
 
-{:refdef: style="text-align: center;"}
-![](/assets/images/java/asm/state_machine_for_aload0_aload0_getfield_putfield.png)
-{: refdef}
-
 ### 预期目标
+
+假如有一个`HelloWorld`类，代码如下：
 
 ```java
 public class HelloWorld {
@@ -347,17 +370,15 @@ public class HelloWorld {
 }
 ```
 
+我们想要实现的预期目标：删除掉`this.val = this.val;`语句。
+
 ```text
 $ javap -c sample.HelloWorld
 Compiled from "HelloWorld.java"
 public class sample.HelloWorld {
   public int val;
 
-  public sample.HelloWorld();
-    Code:
-       0: aload_0
-       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
-       4: return
+...
 
   public void test(int, int);
     Code:
@@ -377,6 +398,10 @@ public class sample.HelloWorld {
 ```
 
 ### 编码实现
+
+{:refdef: style="text-align: center;"}
+![](/assets/images/java/asm/state_machine_for_aload0_aload0_getfield_putfield.png)
+{: refdef}
 
 ```java
 import org.objectweb.asm.ClassVisitor;
@@ -554,6 +579,8 @@ public class sample.HelloWorld {
 
 ### 预期目标
 
+假如有一个`HelloWorld`类，代码如下：
+
 ```java
 public class HelloWorld {
     public void test(int a, int b) {
@@ -565,16 +592,13 @@ public class HelloWorld {
 }
 ```
 
+我们想要实现的预期目标：删除掉打印字符串的语句。
+
 ```text
 $ javap -c sample.HelloWorld
 Compiled from "HelloWorld.java"
 public class sample.HelloWorld {
-  public sample.HelloWorld();
-    Code:
-       0: aload_0
-       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
-       4: return
-
+...
   public void test(int, int);
     Code:
        0: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
@@ -744,12 +768,7 @@ public class HelloWorldTransformCore {
 ```text
 $ javap -c sample.HelloWorld
 public class sample.HelloWorld {
-  public sample.HelloWorld();
-    Code:
-       0: aload_0
-       1: invokespecial #8                  // Method java/lang/Object."<init>":()V
-       4: return
-
+...
   public void test(int, int);
     Code:
        0: iload_1
@@ -767,5 +786,8 @@ public class sample.HelloWorld {
 
 本文对stateful transformations进行介绍，内容总结如下：
 
-- 第一点，stateful transformations可以实现复杂的操作，它需要记录Instruction的状态信息。
-- 第二点，在`MethodPatternAdapter`类当中，最后一个方法是自定义的`visitInsn()`方法，它是一个抽象方法。在这个抽象方法中，我们要做的事情就是让所有的其它状态都回归“初始状态”。
+- 第一点，stateful transformations可以实现复杂的操作，它是借助于state machine来进行实现的。
+- 第二点，对于`MethodPatternAdapter`类来说，它是一个原始的state machine，本身是一个抽象类；我们写一个具体的子类，作为更“先进”的state machine，在子类当中主要做三件事情：
+    - 第一件事情，从字段层面，根据处理的问题，来定义更多的状态。
+    - 第二件事情，从方法层面，处理好`visitXxxInsn()`的调用，对于`state`字段状态的影响。
+    - 第三件事情，从方法层面，实现`visitInsn()`方法，根据`state`字段的值，如何回归到“初始状态”。
