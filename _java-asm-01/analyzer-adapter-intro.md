@@ -5,6 +5,8 @@ sequence: "408"
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
+对于`AnalyzerAdapter`类来说，它的特点是“可以模拟frame的变化”，或者说“可以模拟local variables和operand stack的变化”。
+
 The `AnalyzerAdapter` is a `MethodVisitor` that keeps track of stack map frame changes between `visitFrame(int, int, Object[], int, Object[])` calls.
 This `AnalyzerAdapter` adapter must be used with the `ClassReader.EXPAND_FRAMES` option.
 
@@ -61,6 +63,7 @@ public class AnalyzerAdapter extends MethodVisitor {
 
 第三个部分，`AnalyzerAdapter`类定义的构造方法有哪些。
 
+有一个问题：`AnalyzerAdapter`类的构造方法，到底是想实现一个什么样的代码逻辑呢？回答：它想构建方法刚进入时的Frame状态。在方法刚进入时，Frame的初始状态是什么样的呢？其中，operand stack上没有任何元素，而local variables则需要考虑存储`this`和方法的参数信息。在`AnalyzerAdapter`类的构造方法中，主要就是围绕着`locals`字段来展开，它需要将`this`和方法参数添加进入。
 
 ```java
 public class AnalyzerAdapter extends MethodVisitor {
@@ -322,6 +325,12 @@ public class AnalyzerAdapter extends MethodVisitor {
 
 这三种状态，可以与“生命体”作一个类比。在这个世界上，大多数的生命体，都会经历出生、成长、衰老和死亡的变化。
 
+---
+
+在Java语言当中，流程控制语句有三种，分别是顺序（sequential structure）、选择（selective structure）和循环（cycle structure）。但是，如果进入到ByteCode层面或Instruction层面，那么选择（selective structure）和循环（cycle structure）本质上是一样的，都是跳转（Jump）。
+
+---
+
 ### 初始状态
 
 首先，就是local variables和operand stack的初始状态，它是通过`AnalyzerAdapter`类的构造方法来为`locals`和`stack`字段赋值。
@@ -432,6 +441,43 @@ INVOKESPECIAL java/lang/String.<init> ()V
 - 它重要，是因为它在“初始状态－中间状态－结束状态”这个环节当中是必不可少的一部分，这是从“整体性”的角度上来考虑。
 
 ## 示例：打印方法的Frame
+
+### 预期目标
+
+假如有一个`HelloWorld`类，代码如下：
+
+```java
+import java.util.Random;
+
+public class HelloWorld {
+    public HelloWorld() {
+        super();
+    }
+
+    public boolean getFlag() {
+        Random rand = new Random();
+        return rand.nextBoolean();
+    }
+
+    public void test(boolean flag) {
+        if (flag) {
+            System.out.println("value is true");
+        }
+        else {
+            System.out.println("value is false");
+        }
+    }
+
+    public static void main(String[] args) {
+        HelloWorld instance = new HelloWorld();
+        boolean flag = instance.getFlag();
+        instance.test(flag);
+    }
+}
+```
+
+我们想实现的预期目标：打印出`HelloWorld`类当中各个方法的frame变化情况。
+
 
 ### 编码实现
 
@@ -565,7 +611,7 @@ public class MethodStackMapFrameVisitor extends ClassVisitor {
 
         private void printStackMapFrame() {
             String locals_str = locals == null ? "[]" : list2Str(locals);
-            String stack_str = locals == null ? "[]" : list2Str(stack);
+            String stack_str = stack == null ? "[]" : list2Str(stack);
             String line = String.format("%s %s", locals_str, stack_str);
             System.out.println(line);
         }

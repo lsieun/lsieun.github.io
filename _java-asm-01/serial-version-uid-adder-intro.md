@@ -5,25 +5,210 @@ sequence: "412"
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
-`SerialVersionUIDAdder`类继承自`ClassVisitor`类，它的主要作用为类文件添加一个`serialVersionUID`字段。当`SerialVersionUIDAdder`类计算`serialVersionUID`字段的值时，它有一套自己的算法。那么，`serialVersionUID`字段有什么作用呢？
+`SerialVersionUIDAdder`类的特点是可以为Class文件添加一个`serialVersionUID`字段。
 
-## serialVersionUID介绍
+## SerialVersionUIDAdder类
 
-The `serialVersionUID` attribute is an identifier that is used to serialize/deserialize an object of a `Serializable` class.
+当`SerialVersionUIDAdder`类计算`serialVersionUID`值的时候，它有一套自己的算法，对于算法本身就不进行介绍了。那么，`serialVersionUID`字段有什么作用呢？
 
-Simply put, we use the `serialVersionUID` attribute to remember versions of a `Serializable` class to verify that a loaded class and the serialized object are compatible.
+Simply put, we use the `serialVersionUID` attribute to **remember versions of a `Serializable` class** to verify that **a loaded class and the serialized object are compatible**.
 
-The `serialVersionUID` attributes of different classes are independent.
-Therefore, it is not necessary for different classes to have unique values.
+### class info
 
-- **Serialization**: At the time of serialization, with every object will save a **Unique Identifier**.
-- **Deserialization**: At the time of deserialization, JVM will compare the unique ID associated with the Object with local class Unique ID. If both unique ID matched then only deserialization will be performed. Otherwise, we will get Runtime Exception saying `InvalidClassException`.
+第一个部分，`SerialVersionUIDAdder`类的父类是`ClassVisitor`类。
+
+```java
+public class SerialVersionUIDAdder extends ClassVisitor {
+}
+```
+
+### fields
+
+第二个部分，`SerialVersionUIDAdder`类定义的字段有哪些。
+
+`SerialVersionUIDAdder`类的字段分成三组：
+
+- 第一组，`computeSvuid`和`hasSvuid`字段，用于判断是否需要添加`serialVersionUID`信息。
+- 第二组，`access`、`name`和`interfaces`字段，用于记录当前类的访问标识、类的名字和实现的接口。
+- 第三组，`svuidFields`、`svuidMethods`、`svuidConstructors`和`hasStaticInitializer`字段，用于记录字段、构造方法、普通方法、是否有`<clinit>()`方法。
+
+第二组和第三组部分的字段都是用于计算`serialVersionUID`值的，而第一组字段是则先判断是否有必要去计算`serialVersionUID`值。
+
+```java
+public class SerialVersionUIDAdder extends ClassVisitor {
+    // 第一组，用于判断是否需要添加serialVersionUID信息
+    private boolean computeSvuid;
+    private boolean hasSvuid;
+
+    // 第二组，用于记录当前类的访问标识、类的名字和实现的接口
+    private int access;
+    private String name;
+    private String[] interfaces;
+
+    // 第三组，用于记录字段、构造方法、普通方法
+    private Collection<Item> svuidFields;
+    private boolean hasStaticInitializer;
+    private Collection<Item> svuidConstructors;
+    private Collection<Item> svuidMethods;
+}
+```
+
+其中，`svuidFields`、`svuidMethods`和`svuidConstructors`字段都涉及到`Item`类。`Item`类的定义如下：
+
+```java
+private static final class Item implements Comparable<Item> {
+    final String name;
+    final int access;
+    final String descriptor;
+
+    Item(final String name, final int access, final String descriptor) {
+        this.name = name;
+        this.access = access;
+        this.descriptor = descriptor;
+    }
+}
+```
+
+### constructors
+
+第三个部分，`SerialVersionUIDAdder`类定义的构造方法有哪些。
+
+```java
+public class SerialVersionUIDAdder extends ClassVisitor {
+    public SerialVersionUIDAdder(final ClassVisitor classVisitor) {
+        this(Opcodes.ASM9, classVisitor);
+    }
+
+    protected SerialVersionUIDAdder(final int api, final ClassVisitor classVisitor) {
+        super(api, classVisitor);
+    }
+}
+```
+
+### methods
+
+第四个部分，`SerialVersionUIDAdder`类定义的方法有哪些。
+
+```java
+public class SerialVersionUIDAdder extends ClassVisitor {
+    @Override
+    public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
+        // Get the class name, access flags, and interfaces information (step 1, 2 and 3) for SVUID computation.
+        // 对于枚举类型，不计算serialVersionUID
+        computeSvuid = (access & Opcodes.ACC_ENUM) == 0;
+
+        if (computeSvuid) {
+            // 记录第二组字段的信息
+            this.name = name;
+            this.access = access;
+            this.interfaces = interfaces.clone();
+            this.svuidFields = new ArrayList<>();
+            this.svuidConstructors = new ArrayList<>();
+            this.svuidMethods = new ArrayList<>();
+        }
+
+        super.visit(version, access, name, signature, superName, interfaces);
+    }
+
+    @Override
+    public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
+        // Get the class field information for step 4 of the algorithm. Also determine if the class already has a SVUID.
+        if (computeSvuid) {
+            if ("serialVersionUID".equals(name)) {
+                // Since the class already has SVUID, we won't be computing it.
+                computeSvuid = false;
+                hasSvuid = true;
+            }
+            // Collect the non private fields. Only the ACC_PUBLIC, ACC_PRIVATE, ACC_PROTECTED,
+            // ACC_STATIC, ACC_FINAL, ACC_VOLATILE, and ACC_TRANSIENT flags are used when computing
+            // serialVersionUID values.
+            if ((access & Opcodes.ACC_PRIVATE) == 0
+                    || (access & (Opcodes.ACC_STATIC | Opcodes.ACC_TRANSIENT)) == 0) {
+                int mods = access
+                                & (Opcodes.ACC_PUBLIC
+                                | Opcodes.ACC_PRIVATE
+                                | Opcodes.ACC_PROTECTED
+                                | Opcodes.ACC_STATIC
+                                | Opcodes.ACC_FINAL
+                                | Opcodes.ACC_VOLATILE
+                                | Opcodes.ACC_TRANSIENT);
+                svuidFields.add(new Item(name, mods, desc));
+            }
+        }
+
+        return super.visitField(access, name, desc, signature, value);
+    }
+
+    
+    @Override
+    public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
+        // Get constructor and method information (step 5 and 7). Also determine if there is a class initializer (step 6).
+        if (computeSvuid) {
+            // 这里是对静态初始方法进行判断
+            if (CLINIT.equals(name)) {
+                hasStaticInitializer = true;
+            }
+            // Collect the non private constructors and methods. Only the ACC_PUBLIC, ACC_PRIVATE,
+            // ACC_PROTECTED, ACC_STATIC, ACC_FINAL, ACC_SYNCHRONIZED, ACC_NATIVE, ACC_ABSTRACT and
+            // ACC_STRICT flags are used.
+            int mods = access
+                            & (Opcodes.ACC_PUBLIC
+                            | Opcodes.ACC_PRIVATE
+                            | Opcodes.ACC_PROTECTED
+                            | Opcodes.ACC_STATIC
+                            | Opcodes.ACC_FINAL
+                            | Opcodes.ACC_SYNCHRONIZED
+                            | Opcodes.ACC_NATIVE
+                            | Opcodes.ACC_ABSTRACT
+                            | Opcodes.ACC_STRICT);
+
+            if ((access & Opcodes.ACC_PRIVATE) == 0) {
+                if ("<init>".equals(name)) {
+                    // 这里是对构造方法进行判断
+                    svuidConstructors.add(new Item(name, mods, descriptor));
+                } else if (!CLINIT.equals(name)) {
+                    // 这里是对普通方法进行判断
+                    svuidMethods.add(new Item(name, mods, descriptor));
+                }
+            }
+        }
+
+        return super.visitMethod(access, name, descriptor, signature, exceptions);
+    }
+
+    @Override
+    public void visitEnd() {
+        // Add the SVUID field to the class if it doesn't have one.
+        if (computeSvuid && !hasSvuid) {
+            try {
+                addSVUID(computeSVUID());
+            } catch (IOException e) {
+                throw new IllegalStateException("Error while computing SVUID for " + name, e);
+            }
+        }
+
+        super.visitEnd();
+    }
+
+    protected void addSVUID(final long svuid) {
+        FieldVisitor fieldVisitor =
+                super.visitField(Opcodes.ACC_FINAL + Opcodes.ACC_STATIC, "serialVersionUID", "J", null, svuid);
+        if (fieldVisitor != null) {
+            fieldVisitor.visitEnd();
+        }
+    }
+
+    protected long computeSVUID() throws IOException {
+        // ...
+    }
+}
+```
 
 ## 示例
 
 ### 预期目标
 
-修改前：
+假如有一个`HelloWorld`类，代码如下：
 
 ```java
 import java.io.Serializable;
@@ -44,30 +229,7 @@ public class HelloWorld implements Serializable {
 }
 ```
 
-修改后：
-
-```java
-import java.io.Serializable;
-
-public class HelloWorld implements Serializable {
-    public String name;
-    public int age;
-
-    public HelloWorld(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    public void test() {
-        System.out.println("Hello World");
-    }
-
-    @Override
-    public String toString() {
-        return String.format("HelloWorld { name='%s', age=%d }", name, age);
-    }
-}
-```
+我们想实现的预期目标：为`HelloWorld`类添加`serialVersionUID`字段。
 
 ### 进行转换
 
@@ -151,7 +313,8 @@ public class HelloWorldRun {
 
 ## 总结
 
-这篇文章主要介绍`SerialVersionUIDAdder`类，内容总结如下：
+本文对`SerialVersionUIDAdder`类进行介绍，内容总结如下：
 
-- 第一点，了解`serialVersionUID`字段的作用。
-- 第二点，如何使用`SerialVersionUIDAdder`类。
+- 第一点，`SerialVersionUIDAdder`类的特点是可以为Class文件添加一个`serialVersionUID`字段。
+- 第二点，了解`SerialVersionUIDAdder`类的各个部分的信息，以便理解它的工作原理。
+- 第三点，如何使用`SerialVersionUIDAdder`类添加`serialVersionUID`字段。

@@ -5,15 +5,17 @@ sequence: "409"
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
+对于`InstructionAdapter`类来说，它的特点是“添加了许多与opcode同名的方法”，更接近“原汁原味”的JVM Instruction Set。
+
 ## 为什么有InstructionAdapter类
 
-`InstructionAdapter`类继承自`MethodVisitor`类，它提供了更详细的API用于generate和transform instruction。
+`InstructionAdapter`类继承自`MethodVisitor`类，它提供了更详细的API用于generate和transform。
 
-在JVM Specification中，一共定义了200多个opcode，在ASM的`MethodVisitor`类当中定义了20多个`visitXxxInsn()`方法。这说明一个问题，也就是在`MethodVisitor`类的每个`visitXxxInsn()`方法都会对应JVM Specification当中多个opcode。
+在JVM Specification中，一共定义了200多个opcode，在ASM的`MethodVisitor`类当中定义了15个`visitXxxInsn()`方法。这说明一个问题，也就是在`MethodVisitor`类的每个`visitXxxInsn()`方法都会对应JVM Specification当中多个opcode。
 
 那么，`InstructionAdapter`类起到一个什么样的作用呢？`InstructionAdapter`类继承了`MethodVisitor`类，也就继承了那些`visitXxxInsn()`方法，同时它也添加了80多个新的方法，这些新的方法与opcode更加接近。
 
-从功能上来说，`InstructionAdapter`类和`MethodVisitor`类是一样的，两者没有差异。对于`InstructionAdapter`类来说，它可能更适合于熟悉opcode的人来使用。但是，如果我们已经熟悉`MethodVisitor`类里的`visitXxxIns()`方法，那就完全可以不去使用`InstructionAdapter`类。
+从功能上来说，`InstructionAdapter`类和`MethodVisitor`类是一样的，两者没有差异。对于`InstructionAdapter`类来说，它可能更适合于熟悉opcode的人来使用。但是，如果我们已经熟悉`MethodVisitor`类里的`visitXxxInsn()`方法，那就完全可以不去使用`InstructionAdapter`类。
 
 ## InstructionAdapter类
 
@@ -57,7 +59,7 @@ public class InstructionAdapter extends MethodVisitor {
 
 ### methods
 
-第四个部分，`InstructionAdapter`类定义的方法有哪些。除了从`MethodVisitor`类继承的`visitXxxInsn()`方法，`InstructionAdapter`类还定义了许多与opcode相关的新方法，这些新方法本质上又是调用`visitXxxInsn()`方法来实现的。
+第四个部分，`InstructionAdapter`类定义的方法有哪些。除了从`MethodVisitor`类继承的`visitXxxInsn()`方法，`InstructionAdapter`类还定义了许多与opcode相关的新方法，这些新方法本质上就是调用`visitXxxInsn()`方法来实现的。
 
 ```java
 public class InstructionAdapter extends MethodVisitor {
@@ -81,6 +83,8 @@ public class InstructionAdapter extends MethodVisitor {
 
 ### 预期目标
 
+我们想实现的预期目标：生成如下的`HelloWorld`类。
+
 ```java
 public class HelloWorld {
     public void test() {
@@ -90,8 +94,6 @@ public class HelloWorld {
 ```
 
 ### 编码实现
-
-接下来，我们来看一个使用`InstructionAdapter`生成类的示例：
 
 ```java
 import lsieun.utils.FileUtils;

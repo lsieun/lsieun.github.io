@@ -5,7 +5,7 @@ sequence: "410"
 
 [UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
-使用`ClassRemapper`类，我们可以将class文件进行简单的混淆处理：
+`ClassRemapper`类的特点是，可以实现从“一个类”向“另一个类”的映射。借助于这个类，我们可以将class文件进行简单的混淆处理（obfuscate）：
 
 {:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/class-remap.png)
@@ -24,14 +24,34 @@ public class ClassRemapper extends ClassVisitor {
 
 ### fields
 
-第二个部分，`ClassRemapper`类定义的字段有哪些。在`ClassRemapper`类当中，定义了两个字段：`Remapper remapper`字段和`String className`字段。其中，`Remapper remapper`字段是关键性的部分，它负责从“一个类”向“另一个类”的映射；而`String className`字段则表示当前类的名字。
+第二个部分，`ClassRemapper`类定义的字段有哪些。在`ClassRemapper`类当中，定义了两个字段：`remapper`字段和`className`字段。
 
-在ASM中，`Remapper`类是一个抽象类，它一个具体的子类`SimpleRemapper`；这个`SimpleRemapper`从本质上来说是一个`Map`，所以实现上也比较简单。
+- `remapper`字段是实现从“一个类”向“另一个类”映射的关键部分；它的类型是`Remapper`类。
+- `className`字段则表示当前类的名字。
 
 ```java
 public class ClassRemapper extends ClassVisitor {
     protected final Remapper remapper;
     protected String className;
+}
+```
+
+`Remapper`类是一个抽象类，它有一个具体的子类`SimpleRemapper`类；这个`SimpleRemapper`类从本质上来说是一个`Map`，在实现上比较简单。
+
+```java
+public abstract class Remapper {
+}
+
+public class SimpleRemapper extends Remapper {
+    private final Map<String, String> mapping;
+
+    public SimpleRemapper(final Map<String, String> mapping) {
+        this.mapping = mapping;
+    }
+
+    public SimpleRemapper(final String oldName, final String newName) {
+        this.mapping = Collections.singletonMap(oldName, newName);
+    }    
 }
 ```
 
@@ -410,6 +430,7 @@ public class HelloWorldRun {
 
 本文对`ClassRemapper`类进行介绍，内容总结如下：
 
-- 第一点，从类成员的角度上来说，它里面非常关键的一个部分是`Remapper`。`Remapper`类，从本质上来说，是一个`Map`，它记录的是从“一个类”向“另一个类”的映射关系。在ASM中，提供了一个`SimpleRemapper`类，这是一个比较简单`Remapper`类的实现。其实，我们也可以提供一个自己的`Remapper`类的子类，来完成一些特殊的转换规则。
-- 第二点，从应用的角度来说，`ClassRemapper`类主要用于对class文件进行混淆处理。但是，`ClassRemapper`类进行混淆处理的程度是比较低的，远不及一些专业的obfuscator。
+- 第一点，`ClassRemapper`类的特点是，可以实现从“一个类”向“另一个类”的映射。
+- 第二点，了解`ClassRemapper`类各个部分的信息。使用`ClassRemapper`类时，关键的地方就是创建一个`Remapper`对象。`Remapper`类，是一个抽象类，它有一个具体实现`SimpleRemapper`类，它记录的是从“一个类”向“另一个类”的映射关系。其实，我们也可以提供一个自己的`Remapper`类的子类，来完成一些特殊的转换规则。
+- 第三点，从功能（强弱）的角度来说，`ClassRemapper`类可以实现对class文件进行简单的混淆处理。但是，`ClassRemapper`类进行混淆处理的程度是比较低的，远不及一些专业的代码混淆工具（obfuscator）。
 

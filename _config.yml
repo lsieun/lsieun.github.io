@@ -47,7 +47,10 @@ collections:
     output: true
     title: "Jekyll快速参考教程"
     sequence: 3
-
+  cert:
+    output: true
+    title: "X.509证书"
+    sequence: 3
 
 defaults:
   -
@@ -76,6 +79,13 @@ defaults:
     values:
       layout: "post"
       tags: jekyll
+  -
+    scope:
+      path: ""
+      type: "cert"
+    values:
+      layout: "post"
+      tags: x509
   - scope:
       path: ""
     values:

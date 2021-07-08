@@ -7,6 +7,12 @@ tags: java asm
 
 ASM is an open source java library for manipulating java byte code.
 
+---
+
+对于《Java ASM系列一：Core API》有配套的视频讲解，可以点击[这里](https://edu.51cto.com/course/28517.html)和[这里](https://space.bilibili.com/1321054247/channel/detail?cid=189917)进行查看；同时，也可以点击[这里](https://gitee.com/lsieun/learn-java-asm)查看源码资料。
+
+---
+
 ## 主要内容
 
 ### 第一章 基础
