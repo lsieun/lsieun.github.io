@@ -1,0 +1,500 @@
+---
+title:  "opcode: transfer values (50/76/205)"
+sequence: "203"
+---
+
+## 概览
+
+从Instruction的角度来说，与transfer values相关的opcode有50个。
+
+其中，与load相关的opcode有25个，内容如下：
+
+| opcode | mnemonic symbol | opcode | mnemonic symbol | opcode | mnemonic symbol | opcode | mnemonic symbol |
+|--------|-----------------|--------|-----------------|--------|-----------------|--------|-----------------|
+| 21     | iload           | 28     | iload_2         | 35     | fload_1         | 42     | aload_0         |
+| 22     | lload           | 29     | iload_3         | 36     | fload_2         | 43     | aload_1         |
+| 23     | fload           | 30     | lload_0         | 37     | fload_3         | 44     | aload_2         |
+| 24     | dload           | 31     | lload_1         | 38     | dload_0         | 45     | aload_3         |
+| 25     | aload           | 32     | lload_2         | 39     | dload_1         | 46     |                 |
+| 26     | iload_0         | 33     | lload_3         | 40     | dload_2         | 47     |                 |
+| 27     | iload_1         | 34     | fload_0         | 41     | dload_3         | 48     |                 |
+
+其中，与store相关的opcode有25个，内容如下：
+
+| opcode | mnemonic symbol | opcode | mnemonic symbol | opcode | mnemonic symbol | opcode | mnemonic symbol |
+|--------|-----------------|--------|-----------------|--------|-----------------|--------|-----------------|
+| 54     | istore          | 61     | istore_2        | 68     | fstore_1        | 75     | astore_0        |
+| 55     | lstore          | 62     | istore_3        | 69     | fstore_2        | 76     | astore_1        |
+| 56     | fstore          | 63     | lstore_0        | 70     | fstore_3        | 77     | astore_2        |
+| 57     | dstore          | 64     | lstore_1        | 71     | dstore_0        | 78     | astore_3        |
+| 58     | astore          | 65     | lstore_2        | 72     | dstore_1        | 79     |                 |
+| 59     | istore_0        | 66     | lstore_3        | 73     | dstore_2        | 80     |                 |
+| 60     | istore_1        | 67     | fstore_0        | 74     | dstore_3        | 81     |                 |
+
+从ASM的角度来说，这些opcode与`MethodVisitor.visitXxxInsn()`方法对应关系如下：
+
+- `MethodVisitor.visitInsn()`: 
+    - `iload`, `istore`, `iload_<n>`, `istore_<n>`.
+    - `lload`, `lstore`, `lload_<n>`, `lstore_<n>`.
+    - `fload`, `fstore`, `fload_<n>`, `fstore_<n>`.
+    - `dload`, `dstore`, `dload_<n>`, `dstore_<n>`.
+    - `aload`, `astore`, `aload_<n>`, `astore_<n>`.
+
+注意: Constant Pool、operand stack和local variables，对于`long`和`double`类型的数据，都占用2个位置。
+
+## primitive type
+
+### int
+
+从Java语言的视角，有一个`HelloWorld`类，代码如下：
+
+```java
+public class HelloWorld {
+    public void test() {
+        int a = 1;
+        int b = a;
+        int c = b;
+        int d = c;
+        int e = d;
+    }
+}
+```
+
+从Instruction的视角来看，方法体对应的内容如下：
+
+```text
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test();
+    Code:
+       0: iconst_1
+       1: istore_1
+       2: iload_1
+       3: istore_2
+       4: iload_2
+       5: istore_3
+       6: iload_3
+       7: istore        4
+       9: iload         4
+      11: istore        5
+      13: return
+}
+```
+
+从ASM的视角来看，方法体对应的内容如下：
+
+```text
+methodVisitor.visitCode();
+methodVisitor.visitInsn(ICONST_1);
+methodVisitor.visitVarInsn(ISTORE, 1);
+methodVisitor.visitVarInsn(ILOAD, 1);
+methodVisitor.visitVarInsn(ISTORE, 2);
+methodVisitor.visitVarInsn(ILOAD, 2);
+methodVisitor.visitVarInsn(ISTORE, 3);
+methodVisitor.visitVarInsn(ILOAD, 3);
+methodVisitor.visitVarInsn(ISTORE, 4);
+methodVisitor.visitVarInsn(ILOAD, 4);
+methodVisitor.visitVarInsn(ISTORE, 5);
+methodVisitor.visitInsn(RETURN);
+methodVisitor.visitMaxs(1, 6);
+methodVisitor.visitEnd();
+```
+
+从Frame的视角来看，local variable和operand stack的变化：
+
+```text
+[sample/HelloWorld] []
+[sample/HelloWorld] [int]
+[sample/HelloWorld, int] []
+[sample/HelloWorld, int] [int]
+[sample/HelloWorld, int, int] []
+[sample/HelloWorld, int, int] [int]
+[sample/HelloWorld, int, int, int] []
+[sample/HelloWorld, int, int, int] [int]
+[sample/HelloWorld, int, int, int, int] []
+[sample/HelloWorld, int, int, int, int] [int]
+[sample/HelloWorld, int, int, int, int, int] []
+[] []
+```
+
+从JVM规范的角度来看，`istore_<n>`和`istore`指令对应的Operand Stack的变化如下：
+
+```text
+..., value →
+
+...
+```
+
+- The `<n>` must be an index into the local variable array of the current frame.
+- The `value` on the top of the operand stack must be of type `int`. It is popped from the operand stack, and the value of the local variable at `<n>` is set to `value`.
+
+从JVM规范的角度来看，`iload_<n>`和`iload`指令对应的Operand Stack的变化如下：
+
+```text
+... →
+
+..., value
+```
+
+- The `<n>` must be an index into the local variable array of the current frame.
+- The local variable at `<n>` must contain an `int`. The value of the local variable at `<n>` is pushed onto the operand stack.
+
+### float
+
+从Java语言的视角，有一个`HelloWorld`类，代码如下：
+
+```java
+public class HelloWorld {
+    public void test() {
+        float a = 1;
+        float b = a;
+        float c = b;
+        float d = c;
+        float e = d;
+    }
+}
+```
+
+从Instruction的视角来看，方法体对应的内容如下：
+
+```text
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test();
+    Code:
+       0: fconst_1
+       1: fstore_1
+       2: fload_1
+       3: fstore_2
+       4: fload_2
+       5: fstore_3
+       6: fload_3
+       7: fstore        4
+       9: fload         4
+      11: fstore        5
+      13: return
+}
+```
+
+从ASM的视角来看，方法体对应的内容如下：
+
+```text
+methodVisitor.visitInsn(FCONST_1);
+methodVisitor.visitVarInsn(FSTORE, 1);
+methodVisitor.visitVarInsn(FLOAD, 1);
+methodVisitor.visitVarInsn(FSTORE, 2);
+methodVisitor.visitVarInsn(FLOAD, 2);
+methodVisitor.visitVarInsn(FSTORE, 3);
+methodVisitor.visitVarInsn(FLOAD, 3);
+methodVisitor.visitVarInsn(FSTORE, 4);
+methodVisitor.visitVarInsn(FLOAD, 4);
+methodVisitor.visitVarInsn(FSTORE, 5);
+methodVisitor.visitInsn(RETURN);
+methodVisitor.visitMaxs(1, 6);
+methodVisitor.visitEnd();
+```
+
+从Frame的视角来看，local variable和operand stack的变化：
+
+```text
+[sample/HelloWorld] []
+[sample/HelloWorld] [float]
+[sample/HelloWorld, float] []
+[sample/HelloWorld, float] [float]
+[sample/HelloWorld, float, float] []
+[sample/HelloWorld, float, float] [float]
+[sample/HelloWorld, float, float, float] []
+[sample/HelloWorld, float, float, float] [float]
+[sample/HelloWorld, float, float, float, float] []
+[sample/HelloWorld, float, float, float, float] [float]
+[sample/HelloWorld, float, float, float, float, float] []
+[] []
+```
+
+从JVM规范的角度来看，`fstore_<n>`和`fstore`指令对应的Operand Stack的变化如下：
+
+```text
+..., value →
+
+...
+```
+
+从JVM规范的角度来看，`fload_<n>`和`fload`指令对应的Operand Stack的变化如下：
+
+```text
+... →
+
+..., value
+```
+
+### long
+
+从Java语言的视角，有一个`HelloWorld`类，代码如下：
+
+```java
+public class HelloWorld {
+    public void test() {
+        long a = 1;
+        long b = a;
+        long c = b;
+        long d = c;
+    }
+}
+```
+
+从Instruction的视角来看，方法体对应的内容如下：
+
+```text
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test();
+    Code:
+       0: lconst_1
+       1: lstore_1
+       2: lload_1
+       3: lstore_3
+       4: lload_3
+       5: lstore        5
+       7: lload         5
+       9: lstore        7
+      11: return
+}
+```
+
+从ASM的视角来看，方法体对应的内容如下：
+
+```text
+methodVisitor.visitCode();
+methodVisitor.visitInsn(LCONST_1);
+methodVisitor.visitVarInsn(LSTORE, 1);
+methodVisitor.visitVarInsn(LLOAD, 1);
+methodVisitor.visitVarInsn(LSTORE, 3);
+methodVisitor.visitVarInsn(LLOAD, 3);
+methodVisitor.visitVarInsn(LSTORE, 5);
+methodVisitor.visitVarInsn(LLOAD, 5);
+methodVisitor.visitVarInsn(LSTORE, 7);
+methodVisitor.visitInsn(RETURN);
+methodVisitor.visitMaxs(2, 9);
+methodVisitor.visitEnd();
+```
+
+从Frame的视角来看，local variable和operand stack的变化：
+
+```text
+[sample/HelloWorld] []
+[sample/HelloWorld] [long, top]
+[sample/HelloWorld, long, top] []
+[sample/HelloWorld, long, top] [long, top]
+[sample/HelloWorld, long, top, long, top] []
+[sample/HelloWorld, long, top, long, top] [long, top]
+[sample/HelloWorld, long, top, long, top, long, top] []
+[sample/HelloWorld, long, top, long, top, long, top] [long, top]
+[sample/HelloWorld, long, top, long, top, long, top, long, top] []
+[] []
+```
+
+从JVM规范的角度来看，`lstore_<n>`和`lstore`指令对应的Operand Stack的变化如下：
+
+```text
+..., value →
+
+...
+```
+
+The `value` on the top of the operand stack must be of type `long`. It is popped from the operand stack, and the local variables at `index` and `index+1` are set to `value`.
+
+从JVM规范的角度来看，`lload_<n>`和`lload`指令对应的Operand Stack的变化如下：
+
+```text
+... →
+
+..., value
+```
+
+The local variable at `index` must contain a `long`. The `value` of the local variable at `index` is pushed onto the operand stack.
+
+### double
+
+从Java语言的视角，有一个`HelloWorld`类，代码如下：
+
+```java
+public class HelloWorld {
+    public void test() {
+        double a = 1;
+        double b = a;
+        double c = b;
+        double d = c;
+    }
+}
+```
+
+从Instruction的视角来看，方法体对应的内容如下：
+
+```text
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+...
+  public void test();
+    Code:
+       0: dconst_1
+       1: dstore_1
+       2: dload_1
+       3: dstore_3
+       4: dload_3
+       5: dstore        5
+       7: dload         5
+       9: dstore        7
+      11: return
+}
+```
+
+从ASM的视角来看，方法体对应的内容如下：
+
+```text
+methodVisitor.visitCode();
+methodVisitor.visitInsn(DCONST_1);
+methodVisitor.visitVarInsn(DSTORE, 1);
+methodVisitor.visitVarInsn(DLOAD, 1);
+methodVisitor.visitVarInsn(DSTORE, 3);
+methodVisitor.visitVarInsn(DLOAD, 3);
+methodVisitor.visitVarInsn(DSTORE, 5);
+methodVisitor.visitVarInsn(DLOAD, 5);
+methodVisitor.visitVarInsn(DSTORE, 7);
+methodVisitor.visitInsn(RETURN);
+methodVisitor.visitMaxs(2, 9);
+methodVisitor.visitEnd();
+```
+
+从Frame的视角来看，local variable和operand stack的变化：
+
+```text
+[sample/HelloWorld] []
+[sample/HelloWorld] [double, top]
+[sample/HelloWorld, double, top] []
+[sample/HelloWorld, double, top] [double, top]
+[sample/HelloWorld, double, top, double, top] []
+[sample/HelloWorld, double, top, double, top] [double, top]
+[sample/HelloWorld, double, top, double, top, double, top] []
+[sample/HelloWorld, double, top, double, top, double, top] [double, top]
+[sample/HelloWorld, double, top, double, top, double, top, double, top] []
+[] []
+```
+
+从JVM规范的角度来看，`dstore_<n>`和`dstore`指令对应的Operand Stack的变化如下：
+
+```text
+..., value →
+
+...
+```
+
+从JVM规范的角度来看，`dload_<n>`和`dload`指令对应的Operand Stack的变化如下：
+
+```text
+... →
+
+..., value
+```
+
+## reference type
+
+从Java语言的视角，有一个`HelloWorld`类，代码如下：
+
+```java
+public class HelloWorld {
+    public void test() {
+        Object a = null;
+        Object b = a;
+        Object c = b;
+        Object d = c;
+        Object e = d;
+    }
+}
+```
+
+在上面的代码中，我们也可以将`null`替换成`String`或`Object`类型的对象。
+
+从Instruction的视角来看，方法体对应的内容如下：
+
+```text
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test();
+    Code:
+       0: aconst_null
+       1: astore_1
+       2: aload_1
+       3: astore_2
+       4: aload_2
+       5: astore_3
+       6: aload_3
+       7: astore        4
+       9: aload         4
+      11: astore        5
+      13: return
+}
+```
+
+从ASM的视角来看，方法体对应的内容如下：
+
+```text
+methodVisitor.visitCode();
+methodVisitor.visitInsn(ACONST_NULL);
+methodVisitor.visitVarInsn(ASTORE, 1);
+methodVisitor.visitVarInsn(ALOAD, 1);
+methodVisitor.visitVarInsn(ASTORE, 2);
+methodVisitor.visitVarInsn(ALOAD, 2);
+methodVisitor.visitVarInsn(ASTORE, 3);
+methodVisitor.visitVarInsn(ALOAD, 3);
+methodVisitor.visitVarInsn(ASTORE, 4);
+methodVisitor.visitVarInsn(ALOAD, 4);
+methodVisitor.visitVarInsn(ASTORE, 5);
+methodVisitor.visitInsn(RETURN);
+methodVisitor.visitMaxs(1, 6);
+methodVisitor.visitEnd();
+```
+
+从Frame的视角来看，local variable和operand stack的变化：
+
+```text
+[sample/HelloWorld] []
+[sample/HelloWorld] [null]
+[sample/HelloWorld, null] []
+[sample/HelloWorld, null] [null]
+[sample/HelloWorld, null, null] []
+[sample/HelloWorld, null, null] [null]
+[sample/HelloWorld, null, null, null] []
+[sample/HelloWorld, null, null, null] [null]
+[sample/HelloWorld, null, null, null, null] []
+[sample/HelloWorld, null, null, null, null] [null]
+[sample/HelloWorld, null, null, null, null, null] []
+[] []
+```
+
+从JVM规范的角度来看，`astore_<n>`和`astore`指令对应的Operand Stack的变化如下：
+
+```text
+..., objectref →
+
+...
+```
+
+The `objectref` on the top of the operand stack must be of type `returnAddress` or of type `reference`. It is popped from the operand stack, and the value of the local variable at `index` is set to `objectref`.
+
+从JVM规范的角度来看，`aload_<n>`和`aload`指令对应的Operand Stack的变化如下：
+
+```text
+... →
+
+..., objectref
+```
+
+The local variable at `index` must contain a `reference`. The `objectref` in the local variable at `index` is pushed onto the operand stack.

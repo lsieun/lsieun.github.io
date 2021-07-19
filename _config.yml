@@ -43,14 +43,38 @@ collections:
     output: true
     title: "Java ASM第02季"
     sequence: 2
+  java-asm-03:
+    output: true
+    title: "Java ASM第03季"
+    sequence: 3
+  java-asm-04:
+    output: true
+    title: "Java ASM第04季"
+    sequence: 4
+  java-asm-05:
+    output: true
+    title: "Java ASM第05季"
+    sequence: 5
+  java-agent:
+    output: true
+    title: "Java Agent in Action"
+    sequence: 6
+  intellij-idea:
+    output: true
+    title: "IntelliJ IDEA"
+    sequence: 7
+  writing:
+    output: true
+    title: "Writing"
+    sequence: 8
   jekyll:
     output: true
     title: "Jekyll快速参考教程"
-    sequence: 3
+    sequence: 1
   cert:
     output: true
     title: "X.509证书"
-    sequence: 3
+    sequence: 8
 
 defaults:
   -
@@ -72,6 +96,55 @@ defaults:
     values:
       layout: "post"
       tags: java asm
+  -
+    scope:
+      path: ""
+      type: "java-asm-02"
+    values:
+      layout: "post"
+      tags: java asm
+  -
+    scope:
+      path: ""
+      type: "java-asm-03"
+    values:
+      layout: "post"
+      tags: java asm
+  -
+    scope:
+      path: ""
+      type: "java-asm-04"
+    values:
+      layout: "post"
+      tags: java asm
+  -
+    scope:
+      path: ""
+      type: "java-asm-05"
+    values:
+      layout: "post"
+      tags: java asm
+  -
+    scope:
+      path: ""
+      type: "java-agent"
+    values:
+      layout: "post"
+      tags: java asm
+  -
+    scope:
+      path: ""
+      type: "intellij-idea"
+    values:
+      layout: "post"
+      tags: java ide
+  -
+    scope:
+      path: ""
+      type: "writing"
+    values:
+      layout: "post"
+      tags: writing
   -
     scope:
       path: ""

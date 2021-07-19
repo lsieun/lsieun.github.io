@@ -1,0 +1,160 @@
+---
+title:  "opcode: monitor (2/198/205)"
+sequence: "213"
+---
+
+## 概览
+
+从Instruction的角度来说，与monitor相关的opcode有2个，内容如下：
+
+| opcode | mnemonic symbol | opcode | mnemonic symbol | opcode | mnemonic symbol | opcode | mnemonic symbol |
+|--------|-----------------|--------|-----------------|--------|-----------------|--------|-----------------|
+| 194    | monitorenter    | 195    | monitorexit     |        |                 |        |                 |
+
+从ASM的角度来说，这些opcode与`MethodVisitor.visitXxxInsn()`方法对应关系如下：
+
+- `MethodVisitor.visitInsn()`: `monitorenter`, `monitorexit`
+
+从Java语言的视角，有一个`HelloWorld`类，代码如下：
+
+```java
+public class HelloWorld {
+    public void test() {
+        synchronized (System.out) {
+            System.out.println("Hello World");
+        }
+    }
+}
+```
+
+从Instruction的视角来看，方法体对应的内容如下：
+
+```text
+$ javap -c -p sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test();
+    Code:
+       0: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+       3: dup
+       4: astore_1
+       5: monitorenter
+       6: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+       9: ldc           #3                  // String Hello World
+      11: invokevirtual #4                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      14: aload_1
+      15: monitorexit
+      16: goto          24
+      19: astore_2
+      20: aload_1
+      21: monitorexit
+      22: aload_2
+      23: athrow
+      24: return
+    Exception table:
+       from    to  target type
+           6    16    19   any
+          19    22    19   any
+}
+```
+
+从ASM的视角来看，方法体对应的内容如下：
+
+```text
+Label label0 = new Label();
+Label label1 = new Label();
+Label label2 = new Label();
+Label label3 = new Label();
+Label label4 = new Label();
+
+methodVisitor.visitCode();
+methodVisitor.visitTryCatchBlock(label0, label1, label2, null);
+methodVisitor.visitTryCatchBlock(label2, label3, label2, null);
+
+methodVisitor.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
+methodVisitor.visitInsn(DUP);
+methodVisitor.visitVarInsn(ASTORE, 1);
+methodVisitor.visitInsn(MONITORENTER);
+
+methodVisitor.visitLabel(label0);
+methodVisitor.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
+methodVisitor.visitLdcInsn("Hello World");
+methodVisitor.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
+methodVisitor.visitVarInsn(ALOAD, 1);
+methodVisitor.visitInsn(MONITOREXIT);
+
+methodVisitor.visitLabel(label1);
+methodVisitor.visitJumpInsn(GOTO, label4);
+
+methodVisitor.visitLabel(label2);
+methodVisitor.visitVarInsn(ASTORE, 2);
+methodVisitor.visitVarInsn(ALOAD, 1);
+methodVisitor.visitInsn(MONITOREXIT);
+
+methodVisitor.visitLabel(label3);
+methodVisitor.visitVarInsn(ALOAD, 2);
+methodVisitor.visitInsn(ATHROW);
+
+methodVisitor.visitLabel(label4);
+methodVisitor.visitInsn(RETURN);
+methodVisitor.visitMaxs(2, 3);
+methodVisitor.visitEnd();
+```
+
+从Frame的视角来看，local variable和operand stack的变化：
+
+```text
+[sample/HelloWorld] []
+[sample/HelloWorld] []
+[sample/HelloWorld] []
+[sample/HelloWorld] [java/io/PrintStream]
+[sample/HelloWorld] [java/io/PrintStream, java/io/PrintStream]
+[sample/HelloWorld, java/io/PrintStream] [java/io/PrintStream]
+[sample/HelloWorld, java/io/PrintStream] []
+[sample/HelloWorld, java/io/PrintStream] [java/io/PrintStream]
+[sample/HelloWorld, java/io/PrintStream] [java/io/PrintStream, java/lang/String]
+[sample/HelloWorld, java/io/PrintStream] []
+[sample/HelloWorld, java/io/PrintStream] [java/io/PrintStream]
+[sample/HelloWorld, java/io/PrintStream] []
+[] []
+[sample/HelloWorld, java/lang/Object, java/lang/Throwable] []
+[sample/HelloWorld, java/lang/Object, java/lang/Throwable] [java/lang/Object]
+[sample/HelloWorld, java/lang/Object, java/lang/Throwable] []
+[sample/HelloWorld, java/lang/Object, java/lang/Throwable] [java/lang/Throwable]
+[] []
+[] []
+```
+
+从JVM规范的角度来看，`monitorenter`指令对应的Operand Stack的变化如下：
+
+```text
+..., objectref →
+
+...
+```
+
+The `objectref` must be of type `reference`.
+
+Each object is associated with a monitor. A monitor is locked if and only if it has an owner. The thread that executes `monitorenter` attempts to gain ownership of the monitor associated with `objectref`, as follows:
+
+- If the entry count of the monitor associated with `objectref` is zero, the thread enters the monitor and sets its entry count to one. The thread is then the owner of the monitor.
+- If the thread already owns the monitor associated with `objectref`, it reenters the monitor, incrementing its entry count.
+- If another thread already owns the monitor associated with `objectref`, the thread blocks until the monitor's entry count is zero, then tries again to gain ownership.
+
+从JVM规范的角度来看，`monitorexit`指令对应的Operand Stack的变化如下：
+
+```text
+..., objectref →
+
+...
+```
+
+The `objectref` must be of type `reference`.
+
+The thread that executes `monitorexit` must be the owner of the monitor associated with the instance referenced by `objectref`.
+
+The thread decrements the entry count of the monitor associated with `objectref`.
+
+- If as a result the value of the entry count is zero, the thread exits the monitor and is no longer its owner.
+- Other threads that are blocking to enter the monitor are allowed to attempt to do so.

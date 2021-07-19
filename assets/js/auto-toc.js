@@ -40,11 +40,11 @@
                 } else if (h.is("h3")) {
                     second_index += 1;
                     third_index = 0;
-                    text = first_index + "." + second_index + " " + text;
+                    text = first_index + "." + second_index + ". " + text;
                 }
                 else if (h.is("h4")) {
                     third_index += 1;
-                    text = first_index + "." + second_index + "." + third_index + " " + text;
+                    text = first_index + "." + second_index + "." + third_index + ". " + text;
                 }
 
                 let head_id = h.attr("id");

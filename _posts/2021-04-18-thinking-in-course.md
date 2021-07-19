@@ -9,6 +9,92 @@ image: /assets/images/online-course.jpg
 
 录制视频课程的过程中，需要注意的事情。
 
+## 选课
+
+市场调查
+
+- （1）查看平台是否有同类课？
+- （2）同类课的售卖现状如何？
+- （3）同类课是否存在内容空白点？
+
+用户调查
+
+- （1）了解目标用户需求（工作背景、期望、问题）
+- （2）先推流量课，定位种子用户
+
+在线课程最、最基本的要求，视频本身的质量，包含但不限于，声音清楚，没有电流声、杂音等其它和课程无关的声音，画质清晰，授课流畅。
+
+按知识体系建立知识树，按基础、进阶，提升细化课程。
+
+一些课程中，理论性知识偏多，能够落地结合实际场景来操作实战内容偏少。很大一部分人都已经走向岗位或者有多年工作经验的人，很大情况需要通过学习来解决实际工作中的一些问题。所以说，课程中与项目相关的实战内容是比较需要的。
+
+## 文章
+
+### 关键字
+
+- try not to overuse keywords - for example, if the article is about Spring, do not use “Spring” excessively because Google will consider that ”Keyword Stuffing”
+
+### 标题
+
+separate heading with text, add a brief introductory text after the H2 heading to separate the headings:
+
+```html
+<h2>2. OAuth</h2>
+// add text here
+<h3>2.1. What is OAuth2?</h3>
+```
+
+### 段落
+
+- keep paragraphs small, simple and to the point - use clear and simple statements
+- break concepts into multiple paragraphs if possible - if an idea stretches more than a few lines, I would break it into multiple paragraphs
+
+### 内容
+
+prefer “we” language, not “you” language
+- whenever possible, it’s better to say:
+  We’re going to implement this ...
+  than:
+  You’re going to implement this...
+
+### 代码/图片
+
+引入代码或图片时，应该以“：”结尾。
+
+
+a code sample or diagram/image should be introduced with a sentence ending in a colon ( “:” )
+
+- 正确的代码示例：
+
+---
+Here we’re setting up a controller:
+```text
+{some code here}
+```
+---
+
+- 错误的代码示例：
+
+---
+Here, we’re setting up a controller.
+```text
+{some code here}
+```
+---
+
+{% assign filtered_posts = site.writing | sort: "sequence" %}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    {% if num > 100 and num < 200 %}
+    <li>
+        <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
+    </li>
+    {% endif %}
+
+    {% endfor %}
+</ol>
+
 ## 课程准备
 
 ### 课程内容
@@ -121,6 +207,7 @@ image: /assets/images/online-course.jpg
 - [51CTO: 教你打造优秀IT博文](https://blog.51cto.com/shaochengcheng/760874)
 - [51CTO: 学院视频课程录制参数设置][video-parameter]
 - [51CTO: 文章管理](https://blog.51cto.com/blogger/blog-manage)
+- [baeldung - for authors - 5 - on good writing](https://docs.google.com/document/d/15EpG0P5VLBpUH-bGypfS-uBk83rSEj8jeoR9lXJMdS8/edit)
 
 [51cto-university]: https://edu.51cto.com/center/lec/university/index
 [video-parameter]: https://edu.51cto.com/center/lec/university/index#id=54

@@ -27,6 +27,13 @@ pkill -f jekyll
 kill -9 process_id
 ```
 
+## just-run.sh
+
+```bash
+#/bin/bash
+bundle exec jekyll serve --unpublished
+```
+
 ## References
 
 - [jekyllrb.com: Serve Command Options](https://jekyllrb.com/docs/configuration/options/#serve-command-options)

@@ -1,0 +1,1002 @@
+---
+title:  "opcode: constant (20/26/205)"
+sequence: "202"
+---
+
+## 概览
+
+从Instruction的角度来说，与constant相关的opcode有20个，内容如下：
+
+- int: `iconst_<i>`, `bipush`
+
+| opcode | mnemonic symbol | opcode | mnemonic symbol | opcode | mnemonic symbol | opcode | mnemonic symbol |
+|--------|-----------------|--------|-----------------|--------|-----------------|--------|-----------------|
+| 1      | aconst_null     | 6      | iconst_3        | 11     | fconst_0        | 16     | bipush          |
+| 2      | iconst_m1       | 7      | iconst_4        | 12     | fconst_1        | 17     | sipush          |
+| 3      | iconst_0        | 8      | iconst_5        | 13     | fconst_2        | 18     | ldc             |
+| 4      | iconst_1        | 9      | lconst_0        | 14     | dconst_0        | 19     | ldc_w           |
+| 5      | iconst_2        | 10     | lconst_1        | 15     | dconst_1        | 20     | ldc2_w          |
+
+从ASM的角度来说，这些opcode与`MethodVisitor.visitXxxInsn()`方法对应关系如下：
+
+- `MethodVisitor.visitInsn()`: `aconst_null`, `iconst_<i>`, `lconst_<l>`, `fconst_<f>`, `dconst_<d>`
+- `MethodVisitor.visitIntInsn()`: `bipush`, `sipush`
+- `MethodVisitor.visitLdcInsn()`: `ldc`, `ldc_w`, `ldc2_w`
+
+## int
+
+### `iconst_<i>`: -1~5
+
+从Java语言的视角，有一个`HelloWorld`类，代码如下：
+
+```java
+public class HelloWorld {
+    public void test() {
+        int int_m1 = -1;
+        int int_0 = 0;
+        int int_1 = 1;
+        int int_2 = 2;
+        int int_3 = 3;
+        int int_4 = 4;
+        int int_5 = 5;
+    }
+}
+```
+
+从Instruction的视角来看，方法体对应的内容如下：
+
+```text
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test();
+    Code:
+       0: iconst_m1
+       1: istore_1
+       2: iconst_0
+       3: istore_2
+       4: iconst_1
+       5: istore_3
+       6: iconst_2
+       7: istore        4
+       9: iconst_3
+      10: istore        5
+      12: iconst_4
+      13: istore        6
+      15: iconst_5
+      16: istore        7
+      18: return
+}
+```
+
+从ASM的视角来看，方法体对应的内容如下：
+
+```text
+methodVisitor.visitCode();
+methodVisitor.visitInsn(ICONST_M1);
+methodVisitor.visitVarInsn(ISTORE, 1);
+methodVisitor.visitInsn(ICONST_0);
+methodVisitor.visitVarInsn(ISTORE, 2);
+methodVisitor.visitInsn(ICONST_1);
+methodVisitor.visitVarInsn(ISTORE, 3);
+methodVisitor.visitInsn(ICONST_2);
+methodVisitor.visitVarInsn(ISTORE, 4);
+methodVisitor.visitInsn(ICONST_3);
+methodVisitor.visitVarInsn(ISTORE, 5);
+methodVisitor.visitInsn(ICONST_4);
+methodVisitor.visitVarInsn(ISTORE, 6);
+methodVisitor.visitInsn(ICONST_5);
+methodVisitor.visitVarInsn(ISTORE, 7);
+methodVisitor.visitInsn(RETURN);
+methodVisitor.visitMaxs(1, 8);
+methodVisitor.visitEnd();
+```
+
+从Frame的视角来看，local variable和operand stack的变化：
+
+```text
+[sample/HelloWorld] []
+[sample/HelloWorld] [int]
+[sample/HelloWorld, int] []
+[sample/HelloWorld, int] [int]
+[sample/HelloWorld, int, int] []
+[sample/HelloWorld, int, int] [int]
+[sample/HelloWorld, int, int, int] []
+[sample/HelloWorld, int, int, int] [int]
+[sample/HelloWorld, int, int, int, int] []
+[sample/HelloWorld, int, int, int, int] [int]
+[sample/HelloWorld, int, int, int, int, int] []
+[sample/HelloWorld, int, int, int, int, int] [int]
+[sample/HelloWorld, int, int, int, int, int, int] []
+[sample/HelloWorld, int, int, int, int, int, int] [int]
+[sample/HelloWorld, int, int, int, int, int, int, int] []
+[] []
+```
+
+从JVM规范的角度来看，Operand Stack的变化如下：
+
+```text
+... →
+
+..., <i>
+```
+
+Push the `int` constant `<i>` (-1, 0, 1, 2, 3, 4 or 5) onto the operand stack.
+
+### bipush: -128~127
+
+从Java语言的视角，有一个`HelloWorld`类，代码如下：
+
+```java
+public class HelloWorld {
+    public void test() {
+        int int_m128 = -128;
+        int int_127 = 127;
+    }
+}
+```
+
+从Instruction的视角来看，方法体对应的内容如下：
+
+```text
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test();
+    Code:
+       0: bipush        -128
+       2: istore_1
+       3: bipush        127
+       5: istore_2
+       6: return
+}
+```
+
+从ASM的视角来看，方法体对应的内容如下：
+
+```text
+methodVisitor.visitCode();
+methodVisitor.visitIntInsn(BIPUSH, -128);
+methodVisitor.visitVarInsn(ISTORE, 1);
+methodVisitor.visitIntInsn(BIPUSH, 127);
+methodVisitor.visitVarInsn(ISTORE, 2);
+methodVisitor.visitInsn(RETURN);
+methodVisitor.visitMaxs(1, 3);
+methodVisitor.visitEnd();
+```
+
+从Frame的视角来看，local variable和operand stack的变化：
+
+```text
+[sample/HelloWorld] []
+[sample/HelloWorld] [int]
+[sample/HelloWorld, int] []
+[sample/HelloWorld, int] [int]
+[sample/HelloWorld, int, int] []
+[] []
+```
+
+从JVM规范的角度来看，Operand Stack的变化如下：
+
+```text
+... →
+
+..., value
+```
+
+The immediate byte is sign-extended to an `int` value. That `value` is pushed onto the operand stack.
+
+### sipush: -32768~32767
+
+从Java语言的视角，有一个`HelloWorld`类，代码如下：
+
+```java
+public class HelloWorld {
+    public void test() {
+        int int_m32768 = -32768;
+        int int_32767 = 32767;
+    }
+}
+```
+
+从Instruction的视角来看，方法体对应的内容如下：
+
+```text
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test();
+    Code:
+       0: sipush        -32768
+       3: istore_1
+       4: sipush        32767
+       7: istore_2
+       8: return
+}
+```
+
+从ASM的视角来看，方法体对应的内容如下：
+
+```text
+methodVisitor.visitCode();
+methodVisitor.visitIntInsn(SIPUSH, -32768);
+methodVisitor.visitVarInsn(ISTORE, 1);
+methodVisitor.visitIntInsn(SIPUSH, 32767);
+methodVisitor.visitVarInsn(ISTORE, 2);
+methodVisitor.visitInsn(RETURN);
+methodVisitor.visitMaxs(1, 3);
+methodVisitor.visitEnd();
+```
+
+从Frame的视角来看，local variable和operand stack的变化：
+
+```text
+[sample/HelloWorld] []
+[sample/HelloWorld] [int]
+[sample/HelloWorld, int] []
+[sample/HelloWorld, int] [int]
+[sample/HelloWorld, int, int] []
+[] []
+```
+
+从JVM规范的角度来看，Operand Stack的变化如下：
+
+```text
+... →
+
+..., value
+```
+
+Format
+
+```text
+sipush
+byte1
+byte2
+```
+
+The immediate unsigned `byte1` and `byte2` values are assembled into an intermediate `short`, where the `value` of the `short` is `(byte1 << 8) | byte2`. The intermediate `value` is then sign-extended to an `int` value. That `value` is pushed onto the operand stack.
+
+### ldc: MIN_~MAX
+
+从Java语言的视角，有一个`HelloWorld`类，代码如下：
+
+```java
+public class HelloWorld {
+    public void test() {
+        int int_min = Integer.MIN_VALUE;
+        int int_max = Integer.MAX_VALUE;
+    }
+}
+```
+
+从Instruction的视角来看，方法体对应的内容如下：
+
+```text
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test();
+    Code:
+       0: ldc           #3                  // int -2147483648
+       2: istore_1
+       3: ldc           #4                  // int 2147483647
+       5: istore_2
+       6: return
+}
+```
+
+从ASM的视角来看，方法体对应的内容如下：
+
+```text
+methodVisitor.visitCode();
+methodVisitor.visitLdcInsn(new Integer(-2147483648));
+methodVisitor.visitVarInsn(ISTORE, 1);
+methodVisitor.visitLdcInsn(new Integer(2147483647));
+methodVisitor.visitVarInsn(ISTORE, 2);
+methodVisitor.visitInsn(RETURN);
+methodVisitor.visitMaxs(1, 3);
+methodVisitor.visitEnd();
+```
+
+从Frame的视角来看，local variable和operand stack的变化：
+
+```text
+[sample/HelloWorld] []
+[sample/HelloWorld] [int]
+[sample/HelloWorld, int] []
+[sample/HelloWorld, int] [int]
+[sample/HelloWorld, int, int] []
+[] []
+```
+
+从JVM规范的角度来看，Operand Stack的变化如下：
+
+```text
+... →
+
+..., value
+```
+
+Format
+
+```text
+ldc
+index
+```
+
+The `index` is an unsigned byte that must be a valid index into the run-time constant pool of the current class. The run-time constant pool entry at `index` either must be a run-time constant of type `int` or `float`, or **a reference to a string literal**, or **a symbolic reference to a class, method type, or method handle**.
+
+## long
+
+### `lconst_<l>`: 0~1
+
+从Java语言的视角，有一个`HelloWorld`类，代码如下：
+
+```java
+public class HelloWorld {
+    public void test() {
+        long long_0 = 0;
+        long long_1 = 1;
+    }
+}
+```
+
+从Instruction的视角来看，方法体对应的内容如下：
+
+```text
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test();
+    Code:
+       0: lconst_0
+       1: lstore_1
+       2: lconst_1
+       3: lstore_3
+       4: return
+}
+```
+
+从ASM的视角来看，方法体对应的内容如下：
+
+```text
+methodVisitor.visitCode();
+methodVisitor.visitInsn(LCONST_0);
+methodVisitor.visitVarInsn(LSTORE, 1);
+methodVisitor.visitInsn(LCONST_1);
+methodVisitor.visitVarInsn(LSTORE, 3);
+methodVisitor.visitInsn(RETURN);
+methodVisitor.visitMaxs(2, 5);
+methodVisitor.visitEnd();
+```
+
+从Frame的视角来看，local variable和operand stack的变化：
+
+```text
+[sample/HelloWorld] []
+[sample/HelloWorld] [long, top]
+[sample/HelloWorld, long, top] []
+[sample/HelloWorld, long, top] [long, top]
+[sample/HelloWorld, long, top, long, top] []
+[] []
+```
+
+从JVM规范的角度来看，Operand Stack的变化如下：
+
+```text
+... →
+
+..., <l>
+```
+
+Push the `long` constant `<l>` (0 or 1) onto the operand stack.
+
+### ldc2_w: MIN~MAX
+
+从Java语言的视角，有一个`HelloWorld`类，代码如下：
+
+```java
+public class HelloWorld {
+    public void test() {
+        long long_min = Long.MIN_VALUE;
+        long long_max = Long.MAX_VALUE;
+    }
+}
+```
+
+从Instruction的视角来看，方法体对应的内容如下：
+
+```text
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test();
+    Code:
+       0: ldc2_w        #3                  // long -9223372036854775808l
+       3: lstore_1
+       4: ldc2_w        #5                  // long 9223372036854775807l
+       7: lstore_3
+       8: return
+}
+```
+
+从ASM的视角来看，方法体对应的内容如下：
+
+```text
+methodVisitor.visitCode();
+methodVisitor.visitLdcInsn(new Long(-9223372036854775808L));
+methodVisitor.visitVarInsn(LSTORE, 1);
+methodVisitor.visitLdcInsn(new Long(9223372036854775807L));
+methodVisitor.visitVarInsn(LSTORE, 3);
+methodVisitor.visitInsn(RETURN);
+methodVisitor.visitMaxs(2, 5);
+methodVisitor.visitEnd();
+```
+
+从Frame的视角来看，local variable和operand stack的变化：
+
+```text
+[sample/HelloWorld] []
+[sample/HelloWorld] [long, top]
+[sample/HelloWorld, long, top] []
+[sample/HelloWorld, long, top] [long, top]
+[sample/HelloWorld, long, top, long, top] []
+[] []
+```
+
+从JVM规范的角度来看，Operand Stack的变化如下：
+
+```text
+... →
+
+..., value
+```
+
+The numeric `value` of that run-time constant is pushed onto the operand stack as a `long` or `double`, respectively.
+
+## float
+
+### `fconst_<f>`: 0~2
+
+从Java语言的视角，有一个`HelloWorld`类，代码如下：
+
+```java
+public class HelloWorld {
+    public void test() {
+        float float_0 = 0;
+        float float_1 = 1;
+        float float_2 = 2;
+    }
+}
+```
+
+从Instruction的视角来看，方法体对应的内容如下：
+
+```text
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test();
+    Code:
+       0: fconst_0
+       1: fstore_1
+       2: fconst_1
+       3: fstore_2
+       4: fconst_2
+       5: fstore_3
+       6: return
+}
+```
+
+从ASM的视角来看，方法体对应的内容如下：
+
+```text
+methodVisitor.visitCode();
+methodVisitor.visitInsn(FCONST_0);
+methodVisitor.visitVarInsn(FSTORE, 1);
+methodVisitor.visitInsn(FCONST_1);
+methodVisitor.visitVarInsn(FSTORE, 2);
+methodVisitor.visitInsn(FCONST_2);
+methodVisitor.visitVarInsn(FSTORE, 3);
+methodVisitor.visitInsn(RETURN);
+methodVisitor.visitMaxs(1, 4);
+methodVisitor.visitEnd();
+```
+
+从Frame的视角来看，local variable和operand stack的变化：
+
+```text
+[sample/HelloWorld] []
+[sample/HelloWorld] [float]
+[sample/HelloWorld, float] []
+[sample/HelloWorld, float] [float]
+[sample/HelloWorld, float, float] []
+[sample/HelloWorld, float, float] [float]
+[sample/HelloWorld, float, float, float] []
+[] []
+```
+
+从JVM规范的角度来看，Operand Stack的变化如下：
+
+```text
+... →
+
+..., <f>
+```
+
+Push the `float` constant `<f>` (0.0, 1.0, or 2.0) onto the operand stack.
+
+### ldc: MIN~MAX
+
+从Java语言的视角，有一个`HelloWorld`类，代码如下：
+
+```java
+public class HelloWorld {
+    public void test() {
+        float float_min = Float.MIN_VALUE;
+        float float_max = Float.MAX_VALUE;
+    }
+}
+```
+
+从Instruction的视角来看，方法体对应的内容如下：
+
+```text
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test();
+    Code:
+       0: ldc           #3                  // float 1.4E-45f
+       2: fstore_1
+       3: ldc           #4                  // float 3.4028235E38f
+       5: fstore_2
+       6: return
+}
+```
+
+从ASM的视角来看，方法体对应的内容如下：
+
+```text
+methodVisitor.visitCode();
+methodVisitor.visitLdcInsn(new Float("1.4E-45"));
+methodVisitor.visitVarInsn(FSTORE, 1);
+methodVisitor.visitLdcInsn(new Float("3.4028235E38"));
+methodVisitor.visitVarInsn(FSTORE, 2);
+methodVisitor.visitInsn(RETURN);
+methodVisitor.visitMaxs(1, 3);
+methodVisitor.visitEnd();
+```
+
+从Frame的视角来看，local variable和operand stack的变化：
+
+```text
+[sample/HelloWorld] []
+[sample/HelloWorld] [float]
+[sample/HelloWorld, float] []
+[sample/HelloWorld, float] [float]
+[sample/HelloWorld, float, float] []
+[] []
+```
+
+从JVM规范的角度来看，Operand Stack的变化如下：
+
+```text
+... →
+
+..., value
+```
+
+Format
+
+```text
+ldc
+index
+```
+
+The `index` is an unsigned byte that must be a valid index into the run-time constant pool of the current class. The run-time constant pool entry at `index` either must be a run-time constant of type `int` or `float`, or **a reference to a string literal**, or **a symbolic reference to a class, method type, or method handle**.
+
+## double
+
+### `dconst_<d>`: 0~1
+
+从Java语言的视角，有一个`HelloWorld`类，代码如下：
+
+```java
+public class HelloWorld {
+    public void test() {
+        double double_0 = 0;
+        double double_1 = 1;
+    }
+}
+```
+
+从Instruction的视角来看，方法体对应的内容如下：
+
+```text
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test();
+    Code:
+       0: dconst_0
+       1: dstore_1
+       2: dconst_1
+       3: dstore_3
+       4: return
+}
+```
+
+从ASM的视角来看，方法体对应的内容如下：
+
+```text
+methodVisitor.visitCode();
+methodVisitor.visitInsn(DCONST_0);
+methodVisitor.visitVarInsn(DSTORE, 1);
+methodVisitor.visitInsn(DCONST_1);
+methodVisitor.visitVarInsn(DSTORE, 3);
+methodVisitor.visitInsn(RETURN);
+methodVisitor.visitMaxs(2, 5);
+methodVisitor.visitEnd();
+```
+
+从Frame的视角来看，local variable和operand stack的变化：
+
+```text
+[sample/HelloWorld] []
+[sample/HelloWorld] [double, top]
+[sample/HelloWorld, double, top] []
+[sample/HelloWorld, double, top] [double, top]
+[sample/HelloWorld, double, top, double, top] []
+[] []
+```
+
+从JVM规范的角度来看，Operand Stack的变化如下：
+
+```text
+... →
+
+..., <d>
+```
+
+Push the `double` constant `<d>` (0.0 or 1.0) onto the operand stack.
+
+### ldc2_w: MIN~MAX
+
+从Java语言的视角，有一个`HelloWorld`类，代码如下：
+
+```java
+public class HelloWorld {
+    public void test() {
+        double double_min = Double.MIN_VALUE;
+        double double_max = Double.MAX_VALUE;
+    }
+}
+```
+
+从Instruction的视角来看，方法体对应的内容如下：
+
+```text
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test();
+    Code:
+       0: ldc2_w        #3                  // double 4.9E-324d
+       3: dstore_1
+       4: ldc2_w        #5                  // double 1.7976931348623157E308d
+       7: dstore_3
+       8: return
+}
+```
+
+从ASM的视角来看，方法体对应的内容如下：
+
+```text
+methodVisitor.visitCode();
+methodVisitor.visitLdcInsn(new Double("4.9E-324"));
+methodVisitor.visitVarInsn(DSTORE, 1);
+methodVisitor.visitLdcInsn(new Double("1.7976931348623157E308"));
+methodVisitor.visitVarInsn(DSTORE, 3);
+methodVisitor.visitInsn(RETURN);
+methodVisitor.visitMaxs(2, 5);
+methodVisitor.visitEnd();
+```
+
+从Frame的视角来看，local variable和operand stack的变化：
+
+```text
+[sample/HelloWorld] []
+[sample/HelloWorld] [double, top]
+[sample/HelloWorld, double, top] []
+[sample/HelloWorld, double, top] [double, top]
+[sample/HelloWorld, double, top, double, top] []
+[] []
+```
+
+从JVM规范的角度来看，Operand Stack的变化如下：
+
+```text
+... →
+
+..., value
+```
+
+The numeric `value` of that run-time constant is pushed onto the operand stack as a `long` or `double`, respectively.
+
+## reference type
+
+### null: aconst_null
+
+从Java语言的视角，有一个`HelloWorld`类，代码如下：
+
+```java
+public class HelloWorld {
+    public void test() {
+        Object obj_null = null;
+    }
+}
+```
+
+从Instruction的视角来看，方法体对应的内容如下：
+
+```text
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test();
+    Code:
+       0: aconst_null
+       1: astore_1
+       2: return
+}
+```
+
+从ASM的视角来看，方法体对应的内容如下：
+
+```text
+methodVisitor.visitCode();
+methodVisitor.visitInsn(ACONST_NULL);
+methodVisitor.visitVarInsn(ASTORE, 1);
+methodVisitor.visitInsn(RETURN);
+methodVisitor.visitMaxs(1, 2);
+methodVisitor.visitEnd();
+```
+
+从Frame的视角来看，local variable和operand stack的变化：
+
+```text
+[sample/HelloWorld] []
+[sample/HelloWorld] [null]
+[sample/HelloWorld, null] []
+[] []
+```
+
+从JVM规范的角度来看，Operand Stack的变化如下：
+
+```text
+... →
+
+..., null
+```
+
+Push the `null` object reference onto the operand stack.
+
+### String: ldc
+
+从Java语言的视角，有一个`HelloWorld`类，代码如下：
+
+```java
+public class HelloWorld {
+    public void test() {
+        String str = "GoodChild";
+    }
+}
+```
+
+从Instruction的视角来看，方法体对应的内容如下：
+
+```text
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test();
+    Code:
+       0: ldc           #2                  // String GoodChild
+       2: astore_1
+       3: return
+}
+
+```
+
+从ASM的视角来看，方法体对应的内容如下：
+
+```text
+methodVisitor.visitCode();
+methodVisitor.visitLdcInsn("GoodChild");
+methodVisitor.visitVarInsn(ASTORE, 1);
+methodVisitor.visitInsn(RETURN);
+methodVisitor.visitMaxs(1, 2);
+methodVisitor.visitEnd();
+```
+
+从Frame的视角来看，local variable和operand stack的变化：
+
+```text
+[sample/HelloWorld] []
+[sample/HelloWorld] [java/lang/String]
+[sample/HelloWorld, java/lang/String] []
+[] []
+```
+
+从JVM规范的角度来看，Operand Stack的变化如下：
+
+```text
+... →
+
+..., value
+```
+
+Format
+
+```text
+ldc
+index
+```
+
+The `index` is an unsigned byte that must be a valid index into the run-time constant pool of the current class. The run-time constant pool entry at `index` either must be a run-time constant of type `int` or `float`, or **a reference to a string literal**, or **a symbolic reference to a class, method type, or method handle**.
+
+### `Class<?>`: ldc
+
+从Java语言的视角，有一个`HelloWorld`类，代码如下：
+
+```java
+public class HelloWorld {
+    public void test() {
+        Class<?> clazz = HelloWorld.class;
+    }
+}
+```
+
+从Instruction的视角来看，方法体对应的内容如下：
+
+```text
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test();
+    Code:
+       0: ldc           #2                  // class sample/HelloWorld
+       2: astore_1
+       3: return
+}
+```
+
+从ASM的视角来看，方法体对应的内容如下：
+
+```text
+methodVisitor.visitCode();
+methodVisitor.visitLdcInsn(Type.getType("Lsample/HelloWorld;"));
+methodVisitor.visitVarInsn(ASTORE, 1);
+methodVisitor.visitInsn(RETURN);
+methodVisitor.visitMaxs(1, 2);
+methodVisitor.visitEnd();
+```
+
+从Frame的视角来看，local variable和operand stack的变化：
+
+```text
+[sample/HelloWorld] []
+[sample/HelloWorld] [java/lang/Class]
+[sample/HelloWorld, java/lang/Class] []
+[] []
+```
+
+从JVM规范的角度来看，Operand Stack的变化如下：
+
+```text
+... →
+
+..., value
+```
+
+Format
+
+```text
+ldc
+index
+```
+
+The `index` is an unsigned byte that must be a valid index into the run-time constant pool of the current class. The run-time constant pool entry at `index` either must be a run-time constant of type `int` or `float`, or **a reference to a string literal**, or **a symbolic reference to a class, method type, or method handle**.
+
+## ldc and ldc_w
+
+从Java语言的视角，有一个`HelloWorld`类，代码如下：
+
+```java
+public class HelloWorld {
+    private String str001 = "str001";
+    // ... ... 省略255个
+    private String str257 = "str257";
+
+    public void test() {
+        String str = "str258";
+    }
+
+    public static void main(String[] args) {
+        String format = "private String str%03d = \"str%03d\";";
+        for (int i = 1; i < 258; i++) {
+            String line = String.format(format, i, i);
+            System.out.println(line);
+        }
+    }
+}
+```
+
+从Instruction的视角来看，方法体对应的内容如下：
+
+```text
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test();
+    Code:
+       0: ldc_w         #516                // String str258
+       3: astore_1
+       4: return
+...
+}
+```
+
+从ASM的视角来看，方法体对应的内容如下：
+
+```text
+methodVisitor.visitCode();
+methodVisitor.visitLdcInsn("str258");
+methodVisitor.visitVarInsn(ASTORE, 1);
+methodVisitor.visitInsn(RETURN);
+methodVisitor.visitMaxs(1, 2);
+methodVisitor.visitEnd();
+```
+
+从Frame的视角来看，local variable和operand stack的变化：
+
+```text
+[sample/HelloWorld] []
+[sample/HelloWorld] [java/lang/String]
+[sample/HelloWorld, java/lang/String] []
+[] []
+```
+
+从JVM规范的角度来看，Operand Stack的变化如下：
+
+```text
+... →
+
+..., value
+```
+
+Format
+
+```text
+ldc_w
+indexbyte1
+indexbyte2
+```
+
+The unsigned `indexbyte1` and `indexbyte2` are assembled into an unsigned 16-bit index into the run-time constant pool of the current class, where the value of the `index` is calculated as `(indexbyte1 << 8) | indexbyte2`. The index must be a valid index into the run-time constant pool of the current class. The run-time constant pool entry at the index either must be a run-time constant of type `int` or `float`, or **a reference to a string literal**, or **a symbolic reference to a class, method type, or method handle**.
