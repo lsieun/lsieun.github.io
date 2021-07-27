@@ -5,7 +5,7 @@ image: /assets/images/java/asm/brew_your_own_bytecode_with_asm.jpg
 tags: java asm
 ---
 
-ASM is an open source java library for manipulating java byte code.
+ASM is an open-source java library for manipulating bytecode.
 
 ---
 

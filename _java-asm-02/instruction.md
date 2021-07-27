@@ -1,9 +1,38 @@
 ---
-title:  "205个opcode"
+title:  "Instruction"
 sequence: "102"
 ---
 
-下表的内容是来自于[The Java® Virtual Machine Specification Java SE 8 Edition](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)中的[Chapter 6. The Java Virtual Machine Instruction Set](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html)
+## Instruction VS. Opcode
+
+严格的来说，instruction和opcode这两个概念是有区别的。相对来说，instruction是一个比较大的概念，而opcode是一个比较小的概念：
+
+```text
+instruction = opcode + operands
+```
+
+- 问题：能否在文档中找到依据呢？
+- 回答：能。
+
+A Java Virtual Machine **instruction** consists of a one-byte **opcode** specifying the operation to be performed, followed by zero or more **operands** supplying arguments or data that are used by the operation. **Many instructions have no operands and consist only of an opcode.** （本段内容来自于[2.11. Instruction Set Summary](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.11)的第一段）
+
+粗略的来说，在现实生活当中谈论技术问题，我们经常混用instruction和opcode这两个概念，不作区分，可以将两者当成一回事儿。
+
+## Opcodes
+
+### 一个字节的容量（256）
+
+opcode占用空间的大小为1 byte。在1 byte中，包含8个bit，因此1 byte最多可以表示256个值（即0~255）。
+
+### opcode的数量（205）
+
+虽然一个字节（byte)当中可以存储256个值（即0~255），但是在Java 8这个版本中定义的opcode数量只有205个。因此，opcode的内容就是一个“数值”，位于0~255之间。
+
+### opcode和mnemonic symbol
+
+要记住每个opcode对应数值的含义，是非常困难的。为了方便人们记忆opcode的作用，就给每个opcode起了一个名字，叫作mnemonic symbol（助记符号）。
+
+
 
 | opcode | mnemonic symbol | opcode | mnemonic symbol | opcode | mnemonic symbol | opcode | mnemonic symbol |
 |--------|-----------------|--------|-----------------|--------|-----------------|--------|-----------------|
@@ -71,4 +100,52 @@ sequence: "102"
 | 61     | istore_2        | 125    | lushr           | 189    | anewarray       | 253    |                 |
 | 62     | istore_3        | 126    | iand            | 190    | arraylength     | 254    | impdep1         |
 | 63     | lstore_0        | 127    | land            | 191    | athrow          | 255    | impdep2         |
+
+在上面表格当中，大家如果对任何一个opcode或mnemonic symbol感兴趣，都可以参阅[Chapter 6. The Java Virtual Machine Instruction Set](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html)。
+
+### mnemonic symbol和类型信息
+
+对于大多数的opcode，它的mnemonic symbol名字当中带有类型信息（type information）。一般情况下，规律如下：
+
+- `i`表示`int`类型
+- `l`表示`long`类型。
+- `s`表示`short`类型
+- `b`表示`byte`类型
+- `c`表示`char`类型
+- `f`表示`float`类型
+- `d`表示`double`类型。
+- `a`表示`reference`类型。`a`可能是address的首字母，表示指向内存空间的一个地址信息。
+
+有一些opcode，它的mnemonic symbol名字不带有类型信息（type information），但是可以操作多种类型的数据，例如：
+
+- `arraylength`，无论是`int[]`类型的数组，还是`String[]`类型的数组，获取数组的长度都是使用`arraylength`。
+- `ldc`、`ldc_w`和`ldc2_w`表示**l**oa**d** **c**onstant的缩写，可以加载各种常量值。
+- 与stack相关的指令，可以操作多种数据类型。`pop`表示出栈操作，`dup`相关的指令是duplicate单词的缩写，表示“复制”操作；`swap`表示“交换”。
+
+还有一些opcode，它的mnemonic symbol名字不带有类型信息（type information），它也不处理任何类型的数据。例如：
+
+- `goto`
+
+- 问题：能否在文档中找到依据呢？
+- 回答：能。
+
+For the majority of **typed instructions**, the instruction type is represented explicitly in the opcode mnemonic by a letter: `i` for an `int` operation, `l` for long, `s` for `short`, `b` for `byte`, `c` for `char`, `f` for `float`, `d` for `double`, and `a` for `reference`. Some instructions for which the type is unambiguous do not have a type letter in their mnemonic. For instance, `arraylength` always operates on an object that is an array. Some instructions, such as `goto`, an unconditional control transfer, do not operate on typed operands.（本段内容来自于[2.11.1. Types and the Java Virtual Machine](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.11.1)的第二段）
+
+## 学习方式
+
+学习新事物，一般有两种学习体验：
+
+- 第一种，经过短期刻苦努力，然后突然明白一个知识点，给人一种如获至宝的感觉。
+- 第二种，经过长期坚持探索，大的知识点要学习，小的知识点也不舍弃，慢慢积累，最后达到水滴石穿的效果。
+
+举个武侠世界的例子：一般的名门正派，练武功，都是讲究打好根基，循序渐进，长年累月，终成一代宗师；而邪派，练武功，急于求成，短时间内，武功突飞猛进，但往往也伴随着不好的副作用。
+
+学习这些opcode，也是一个缓慢的过程，就是平时一点一点的学习、慢慢积累的过程。
+
+- 不推荐的学习方式：想短期内将所有opcode全部学下来，必然会忽略掉一些关键性的细节，处理简单的问题还行，但处理难的问题就有点棘手；同时，记忆也不深刻，也会陷入到一个非常枯燥的学习困境。
+- 推荐的学习方式：
+    - 第一步，打好基础。例如，Stack Frame的结构、进入方法时的Stack Frame的初始状态、long和double类型的占用空间的大小等。
+    - 第二步，以“使用”为导向，有选择性的、跳跃式的学习。当用到这个opcode了，如果不了解它，那我们再去学习它；不要一味贪多，想全部学下来。
+
+在后续内容当中，我们会将205个opcode分成不同的类别进行介绍，大家根据自己的兴趣有选择性的学习就可以了。
 

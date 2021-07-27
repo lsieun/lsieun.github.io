@@ -67,6 +67,14 @@ collections:
     output: true
     title: "Writing"
     sequence: 8
+  design-pattern:
+    output: true
+    title: "Design Pattern"
+    sequence: 9
+  architecture:
+    output: true
+    title: "Architecture"
+    sequence: 10
   jekyll:
     output: true
     title: "Jekyll快速参考教程"
@@ -145,6 +153,20 @@ defaults:
     values:
       layout: "post"
       tags: writing
+  -
+    scope:
+      path: ""
+      type: "design-pattern"
+    values:
+      layout: "post"
+      tags: design-pattern
+  -
+    scope:
+      path: ""
+      type: "architecture"
+    values:
+      layout: "post"
+      tags: architecture
   -
     scope:
       path: ""

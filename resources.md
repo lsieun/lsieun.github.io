@@ -6,27 +6,44 @@ permalink: /resources/
 
 ## 网站
 
-IT技术网站
+IT技术网站（按字母排序）
 
-- [51CTO](https://www.51cto.com/) / [51CTO学堂](https://edu.51cto.com/) / [51CTO个人博客](https://blog.51cto.com/lsieun)
+- [51CTO](https://www.51cto.com/)
+    - [51CTO学堂](https://edu.51cto.com/)
+    - [51CTO个人博客](https://blog.51cto.com/lsieun)
 - [52破解](https://www.52pojie.cn/)
-- [Baeldung](https://www.baeldung.com/) / [Java Tutorial](https://www.baeldung.com/java-tutorial) / [Java Category](https://www.baeldung.com/category/java/) / [Write for Baeldung](https://www.baeldung.com/contribution-guidelines)
-- Git: [Gitee](https://gitee.com) / [Github](https://github.com) / [Git下载](https://git-scm.com/)
-- [Google](https://www.google.com/) / [Google Translate](https://translate.google.com/)
+- [Baeldung](https://www.baeldung.com/)
+    - [Core Concepts](https://www.baeldung.com/cs/category/core-concepts)
+    - [Java Tutorial](https://www.baeldung.com/java-tutorial)
+    - [Java Category](https://www.baeldung.com/category/java/)
+    - [Write for Baeldung](https://www.baeldung.com/contribution-guidelines)
+    - [Java drafts site](https://drafts.baeldung.com/wp-login.php)
+- Git:
+    - [Gitee](https://gitee.com)
+    - [Github](https://github.com)
+    - [Git下载](https://git-scm.com/)
+- [Google](https://www.google.com/)
+    - [Google Translate](https://translate.google.com/)
 - [InfoQ](https://www.infoq.com/)
-- Oracle: [Java Language and Virtual Machine Specifications](https://docs.oracle.com/javase/specs/index.html) / [Java Documentation](https://docs.oracle.com/en/java/index.html)
+- Oracle:
+    - [Java Language and Virtual Machine Specifications](https://docs.oracle.com/javase/specs/index.html)
+    - [Java Documentation](https://docs.oracle.com/en/java/index.html)
 
-社交网站：
+社交网站（按字母排序）
 
-- [B站](https://www.bilibili.com/) / [个人空间](https://space.bilibili.com/1321054247/)
-- [微信公众平台](https://mp.weixin.qq.com/) / [135编辑器](https://www.135editor.com/)(微信登录)
+- [B站](https://www.bilibili.com/)
+    - [个人空间](https://space.bilibili.com/1321054247/)
+- 微信:
+    - [公众平台](https://mp.weixin.qq.com/)
+    - [135编辑器](https://www.135editor.com/)(微信登录)
 
 视频网站：
 
 - [动物世界－央视网](http://tv.cctv.com/lm/dwsj/index.shtml?spm=C31267.PzXj0D8UJUyC.EuVgsDNuNsvy.1)
 - [好视频影院](https://www.hspyy.net)，有老版的《三国》
 - [SOAP2DAY](https://soap2day.to/)，英文电影
-- 动漫：[Naruto Shippuden Episode](http://ww9.soul-anime.us/anime/naruto-shippuden/)，特点是“日语声音，英文字幕”。
+- 动漫：
+  - [Naruto Shippuden Episode](http://ww9.soul-anime.us/anime/naruto-shippuden/)，特点是“日语声音，英文字幕”。
 
 知识问答：
 
@@ -72,4 +89,19 @@ Chrome插件：
 历史
 
 - [全历史](https://www.allhistory.com/)
+
+## 潜在的课程方向
+
+### 简单APM
+
+简单的APM、调用链项目。
+
+在HTTP请求入口插桩获取请求、响应相关信息，进行一些安全分析。获取SQL查询结果，脱敏处理。安全检测。使用ASM技术，动态插入检测逻辑。
+
+### 测试方向
+
+- [精准测试：基于 asm+javaparser 调用链差异化对比实践](https://testerhome.com/topics/23819)
+- [JavaParser](http://javaparser.org/)
+- [Github: javaparser](https://github.com/javaparser/javaparser)
+
 

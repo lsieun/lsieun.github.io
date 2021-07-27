@@ -450,13 +450,13 @@ public class HelloWorldGenerateCore {
             MethodVisitor mv2 = cw.visitMethod(ACC_PUBLIC, "test", "()V", null, null);
             Label startLabel = new Label();
             Label endLabel = new Label();
-            Label handlerLabel = new Label();
+            Label exceptionHandlerLabel = new Label();
             Label returnLabel = new Label();
 
             // 第1段
             mv2.visitCode();
             // visitTryCatchBlock可以在这里访问
-            mv2.visitTryCatchBlock(startLabel, endLabel, handlerLabel, "java/lang/InterruptedException");
+            mv2.visitTryCatchBlock(startLabel, endLabel, exceptionHandlerLabel, "java/lang/InterruptedException");
 
             // 第2段
             mv2.visitLabel(startLabel);
@@ -474,7 +474,7 @@ public class HelloWorldGenerateCore {
             mv2.visitJumpInsn(GOTO, returnLabel);
 
             // 第4段
-            mv2.visitLabel(handlerLabel);
+            mv2.visitLabel(exceptionHandlerLabel);
             mv2.visitVarInsn(ASTORE, 1);
             mv2.visitVarInsn(ALOAD, 1);
             mv2.visitMethodInsn(INVOKEVIRTUAL, "java/lang/InterruptedException", "printStackTrace", "()V", false);
@@ -485,7 +485,7 @@ public class HelloWorldGenerateCore {
 
             // 第6段
             // visitTryCatchBlock也可以在这里访问
-            // mv2.visitTryCatchBlock(startLabel, endLabel, handlerLabel, "java/lang/InterruptedException");
+            // mv2.visitTryCatchBlock(startLabel, endLabel, exceptionHandlerLabel, "java/lang/InterruptedException");
             mv2.visitMaxs(0, 0);
             mv2.visitEnd();
         }

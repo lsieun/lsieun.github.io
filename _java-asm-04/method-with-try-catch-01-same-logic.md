@@ -10,8 +10,10 @@ sequence: "201"
 ```java
 public class HelloWorld {
     public void test(String name, int age) {
+        int a = 1;
+        int b = 2;
         System.out.println("Start where you are.");
-        
+
         try {
             int length = name.length();
             System.out.println("name length is " + length);
@@ -19,17 +21,19 @@ public class HelloWorld {
             // 这里对异常进行了处理
             System.out.println("name is null");
         }
-        
+
         System.out.println("Use what you have.");
-        
+
         try {
             int val = 100 / age;
             System.out.println("val = " + val);
         } catch (ArithmeticException ex) {
             // 这里没有对异常进行任何处理
         }
-        
+
         System.out.println("Do what you can.");
+        System.out.println(a);
+        System.out.println(b);
     }
 }
 ```
@@ -42,7 +46,6 @@ public class HelloWorld {
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Type;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +64,7 @@ public class MethodWithSameTryCatchLogicVisitor extends ClassVisitor {
             boolean isAbstractMethod = (access & ACC_ABSTRACT) != 0;
             boolean isNativeMethod = (access & ACC_NATIVE) != 0;
             if (!isAbstractMethod && !isNativeMethod) {
-                mv = new MethodWithSameTryCatchLogicAdapter(api, mv, access, descriptor);
+                mv = new MethodWithSameTryCatchLogicAdapter(api, mv);
             }
         }
         return mv;
@@ -69,14 +72,10 @@ public class MethodWithSameTryCatchLogicVisitor extends ClassVisitor {
 
 
     private static class MethodWithSameTryCatchLogicAdapter extends MethodVisitor {
-        private final int methodAccess;
-        private final String methodDesc;
         private final List<Label> handlerList = new ArrayList<>();
 
-        public MethodWithSameTryCatchLogicAdapter(int api, MethodVisitor methodVisitor, int methodAccess, String methodDesc) {
+        public MethodWithSameTryCatchLogicAdapter(int api, MethodVisitor methodVisitor) {
             super(api, methodVisitor);
-            this.methodAccess = methodAccess;
-            this.methodDesc = methodDesc;
         }
 
         @Override
@@ -98,28 +97,13 @@ public class MethodWithSameTryCatchLogicVisitor extends ClassVisitor {
             // 其次，处理自己的代码逻辑
             // 需要注意：不要将operand stack上的异常给弄丢了。
             if (handlerList.contains(label)) {
-                // (1) 在local variables计算一个索引值，用于存储当前捕获的异常
-                Type t = Type.getType(methodDesc);
-                Type[] argumentTypes = t.getArgumentTypes();
-
-                boolean isStaticMethod = ((methodAccess & ACC_STATIC) != 0);
-                int localIndex = isStaticMethod ? 0 : 1;
-                for (Type argType : argumentTypes) {
-                    localIndex += argType.getSize();
-                }
-
-                // (2) 添加自己的代码处理逻辑
-                super.visitVarInsn(ASTORE, localIndex);
-                super.visitVarInsn(ALOAD, localIndex);
-                super.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Exception", "printStackTrace", "()V", false);
-
-                // (3) 保证operand stack在修改前和修改后是一致的。
-                super.visitVarInsn(ALOAD, localIndex);
+                // 在这里，我们复制一份来使用
+                super.visitInsn(DUP);
+                super.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
+                super.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Exception", "printStackTrace", "(Ljava/io/PrintStream;)V", false);
             }
         }
-
     }
-
 }
 ```
 

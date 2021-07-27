@@ -92,18 +92,6 @@ Duplicate the top `value` on the operand stack and push the duplicated value ont
 
 The `dup` instruction must not be used unless `value` is a value of a **category 1 computational type**.
 
-| Actual type | Computational type | Category |
-|-------------|--------------------|----------|
-| boolean     | int                | 1        |
-| byte        | int                | 1        |
-| char        | int                | 1        |
-| short       | int                | 1        |
-| int         | int                | 1        |
-| float       | int                | 1        |
-| reference   | reference          | 1        |
-| long        | long               | 2        |
-| double      | double             | 2        |
-
 从JVM规范的角度来看，`invokespecial`指令对应的Operand Stack的变化如下：
 
 ```text

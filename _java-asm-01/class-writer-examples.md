@@ -255,8 +255,6 @@ methods:
 我们可以使用`ASMPrint`类来查看下面的`sample.HelloWorld`类的ASM代码，从而观察`value`参数和`exceptions`参数的取值：
 
 ```java
-package sample;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
