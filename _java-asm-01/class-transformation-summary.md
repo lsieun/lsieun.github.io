@@ -3,7 +3,7 @@ title:  "本章内容总结"
 sequence: "313"
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 在本章当中，从Core API的角度来说（第二个层次），我们介绍了`asm.jar`当中的`ClassReader`和`Type`两个类；同时，从应用的角度来说（第一个层次），我们也介绍了Class Transformation的原理和示例。
 

@@ -3,7 +3,7 @@ title:  "查找已有的方法（查找－方法调用）"
 sequence: "311"
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 ## 查找Instruction
 

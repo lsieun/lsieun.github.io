@@ -3,7 +3,7 @@ title:  "AdviceAdapter介绍"
 sequence: "405"
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 对于`AdviceAdapter`类来说，能够很容易的实现在“方法进入”和“方法退出”时添加代码。`AdviceAdapter`类的特点：引入了`onMethodEnter()`方法和`onMethodExit()`方法。
 

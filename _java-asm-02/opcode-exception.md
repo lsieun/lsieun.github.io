@@ -3,6 +3,8 @@ title:  "opcode: exception (1/196/205)"
 sequence: "212"
 ---
 
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
+
 ## 概览
 
 从Instruction的角度来说，与exception相关的opcode有1个，内容如下：
@@ -58,11 +60,11 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [uninitialized_java/lang/RuntimeException]
-[sample/HelloWorld] [uninitialized_java/lang/RuntimeException, uninitialized_java/lang/RuntimeException]
-[sample/HelloWorld] [java/lang/RuntimeException]
-[] []
+                               // {this} | {}
+0000: new             #2       // {this} | {uninitialized_RuntimeException}
+0003: dup                      // {this} | {uninitialized_RuntimeException, uninitialized_RuntimeException}
+0004: invokespecial   #3       // {this} | {RuntimeException}
+0007: athrow                   // {} | {}
 ```
 
 从JVM规范的角度来看，`athrow`指令对应的Operand Stack的变化如下：

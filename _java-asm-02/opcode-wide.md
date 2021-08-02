@@ -3,6 +3,8 @@ title:  "opcode: wide (1/195/205)"
 sequence: "211"
 ---
 
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
+
 ## 概览
 
 从Instruction的角度来说，与wide相关的opcode有1个，内容如下：
@@ -178,7 +180,8 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] []
-[] []
+                               // {this, int} | {}
+0000: wide                
+0001: iinc       1    128      // {this, int} | {}
+0006: return                   // {} | {}
 ```

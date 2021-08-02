@@ -3,7 +3,7 @@ title:  "AnalyzerAdapter介绍"
 sequence: "408"
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 对于`AnalyzerAdapter`类来说，它的特点是“可以模拟frame的变化”，或者说“可以模拟local variables和operand stack的变化”。
 

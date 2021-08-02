@@ -3,6 +3,8 @@ title:  "opcode: stack (9/194/205)"
 sequence: "210"
 ---
 
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
+
 ## 概览
 
 从Instruction的角度来说，与stack相关的opcode有9个，内容如下：
@@ -68,12 +70,12 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [int]
-[sample/HelloWorld] [int, int]
-[sample/HelloWorld] [int]
-[sample/HelloWorld] []
-[] []
+                               // {this} | {}
+0000: iconst_3                 // {this} | {int}
+0001: iconst_4                 // {this} | {int, int}
+0002: invokestatic    #2       // {this} | {int}
+0005: pop                      // {this} | {}
+0006: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`pop`指令对应的Operand Stack的变化如下：
@@ -131,12 +133,12 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [long, top]
-[sample/HelloWorld] [long, top, long, top]
-[sample/HelloWorld] [long, top]
-[sample/HelloWorld] []
-[] []
+                               // {this} | {}
+0000: ldc2_w          #2       // {this} | {long, top}
+0003: ldc2_w          #4       // {this} | {long, top, long, top}
+0006: invokestatic    #6       // {this} | {long, top}
+0009: pop2                     // {this} | {}
+0010: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`pop2`指令对应的Operand Stack的变化如下：
@@ -210,12 +212,12 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [int]
-[sample/HelloWorld] [int, int]
-[sample/HelloWorld, int] [int]
-[sample/HelloWorld, int, int] []
-[] []
+                               // {this} | {}
+0000: iconst_2                 // {this} | {int}
+0001: dup                      // {this} | {int, int}
+0002: istore_1                 // {this, int} | {int}
+0003: istore_2                 // {this, int, int} | {}
+0004: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`dup`指令对应的Operand Stack的变化如下：
@@ -279,12 +281,12 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] [sample/HelloWorld]
-[sample/HelloWorld, int] [sample/HelloWorld, int]
-[sample/HelloWorld, int] [int, sample/HelloWorld, int]
-[sample/HelloWorld, int] [int]
-[] []
+                               // {HelloWorld, int} | {}
+0000: aload_0                  // {HelloWorld, int} | {HelloWorld}
+0001: iload_1                  // {HelloWorld, int} | {HelloWorld, int}
+0002: dup_x1                   // {HelloWorld, int} | {int, HelloWorld, int}
+0003: putfield        #2       // {HelloWorld, int} | {int}
+0006: ireturn                  // {} | {}
 ```
 
 从JVM规范的角度来看，`dup_x1`指令对应的Operand Stack的变化如下：
@@ -346,13 +348,13 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[[I, int, int] []
-[[I, int, int] [[I]
-[[I, int, int] [[I, int]
-[[I, int, int] [[I, int, int]
-[[I, int, int] [int, [I, int, int]
-[[I, int, int] [int]
-[] []
+                               // {[I, int, int} | {}
+0000: aload_0                  // {[I, int, int} | {[I}
+0001: iload_1                  // {[I, int, int} | {[I, int}
+0002: iload_2                  // {[I, int, int} | {[I, int, int}
+0003: dup_x2                   // {[I, int, int} | {int, [I, int, int}
+0004: iastore                  // {[I, int, int} | {int}
+0005: ireturn                  // {} | {}
 ```
 
 从JVM规范的角度来看，`dup_x2`指令对应的Operand Stack的变化如下：
@@ -426,12 +428,12 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [long, top]
-[sample/HelloWorld] [long, top, long, top]
-[sample/HelloWorld, long, top] [long, top]
-[sample/HelloWorld, long, top, long, top] []
-[] []
+                               // {this} | {}
+0000: ldc2_w          #2       // {this} | {long, top}
+0003: dup2                     // {this} | {long, top, long, top}
+0004: lstore_1                 // {this, long, top} | {long, top}
+0005: lstore_3                 // {this, long, top, long, top} | {}
+0006: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`dup2`指令对应的Operand Stack的变化如下：
@@ -505,12 +507,12 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld, long, top] []
-[sample/HelloWorld, long, top] [sample/HelloWorld]
-[sample/HelloWorld, long, top] [sample/HelloWorld, long, top]
-[sample/HelloWorld, long, top] [long, top, sample/HelloWorld, long, top]
-[sample/HelloWorld, long, top] [long, top]
-[] []
+                               // {HelloWorld, long, top} | {}
+0000: aload_0                  // {HelloWorld, long, top} | {HelloWorld}
+0001: lload_1                  // {HelloWorld, long, top} | {HelloWorld, long, top}
+0002: dup2_x1                  // {HelloWorld, long, top} | {long, top, HelloWorld, long, top}
+0003: putfield        #2       // {HelloWorld, long, top} | {long, top}
+0006: lreturn                  // {} | {}
 ```
 
 从JVM规范的角度来看，`dup2_x1`指令对应的Operand Stack的变化如下：
@@ -582,13 +584,13 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[[J, int, long, top] []
-[[J, int, long, top] [[J]
-[[J, int, long, top] [[J, int]
-[[J, int, long, top] [[J, int, long, top]
-[[J, int, long, top] [long, top, [J, int, long, top]
-[[J, int, long, top] [long, top]
-[] []
+                               // {[J, int, long, top} | {}
+0000: aload_0                  // {[J, int, long, top} | {[J}
+0001: iload_1                  // {[J, int, long, top} | {[J, int}
+0002: lload_2                  // {[J, int, long, top} | {[J, int, long, top}
+0003: dup2_x2                  // {[J, int, long, top} | {long, top, [J, int, long, top}
+0004: lastore                  // {[J, int, long, top} | {long, top}
+0005: lreturn                  // {} | {}
 ```
 
 从JVM规范的角度来看，`dup2_x2`指令对应的Operand Stack的变化如下：
@@ -676,11 +678,11 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [java/io/PrintStream]
-[sample/HelloWorld] [java/io/PrintStream, java/lang/String]
-[sample/HelloWorld] []
-[] []
+                               // {this} | {}
+0000: getstatic       #2       // {this} | {PrintStream}
+0003: ldc             #3       // {this} | {PrintStream, String}
+0005: invokevirtual   #4       // {this} | {}
+0008: return                   // {} | {}
 ```
 
 为了使用`swap`指令，我们编写如下ASM代码：
@@ -759,12 +761,12 @@ public class sample.HelloWorld {
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [java/lang/String]
-[sample/HelloWorld] [java/lang/String, java/io/PrintStream]
-[sample/HelloWorld] [java/io/PrintStream, java/lang/String]
-[sample/HelloWorld] []
-[] []
+                               // {this} | {}
+0000: ldc             #11      // {this} | {String}
+0002: getstatic       #17      // {this} | {String, PrintStream}
+0005: swap                     // {this} | {PrintStream, String}
+0006: invokevirtual   #23      // {this} | {}
+0009: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`swap`指令对应的Operand Stack的变化如下：

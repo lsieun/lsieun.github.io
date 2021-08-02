@@ -3,7 +3,7 @@ title:  "ClassReader代码示例"
 sequence: "302"
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 在现阶段，我们接触了`ClassVisitor`、`ClassWriter`和`ClassReader`类，因此可以介绍Class Transformation的操作。
 

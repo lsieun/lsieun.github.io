@@ -3,7 +3,7 @@ title:  "Label代码示例"
 sequence: "211"
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 ## 示例一：if语句
 

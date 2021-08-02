@@ -3,6 +3,8 @@ title:  "opcode: jump (25/185/205)"
 sequence: "209"
 ---
 
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
+
 ## 概览
 
 从Instruction的角度来说，与jump相关的opcode有25个，内容如下：
@@ -102,17 +104,19 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] [int]
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] [java/io/PrintStream]
-[sample/HelloWorld, int] [java/io/PrintStream, java/lang/String]
-[sample/HelloWorld, int] []
-[] []
-[sample/HelloWorld, int] [java/io/PrintStream]
-[sample/HelloWorld, int] [java/io/PrintStream, java/lang/String]
-[sample/HelloWorld, int] []
-[] []
+                               // {this, int} | {}
+0000: iload_1                  // {this, int} | {int}
+0001: ifne            14       // {this, int} | {}
+0004: getstatic       #2       // {this, int} | {PrintStream}
+0007: ldc             #3       // {this, int} | {PrintStream, String}
+0009: invokevirtual   #4       // {this, int} | {}
+0012: goto            11       // {} | {}
+                               // {this, int} | {}
+0015: getstatic       #2       // {this, int} | {PrintStream}
+0018: ldc             #5       // {this, int} | {PrintStream, String}
+0020: invokevirtual   #4       // {this, int} | {}
+                               // {this, int} | {}
+0023: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`ifne`指令对应的Operand Stack的变化如下：
@@ -201,18 +205,20 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld, int, int] []
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int] [int, int]
-[sample/HelloWorld, int, int] []
-[sample/HelloWorld, int, int] [java/io/PrintStream]
-[sample/HelloWorld, int, int] [java/io/PrintStream, java/lang/String]
-[sample/HelloWorld, int, int] []
-[] []
-[sample/HelloWorld, int, int] [java/io/PrintStream]
-[sample/HelloWorld, int, int] [java/io/PrintStream, java/lang/String]
-[sample/HelloWorld, int, int] []
-[] []
+                               // {this, int, int} | {}
+0000: iload_1                  // {this, int, int} | {int}
+0001: iload_2                  // {this, int, int} | {int, int}
+0002: if_icmple       14       // {this, int, int} | {}
+0005: getstatic       #2       // {this, int, int} | {PrintStream}
+0008: ldc             #3       // {this, int, int} | {PrintStream, String}
+0010: invokevirtual   #4       // {this, int, int} | {}
+0013: goto            11       // {} | {}
+                               // {this, int, int} | {}
+0016: getstatic       #2       // {this, int, int} | {PrintStream}
+0019: ldc             #5       // {this, int, int} | {PrintStream, String}
+0021: invokevirtual   #4       // {this, int, int} | {}
+                               // {this, int, int} | {}
+0024: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`if_icmple`指令对应的Operand Stack的变化如下：
@@ -303,19 +309,21 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld, long, top, long, top] []
-[sample/HelloWorld, long, top, long, top] [long, top]
-[sample/HelloWorld, long, top, long, top] [long, top, long, top]
-[sample/HelloWorld, long, top, long, top] [int]
-[sample/HelloWorld, long, top, long, top] []
-[sample/HelloWorld, long, top, long, top] [java/io/PrintStream]
-[sample/HelloWorld, long, top, long, top] [java/io/PrintStream, java/lang/String]
-[sample/HelloWorld, long, top, long, top] []
-[] []
-[sample/HelloWorld, long, top, long, top] [java/io/PrintStream]
-[sample/HelloWorld, long, top, long, top] [java/io/PrintStream, java/lang/String]
-[sample/HelloWorld, long, top, long, top] []
-[] []
+                               // {this, long, top, long, top} | {}
+0000: lload_1                  // {this, long, top, long, top} | {long, top}
+0001: lload_3                  // {this, long, top, long, top} | {long, top, long, top}
+0002: lcmp                     // {this, long, top, long, top} | {int}
+0003: ifle            14       // {this, long, top, long, top} | {}
+0006: getstatic       #2       // {this, long, top, long, top} | {PrintStream}
+0009: ldc             #3       // {this, long, top, long, top} | {PrintStream, String}
+0011: invokevirtual   #4       // {this, long, top, long, top} | {}
+0014: goto            11       // {} | {}
+                               // {this, long, top, long, top} | {}
+0017: getstatic       #2       // {this, long, top, long, top} | {PrintStream}
+0020: ldc             #5       // {this, long, top, long, top} | {PrintStream, String}
+0022: invokevirtual   #4       // {this, long, top, long, top} | {}
+                               // {this, long, top, long, top} | {}
+0025: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`lcmp`指令对应的Operand Stack的变化如下：
@@ -395,17 +403,19 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld, java/lang/Object] []
-[sample/HelloWorld, java/lang/Object] [java/lang/Object]
-[sample/HelloWorld, java/lang/Object] []
-[sample/HelloWorld, java/lang/Object] [java/io/PrintStream]
-[sample/HelloWorld, java/lang/Object] [java/io/PrintStream, java/lang/String]
-[sample/HelloWorld, java/lang/Object] []
-[] []
-[sample/HelloWorld, java/lang/Object] [java/io/PrintStream]
-[sample/HelloWorld, java/lang/Object] [java/io/PrintStream, java/lang/String]
-[sample/HelloWorld, java/lang/Object] []
-[] []
+                               // {this, Object} | {}
+0000: aload_1                  // {this, Object} | {Object}
+0001: ifnonnull       14       // {this, Object} | {}
+0004: getstatic       #2       // {this, Object} | {PrintStream}
+0007: ldc             #3       // {this, Object} | {PrintStream, String}
+0009: invokevirtual   #4       // {this, Object} | {}
+0012: goto            11       // {} | {}
+                               // {this, Object} | {}
+0015: getstatic       #2       // {this, Object} | {PrintStream}
+0018: ldc             #5       // {this, Object} | {PrintStream, String}
+0020: invokevirtual   #4       // {this, Object} | {}
+                               // {this, Object} | {}
+0023: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`ifnonnull`指令对应的Operand Stack的变化如下：
@@ -497,18 +507,20 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld, java/lang/Object, java/lang/Object] []
-[sample/HelloWorld, java/lang/Object, java/lang/Object] [java/lang/Object]
-[sample/HelloWorld, java/lang/Object, java/lang/Object] [java/lang/Object, java/lang/Object]
-[sample/HelloWorld, java/lang/Object, java/lang/Object] []
-[sample/HelloWorld, java/lang/Object, java/lang/Object] [java/io/PrintStream]
-[sample/HelloWorld, java/lang/Object, java/lang/Object] [java/io/PrintStream, java/lang/String]
-[sample/HelloWorld, java/lang/Object, java/lang/Object] []
-[] []
-[sample/HelloWorld, java/lang/Object, java/lang/Object] [java/io/PrintStream]
-[sample/HelloWorld, java/lang/Object, java/lang/Object] [java/io/PrintStream, java/lang/String]
-[sample/HelloWorld, java/lang/Object, java/lang/Object] []
-[] []
+                               // {this, Object, Object} | {}
+0000: aload_1                  // {this, Object, Object} | {Object}
+0001: aload_2                  // {this, Object, Object} | {Object, Object}
+0002: if_acmpne       14       // {this, Object, Object} | {}
+0005: getstatic       #2       // {this, Object, Object} | {PrintStream}
+0008: ldc             #3       // {this, Object, Object} | {PrintStream, String}
+0010: invokevirtual   #4       // {this, Object, Object} | {}
+0013: goto            11       // {} | {}
+                               // {this, Object, Object} | {}
+0016: getstatic       #2       // {this, Object, Object} | {PrintStream}
+0019: ldc             #5       // {this, Object, Object} | {PrintStream, String}
+0021: invokevirtual   #4       // {this, Object, Object} | {}
+                               // {this, Object, Object} | {}
+0024: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`if_acmpne`指令对应的Operand Stack的变化如下：
@@ -628,23 +640,34 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] [int]
-[sample/HelloWorld, int, int] []
-[sample/HelloWorld, int, int] [int]
-[] []
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int] []
-[] []
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int] []
-[] []
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int] []
-[] []
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int] []
-[] []
+                               // {this, int} | {}
+0000: iconst_0                 // {this, int} | {int}
+0001: istore_2                 // {this, int, int} | {}
+0002: iload_1                  // {this, int, int} | {int}
+0003: tableswitch              // {} | {}
+      {
+              1: 25
+              2: 30
+              3: 35
+        default: 40
+      }
+                               // {this, int, int} | {}
+0028: iconst_1                 // {this, int, int} | {int}
+0029: istore_2                 // {this, int, int} | {}
+0030: goto            15       // {} | {}
+                               // {this, int, int} | {}
+0033: iconst_2                 // {this, int, int} | {int}
+0034: istore_2                 // {this, int, int} | {}
+0035: goto            10       // {} | {}
+                               // {this, int, int} | {}
+0038: iconst_3                 // {this, int, int} | {int}
+0039: istore_2                 // {this, int, int} | {}
+0040: goto            5        // {} | {}
+                               // {this, int, int} | {}
+0043: iconst_4                 // {this, int, int} | {int}
+0044: istore_2                 // {this, int, int} | {}
+                               // {this, int, int} | {}
+0045: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`tableswitch`指令对应的Operand Stack的变化如下：
@@ -783,23 +806,34 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] [int]
-[sample/HelloWorld, int, int] []
-[sample/HelloWorld, int, int] [int]
-[] []
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int] []
-[] []
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int] []
-[] []
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int] []
-[] []
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int] []
-[] []
+                               // {this, int} | {}
+0000: iconst_0                 // {this, int} | {int}
+0001: istore_2                 // {this, int, int} | {}
+0002: iload_1                  // {this, int, int} | {int}
+0003: lookupswitch             // {} | {}
+      {
+             10: 33
+             20: 38
+             30: 43
+        default: 48
+      }
+                               // {this, int, int} | {}
+0036: iconst_1                 // {this, int, int} | {int}
+0037: istore_2                 // {this, int, int} | {}
+0038: goto            15       // {} | {}
+                               // {this, int, int} | {}
+0041: iconst_2                 // {this, int, int} | {int}
+0042: istore_2                 // {this, int, int} | {}
+0043: goto            10       // {} | {}
+                               // {this, int, int} | {}
+0046: iconst_3                 // {this, int, int} | {int}
+0047: istore_2                 // {this, int, int} | {}
+0048: goto            5        // {} | {}
+                               // {this, int, int} | {}
+0051: iconst_4                 // {this, int, int} | {int}
+0052: istore_2                 // {this, int, int} | {}
+                               // {this, int, int} | {}
+0053: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`lookupswitch`指令对应的Operand Stack的变化如下：

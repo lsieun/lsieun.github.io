@@ -3,7 +3,7 @@ title:  "LocalVariablesSorter介绍"
 sequence: "407"
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 对于`LocalVariablesSorter`类来说，它的特点是“可以引入新的局部变量，并且能够对局部变量重新排序”。
 

@@ -3,7 +3,7 @@ title:  "GeneratorAdapter介绍"
 sequence: "406"
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 对于`GeneratorAdapter`类来说，它非常重要的一个特点：将一些`visitXxxInsn()`方法封装成一些常用的方法。
 

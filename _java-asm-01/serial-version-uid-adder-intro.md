@@ -3,7 +3,7 @@ title:  "SerialVersionUIDAdder介绍"
 sequence: "412"
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 `SerialVersionUIDAdder`类的特点是可以为Class文件添加一个`serialVersionUID`字段。
 

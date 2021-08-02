@@ -3,6 +3,8 @@ title:  "opcode: constant (20/26/205)"
 sequence: "202"
 ---
 
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
+
 ## 概览
 
 从Instruction的角度来说，与constant相关的opcode有20个，内容如下：
@@ -96,22 +98,22 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [int]
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] [int]
-[sample/HelloWorld, int, int] []
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int, int] []
-[sample/HelloWorld, int, int, int] [int]
-[sample/HelloWorld, int, int, int, int] []
-[sample/HelloWorld, int, int, int, int] [int]
-[sample/HelloWorld, int, int, int, int, int] []
-[sample/HelloWorld, int, int, int, int, int] [int]
-[sample/HelloWorld, int, int, int, int, int, int] []
-[sample/HelloWorld, int, int, int, int, int, int] [int]
-[sample/HelloWorld, int, int, int, int, int, int, int] []
-[] []
+                               // {this} | {}
+0000: iconst_m1                // {this} | {int}
+0001: istore_1                 // {this, int} | {}
+0002: iconst_0                 // {this, int} | {int}
+0003: istore_2                 // {this, int, int} | {}
+0004: iconst_1                 // {this, int, int} | {int}
+0005: istore_3                 // {this, int, int, int} | {}
+0006: iconst_2                 // {this, int, int, int} | {int}
+0007: istore          4        // {this, int, int, int, int} | {}
+0009: iconst_3                 // {this, int, int, int, int} | {int}
+0010: istore          5        // {this, int, int, int, int, int} | {}
+0012: iconst_4                 // {this, int, int, int, int, int} | {int}
+0013: istore          6        // {this, int, int, int, int, int, int} | {}
+0015: iconst_5                 // {this, int, int, int, int, int, int} | {int}
+0016: istore          7        // {this, int, int, int, int, int, int, int} | {}
+0018: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，Operand Stack的变化如下：
@@ -170,12 +172,12 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [int]
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] [int]
-[sample/HelloWorld, int, int] []
-[] []
+                               // {this} | {}
+0000: bipush          -128     // {this} | {int}
+0002: istore_1                 // {this, int} | {}
+0003: bipush          127      // {this, int} | {int}
+0005: istore_2                 // {this, int, int} | {}
+0006: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，Operand Stack的变化如下：
@@ -234,12 +236,12 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [int]
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] [int]
-[sample/HelloWorld, int, int] []
-[] []
+                               // {this} | {}
+0000: sipush          -32768   // {this} | {int}
+0003: istore_1                 // {this, int} | {}
+0004: sipush          32767    // {this, int} | {int}
+0007: istore_2                 // {this, int, int} | {}
+0008: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，Operand Stack的变化如下：
@@ -306,12 +308,12 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [int]
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] [int]
-[sample/HelloWorld, int, int] []
-[] []
+                               // {this} | {}
+0000: ldc             #3       // {this} | {int}
+0002: istore_1                 // {this, int} | {}
+0003: ldc             #4       // {this, int} | {int}
+0005: istore_2                 // {this, int, int} | {}
+0006: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，Operand Stack的变化如下：
@@ -379,12 +381,12 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [long, top]
-[sample/HelloWorld, long, top] []
-[sample/HelloWorld, long, top] [long, top]
-[sample/HelloWorld, long, top, long, top] []
-[] []
+                               // {this} | {}
+0000: lconst_0                 // {this} | {long, top}
+0001: lstore_1                 // {this, long, top} | {}
+0002: lconst_1                 // {this, long, top} | {long, top}
+0003: lstore_3                 // {this, long, top, long, top} | {}
+0004: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，Operand Stack的变化如下：
@@ -443,12 +445,12 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [long, top]
-[sample/HelloWorld, long, top] []
-[sample/HelloWorld, long, top] [long, top]
-[sample/HelloWorld, long, top, long, top] []
-[] []
+                               // {this} | {}
+0000: ldc2_w          #3       // {this} | {long, top}
+0003: lstore_1                 // {this, long, top} | {}
+0004: ldc2_w          #5       // {this, long, top} | {long, top}
+0007: lstore_3                 // {this, long, top, long, top} | {}
+0008: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，Operand Stack的变化如下：
@@ -514,14 +516,14 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [float]
-[sample/HelloWorld, float] []
-[sample/HelloWorld, float] [float]
-[sample/HelloWorld, float, float] []
-[sample/HelloWorld, float, float] [float]
-[sample/HelloWorld, float, float, float] []
-[] []
+                               // {this} | {}
+0000: fconst_0                 // {this} | {float}
+0001: fstore_1                 // {this, float} | {}
+0002: fconst_1                 // {this, float} | {float}
+0003: fstore_2                 // {this, float, float} | {}
+0004: fconst_2                 // {this, float, float} | {float}
+0005: fstore_3                 // {this, float, float, float} | {}
+0006: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，Operand Stack的变化如下：
@@ -580,12 +582,12 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [float]
-[sample/HelloWorld, float] []
-[sample/HelloWorld, float] [float]
-[sample/HelloWorld, float, float] []
-[] []
+                               // {this} | {}
+0000: ldc             #3       // {this} | {float}
+0002: fstore_1                 // {this, float} | {}
+0003: ldc             #4       // {this, float} | {float}
+0005: fstore_2                 // {this, float, float} | {}
+0006: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，Operand Stack的变化如下：
@@ -653,12 +655,12 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [double, top]
-[sample/HelloWorld, double, top] []
-[sample/HelloWorld, double, top] [double, top]
-[sample/HelloWorld, double, top, double, top] []
-[] []
+                               // {this} | {}
+0000: dconst_0                 // {this} | {double, top}
+0001: dstore_1                 // {this, double, top} | {}
+0002: dconst_1                 // {this, double, top} | {double, top}
+0003: dstore_3                 // {this, double, top, double, top} | {}
+0004: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，Operand Stack的变化如下：
@@ -717,12 +719,12 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [double, top]
-[sample/HelloWorld, double, top] []
-[sample/HelloWorld, double, top] [double, top]
-[sample/HelloWorld, double, top, double, top] []
-[] []
+                               // {this} | {}
+0000: ldc2_w          #3       // {this} | {double, top}
+0003: dstore_1                 // {this, double, top} | {}
+0004: ldc2_w          #5       // {this, double, top} | {double, top}
+0007: dstore_3                 // {this, double, top, double, top} | {}
+0008: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，Operand Stack的变化如下：
@@ -778,10 +780,10 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [null]
-[sample/HelloWorld, null] []
-[] []
+                               // {this} | {}
+0000: aconst_null              // {this} | {null}
+0001: astore_1                 // {this, null} | {}
+0002: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，Operand Stack的变化如下：
@@ -836,10 +838,10 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [java/lang/String]
-[sample/HelloWorld, java/lang/String] []
-[] []
+                               // {this} | {}
+0000: ldc             #2       // {this} | {String}
+0002: astore_1                 // {this, String} | {}
+0003: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，Operand Stack的变化如下：
@@ -900,10 +902,10 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [java/lang/Class]
-[sample/HelloWorld, java/lang/Class] []
-[] []
+                               // {this} | {}
+0000: ldc             #2       // {this} | {Class}
+0002: astore_1                 // {this, Class} | {}
+0003: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，Operand Stack的变化如下：
@@ -977,10 +979,10 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [java/lang/String]
-[sample/HelloWorld, java/lang/String] []
-[] []
+                               // {this} | {}
+0000: ldc_w           #516     // {this} | {String}
+0003: astore_1                 // {this, String} | {}
+0004: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，Operand Stack的变化如下：

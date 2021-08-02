@@ -3,6 +3,8 @@ title:  "opcode: object (3/131/205)"
 sequence: "205"
 ---
 
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
+
 ## 概览
 
 从Instruction的角度来说，与type相关的opcode有3个，内容如下：
@@ -62,12 +64,12 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [uninitialized_java/lang/Object]
-[sample/HelloWorld] [uninitialized_java/lang/Object, uninitialized_java/lang/Object]
-[sample/HelloWorld] [java/lang/Object]
-[sample/HelloWorld, java/lang/Object] []
-[] []
+                               // {this} | {}
+0000: new             #2       // {this} | {uninitialized_Object}
+0003: dup                      // {this} | {uninitialized_Object, uninitialized_Object}
+0004: invokespecial   #1       // {this} | {Object}
+0007: astore_1                 // {this, Object} | {}
+0008: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`new`指令对应的Operand Stack的变化如下：
@@ -159,14 +161,14 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [uninitialized_sample/HelloWorld]
-[sample/HelloWorld] [uninitialized_sample/HelloWorld, uninitialized_sample/HelloWorld]
-[sample/HelloWorld] [uninitialized_sample/HelloWorld, uninitialized_sample/HelloWorld, java/lang/String]
-[sample/HelloWorld] [uninitialized_sample/HelloWorld, uninitialized_sample/HelloWorld, java/lang/String, int]
-[sample/HelloWorld] [sample/HelloWorld]
-[sample/HelloWorld, sample/HelloWorld] []
-[] []
+                               // {this} | {}
+0000: new             #4       // {this} | {uninitialized_HelloWorld}
+0003: dup                      // {this} | {uninitialized_HelloWorld, uninitialized_HelloWorld}
+0004: ldc             #5       // {this} | {uninitialized_HelloWorld, uninitialized_HelloWorld, String}
+0006: bipush          10       // {this} | {uninitialized_HelloWorld, uninitialized_HelloWorld, String, int}
+0008: invokespecial   #6       // {this} | {HelloWorld}
+0011: astore_1                 // {this, HelloWorld} | {}
+0012: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`invokespecial`指令对应的Operand Stack的变化如下：
@@ -233,15 +235,15 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [uninitialized_java/lang/Object]
-[sample/HelloWorld] [uninitialized_java/lang/Object, uninitialized_java/lang/Object]
-[sample/HelloWorld] [java/lang/Object]
-[sample/HelloWorld, java/lang/Object] []
-[sample/HelloWorld, java/lang/Object] [java/lang/Object]
-[sample/HelloWorld, java/lang/Object] [java/lang/String]
-[sample/HelloWorld, java/lang/Object, java/lang/String] []
-[] []
+                               // {this} | {}
+0000: new             #2       // {this} | {uninitialized_Object}
+0003: dup                      // {this} | {uninitialized_Object, uninitialized_Object}
+0004: invokespecial   #1       // {this} | {Object}
+0007: astore_1                 // {this, Object} | {}
+0008: aload_1                  // {this, Object} | {Object}
+0009: checkcast       #3       // {this, Object} | {String}
+0012: astore_2                 // {this, Object, String} | {}
+0013: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`checkcast`指令对应的Operand Stack的变化如下：
@@ -311,15 +313,15 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [uninitialized_java/lang/Object]
-[sample/HelloWorld] [uninitialized_java/lang/Object, uninitialized_java/lang/Object]
-[sample/HelloWorld] [java/lang/Object]
-[sample/HelloWorld, java/lang/Object] []
-[sample/HelloWorld, java/lang/Object] [java/lang/Object]
-[sample/HelloWorld, java/lang/Object] [int]
-[sample/HelloWorld, java/lang/Object, int] []
-[] []
+                               // {this} | {}
+0000: new             #2       // {this} | {uninitialized_Object}
+0003: dup                      // {this} | {uninitialized_Object, uninitialized_Object}
+0004: invokespecial   #1       // {this} | {Object}
+0007: astore_1                 // {this, Object} | {}
+0008: aload_1                  // {this, Object} | {Object}
+0009: instanceof      #3       // {this, Object} | {int}
+0012: istore_2                 // {this, Object, int} | {}
+0013: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`instanceof`指令对应的Operand Stack的变化如下：

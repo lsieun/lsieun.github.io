@@ -3,6 +3,8 @@ title:  "opcode: math (52/128/205)"
 sequence: "204"
 ---
 
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
+
 ## 概览
 
 从Instruction的角度来说，与math相关的opcode有52个，内容如下：
@@ -95,16 +97,16 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [int]
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] [int]
-[sample/HelloWorld, int, int] []
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int] [int, int]
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int, int] []
-[] []
+                               // {this} | {}
+0000: iconst_1                 // {this} | {int}
+0001: istore_1                 // {this, int} | {}
+0002: iconst_2                 // {this, int} | {int}
+0003: istore_2                 // {this, int, int} | {}
+0004: iload_1                  // {this, int, int} | {int}
+0005: iload_2                  // {this, int, int} | {int, int}
+0006: iadd                     // {this, int, int} | {int}
+0007: istore_3                 // {this, int, int, int} | {}
+0008: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`iadd`指令对应的Operand Stack的变化如下：
@@ -170,16 +172,16 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [long, top]
-[sample/HelloWorld, long, top] []
-[sample/HelloWorld, long, top] [long, top]
-[sample/HelloWorld, long, top, long, top] []
-[sample/HelloWorld, long, top, long, top] [long, top]
-[sample/HelloWorld, long, top, long, top] [long, top, long, top]
-[sample/HelloWorld, long, top, long, top] [long, top]
-[sample/HelloWorld, long, top, long, top, long, top] []
-[] []
+                               // {this} | {}
+0000: lconst_1                 // {this} | {long, top}
+0001: lstore_1                 // {this, long, top} | {}
+0002: ldc2_w          #2       // {this, long, top} | {long, top}
+0005: lstore_3                 // {this, long, top, long, top} | {}
+0006: lload_1                  // {this, long, top, long, top} | {long, top}
+0007: lload_3                  // {this, long, top, long, top} | {long, top, long, top}
+0008: ladd                     // {this, long, top, long, top} | {long, top}
+0009: lstore          5        // {this, long, top, long, top, long, top} | {}
+0011: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`ladd`指令对应的Operand Stack的变化如下：
@@ -240,13 +242,13 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [int]
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] [int]
-[sample/HelloWorld, int] [int]
-[sample/HelloWorld, int, int] []
-[] []
+                               // {this} | {}
+0000: iconst_1                 // {this} | {int}
+0001: istore_1                 // {this, int} | {}
+0002: iload_1                  // {this, int} | {int}
+0003: ineg                     // {this, int} | {int}
+0004: istore_2                 // {this, int, int} | {}
+0005: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`ineg`指令对应的Operand Stack的变化如下：
@@ -307,13 +309,13 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [long, top]
-[sample/HelloWorld, long, top] []
-[sample/HelloWorld, long, top] [long, top]
-[sample/HelloWorld, long, top] [long, top]
-[sample/HelloWorld, long, top, long, top] []
-[] []
+                               // {this} | {}
+0000: lconst_1                 // {this} | {long, top}
+0001: lstore_1                 // {this, long, top} | {}
+0002: lload_1                  // {this, long, top} | {long, top}
+0003: lneg                     // {this, long, top} | {long, top}
+0004: lstore_3                 // {this, long, top, long, top} | {}
+0005: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`lneg`指令对应的Operand Stack的变化如下：
@@ -376,13 +378,13 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [int]
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] []
-[] []
+                               // {this} | {}
+0000: iconst_0                 // {this} | {int}
+0001: istore_1                 // {this, int} | {}
+0002: iinc       1    1        // {this, int} | {}
+0005: iinc       1    10       // {this, int} | {}
+0008: iinc       1    -5       // {this, int} | {}
+0011: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`iinc`指令对应的Operand Stack的变化如下：
@@ -448,16 +450,16 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [int]
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] [int]
-[sample/HelloWorld, int, int] []
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int] [int, int]
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int, int] []
-[] []
+                               // {this} | {}
+0000: iconst_1                 // {this} | {int}
+0001: istore_1                 // {this, int} | {}
+0002: iconst_2                 // {this, int} | {int}
+0003: istore_2                 // {this, int, int} | {}
+0004: iload_1                  // {this, int, int} | {int}
+0005: iload_2                  // {this, int, int} | {int, int}
+0006: ishl                     // {this, int, int} | {int}
+0007: istore_3                 // {this, int, int, int} | {}
+0008: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`ishl`指令对应的Operand Stack的变化如下：
@@ -525,16 +527,16 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [int]
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] [int]
-[sample/HelloWorld, int, int] []
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int] [int, int]
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int, int] []
-[] []
+                               // {this} | {}
+0000: iconst_1                 // {this} | {int}
+0001: istore_1                 // {this, int} | {}
+0002: iconst_2                 // {this, int} | {int}
+0003: istore_2                 // {this, int, int} | {}
+0004: iload_1                  // {this, int, int} | {int}
+0005: iload_2                  // {this, int, int} | {int, int}
+0006: ishr                     // {this, int, int} | {int}
+0007: istore_3                 // {this, int, int, int} | {}
+0008: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`ishr`指令对应的Operand Stack的变化如下：
@@ -602,16 +604,16 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [int]
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] [int]
-[sample/HelloWorld, int, int] []
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int] [int, int]
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int, int] []
-[] []
+                               // {this} | {}
+0000: iconst_1                 // {this} | {int}
+0001: istore_1                 // {this, int} | {}
+0002: iconst_2                 // {this, int} | {int}
+0003: istore_2                 // {this, int, int} | {}
+0004: iload_1                  // {this, int, int} | {int}
+0005: iload_2                  // {this, int, int} | {int, int}
+0006: iushr                    // {this, int, int} | {int}
+0007: istore_3                 // {this, int, int, int} | {}
+0008: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`iushr`指令对应的Operand Stack的变化如下：
@@ -681,16 +683,16 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [int]
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] [int]
-[sample/HelloWorld, int, int] []
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int] [int, int]
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int, int] []
-[] []
+                               // {this} | {}
+0000: iconst_1                 // {this} | {int}
+0001: istore_1                 // {this, int} | {}
+0002: iconst_2                 // {this, int} | {int}
+0003: istore_2                 // {this, int, int} | {}
+0004: iload_1                  // {this, int, int} | {int}
+0005: iload_2                  // {this, int, int} | {int, int}
+0006: iand                     // {this, int, int} | {int}
+0007: istore_3                 // {this, int, int, int} | {}
+0008: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`iand`指令对应的Operand Stack的变化如下：
@@ -758,16 +760,16 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [int]
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] [int]
-[sample/HelloWorld, int, int] []
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int] [int, int]
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int, int] []
-[] []
+                               // {this} | {}
+0000: iconst_1                 // {this} | {int}
+0001: istore_1                 // {this, int} | {}
+0002: iconst_2                 // {this, int} | {int}
+0003: istore_2                 // {this, int, int} | {}
+0004: iload_1                  // {this, int, int} | {int}
+0005: iload_2                  // {this, int, int} | {int, int}
+0006: ior                      // {this, int, int} | {int}
+0007: istore_3                 // {this, int, int, int} | {}
+0008: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`ior`指令对应的Operand Stack的变化如下：
@@ -835,16 +837,16 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [int]
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] [int]
-[sample/HelloWorld, int, int] []
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int] [int, int]
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int, int] []
-[] []
+                               // {this} | {}
+0000: iconst_1                 // {this} | {int}
+0001: istore_1                 // {this, int} | {}
+0002: iconst_2                 // {this, int} | {int}
+0003: istore_2                 // {this, int, int} | {}
+0004: iload_1                  // {this, int, int} | {int}
+0005: iload_2                  // {this, int, int} | {int, int}
+0006: ixor                     // {this, int, int} | {int}
+0007: istore_3                 // {this, int, int, int} | {}
+0008: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`ixor`指令对应的Operand Stack的变化如下：
@@ -907,14 +909,14 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [int]
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] [int]
-[sample/HelloWorld, int] [int, int]
-[sample/HelloWorld, int] [int]
-[sample/HelloWorld, int, int] []
-[] []
+                               // {this} | {}
+0000: iconst_0                 // {this} | {int}
+0001: istore_1                 // {this, int} | {}
+0002: iload_1                  // {this, int} | {int}
+0003: iconst_m1                // {this, int} | {int, int}
+0004: ixor                     // {this, int} | {int}
+0005: istore_2                 // {this, int, int} | {}
+0006: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`ixor`指令对应的Operand Stack的变化如下：
@@ -977,13 +979,13 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [int]
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] [int]
-[sample/HelloWorld, int] [long, top]
-[sample/HelloWorld, int, long, top] []
-[] []
+                               // {this} | {}
+0000: iconst_0                 // {this} | {int}
+0001: istore_1                 // {this, int} | {}
+0002: iload_1                  // {this, int} | {int}
+0003: i2l                      // {this, int} | {long, top}
+0004: lstore_2                 // {this, int, long, top} | {}
+0005: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`i2l`指令对应的Operand Stack的变化如下：
@@ -1044,13 +1046,13 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [long, top]
-[sample/HelloWorld, long, top] []
-[sample/HelloWorld, long, top] [long, top]
-[sample/HelloWorld, long, top] [int]
-[sample/HelloWorld, long, top, int] []
-[] []
+                               // {this} | {}
+0000: lconst_0                 // {this} | {long, top}
+0001: lstore_1                 // {this, long, top} | {}
+0002: lload_1                  // {this, long, top} | {long, top}
+0003: l2i                      // {this, long, top} | {int}
+0004: istore_3                 // {this, long, top, int} | {}
+0005: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`l2i`指令对应的Operand Stack的变化如下：

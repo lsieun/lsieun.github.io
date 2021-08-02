@@ -3,7 +3,7 @@ title:  "修改已有的方法（优化－删除－复杂的变换）"
 sequence: "312"
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 ## 复杂的变换
 

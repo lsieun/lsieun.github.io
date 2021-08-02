@@ -6,54 +6,84 @@ permalink: /resources/
 
 ## 网站
 
-IT技术网站（按字母排序）
+所有网站按字母或拼音顺序进行排列
 
-- [51CTO](https://www.51cto.com/)
-    - [51CTO学堂](https://edu.51cto.com/)
-    - [51CTO个人博客](https://blog.51cto.com/lsieun)
+### IT技术网站
+
+- [51CTO](https://www.51cto.com/): [51CTO学堂](https://edu.51cto.com/) / [51CTO个人博客](https://blog.51cto.com/lsieun)
 - [52破解](https://www.52pojie.cn/)
+- [All It Books](https://allitbooks.net/)
 - [Baeldung](https://www.baeldung.com/)
     - [Core Concepts](https://www.baeldung.com/cs/category/core-concepts)
     - [Java Tutorial](https://www.baeldung.com/java-tutorial)
     - [Java Category](https://www.baeldung.com/category/java/)
     - [Write for Baeldung](https://www.baeldung.com/contribution-guidelines)
     - [Java drafts site](https://drafts.baeldung.com/wp-login.php)
+- [翻轉工作室](https://www.tsnien.idv.tw/): 这是台湾粘添壽博士的网站
 - Git:
     - [Gitee](https://gitee.com)
     - [Github](https://github.com)
     - [Git下载](https://git-scm.com/)
 - [Google](https://www.google.com/)
     - [Google Translate](https://translate.google.com/)
+    - [Gmail](https://www.google.com/gmail/)
 - [InfoQ](https://www.infoq.com/)
 - Oracle:
     - [Java Language and Virtual Machine Specifications](https://docs.oracle.com/javase/specs/index.html)
+    - [Java SE Downloads](https://www.oracle.com/java/technologies/javase-downloads.html)
     - [Java Documentation](https://docs.oracle.com/en/java/index.html)
+    - [Oracle Java SE Documentation](https://docs.oracle.com/en/java/javase/index.html)
+- [Project Nayuki](https://www.nayuki.io/): a magical girl software developer in Toronto, Canada.
+
+### Java资源
+
+日常讯息类
+
+- [InfoQ](https://www.infoq.com/): [Java](https://www.infoworld.com/category/java/)
+
+知识总结
+
+- [Singapore NanYang Technological University: programming notes](https://www3.ntu.edu.sg/home/ehchua/programming/index.html)
+
+### 其它
 
 社交网站（按字母排序）
 
-- [B站](https://www.bilibili.com/)
-    - [个人空间](https://space.bilibili.com/1321054247/)
-- 微信:
-    - [公众平台](https://mp.weixin.qq.com/)
-    - [135编辑器](https://www.135editor.com/)(微信登录)
+- [B站](https://www.bilibili.com/): [个人空间](https://space.bilibili.com/1321054247/)
+- 微信: [公众平台](https://mp.weixin.qq.com/) / [135编辑器](https://www.135editor.com/)(微信登录)
 
-视频网站：
+视频网站
 
 - [动物世界－央视网](http://tv.cctv.com/lm/dwsj/index.shtml?spm=C31267.PzXj0D8UJUyC.EuVgsDNuNsvy.1)
 - [好视频影院](https://www.hspyy.net)，有老版的《三国》
+- [破解资源君](https://www.youtube.com/channel/UCrGEYuZ1nw3RDj4LDKJmrZw): [0730.zip](https://raw.githubusercontent.com/pojiezhiyuanjun/freev2/master/0730.zip)
 - [SOAP2DAY](https://soap2day.to/)，英文电影
 - 动漫：
   - [Naruto Shippuden Episode](http://ww9.soul-anime.us/anime/naruto-shippuden/)，特点是“日语声音，英文字幕”。
 
-知识问答：
+知识问答
 
 - [Quora](https://www.quora.com/)
 - [知乎](https://www.zhihu.com/)
 
-网盘：
+网盘
 
 - [百度云](https://pan.baidu.com/)
 - [蓝奏云](https://up.woozooo.com/)
+
+开源免费软件
+
+- 视频编辑：[DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve)
+- 视频转换器：[Handbrake](https://handbrake.fr)
+- 图片编辑：[Gimp](https://www.gimp.org)
+- 录屏软件：[OBS](https://obsproject.com)
+- 3D建模：[Blender](https://www.blender.org)
+- Office: [Onlyoffice](https://www.onlyoffice.com/) / [Libreoffice](https://www.libreoffice.org)
+- OS: [Linux Mint](https://linuxmint.com) / [Ubuntu](https://ubuntu.com) / [Zorin OS](https://zorinos.com)
+
+潜在感兴趣的书籍：
+
+- [ ] 深入理解JVM字节码
 
 ## 工具类
 

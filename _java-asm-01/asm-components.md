@@ -1,10 +1,9 @@
 ---
 title:  "ASM的组成部分"
 sequence: "102"
-
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 ## ASM的两个组成部分
 

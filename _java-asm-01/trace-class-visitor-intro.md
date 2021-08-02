@@ -3,7 +3,7 @@ title:  "TraceClassVisitor介绍"
 sequence: "403"
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 `TraceClassVisitor` class extends the `ClassVisitor` class, and builds **a textual representation of the visited class**.
 

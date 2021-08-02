@@ -11,11 +11,12 @@ permalink: /about/
 - 2015-11-07 信息系统项目管理师（高级）
 - 2014-11-08 系统集成项目管理工程师（中级）
 
-联系方式：
+联系方式（[扫码](/static/contact.html)）：
 
 - QQ：515882294
 - Email: 515882294@qq.com
-- QQ群: [584642776](/assets/images/contact/qq-group.jpg) (Java字节码交流群)
+- QQ群: [584642776](https://jq.qq.com/?_wv=1027&k=yOBiOaJV) (Java字节码交流群)
+- 微信：`lsieun`
 - 微信公众号：刘森日知录
 
 ## 我对网络课程的思考

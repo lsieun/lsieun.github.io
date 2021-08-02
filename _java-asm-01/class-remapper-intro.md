@@ -3,7 +3,7 @@ title:  "ClassRemapper介绍"
 sequence: "410"
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 `ClassRemapper`类的特点是，可以实现从“一个类”向“另一个类”的映射。借助于这个类，我们可以将class文件进行简单的混淆处理（obfuscate）：
 

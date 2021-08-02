@@ -21,12 +21,12 @@ The reader will form an opinion of you, the author, based on both the content an
 
 ### Give Your Writing Structure
 
-It’s fine to rattle off a stream of consciousness when you’re writing in your journal, but if you actually want to communicate with others you’ll need to bring some order to those rambling thoughts. Here are some tips.
+It's fine to rattle off a stream of consciousness when you're writing in your journal, but if you actually want to communicate with others you'll need to bring some order to those rambling thoughts. Here are some tips.
 
-- Make sure you’re clear on the concepts you’re writing about.
+- Make sure you're clear on the concepts you're writing about.
 - If the message is complex, outline it.
-- Anticipate your readers’ questions.
-- Don’t over-explain everything.
+- Anticipate your readers' questions.
+- Don't over-explain everything.
 
 ### Tighten Your Writing
 
@@ -50,7 +50,7 @@ Short, less complicated sentences are easier to read. Keep it simple, silly! But
 
 - Infuse your personality into your writing
 
-Letting your personality shine through is the best way to develop a writing style. Use the phrases and slang that you would normally use (within reason). When it’s appropriate, throw in a relevant personal anecdote. In all but the most formal or professional writing settings, be yourself when you write.
+Letting your personality shine through is the best way to develop a writing style. Use the phrases and slang that you would normally use (within reason). When it's appropriate, throw in a relevant personal anecdote. In all but the most formal or professional writing settings, be yourself when you write.
 
 - Practice, practice, practice!
 

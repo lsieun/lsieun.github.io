@@ -5,7 +5,7 @@ sequence: "101"
 
 ## DER
 
-Every encoded value is represented as a type, followed by the value’s length,
+Every encoded value is represented as a type, followed by the value's length,
 followed by the actual contents of the value itself;
 the representation of the value depends on the type.
 
@@ -14,7 +14,7 @@ tag, length, contents
 ```
 
 DER allows for multi-byte types as well — and has complex rules on how to encode and
-recognize them — but X.509 doesn’t need to make use of them and sticks with single-byte types.
+recognize them — but X.509 doesn't need to make use of them and sticks with single-byte types.
 
 
 
@@ -40,9 +40,9 @@ The integer value 65535 is encoded as
 
 - type: 6
 
-OID’s are just as simple to encode. They’re stored just like integers, but they have a type of `6` instead of `2`.
+OID's are just as simple to encode. They're stored just like integers, but they have a type of `6` instead of `2`.
 
-Otherwise, they’re encoded the same way:
+Otherwise, they're encoded the same way:
 
 ```text
 type, length, value
@@ -67,7 +67,7 @@ The `type` code for a date is either `23` or `24`:
 
 Although the type actually includes enough information to infer
 the length — you know that generalized times are 15 digits, and UTC times
-are 13 — for consistency’s sake the lengths are included as well. After that, the
+are 13 — for consistency's sake the lengths are included as well. After that, the
 year, month, day, hour, minute, second and Z are included in ASCII format. So
 the date Feb. 23, 2010, 6:50:13 is encoded in UTC time as
 
@@ -85,7 +85,7 @@ tag, length, contents
 ```
 
 The only difference between bit strings and character strings is that
-bit strings don’t necessarily have to end on an eight-bit boundary,
+bit strings don't necessarily have to end on an eight-bit boundary,
 so they have an extra byte to indicate how much padding was included.
 In practice, this is always `0` because all useful bit patterns are eight-bit aligned anyway.
 
@@ -100,7 +100,7 @@ So how are lengths greater than 255 represented?
 Actually, a single-length byte can only represent 127 byte values.
 
 The high-order bit is reserved.
-If it’s 1, then the low order seven bits represent not the length of the value,
+If it's 1, then the low order seven bits represent not the length of the value,
 but the length of the length — that is,
 how many of the bytes following encode the length of the subsequently following value.
 
@@ -114,7 +114,7 @@ So, if a bit string is 512 bytes long, the DER-encoded representation:
 
 Sets and sequences are what ASN.1 calls a **constructed type** — that is, a type containing other types.
 
-Technically, they’re encoded the same way other values are.
+Technically, they're encoded the same way other values are.
 They start with a `tag`, are followed by **a variable number of length bytes**, and are then followed by **their contents**.
 
 However, for **constructed types**, the **contents** themselves

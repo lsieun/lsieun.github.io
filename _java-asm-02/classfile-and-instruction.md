@@ -1,7 +1,75 @@
 ---
-title:  "Instruction"
+title:  "ClassFile和Instruction"
 sequence: "102"
 ---
+
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
+
+## ClassFile对方法的约束
+
+从ClassFile的角度来说，它对于方法接收的参数数量、方法体的大小做了约束。
+
+### 方法参数的数量（255）
+
+在一个方法当中，方法接收的参数最多有255个。我们分成三种情况来进行说明：
+
+- 第一种情况，对于non-static方法来说，`this`也要占用1个参数位置，因此接收的参数最多有254个参数。
+- 第二种情况，对于static方法来说，不需要存储`this`变量，因此接收的参数最多有255个参数。
+- 第三种情况，不管是non-static方法，还是static方法，`long`类型或`double`类型占据2个参数位置，所以实际的参数数量要小于255。
+
+```java
+public class HelloWorld {
+    public void test(int a, int b) {
+        // do nothing
+    }
+
+    public static void main(String[] args) {
+        for (int i = 1; i <= 255; i++) {
+            String item = String.format("int val%d,", i);
+            System.out.println(item);
+        }
+    }
+}
+```
+
+- 问题：能否在文档中找到依据呢？
+- 回答：能。
+
+在[Java Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)的[4.11. Limitations of the Java Virtual Machine](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.11)部分对方法参数的数量进行了限制：
+
+The number of method parameters is limited to **255** by the definition of a method descriptor, where the limit includes one unit for `this` in the case of instance or interface method invocations.
+
+### 方法体的大小（65535）
+
+对于方法来说，方法体并不是想写多少代码就写多少代码，它的大小也有一个限制：方法体内最多包含65535个字节。
+
+当方法体的代码超过65535字节（bytes）时，会出现编译错误：code too large。
+
+- 问题：能否在文档中找到依据呢？
+- 回答：能。
+
+在[Java Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)的[4.7.3. The Code Attribute](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.3)部分定义了`Code`属性：
+
+```text
+Code_attribute {
+    u2 attribute_name_index;
+    u4 attribute_length;
+    u2 max_stack;
+    u2 max_locals;
+    u4 code_length;
+    u1 code[code_length];
+    u2 exception_table_length;
+    {   u2 start_pc;
+        u2 end_pc;
+        u2 handler_pc;
+        u2 catch_type;
+    } exception_table[exception_table_length];
+    u2 attributes_count;
+    attribute_info attributes[attributes_count];
+}
+```
+
+- `code_length`: The value of the `code_length` item gives the number of bytes in the `code` array for this method. The value of `code_length` must be greater than **zero** (as the `code` array must not be empty) and less than **65536**.
 
 ## Instruction VS. Opcode
 
@@ -131,7 +199,7 @@ opcode占用空间的大小为1 byte。在1 byte中，包含8个bit，因此1 by
 
 For the majority of **typed instructions**, the instruction type is represented explicitly in the opcode mnemonic by a letter: `i` for an `int` operation, `l` for long, `s` for `short`, `b` for `byte`, `c` for `char`, `f` for `float`, `d` for `double`, and `a` for `reference`. Some instructions for which the type is unambiguous do not have a type letter in their mnemonic. For instance, `arraylength` always operates on an object that is an array. Some instructions, such as `goto`, an unconditional control transfer, do not operate on typed operands.（本段内容来自于[2.11.1. Types and the Java Virtual Machine](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.11.1)的第二段）
 
-## 学习方式
+## Opcode学习方式
 
 学习新事物，一般有两种学习体验：
 
@@ -142,10 +210,18 @@ For the majority of **typed instructions**, the instruction type is represented 
 
 学习这些opcode，也是一个缓慢的过程，就是平时一点一点的学习、慢慢积累的过程。
 
-- 不推荐的学习方式：想短期内将所有opcode全部学下来，必然会忽略掉一些关键性的细节，处理简单的问题还行，但处理难的问题就有点棘手；同时，记忆也不深刻，也会陷入到一个非常枯燥的学习困境。
-- 推荐的学习方式：
-    - 第一步，打好基础。例如，Stack Frame的结构、进入方法时的Stack Frame的初始状态、long和double类型的占用空间的大小等。
-    - 第二步，以“使用”为导向，有选择性的、跳跃式的学习。当用到这个opcode了，如果不了解它，那我们再去学习它；不要一味贪多，想全部学下来。
+推荐的学习方式：
+
+- 第一步，打好基础。例如，Stack Frame的结构、进入方法时的Stack Frame的初始状态、long和double类型的占用空间的大小等。
+- 第二步，以“使用”为导向，有选择性的、跳跃式的学习。当用到这个opcode了，如果不了解它，那我们再去学习它；不要一味贪多，想全部学下来。
 
 在后续内容当中，我们会将205个opcode分成不同的类别进行介绍，大家根据自己的兴趣有选择性的学习就可以了。
 
+## 总结
+
+本文内容总结如下：
+
+- 第一点，在ClassFile结构中，对于方法接收的参数和方法体的大小是有数量限制的。
+- 第二点，instruction = opcode + operands
+- 第三点，opcode占用1个byte大小，目前定义了205个；为了方便记忆，JVM文档为opcode提供了名字（即mnemonic symbol），大多数的名字中带有类型信息。
+- 第四点，学习opcode是一个长期积累的过程，推荐大家对感兴趣的内容进行有选择性的学习。

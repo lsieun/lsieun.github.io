@@ -3,6 +3,8 @@ title:  "opcode: field (4/135/205)"
 sequence: "206"
 ---
 
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
+
 ## 概览
 
 从Instruction的角度来说，与field相关的opcode有4个，内容如下：
@@ -63,11 +65,11 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [sample/HelloWorld]
-[sample/HelloWorld] [int]
-[sample/HelloWorld, int] []
-[] []
+                               // {this} | {}
+0000: aload_0                  // {this} | {this}
+0001: getfield        #2       // {this} | {int}
+0004: istore_1                 // {this, int} | {}
+0005: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`getfield`指令对应的Operand Stack的变化如下：
@@ -127,11 +129,11 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [sample/HelloWorld]
-[sample/HelloWorld] [sample/HelloWorld, int]
-[sample/HelloWorld] []
-[] []
+                               // {this} | {}
+0000: aload_0                  // {this} | {this}
+0001: iconst_0                 // {this} | {this, int}
+0002: putfield        #2       // {this} | {}
+0005: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`putfield`指令对应的Operand Stack的变化如下：
@@ -196,10 +198,10 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [int]
-[sample/HelloWorld, int] []
-[] []
+                               // {this} | {}
+0000: getstatic       #2       // {this} | {int}
+0003: istore_1                 // {this, int} | {}
+0004: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`getstatic`指令对应的Operand Stack的变化如下：
@@ -257,10 +259,10 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [int]
-[sample/HelloWorld] []
-[] []
+                               // {this} | {}
+0000: iconst_1                 // {this} | {int}
+0001: putstatic       #2       // {this} | {}
+0004: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`putstatic`指令对应的Operand Stack的变化如下：

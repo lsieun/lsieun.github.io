@@ -3,6 +3,8 @@ title:  "opcode: transfer values (50/76/205)"
 sequence: "203"
 ---
 
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
+
 ## 概览
 
 从Instruction的角度来说，与transfer values相关的opcode有50个。
@@ -105,18 +107,18 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [int]
-[sample/HelloWorld, int] []
-[sample/HelloWorld, int] [int]
-[sample/HelloWorld, int, int] []
-[sample/HelloWorld, int, int] [int]
-[sample/HelloWorld, int, int, int] []
-[sample/HelloWorld, int, int, int] [int]
-[sample/HelloWorld, int, int, int, int] []
-[sample/HelloWorld, int, int, int, int] [int]
-[sample/HelloWorld, int, int, int, int, int] []
-[] []
+                               // {this} | {}
+0000: iconst_1                 // {this} | {int}
+0001: istore_1                 // {this, int} | {}
+0002: iload_1                  // {this, int} | {int}
+0003: istore_2                 // {this, int, int} | {}
+0004: iload_2                  // {this, int, int} | {int}
+0005: istore_3                 // {this, int, int, int} | {}
+0006: iload_3                  // {this, int, int, int} | {int}
+0007: istore          4        // {this, int, int, int, int} | {}
+0009: iload           4        // {this, int, int, int, int} | {int}
+0011: istore          5        // {this, int, int, int, int, int} | {}
+0013: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`istore_<n>`和`istore`指令对应的Operand Stack的变化如下：
@@ -201,18 +203,18 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [float]
-[sample/HelloWorld, float] []
-[sample/HelloWorld, float] [float]
-[sample/HelloWorld, float, float] []
-[sample/HelloWorld, float, float] [float]
-[sample/HelloWorld, float, float, float] []
-[sample/HelloWorld, float, float, float] [float]
-[sample/HelloWorld, float, float, float, float] []
-[sample/HelloWorld, float, float, float, float] [float]
-[sample/HelloWorld, float, float, float, float, float] []
-[] []
+                               // {this} | {}
+0000: fconst_1                 // {this} | {float}
+0001: fstore_1                 // {this, float} | {}
+0002: fload_1                  // {this, float} | {float}
+0003: fstore_2                 // {this, float, float} | {}
+0004: fload_2                  // {this, float, float} | {float}
+0005: fstore_3                 // {this, float, float, float} | {}
+0006: fload_3                  // {this, float, float, float} | {float}
+0007: fstore          4        // {this, float, float, float, float} | {}
+0009: fload           4        // {this, float, float, float, float} | {float}
+0011: fstore          5        // {this, float, float, float, float, float} | {}
+0013: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`fstore_<n>`和`fstore`指令对应的Operand Stack的变化如下：
@@ -287,16 +289,16 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [long, top]
-[sample/HelloWorld, long, top] []
-[sample/HelloWorld, long, top] [long, top]
-[sample/HelloWorld, long, top, long, top] []
-[sample/HelloWorld, long, top, long, top] [long, top]
-[sample/HelloWorld, long, top, long, top, long, top] []
-[sample/HelloWorld, long, top, long, top, long, top] [long, top]
-[sample/HelloWorld, long, top, long, top, long, top, long, top] []
-[] []
+                               // {this} | {}
+0000: lconst_1                 // {this} | {long, top}
+0001: lstore_1                 // {this, long, top} | {}
+0002: lload_1                  // {this, long, top} | {long, top}
+0003: lstore_3                 // {this, long, top, long, top} | {}
+0004: lload_3                  // {this, long, top, long, top} | {long, top}
+0005: lstore          5        // {this, long, top, long, top, long, top} | {}
+0007: lload           5        // {this, long, top, long, top, long, top} | {long, top}
+0009: lstore          7        // {this, long, top, long, top, long, top, long, top} | {}
+0011: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`lstore_<n>`和`lstore`指令对应的Operand Stack的变化如下：
@@ -374,16 +376,16 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [double, top]
-[sample/HelloWorld, double, top] []
-[sample/HelloWorld, double, top] [double, top]
-[sample/HelloWorld, double, top, double, top] []
-[sample/HelloWorld, double, top, double, top] [double, top]
-[sample/HelloWorld, double, top, double, top, double, top] []
-[sample/HelloWorld, double, top, double, top, double, top] [double, top]
-[sample/HelloWorld, double, top, double, top, double, top, double, top] []
-[] []
+                               // {this} | {}
+0000: dconst_1                 // {this} | {double, top}
+0001: dstore_1                 // {this, double, top} | {}
+0002: dload_1                  // {this, double, top} | {double, top}
+0003: dstore_3                 // {this, double, top, double, top} | {}
+0004: dload_3                  // {this, double, top, double, top} | {double, top}
+0005: dstore          5        // {this, double, top, double, top, double, top} | {}
+0007: dload           5        // {this, double, top, double, top, double, top} | {double, top}
+0009: dstore          7        // {this, double, top, double, top, double, top, double, top} | {}
+0011: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`dstore_<n>`和`dstore`指令对应的Operand Stack的变化如下：
@@ -465,18 +467,18 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [null]
-[sample/HelloWorld, null] []
-[sample/HelloWorld, null] [null]
-[sample/HelloWorld, null, null] []
-[sample/HelloWorld, null, null] [null]
-[sample/HelloWorld, null, null, null] []
-[sample/HelloWorld, null, null, null] [null]
-[sample/HelloWorld, null, null, null, null] []
-[sample/HelloWorld, null, null, null, null] [null]
-[sample/HelloWorld, null, null, null, null, null] []
-[] []
+                               // {this} | {}
+0000: aconst_null              // {this} | {null}
+0001: astore_1                 // {this, null} | {}
+0002: aload_1                  // {this, null} | {null}
+0003: astore_2                 // {this, null, null} | {}
+0004: aload_2                  // {this, null, null} | {null}
+0005: astore_3                 // {this, null, null, null} | {}
+0006: aload_3                  // {this, null, null, null} | {null}
+0007: astore          4        // {this, null, null, null, null} | {}
+0009: aload           4        // {this, null, null, null, null} | {null}
+0011: astore          5        // {this, null, null, null, null, null} | {}
+0013: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`astore_<n>`和`astore`指令对应的Operand Stack的变化如下：

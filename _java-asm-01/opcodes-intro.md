@@ -3,7 +3,7 @@ title:  "Opcodes介绍"
 sequence: "213"
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 `Opcodes`是一个接口，它定义了许多字段。这些字段主要是在`ClassVisitor.visitXxx()`和`MethodVisitor.visitXxx()`方法中使用。
 

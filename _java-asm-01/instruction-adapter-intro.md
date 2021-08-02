@@ -3,7 +3,7 @@ title:  "InstructionAdapter介绍"
 sequence: "409"
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 对于`InstructionAdapter`类来说，它的特点是“添加了许多与opcode同名的方法”，更接近“原汁原味”的JVM Instruction Set。
 

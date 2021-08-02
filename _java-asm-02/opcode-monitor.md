@@ -3,6 +3,8 @@ title:  "opcode: monitor (2/198/205)"
 sequence: "213"
 ---
 
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
+
 ## 概览
 
 从Instruction的角度来说，与monitor相关的opcode有2个，内容如下：
@@ -105,25 +107,25 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] []
-[sample/HelloWorld] []
-[sample/HelloWorld] [java/io/PrintStream]
-[sample/HelloWorld] [java/io/PrintStream, java/io/PrintStream]
-[sample/HelloWorld, java/io/PrintStream] [java/io/PrintStream]
-[sample/HelloWorld, java/io/PrintStream] []
-[sample/HelloWorld, java/io/PrintStream] [java/io/PrintStream]
-[sample/HelloWorld, java/io/PrintStream] [java/io/PrintStream, java/lang/String]
-[sample/HelloWorld, java/io/PrintStream] []
-[sample/HelloWorld, java/io/PrintStream] [java/io/PrintStream]
-[sample/HelloWorld, java/io/PrintStream] []
-[] []
-[sample/HelloWorld, java/lang/Object, java/lang/Throwable] []
-[sample/HelloWorld, java/lang/Object, java/lang/Throwable] [java/lang/Object]
-[sample/HelloWorld, java/lang/Object, java/lang/Throwable] []
-[sample/HelloWorld, java/lang/Object, java/lang/Throwable] [java/lang/Throwable]
-[] []
-[] []
+                               // {this} | {}
+0000: getstatic       #2       // {this} | {PrintStream}
+0003: dup                      // {this} | {PrintStream, PrintStream}
+0004: astore_1                 // {this, PrintStream} | {PrintStream}
+0005: monitorenter             // {this, PrintStream} | {}
+0006: getstatic       #2       // {this, PrintStream} | {PrintStream}
+0009: ldc             #3       // {this, PrintStream} | {PrintStream, String}
+0011: invokevirtual   #4       // {this, PrintStream} | {}
+0014: aload_1                  // {this, PrintStream} | {PrintStream}
+0015: monitorexit              // {this, PrintStream} | {}
+0016: goto            8        // {} | {}
+                               // {this, Object} | {Throwable}
+0019: astore_2                 // {this, Object, Throwable} | {}
+0020: aload_1                  // {this, Object, Throwable} | {Object}
+0021: monitorexit              // {this, Object, Throwable} | {}
+0022: aload_2                  // {this, Object, Throwable} | {Throwable}
+0023: athrow                   // {} | {}
+                               // {this} | {}
+0024: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`monitorenter`指令对应的Operand Stack的变化如下：

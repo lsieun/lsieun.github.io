@@ -3,7 +3,7 @@ title:  "修改已有的方法（删除－移除Instruction）"
 sequence: "308"
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 ## 如何移除Instruction
 

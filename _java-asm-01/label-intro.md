@@ -3,7 +3,7 @@ title:  "Label介绍"
 sequence: "210"
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 在程序中，有三种基本控制结构：顺序、选择和循环。我们现在已经知道，`MethodVisitor`类是用于生成方法体的代码。如果没有`Label`类的参与，那么`MethodVisitor`类只能生成“顺序”结构的代码；如果有`Label`类的参与，`MethodVisitor`类就能生成“选择”和“循环”结构的代码。在本文当中，我们来介绍`Label`类。
 

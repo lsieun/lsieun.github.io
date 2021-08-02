@@ -3,7 +3,7 @@ title:  "FieldWriter介绍"
 sequence: "205"
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 `FieldWriter`类继承自`FieldVisitor`类。在`ClassWriter`类里，`visitField()`方法的实现就是通过`FieldWriter`类来实现的。在本文当中，我们就是介绍`FieldWriter`类。
 

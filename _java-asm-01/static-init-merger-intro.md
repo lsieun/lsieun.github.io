@@ -3,7 +3,7 @@ title:  "StaticInitMerger介绍"
 sequence: "411"
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 `StaticInitMerger`类的特点是，可以实现将多个`<clinit>()`方法合并到一起。
 

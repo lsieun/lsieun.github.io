@@ -3,6 +3,8 @@ title:  "opcode: return (6/6/205)"
 sequence: "201"
 ---
 
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
+
 ## 概览
 
 从Instruction的角度来说，与return相关的opcode有6个，内容如下：
@@ -52,8 +54,8 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[] []
+                               // {this} | {}
+0000: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，Operand Stack的变化如下：
@@ -107,9 +109,9 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [int]
-[] []
+                               // {this} | {}
+0000: iconst_0                 // {this} | {int}
+0001: ireturn                  // {} | {}
 ```
 
 从JVM规范的角度来看，Operand Stack的变化如下：
@@ -165,9 +167,9 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [float]
-[] []
+                               // {this} | {}
+0000: fconst_0                 // {this} | {float}
+0001: freturn                  // {} | {}
 ```
 
 从JVM规范的角度来看，Operand Stack的变化如下：
@@ -224,9 +226,9 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [long, top]
-[] []
+                               // {this} | {}
+0000: lconst_0                 // {this} | {long, top}
+0001: lreturn                  // {} | {}
 ```
 
 从JVM规范的角度来看，Operand Stack的变化如下：
@@ -281,9 +283,9 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [double, top]
-[] []
+                               // {this} | {}
+0000: dconst_0                 // {this} | {double, top}
+0001: dreturn                  // {} | {}
 ```
 
 从JVM规范的角度来看，Operand Stack的变化如下：
@@ -338,9 +340,9 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [null]
-[] []
+                               // {this} | {}
+0000: aconst_null              // {this} | {null}
+0001: areturn                  // {} | {}
 ```
 
 从JVM规范的角度来看，Operand Stack的变化如下：

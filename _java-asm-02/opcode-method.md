@@ -3,6 +3,8 @@ title:  "opcode: method (5/140/205)"
 sequence: "207"
 ---
 
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
+
 ## 概览
 
 从Instruction的角度来说，与method相关的opcode有5个，内容如下：
@@ -95,19 +97,19 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [sample/HelloWorld]
-[sample/HelloWorld] [sample/HelloWorld, java/lang/String]
-[sample/HelloWorld] [sample/HelloWorld, java/lang/String, int]
-[sample/HelloWorld] []
-[sample/HelloWorld] [sample/HelloWorld]
-[sample/HelloWorld] []
-[sample/HelloWorld] [sample/HelloWorld]
-[sample/HelloWorld] []
-[sample/HelloWorld] [sample/HelloWorld]
-[sample/HelloWorld] [java/lang/String]
-[sample/HelloWorld, java/lang/String] []
-[] []
+                               // {this} | {}
+0000: aload_0                  // {this} | {this}
+0001: ldc             #2       // {this} | {this, String}
+0003: bipush          10       // {this} | {this, String, int}
+0005: invokevirtual   #3       // {this} | {}
+0008: aload_0                  // {this} | {this}
+0009: invokevirtual   #4       // {this} | {}
+0012: aload_0                  // {this} | {this}
+0013: invokevirtual   #5       // {this} | {}
+0016: aload_0                  // {this} | {this}
+0017: invokevirtual   #6       // {this} | {String}
+0020: astore_1                 // {this, String} | {}
+0021: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`invokevirtual`指令对应的Operand Stack的变化如下：
@@ -177,12 +179,12 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [uninitialized_sample/HelloWorld]
-[sample/HelloWorld] [uninitialized_sample/HelloWorld, uninitialized_sample/HelloWorld]
-[sample/HelloWorld] [sample/HelloWorld]
-[sample/HelloWorld, sample/HelloWorld] []
-[] []
+                               // {this} | {}
+0000: new             #2       // {this} | {uninitialized_HelloWorld}
+0003: dup                      // {this} | {uninitialized_HelloWorld, uninitialized_HelloWorld}
+0004: invokespecial   #3       // {this} | {HelloWorld}
+0007: astore_1                 // {this, HelloWorld} | {}
+0008: return                   // {} | {}
 ```
 
 ### invoke private method
@@ -230,10 +232,10 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [sample/HelloWorld]
-[sample/HelloWorld] []
-[] []
+                               // {this} | {}
+0000: aload_0                  // {this} | {this}
+0001: invokespecial   #2       // {this} | {}
+0004: return                   // {} | {}
 ```
 
 ### invoke super method
@@ -279,11 +281,11 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [sample/HelloWorld]
-[sample/HelloWorld] [java/lang/String]
-[sample/HelloWorld, java/lang/String] []
-[] []
+                               // {this} | {}
+0000: aload_0                  // {this} | {this}
+0001: invokespecial   #2       // {this} | {String}
+0004: astore_1                 // {this, String} | {}
+0005: return                   // {} | {}
 ```
 
 ## invokestatic
@@ -347,13 +349,13 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [java/lang/String]
-[sample/HelloWorld] [java/lang/String, int]
-[sample/HelloWorld] []
-[sample/HelloWorld] []
-[sample/HelloWorld] []
-[] []
+                               // {this} | {}
+0000: ldc             #2       // {this} | {String}
+0002: bipush          10       // {this} | {String, int}
+0004: invokestatic    #3       // {this} | {}
+0007: invokestatic    #4       // {this} | {}
+0010: invokestatic    #5       // {this} | {}
+0013: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`invokestatic`指令对应的Operand Stack的变化如下：
@@ -443,18 +445,18 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [uninitialized_sample/HelloWorld$1]
-[sample/HelloWorld] [uninitialized_sample/HelloWorld$1, uninitialized_sample/HelloWorld$1]
-[sample/HelloWorld] [uninitialized_sample/HelloWorld$1, uninitialized_sample/HelloWorld$1, sample/HelloWorld]
-[sample/HelloWorld] [sample/HelloWorld$1]
-[sample/HelloWorld, sample/HelloWorld$1] []
-[sample/HelloWorld, sample/HelloWorld$1] [sample/HelloWorld$1]
-[sample/HelloWorld, sample/HelloWorld$1] []
-[sample/HelloWorld, sample/HelloWorld$1] [sample/HelloWorld$1]
-[sample/HelloWorld, sample/HelloWorld$1] []
-[sample/HelloWorld, sample/HelloWorld$1] []
-[] []
+                               // {this} | {}
+0000: new             #2       // {this} | {uninitialized_HelloWorld$1}
+0003: dup                      // {this} | {uninitialized_HelloWorld$1, uninitialized_HelloWorld$1}
+0004: aload_0                  // {this} | {uninitialized_HelloWorld$1, uninitialized_HelloWorld$1, this}
+0005: invokespecial   #3       // {this} | {HelloWorld$1}
+0008: astore_1                 // {this, HelloWorld$1} | {}
+0009: aload_1                  // {this, HelloWorld$1} | {HelloWorld$1}
+0010: invokeinterface #4  1    // {this, HelloWorld$1} | {}
+0015: aload_1                  // {this, HelloWorld$1} | {HelloWorld$1}
+0016: invokeinterface #5  1    // {this, HelloWorld$1} | {}
+0021: invokestatic    #6       // {this, HelloWorld$1} | {}
+0024: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`invokeinterface`指令对应的Operand Stack的变化如下：
@@ -523,14 +525,14 @@ methodVisitor.visitEnd();
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] [java/io/PrintStream]
-[sample/HelloWorld] [java/io/PrintStream, java/io/PrintStream]
-[sample/HelloWorld] [java/io/PrintStream, java/lang/Class]
-[sample/HelloWorld] [java/io/PrintStream]
-[sample/HelloWorld] [java/util/function/Consumer]
-[sample/HelloWorld, java/util/function/Consumer] []
-[] []
+                               // {this} | {}
+0000: getstatic       #2       // {this} | {PrintStream}
+0003: dup                      // {this} | {PrintStream, PrintStream}
+0004: invokevirtual   #3       // {this} | {PrintStream, Class}
+0007: pop                      // {this} | {PrintStream}
+0008: invokedynamic   #4       // {this} | {Consumer}
+0013: astore_1                 // {this, Consumer} | {}
+0014: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`invokedynamic`指令对应的Operand Stack的变化如下：

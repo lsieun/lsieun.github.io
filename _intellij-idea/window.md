@@ -22,6 +22,7 @@ sequence: "101"
 
 - `F12`: Go back to previous tool window
 - `Ctrl + Shift + F12`: Toggle maximizing editor
+- `Ctrl + Alt + F12`: Show In Explorer
 
 ## Editor
 

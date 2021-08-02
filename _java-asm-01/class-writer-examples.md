@@ -3,7 +3,7 @@ title:  "ClassWriter代码示例"
 sequence: "203"
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 {:refdef: style="text-align: center;"}
 ![What ASM Can Do](/assets/images/java/asm/what-asm-can-do.png)

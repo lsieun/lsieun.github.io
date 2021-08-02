@@ -3,7 +3,7 @@ title:  "修改已有的方法（删除－清空方法体）"
 sequence: "309"
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 ## 如何清空方法体
 

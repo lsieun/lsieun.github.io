@@ -3,7 +3,7 @@ title:  "FieldVisitor介绍"
 sequence: "204"
 ---
 
-[UP]({% link _posts/2021-04-22-java-asm-season-01.md %})
+[上级目录]({% link _posts/2021-04-22-java-asm-season-01.md %})
 
 通过调用`ClassVisitor`类的`visitField()`方法，会返回一个`FieldVisitor`类型的对象。在本文当中，我们就对`FieldVisitor`类进行介绍。
 

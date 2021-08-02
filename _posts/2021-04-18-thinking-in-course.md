@@ -52,10 +52,10 @@ separate heading with text, add a brief introductory text after the H2 heading t
 ### 内容
 
 prefer “we” language, not “you” language
-- whenever possible, it’s better to say:
-  We’re going to implement this ...
+- whenever possible, it's better to say:
+  We're going to implement this ...
   than:
-  You’re going to implement this...
+  You're going to implement this...
 
 ### 代码/图片
 
@@ -67,7 +67,7 @@ a code sample or diagram/image should be introduced with a sentence ending in a 
 - 正确的代码示例：
 
 ---
-Here we’re setting up a controller:
+Here we're setting up a controller:
 ```text
 {some code here}
 ```
@@ -76,7 +76,7 @@ Here we’re setting up a controller:
 - 错误的代码示例：
 
 ---
-Here, we’re setting up a controller.
+Here, we're setting up a controller.
 ```text
 {some code here}
 ```

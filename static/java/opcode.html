@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>opcode</title>
+    <link rel="stylesheet" href="/assets/main.css"/>
+    <link rel="stylesheet" href="/assets/css/w3.css"/>
+    <script type="text/javascript" src="/assets/js/jquery-3.6.0.min.js"></script>
+    <style type="text/css">
+        code {
+            font-family: monospace;
+            padding: 2px 4px;
+            margin: 0;
+            color: #d14;
+            background-color: #f7f7f9;
+            border: 1px solid #e1e1e8;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header" role="banner">
+    <div class="w3-content" style="max-width:1280px">
+        <a class="site-title" rel="author" href="/">lsieun</a>
+    </div>
+</header>
+
+<div class="w3-container w3-center w3-padding-32">
+    <p>
+        Welcome to the blog of
+        <span class="w3-tag w3-round w3-green" style="padding:3px">
+            <span class="w3-tag w3-round w3-green w3-border w3-border-white">lsieun</span>
+        </span>
+        <img alt="" class="w3-spin" src="/assets/images/spin.png"/>
+    </p>
+</div>
+
+<main class="w3-container" aria-label="Content">
+    <div class="w3-content" style="max-width:1280px">
+        <article class="post">
+            <table border="1" style="width:100%; border: 1px solid black; border-collapse: collapse;" class="w3-center">
+                <caption>opcode</caption>
+                <thead onclick="$(this).next().toggle()">
+                <tr>
+                    <th>opcode</th><th>mnemonic symbol</th>
+                    <th>opcode</th><th>mnemonic symbol</th>
+                    <th>opcode</th><th>mnemonic symbol</th>
+                    <th>opcode</th><th>mnemonic symbol</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><code>0</code></td><td>nop</td>
+                    <td><code>64</code></td><td class="w3-light-blue">lstore_1</td>
+                    <td><code>128</code></td><td class="w3-pale-red">ior</td>
+                    <td><code>192</code></td><td>checkcast</td>
+                </tr>
+                <tr>
+                    <td><code>1</code></td><td class="w3-amber">aconst_null</td>
+                    <td><code>65</code></td><td class="w3-light-blue">lstore_2</td>
+                    <td><code>129</code></td><td class="w3-pale-red">lor</td>
+                    <td><code>193</code></td><td>instanceof</td>
+                </tr>
+                <tr>
+                    <td><code>2</code></td><td class="w3-amber">iconst_m1</td>
+                    <td><code>66</code></td><td class="w3-light-blue">lstore_3</td>
+                    <td><code>130</code></td><td class="w3-pale-red">ixor</td>
+                    <td><code>194</code></td><td>monitorenter</td>
+                </tr>
+                <tr>
+                    <td><code>3</code></td><td class="w3-amber">iconst_0</td>
+                    <td><code>67</code></td><td class="w3-light-blue">fstore_0</td>
+                    <td><code>131</code></td><td class="w3-pale-red">lxor</td>
+                    <td><code>195</code></td><td>monitorexit</td>
+                </tr>
+                <tr>
+                    <td><code>4</code></td><td class="w3-amber">iconst_1</td>
+                    <td><code>68</code></td><td class="w3-light-blue">fstore_1</td>
+                    <td><code>132</code></td><td class="w3-pale-red">iinc</td>
+                    <td><code>196</code></td><td>wide</td>
+                </tr>
+                <tr>
+                    <td><code>5</code></td><td class="w3-amber">iconst_2</td>
+                    <td><code>69</code></td><td class="w3-light-blue">fstore_2</td>
+                    <td><code>133</code></td><td class="w3-teal">i2l</td>
+                    <td><code>197</code></td><td class="w3-indigo">multianewarray</td>
+                </tr>
+                <tr>
+                    <td><code>6</code></td><td class="w3-amber">iconst_3</td>
+                    <td><code>70</code></td><td class="w3-light-blue">fstore_3</td>
+                    <td><code>134</code></td><td class="w3-teal">i2f</td>
+                    <td><code>198</code></td><td class="w3-pink">ifnull</td>
+                </tr>
+                <tr>
+                    <td><code>7</code></td><td class="w3-amber">iconst_4</td>
+                    <td><code>71</code></td><td class="w3-light-blue">dstore_0</td>
+                    <td><code>135</code></td><td class="w3-teal">i2d</td>
+                    <td><code>199</code></td><td class="w3-pink">ifnonnull</td>
+                </tr>
+                <tr>
+                    <td><code>8</code></td><td class="w3-amber">iconst_5</td>
+                    <td><code>72</code></td><td class="w3-light-blue">dstore_1</td>
+                    <td><code>136</code></td><td class="w3-teal">l2i</td>
+                    <td><code>200</code></td><td class="w3-green">goto_w</td>
+                </tr>
+                <tr>
+                    <td><code>9</code></td><td class="w3-amber">lconst_0</td>
+                    <td><code>73</code></td><td class="w3-light-blue">dstore_2</td>
+                    <td><code>137</code></td><td class="w3-teal">l2f</td>
+                    <td><code>201</code></td><td class="w3-grey">jsr_w</td>
+                </tr>
+                <tr>
+                    <td><code>10</code></td><td class="w3-amber">lconst_1</td>
+                    <td><code>74</code></td><td class="w3-light-blue">dstore_3</td>
+                    <td><code>138</code></td><td class="w3-teal">l2d</td>
+                    <td><code>202</code></td><td>breakpoint</td>
+                </tr>
+                <tr>
+                    <td><code>11</code></td><td class="w3-amber">fconst_0</td>
+                    <td><code>75</code></td><td class="w3-light-blue">astore_0</td>
+                    <td><code>139</code></td><td class="w3-teal">f2i</td>
+                    <td><code>203</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>12</code></td><td class="w3-amber">fconst_1</td>
+                    <td><code>76</code></td><td class="w3-light-blue">astore_1</td>
+                    <td><code>140</code></td><td class="w3-teal">f2l</td>
+                    <td><code>204</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>13</code></td><td class="w3-amber">fconst_2</td>
+                    <td><code>77</code></td><td class="w3-light-blue">astore_2</td>
+                    <td><code>141</code></td><td class="w3-teal">f2d</td>
+                    <td><code>205</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>14</code></td><td class="w3-amber">dconst_0</td>
+                    <td><code>78</code></td><td class="w3-light-blue">astore_3</td>
+                    <td><code>142</code></td><td class="w3-teal">d2i</td>
+                    <td><code>206</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>15</code></td><td class="w3-amber">dconst_1</td>
+                    <td><code>79</code></td><td class="w3-brown">iastore</td>
+                    <td><code>143</code></td><td class="w3-teal">d2l</td>
+                    <td><code>207</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>16</code></td><td class="w3-amber">bipush</td>
+                    <td><code>80</code></td><td class="w3-brown">lastore</td>
+                    <td><code>144</code></td><td class="w3-teal">d2f</td>
+                    <td><code>208</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>17</code></td><td class="w3-amber">sipush</td>
+                    <td><code>81</code></td><td class="w3-brown">fastore</td>
+                    <td><code>145</code></td><td class="w3-teal">i2b</td>
+                    <td><code>209</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>18</code></td><td class="w3-amber">ldc</td>
+                    <td><code>82</code></td><td class="w3-brown">dastore</td>
+                    <td><code>146</code></td><td class="w3-teal">i2c</td>
+                    <td><code>210</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>19</code></td><td class="w3-amber">ldc_w</td>
+                    <td><code>83</code></td><td class="w3-brown">aastore</td>
+                    <td><code>147</code></td><td class="w3-teal">i2s</td>
+                    <td><code>211</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>20</code></td><td class="w3-amber">ldc2_w</td>
+                    <td><code>84</code></td><td class="w3-brown">bastore</td>
+                    <td><code>148</code></td><td class="w3-pink">lcmp</td>
+                    <td><code>212</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>21</code></td><td class="w3-light-blue">iload</td>
+                    <td><code>85</code></td><td class="w3-brown">castore</td>
+                    <td><code>149</code></td><td class="w3-pink">fcmpl</td>
+                    <td><code>213</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>22</code></td><td class="w3-light-blue">lload</td>
+                    <td><code>86</code></td><td class="w3-brown">sastore</td>
+                    <td><code>150</code></td><td class="w3-pink">fcmpg</td>
+                    <td><code>214</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>23</code></td><td class="w3-light-blue">fload</td>
+                    <td><code>87</code></td><td class="w3-purple">pop</td>
+                    <td><code>151</code></td><td class="w3-pink">dcmpl</td>
+                    <td><code>215</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>24</code></td><td class="w3-light-blue">dload</td>
+                    <td><code>88</code></td><td class="w3-purple">pop2</td>
+                    <td><code>152</code></td><td class="w3-pink">dcmpg</td>
+                    <td><code>216</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>25</code></td><td class="w3-light-blue">aload</td>
+                    <td><code>89</code></td><td class="w3-purple">dup</td>
+                    <td><code>153</code></td><td class="w3-pink">ifeq</td>
+                    <td><code>217</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>26</code></td><td class="w3-light-blue">iload_0</td>
+                    <td><code>90</code></td><td class="w3-purple">dup_x1</td>
+                    <td><code>154</code></td><td class="w3-pink">ifne</td>
+                    <td><code>218</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>27</code></td><td class="w3-light-blue">iload_1</td>
+                    <td><code>91</code></td><td class="w3-purple">dup_x2</td>
+                    <td><code>155</code></td><td class="w3-pink">iflt</td>
+                    <td><code>219</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>28</code></td><td class="w3-light-blue">iload_2</td>
+                    <td><code>92</code></td><td class="w3-purple">dup2</td>
+                    <td><code>156</code></td><td class="w3-pink">ifge</td>
+                    <td><code>220</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>29</code></td><td class="w3-light-blue">iload_3</td>
+                    <td><code>93</code></td><td class="w3-purple">dup2_x1</td>
+                    <td><code>157</code></td><td class="w3-pink">ifgt</td>
+                    <td><code>221</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>30</code></td><td class="w3-light-blue">lload_0</td>
+                    <td><code>94</code></td><td class="w3-purple">dup2_x2</td>
+                    <td><code>158</code></td><td class="w3-pink">ifle</td>
+                    <td><code>222</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>31</code></td><td class="w3-light-blue">lload_1</td>
+                    <td><code>95</code></td><td class="w3-purple">swap</td>
+                    <td><code>159</code></td><td class="w3-pink">if_icmpeq</td>
+                    <td><code>223</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>32</code></td><td class="w3-light-blue">lload_2</td>
+                    <td><code>96</code></td><td class="w3-pale-red">iadd</td>
+                    <td><code>160</code></td><td class="w3-pink">if_icmpne</td>
+                    <td><code>224</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>33</code></td><td class="w3-light-blue">lload_3</td>
+                    <td><code>97</code></td><td class="w3-pale-red">ladd</td>
+                    <td><code>161</code></td><td class="w3-pink">if_icmplt</td>
+                    <td><code>225</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>34</code></td><td class="w3-light-blue">fload_0</td>
+                    <td><code>98</code></td><td class="w3-pale-red">fadd</td>
+                    <td><code>162</code></td><td class="w3-pink">if_icmpge</td>
+                    <td><code>226</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>35</code></td><td class="w3-light-blue">fload_1</td>
+                    <td><code>99</code></td><td class="w3-pale-red">dadd</td>
+                    <td><code>163</code></td><td class="w3-pink">if_icmpgt</td>
+                    <td><code>227</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>36</code></td><td class="w3-light-blue">fload_2</td>
+                    <td><code>100</code></td><td class="w3-pale-red">isub</td>
+                    <td><code>164</code></td><td class="w3-pink">if_icmple</td>
+                    <td><code>228</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>37</code></td><td class="w3-light-blue">fload_3</td>
+                    <td><code>101</code></td><td class="w3-pale-red">lsub</td>
+                    <td><code>165</code></td><td class="w3-pink">if_acmpeq</td>
+                    <td><code>229</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>38</code></td><td class="w3-light-blue">dload_0</td>
+                    <td><code>102</code></td><td class="w3-pale-red">fsub</td>
+                    <td><code>166</code></td><td class="w3-pink">if_acmpne</td>
+                    <td><code>230</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>39</code></td><td class="w3-light-blue">dload_1</td>
+                    <td><code>103</code></td><td class="w3-pale-red">dsub</td>
+                    <td><code>167</code></td><td class="w3-green">goto</td>
+                    <td><code>231</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>40</code></td><td class="w3-light-blue">dload_2</td>
+                    <td><code>104</code></td><td class="w3-pale-red">imul</td>
+                    <td><code>168</code></td><td class="w3-grey">jsr</td>
+                    <td><code>232</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>41</code></td><td class="w3-light-blue">dload_3</td>
+                    <td><code>105</code></td><td class="w3-pale-red">lmul</td>
+                    <td><code>169</code></td><td class="w3-grey">ret</td>
+                    <td><code>233</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>42</code></td><td class="w3-light-blue">aload_0</td>
+                    <td><code>106</code></td><td class="w3-pale-red">fmul</td>
+                    <td><code>170</code></td><td class="w3-pink">tableswitch</td>
+                    <td><code>234</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>43</code></td><td class="w3-light-blue">aload_1</td>
+                    <td><code>107</code></td><td class="w3-pale-red">dmul</td>
+                    <td><code>171</code></td><td class="w3-pink">lookupswitch</td>
+                    <td><code>235</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>44</code></td><td class="w3-light-blue">aload_2</td>
+                    <td><code>108</code></td><td class="w3-pale-red">idiv</td>
+                    <td><code>172</code></td><td class="w3-lime">ireturn</td>
+                    <td><code>236</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>45</code></td><td class="w3-light-blue">aload_3</td>
+                    <td><code>109</code></td><td class="w3-pale-red">ldiv</td>
+                    <td><code>173</code></td><td class="w3-lime">lreturn</td>
+                    <td><code>237</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>46</code></td><td class="w3-brown">iaload</td>
+                    <td><code>110</code></td><td class="w3-pale-red">fdiv</td>
+                    <td><code>174</code></td><td class="w3-lime">freturn</td>
+                    <td><code>238</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>47</code></td><td class="w3-brown">laload</td>
+                    <td><code>111</code></td><td class="w3-pale-red">ddiv</td>
+                    <td><code>175</code></td><td class="w3-lime">dreturn</td>
+                    <td><code>239</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>48</code></td><td class="w3-brown">faload</td>
+                    <td><code>112</code></td><td class="w3-pale-red">irem</td>
+                    <td><code>176</code></td><td class="w3-lime">areturn</td>
+                    <td><code>240</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>49</code></td><td class="w3-brown">daload</td>
+                    <td><code>113</code></td><td class="w3-pale-red">lrem</td>
+                    <td><code>177</code></td><td class="w3-lime">return</td>
+                    <td><code>241</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>50</code></td><td class="w3-brown">aaload</td>
+                    <td><code>114</code></td><td class="w3-pale-red">frem</td>
+                    <td><code>178</code></td><td class="w3-blue">getstatic</td>
+                    <td><code>242</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>51</code></td><td class="w3-brown">baload</td>
+                    <td><code>115</code></td><td class="w3-pale-red">drem</td>
+                    <td><code>179</code></td><td class="w3-blue">putstatic</td>
+                    <td><code>243</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>52</code></td><td class="w3-brown">caload</td>
+                    <td><code>116</code></td><td class="w3-pale-red">ineg</td>
+                    <td><code>180</code></td><td class="w3-blue">getfield</td>
+                    <td><code>244</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>53</code></td><td class="w3-brown">saload</td>
+                    <td><code>117</code></td><td class="w3-pale-red">lneg</td>
+                    <td><code>181</code></td><td class="w3-blue">putfield</td>
+                    <td><code>245</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>54</code></td><td class="w3-light-blue">istore</td>
+                    <td><code>118</code></td><td class="w3-pale-red">fneg</td>
+                    <td><code>182</code></td><td class="w3-aqua">invokevirtual</td>
+                    <td><code>246</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>55</code></td><td class="w3-light-blue">lstore</td>
+                    <td><code>119</code></td><td class="w3-pale-red">dneg</td>
+                    <td><code>183</code></td><td class="w3-aqua">invokespecial</td>
+                    <td><code>247</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>56</code></td><td class="w3-light-blue">fstore</td>
+                    <td><code>120</code></td><td class="w3-pale-red">ishl</td>
+                    <td><code>184</code></td><td class="w3-aqua">invokestatic</td>
+                    <td><code>248</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>57</code></td><td class="w3-light-blue">dstore</td>
+                    <td><code>121</code></td><td class="w3-pale-red">lshl</td>
+                    <td><code>185</code></td><td class="w3-aqua">invokeinterface</td>
+                    <td><code>249</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>58</code></td><td class="w3-light-blue">astore</td>
+                    <td><code>122</code></td><td class="w3-pale-red">ishr</td>
+                    <td><code>186</code></td><td class="w3-aqua">invokedynamic</td>
+                    <td><code>250</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>59</code></td><td class="w3-light-blue">istore_0</td>
+                    <td><code>123</code></td><td class="w3-pale-red">lshr</td>
+                    <td><code>187</code></td><td class="w3-indigo">new</td>
+                    <td><code>251</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>60</code></td><td class="w3-light-blue">istore_1</td>
+                    <td><code>124</code></td><td class="w3-pale-red">iushr</td>
+                    <td><code>188</code></td><td class="w3-indigo">newarray</td>
+                    <td><code>252</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>61</code></td><td class="w3-light-blue">istore_2</td>
+                    <td><code>125</code></td><td class="w3-pale-red">lushr</td>
+                    <td><code>189</code></td><td class="w3-indigo">anewarray</td>
+                    <td><code>253</code></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>62</code></td><td class="w3-light-blue">istore_3</td>
+                    <td><code>126</code></td><td class="w3-pale-red">iand</td>
+                    <td><code>190</code></td><td class="w3-brown">arraylength</td>
+                    <td><code>254</code></td><td>impdep1</td>
+                </tr>
+                <tr>
+                    <td><code>63</code></td><td class="w3-light-blue">lstore_0</td>
+                    <td><code>127</code></td><td class="w3-pale-red">land</td>
+                    <td><code>191</code></td><td>athrow</td>
+                    <td><code>255</code></td><td>impdep2</td>
+                </tr>
+                </tbody>
+            </table>
+            <hr/>
+
+            <p class="indented">
+                The Java Virtual Machine's heap stores all objects created by a running Java application.
+                Objects are created by the <code>new</code>, <code>newarray</code>, <code>anewarray</code>, and <code>multianewarray</code> instructions,
+                but never freed explicitly by the code.
+                Garbage collection is the process of automatically freeing objects that are no longer referenced by the program.
+            </p>
+
+            <p class="indented">
+                Unlike all other opcodes, method invocations(<code>invokevirtual</code>、<code>invokespecial</code>、<code>invokestatic</code>、<code>invokeinterface</code>、<code>invokedynamic</code>) pops a variable number of entries of the stack!
+            </p>
+            <ul>
+                <li>
+                    AllocationInstruction
+                    <img alt="" src="/assets/images/list.png" onclick="$(this).next().toggle()"/>
+                    <ul style="display: none;">
+                        <li><code>new</code></li>
+                        <li><code>newarray</code></li>
+                        <li><code>anewarray</code></li>
+                        <li><code>multianewarray</code></li>
+                    </ul>
+                </li>
+                <li>
+                    ArithmeticInstruction
+                    <img alt="" src="/assets/images/list.png" onclick="$(this).next().toggle()"/>
+                    <ul style="display: none;">
+                        <li><code>iadd</code></li>
+                        <li><code>ladd</code></li>
+                        <li><code>fadd</code></li>
+                        <li><code>dadd</code></li>
+                        <li><code>isub</code></li>
+                        <li><code>lsub</code></li>
+                        <li><code>fsub</code></li>
+                        <li><code>dsub</code></li>
+                        <li><code>imul</code></li>
+                        <li><code>lmul</code></li>
+                        <li><code>fmul</code></li>
+                        <li><code>dmul</code></li>
+                        <li><code>idiv</code></li>
+                        <li><code>ldiv</code></li>
+                        <li><code>fdiv</code></li>
+                        <li><code>ddiv</code></li>
+                        <li><code>irem</code></li>
+                        <li><code>lrem</code></li>
+                        <li><code>frem</code></li>
+                        <li><code>drem</code></li>
+                        <li><code>ineg</code></li>
+                        <li><code>lneg</code></li>
+                        <li><code>fneg</code></li>
+                        <li><code>dneg</code></li>
+                        <li><code>ishl</code></li>
+                        <li><code>lshl</code></li>
+                        <li><code>ishr</code></li>
+                        <li><code>lshr</code></li>
+                        <li><code>iushr</code></li>
+                        <li><code>lushr</code></li>
+                        <li><code>iand</code></li>
+                        <li><code>land</code></li>
+                        <li><code>ior</code></li>
+                        <li><code>lor</code></li>
+                        <li><code>ixor</code></li>
+                        <li><code>lxor</code></li>
+                        <li><code>iinc</code></li>
+                    </ul>
+                </li>
+                <li>
+                    ArrayInstruction
+                    <img alt="" src="/assets/images/list.png" onclick="$(this).next().toggle()"/>
+                    <ul style="display: none;">
+                        <li><code>iaload</code></li>
+                        <li><code>laload</code></li>
+                        <li><code>faload</code></li>
+                        <li><code>daload</code></li>
+                        <li><code>aaload</code></li>
+                        <li><code>baload</code></li>
+                        <li><code>caload</code></li>
+                        <li><code>saload</code></li>
+                        <li><code>iastore</code></li>
+                        <li><code>lastore</code></li>
+                        <li><code>fastore</code></li>
+                        <li><code>dastore</code></li>
+                        <li><code>aastore</code></li>
+                        <li><code>bastore</code></li>
+                        <li><code>castore</code></li>
+                        <li><code>sastore</code></li>
+                    </ul>
+                </li>
+                <li>
+                    CompareInstruction
+                    <img alt="" src="/assets/images/list.png" onclick="$(this).next().toggle()"/>
+                    <ul style="display: none;">
+                        <li><code>lcmp</code></li>
+                        <li><code>fcmpl</code></li>
+                        <li><code>fcmpg</code></li>
+                        <li><code>dcmpl</code></li>
+                        <li><code>dcmpg</code></li>
+                    </ul>
+                </li>
+                <li>
+                    ConstantPushInstruction
+                    <img alt="" src="/assets/images/list.png" onclick="$(this).next().toggle()"/>
+                    <ul style="display: none;">
+                        <li><code>aconst_null</code></li>
+                        <li><code>iconst_m1</code></li>
+                        <li><code>iconst_0</code></li>
+                        <li><code>iconst_1</code></li>
+                        <li><code>iconst_2</code></li>
+                        <li><code>iconst_3</code></li>
+                        <li><code>iconst_4</code></li>
+                        <li><code>iconst_5</code></li>
+                        <li><code>lconst_0</code></li>
+                        <li><code>lconst_1</code></li>
+                        <li><code>fconst_0</code></li>
+                        <li><code>fconst_1</code></li>
+                        <li><code>fconst_2</code></li>
+                        <li><code>dconst_0</code></li>
+                        <li><code>dconst_1</code></li>
+                        <li><code>bipush</code></li>
+                        <li><code>sipush</code></li>
+                    </ul>
+                </li>
+                <li>
+                    ConversionInstruction
+                    <img alt="" src="/assets/images/list.png" onclick="$(this).next().toggle()"/>
+                    <ul style="display: none;">
+                        <li><code>i2l</code></li>
+                        <li><code>i2f</code></li>
+                        <li><code>i2d</code></li>
+                        <li><code>l2i</code></li>
+                        <li><code>l2f</code></li>
+                        <li><code>l2d</code></li>
+                        <li><code>f2i</code></li>
+                        <li><code>f2l</code></li>
+                        <li><code>f2d</code></li>
+                        <li><code>d2i</code></li>
+                        <li><code>d2l</code></li>
+                        <li><code>d2f</code></li>
+                        <li><code>i2b</code></li>
+                        <li><code>i2c</code></li>
+                        <li><code>i2s</code></li>
+                    </ul>
+                </li>
+                <li>
+                    CPInstruction
+                    <img alt="" src="/assets/images/list.png" onclick="$(this).next().toggle()"/>
+                    <ul style="display: none;">
+                        <li><code>ldc</code></li>
+                        <li><code>ldc_w</code></li>
+                        <li><code>ldc2_w</code></li>
+                    </ul>
+                </li>
+                <li>
+                    FieldInstruction
+                    <img alt="" src="/assets/images/list.png" onclick="$(this).next().toggle()"/>
+                    <ul style="display: none;">
+                        <li><code>getstatic</code></li>
+                        <li><code>putstatic</code></li>
+                        <li><code>getfield</code></li>
+                        <li><code>putfield</code></li>
+                    </ul>
+                </li>
+                <li>
+                    IfInstruction
+                    <img alt="" src="/assets/images/list.png" onclick="$(this).next().toggle()"/>
+                    <ul style="display: none;">
+                        <li><code>ifeq</code></li>
+                        <li><code>ifne</code></li>
+                        <li><code>iflt</code></li>
+                        <li><code>ifge</code></li>
+                        <li><code>ifgt</code></li>
+                        <li><code>ifle</code></li>
+                        <li><code>if_icmpeq</code></li>
+                        <li><code>if_icmpne</code></li>
+                        <li><code>if_icmplt</code></li>
+                        <li><code>if_icmpge</code></li>
+                        <li><code>if_icmpgt</code></li>
+                        <li><code>if_icmple</code></li>
+                        <li><code>if_acmpeq</code></li>
+                        <li><code>if_acmpne</code></li>
+                        <li><code>ifnull</code></li>
+                        <li><code>ifnonnull</code></li>
+                    </ul>
+                </li>
+                <li>
+                    InvokeInstruction
+                    <img alt="" src="/assets/images/list.png" onclick="$(this).next().toggle()"/>
+                    <ul style="display: none;">
+                        <li><code>invokevirtual</code></li>
+                        <li><code>invokespecial</code></li>
+                        <li><code>invokestatic</code></li>
+                        <li><code>invokeinterface</code></li>
+                        <li><code>invokedynamic</code></li>
+                    </ul>
+                </li>
+                <li>
+                    JumpInstruction
+                    <img alt="" src="/assets/images/list.png" onclick="$(this).next().toggle()"/>
+                    <ul style="display: none;">
+                        <li><code>goto</code></li>
+                        <li><code>goto_w</code></li>
+                    </ul>
+                </li>
+                <li>
+                    LocalVariableInstruction
+                    <img alt="" src="/assets/images/list.png" onclick="$(this).next().toggle()"/>
+                    <ul style="display: none;">
+                        <li><code>iload</code></li>
+                        <li><code>lload</code></li>
+                        <li><code>fload</code></li>
+                        <li><code>dload</code></li>
+                        <li><code>aload</code></li>
+                        <li><code>iload_0</code></li>
+                        <li><code>iload_1</code></li>
+                        <li><code>iload_2</code></li>
+                        <li><code>iload_3</code></li>
+                        <li><code>lload_0</code></li>
+                        <li><code>lload_1</code></li>
+                        <li><code>lload_2</code></li>
+                        <li><code>lload_3</code></li>
+                        <li><code>fload_0</code></li>
+                        <li><code>fload_1</code></li>
+                        <li><code>fload_2</code></li>
+                        <li><code>fload_3</code></li>
+                        <li><code>dload_0</code></li>
+                        <li><code>dload_1</code></li>
+                        <li><code>dload_2</code></li>
+                        <li><code>dload_3</code></li>
+                        <li><code>aload_0</code></li>
+                        <li><code>aload_1</code></li>
+                        <li><code>aload_2</code></li>
+                        <li><code>aload_3</code></li>
+                        <li><code>istore</code></li>
+                        <li><code>lstore</code></li>
+                        <li><code>fstore</code></li>
+                        <li><code>dstore</code></li>
+                        <li><code>astore</code></li>
+                        <li><code>istore_0</code></li>
+                        <li><code>istore_1</code></li>
+                        <li><code>istore_2</code></li>
+                        <li><code>istore_3</code></li>
+                        <li><code>lstore_0</code></li>
+                        <li><code>lstore_1</code></li>
+                        <li><code>lstore_2</code></li>
+                        <li><code>lstore_3</code></li>
+                        <li><code>fstore_0</code></li>
+                        <li><code>fstore_1</code></li>
+                        <li><code>fstore_2</code></li>
+                        <li><code>fstore_3</code></li>
+                        <li><code>dstore_0</code></li>
+                        <li><code>dstore_1</code></li>
+                        <li><code>dstore_2</code></li>
+                        <li><code>dstore_3</code></li>
+                        <li><code>astore_0</code></li>
+                        <li><code>astore_1</code></li>
+                        <li><code>astore_2</code></li>
+                        <li><code>astore_3</code></li>
+                    </ul>
+                </li>
+                <li>
+                    ReturnInstruction
+                    <img alt="" src="/assets/images/list.png" onclick="$(this).next().toggle()"/>
+                    <ul style="display: none;">
+                        <li><code>ireturn</code></li>
+                        <li><code>lreturn</code></li>
+                        <li><code>freturn</code></li>
+                        <li><code>dreturn</code></li>
+                        <li><code>areturn</code></li>
+                        <li><code>return</code></li>
+                    </ul>
+                </li>
+                <li>
+                    SelectInstruction
+                    <img alt="" src="/assets/images/list.png" onclick="$(this).next().toggle()"/>
+                    <ul style="display: none;">
+                        <li><code>tableswitch</code></li>
+                        <li><code>lookupswitch</code></li>
+                    </ul>
+                </li>
+                <li>
+                    StackInstruction
+                    <img alt="" src="/assets/images/list.png" onclick="$(this).next().toggle()"/>
+                    <ul style="display: none;">
+                        <li><code>pop</code></li>
+                        <li><code>pop2</code></li>
+                        <li><code>dup</code></li>
+                        <li><code>dup_x1</code></li>
+                        <li><code>dup_x2</code></li>
+                        <li><code>dup2</code></li>
+                        <li><code>dup2_x1</code></li>
+                        <li><code>dup2_x2</code></li>
+                        <li><code>swap</code></li>
+                    </ul>
+                </li>
+                <li>
+                    SubroutineInstruction
+                    <img alt="" src="/assets/images/list.png" onclick="$(this).next().toggle()"/>
+                    <ul style="display: none;">
+                        <li><code>jsr</code></li>
+                        <li><code>ret</code></li>
+                        <li><code>jsr_w</code></li>
+                    </ul>
+                </li>
+                <li>
+                    XXXInstruction
+                    <img alt="" src="/assets/images/list.png" onclick="$(this).next().toggle()"/>
+                    <ul style="display: none;">
+                        <li><code>nop</code></li>
+                        <li><code>arraylength</code></li>
+                        <li><code>athrow</code></li>
+                        <li><code>checkcast</code></li>
+                        <li><code>instanceof</code></li>
+                        <li><code>monitorenter</code></li>
+                        <li><code>monitorexit</code></li>
+                        <li><code>wide</code></li>
+                        <li><code>impdep1</code></li>
+                        <li><code>impdep2</code></li>
+                    </ul>
+                </li>
+            </ul>
+        </article>
+    </div>
+</main>
+
+</body>
+</html>
