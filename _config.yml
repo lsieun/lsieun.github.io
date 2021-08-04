@@ -75,6 +75,10 @@ collections:
     output: true
     title: "Architecture"
     sequence: 10
+  english:
+    output: true
+    title: "English"
+    sequence: 11
   jekyll:
     output: true
     title: "Jekyll快速参考教程"
@@ -167,6 +171,13 @@ defaults:
     values:
       layout: "post"
       tags: architecture
+  -
+    scope:
+      path: ""
+      type: "english"
+    values:
+      layout: "post"
+      tags: english
   -
     scope:
       path: ""

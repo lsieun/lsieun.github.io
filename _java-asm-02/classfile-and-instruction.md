@@ -206,8 +206,6 @@ For the majority of **typed instructions**, the instruction type is represented 
 - 第一种，经过短期刻苦努力，然后突然明白一个知识点，给人一种如获至宝的感觉。
 - 第二种，经过长期坚持探索，大的知识点要学习，小的知识点也不舍弃，慢慢积累，最后达到水滴石穿的效果。
 
-举个武侠世界的例子：一般的名门正派，练武功，都是讲究打好根基，循序渐进，长年累月，终成一代宗师；而邪派，练武功，急于求成，短时间内，武功突飞猛进，但往往也伴随着不好的副作用。
-
 学习这些opcode，也是一个缓慢的过程，就是平时一点一点的学习、慢慢积累的过程。
 
 推荐的学习方式：
@@ -224,4 +222,4 @@ For the majority of **typed instructions**, the instruction type is represented 
 - 第一点，在ClassFile结构中，对于方法接收的参数和方法体的大小是有数量限制的。
 - 第二点，instruction = opcode + operands
 - 第三点，opcode占用1个byte大小，目前定义了205个；为了方便记忆，JVM文档为opcode提供了名字（即mnemonic symbol），大多数的名字中带有类型信息。
-- 第四点，学习opcode是一个长期积累的过程，推荐大家对感兴趣的内容进行有选择性的学习。
+- 第四点，学习opcode是一个长期积累的过程，不能一蹴而就。所以，推荐大家依据感兴趣的内容，进行有选择性的学习。

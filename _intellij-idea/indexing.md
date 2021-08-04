@@ -11,9 +11,7 @@ sequence: "201"
 
 在类名、方法名、字段名，我们可以使用鼠标右键点击，然后选择`Find Usages`，就可以查看该条目在哪些地方使用到了。那么，我们思考一下：Find Usages是如何实现的呢？
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/how-may-find-usages-work.png)
-{: refdef}
 
 ### Rename Refactoring
 
@@ -24,9 +22,7 @@ Use the Rename refactoring to change **names of symbols, files, directories, pac
 
 在类名、方法名、字段名，我们可以使用鼠标右键点击，然后选择`Refactor | Rename...`，将该条目进行重新命名，那么所有使用到该条目的地方也会更新为新的名字。那么，我们思考一下：Rename Refactoring是如何实现的呢？
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/how-may-rename-refactoring-work.png)
-{: refdef}
 
 ### Code Inspections
 
@@ -52,9 +48,7 @@ public class HelloWorld {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/can-not-resolve-symbol-swapper32.png)
-{: refdef}
 
 ### Full Text Search
 
@@ -85,9 +79,7 @@ It starts when
 
 For example, this can happen if multiple files in your project are created or generated after you build your project.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/indexing.png)
-{: refdef}
 
 ### 对哪些事物进行索引
 

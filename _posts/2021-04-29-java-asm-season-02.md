@@ -32,7 +32,6 @@ ASM is an open-source java library for manipulating bytecode.
         <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
     </li>
     {% endif %}
-
     {% endfor %}
 </ol>
 
@@ -49,27 +48,40 @@ ASM is an open-source java library for manipulating bytecode.
         <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
     </li>
     {% endif %}
-
     {% endfor %}
 </ol>
 
-### 第三章
-
-处理exception，将exception存储到什么位置
-创建对象，new/dup/invokespecial
-调用方法，加载this、方法参数，最后调用方法
-Java 8 Lambda到底是怎么回事
-
-### 所有章节
+### 第三章 难点解析
 
 {% assign filtered_posts = site.java-asm-02 | sort: "sequence" %}
 <ol>
     {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    {% if num > 300 and num < 400 %}
     <li>
         <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
     </li>
+    {% endif %}
     {% endfor %}
 </ol>
+
+[comment]: <> (### 所有章节)
+
+[comment]: <> ({% assign filtered_posts = site.java-asm-02 | sort: "sequence" %})
+
+[comment]: <> (<ol>)
+
+[comment]: <> (    {% for post in filtered_posts %})
+
+[comment]: <> (    <li>)
+
+[comment]: <> (        <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>)
+
+[comment]: <> (    </li>)
+
+[comment]: <> (    {% endfor %})
+
+[comment]: <> (</ol>)
 
 ## 参考资料
 
