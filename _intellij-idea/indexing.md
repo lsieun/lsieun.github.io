@@ -52,9 +52,92 @@ public class HelloWorld {
 
 ### Full Text Search
 
-## Trigrams
+做了一个测试：
 
-In computer science, an **inverted index** is a database index storing a mapping from content, such as words or numbers, to its locations in a table, or in a document or a set of documents. The purpose of an inverted index is to allow fast full-text searches, at a cost of increased processing when a document is added to the database.
+- 源码：[IntelliJ IDEA Community](https://github.com/jetbrains/intellij-community)
+- License: Apache-2.0 License
+- 120k files / 4.5Gb total
+- with 69k Java files, 7k Kotlin files consuming 212Mb
+
+编写一个Kotlin程序（省略）
+
+测试结果：
+
+- takes ~2.5 seconds on macOS
+- takes ~4 seconds on Windows
+
+Full Text Search in IntelliJ，就非常快，基本上刚输入完“Swapper”，就直接显示结果了。
+
+## Trigram Search
+
+### Forward Index
+
+The **forward index** stores a list of words for each document. The following is a simplified form of the forward index:
+
+| Document | Words |
+|----------|-------|
+| Document 1 | the,cow,says,moo |
+| Document 2 | the,cat,and,the,hat |
+| Document 3 | the,dish,ran,away,with,the,spoon |
+
+### Inverted Index
+
+In computer science, an **inverted index** is a database index storing **a mapping** from **content**, such as words or numbers, to **its locations in a document or a set of documents**. The purpose of an inverted index is to allow fast full-text searches, at a cost of increased processing when a document is added to the database.
+
+| Words | Document |
+|----------|-------|
+| and | Document 2 |
+| away | Document 3 |
+| cat | Document 2 |
+| cow | Document 1 |
+| dish | Document 3 |
+| hat | Document 2 |
+| moo | Document 1 |
+| ran | Document 3 |
+| says | Document 1 |
+| spoon | Document 3 |
+| the | Document 1, Document 2, Document 3 |
+| with | Document 3 |
+
+### What is Trigram Indexes
+
+Trigram indexes are ideal for text searches when the exact spelling of the target object is not precisely known. It finds objects which match the maximum number of three-character strings in the entered search terms, i.e., near matches. A classical tree index allows exact match queries (eg. `x='qqq'`), range queries (eg. `x >= 10 and x <= 100`) and prefix match queries (eg. `x >= 'abc'`).
+
+However, for more complex regular expressions like `%xyz%` a tree index would require a sequential search, which is significantly slower. In this case a trigram index can be optimal.
+
+The idea of trigram index is rather simple. Assume that we have a string key `qwerty`.
+The string is split into trigrams (sequences of three subsequent characters):
+- qwe
+- wer
+- ert
+- rty
+
+{:refdef: style="text-align: center;"}
+![](/assets/images/intellij/trigram-indexes-qwerty.png)
+{: refdef}
+
+These trigrams are stored in a normal tree index. Now consider a query looking for the substring `wert`.
+The query condition is also split into trigrams: `wer` and `ert`.
+The search then is looking for these trigrams in the index.
+The result of the lookup is two lists of objects -- so-called inverse lists.
+The next step is to join these lists, i.e. to find objects which are present in both lists.
+
+There is no guarantee that the objects that were found through this algorithm actually contain the `wert` substring yet.
+For example, it could be `werrert`.
+So the next step in the lookup process is to recheck that the object really matches the given regular expression.
+
+The main limitation of the trigram index is clear from the description above: it cannot be used for substrings shorter than 3.
+For example the pattern `%01%` requires a sequential search even if the trigram index is present.
+
+The trigram index can be used to locate objects containing a specified substring and regular expression matching; similar to the `LIKE` operator in SQL. In the case of the `LIKE` operator the runtime just extracts the longest substring from the pattern excluding wildcards and performs a search for this substring, and then performs a regular expression match for all selected objects. It is also possible to use the trigram index for an exact match lookup, especially if there are no other indexes declared for the data set.
+
+### Trigram Index: Building
+
+![](/assets/images/intellij/trigram-indexes-example-01.png)
+
+### Trigram Index: Using
+
+![](/assets/images/intellij/trigram-indexes-example-02.png)
 
 ## Indexing
 

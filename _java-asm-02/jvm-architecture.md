@@ -184,7 +184,7 @@ Code_attribute {
 
 对于operand stack是这样描述的：（内容来自于[2.6.2. Operand Stacks](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.6.2)）
 
-- Each entry on the operand stack can hold a value of any Java Virtual Machine type, including a value of type `long` or `type` double.
+- Each entry on the operand stack can hold a value of any Java Virtual Machine type, including a value of type `long` or type `double`.
 - At any point in time, an operand stack has an associated depth, where a value of type `long` or `double` contributes two units to the depth and a value of any other type contributes one unit.
 
 ## 总结

@@ -19,13 +19,20 @@ public class HelloWorld {
 
 在这里，我们只关心方法的部分：
 
-- 对于方法的参数信息，我们可以使用`ClassVisitor.visitMethod(int access, String name, String descriptor, String signature, String[] exceptions)`方法的`descriptor`参数来提供。
+- 对于方法头的部分，我们可以使用`ClassVisitor.visitMethod(int access, String name, String descriptor, String signature, String[] exceptions)`方法来提供。
+  - 其中的`access`参数提供访问标识信息，例如`public`
+  - 其中的`name`参数提供方法的名字，例如`test`
+  - 其中的`descriptor`参数提供方法的参数类型和返回值的类型
 - 对于方法体的部分，我们可能通过使用`MethodVisitor`类来实现。
+  - 如何得到一个`MethodVisitor`对象呢？`ClassVisitor.visitMethod()`的返回值是一个`MethodVisitor`类型的实例。
+  - 方法体的instructions是如何添加的呢？通过调用`MethodVisitor.visitXxxInsn()`方法来提供的
 
-对于`MethodVisitor`类来说，我们从两个方面来把握它（回顾`MethodVisitor`类，可以参考[此处]({% link _java-asm-01/method-visitor-intro.md %})）：
+对于`MethodVisitor`类来说，我们从两个方面来把握（回顾`MethodVisitor`类，可以参考[此处]({% link _java-asm-01/method-visitor-intro.md %})）：
 
 - 第一方面，就是`MethodVisitor`类的`visitXxx()`方法的调用顺序。
 - 第二方面，就是`MethodVisitor`类的`visitXxxInsn()`方法具体有哪些。
+
+注意：`visitXxx()`方法表示`MethodVisitor`类当中所有以`visit`开头的方法，包含的方法比较多；而`visitXxxInsn()`方法是`visitXxx()`方法当中的一小部分，包含的方法比较较少。
 
 ## 方法的调用顺序
 
@@ -54,7 +61,7 @@ visitEnd
 
 ## visitXxxInsn()方法
 
-概括的来说，`MethodVisitor`类有15个`visitXxxInsn()`方法。但严格的来说，有13个`visitXxxInsn()`方法，再加上`visitLabel()`和`visitTryCatchBlock()`这2个方法。
+粗略的来说，`MethodVisitor`类有15个`visitXxxInsn()`方法。但严格的来说，有13个`visitXxxInsn()`方法，再加上`visitLabel()`和`visitTryCatchBlock()`这2个方法。
 
 那么，这15个`visitXxxInsn()`方法，可以用来生成将近200个左右的opcode，也就是用来生成方法体的内容。
 
@@ -95,7 +102,7 @@ public abstract class MethodVisitor {
 
 ## 总结
 
-本文主要是对ASM中`MethodVisitor类进行回顾，内容总结如下：
+本文主要是对ASM中`MethodVisitor`类进行回顾，内容总结如下：
 
 - 第一点，`MethodVisitor`类的`visitXxx()`方法要遵循一定的调用顺序。
 - 第二点，`MethodVisitor`类有15个`visitXxxInsn()`方法，用来生成将近200个左右的opcode。

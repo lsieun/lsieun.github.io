@@ -140,3 +140,6 @@ Chrome插件：
 
 有位同学在群里提了一个问题，说JaCoCo会将`Long`类型转换成`boolean[]`类型，而且不出错。后来发现，原来是修改了`equals`方法，在这里[Coverage Runtime Dependency](https://www.jacoco.org/jacoco/trunk/doc/implementation.html)找到了答案。相应的`equals`所在的类是[org.jacoco.core.runtime.RuntimeData](https://github.com/jacoco/jacoco/blob/master/org.jacoco.core/src/org/jacoco/core/runtime/RuntimeData.java)类。
 
+### xxx
+
+Annotation Processor, Antlr实战、IDEA plugin
