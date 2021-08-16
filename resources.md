@@ -19,6 +19,7 @@ permalink: /resources/
     - [Java Category](https://www.baeldung.com/category/java/)
     - [Write for Baeldung](https://www.baeldung.com/contribution-guidelines)
     - [Java drafts site](https://drafts.baeldung.com/wp-login.php)
+    - [Jira](http://jira.baeldung.com)
 - [翻轉工作室](https://www.tsnien.idv.tw/): 这是台湾粘添壽博士的网站
 - Git:
     - [Gitee](https://gitee.com)
@@ -28,11 +29,15 @@ permalink: /resources/
     - [Google Translate](https://translate.google.com/)
     - [Gmail](https://www.google.com/gmail/)
 - [InfoQ](https://www.infoq.com/)
+- OpenJDK
+  - [Amazon Corretto](https://aws.amazon.com/corretto/): No-cost, multiplatform, production-ready distribution of OpenJDK
+  - [Github OpenJDK](https://github.com/openjdk/)
 - Oracle:
     - [Java Language and Virtual Machine Specifications](https://docs.oracle.com/javase/specs/index.html)
     - [Java SE Downloads](https://www.oracle.com/java/technologies/javase-downloads.html)
     - [Java Documentation](https://docs.oracle.com/en/java/index.html)
     - [Oracle Java SE Documentation](https://docs.oracle.com/en/java/javase/index.html)
+    - [Duke, the Java Mascot](https://www.oracle.com/java/duke.html)
 - [Project Nayuki](https://www.nayuki.io/): a magical girl software developer in Toronto, Canada.
 
 ### Java资源

@@ -43,6 +43,19 @@ public class HelloWorld {
 }
 ```
 
+假如有一个`HelloWorldRun`类，其代码如下：
+
+```java
+import sample.HelloWorld;
+
+public class HelloWorldRun {
+    public static void main(String[] args) throws Exception {
+        HelloWorld instance = new HelloWorld();
+        instance.test();
+    }
+}
+```
+
 从Instruction的视角来看，方法体对应的内容如下：
 
 ```text
@@ -81,9 +94,7 @@ public class sample.HelloWorld {
 0019: return                   // {} | {}
 ```
 
-
 ## 使用astore替换dup指令
-
 
 
 ```java
@@ -147,6 +158,29 @@ public class HelloWorldGenerateCore {
 }
 ```
 
+从Instruction的视角来看，方法体对应的内容如下：
+
+```text
+$ javap -c sample.HelloWorld
+public class sample.HelloWorld {
+...
+  public void test();
+    Code:
+       0: new           #11                 // class sample/GoodChild
+       3: astore_1
+       4: aload_1
+       5: ldc           #13                 // String tom
+       7: bipush        10
+       9: invokespecial #16                 // Method sample/GoodChild."<init>":(Ljava/lang/String;I)V
+      12: getstatic     #22                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      15: aload_1
+      16: invokevirtual #28                 // Method java/io/PrintStream.println:(Ljava/lang/Object;)V
+      19: return
+}
+```
+
+从Frame的视角来看，local variable和operand stack的变化：
+
 ```text
                                // {this} | {}
 0000: new             #11      // {this} | {uninitialized_GoodChild}
@@ -159,17 +193,6 @@ public class HelloWorldGenerateCore {
 0015: aload_1                  // {this, GoodChild} | {PrintStream, GoodChild}
 0016: invokevirtual   #28      // {this, GoodChild} | {}
 0019: return                   // {} | {}
-```
-
-```java
-import sample.HelloWorld;
-
-public class HelloWorldRun {
-    public static void main(String[] args) throws Exception {
-        HelloWorld instance = new HelloWorld();
-        instance.test();
-    }
-}
 ```
 
 ## 打印未初始化对象
@@ -232,6 +255,8 @@ public class HelloWorldGenerateCore {
     }
 }
 ```
+
+从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
                                // {this} | {}

@@ -86,7 +86,7 @@ methodVisitor.visitEnd();
 ```text
                                // {this} | {}
 0000: iconst_5                 // {this} | {int}
-0001: newarray        byte     // {this} | {[B}
+0001: newarray   8 (byte)      // {this} | {[B}
 0003: astore_1                 // {this, [B} | {}
 0004: return                   // {} | {}
 ```

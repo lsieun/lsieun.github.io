@@ -66,7 +66,9 @@ methodVisitor.visitEnd();
 [empty]
 ```
 
-The current method must have return type `void`. If no exception is thrown, **any values on the operand stack of the current frame are discarded.**
+The current method must have return type `void`.
+- If no exception is thrown, **any values on the operand stack of the current frame are discarded.**
+- The interpreter then returns control to the invoker of the method, reinstating the frame of the invoker.
 
 ## return primitive type
 

@@ -109,13 +109,13 @@ public class sample.HelloWorld {
 从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-[sample/HelloWorld] []
-[sample/HelloWorld] []
-[sample/HelloWorld] []
-[sample/HelloWorld] []
-[sample/HelloWorld] []
-[sample/HelloWorld] []
-[] []
+                               // {this} | {}
+0000: nop                      // {this} | {}
+0001: nop                      // {this} | {}
+0002: nop                      // {this} | {}
+0003: nop                      // {this} | {}
+0004: nop                      // {this} | {}
+0005: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`nop`指令对应的Operand Stack的变化如下：

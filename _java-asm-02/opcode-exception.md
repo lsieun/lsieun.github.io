@@ -89,9 +89,11 @@ public class HelloWorld {
     public void test() {
         try {
             int val = 1 / 0;
-        } catch (ArithmeticException e1) {
+        }
+        catch (ArithmeticException e1) {
             System.out.println("catch ArithmeticException");
-        } catch (Exception e2) {
+        }
+        catch (Exception e2) {
             System.out.println("catch Exception");
         }
     }
@@ -170,126 +172,27 @@ methodVisitor.visitMaxs(2, 2);
 methodVisitor.visitEnd();
 ```
 
-如果我们将两个`visitTryCatchBlock`顺序变换一下位置，如下所示，会怎么样呢？这样修改之后，捕获的就是`Exception`类型的异常，而不是`ArithmeticException`类型的异常。
+从Frame的视角来看，local variable和operand stack的变化：
 
 ```text
-methodVisitor.visitTryCatchBlock(label0, label1, label3, "java/lang/Exception");
-methodVisitor.visitTryCatchBlock(label0, label1, label2, "java/lang/ArithmeticException");
-```
-
-完整代码如下：
-
-```java
-import lsieun.utils.FileUtils;
-import org.objectweb.asm.*;
-
-import static org.objectweb.asm.Opcodes.*;
-
-public class HelloWorldGenerateCore {
-    public static void main(String[] args) throws Exception {
-        String relative_path = "sample/HelloWorld.class";
-        String filepath = FileUtils.getFilePath(relative_path);
-
-        // (1) 生成byte[]内容
-        byte[] bytes = dump();
-
-        // (2) 保存byte[]到文件
-        FileUtils.writeBytes(filepath, bytes);
-    }
-
-    public static byte[] dump() throws Exception {
-        // (1) 创建ClassWriter对象
-        ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
-
-        // (2) 调用visitXxx()方法
-        cw.visit(V1_8, ACC_PUBLIC + ACC_SUPER, "sample/HelloWorld",
-                null, "java/lang/Object", null);
-
-        {
-            MethodVisitor mv1 = cw.visitMethod(ACC_PUBLIC, "<init>", "()V", null, null);
-            mv1.visitCode();
-            mv1.visitVarInsn(ALOAD, 0);
-            mv1.visitMethodInsn(INVOKESPECIAL, "java/lang/Object", "<init>", "()V", false);
-            mv1.visitInsn(RETURN);
-            mv1.visitMaxs(1, 1);
-            mv1.visitEnd();
-        }
-
-        {
-            MethodVisitor mv2 = cw.visitMethod(ACC_PUBLIC, "test", "()V", null, null);
-            Label label0 = new Label();
-            Label label1 = new Label();
-            Label label2 = new Label();
-            Label label3 = new Label();
-            Label label4 = new Label();
-
-            mv2.visitCode();
-            mv2.visitTryCatchBlock(label0, label1, label3, "java/lang/Exception");
-            mv2.visitTryCatchBlock(label0, label1, label2, "java/lang/ArithmeticException");
-
-
-            mv2.visitLabel(label0);
-            mv2.visitInsn(ICONST_1);
-            mv2.visitInsn(ICONST_0);
-            mv2.visitInsn(IDIV);
-            mv2.visitVarInsn(ISTORE, 1);
-
-            mv2.visitLabel(label1);
-            mv2.visitJumpInsn(GOTO, label4);
-
-            mv2.visitLabel(label2);
-            mv2.visitVarInsn(ASTORE, 1);
-            mv2.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
-            mv2.visitLdcInsn("catch ArithmeticException");
-            mv2.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
-            mv2.visitJumpInsn(GOTO, label4);
-
-            mv2.visitLabel(label3);
-            mv2.visitVarInsn(ASTORE, 1);
-            mv2.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
-            mv2.visitLdcInsn("catch Exception");
-            mv2.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
-
-            mv2.visitLabel(label4);
-            mv2.visitInsn(RETURN);
-            mv2.visitMaxs(2, 2);
-            mv2.visitEnd();
-        }
-        cw.visitEnd();
-
-        // (3) 调用toByteArray()方法
-        return cw.toByteArray();
-    }
-}
-```
-
-从Instruction的视角来看，方法体对应的内容如下：
-
-```text
-$ javap -c -p sample.HelloWorld
-public class sample.HelloWorld {
-...
-  public void test();
-    Code:
-       0: iconst_1
-       1: iconst_0
-       2: idiv
-       3: istore_1
-       4: goto          28
-       7: astore_1
-       8: getstatic     #19                 // Field java/lang/System.out:Ljava/io/PrintStream;
-      11: ldc           #21                 // String catch ArithmeticException
-      13: invokevirtual #27                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
-      16: goto          28
-      19: astore_1
-      20: getstatic     #19                 // Field java/lang/System.out:Ljava/io/PrintStream;
-      23: ldc           #29                 // String catch Exception
-      25: invokevirtual #27                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
-      28: return
-    Exception table:
-       from    to  target type
-           0     4    19   Class java/lang/Exception
-           0     4     7   Class java/lang/ArithmeticException
-}
+                               // {this} | {}
+0000: iconst_1                 // {this} | {int}
+0001: iconst_0                 // {this} | {int, int}
+0002: idiv                     // {this} | {int}
+0003: istore_1                 // {this, int} | {}
+0004: goto            24       // {} | {}
+                               // {this} | {ArithmeticException}
+0007: astore_1                 // {this, ArithmeticException} | {}
+0008: getstatic       #3       // {this, ArithmeticException} | {PrintStream}
+0011: ldc             #4       // {this, ArithmeticException} | {PrintStream, String}
+0013: invokevirtual   #5       // {this, ArithmeticException} | {}
+0016: goto            12       // {} | {}
+                               // {this} | {Exception}
+0019: astore_1                 // {this, Exception} | {}
+0020: getstatic       #3       // {this, Exception} | {PrintStream}
+0023: ldc             #7       // {this, Exception} | {PrintStream, String}
+0025: invokevirtual   #5       // {this, Exception} | {}
+                               // {this} | {}
+0028: return                   // {} | {}
 ```
 

@@ -79,6 +79,10 @@ collections:
     output: true
     title: "English"
     sequence: 11
+  jdk-tools:
+    output: true
+    title: "JDK Tools"
+    sequence: 12
   jekyll:
     output: true
     title: "Jekyll快速参考教程"
@@ -181,6 +185,13 @@ defaults:
   -
     scope:
       path: ""
+      type: "jdk-tools"
+    values:
+      layout: "post"
+      tags: jdk-tools
+  -
+    scope:
+      path: ""
       type: "jekyll"
     values:
       layout: "post"
@@ -210,14 +221,19 @@ plugins:
 # Excluded items can be processed by explicitly listing the directories or
 # their entries' file path in the `include:` list.
 #
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+exclude:
+    - .sass-cache/
+    - .jekyll-cache/
+    - .idea/
+    - just-run.sh
+    - shutdown.sh
+    - startup.sh
+    - gemfiles/
+    - README.md
+    - Gemfile
+    - Gemfile.lock
+    - node_modules/
+    - vendor/bundle/
+    - vendor/cache/
+    - vendor/gems/
+    - vendor/ruby/

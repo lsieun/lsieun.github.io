@@ -16,3 +16,4 @@ dist/
 .*
 !.gitignore
 google.txt
+Gemfile.lock

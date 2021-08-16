@@ -28,7 +28,7 @@ indexbyte2
 
 where `<opcode>` is one of `iload`, `fload`, `aload`, `lload`, `dload`, `istore`, `fstore`, `astore`, `lstore`, `dstore`, or `ret`.
 
-The second form of the `wide` instruction applies only to the `iinc` instruction (§iinc).
+The second form of the `wide` instruction applies only to the `iinc` instruction.
 
 ```text
 wide

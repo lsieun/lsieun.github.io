@@ -14,14 +14,19 @@ sequence: "207"
 | 182    | invokevirtual   | 184    | invokestatic    | 186    | invokedynamic   |
 | 183    | invokespecial   | 185    | invokeinterface | 187    |                 |
 
+{:refdef: style="text-align: center;"}
+![方法调用的分类](/assets/images/java/asm/opcode-method-invocation.png)
+{: refdef}
+
 从ASM的角度来说，这些opcode与`MethodVisitor.visitXxxInsn()`方法对应关系如下：
 
 - `MethodVisitor.visitMethodInsn()`: `invokevirtual`, `invokespecial`, `invokestatic`, `invokeinterface`
 - `MethodVisitor.visitInvokeDynamicInsn()`: `invokedynamic`
 
-static方法，在local variables索引为`0`的位置，存储的可能是方法的第一个参数或方法体内定义的局部变量。
+另外，我们要注意：
 
-方法调用，是先把方法所需要的参数加载到operand stack上，最后再进行方法的调用。
+- 方法调用，是先把方法所需要的参数加载到operand stack上，最后再进行方法的调用。
+- static方法，在local variables索引为`0`的位置，存储的可能是方法的第一个参数或方法体内定义的局部变量。
 
 ## invokevirtual
 
@@ -306,10 +311,15 @@ public class HelloWorld {
         // do nothing
     }
 
+    private static void staticPrivateMethod() {
+        // do nothing
+    }
+
     public void test() {
         staticPublicMethod("tomcat", 10);
         staticProtectedMethod();
         staticPackageMethod();
+        staticPrivateMethod();
     }
 }
 ```
@@ -317,7 +327,7 @@ public class HelloWorld {
 从Instruction的视角来看，方法体对应的内容如下：
 
 ```text
-$ javap -c sample.HelloWorld
+$  javap -c sample.HelloWorld
 Compiled from "HelloWorld.java"
 public class sample.HelloWorld {
 ...
@@ -328,7 +338,8 @@ public class sample.HelloWorld {
        4: invokestatic  #3                  // Method staticPublicMethod:(Ljava/lang/String;I)V
        7: invokestatic  #4                  // Method staticProtectedMethod:()V
       10: invokestatic  #5                  // Method staticPackageMethod:()V
-      13: return
+      13: invokestatic  #6                  // Method staticPrivateMethod:()V
+      16: return
 }
 ```
 
@@ -341,6 +352,7 @@ methodVisitor.visitIntInsn(BIPUSH, 10);
 methodVisitor.visitMethodInsn(INVOKESTATIC, "sample/HelloWorld", "staticPublicMethod", "(Ljava/lang/String;I)V", false);
 methodVisitor.visitMethodInsn(INVOKESTATIC, "sample/HelloWorld", "staticProtectedMethod", "()V", false);
 methodVisitor.visitMethodInsn(INVOKESTATIC, "sample/HelloWorld", "staticPackageMethod", "()V", false);
+methodVisitor.visitMethodInsn(INVOKESTATIC, "sample/HelloWorld", "staticPrivateMethod", "()V", false);
 methodVisitor.visitInsn(RETURN);
 methodVisitor.visitMaxs(2, 1);
 methodVisitor.visitEnd();
@@ -355,7 +367,8 @@ methodVisitor.visitEnd();
 0004: invokestatic    #3       // {this} | {}
 0007: invokestatic    #4       // {this} | {}
 0010: invokestatic    #5       // {this} | {}
-0013: return                   // {} | {}
+0013: invokestatic    #6       // {this} | {}
+0016: return                   // {} | {}
 ```
 
 从JVM规范的角度来看，`invokestatic`指令对应的Operand Stack的变化如下：

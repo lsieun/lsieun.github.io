@@ -11,16 +11,23 @@ sequence: "105"
 
 在[asm4-guide.pdf](https://asm.ow2.io/asm4-guide.pdf)文档的`3.1.1. Execution Model`部分提到了Execution Model。
 
-那么，Execution Model是什么呢？其实，Execution Model就是指Stack Frame。换句话说，方法内instructions的执行，就是在Stack Frame上来展开。方法与Stack Frame之间有一个非常紧密的关系：
+那么，Execution Model是什么呢？其实，**Execution Model就是指Stack Frame简化之后的模型**。如何“简化”呢？也就是，我们不需要去考虑Stack Frame的技术实现细节，把它想像一个理想的模型就可以了。
 
-- 一个方法开始执行，就对应着Stack Frame的产生。
-- 一个方法执行结束，无论正常结束（return），还是异常退出（throw exception），都表示着相应的Stack Frame的销毁。
-
-在Stack Frame当中，主要由local variable和operand stack两个部分组成。
+针对Execution Model或Stack Frame，我们可以理解成它由local variable和operand stack两个部分组成，或者说理解成它由local variable、operand stack和frame data三个部分组成。换句话说，local variable和operand stack是两个必不可少的部分，而frame data是一个相对来说不那么重要的部分。在一般的描述当中，都是将Stack Frame描述成local variable和operand stack两个部分；但是，如果我们为了知识的完整性，就可以考虑添加上frame data这个部分。
 
 {:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/jvm-execution-model-2.png)
 {: refdef}
+
+另外，方法的执行与Stack Frame之间有一个非常紧密的关系：
+
+- 一个方法的调用开始，就对应着Stack Frame的内存空间的分配。
+- 一个方法的执行结束，无论正常结束（return），还是异常退出（throw exception），都表示着相应的Stack Frame内存空间被销毁。
+
+接下来，我们就通过两个方面来把握Stack Frame的状态：
+
+- 第一个方面，方法刚进入的时候，任何的instruction都没有执行，那么Stack Frame是一个什么样的状态呢？
+- 第二个方面，在方法开始执行后，这个时候instruction开始执行，每一条instruction的执行，会对Stack Frame的状态产生什么样的影响呢？
 
 ### 方法的初始状态
 
@@ -28,7 +35,9 @@ sequence: "105"
 
 在Stack Frame当中，operand stack是空的，而local variables则需要考虑三方面的因素：
 
-- 当前方法是否为static方法。如果当前方法是non-static方法，则需要在local variables索引为`0`的位置存在一个`this`变量；如果当前方法是static方法，则不需要存储`this`。
+- 当前方法是否为static方法。
+  - 如果当前方法是non-static方法，则需要在local variables索引为`0`的位置存在一个`this`变量，后续的内容从`1`开始存放。
+  - 如果当前方法是static方法，则不需要存储`this`，因此后续的内容从`0`开始存放。
 - 当前方法是否接收参数。方法接收的参数，会按照参数的声明顺序放到local variables当中。
 - 方法参数是否包含`long`或`double`类型。如果方法的参数是`long`或`double`类型，那么它在local variables当中占用两个位置。
 
@@ -43,13 +52,11 @@ The Java Virtual Machine uses **local variables** to pass parameters on **method
 
 方法的后续变化，就是在方法初始状态的基础上，随着instruction的执行而对local variable和operand stack的状态产生影响。
 
-当一个具体方法要执行时，其实就是方法里的instruction一条一条在执行：
+当方法执行时，就是将instruction一条一条的执行：
 
 - 第一步，获取instruction。每一条instruction都是从`instructions`内存空间中取出来的。
 - 第二步，执行instruction。对于instruction的执行，就会引起operand stack和local variables的状态变化。
-- 第三步，在执行instruction过程中，需要获取相关资源。通过`ref`可以获取runtime constant pool的“资源”，例如一个字符串的内容，一个指向方法的物理内存地址。
-
-需要注意的是，虽然local variable和operand stack是Stack Frame当中两个最重要的结构，两者似乎是处于一个平等的地位上；但是，大多数的instruction都是在operand stack上执行，而local variable只是提供一个临时的数据存储区域。举个形象的例子，operand stack类似于“公司”，local variables类似于“临时租的房子”，虽然说“公司”和“临时租的房子”是我们经常待的场所，是两个非常重要的地方，但是我们工作的时间大部是在“公司”进行的。大多数情况下，都是先把数据加载到operand stack上，在operand stack上进行运算，最后可能将数据存储到local variables当中。只有少部分的操作（例如`iinc`），只需要在local variable上就能完成。
+  - 在执行instruction过程中，需要获取相关资源。通过`ref`可以获取runtime constant pool的“资源”，例如一个字符串的内容，一个指向方法的物理内存地址。
 
 在[Chapter 2. The Structure of the Java Virtual Machine](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html)的[2.11. Instruction Set Summary](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.11)部分，对程序的执行进行了如下描述：
 
@@ -62,6 +69,12 @@ do {
     execute the action for the opcode;
 } while (there is more to do);
 ```
+
+{:refdef: style="text-align: center;"}
+![](/assets/images/java/asm/jvm-execution-model-2.png)
+{: refdef}
+
+需要注意的是，虽然local variable和operand stack是Stack Frame当中两个最重要的结构，两者是处于一个平等的地位上，缺少任何一个都无法正常工作；但是，从使用频率的角度来说，两者还是有很大的差别。先举个生活当中的例子，operand stack类似于“公司”，local variables类似于“临时租的房子”，虽然说“公司”和“临时租的房子”是我们经常待的场所，是两个非常重要的地方，但是我们工作的时间大部是在“公司”进行的，少部分工作时间是在“家”里进行。也就是说，大多数情况下，都是先把数据加载到operand stack上，在operand stack上进行运算，最后可能将数据存储到local variables当中。只有少部分的操作（例如`iinc`），只需要在local variable上就能完成。所以从使用频率的角度来说，**operand stack是进行工作的“主战场”，使用频率就比较高，大多数工作都是在它上面完成；而local variable使用频率就相对较低，它只是提供一个临时的数据存储区域**。
 
 ## 查看方法的Stack Frame变化
 

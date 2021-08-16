@@ -17,6 +17,8 @@ sequence: "213"
 
 - `MethodVisitor.visitInsn()`: `monitorenter`, `monitorexit`
 
+## 示例
+
 从Java语言的视角，有一个`HelloWorld`类，代码如下：
 
 ```java

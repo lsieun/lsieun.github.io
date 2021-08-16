@@ -35,7 +35,7 @@ sequence: "203"
 
 从ASM的角度来说，这些opcode与`MethodVisitor.visitXxxInsn()`方法对应关系如下：
 
-- `MethodVisitor.visitInsn()`: 
+- `MethodVisitor.visitVarInsn()`: 
     - `iload`, `istore`, `iload_<n>`, `istore_<n>`.
     - `lload`, `lstore`, `lload_<n>`, `lstore_<n>`.
     - `fload`, `fstore`, `fload_<n>`, `fstore_<n>`.
@@ -121,18 +121,7 @@ methodVisitor.visitEnd();
 0013: return                   // {} | {}
 ```
 
-从JVM规范的角度来看，`istore_<n>`和`istore`指令对应的Operand Stack的变化如下：
-
-```text
-..., value →
-
-...
-```
-
-- The `<n>` must be an index into the local variable array of the current frame.
-- The `value` on the top of the operand stack must be of type `int`. It is popped from the operand stack, and the value of the local variable at `<n>` is set to `value`.
-
-从JVM规范的角度来看，`iload_<n>`和`iload`指令对应的Operand Stack的变化如下：
+从JVM规范的角度来看，`iload`指令对应的Operand Stack的变化如下：
 
 ```text
 ... →
@@ -140,8 +129,35 @@ methodVisitor.visitEnd();
 ..., value
 ```
 
-- The `<n>` must be an index into the local variable array of the current frame.
-- The local variable at `<n>` must contain an `int`. The value of the local variable at `<n>` is pushed onto the operand stack.
+Format:
+
+```text
+iload
+index
+```
+
+- The `index` is an unsigned byte that must be an index into the local variable array of the current frame.
+- The local variable at `index` must contain an `int`.
+- The `value` of the local variable at `index` is pushed onto the operand stack.
+
+从JVM规范的角度来看，`istore`指令对应的Operand Stack的变化如下：
+
+```text
+..., value →
+
+...
+```
+
+Format:
+
+```text
+istore
+index
+```
+
+- The `index` is an unsigned byte that must be an index into the local variable array of the current frame.
+- The `value` on the top of the operand stack must be of type `int`.
+- It is popped from the operand stack, and the value of the local variable at `index` is set to `value`.
 
 ### float
 
@@ -217,7 +233,26 @@ methodVisitor.visitEnd();
 0013: return                   // {} | {}
 ```
 
-从JVM规范的角度来看，`fstore_<n>`和`fstore`指令对应的Operand Stack的变化如下：
+从JVM规范的角度来看，`fload`指令对应的Operand Stack的变化如下：
+
+```text
+... →
+
+..., value
+```
+
+Format:
+
+```text
+fload
+index
+```
+
+- The `index` is an unsigned byte that must be an index into the local variable array of the current frame.
+- The local variable at `index` must contain a `float`.
+- The `value` of the local variable at `index` is pushed onto the operand stack.
+
+从JVM规范的角度来看，`fstore`指令对应的Operand Stack的变化如下：
 
 ```text
 ..., value →
@@ -225,13 +260,16 @@ methodVisitor.visitEnd();
 ...
 ```
 
-从JVM规范的角度来看，`fload_<n>`和`fload`指令对应的Operand Stack的变化如下：
+Format:
 
 ```text
-... →
-
-..., value
+fstore
+index
 ```
+
+- The `index` is an unsigned byte that must be an index into the local variable array of the current frame.
+- The `value` on the top of the operand stack must be of type `float`.
+- It is popped from the operand stack and undergoes value set conversion, resulting in `value'`. The value of the local variable at `index` is set to `value'`.
 
 ### long
 
@@ -301,17 +339,7 @@ methodVisitor.visitEnd();
 0011: return                   // {} | {}
 ```
 
-从JVM规范的角度来看，`lstore_<n>`和`lstore`指令对应的Operand Stack的变化如下：
-
-```text
-..., value →
-
-...
-```
-
-The `value` on the top of the operand stack must be of type `long`. It is popped from the operand stack, and the local variables at `index` and `index+1` are set to `value`.
-
-从JVM规范的角度来看，`lload_<n>`和`lload`指令对应的Operand Stack的变化如下：
+从JVM规范的角度来看，`lload`指令对应的Operand Stack的变化如下：
 
 ```text
 ... →
@@ -319,7 +347,35 @@ The `value` on the top of the operand stack must be of type `long`. It is popped
 ..., value
 ```
 
-The local variable at `index` must contain a `long`. The `value` of the local variable at `index` is pushed onto the operand stack.
+Format:
+
+```text
+lload
+index
+```
+
+- The `index` is an unsigned byte. Both `index` and `index+1` must be indices into the local variable array of the current frame.
+- The local variable at `index` must contain a `long`.
+- The `value` of the local variable at `index` is pushed onto the operand stack.
+
+从JVM规范的角度来看，`lstore`指令对应的Operand Stack的变化如下：
+
+```text
+..., value →
+
+...
+```
+
+Format:
+
+```text
+lstore
+index
+```
+
+- The `index` is an unsigned byte. Both `index` and `index+1` must be indices into the local variable array of the current frame.
+- The `value` on the top of the operand stack must be of type `long`.
+- It is popped from the operand stack, and the local variables at `index` and `index+1` are set to `value`.
 
 ### double
 
@@ -388,7 +444,26 @@ methodVisitor.visitEnd();
 0011: return                   // {} | {}
 ```
 
-从JVM规范的角度来看，`dstore_<n>`和`dstore`指令对应的Operand Stack的变化如下：
+从JVM规范的角度来看，`dload`指令对应的Operand Stack的变化如下：
+
+```text
+... →
+
+..., value
+```
+
+Format:
+
+```text
+dload
+index
+```
+
+- The `index` is an unsigned byte. Both `index` and `index+1` must be indices into the local variable array of the current frame.
+- The local variable at `index` must contain a `double`.
+- The `value` of the local variable at `index` is pushed onto the operand stack.
+
+从JVM规范的角度来看，`dstore`指令对应的Operand Stack的变化如下：
 
 ```text
 ..., value →
@@ -396,13 +471,16 @@ methodVisitor.visitEnd();
 ...
 ```
 
-从JVM规范的角度来看，`dload_<n>`和`dload`指令对应的Operand Stack的变化如下：
+Format:
 
 ```text
-... →
-
-..., value
+dstore
+index
 ```
+
+- The `index` is an unsigned byte. Both `index` and `index+1` must be indices into the local variable array of the current frame.
+- The `value` on the top of the operand stack must be of type `double`.
+- It is popped from the operand stack and undergoes value set conversion, resulting in `value'`. The local variables at `index` and `index+1` are set to `value'`.
 
 ## reference type
 
@@ -481,17 +559,7 @@ methodVisitor.visitEnd();
 0013: return                   // {} | {}
 ```
 
-从JVM规范的角度来看，`astore_<n>`和`astore`指令对应的Operand Stack的变化如下：
-
-```text
-..., objectref →
-
-...
-```
-
-The `objectref` on the top of the operand stack must be of type `returnAddress` or of type `reference`. It is popped from the operand stack, and the value of the local variable at `index` is set to `objectref`.
-
-从JVM规范的角度来看，`aload_<n>`和`aload`指令对应的Operand Stack的变化如下：
+从JVM规范的角度来看，`aload`指令对应的Operand Stack的变化如下：
 
 ```text
 ... →
@@ -499,4 +567,32 @@ The `objectref` on the top of the operand stack must be of type `returnAddress` 
 ..., objectref
 ```
 
-The local variable at `index` must contain a `reference`. The `objectref` in the local variable at `index` is pushed onto the operand stack.
+Format:
+
+```text
+aload
+index
+```
+
+- The `index` is an unsigned byte that must be an index into the local variable array of the current frame.
+- The local variable at `index` must contain a reference.
+- The `objectref` in the local variable at `index` is pushed onto the operand stack.
+
+从JVM规范的角度来看，`astore`指令对应的Operand Stack的变化如下：
+
+```text
+..., objectref →
+
+...
+```
+
+Format:
+
+```text
+astore
+index
+```
+
+- The `index` is an unsigned byte that must be an index into the local variable array of the current frame.
+- The `objectref` on the top of the operand stack must be of type `returnAddress` or of type `reference`.
+- It is popped from the operand stack, and the `value` of the local variable at `index` is set to `objectref`.

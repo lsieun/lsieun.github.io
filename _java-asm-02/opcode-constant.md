@@ -9,8 +9,6 @@ sequence: "202"
 
 从Instruction的角度来说，与constant相关的opcode有20个，内容如下：
 
-- int: `iconst_<i>`, `bipush`
-
 | opcode | mnemonic symbol | opcode | mnemonic symbol | opcode | mnemonic symbol | opcode | mnemonic symbol |
 |--------|-----------------|--------|-----------------|--------|-----------------|--------|-----------------|
 | 1      | aconst_null     | 6      | iconst_3        | 11     | fconst_0        | 16     | bipush          |
@@ -190,6 +188,13 @@ methodVisitor.visitEnd();
 
 The immediate byte is sign-extended to an `int` value. That `value` is pushed onto the operand stack.
 
+Format
+
+```text
+bipush
+byte
+```
+
 ### sipush: -32768~32767
 
 从Java语言的视角，有一个`HelloWorld`类，代码如下：
@@ -262,7 +267,7 @@ byte2
 
 The immediate unsigned `byte1` and `byte2` values are assembled into an intermediate `short`, where the `value` of the `short` is `(byte1 << 8) | byte2`. The intermediate `value` is then sign-extended to an `int` value. That `value` is pushed onto the operand stack.
 
-### ldc: MIN_~MAX
+### ldc: MIN~MAX
 
 从Java语言的视角，有一个`HelloWorld`类，代码如下：
 
@@ -462,6 +467,16 @@ methodVisitor.visitEnd();
 ```
 
 The numeric `value` of that run-time constant is pushed onto the operand stack as a `long` or `double`, respectively.
+
+Format
+
+```text
+ldc2_w
+indexbyte1
+indexbyte2
+```
+
+The unsigned `indexbyte1` and `indexbyte2` are assembled into an unsigned 16-bit `index` into the run-time constant pool of the current class, where the value of the `index` is calculated as `(indexbyte1 << 8) | indexbyte2`. The `index` must be a valid index into the run-time constant pool of the current class.
 
 ## float
 
