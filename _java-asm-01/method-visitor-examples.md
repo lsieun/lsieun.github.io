@@ -94,6 +94,7 @@ public class HelloWorldRun {
 对于`HelloWorld`类中`<init>()`方法对应的Instruction内容如下：
 
 ```text
+$ javap -c sample.HelloWorld
 public sample.HelloWorld();
   Code:
      0: aload_0
@@ -216,6 +217,7 @@ public class HelloWorldRun {
 对于`HelloWorld`类中`<clinit>()`方法对应的Instruction内容如下：
 
 ```text
+$ javap -c sample.HelloWorld
 static {};
   Code:
      0: getstatic     #18                 // Field java/lang/System.out:Ljava/io/PrintStream;
@@ -352,6 +354,7 @@ public class HelloWorldRun {
 对于`HelloWorld`类中`test()`方法对应的Instruction内容如下：
 
 ```text
+$ javap -c sample.HelloWorld
 public void test();
   Code:
      0: new           #11                 // class sample/GoodChild
@@ -484,6 +487,7 @@ public class HelloWorldRun {
 对于`HelloWorld`类中`test()`方法对应的Instruction内容如下：
 
 ```text
+$ javap -c sample.HelloWorld
 public void test(int, int);
   Code:
      0: iload_1

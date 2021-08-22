@@ -18,6 +18,76 @@ ASM is an open-source java library for manipulating bytecode.（先占位置，�
 
 ---
 
+
+
+## 主要内容
+
+### 第一章 基础
+
+{% assign filtered_posts = site.java-asm-03 | sort: "sequence" %}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    {% if num > 100 and num < 200 %}
+    <li>
+        <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
+    </li>
+    {% endif %}
+    {% endfor %}
+</ol>
+
+### 第二章 Class Generation
+
+{% assign filtered_posts = site.java-asm-03 | sort: "sequence" %}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    {% if num > 200 and num < 300 %}
+    <li>
+        <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
+    </li>
+    {% endif %}
+    {% endfor %}
+</ol>
+
+### 第三章 Class Transformation
+
+{% assign filtered_posts = site.java-asm-03 | sort: "sequence" %}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    {% if num > 300 and num < 400 %}
+    <li>
+        <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
+    </li>
+    {% endif %}
+    {% endfor %}
+</ol>
+
+### 第四章 Method Analysis
+
+{% assign filtered_posts = site.java-asm-03 | sort: "sequence" %}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    {% if num > 400 and num < 500 %}
+    <li>
+        <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
+    </li>
+    {% endif %}
+    {% endfor %}
+</ol>
+
+## 参考资料
+
+- 课程源码：[learn-java-asm](https://gitee.com/lsieun/learn-java-asm)
+- [ASM官网](https://asm.ow2.io/)
+- [ASM API文档](https://asm.ow2.io/javadoc/index.html)
+- [Oracle: The Java Virtual Machine Specification, Java SE 8 Edition](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)
+    - [Chapter 2. The Structure of the Java Virtual Machine](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html)
+    - [Chapter 4. The class File Format](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html)
+    - [Chapter 6. The Java Virtual Machine Instruction Set](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html)
+
 {:refdef: style="text-align: center;"}
 ![QQ Group](/assets/images/contact/qq-group.jpg)
 {: refdef}

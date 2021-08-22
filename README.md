@@ -34,41 +34,8 @@ bundle exec jekyll serve --unpublished --drafts
 {: refdef}
 ```
 
-从Java语言的视角，有一个`HelloWorld`类，代码如下：
+## 课程更新
 
-```java
-
-```
-
-从Instruction的视角来看，方法体对应的内容如下：
-
-```text
-$ javap -c sample.HelloWorld
-
-```
-
-从ASM的视角来看，方法体对应的内容如下：
-
-```text
-
-```
-
-从Frame的视角来看，local variable和operand stack的变化：
-
-```text
-
-```
-
-从JVM规范的角度来看，``指令对应的Operand Stack的变化如下：
-
-```text
-
-```
-
-Format
-
-```text
-
-```
-
-
+- [ ] Git仓库的README文件
+- [ ] 本网站的`about.markdown`页面的课程列表要更新
+- [ ] 本网站的每个课程的页面，要指向视频的地址和代码的地址

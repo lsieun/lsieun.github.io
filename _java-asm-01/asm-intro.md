@@ -85,89 +85,24 @@ ASM的Logo设计很有特点，它在旋转的过程中，会分别呈现出“A
 
 比如说，我们常用的Java版本是Java 8和Java 11。针对Java 8版本，我们需要使用ASM 5.0版本，就能正常工作。对于Java 11版本，我们需要使用ASM 7.0版本，就能正常工作。当然，我们可以尽量使用较高的ASM版本。
 
-<table>
-<thead>
-<tr>
-    <th>ASM Release</th>
-    <th>Release Date</th>
-    <th>Java Support</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-    <td>2.0</td>
-    <td>2005-05-17</td>
-    <td>Java 5 language support</td>
-</tr>
-<tr>
-    <td>3.2</td>
-    <td>2009-06-11</td>
-    <td>support for the new invokedynamic code.</td>
-</tr>
-<tr>
-    <td>4.0</td>
-    <td>2011-10-29</td>
-    <td>Java 7 language support</td>
-</tr>
-<tr>
-    <td>5.0</td>
-    <td>2014-03-16</td>
-    <td><b>Java 8 language support</b></td>
-</tr>
-<tr>
-    <td>6.0</td>
-    <td>2017-09-23</td>
-    <td>Java 9 language support</td>
-</tr>
-<tr>
-    <td>6.1</td>
-    <td>2018-03-11</td>
-    <td>Java 10 language support</td>
-</tr>
-<tr>
-    <td>7.0</td>
-    <td>2018-10-27</td>
-    <td><b>Java 11 language support</b></td>
-</tr>
-<tr>
-    <td>7.1</td>
-    <td>2019-03-03</td>
-    <td>Java 13 language support</td>
-</tr>
-<tr>
-    <td>8.0</td>
-    <td>2020-03-28</td>
-    <td>Java 14 language support</td>
-</tr>
-<tr>
-    <td>9.0</td>
-    <td>2020-09-22</td>
-    <td>Java 16 language support</td>
-</tr>
-<tr>
-    <td>9.1</td>
-    <td>2021-02-06</td>
-    <td>Java 17 language support</td>
-</tr>
-<tr>
-    <td></td>
-    <td></td>
-    <td></td>
-</tr>
-<tr>
-    <td></td>
-    <td></td>
-    <td></td>
-</tr>
-</tbody>
-</table>
-
+| ASM Release | Release Date | Java Support |
+|-------------|--------------|--------------|
+|    2.0      |  2005-05-17  | Java 5 language support |
+|    3.2      |  2009-06-11  | support for the new `invokedynamic` code. |
+|    4.0      |  2011-10-29  | Java 7 language support |
+|    5.0      |  2014-03-16  | **Java 8 language support** |
+|    6.0      |  2017-09-23  | Java 9 language support |
+|    6.1      |  2018-03-11  | Java 10 language support |
+|    7.0      |  2018-10-27  | **Java 11 language support** |
+|    7.1      |  2019-03-03  | Java 13 language support |
+|    8.0      |  2020-03-28  | Java 14 language support |
+|    9.0      |  2020-09-22  | Java 16 language support |
+|    9.1      |  2021-02-06  | JDK 17 support |
+|    9.2      |  2021-06-26  | JDK 18 support |
 
 ## ASM能够做什么
 
 ### 通俗的理解
-
-
 
 - 父类：修改成一个新的父类
 - 接口：添加一个新的接口、删除已有的接口

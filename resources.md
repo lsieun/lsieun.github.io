@@ -20,6 +20,7 @@ permalink: /resources/
     - [Write for Baeldung](https://www.baeldung.com/contribution-guidelines)
     - [Java drafts site](https://drafts.baeldung.com/wp-login.php)
     - [Jira](http://jira.baeldung.com)
+- [BLAKE2](https://www.blake2.net/): fast secure hashing
 - [翻轉工作室](https://www.tsnien.idv.tw/): 这是台湾粘添壽博士的网站
 - Git:
     - [Gitee](https://gitee.com)
@@ -61,6 +62,7 @@ permalink: /resources/
 
 - [动物世界－央视网](http://tv.cctv.com/lm/dwsj/index.shtml?spm=C31267.PzXj0D8UJUyC.EuVgsDNuNsvy.1)
 - [好视频影院](https://www.hspyy.net)，有老版的《三国》
+- [努努影院](https://www.nunuyy.cc/)
 - [破解资源君](https://www.youtube.com/channel/UCrGEYuZ1nw3RDj4LDKJmrZw): [0730.zip](https://raw.githubusercontent.com/pojiezhiyuanjun/freev2/master/0730.zip)
 - [SOAP2DAY](https://soap2day.to/)，英文电影
 - 动漫：

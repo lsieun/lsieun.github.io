@@ -374,11 +374,11 @@ public class HelloWorldRun {
 其输出结果如下：
 
 ```text
+name is null
 Exception in thread "main" java.lang.ArithmeticException: / by zero
 	at sample.HelloWorld.div(HelloWorld.java:18)
 	at sample.HelloWorld.test(HelloWorld.java:13)
 	at run.HelloWorldRun.main(HelloWorldRun.java:8)
-name is null
 ```
 
 使用`javap`命令查看exception table的内容：
