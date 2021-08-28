@@ -126,6 +126,11 @@ Chrome插件：
 历史
 
 - [全历史](https://www.allhistory.com/)
+- [三国演义](http://sanguo.5000yan.com/)
+- [红楼梦](http://hongloumeng.5000yan.com/)
+- [水浒传](http://shuihu.5000yan.com/)
+- [西游记](http://xiyouji.5000yan.com/)
+- [封神演义](https://www.xyyuedu.com/gdmz/fengshenbangxs/)
 
 ## 潜在的课程方向
 

@@ -26,5 +26,16 @@ the computed frames – returned by the `Analyzer.getFrames` method – are `nul
 This property can be used to implement a `RemoveDeadCodeAdapter` class very easily
 (there are more efficient ways, but they require writing more code):
 
-
+```java
+public class HelloWorld {
+    public void test(boolean flag) {
+        Object obj = null;
+        if (flag) {
+            obj = "10";
+        }
+        int hash = obj.hashCode();
+        System.out.println(hash);
+    }
+}
+```
 

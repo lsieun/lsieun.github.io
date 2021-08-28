@@ -31,3 +31,56 @@ mn.instructions.insert(i, il);
 
 Inserting the instructions one by one is also possible but more cumbersome,
 because the insertion point must be updated after each insertion.
+
+```java
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.tree.MethodNode;
+
+public class MyMethodNode extends MethodNode {
+    public MyMethodNode(int access, String name, String descriptor,
+                        String signature, String[] exceptions,
+                        MethodVisitor mv) {
+        super(access, name, descriptor, signature, exceptions);
+        this.mv = mv;
+    }
+
+    @Override
+    public void visitEnd() {
+        // 首先，处理自己的代码逻辑
+        // put your transformation code here
+        accept(mv);
+
+        // 其次，调用父类的方法实现
+        super.visitEnd();
+    }
+}
+```
+
+```java
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.tree.MethodNode;
+
+public class MyMethodAdapter extends MethodVisitor {
+    private final MethodVisitor next;
+
+    public MyMethodAdapter(int api, int access, String name, String desc,
+                           String signature, String[] exceptions, MethodVisitor mv) {
+        super(api, new MethodNode(access, name, desc, signature, exceptions));
+        this.next = mv;
+    }
+
+    @Override
+    public void visitEnd() {
+        // 首先，处理自己的代码逻辑
+        MethodNode mn = (MethodNode) mv;
+        // put your transformation code here
+        if (next != null) {
+            mn.accept(next);
+        }
+
+        // 其次，调用父类的方法实现
+        super.visitEnd();
+    }
+}
+```
+

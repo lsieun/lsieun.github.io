@@ -83,6 +83,18 @@ collections:
     output: true
     title: "JDK Tools"
     sequence: 12
+  linux:
+    output: true
+    title: "Linux"
+    sequence: 13
+  bash:
+    output: true
+    title: "Bash"
+    sequence: 14
+  libgdx:
+    output: true
+    title: "libGDX"
+    sequence: 15
   jekyll:
     output: true
     title: "Jekyll快速参考教程"
@@ -189,6 +201,27 @@ defaults:
     values:
       layout: "post"
       tags: jdk-tools
+  -
+    scope:
+      path: ""
+      type: "linux"
+    values:
+      layout: "post"
+      tags: linux
+  -
+    scope:
+      path: ""
+      type: "bash"
+    values:
+      layout: "post"
+      tags: bash
+  -
+    scope:
+      path: ""
+      type: "libgdx"
+    values:
+      layout: "post"
+      tags: libgdx
   -
     scope:
       path: ""

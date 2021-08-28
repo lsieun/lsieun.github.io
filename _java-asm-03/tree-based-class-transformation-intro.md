@@ -5,6 +5,10 @@ sequence: "301"
 
 [上级目录]({% link _posts/2021-05-01-java-asm-season-03.md %})
 
+- ClassVisitor --> ClassNode --> ClassTransformer/MethodTransformer
+- MethodVisitor --> MethodNode --> MethodTransformer
+
+
 ## 如何进行转换
 
 ```java
@@ -52,10 +56,14 @@ public class MyClassNode extends ClassNode {
 
     @Override
     public void visitEnd() {
+        // 首先，处理自己的代码逻辑
         // put your transformation code here
-        super.visitEnd();
+        if (cv != null) {
+            accept(cv);
+        }
 
-        accept(cv);
+        // 其次，调用父类的方法实现
+        super.visitEnd();
     }
 }
 ```
@@ -80,6 +88,7 @@ import org.objectweb.asm.tree.ClassNode;
 
 public class MyClassVisitor extends ClassVisitor {
     private final ClassVisitor next;
+
     public MyClassVisitor(int api, ClassVisitor classVisitor) {
         super(api, new ClassNode());
         this.next = classVisitor;
@@ -87,10 +96,15 @@ public class MyClassVisitor extends ClassVisitor {
 
     @Override
     public void visitEnd() {
-        super.visitEnd();
+        // 首先，处理自己的代码逻辑
         ClassNode cn = (ClassNode) cv;
         // put your transformation code here
-        cn.accept(next);
+        if (next != null) {
+            cn.accept(next);
+        }
+
+        // 其次，调用父类的方法实现
+        super.visitEnd();
     }
 }
 ```

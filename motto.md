@@ -2,6 +2,7 @@
 layout: post
 title: Mottos
 permalink: /mottos/
+published: false
 ---
 
 ## Cognition

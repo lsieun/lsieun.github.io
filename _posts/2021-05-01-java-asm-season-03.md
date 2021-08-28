@@ -6,7 +6,7 @@ tags: java asm
 published: true
 ---
 
-ASM is an open-source java library for manipulating bytecode.（先占位置，文章还没有写。）
+ASM is an open-source java library for manipulating bytecode.（不断更新中。。。）
 
 ---
 

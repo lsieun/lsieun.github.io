@@ -353,3 +353,320 @@ public class sample.HelloWorld {
       11: return
 }
 ```
+
+## 示例三：优化跳转
+
+### 预期目标
+
+假如有一个`HelloWorld`类，代码如下：
+
+```java
+public class HelloWorld {
+    public void test(int val) {
+        System.out.println(val == 0 ? "val is 0" : "val is not 0");
+    }
+}
+```
+
+接着，我们查看`test`方法所包含的instructions内容：
+
+```text
+javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+...
+  public void test(int);
+    Code:
+       0: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+       3: iload_1
+       4: ifne          12
+       7: ldc           #3                  // String val is 0
+       9: goto          14
+      12: ldc           #4                  // String val is not 0
+      14: invokevirtual #5                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      17: return
+}
+```
+
+在保证`test`方法正常运行的前提下，打乱内部instructions之间的顺序：
+
+```java
+import lsieun.utils.FileUtils;
+import org.objectweb.asm.*;
+
+import static org.objectweb.asm.Opcodes.*;
+
+public class HelloWorldGenerateCore {
+    public static void main(String[] args) throws Exception {
+        String relative_path = "sample/HelloWorld.class";
+        String filepath = FileUtils.getFilePath(relative_path);
+
+        // (1) 生成byte[]内容
+        byte[] bytes = dump();
+
+        // (2) 保存byte[]到文件
+        FileUtils.writeBytes(filepath, bytes);
+    }
+
+    public static byte[] dump() throws Exception {
+        // (1) 创建ClassWriter对象
+        ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
+
+        // (2) 调用visitXxx()方法
+        cw.visit(V1_8, ACC_PUBLIC + ACC_SUPER, "sample/HelloWorld",
+                null, "java/lang/Object", null);
+
+        {
+            MethodVisitor mv1 = cw.visitMethod(ACC_PUBLIC, "<init>", "()V", null, null);
+            mv1.visitCode();
+            mv1.visitVarInsn(ALOAD, 0);
+            mv1.visitMethodInsn(INVOKESPECIAL, "java/lang/Object", "<init>", "()V", false);
+            mv1.visitInsn(RETURN);
+            mv1.visitMaxs(1, 1);
+            mv1.visitEnd();
+        }
+
+        {
+            MethodVisitor mv2 = cw.visitMethod(ACC_PUBLIC, "test", "(I)V", null, null);
+
+            Label startLabel = new Label();
+            Label middleLabel = new Label();
+            Label endLabel = new Label();
+            Label ifLabel = new Label();
+            Label elseLabel = new Label();
+            Label printLabel = new Label();
+            Label returnLabel = new Label();
+
+            mv2.visitCode();
+            mv2.visitJumpInsn(GOTO, middleLabel);
+            mv2.visitLabel(returnLabel);
+            mv2.visitInsn(RETURN);
+
+            mv2.visitLabel(startLabel);
+            mv2.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
+            mv2.visitVarInsn(ILOAD, 1);
+            mv2.visitJumpInsn(GOTO, ifLabel);
+
+            mv2.visitLabel(middleLabel);
+            mv2.visitJumpInsn(GOTO, endLabel);
+
+            mv2.visitLabel(ifLabel);
+            mv2.visitJumpInsn(IFNE, elseLabel);
+            mv2.visitLdcInsn("val is 0");
+            mv2.visitJumpInsn(GOTO, printLabel);
+
+            mv2.visitLabel(elseLabel);
+            mv2.visitLdcInsn("val is not 0");
+
+            mv2.visitLabel(printLabel);
+            mv2.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
+            mv2.visitJumpInsn(GOTO, returnLabel);
+
+            mv2.visitLabel(endLabel);
+            mv2.visitJumpInsn(GOTO, startLabel);
+
+            mv2.visitMaxs(2, 2);
+            mv2.visitEnd();
+        }
+        cw.visitEnd();
+
+        // (3) 调用toByteArray()方法
+        return cw.toByteArray();
+    }
+}
+```
+
+接着，我们查看`test`方法包含的instructions内容：
+
+```text
+$ javap -c sample.HelloWorld
+public class sample.HelloWorld {
+...
+  public void test(int);
+    Code:
+       0: goto          11
+       3: return
+       4: getstatic     #16                 // Field java/lang/System.out:Ljava/io/PrintStream;
+       7: iload_1
+       8: goto          14
+      11: goto          30
+      14: ifne          22
+      17: ldc           #18                 // String val is 0
+      19: goto          24
+      22: ldc           #20                 // String val is not 0
+      24: invokevirtual #26                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      27: goto          3
+      30: goto          4
+}
+```
+
+我们想要实现的预期目标：优化instruction的跳转。
+
+### 编码实现
+
+```java
+import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.InsnList;
+import org.objectweb.asm.tree.MethodNode;
+
+public class MethodOptimizeJumpTransformer extends ClassTransformer {
+    public MethodOptimizeJumpTransformer(ClassTransformer ct) {
+        super(ct);
+    }
+
+    @Override
+    public void transform(ClassNode cn) {
+        // 首先，处理自己的代码逻辑
+        for (MethodNode mn : cn.methods) {
+            if ("<init>".equals(mn.name) || "<clinit>".equals(mn.name)) {
+                continue;
+            }
+            InsnList insns = mn.instructions;
+            if (insns.size() == 0) {
+                continue;
+            }
+            MethodTransformer mt = new MethodOptimizeJumpConverter(null);
+            mt.transform(mn);
+        }
+
+        // 其次，调用父类的方法实现
+        super.transform(cn);
+    }
+}
+```
+
+```java
+import org.objectweb.asm.tree.*;
+
+import static org.objectweb.asm.Opcodes.*;
+
+public class MethodOptimizeJumpConverter extends MethodTransformer {
+    public MethodOptimizeJumpConverter(MethodTransformer mt) {
+        super(mt);
+    }
+
+    @Override
+    public void transform(MethodNode mn) {
+        // 首先，处理自己的代码逻辑
+        InsnList instructions = mn.instructions;
+        for (AbstractInsnNode insnNode : instructions) {
+            if (insnNode instanceof JumpInsnNode) {
+                JumpInsnNode jumpInsnNode = (JumpInsnNode) insnNode;
+                LabelNode label = jumpInsnNode.label;
+                AbstractInsnNode target;
+                while (true) {
+                    target = label;
+                    while (target != null && target.getOpcode() < 0) {
+                        target = target.getNext();
+                    }
+
+                    if (target != null && target.getOpcode() == GOTO) {
+                        label = ((JumpInsnNode) target).label;
+                    }
+                    else {
+                        break;
+                    }
+                }
+
+                // update target
+                jumpInsnNode.label = label;
+                // if possible, replace jump with target instruction
+                if (insnNode.getOpcode() == GOTO && target != null) {
+                    int opcode = target.getOpcode();
+                    if ((opcode >= IRETURN && opcode <= RETURN) || opcode == ATHROW) {
+                        instructions.set(insnNode, target.clone(null));
+                    }
+                }
+            }
+        }
+
+        // 其次，调用父类的方法实现
+        super.transform(mn);
+    }
+}
+```
+
+### 进行转换
+
+```java
+import lsieun.asm.tree.*;
+import lsieun.utils.FileUtils;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.tree.*;
+
+public class HelloWorldTransformTree {
+    public static void main(String[] args) {
+        String relative_path = "sample/HelloWorld.class";
+        String filepath = FileUtils.getFilePath(relative_path);
+        byte[] bytes1 = FileUtils.readBytes(filepath);
+        if (bytes1 == null) {
+            throw new RuntimeException("bytes1 is null");
+        }
+
+        // (1)构建ClassReader
+        ClassReader cr = new ClassReader(bytes1);
+
+        // (2) 构建ClassNode
+        int api = Opcodes.ASM9;
+        ClassNode cn = new ClassNode(api);
+        cr.accept(cn, ClassReader.SKIP_FRAMES | ClassReader.SKIP_DEBUG);
+
+        // (3) 进行transform
+        ClassTransformer ct = new MethodOptimizeJumpTransformer(null);
+        ct.transform(cn);
+
+        // (4) 构建ClassWriter
+        ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
+        cn.accept(cw);
+
+        // (5) 生成byte[]内容输出
+        byte[] bytes2 = cw.toByteArray();
+
+        FileUtils.writeBytes(filepath, bytes2);
+    }
+}
+```
+
+### 验证结果
+
+```java
+import java.lang.reflect.Method;
+
+public class HelloWorldRun {
+    public static void main(String[] args) throws Exception {
+        Class<?> clazz = Class.forName("sample.HelloWorld");
+        Object instance = clazz.newInstance();
+        Method m = clazz.getDeclaredMethod("test", int.class);
+        m.invoke(instance, 0);
+        m.invoke(instance, 1);
+    }
+}
+```
+
+```text
+$ javap -c sample.HelloWorld
+public class sample.HelloWorld {
+...
+  public void test(int);
+    Code:
+       0: goto          4
+       3: athrow
+       4: getstatic     #16                 // Field java/lang/System.out:Ljava/io/PrintStream;
+       7: iload_1
+       8: goto          14
+      11: nop
+      12: nop
+      13: athrow
+      14: ifne          22
+      17: ldc           #18                 // String val is 0
+      19: goto          24
+      22: ldc           #20                 // String val is not 0
+      24: invokevirtual #26                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      27: return
+      28: nop
+      29: nop
+      30: athrow
+}
+```

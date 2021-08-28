@@ -270,7 +270,7 @@ public class HelloWorldGenerateCore {
 
 ### 执行结果（出现错误）
 
-运行`HelloWorldRun`类之，得到如下结果：
+运行`HelloWorldRun`类之后，得到如下结果：
 
 ```text
 Exception in thread "main" java.lang.VerifyError: Bad type on operand stack

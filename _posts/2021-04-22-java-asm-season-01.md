@@ -34,7 +34,6 @@ ASM is an open-source java library for manipulating bytecode.
         <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
     </li>
     {% endif %}
-    
     {% endfor %}
 </ol>
 
