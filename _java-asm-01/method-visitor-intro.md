@@ -154,4 +154,4 @@ visitEnd
 - 第一点，对于`MethodVisitor`类的各个不同部分进行介绍，以便从整体上来理解`MethodVisitor`类。
 - 第二点，在`MethodVisitor`类当中，`visitXxx()`方法也需要遵循一定的调用顺序。
 
-需要注意的一点，`ClassVisitor`类有自己的`visitXxx()`方法，`MethodVisitor`类也有自己的`visitXxx()`方法，两者是不一样的，要注意区分。另外，`ClassVisitor.visitMethod()`方法提供的是“方法声明”所需要的信息，它会返回一个`MethodVisitor`对象，这个`MethodVisitor`对象就用来实现“方法体”里面的代码逻辑。
+需要注意的一点，`ClassVisitor`类有自己的`visitXxx()`方法，`MethodVisitor`类也有自己的`visitXxx()`方法，两者是不一样的，要注意区分。另外，`ClassVisitor.visitMethod()`方法提供的是“方法头”（Method Header）所需要的信息，它会返回一个`MethodVisitor`对象，这个`MethodVisitor`对象就用来实现“方法体”里面的代码逻辑。

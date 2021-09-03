@@ -83,6 +83,7 @@ ASM is an open-source java library for manipulating bytecode.（不断更新中�
 - 课程源码：[learn-java-asm](https://gitee.com/lsieun/learn-java-asm)
 - [ASM官网](https://asm.ow2.io/)
 - [ASM API文档](https://asm.ow2.io/javadoc/index.html)
+- ASM使用手册：[英文版](https://asm.ow2.io/asm4-guide.pdf)、[中文版](https://www.yuque.com/mikaelzero/asm)
 - [Oracle: The Java Virtual Machine Specification, Java SE 8 Edition](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)
     - [Chapter 2. The Structure of the Java Virtual Machine](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html)
     - [Chapter 4. The class File Format](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html)

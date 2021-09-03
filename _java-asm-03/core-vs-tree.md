@@ -5,7 +5,11 @@ sequence: "101"
 
 [上级目录]({% link _posts/2021-05-01-java-asm-season-03.md %})
 
-Like for class generation, using the tree API to transform classes
+Core API和Tree API都可以用来进行Class Generation、Class Transformation和Class Analysis。
+
+## class generation
+
+Like for **class generation**, using the tree API to transform classes
 takes more time and consumes more memory than using the core API.
 But it makes it possible to implement some transformations more easily.
 

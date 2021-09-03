@@ -3,6 +3,8 @@ title:  "SimpleVerifier"
 sequence: "407"
 ---
 
+[上级目录]({% link _posts/2021-05-01-java-asm-season-03.md %})
+
 The `SimpleVerifier` class extends the `BasicVerifier` class.
 It uses **more sets** to simulate the execution of bytecode instructions:
 indeed each class is represented by its own set, representing all possible objects of this class.

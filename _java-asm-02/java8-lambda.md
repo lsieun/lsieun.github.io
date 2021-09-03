@@ -10,7 +10,7 @@ sequence: "304"
 在本文当中，我们主要对Java 8 Lambda的两方面进行介绍：
 
 - 第一方面，如何使用ASM生成Lambda表达式？
-- 第二方面，Lambda表达式的实现原理是什么？
+- 第二方面，探究Lambda表达式的实现原理是什么？
 
 ## 使用ASM生成Lambda
 
@@ -31,6 +31,11 @@ public class HelloWorld {
 ```
 
 ### 编码实现
+
+在下面的代码中，我们重点关注两个点：
+
+- 第一点，是`Handle`实例的创建。
+- 第二点，是`MethodVisitor.visitInvokeDynamicInsn()`方法。
 
 ```java
 import lsieun.utils.FileUtils;
@@ -71,9 +76,11 @@ public class HelloWorldGenerateCore {
         {
             MethodVisitor mv2 = cw.visitMethod(ACC_PUBLIC, "test", "()V", null, null);
             mv2.visitCode();
+            // 第1点，Handle实例的创建
             Handle bootstrapMethodHandle = new Handle(H_INVOKESTATIC, "java/lang/invoke/LambdaMetafactory", "metafactory",
                     "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;" +
                             "Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;", false);
+            // 第2点，MethodVisitor.visitInvokeDynamicInsn()方法的调用
             mv2.visitInvokeDynamicInsn("apply", "()Ljava/util/function/BiFunction;",
                     bootstrapMethodHandle,
                     Type.getType("(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;"),
@@ -108,6 +115,8 @@ public class HelloWorldGenerateCore {
 
 ### 验证结果
 
+接下来，我们来验证生成的Lambda表达式是否能够正常运行。
+
 ```java
 import java.lang.reflect.Method;
 
@@ -122,11 +131,13 @@ public class HelloWorldRun {
 }
 ```
 
-## Lambda的实现原理
+## 探究Lambda的实现原理
+
+简单来说，Lambda表达式的内部原理，是借助于Java ASM生成匿名内部类来实现的。
 
 ### 追踪Lambda
 
-我们使用`javap -v -p sample.HelloWorld`命令查看输出结果：
+首先，我们使用`javap -v -p sample.HelloWorld`命令查看输出结果：
 
 ```text
 $ javap -v -p sample.HelloWorld
@@ -145,10 +156,19 @@ BootstrapMethods:
       #31 (Ljava/lang/Integer;Ljava/lang/Integer;)Ljava/lang/Integer;
 ```
 
-通过上面的输出结果，我们可以定位到`java.lang.invoke.LambdaMetafactory`类的`metafactory()`方法。
+通过上面的输出结果，我们定位到BootstrapMethods的部分，可以看到它使用了`java.lang.invoke.LambdaMetafactory`类的`metafactory()`方法。
+
+至此，我们想表达的意思：Lambda表达式是与`LambdaMetafactory.metafactory()`方法有关联关系的。
+
+---
+
+在IDE当中，我们可以查看`LambdaMetafactory.metafactory()`方法，其内容如下：
 
 ![LambdaMetafactory的metafactory方法](/assets/images/java/asm/LambdaMetafactory-metafactory.png)
 
+在上图中，我们可以看到`mf`指向一个`InnerClassLambdaMetafactory`的实例，并在最后调用了`buildCallSite()`方法。
+
+---
 
 接着，我们跳转到`java.lang.invoke.InnerClassLambdaMetafactory`类的`buildCallSite()`方法
 
@@ -170,7 +190,11 @@ final byte[] classBytes = cw.toByteArray();
 Arrays.toString(classBytes)
 ```
 
+其实，这里的`classBytes`就是生成的类文件的字节码内容，这样的字符串内容就是该字节码内容的另一种表现形式。那么，拿到这样一个字符串内容之后，我们应该如何处理呢？
+
 ### 查看生成的类
+
+在[项目代码](https://gitee.com/lsieun/learn-java-asm)中，有一个`LambdaRun`类，它的作用就是将上述字符串内容的类信息打印出来。
 
 ```text
 import lsieun.utils.StringUtils;
@@ -197,3 +221,48 @@ public class LambdaRun {
     }
 }
 ```
+
+我们可以将代表字节码内容的字符串放到上面代码的`str`变量中，然后运行`LambdaRun`可以得到如下结果：
+
+```text
+// class version 52.0 (52)
+// access flags 0x1030
+final synthetic class sample/HelloWorld$$Lambda$1 implements java/util/function/BiFunction {
+
+
+  // access flags 0x2
+  private <init>()V
+    ALOAD 0
+    INVOKESPECIAL java/lang/Object.<init> ()V
+    RETURN
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public apply(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  @Ljava/lang/invoke/LambdaForm$Hidden;()
+    ALOAD 1
+    CHECKCAST java/lang/Integer
+    INVOKEVIRTUAL java/lang/Integer.intValue ()I
+    ALOAD 2
+    CHECKCAST java/lang/Integer
+    INVOKEVIRTUAL java/lang/Integer.intValue ()I
+    INVOKESTATIC java/lang/Math.max (II)I
+    INVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;
+    ARETURN
+    MAXSTACK = 2
+    MAXLOCALS = 3
+}
+```
+
+通过上面的输出结果，我们可以看到：
+
+- 第一点，当前类的名字叫`sample/HelloWorld$$Lambda$1`。
+  - 当前类带有`final`和`synthetic`标识。
+  - 当前类实现了`java/util/function/BiFunction`接口。
+- 第二点，在`sample/HelloWorld$$Lambda$1`类当中，它定义了一个构造方法（`<init>()V`）。
+- 第三点，在`sample/HelloWorld$$Lambda$1`类当中，它定义了一个`apply`方法（`apply(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;`）。
+  - 这个`apply`方法正是`BiFunction`接口中定义的方法。
+  - `apply`方法的内部代码逻辑，是通过调用`Math.max()`方法来实现的；而`Math::max`正是Lambda表达式的内容。
+
+至此，我们可以知道：Lambda表达式的实现，是由JVM调用ASM来实现的。也就是说，JVM使用ASM创建一个匿名内部类（`sample/HelloWorld$$Lambda$1`），让该匿名内部类实现特定的接口（`java/util/function/BiFunction`），并在接口定义的方法（`apply`）实现中包含Lambda表达式的内容。

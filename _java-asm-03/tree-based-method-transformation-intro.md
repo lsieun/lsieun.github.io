@@ -5,9 +5,30 @@ sequence: "303"
 
 [上级目录]({% link _posts/2021-05-01-java-asm-season-03.md %})
 
+## Tree Based Method Transformation
+
+```java
+import org.objectweb.asm.tree.MethodNode;
+
+public class MethodTransformer {
+    protected MethodTransformer mt;
+
+    public MethodTransformer(MethodTransformer mt) {
+        this.mt = mt;
+    }
+
+    public void transform(MethodNode mn) {
+        if (mt != null) {
+            mt.transform(mn);
+        }
+    }
+}
+```
+
 Transforming a method with the tree API simply consists in modifying the fields of a `MethodNode` object, and in particular the `instructions` list.
 Although this list can be modified in arbitrary ways,
 **a common pattern is to modify it while iterating over it.**
+
 Indeed, unlike with the general `ListIterator` contract,
 the `ListIterator` returned by an `InsnList` supports many concurrent list modifications.
 In fact, you can use the `InsnList` methods to remove one or more elements before and including the current one,
@@ -32,6 +53,10 @@ mn.instructions.insert(i, il);
 Inserting the instructions one by one is also possible but more cumbersome,
 because the insertion point must be updated after each insertion.
 
+## Two Common Patterns
+
+### First Pattern
+
 ```java
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.tree.MethodNode;
@@ -48,13 +73,19 @@ public class MyMethodNode extends MethodNode {
     public void visitEnd() {
         // 首先，处理自己的代码逻辑
         // put your transformation code here
-        accept(mv);
 
-        // 其次，调用父类的方法实现
+        // 其次，调用父类的方法实现（根据实际情况，选择保留，或删除）
         super.visitEnd();
+
+        // 最后，向后续MethodVisitor传递
+        if (mv != null) {
+            accept(mv);
+        }
     }
 }
 ```
+
+### Second Pattern
 
 ```java
 import org.objectweb.asm.MethodVisitor;
@@ -74,12 +105,14 @@ public class MyMethodAdapter extends MethodVisitor {
         // 首先，处理自己的代码逻辑
         MethodNode mn = (MethodNode) mv;
         // put your transformation code here
+
+        // 其次，调用父类的方法实现（根据实际情况，选择保留，或删除）
+        super.visitEnd();
+
+        // 最后，向后续ClassVisitor传递
         if (next != null) {
             mn.accept(next);
         }
-
-        // 其次，调用父类的方法实现
-        super.visitEnd();
     }
 }
 ```
