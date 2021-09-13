@@ -194,7 +194,7 @@ Arrays.toString(classBytes)
 
 ### 查看生成的类
 
-在[项目代码](https://gitee.com/lsieun/learn-java-asm)中，有一个`LambdaRun`类，它的作用就是将上述字符串内容的类信息打印出来。
+在[项目代码](https://gitee.com/lsieun/learn-java-asm)中，有一个`PrintASMTextLambda`类，它的作用就是将上述字符串内容的类信息打印出来。
 
 ```text
 import lsieun.utils.StringUtils;
@@ -206,7 +206,7 @@ import org.objectweb.asm.util.TraceClassVisitor;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class LambdaRun {
+public class PrintASMTextLambda {
     public static void main(String[] args) throws IOException {
         // (1) 设置参数
         String str = "[-54, -2, -70, -66, ...]";
@@ -222,7 +222,7 @@ public class LambdaRun {
 }
 ```
 
-我们可以将代表字节码内容的字符串放到上面代码的`str`变量中，然后运行`LambdaRun`可以得到如下结果：
+我们可以将代表字节码内容的字符串放到上面代码的`str`变量中，然后运行`PrintASMTextLambda`可以得到如下结果：
 
 ```text
 // class version 52.0 (52)

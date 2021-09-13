@@ -1,6 +1,6 @@
 ---
-title:  "SimpleVerifier"
-sequence: "407"
+title:  "BasicValue-SimpleVerifier"
+sequence: "406"
 ---
 
 [上级目录]({% link _posts/2021-05-01-java-asm-season-03.md %})
@@ -18,7 +18,7 @@ This default behavior can be changed by overriding the protected methods of this
 
 ### class info
 
-`SimpleVerifier`类继承自`BasicVerifier`类。
+第一个部分，`SimpleVerifier`类继承自`BasicVerifier`类。
 
 ```java
 public class SimpleVerifier extends BasicVerifier {
@@ -27,22 +27,100 @@ public class SimpleVerifier extends BasicVerifier {
 
 ### fields
 
+第二个部分，`SimpleVerifier`类定义的字段有哪些。
+
 ```java
 public class SimpleVerifier extends BasicVerifier {
+    // 第一组字段，当前类、父类、接口
+    private final Type currentClass;
+    private final Type currentSuperClass;
+    private final List<Type> currentClassInterfaces;
+    private final boolean isInterface;
+
+    // 第二组字段，ClassLoader
+    private ClassLoader loader = getClass().getClassLoader();
 }
 ```
 
 ### constructors
 
+第三个部分，`SimpleVerifier`类定义的构造方法有哪些。
+
+注意，前三个构造方法都不适合由子类继承，因为它会判断`getClass() != SimpleVerifier.class`是否成立；如果是子类实现，就会抛出`IllegalStateException`类型的异常。
+
 ```java
 public class SimpleVerifier extends BasicVerifier {
+    public SimpleVerifier() {
+        this(null, null, false);
+    }
+
+    public SimpleVerifier(Type currentClass, Type currentSuperClass, boolean isInterface) {
+        this(currentClass, currentSuperClass, null, isInterface);
+    }
+
+    public SimpleVerifier(Type currentClass, Type currentSuperClass, List<Type> currentClassInterfaces, boolean isInterface) {
+        this(ASM9, currentClass, currentSuperClass, currentClassInterfaces, isInterface);
+        if (getClass() != SimpleVerifier.class) {
+            throw new IllegalStateException();
+        }
+    }
+
+    protected SimpleVerifier(int api, Type currentClass, Type currentSuperClass, List<Type> currentClassInterfaces, boolean isInterface) {
+        super(api);
+        this.currentClass = currentClass;
+        this.currentSuperClass = currentSuperClass;
+        this.currentClassInterfaces = currentClassInterfaces;
+        this.isInterface = isInterface;
+    }
 }
 ```
 
 ### methods
 
+第四个部分，`SimpleVerifier`类定义的方法有哪些。
+
+我们重点关注`newValue`方法：
+
+- 在`BasicInterpreter`和`BasicVerifier`类当中，可以使用的`BasicValue`值有7个。
+- 在`SimpleVerifier`类当中，`newValue`方法可以使用的`BasicValue`值多样化，每个不同的类都有一个对应的`BasicValue`值。
+
 ```java
 public class SimpleVerifier extends BasicVerifier {
+    @Override
+    public BasicValue newValue(Type type) {
+        if (type == null) {
+            return BasicValue.UNINITIALIZED_VALUE;
+        }
+
+        boolean isArray = type.getSort() == Type.ARRAY;
+        if (isArray) {
+            switch (type.getElementType().getSort()) {
+                case Type.BOOLEAN:
+                case Type.CHAR:
+                case Type.BYTE:
+                case Type.SHORT:
+                    return new BasicValue(type);
+                default:
+                    break;
+            }
+        }
+
+        BasicValue value = super.newValue(type);
+        if (BasicValue.REFERENCE_VALUE.equals(value)) {
+            if (isArray) {
+                value = newValue(type.getElementType());
+                StringBuilder descriptor = new StringBuilder();
+                for (int i = 0; i < type.getDimensions(); ++i) {
+                    descriptor.append('[');
+                }
+                descriptor.append(value.getType().getDescriptor());
+                value = new BasicValue(Type.getType(descriptor.toString()));
+            } else {
+                value = new BasicValue(type);
+            }
+        }
+        return value;
+    }
 }
 ```
 
@@ -59,6 +137,8 @@ public class HelloWorld {
     }
 }
 ```
+
+我们可以使用`javap`指令查看`test`方法包含的instructions内容：
 
 ```text
 $ javap -c sample.HelloWorld
@@ -84,10 +164,13 @@ public class sample.HelloWorld {
 ### 编码实现
 
 ```java
+import lsieun.asm.tree.transformer.MethodTransformer;
 import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.InsnList;
-import org.objectweb.asm.tree.MethodNode;
+import org.objectweb.asm.Type;
+import org.objectweb.asm.tree.*;
+import org.objectweb.asm.tree.analysis.*;
+
+import static org.objectweb.asm.Opcodes.CHECKCAST;
 
 public class RemoveUnusedCastNode extends ClassNode {
     public RemoveUnusedCastNode(int api, ClassVisitor cv) {
@@ -118,70 +201,60 @@ public class RemoveUnusedCastNode extends ClassNode {
             accept(cv);
         }
     }
-}
-```
 
-```java
-import org.objectweb.asm.Type;
-import org.objectweb.asm.tree.AbstractInsnNode;
-import org.objectweb.asm.tree.MethodNode;
-import org.objectweb.asm.tree.TypeInsnNode;
-import org.objectweb.asm.tree.analysis.*;
+    private static class MethodRemoveUnusedCastTransformer extends MethodTransformer {
+        private final String owner;
 
-import static org.objectweb.asm.Opcodes.*;
+        public MethodRemoveUnusedCastTransformer(String owner, MethodTransformer mt) {
+            super(mt);
+            this.owner = owner;
+        }
 
-public class MethodRemoveUnusedCastTransformer extends MethodTransformer {
-    private final String owner;
-
-    public MethodRemoveUnusedCastTransformer(String owner, MethodTransformer mt) {
-        super(mt);
-        this.owner = owner;
-    }
-
-    @Override
-    public void transform(MethodNode mn) {
-        // 首先，处理自己的代码逻辑
-        Analyzer<BasicValue> analyzer = new Analyzer<>(new SimpleVerifier());
-        try {
-            Frame<BasicValue>[] frames = analyzer.analyze(owner, mn);
-            AbstractInsnNode[] insnNodes = mn.instructions.toArray();
-            for (int i = 0; i < insnNodes.length; i++) {
-                AbstractInsnNode insn = insnNodes[i];
-                if (insn.getOpcode() == CHECKCAST) {
-                    Frame<BasicValue> f = frames[i];
-                    if (f != null && f.getStackSize() > 0) {
-                        BasicValue operand = f.getStack(f.getStackSize() - 1);
-                        Class<?> to = getClass(((TypeInsnNode) insn).desc);
-                        Class<?> from = getClass(operand.getType());
-                        if (to.isAssignableFrom(from)) {
-                            mn.instructions.remove(insn);
+        @Override
+        public void transform(MethodNode mn) {
+            // 首先，处理自己的代码逻辑
+            Analyzer<BasicValue> analyzer = new Analyzer<>(new SimpleVerifier());
+            try {
+                Frame<BasicValue>[] frames = analyzer.analyze(owner, mn);
+                AbstractInsnNode[] insnNodes = mn.instructions.toArray();
+                for (int i = 0; i < insnNodes.length; i++) {
+                    AbstractInsnNode insn = insnNodes[i];
+                    if (insn.getOpcode() == CHECKCAST) {
+                        Frame<BasicValue> f = frames[i];
+                        if (f != null && f.getStackSize() > 0) {
+                            BasicValue operand = f.getStack(f.getStackSize() - 1);
+                            Class<?> to = getClass(((TypeInsnNode) insn).desc);
+                            Class<?> from = getClass(operand.getType());
+                            if (to.isAssignableFrom(from)) {
+                                mn.instructions.remove(insn);
+                            }
                         }
                     }
                 }
             }
-        }
-        catch (AnalyzerException ex) {
-            ex.printStackTrace();
+            catch (AnalyzerException ex) {
+                ex.printStackTrace();
+            }
+
+            // 其次，调用父类的方法实现
+            super.transform(mn);
         }
 
-        // 其次，调用父类的方法实现
-        super.transform(mn);
-    }
+        private static Class<?> getClass(String desc) {
+            try {
+                return Class.forName(desc.replace('/', '.'));
+            }
+            catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex.toString());
+            }
+        }
 
-    private static Class<?> getClass(String desc) {
-        try {
-            return Class.forName(desc.replace('/', '.'));
+        private static Class<?> getClass(Type t) {
+            if (t.getSort() == Type.OBJECT) {
+                return getClass(t.getInternalName());
+            }
+            return getClass(t.getDescriptor());
         }
-        catch (ClassNotFoundException ex) {
-            throw new RuntimeException(ex.toString());
-        }
-    }
-
-    private static Class<?> getClass(Type t) {
-        if (t.getSort() == Type.OBJECT) {
-            return getClass(t.getInternalName());
-        }
-        return getClass(t.getDescriptor());
     }
 }
 ```
@@ -228,6 +301,8 @@ public class HelloWorldTransformTree {
 
 ### 验证结果
 
+一方面，验证`test`方法的功能是否正常：
+
 ```java
 import java.lang.reflect.Method;
 
@@ -240,6 +315,8 @@ public class HelloWorldRun {
     }
 }
 ```
+
+另一方面，验证`test`方法是否包含`checkcast`指令：
 
 ```text
 $ javap -c sample.HelloWorld
@@ -358,8 +435,7 @@ public class HelloWorldTransformCore {
         //（3）串连ClassVisitor
         int api = Opcodes.ASM9;
         ClassVisitor cv = new RemoveUnusedCastVisitor(api, cw);
-
-
+        
         //（4）结合ClassReader和ClassVisitor
         int parsingOptions = ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES;
         cr.accept(cv, parsingOptions);

@@ -60,9 +60,10 @@ permalink: /resources/
 
 视频网站
 
-- [动物世界－央视网](http://tv.cctv.com/lm/dwsj/index.shtml?spm=C31267.PzXj0D8UJUyC.EuVgsDNuNsvy.1)
+- CCTV: [动物世界](http://tv.cctv.com/lm/dwsj/index.shtml?spm=C31267.PzXj0D8UJUyC.EuVgsDNuNsvy.1), [龙门飞甲](https://tv.cctv.com/2018/08/16/VIDAzFeInQPP4aQhmXQF4ljf180816.shtml)
 - [好视频影院](https://www.hspyy.net)，有老版的《三国》
 - [努努影院](https://www.nunuyy.cc/)
+- [策驰电影网](http://www.485a.com)
 - [破解资源君](https://www.youtube.com/channel/UCrGEYuZ1nw3RDj4LDKJmrZw): [0730.zip](https://raw.githubusercontent.com/pojiezhiyuanjun/freev2/master/0730.zip)
 - [SOAP2DAY](https://soap2day.to/)，英文电影
 - 动漫：
@@ -159,3 +160,7 @@ Chrome插件：
 ### xxx
 
 Annotation Processor, Antlr实战、IDEA plugin
+
+### JMH
+
+- [JMH](http://openjdk.java.net/projects/code-tools/jmh/) is a Java harness for building, running, and analysing nano/micro/milli/macro benchmarks written in Java and other languages targetting the JVM.

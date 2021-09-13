@@ -1,2 +1,2 @@
 #/bin/bash
-bundle exec jekyll serve --unpublished
+bundle exec jekyll serve --drafts --unpublished

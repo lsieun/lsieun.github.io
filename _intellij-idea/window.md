@@ -24,13 +24,7 @@ sequence: "101"
 - `Ctrl + Shift + F12`: Toggle maximizing editor
 - `Ctrl + Alt + F12`: Show In Explorer
 
-## Editor
 
-- `Ctrl + F4`: Close active editor tab
-
-### Switch Editor
-
-- `Alt + Right/Left`: Go to next / previous editor tab
 
 ## Project Window
 

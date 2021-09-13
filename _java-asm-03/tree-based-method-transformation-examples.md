@@ -35,58 +35,116 @@ public class HelloWorld {
 
 我们想实现的预期目标：计算出方法的运行时间。
 
+经过转换之后的结果，主要体现在三方面：
+
+- 第一点，添加了一个`timer`字段，是`long`类型，访问标识为`public`和`static`。
+- 第二点，在方法进入之后，`timer`字段减去一个时间戳：`timer -= System.currentTimeMillis();`。
+- 第三点，在方法退出之前，`timer`字段加上一个时间戳：`timer += System.currentTimeMillis();`。
+
+```java
+import java.util.Random;
+
+public class HelloWorld {
+    public static long timer;
+
+    public int add(int a, int b) throws InterruptedException {
+        timer -= System.currentTimeMillis();
+        int c = a + b;
+        Random rand = new Random(System.currentTimeMillis());
+        int num = rand.nextInt(300);
+        Thread.sleep(100 + num);
+        timer += System.currentTimeMillis();
+        return c;
+    }
+
+    public int sub(int a, int b) throws InterruptedException {
+        timer -= System.currentTimeMillis();
+        int c = a - b;
+        Random rand = new Random(System.currentTimeMillis());
+        int num = rand.nextInt(400);
+        Thread.sleep(100 + num);
+        timer += System.currentTimeMillis();
+        return c;
+    }
+}
+```
+
 ### 编码实现
 
 ```java
+import lsieun.asm.tree.transformer.ClassTransformer;
+import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.tree.*;
-
-import java.util.ListIterator;
 
 import static org.objectweb.asm.Opcodes.*;
 
-public class MethodAddTimerTransformer extends ClassTransformer {
-    public MethodAddTimerTransformer(ClassTransformer ct) {
-        super(ct);
+public class ClassAddTimerNode extends ClassNode {
+    public ClassAddTimerNode(int api, ClassVisitor cv) {
+        super(api);
+        this.cv = cv;
     }
 
     @Override
-    public void transform(ClassNode cn) {
-        for (MethodNode mn : cn.methods) {
-            if ("<init>".equals(mn.name) || "<clinit>".equals(mn.name)) {
-                continue;
-            }
-            InsnList instructions = mn.instructions;
-            if (instructions.size() == 0) {
-                continue;
-            }
-            ListIterator<AbstractInsnNode> it = instructions.iterator();
-            while (it.hasNext()) {
-                AbstractInsnNode item = it.next();
-                int opcode = item.getOpcode();
-                if ((opcode >= IRETURN && opcode <= RETURN) || (opcode == ATHROW)) {
-                    InsnList il = new InsnList();
-                    il.add(new FieldInsnNode(GETSTATIC, cn.name, "timer", "J"));
-                    il.add(new MethodInsnNode(INVOKESTATIC, "java/lang/System", "currentTimeMillis", "()J"));
-                    il.add(new InsnNode(LADD));
-                    il.add(new FieldInsnNode(PUTSTATIC, cn.name, "timer", "J"));
-                    instructions.insert(item.getPrevious(), il);
-                }
-            }
+    public void visitEnd() {
+        // 首先，处理自己的代码逻辑
+        ClassTransformer ct = new ClassAddTimerTransformer(null);
+        ct.transform(this);
 
-            InsnList il = new InsnList();
-            il.add(new FieldInsnNode(GETSTATIC, cn.name, "timer", "J"));
-            il.add(new MethodInsnNode(INVOKESTATIC, "java/lang/System", "currentTimeMillis", "()J"));
-            il.add(new InsnNode(LSUB));
-            il.add(new FieldInsnNode(PUTSTATIC, cn.name, "timer", "J"));
-            instructions.insert(il);
+        // 其次，调用父类的方法实现（根据实际情况，选择保留，或删除）
+        super.visitEnd();
 
-            mn.maxLocals = 0;
-            mn.maxStack = 0;
+        // 最后，向后续ClassVisitor传递
+        if (cv != null) {
+            accept(cv);
+        }
+    }
+
+    private static class ClassAddTimerTransformer extends ClassTransformer {
+        public ClassAddTimerTransformer(ClassTransformer ct) {
+            super(ct);
         }
 
-        int acc = ACC_PUBLIC | ACC_STATIC;
-        cn.fields.add(new FieldNode(acc, "timer", "J", null, null));
-        super.transform(cn);
+        @Override
+        public void transform(ClassNode cn) {
+            for (MethodNode mn : cn.methods) {
+                if ("<init>".equals(mn.name) || "<clinit>".equals(mn.name)) {
+                    continue;
+                }
+                InsnList instructions = mn.instructions;
+                if (instructions.size() == 0) {
+                    continue;
+                }
+                for (AbstractInsnNode item : instructions) {
+                    int opcode = item.getOpcode();
+                    // 在方法退出之前，加上当前时间戳
+                    if ((opcode >= IRETURN && opcode <= RETURN) || (opcode == ATHROW)) {
+                        InsnList il = new InsnList();
+                        il.add(new FieldInsnNode(GETSTATIC, cn.name, "timer", "J"));
+                        il.add(new MethodInsnNode(INVOKESTATIC, "java/lang/System", "currentTimeMillis", "()J"));
+                        il.add(new InsnNode(LADD));
+                        il.add(new FieldInsnNode(PUTSTATIC, cn.name, "timer", "J"));
+                        instructions.insertBefore(item, il);
+                    }
+                }
+
+                // 在方法刚进入之后，减去当前时间戳
+                InsnList il = new InsnList();
+                il.add(new FieldInsnNode(GETSTATIC, cn.name, "timer", "J"));
+                il.add(new MethodInsnNode(INVOKESTATIC, "java/lang/System", "currentTimeMillis", "()J"));
+                il.add(new InsnNode(LSUB));
+                il.add(new FieldInsnNode(PUTSTATIC, cn.name, "timer", "J"));
+                instructions.insert(il);
+
+                // local variables的大小，保持不变
+                // mn.maxLocals = mn.maxLocals;
+                // operand stack的大小，增加4个位置
+                mn.maxStack += 4;
+            }
+
+            int acc = ACC_PUBLIC | ACC_STATIC;
+            cn.fields.add(new FieldNode(acc, "timer", "J", null, null));
+            super.transform(cn);
+        }
     }
 }
 ```
@@ -94,6 +152,7 @@ public class MethodAddTimerTransformer extends ClassTransformer {
 ### 进行转换
 
 ```java
+import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
@@ -108,20 +167,18 @@ public class HelloWorldTransformTree {
         // (1)构建ClassReader
         ClassReader cr = new ClassReader(bytes1);
 
-        // (2) 构建ClassNode
-        int api = Opcodes.ASM9;
-        ClassNode cn = new ClassNode(api);
-        cr.accept(cn, ClassReader.SKIP_FRAMES | ClassReader.SKIP_DEBUG);
-
-        // (3) 进行transform
-        ClassTransformer ct = new MethodAddTimerTransformer(null);
-        ct.transform(cn);
-
-        // (4) 构建ClassWriter
+        // (2)构建ClassWriter
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
-        cn.accept(cw);
 
-        // (5) 生成byte[]内容输出
+        // (3)串连ClassNode
+        int api = Opcodes.ASM9;
+        ClassNode cn = new ClassAddTimerNode(api, cw);
+
+        //（4）结合ClassReader和ClassNode
+        int parsingOptions = ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES;
+        cr.accept(cn, parsingOptions);
+
+        // (5) 生成byte[]
         byte[] bytes2 = cw.toByteArray();
 
         FileUtils.writeBytes(filepath, bytes2);
@@ -193,22 +250,54 @@ public class HelloWorld {
 
 我们想要实现的预期目标：删除掉`this.val = this.val;`语句。
 
+通过`javap`命令，可以查看`HelloWorld`类的instructions，该语句对应的指令组合是`aload_0 aload0 getfield putfield`：
+
+```text
+$ javap -c sample.HelloWorld
+Compiled from "HelloWorld.java"
+public class sample.HelloWorld {
+  public int val;
+  ...
+
+  public void test(int, int);
+    Code:
+       0: iload_1
+       1: iload_2
+       2: iadd
+       3: istore_3
+       4: aload_0
+       5: aload_0
+       6: getfield      #2                  // Field val:I
+       9: putfield      #2                  // Field val:I
+      12: getstatic     #3                  // Field java/lang/System.out:Ljava/io/PrintStream;
+      15: iload_3
+      16: invokevirtual #4                  // Method java/io/PrintStream.println:(I)V
+      19: return
+}
+```
+
 ### 编码实现
 
 ```java
-import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.InsnList;
-import org.objectweb.asm.tree.MethodNode;
+import lsieun.asm.tree.transformer.MethodTransformer;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.tree.*;
 
-public class MethodRemoveFieldSelfAssignTransformer extends ClassTransformer {
+import java.util.ListIterator;
 
-    public MethodRemoveFieldSelfAssignTransformer(ClassTransformer ct) {
-        super(ct);
+import static org.objectweb.asm.Opcodes.*;
+
+public class RemoveGetFieldPutFieldNode extends ClassNode {
+    public RemoveGetFieldPutFieldNode(int api, ClassVisitor cv) {
+        super(api);
+        this.cv = cv;
     }
 
     @Override
-    public void transform(ClassNode cn) {
-        for (MethodNode mn : cn.methods) {
+    public void visitEnd() {
+        // 首先，处理自己的代码逻辑
+        MethodTransformer mt = new MethodRemoveGetFieldPutFieldTransformer(null);
+        for (MethodNode mn : methods) {
             if ("<init>".equals(mn.name) || "<clinit>".equals(mn.name)) {
                 continue;
             }
@@ -216,79 +305,78 @@ public class MethodRemoveFieldSelfAssignTransformer extends ClassTransformer {
             if (instructions.size() == 0) {
                 continue;
             }
-            MethodConverter mc = new MethodRemoveFieldSelfAssignConverter(null);
-            mc.transform(mn);
+            mt.transform(mn);
         }
 
-        super.transform(cn);
-    }
-}
-```
+        // 其次，调用父类的方法实现（根据实际情况，选择保留，或删除）
+        super.visitEnd();
 
-```java
-import org.objectweb.asm.tree.*;
-
-import java.util.ListIterator;
-
-import static org.objectweb.asm.Opcodes.*;
-
-public class MethodRemoveFieldSelfAssignConverter extends MethodConverter {
-    public MethodRemoveFieldSelfAssignConverter(MethodConverter mt) {
-        super(mt);
+        // 最后，向后续ClassVisitor传递
+        if (cv != null) {
+            accept(cv);
+        }
     }
 
-    @Override
-    public void transform(MethodNode mn) {
-        InsnList instructions = mn.instructions;
-        ListIterator<AbstractInsnNode> it = instructions.iterator();
-        while (it.hasNext()) {
-            AbstractInsnNode node1 = it.next();
-            if (isALOAD0(node1)) {
-                AbstractInsnNode node2 = getNext(node1);
-                if (node2 != null && isALOAD0(node2)) {
-                    AbstractInsnNode node3 = getNext(node2);
-                    if (node3 != null && node3.getOpcode() == GETFIELD) {
-                        AbstractInsnNode node4 = getNext(node3);
-                        if (node4 != null && node4.getOpcode() == PUTFIELD) {
-                            if (sameField(node3, node4)) {
-                                while (it.next() != node4) {
+    private static class MethodRemoveGetFieldPutFieldTransformer extends MethodTransformer {
+        public MethodRemoveGetFieldPutFieldTransformer(MethodTransformer mt) {
+            super(mt);
+        }
+
+        @Override
+        public void transform(MethodNode mn) {
+            // 首先，处理自己的代码逻辑
+            InsnList instructions = mn.instructions;
+            ListIterator<AbstractInsnNode> it = instructions.iterator();
+            while (it.hasNext()) {
+                AbstractInsnNode node1 = it.next();
+                if (isALOAD0(node1)) {
+                    AbstractInsnNode node2 = getNext(node1);
+                    if (node2 != null && isALOAD0(node2)) {
+                        AbstractInsnNode node3 = getNext(node2);
+                        if (node3 != null && node3.getOpcode() == GETFIELD) {
+                            AbstractInsnNode node4 = getNext(node3);
+                            if (node4 != null && node4.getOpcode() == PUTFIELD) {
+                                if (sameField(node3, node4)) {
+                                    while (it.next() != node4) {
+                                    }
+                                    instructions.remove(node1);
+                                    instructions.remove(node2);
+                                    instructions.remove(node3);
+                                    instructions.remove(node4);
                                 }
-                                instructions.remove(node1);
-                                instructions.remove(node2);
-                                instructions.remove(node3);
-                                instructions.remove(node4);
                             }
                         }
                     }
                 }
             }
+
+            // 其次，调用父类的方法实现
+            super.transform(mn);
         }
 
-        super.transform(mn);
-    }
+        private static AbstractInsnNode getNext(AbstractInsnNode insn) {
+            do {
+                insn = insn.getNext();
+                if (insn != null && !(insn instanceof LineNumberNode)) {
+                    break;
+                }
+            } while (insn != null);
+            return insn;
+        }
 
-    private static AbstractInsnNode getNext(AbstractInsnNode insn) {
-        do {
-            insn = insn.getNext();
-            if (insn != null && !(insn instanceof LineNumberNode)) {
-                break;
-            }
-        } while (insn != null);
-        return insn;
-    }
+        private static boolean isALOAD0(AbstractInsnNode insnNode) {
+            return insnNode.getOpcode() == ALOAD && ((VarInsnNode) insnNode).var == 0;
+        }
 
-    private static boolean isALOAD0(AbstractInsnNode insnNode) {
-        return insnNode.getOpcode() == ALOAD && ((VarInsnNode) insnNode).var == 0;
-    }
-
-    private static boolean sameField(AbstractInsnNode oneInsnNode, AbstractInsnNode anotherInsnNode) {
-        if (!(oneInsnNode instanceof FieldInsnNode)) return false;
-        if (!(anotherInsnNode instanceof FieldInsnNode)) return false;
-        FieldInsnNode fieldInsnNode1 = (FieldInsnNode) oneInsnNode;
-        FieldInsnNode fieldInsnNode2 = (FieldInsnNode) anotherInsnNode;
-        String name1 = fieldInsnNode1.name;
-        String name2 = fieldInsnNode2.name;
-        return name1.equals(name2);
+        private static boolean sameField(AbstractInsnNode oneInsnNode, AbstractInsnNode anotherInsnNode) {
+            if (!(oneInsnNode instanceof FieldInsnNode)) return false;
+            if (!(anotherInsnNode instanceof FieldInsnNode)) return false;
+            FieldInsnNode fieldInsnNode1 = (FieldInsnNode) oneInsnNode;
+            FieldInsnNode fieldInsnNode2 = (FieldInsnNode) anotherInsnNode;
+            String name1 = fieldInsnNode1.name;
+            String name2 = fieldInsnNode2.name;
+            return name1.equals(name2);
+        }
     }
 }
 ```
@@ -296,8 +384,6 @@ public class MethodRemoveFieldSelfAssignConverter extends MethodConverter {
 ### 进行转换
 
 ```java
-import lsieun.asm.tree.*;
-import lsieun.asm.tree.ClassTransformer;
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
@@ -313,20 +399,18 @@ public class HelloWorldTransformTree {
         // (1)构建ClassReader
         ClassReader cr = new ClassReader(bytes1);
 
-        // (2) 构建ClassNode
-        int api = Opcodes.ASM9;
-        ClassNode cn = new ClassNode(api);
-        cr.accept(cn, ClassReader.SKIP_FRAMES | ClassReader.SKIP_DEBUG);
-
-        // (3) 进行transform
-        ClassTransformer ct = new MethodRemoveFieldSelfAssignTransformer(null);
-        ct.transform(cn);
-
-        // (4) 构建ClassWriter
+        // (2)构建ClassWriter
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
-        cn.accept(cw);
 
-        // (5) 生成byte[]内容输出
+        // (3)串连ClassNode
+        int api = Opcodes.ASM9;
+        ClassNode cn = new RemoveGetFieldPutFieldNode(api, cw);
+
+        //（4）结合ClassReader和ClassNode
+        int parsingOptions = ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES;
+        cr.accept(cn, parsingOptions);
+
+        // (5) 生成byte[]
         byte[] bytes2 = cw.toByteArray();
 
         FileUtils.writeBytes(filepath, bytes2);
@@ -505,83 +589,85 @@ public class sample.HelloWorld {
 ### 编码实现
 
 ```java
-import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.InsnList;
-import org.objectweb.asm.tree.MethodNode;
-
-public class MethodOptimizeJumpTransformer extends ClassTransformer {
-    public MethodOptimizeJumpTransformer(ClassTransformer ct) {
-        super(ct);
-    }
-
-    @Override
-    public void transform(ClassNode cn) {
-        // 首先，处理自己的代码逻辑
-        for (MethodNode mn : cn.methods) {
-            if ("<init>".equals(mn.name) || "<clinit>".equals(mn.name)) {
-                continue;
-            }
-            InsnList insns = mn.instructions;
-            if (insns.size() == 0) {
-                continue;
-            }
-            MethodTransformer mt = new MethodOptimizeJumpConverter(null);
-            mt.transform(mn);
-        }
-
-        // 其次，调用父类的方法实现
-        super.transform(cn);
-    }
-}
-```
-
-```java
+import lsieun.asm.tree.transformer.MethodTransformer;
+import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.tree.*;
 
 import static org.objectweb.asm.Opcodes.*;
 
-public class MethodOptimizeJumpConverter extends MethodTransformer {
-    public MethodOptimizeJumpConverter(MethodTransformer mt) {
-        super(mt);
+public class OptimizeJumpNode extends ClassNode {
+    public OptimizeJumpNode(int api, ClassVisitor cv) {
+        super(api);
+        this.cv = cv;
     }
 
     @Override
-    public void transform(MethodNode mn) {
+    public void visitEnd() {
         // 首先，处理自己的代码逻辑
-        InsnList instructions = mn.instructions;
-        for (AbstractInsnNode insnNode : instructions) {
-            if (insnNode instanceof JumpInsnNode) {
-                JumpInsnNode jumpInsnNode = (JumpInsnNode) insnNode;
-                LabelNode label = jumpInsnNode.label;
-                AbstractInsnNode target;
-                while (true) {
-                    target = label;
-                    while (target != null && target.getOpcode() < 0) {
-                        target = target.getNext();
+        MethodTransformer mt = new MethodOptimizeJumpTransformer(null);
+        for (MethodNode mn : methods) {
+            if ("<init>".equals(mn.name) || "<clinit>".equals(mn.name)) {
+                continue;
+            }
+            InsnList instructions = mn.instructions;
+            if (instructions.size() == 0) {
+                continue;
+            }
+            mt.transform(mn);
+        }
+
+        // 其次，调用父类的方法实现（根据实际情况，选择保留，或删除）
+        super.visitEnd();
+
+        // 最后，向后续ClassVisitor传递
+        if (cv != null) {
+            accept(cv);
+        }
+    }
+
+    private static class MethodOptimizeJumpTransformer extends MethodTransformer {
+        public MethodOptimizeJumpTransformer(MethodTransformer mt) {
+            super(mt);
+        }
+
+        @Override
+        public void transform(MethodNode mn) {
+            // 首先，处理自己的代码逻辑
+            InsnList instructions = mn.instructions;
+            for (AbstractInsnNode insnNode : instructions) {
+                if (insnNode instanceof JumpInsnNode) {
+                    JumpInsnNode jumpInsnNode = (JumpInsnNode) insnNode;
+                    LabelNode label = jumpInsnNode.label;
+                    AbstractInsnNode target;
+                    while (true) {
+                        target = label;
+                        while (target != null && target.getOpcode() < 0) {
+                            target = target.getNext();
+                        }
+
+                        if (target != null && target.getOpcode() == GOTO) {
+                            label = ((JumpInsnNode) target).label;
+                        }
+                        else {
+                            break;
+                        }
                     }
 
-                    if (target != null && target.getOpcode() == GOTO) {
-                        label = ((JumpInsnNode) target).label;
-                    }
-                    else {
-                        break;
-                    }
-                }
-
-                // update target
-                jumpInsnNode.label = label;
-                // if possible, replace jump with target instruction
-                if (insnNode.getOpcode() == GOTO && target != null) {
-                    int opcode = target.getOpcode();
-                    if ((opcode >= IRETURN && opcode <= RETURN) || opcode == ATHROW) {
-                        instructions.set(insnNode, target.clone(null));
+                    // update target
+                    jumpInsnNode.label = label;
+                    // if possible, replace jump with target instruction
+                    if (insnNode.getOpcode() == GOTO && target != null) {
+                        int opcode = target.getOpcode();
+                        if ((opcode >= IRETURN && opcode <= RETURN) || opcode == ATHROW) {
+                            instructions.set(insnNode, target.clone(null));
+                        }
                     }
                 }
             }
-        }
 
-        // 其次，调用父类的方法实现
-        super.transform(mn);
+            // 其次，调用父类的方法实现
+            super.transform(mn);
+        }
     }
 }
 ```
@@ -589,39 +675,33 @@ public class MethodOptimizeJumpConverter extends MethodTransformer {
 ### 进行转换
 
 ```java
-import lsieun.asm.tree.*;
 import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.tree.*;
+import org.objectweb.asm.tree.ClassNode;
 
 public class HelloWorldTransformTree {
     public static void main(String[] args) {
         String relative_path = "sample/HelloWorld.class";
         String filepath = FileUtils.getFilePath(relative_path);
         byte[] bytes1 = FileUtils.readBytes(filepath);
-        if (bytes1 == null) {
-            throw new RuntimeException("bytes1 is null");
-        }
 
         // (1)构建ClassReader
         ClassReader cr = new ClassReader(bytes1);
 
-        // (2) 构建ClassNode
-        int api = Opcodes.ASM9;
-        ClassNode cn = new ClassNode(api);
-        cr.accept(cn, ClassReader.SKIP_FRAMES | ClassReader.SKIP_DEBUG);
-
-        // (3) 进行transform
-        ClassTransformer ct = new MethodOptimizeJumpTransformer(null);
-        ct.transform(cn);
-
-        // (4) 构建ClassWriter
+        // (2)构建ClassWriter
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
-        cn.accept(cw);
 
-        // (5) 生成byte[]内容输出
+        // (3)串连ClassNode
+        int api = Opcodes.ASM9;
+        ClassNode cn = new OptimizeJumpNode(api, cw);
+
+        //（4）结合ClassReader和ClassNode
+        int parsingOptions = ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES;
+        cr.accept(cn, parsingOptions);
+
+        // (5) 生成byte[]
         byte[] bytes2 = cw.toByteArray();
 
         FileUtils.writeBytes(filepath, bytes2);
@@ -630,6 +710,8 @@ public class HelloWorldTransformTree {
 ```
 
 ### 验证结果
+
+验证结果，一方面要保证程序仍然能够正常运行：
 
 ```java
 import java.lang.reflect.Method;
@@ -644,6 +726,8 @@ public class HelloWorldRun {
     }
 }
 ```
+
+另一方面，要验证“是否对跳转进行了优化”。那么，我们通过`javap`命令来验证：
 
 ```text
 $ javap -c sample.HelloWorld
@@ -670,3 +754,11 @@ public class sample.HelloWorld {
       30: athrow
 }
 ```
+
+## 总结
+
+本文内容总结如下：
+
+- 第一点，代码示例一（方法计时），使用了`ClassTransformer`的子类，因为既要增加字段，又要对方法进行修改。
+- 第二点，代码示例二（移除字段给自身赋值），使用了`MethodTransformer`的子类，需要删除方法内的`aload_0 aload0 getfield putfield`指令组合。
+- 第二点，代码示例三（优化跳转），使用了`MethodTransformer`的子类，需要对方法内的instruction替换跳转目标。

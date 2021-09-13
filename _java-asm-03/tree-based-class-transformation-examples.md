@@ -5,6 +5,20 @@ sequence: "302"
 
 [上级目录]({% link _posts/2021-05-01-java-asm-season-03.md %})
 
+## 整体思路
+
+使用Tree API进行Class Transformation的思路：
+
+```text
+ClassReader --> ClassNode --> ClassWriter
+```
+
+其中，
+
+- `ClassReader`类负责“读”Class。
+- `ClassWriter`类负责“写”Class。
+- `ClassNode`类负责进行“转换”（Transformation）。
+
 ## 示例一：删除字段
 
 ### 预期目标
@@ -21,41 +35,62 @@ public class HelloWorld {
 ### 编码实现
 
 ```java
+import lsieun.asm.tree.transformer.ClassTransformer;
+import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.FieldNode;
 
-import java.util.Iterator;
-
-public class ClassRemoveFieldTransformer extends ClassTransformer {
+public class ClassRemoveFieldNode extends ClassNode {
     private final String fieldName;
     private final String fieldDesc;
 
-    public ClassRemoveFieldTransformer(ClassTransformer ct, String fieldName, String fieldDesc) {
-        super(ct);
+    public ClassRemoveFieldNode(int api, ClassVisitor cv, String fieldName, String fieldDesc) {
+        super(api);
+        this.cv = cv;
         this.fieldName = fieldName;
         this.fieldDesc = fieldDesc;
     }
 
     @Override
-    public void transform(ClassNode cn) {
+    public void visitEnd() {
         // 首先，处理自己的代码逻辑
-        Iterator<FieldNode> it = cn.fields.iterator();
-        while (it.hasNext()) {
-            FieldNode fn = it.next();
-            if (fieldName.equals(fn.name) && fieldDesc.equals(fn.desc)) {
-                it.remove();
-            }
+        ClassTransformer ct = new ClassRemoveFieldTransformer(null, fieldName, fieldDesc);
+        ct.transform(this);
+
+        // 其次，调用父类的方法实现（根据实际情况，选择保留，或删除）
+        super.visitEnd();
+
+        // 最后，向后续ClassVisitor传递
+        if (cv != null) {
+            accept(cv);
+        }
+    }
+
+    private static class ClassRemoveFieldTransformer extends ClassTransformer {
+        private final String fieldName;
+        private final String fieldDesc;
+
+        public ClassRemoveFieldTransformer(ClassTransformer ct, String fieldName, String fieldDesc) {
+            super(ct);
+            this.fieldName = fieldName;
+            this.fieldDesc = fieldDesc;
         }
 
-        // 其次，调用父类的方法实现
-        super.transform(cn);
+        @Override
+        public void transform(ClassNode cn) {
+            // 首先，处理自己的代码逻辑
+            cn.fields.removeIf(fn -> fieldName.equals(fn.name) && fieldDesc.equals(fn.desc));
+
+            // 其次，调用父类的方法实现
+            super.transform(cn);
+        }
     }
 }
 ```
 
 ### 进行转换
 
-```java
+```text
+import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
@@ -70,20 +105,18 @@ public class HelloWorldTransformTree {
         // (1)构建ClassReader
         ClassReader cr = new ClassReader(bytes1);
 
-        // (2) 构建ClassNode
-        int api = Opcodes.ASM9;
-        ClassNode cn = new ClassNode(api);
-        cr.accept(cn, ClassReader.SKIP_FRAMES | ClassReader.SKIP_DEBUG);
-
-        // (3) 进行transform
-        ClassTransformer ct = new ClassRemoveFieldTransformer(null, "strValue", "Ljava/lang/String;");
-        ct.transform(cn);
-
-        // (4) 构建ClassWriter
+        // (2)构建ClassWriter
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
-        cn.accept(cw);
 
-        // (5) 生成byte[]内容输出
+        // (3)串连ClassNode
+        int api = Opcodes.ASM9;
+        ClassNode cn = new ClassRemoveFieldNode(api, cw, "strValue", "Ljava/lang/String;");
+
+        //（4）结合ClassReader和ClassNode
+        int parsingOptions = ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES;
+        cr.accept(cn, parsingOptions);
+
+        // (5) 生成byte[]
         byte[] bytes2 = cw.toByteArray();
 
         FileUtils.writeBytes(filepath, bytes2);
@@ -138,44 +171,77 @@ public class HelloWorld {
 ### 编码实现
 
 ```java
+import lsieun.asm.tree.transformer.ClassTransformer;
+import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
 
-public class ClassAddFieldTransformer extends ClassTransformer {
+public class ClassAddFieldNode extends ClassNode {
     private final int fieldAccess;
     private final String fieldName;
     private final String fieldDesc;
 
-    public ClassAddFieldTransformer(ClassTransformer ct, int fieldAccess, String fieldName, String fieldDesc) {
-        super(ct);
+    public ClassAddFieldNode(int api, ClassVisitor cv,
+                             int fieldAccess, String fieldName, String fieldDesc) {
+        super(api);
+        this.cv = cv;
         this.fieldAccess = fieldAccess;
         this.fieldName = fieldName;
         this.fieldDesc = fieldDesc;
     }
 
     @Override
-    public void transform(ClassNode cn) {
+    public void visitEnd() {
         // 首先，处理自己的代码逻辑
-        boolean isPresent = false;
-        for (FieldNode fn : cn.fields) {
-            if (fieldName.equals(fn.name)) {
-                isPresent = true;
-                break;
-            }
+        ClassTransformer ct = new ClassAddFieldTransformer(null, fieldAccess, fieldName, fieldDesc);
+        ct.transform(this);
+
+        // 其次，调用父类的方法实现（根据实际情况，选择保留，或删除）
+        super.visitEnd();
+
+        // 最后，向后续ClassVisitor传递
+        if (cv != null) {
+            accept(cv);
         }
-        if (!isPresent) {
-            cn.fields.add(new FieldNode(fieldAccess, fieldName, fieldDesc, null, null));
+    }
+
+    private static class ClassAddFieldTransformer extends ClassTransformer {
+        private final int fieldAccess;
+        private final String fieldName;
+        private final String fieldDesc;
+
+        public ClassAddFieldTransformer(ClassTransformer ct, int fieldAccess, String fieldName, String fieldDesc) {
+            super(ct);
+            this.fieldAccess = fieldAccess;
+            this.fieldName = fieldName;
+            this.fieldDesc = fieldDesc;
         }
 
-        // 其次，调用父类的方法实现
-        super.transform(cn);
+        @Override
+        public void transform(ClassNode cn) {
+            // 首先，处理自己的代码逻辑
+            boolean isPresent = false;
+            for (FieldNode fn : cn.fields) {
+                if (fieldName.equals(fn.name)) {
+                    isPresent = true;
+                    break;
+                }
+            }
+            if (!isPresent) {
+                cn.fields.add(new FieldNode(fieldAccess, fieldName, fieldDesc, null, null));
+            }
+
+            // 其次，调用父类的方法实现
+            super.transform(cn);
+        }
     }
 }
 ```
 
 ### 进行转换
 
-```java
+```text
+import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
@@ -190,20 +256,18 @@ public class HelloWorldTransformTree {
         // (1)构建ClassReader
         ClassReader cr = new ClassReader(bytes1);
 
-        // (2) 构建ClassNode
-        int api = Opcodes.ASM9;
-        ClassNode cn = new ClassNode(api);
-        cr.accept(cn, ClassReader.SKIP_FRAMES | ClassReader.SKIP_DEBUG);
-
-        // (3) 进行transform
-        ClassTransformer ct = new ClassAddFieldTransformer(null, Opcodes.ACC_PUBLIC, "objValue", "Ljava/lang/Object;");
-        ct.transform(cn);
-
-        // (4) 构建ClassWriter
+        // (2)构建ClassWriter
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
-        cn.accept(cw);
 
-        // (5) 生成byte[]内容输出
+        // (3)串连ClassNode
+        int api = Opcodes.ASM9;
+        ClassNode cn = new ClassAddFieldNode(api, cw, Opcodes.ACC_PUBLIC, "objValue", "Ljava/lang/Object;");
+
+        //（4）结合ClassReader和ClassNode
+        int parsingOptions = ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES;
+        cr.accept(cn, parsingOptions);
+
+        // (5) 生成byte[]
         byte[] bytes2 = cw.toByteArray();
 
         FileUtils.writeBytes(filepath, bytes2);
@@ -232,41 +296,62 @@ public class HelloWorld {
 ### 编码实现
 
 ```java
+import lsieun.asm.tree.transformer.ClassTransformer;
+import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.MethodNode;
 
-import java.util.Iterator;
-
-public class ClassRemoveMethodTransformer extends ClassTransformer {
+public class ClassRemoveMethodNode extends ClassNode {
     private final String methodName;
     private final String methodDesc;
 
-    public ClassRemoveMethodTransformer(ClassTransformer ct, String methodName, String methodDesc) {
-        super(ct);
+    public ClassRemoveMethodNode(int api, ClassVisitor cv, String methodName, String methodDesc) {
+        super(api);
+        this.cv = cv;
         this.methodName = methodName;
         this.methodDesc = methodDesc;
     }
 
     @Override
-    public void transform(ClassNode cn) {
+    public void visitEnd() {
         // 首先，处理自己的代码逻辑
-        Iterator<MethodNode> it = cn.methods.iterator();
-        while (it.hasNext()) {
-            MethodNode mn = it.next();
-            if (methodName.equals(mn.name) && methodDesc.equals(mn.desc)) {
-                it.remove();
-            }
+        ClassTransformer ct = new ClassRemoveMethodTransformer(null, methodName, methodDesc);
+        ct.transform(this);
+
+        // 其次，调用父类的方法实现（根据实际情况，选择保留，或删除）
+        super.visitEnd();
+
+        // 最后，向后续ClassVisitor传递
+        if (cv != null) {
+            accept(cv);
+        }
+    }
+
+    private static class ClassRemoveMethodTransformer extends ClassTransformer {
+        private final String methodName;
+        private final String methodDesc;
+
+        public ClassRemoveMethodTransformer(ClassTransformer ct, String methodName, String methodDesc) {
+            super(ct);
+            this.methodName = methodName;
+            this.methodDesc = methodDesc;
         }
 
-        // 其次，调用父类的方法实现
-        super.transform(cn);
+        @Override
+        public void transform(ClassNode cn) {
+            // 首先，处理自己的代码逻辑
+            cn.methods.removeIf(mn -> methodName.equals(mn.name) && methodDesc.equals(mn.desc));
+
+            // 其次，调用父类的方法实现
+            super.transform(cn);
+        }
     }
 }
 ```
 
 ### 进行转换
 
-```java
+```text
+import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
@@ -281,20 +366,18 @@ public class HelloWorldTransformTree {
         // (1)构建ClassReader
         ClassReader cr = new ClassReader(bytes1);
 
-        // (2) 构建ClassNode
-        int api = Opcodes.ASM9;
-        ClassNode cn = new ClassNode(api);
-        cr.accept(cn, ClassReader.SKIP_FRAMES | ClassReader.SKIP_DEBUG);
-
-        // (3) 进行transform
-        ClassTransformer ct = new ClassRemoveMethodTransformer(null, "add", "(II)I");
-        ct.transform(cn);
-
-        // (4) 构建ClassWriter
+        // (2)构建ClassWriter
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
-        cn.accept(cw);
 
-        // (5) 生成byte[]内容输出
+        // (3)串连ClassNode
+        int api = Opcodes.ASM9;
+        ClassNode cn = new ClassRemoveMethodNode(api, cw, "add", "(II)I");
+
+        //（4）结合ClassReader和ClassNode
+        int parsingOptions = ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES;
+        cr.accept(cn, parsingOptions);
+
+        // (5) 生成byte[]
         byte[] bytes2 = cw.toByteArray();
 
         FileUtils.writeBytes(filepath, bytes2);
@@ -325,54 +408,97 @@ public class HelloWorld {
 ### 编码实现
 
 ```java
+import lsieun.asm.tree.transformer.ClassTransformer;
+import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.MethodNode;
 
-public class ClassAddMethodTransformer extends ClassTransformer {
+import java.util.function.Consumer;
+
+public class ClassAddMethodNode extends ClassNode {
     private final int methodAccess;
     private final String methodName;
     private final String methodDesc;
+    private final Consumer<MethodNode> methodBody;
 
-    public ClassAddMethodTransformer(ClassTransformer ct, int methodAccess, String methodName, String methodDesc) {
-        super(ct);
+    public ClassAddMethodNode(int api, ClassVisitor cv,
+                              int methodAccess, String methodName, String methodDesc,
+                              Consumer<MethodNode> methodBody) {
+        super(api);
+        this.cv = cv;
         this.methodAccess = methodAccess;
         this.methodName = methodName;
         this.methodDesc = methodDesc;
+        this.methodBody = methodBody;
     }
 
     @Override
-    public void transform(ClassNode cn) {
+    public void visitEnd() {
         // 首先，处理自己的代码逻辑
-        boolean isPresent = false;
-        for (MethodNode mn : cn.methods) {
-            if (methodName.equals(mn.name) && methodDesc.equals(mn.desc)) {
-                isPresent = true;
-                break;
-            }
-        }
-        if (!isPresent) {
-            MethodNode mn = new MethodNode(methodAccess, methodName, methodDesc, null, null);
-            cn.methods.add(mn);
-            generateMethodBody(mn);
-        }
+        ClassTransformer ct = new ClassAddMethodTransformer(null, methodAccess, methodName, methodDesc, methodBody);
+        ct.transform(this);
 
-        // 其次，调用父类的方法实现
-        super.transform(cn);
+        // 其次，调用父类的方法实现（根据实际情况，选择保留，或删除）
+        super.visitEnd();
+
+        // 最后，向后续ClassVisitor传递
+        if (cv != null) {
+            accept(cv);
+        }
     }
 
-    protected void generateMethodBody(MethodNode mn) {
-        // empty method
+    private static class ClassAddMethodTransformer extends ClassTransformer {
+        private final int methodAccess;
+        private final String methodName;
+        private final String methodDesc;
+        private final Consumer<MethodNode> methodBody;
+
+        public ClassAddMethodTransformer(ClassTransformer ct,
+                                         int methodAccess, String methodName, String methodDesc,
+                                         Consumer<MethodNode> methodBody) {
+            super(ct);
+            this.methodAccess = methodAccess;
+            this.methodName = methodName;
+            this.methodDesc = methodDesc;
+            this.methodBody = methodBody;
+        }
+
+        @Override
+        public void transform(ClassNode cn) {
+            // 首先，处理自己的代码逻辑
+            boolean isPresent = false;
+            for (MethodNode mn : cn.methods) {
+                if (methodName.equals(mn.name) && methodDesc.equals(mn.desc)) {
+                    isPresent = true;
+                    break;
+                }
+            }
+            if (!isPresent) {
+                MethodNode mn = new MethodNode(methodAccess, methodName, methodDesc, null, null);
+                cn.methods.add(mn);
+
+                if (methodBody != null) {
+                    methodBody.accept(mn);
+                }
+            }
+
+            // 其次，调用父类的方法实现
+            super.transform(cn);
+        }
     }
 }
 ```
 
 ### 进行转换
 
-```java
+```text
+import lsieun.utils.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.*;
+
+import java.util.function.Consumer;
 
 import static org.objectweb.asm.Opcodes.*;
 
@@ -385,32 +511,28 @@ public class HelloWorldTransformTree {
         // (1)构建ClassReader
         ClassReader cr = new ClassReader(bytes1);
 
-        // (2) 构建ClassNode
-        int api = Opcodes.ASM9;
-        ClassNode cn = new ClassNode(api);
-        cr.accept(cn, ClassReader.SKIP_FRAMES | ClassReader.SKIP_DEBUG);
-
-        // (3) 进行transform
-        ClassTransformer ct = new ClassAddMethodTransformer(null, Opcodes.ACC_PUBLIC, "mul", "(II)I") {
-            @Override
-            protected void generateMethodBody(MethodNode mn) {
-                InsnList il = mn.instructions;
-                il.add(new VarInsnNode(ILOAD, 1));
-                il.add(new VarInsnNode(ILOAD, 2));
-                il.add(new InsnNode(IMUL));
-                il.add(new InsnNode(IRETURN));
-
-                mn.maxStack = 2;
-                mn.maxLocals = 3;
-            }
-        };
-        ct.transform(cn);
-
-        // (4) 构建ClassWriter
+        // (2)构建ClassWriter
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
-        cn.accept(cw);
 
-        // (5) 生成byte[]内容输出
+        // (3)串连ClassNode
+        int api = Opcodes.ASM9;
+        Consumer<MethodNode> methodBody = (mn) -> {
+            InsnList il = mn.instructions;
+            il.add(new VarInsnNode(ILOAD, 1));
+            il.add(new VarInsnNode(ILOAD, 2));
+            il.add(new InsnNode(IMUL));
+            il.add(new InsnNode(IRETURN));
+
+            mn.maxStack = 2;
+            mn.maxLocals = 3;
+        };
+        ClassNode cn = new ClassAddMethodNode(api, cw, ACC_PUBLIC, "mul", "(II)I", methodBody);
+
+        //（4）结合ClassReader和ClassNode
+        int parsingOptions = ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES;
+        cr.accept(cn, parsingOptions);
+
+        // (5) 生成byte[]
         byte[] bytes2 = cw.toByteArray();
 
         FileUtils.writeBytes(filepath, bytes2);

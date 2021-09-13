@@ -21,7 +21,6 @@ Java agent is a powerful tool introduced with Java 5. It has been highly useful 
         <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
     </li>
     {% endif %}
-
     {% endfor %}
 </ol>
 

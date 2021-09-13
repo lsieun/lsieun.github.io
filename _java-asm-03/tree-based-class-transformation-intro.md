@@ -362,9 +362,3 @@ byte[] bytes2 = cw.toByteArray();
 - 第三步，思考如何使用Tree API进行Class Transformation操作。
 - 第四步，思考如何将Tree API转换成Core API。
 - 第五步，最后落实到`ClassWriter`类，调用其`toByteArray()`方法来生成`byte[]`内容。
-
-一般来说，就是对“类”和“方法”进行转换：
-
-- ClassVisitor --> ClassNode --> ClassTransformer/MethodTransformer
-- MethodVisitor --> MethodNode --> MethodTransformer
-

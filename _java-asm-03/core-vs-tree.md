@@ -1,6 +1,6 @@
 ---
 title:  "Core API VS. Tree API"
-sequence: "101"
+sequence: "102"
 ---
 
 [上级目录]({% link _posts/2021-05-01-java-asm-season-03.md %})
@@ -45,3 +45,8 @@ In this case it is better to use the core API with two passes:
 one to compute the mapping between original and obfuscated names
 (a simple hash table that requires much less memory than a full object representation of all the classes),
 and one to transform the classes based on this mapping.
+
+## 功能上
+
+从功能角度上来说，两者是相似的：“你能做的，我也能做”。从具体的应用场景上来说，有各自的优势，有的时候适合用Core API，有的时候适合用Tree API。
+从效率角度上来说，一般来说，Core API执行相对较快，而Tree API执行相对较慢。

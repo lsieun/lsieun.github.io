@@ -1,7 +1,17 @@
 ---
 title:  "baeldung"
-sequence: "102"
+sequence: "201"
 ---
+
+- [Google: Shared with me](https://drive.google.com/drive/shared-with-me)
+
+- [Java drafts site](https://drafts.baeldung.com/wp-admin/)
+- [GitHub: eugenp/tutorials](https://github.com/eugenp/tutorials)
+
+Java 9 and above
+- if the module uses Java 9 or above, then you have to add it to the `*-jdk9-and-above` profiles in the main pom
+- otherwise the build will fail, as it uses JDK 8 for the `default-*` profiles
+
 
 ## Guide
 

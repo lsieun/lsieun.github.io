@@ -95,6 +95,22 @@ collections:
     output: true
     title: "libGDX"
     sequence: 15
+  git:
+    output: true
+    title: "Git"
+    sequence: 16
+  java-core:
+    output: true
+    title: "Java Core"
+    sequence: 16
+  chinese-culture:
+    output: true
+    title: "Chinese Culture"
+    sequence: 17
+  java-generic:
+    output: true
+    title: "Java Generic"
+    sequence: 18
   jekyll:
     output: true
     title: "Jekyll快速参考教程"
@@ -222,6 +238,34 @@ defaults:
     values:
       layout: "post"
       tags: libgdx
+  -
+    scope:
+      path: ""
+      type: "git"
+    values:
+      layout: "post"
+      tags: git
+  -
+    scope:
+      path: ""
+      type: "java-core"
+    values:
+      layout: "post"
+      tags: java
+  -
+    scope:
+      path: ""
+      type: "chinese-culture"
+    values:
+      layout: "post"
+      tags: culture
+  -
+    scope:
+      path: ""
+      type: "java-generic"
+    values:
+      layout: "post"
+      tags: java
   -
     scope:
       path: ""
