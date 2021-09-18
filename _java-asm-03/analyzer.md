@@ -66,9 +66,27 @@ public class Analyzer<V extends Value> implements Opcodes {
 
 第四个部分，`Analyzer`类定义的方法有哪些。
 
+#### getter
+
 ```java
 public class Analyzer<V extends Value> implements Opcodes {
-    public Frame<V>[] analyze(final String owner, final MethodNode method) throws AnalyzerException {
+    public Frame<V>[] getFrames() {
+        return frames;
+    }
+
+    public List<TryCatchBlockNode> getHandlers(int insnIndex) {
+        return handlers[insnIndex];
+    }
+}
+```
+
+
+
+#### analyze
+
+```java
+public class Analyzer<V extends Value> implements Opcodes {
+    public Frame<V>[] analyze(String owner, MethodNode method) throws AnalyzerException {
         // 如果方法是abstract或native方法，则直接返回
         if ((method.access & (ACC_ABSTRACT | ACC_NATIVE)) != 0) {
             frames = (Frame<V>[]) new Frame<?>[0];
@@ -97,6 +115,36 @@ public class Analyzer<V extends Value> implements Opcodes {
         }
 
         return frames;
+    }
+}
+```
+
+#### protected method
+
+```java
+public class Analyzer<V extends Value> implements Opcodes {
+    protected void init(String owner, MethodNode method) throws AnalyzerException {
+        // Nothing to do.
+    }
+
+    protected Frame<V> newFrame(int numLocals, int numStack) {
+        return new Frame<>(numLocals, numStack);
+    }
+
+    protected Frame<V> newFrame(Frame<? extends V> frame) {
+        return new Frame<>(frame);
+    }
+
+    protected void newControlFlowEdge(int insnIndex, int successorIndex) {
+        // Nothing to do.
+    }
+
+    protected boolean newControlFlowExceptionEdge(int insnIndex, TryCatchBlockNode tryCatchBlock) {
+        return newControlFlowExceptionEdge(insnIndex, insnList.indexOf(tryCatchBlock.handler));
+    }
+    
+    protected boolean newControlFlowExceptionEdge(int insnIndex, int successorIndex) {
+        return true;
     }
 }
 ```
@@ -260,7 +308,7 @@ public class MockAnalyzer<V extends Value> implements Opcodes {
         return -1;
     }
 
-    private Frame<V> computeInitialFrame(final String owner, final MethodNode method) {
+    private Frame<V> computeInitialFrame(String owner, MethodNode method) {
         Frame<V> frame = new Frame<>(method.maxLocals, method.maxStack);
         int currentLocal = 0;
 

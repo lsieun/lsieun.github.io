@@ -32,7 +32,7 @@ permalink: /resources/
 - [InfoQ](https://www.infoq.com/)
 - OpenJDK
   - [Amazon Corretto](https://aws.amazon.com/corretto/): No-cost, multiplatform, production-ready distribution of OpenJDK
-  - [Github OpenJDK](https://github.com/openjdk/)
+  - [Github OpenJDK](https://github.com/openjdk/): [jdk8-b120](https://github.com/openjdk/jdk/tree/jdk8-b120/jdk/src/share/classes)
 - Oracle:
     - [Java Language and Virtual Machine Specifications](https://docs.oracle.com/javase/specs/index.html)
     - [Java SE Downloads](https://www.oracle.com/java/technologies/javase-downloads.html)
@@ -40,6 +40,7 @@ permalink: /resources/
     - [Oracle Java SE Documentation](https://docs.oracle.com/en/java/javase/index.html)
     - [Duke, the Java Mascot](https://www.oracle.com/java/duke.html)
 - [Project Nayuki](https://www.nayuki.io/): a magical girl software developer in Toronto, Canada.
+- [SoundManager 2](http://www.schillmania.com/projects/soundmanager2/): makes it easier to play audio using JavaScript.
 
 ### Java资源
 
@@ -126,6 +127,7 @@ Chrome插件：
 
 历史
 
+- [礼记](http://www.8bei8.com/book/liji.html)
 - [全历史](https://www.allhistory.com/)
 - [三国演义](http://sanguo.5000yan.com/)
 - [红楼梦](http://hongloumeng.5000yan.com/)
@@ -164,3 +166,10 @@ Annotation Processor, Antlr实战、IDEA plugin
 ### JMH
 
 - [JMH](http://openjdk.java.net/projects/code-tools/jmh/) is a Java harness for building, running, and analysing nano/micro/milli/macro benchmarks written in Java and other languages targetting the JVM.
+
+### FindBugs
+
+- [FindBugs](http://findbugs.sourceforge.net/)
+- [https://spotbugs.github.io/](https://spotbugs.github.io/)
+
+- [Soot](https://github.com/soot-oss/soot): Soot is a Java optimization framework.

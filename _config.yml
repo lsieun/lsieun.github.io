@@ -111,6 +111,10 @@ collections:
     output: true
     title: "Java Generic"
     sequence: 18
+  maven:
+    output: true
+    title: "Apache Maven"
+    sequence: 19
   jekyll:
     output: true
     title: "Jekyll快速参考教程"
@@ -263,6 +267,13 @@ defaults:
     scope:
       path: ""
       type: "java-generic"
+    values:
+      layout: "post"
+      tags: java
+  -
+    scope:
+      path: ""
+      type: "maven"
     values:
       layout: "post"
       tags: java

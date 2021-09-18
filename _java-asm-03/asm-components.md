@@ -18,6 +18,18 @@ sequence: "101"
 
 从两者的关系来说，Core API是基础，而Tree API是在Core API的这个基础上构建起来的。
 
+电影[《龙门飞甲》](https://www.iqiyi.com/w_19s7jqy8yx.html)雨化田介绍“东厂”和“西厂”的概念：
+
+```text
+一句话，东厂管得了的我要管，东厂管不了的我更要管，先斩后奏，皇权特许，这就是西厂，够不够清楚。
+```
+
+我们镜像上面这句话，说明一下“Core API”和“Tree API”的区别：
+
+```text
+一句话，Core API做得了的我要做，Core API做不了的我更要做，简单易用，功能更强，这就是Tree API，够不够清楚。
+```
+
 ## Tree API概览
 
 ### asm-tree.jar

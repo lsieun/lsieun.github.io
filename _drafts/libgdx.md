@@ -1,7 +1,7 @@
 ---
 title:  "libGDX(Java)"
 categories: game
-image: /assets/images/libgdx/libgdx-logo.png
+image: /assets/images/libgdx/libgdx-cover.png
 tags: libgdx
 published: false
 ---
