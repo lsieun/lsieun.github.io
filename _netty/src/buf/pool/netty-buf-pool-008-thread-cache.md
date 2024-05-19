@@ -1,5 +1,5 @@
 ---
-title: "ThreadCache"
+title: "PoolThreadCache"
 sequence: "108"
 ---
 

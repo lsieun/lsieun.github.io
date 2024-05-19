@@ -51,7 +51,7 @@ Take a look at java_cacerts.txt. See if it includes the same certificate that is
 
 Back in the browser, export the Root CA. Choose the "X.509 Certificate (DER)" type, so the exported file has a der extension.
 
-Assuming the file is called example.der, pick the alias ’example’ for this certificate. Next import the file.
+Assuming the file is called example.der, pick the alias `example` for this certificate. Next import the file.
 
 ```text
 keytool -import -alias example -keystore /path/to/cacerts -file example.der
@@ -61,7 +61,7 @@ keytool -import -alias example -keystore /path/to/cacerts -file example.der
 keytool -import -alias fruit.com -keystore cacerts -file fruit.der
 ```
 
-You will be prompted for a password, use ‘changeit’ and respond “yes” on whether to trust this key.
+You will be prompted for a password, use `changeit` and respond “yes” on whether to trust this key.
 
 Dump the contents again to verify it contains your new certificate. Restart the JVM and check that it can now access the HTTPS URL. Also remove the java_cacerts.txt dump file.
 

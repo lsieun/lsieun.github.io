@@ -1,10 +1,15 @@
 ---
-title: "原子累加器"
+title: "原子累加器：LongAdder"
 sequence: "102"
 ---
 
 [UP](/java-concurrency.html)
 
+The JDK offers us `AtomicLong` for concurrent counters/sequences and
+`LongAdder` for striped counters where contention is an issue.
+
+- LongAdder
+- DoubleAdder
 
 ```java
 import java.util.ArrayList;

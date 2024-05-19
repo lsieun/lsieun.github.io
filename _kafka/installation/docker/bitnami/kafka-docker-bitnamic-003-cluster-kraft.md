@@ -625,7 +625,7 @@ networks:
 The `KAFKA_KRAFT_CLUSTER_ID` does not need to be specified for a single broker,
 contrary to what some tutorials may suggest.
 Kafka will generate an ID on the fly and will post it in logs.
-If you’re setting up a cluster, take this ID from the logs and propagate it to all Kafka services in the docker-compose.
+If you're setting up a cluster, take this ID from the logs and propagate it to all Kafka services in the docker-compose.
 All nodes in a single cluster should have the same `KAFKA_KRAFT_CLUSTER_ID`.
 
 ### Issue2

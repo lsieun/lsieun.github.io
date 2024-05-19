@@ -54,6 +54,6 @@ public class KafkaProducer_001_Simple {
 
 - [Unleash Kafka Producer's Architecture and Internal Workings](http://www.clairvoyant.ai/blog/unleash-kafka-producers-architecture-and-internal-workings)
 - [6张图为你分析Kafka Producer 消息缓存模型](https://developer.huawei.com/consumer/cn/forum/topic/0202832444660380156)
-- [Exploring Kafka Producer’s Internals](https://blog.developer.adobe.com/exploring-kafka-producers-internals-37411b647d0f)
+- [Exploring Kafka Producer's Internals](https://blog.developer.adobe.com/exploring-kafka-producers-internals-37411b647d0f)
 - [Sender — Kafka Producer Network Thread](https://jaceklaskowski.gitbooks.io/apache-kafka/content/kafka-producer-internals-Sender.html)
 - [RecordAccumulator](https://jaceklaskowski.gitbooks.io/apache-kafka/content/kafka-producer-internals-RecordAccumulator.html)

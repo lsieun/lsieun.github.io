@@ -179,12 +179,14 @@ Tutorial
 ### 字幕
 
 - [subtitlist](https://subtitlist.com/)
+- [my-subs](https://my-subs.co/)
 
 ### 动漫
 
 - [B98.TV](https://www.b98.tv/): 动画片
 - [ZORO](https://zoroxtv.to/home)
 - [9Anime](https://9animetv.to/home)
+- [AniWave](https://aniwave.to/home)
 
 ## 软件
 

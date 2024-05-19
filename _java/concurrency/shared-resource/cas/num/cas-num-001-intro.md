@@ -1,5 +1,5 @@
 ---
-title: "原子整数"
+title: "原子整数：AtomicInteger、AtomicLong"
 sequence: "101"
 ---
 

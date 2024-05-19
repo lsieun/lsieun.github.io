@@ -223,6 +223,10 @@ sort: "sequence"
     </tbody>
 </table>
 
+### Virtual Thread
+
+- [The Long Road to Java Virtual Threads](https://dzone.com/articles/the-long-road-to-java-virtual-threads)
+
 ### 线程池
 
 <table>

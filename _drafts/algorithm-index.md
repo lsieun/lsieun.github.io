@@ -70,6 +70,22 @@ sort: "sequence"
     {% endfor %}
 </ol>
 
+## 时间轮
+
+{%
+assign filtered_posts = site.algorithm |
+where_exp: "item", "item.url contains '/algorithm/timing-wheel/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+
 ## Reference
 
 - [Algorithm types and algorithm examples – illustrated](https://www.lavivienpost.com/algorithms-types-and-algorithm-examples/)

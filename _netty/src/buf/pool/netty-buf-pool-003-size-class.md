@@ -89,6 +89,21 @@ public class HelloWorld {
 | 0           | 16           |
 ````
 
+## SizeClass
+
+```java
+abstract class PoolArena<T> implements PoolArenaMetric {
+    enum SizeClass {
+        Small,
+        Normal
+    }
+    
+    private static SizeClass sizeClass(long handle) {
+        return isSubpage(handle) ? SizeClass.Small : SizeClass.Normal;
+    }
+}
+```
+
 ## 快速参考
 
 ### 标准规格

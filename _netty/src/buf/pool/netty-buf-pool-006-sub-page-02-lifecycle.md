@@ -5,11 +5,10 @@ sequence: "106-02"
 
 [UP](/netty.html)
 
-## 生命周期
 
 PoolSubpage 的生命周期，包括它的创建、使用和销毁。
 
-### 对象创建
+## 对象创建
 
 PoolSubpage的创建过程：
 
@@ -20,7 +19,7 @@ PoolSubpage的创建过程：
 ![](/assets/images/netty/buf/netty-buffer-pool-subpage-arena-smallSubpagePools.svg)
 {:refdef}
 
-#### PoolArena
+### PoolArena
 
 ```java
 abstract class PoolArena<T> implements PoolArenaMetric {
@@ -47,7 +46,7 @@ abstract class PoolArena<T> implements PoolArenaMetric {
 }
 ```
 
-#### PoolChunk
+### PoolChunk
 
 ```java
 final class PoolChunk<T> implements PoolChunkMetric {
@@ -59,7 +58,7 @@ final class PoolChunk<T> implements PoolChunkMetric {
 }
 ```
 
-#### PoolSubpage
+### PoolSubpage
 
 ```java
 final class PoolSubpage<T> implements PoolSubpageMetric {
@@ -133,7 +132,7 @@ final class PoolSubpage<T> implements PoolSubpageMetric {
 }
 ```
 
-### 对象使用：内存分配
+## 对象使用：内存分配
 
 {:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/netty-buffer-pool-subpage-allocation.svg)
@@ -155,7 +154,7 @@ final class PoolSubpage<T> implements PoolSubpageMetric {
 - 第一个『正常途径』：从 PoolArena 到 PoolChunk，再从 PoolChunk 中分配 SubPage
 - 第二种『快捷途径』：从 PoolArena 直接到 PoolSubpage
 
-#### PoolArena
+### PoolArena
 
 ```java
 abstract class PoolArena<T> implements PoolArenaMetric {
@@ -238,7 +237,7 @@ abstract class PoolArena<T> implements PoolArenaMetric {
 }
 ```
 
-#### PoolChunk
+### PoolChunk
 
 ```java
 final class PoolChunk<T> implements PoolChunkMetric {
@@ -376,7 +375,7 @@ final class PoolChunk<T> implements PoolChunkMetric {
 }
 ```
 
-#### PoolSubpage
+### PoolSubpage
 
 ```java
 final class PoolSubpage<T> implements PoolSubpageMetric {
@@ -460,7 +459,7 @@ final class PoolSubpage<T> implements PoolSubpageMetric {
 }
 ```
 
-### 对象使用：内存释放
+## 对象使用：内存释放
 
 内存释放过程：
 
@@ -471,7 +470,98 @@ final class PoolSubpage<T> implements PoolSubpageMetric {
 
 - 回收内存块：将内存块标记为空闲，并可能触发内存池的清理操作。
 
-#### PoolChunk
+{:refdef: style="text-align: center;"}
+![](/assets/images/netty/buf/netty-buffer-pool-subpage-free-overview.svg)
+{:refdef}
+
+{:refdef: style="text-align: center;"}
+![](/assets/images/netty/buf/netty-buffer-pool-subpage-free-detail.svg)
+{:refdef}
+
+### PoolArena
+
+```java
+abstract class PoolArena<T> implements PoolArenaMetric {
+    void free(PoolChunk<T> chunk, ByteBuffer nioBuffer, long handle, int normCapacity, PoolThreadCache cache) {
+        chunk.decrementPinnedMemory(normCapacity);
+
+        if (chunk.unpooled) {
+            // NOTE: Huge
+            int size = chunk.chunkSize();
+            destroyChunk(chunk);
+            activeBytesHuge.add(-size);
+            deallocationsHuge.increment();
+        }
+        else {
+            // NOTE: Small + Normal
+            SizeClass sizeClass = sizeClass(handle);
+
+            // cache
+            if (cache != null && cache.add(this, chunk, nioBuffer, handle, normCapacity, sizeClass)) {
+                // cached so not free it.
+                return;
+            }
+
+            // chunk
+            freeChunk(chunk, handle, normCapacity, sizeClass, nioBuffer, false);
+        }
+    }
+    
+    void freeChunk(PoolChunk<T> chunk, long handle,
+                   int normCapacity, SizeClass sizeClass,
+                   ByteBuffer nioBuffer, boolean finalizer) {
+        final boolean destroyChunk;
+        lock();
+        try {
+            // We only call this if freeChunk is not called because of the PoolThreadCache finalizer as otherwise this
+            // may fail due lazy class-loading in for example tomcat.
+            if (!finalizer) {
+                switch (sizeClass) {
+                    case Normal:
+                        ++deallocationsNormal;
+                        break;
+                    case Small:
+                        ++deallocationsSmall;
+                        break;
+                    default:
+                        throw new Error();
+                }
+            }
+            destroyChunk = !chunk.parent.free(chunk, handle, normCapacity, nioBuffer);
+        }
+        finally {
+            unlock();
+        }
+        if (destroyChunk) {
+            // destroyChunk not need to be called while holding the synchronized lock.
+            destroyChunk(chunk);
+        }
+    }
+}
+```
+
+### PoolChunkList
+
+```java
+final class PoolChunkList<T> implements PoolChunkListMetric {
+    boolean free(PoolChunk<T> chunk, long handle, int normCapacity, ByteBuffer nioBuffer) {
+        // NOTE: 释放空间：将 chunk 中 handle 对应的空间释放
+        chunk.free(handle, normCapacity, nioBuffer);
+
+        // NOTE: 移动 Chunk，并进一步决定是否需要『销毁』
+        if (chunk.freeBytes > freeMaxThreshold) {
+            remove(chunk);
+            // Move the PoolChunk down the PoolChunkList linked-list.
+            return move0(chunk);
+        }
+
+        // NOTE: 不移动，且『不销毁』
+        return true;
+    }
+}
+```
+
+### PoolChunk
 
 ```java
 final class PoolChunk<T> implements PoolChunkMetric {
@@ -482,22 +572,29 @@ final class PoolChunk<T> implements PoolChunkMetric {
     }
 
     void free(long handle, int normCapacity, ByteBuffer nioBuffer) {
+        // NOTE: 第 1 阶段，释放 subpage 空间
         if (isSubpage(handle)) {
+            // NOTE: 从 Chunk 中获取 subpage
             int sIdx = runOffset(handle);
             PoolSubpage<T> subpage = subpages[sIdx];
             assert subpage != null;
+
+            // NOTE: 从 Arena 中获取 subpage
             PoolSubpage<T> head = subpage.chunk.arena.smallSubpagePools[subpage.headIndex];
             // Obtain the head of the PoolSubPage pool that is owned by the PoolArena and synchronize on it.
             // This is need as we may add it back and so alter the linked-list structure.
             head.lock();
             try {
+                // NOTE: 只释放 subpage 中的 handle 空间
                 assert subpage.doNotDestroy;
                 if (subpage.free(head, bitmapIdx(handle))) {
-                    //the subpage is still used, do not free it
+                    // the subpage is still used, do not free it
                     return;
                 }
+
+                // NOTE: 释放整个 subpage 空间
                 assert !subpage.doNotDestroy;
-                // Null out slot in the array as it was freed and we should not use it anymore.
+                // Null out slot in the array as it was freed, and we should not use it anymore.
                 subpages[sIdx] = null;
             }
             finally {
@@ -505,10 +602,12 @@ final class PoolChunk<T> implements PoolChunkMetric {
             }
         }
 
+        // NOTE: 第 2 阶段，释放 Chunk 空间
         int runSize = runSize(pageShifts, handle);
         // start free run
         runsAvailLock.lock();
         try {
+            // NOTE: 合并 PageRun
             // collapse continuous runs, successfully collapsed runs
             // will be removed from runsAvail and runsAvailMap
             long finalRun = collapseRuns(handle);
@@ -518,6 +617,7 @@ final class PoolChunk<T> implements PoolChunkMetric {
             //if it is a subpage, set it to run
             finalRun &= ~(1L << IS_SUBPAGE_SHIFT);
 
+            // NOTE: 释放 PageRun
             insertAvailRun(runOffset(finalRun), runPages(finalRun), finalRun);
             freeBytes += runSize;
         }
@@ -533,7 +633,7 @@ final class PoolChunk<T> implements PoolChunkMetric {
 }
 ```
 
-#### PoolSubpage
+### PoolSubpage
 
 ```java
 final class PoolSubpage<T> implements PoolSubpageMetric {
@@ -586,9 +686,14 @@ final class PoolSubpage<T> implements PoolSubpageMetric {
 }
 ```
 
-### 对象销毁
+## 对象销毁
 
-#### PoolArena
+{:refdef: style="text-align: center;"}
+![](/assets/images/netty/buf/netty-buffer-pool-subpage-destroy.svg)
+{:refdef}
+
+
+### PoolArena
 
 ```java
 abstract class PoolArena<T> implements PoolArenaMetric {
@@ -609,16 +714,6 @@ abstract class PoolArena<T> implements PoolArenaMetric {
         for (PoolSubpage<?> page : pages) {
             page.destroy();
         }
-    }
-}
-```
-
-#### PoolSubpage
-
-```java
-final class PoolChunk<T> implements PoolChunkMetric {
-    void destroy() {
-        arena.destroyChunk(this);
     }
 
     static final class HeapArena extends PoolArena<byte[]> {
@@ -642,7 +737,17 @@ final class PoolChunk<T> implements PoolChunkMetric {
 }
 ```
 
-#### PoolSubpage
+### PoolChunk
+
+```java
+final class PoolChunk<T> implements PoolChunkMetric {
+    void destroy() {
+        arena.destroyChunk(this);
+    }
+}
+```
+
+### PoolSubpage
 
 ```java
 final class PoolSubpage<T> implements PoolSubpageMetric {

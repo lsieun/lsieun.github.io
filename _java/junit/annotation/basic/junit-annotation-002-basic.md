@@ -6,7 +6,7 @@ sequence: "102"
 [UP](/junit.html)
 
 
-- The method with the `@BeforeAll` annotation needs to be `static`, otherwise the code won ’ t compile.
+- The method with the `@BeforeAll` annotation needs to be `static`, otherwise the code won't compile.
 - The method with `@AfterAll` also needs to be a `static` method.
 
 ```java

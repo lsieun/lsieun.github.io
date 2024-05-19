@@ -197,4 +197,6 @@ n = ~-n;
 
 ## References
 
-- [Some Useful Bit Manipulations](https://labuladong.gitbook.io/algo-en/iii.-algorithmic-thinking/commonbitmanipulation) [常用的位操作](https://labuladong.gitee.io/algo/4/28/108/)
+- [Some Useful Bit Manipulations](https://labuladong.gitbook.io/algo-en/iii.-algorithmic-thinking/commonbitmanipulation)
+- [常用的位操作](https://labuladong.gitee.io/algo/4/28/108/)
+- [Bit Twiddling Hacks](https://graphics.stanford.edu/~seander/bithacks.html)

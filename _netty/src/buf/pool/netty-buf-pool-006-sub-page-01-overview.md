@@ -34,6 +34,21 @@ reqCapacity --> normCapacity = elemSize --> runSize --> maxNumElems --> bitmapLe
 ![](/assets/images/netty/buf/netty-buffer-pool-subpage-relation-to-arena.svg)
 {:refdef}
 
+### handle
+
+```java
+final class PoolSubpage<T> implements PoolSubpageMetric {
+    private long toHandle(int bitmapIdx) {
+        int pages = runSize >> pageShifts;
+        return (long) runOffset << RUN_OFFSET_SHIFT // runOffset << 49
+                | (long) pages << SIZE_SHIFT        // pages << 34
+                | 1L << IS_USED_SHIFT               // 1 << 33
+                | 1L << IS_SUBPAGE_SHIFT            // 1 << 32
+                | bitmapIdx;                        // bitmapIdx
+    }
+}
+```
+
 ## 数据结构
 
 PoolSubpage的数据结构：
@@ -48,6 +63,7 @@ PoolSubpage的数据结构：
 - 使用位图：记录哪些内存块已被分配。
 
 ### Arena
+
 
 
 ```java

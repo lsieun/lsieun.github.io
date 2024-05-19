@@ -88,4 +88,4 @@ sort: "sequence"
 - [JOL(Java Object Layout) 应用实战（四）](https://zhuanlan.zhihu.com/p/385594273)
 
 - [从计算机本源深入探寻volatile和Java内存模型](https://mp.weixin.qq.com/s?__biz=Mzg3ODgyNDgwNg==&mid=2247486127&idx=1&sn=29d6079f6f26bd82633ec611feb3da85&chksm=cf0c96a6f87b1fb006e2f108879a0066aeb14e4bf5a4a9e2a83057a084dd2dfa2c257a813399&token=302443384&lang=zh_CN#rd)
-
+- [Save Your Memory in JVM with Atomic*FieldUpdater](https://dzone.com/articles/save-your-memory-in-jvm-with-atomicfieldupdater)
