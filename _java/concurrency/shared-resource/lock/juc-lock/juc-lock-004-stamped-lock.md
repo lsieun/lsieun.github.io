@@ -8,12 +8,14 @@ sequence: "104"
 
 ## 介绍
 
+The first thing we need to understand about **`StampedLock` is that it isn't reentrant.**
+
 `StampedLock` also supports both read and write locks.
 
 
 - 时间：Java 8
 - 目的：为了进一步优化读性能。`ReentrantReadWriteLock`，在进行“读”操作时，仍然需要更新“高 16 位”来记录读锁的状态；而 StampedLock 通过“乐观锁”，尽量避免变成“读锁”。
-- 特点：在使用读锁、写锁时都必须配合【戳】使用。
+- 特点：在使用读锁、写锁时都必须配合『戳』使用。
 
 ## 如何使用
 
@@ -259,3 +261,7 @@ public class Test {
 
 - StampedLock 不支持条件变量
 - StampedLock 不支持可重入
+
+## Reference
+
+- [Relearning Java Thread Primitives](https://debugagent.com/relearning-java-thread-primitives) 关于 StampLock，我没有看懂

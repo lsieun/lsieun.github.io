@@ -1,6 +1,6 @@
 ---
 title: "如何实现 Thread-Safety"
-sequence: "102"
+sequence: "112"
 ---
 
 [UP](/java-concurrency.html)

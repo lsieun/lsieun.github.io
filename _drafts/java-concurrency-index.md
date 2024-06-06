@@ -673,6 +673,35 @@ sort: "sequence"
     </tbody>
 </table>
 
+## 经典问题
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">经典问题</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.java |
+where_exp: "item", "item.url contains '/java/concurrency/problems/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 ## Reference
 
 - [Baeldung Tag: Java Concurrency](https://www.baeldung.com/category/java/java-concurrency)
@@ -699,6 +728,7 @@ sort: "sequence"
         - [Guide to the Java Phaser](https://www.baeldung.com/java-phaser)
         - [Start Two Threads at the Exact Same Time in Java](https://www.baeldung.com/java-start-two-threads-at-same-time)
         - [How to Kill a Java Thread](https://www.baeldung.com/java-thread-stop)
+        - [Structured Concurrency in Java 19](https://www.baeldung.com/java-structured-concurrency)
 - [Concurrency Patterns](https://www.dre.vanderbilt.edu/~schmidt/POSA/POSA2/conc-patterns.html)
 
 - [GitHub: RedSpider1/concurrent](https://github.com/RedSpider1/concurrent)

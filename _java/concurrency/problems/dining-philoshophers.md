@@ -1,10 +1,11 @@
 ---
-title: "Dining Philosophers"
+title: "哲学家就餐问题（Dining Philosophers）"
 sequence: "101"
 ---
 
 [UP](/java-concurrency.html)
 
+哲学家就餐问题，是多个线程**共享资源**的场景。
 
 ## 问题描述
 
@@ -254,10 +255,238 @@ public class DiningPhilosophers {
 14:39.552 [main] INFO P5 is thinking...
 ```
 
+### 哲学家就餐问题（待整理）
+
+```java
+import java.util.concurrent.locks.ReentrantLock;
+
+public class PhilosopherRun {
+    public static void main(String[] args) {
+        Chopstick c1 = new Chopstick("1");
+        Chopstick c2 = new Chopstick("2");
+        Chopstick c3 = new Chopstick("3");
+        Chopstick c4 = new Chopstick("4");
+        Chopstick c5 = new Chopstick("5");
+        new Philosopher("苏格拉底", c1, c2).start();
+        new Philosopher("柏拉图", c2, c3).start();
+        new Philosopher("亚里士多德", c3, c4).start();
+        new Philosopher("赫拉克利特", c4, c5).start();
+        new Philosopher("阿基米德", c5, c1).start();
+    }
+}
+
+class Philosopher extends Thread {
+    Chopstick left;
+    Chopstick right;
+
+    public Philosopher(String name, Chopstick left, Chopstick right) {
+        super(name);
+        this.left = left;
+        this.right = right;
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            //　尝试获得左手筷子
+            if (left.tryLock()) {
+                try {
+                    // 尝试获得右手筷子
+                    if (right.tryLock()) {
+                        try {
+                            eat();
+                        } finally {
+                            right.unlock();
+                        }
+                    }
+                } finally {
+                    // 获取右手筷子失败，会放弃已经拿到的左手筷子
+                    left.unlock();
+                }
+            }
+        }
+    }
+
+    private void eat() {
+        LogUtils.log("eating...");
+        SleepUtils.sleep(1);
+    }
+}
+
+
+class Chopstick extends ReentrantLock {
+    String name;
+
+    public Chopstick(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "筷子{" + name + '}';
+    }
+}
+```
+
+只吃一次：
+
+```java
+import java.util.concurrent.locks.ReentrantLock;
+
+public class PhilosopherRun {
+    public static void main(String[] args) {
+        Chopstick c1 = new Chopstick("1");
+        Chopstick c2 = new Chopstick("2");
+        Chopstick c3 = new Chopstick("3");
+        Chopstick c4 = new Chopstick("4");
+        Chopstick c5 = new Chopstick("5");
+        new Philosopher("苏格拉底", c1, c2).start();
+        new Philosopher("柏拉图", c2, c3).start();
+        new Philosopher("亚里士多德", c3, c4).start();
+        new Philosopher("赫拉克利特", c4, c5).start();
+        new Philosopher("阿基米德", c5, c1).start();
+    }
+}
+
+class Philosopher extends Thread {
+    Chopstick left;
+    Chopstick right;
+
+    public Philosopher(String name, Chopstick left, Chopstick right) {
+        super(name);
+        this.left = left;
+        this.right = right;
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            boolean success = false;
+            //　尝试获得左手筷子
+            if (left.tryLock()) {
+                try {
+                    // 尝试获得右手筷子
+                    if (right.tryLock()) {
+                        try {
+                            eat();
+                            success = true;
+                        } finally {
+                            right.unlock();
+                        }
+                    }
+                } finally {
+                    // 获取右手筷子失败，会放弃已经拿到的左手筷子
+                    left.unlock();
+                }
+            }
+
+            if (success) {
+                break;
+            }
+        }
+    }
+
+    private void eat() {
+        LogUtils.log("eating...");
+        SleepUtils.sleep(1);
+    }
+}
+
+
+class Chopstick extends ReentrantLock {
+    String name;
+
+    public Chopstick(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "筷子{" + name + '}';
+    }
+}
+```
+
+吃指定次数（例如，三次）：
+
+```java
+import java.util.concurrent.locks.ReentrantLock;
+
+public class PhilosopherRun {
+    public static void main(String[] args) {
+        Chopstick c1 = new Chopstick("1");
+        Chopstick c2 = new Chopstick("2");
+        Chopstick c3 = new Chopstick("3");
+        Chopstick c4 = new Chopstick("4");
+        Chopstick c5 = new Chopstick("5");
+        new Philosopher("苏格拉底", c1, c2).start();
+        new Philosopher("柏拉图", c2, c3).start();
+        new Philosopher("亚里士多德", c3, c4).start();
+        new Philosopher("赫拉克利特", c4, c5).start();
+        new Philosopher("阿基米德", c5, c1).start();
+    }
+}
+
+class Philosopher extends Thread {
+    Chopstick left;
+    Chopstick right;
+
+    public Philosopher(String name, Chopstick left, Chopstick right) {
+        super(name);
+        this.left = left;
+        this.right = right;
+    }
+
+    @Override
+    public void run() {
+        int count = 0;
+        while (true) {
+            //　尝试获得左手筷子
+            if (left.tryLock()) {
+                try {
+                    // 尝试获得右手筷子
+                    if (right.tryLock()) {
+                        try {
+                            eat();
+                            count++;
+                        } finally {
+                            right.unlock();
+                        }
+                    }
+                } finally {
+                    // 获取右手筷子失败，会放弃已经拿到的左手筷子
+                    left.unlock();
+                }
+            }
+
+            if (count == 3) {
+                break;
+            }
+        }
+    }
+
+    private void eat() {
+        LogUtils.log("eating...");
+        SleepUtils.sleep(1);
+    }
+}
+
+
+class Chopstick extends ReentrantLock {
+    String name;
+
+    public Chopstick(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "筷子{" + name + '}';
+    }
+}
+```
+
 ## Reference
 
 - [The Dining Philosophers Problem in Java](https://www.baeldung.com/java-dining-philoshophers)
 - [The Dining Philosophers](https://www.baeldung.com/cs/dining-philosophers)
-- []()
-- []()
-- []()

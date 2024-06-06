@@ -85,7 +85,7 @@ The read lock may be simultaneously held by multiple threads as long as there is
 ```java
 public interface ReadWriteLock {
     Lock readLock();
-    
+
     Lock writeLock();
 }
 ```

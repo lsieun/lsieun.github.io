@@ -70,11 +70,22 @@ sort: "sequence"
     {% endfor %}
 </ol>
 
-## 时间轮
+## 计时器
 
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">时间轮</th>
+        <th style="text-align: center;">总结</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
 {%
 assign filtered_posts = site.algorithm |
-where_exp: "item", "item.url contains '/algorithm/timing-wheel/'" |
+where_exp: "item", "item.url contains '/algorithm/timer/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -85,9 +96,45 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.algorithm |
+where_exp: "item", "item.url contains '/algorithm/timer/timing-wheel/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.algorithm |
+where_exp: "item", "item.url contains '/algorithm/timer/summary/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 
 ## Reference
 
 - [Algorithm types and algorithm examples – illustrated](https://www.lavivienpost.com/algorithms-types-and-algorithm-examples/)
 - [Data Structure Visualizations](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html)
     - [Min Heap](https://www.cs.usfca.edu/~galles/visualization/Heap.html)
+

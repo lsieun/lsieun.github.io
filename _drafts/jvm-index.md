@@ -302,7 +302,7 @@ sort: "sequence"
     - [Diagnosing a Running JVM](https://www.baeldung.com/running-jvm-diagnose)
     - [External Debugging With JMXTerm](https://www.baeldung.com/java-jmxterm-external-debugging)
     - [Create and Detect Memory Leaks in Java](https://www.baeldung.com/java-create-detect-memory-leaks)
-    - []()
+    - [Differences Between Heap Dump, Thread Dump and Core Dump](https://www.baeldung.com/java-heap-thread-core-dumps)
     - []()
 
 - [JVM Troubleshooting](http://ksoong.org/troubleshooting/)

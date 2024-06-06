@@ -82,6 +82,8 @@ public class ConcurrencyTest3 {
 ### 示例
 
 ```java
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * 预期目标：在某一次输出中，Get 获取的值比 Set 设置的值小。
  *
@@ -90,7 +92,7 @@ public class ConcurrencyTest3 {
  *     <li>Java 17，没有测试成功；查看源码，我发现 set 和 lazySet 的实现是一样的</li>
  * </ul>
  */
-public class SetVsLaySetRun {
+public class SetVsLazySetRun {
     static AtomicInteger atomic = new AtomicInteger(0);
     public static void main(String[] args) {
         new Thread(() -> {

@@ -5,7 +5,14 @@ sequence: "105"
 
 [UP](/java-concurrency.html)
 
-同步原语是在多线程或多进程的编程环境中，用来控制不同线程或进程间操作顺序，保证数据一致性和防止资源冲突的一组基础工具和机制。它们是实现并发控制的基本构件，帮助开发者管理线程间的协作和竞争。以下是一些常见的同步原语：
+When more than one thread needs to write or modify a single resource, such as a data structure,
+the threads generally need to coordinate their access.
+Java has **synchronization primitives** as part of the languages.
+These include the **`synchronized` keyword**, **the `synchronized` block**, and
+**the methods of the class `java.lang.Object` `wait`, `notify` and `notifyAll`.**
+
+同步原语是在多线程或多进程的编程环境中，用来控制不同线程或进程间操作顺序，保证数据一致性和防止资源冲突的一组基础工具和机制。
+它们是实现并发控制的基本构件，帮助开发者管理线程间的协作和竞争。以下是一些常见的同步原语：
 
 1. 互斥锁（Mutex）
    互斥锁是最基本的同步原语之一，用来确保某个资源或代码块在同一时间只能被一个线程访问。当一个线程获得了互斥锁，其他试图访问被锁保护的资源的线程将被阻塞，直到锁被释放。
@@ -26,3 +33,4 @@ sequence: "105"
 - [Synchronization primitives](https://www.cs.columbia.edu/~hgs/os/sync.html)
 - [Lesson 11: Synchronization](https://www.cs.miami.edu/home/burt/learning/globalis/lessonB/)
 - [Bad Practices With Synchronization](https://www.baeldung.com/java-synchronization-bad-practices)
+- [Relearning Java Thread Primitives](https://debugagent.com/relearning-java-thread-primitives)

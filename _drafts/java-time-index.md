@@ -75,6 +75,7 @@ sort: "sequence"
         <th>Basic</th>
         <th>Format</th>
         <th>转换</th>
+        <th>时间单位</th>
     </tr>
     </thead>
     <tbody>
@@ -113,6 +114,21 @@ sort: "sequence"
 {%
 assign filtered_posts = site.java |
 where_exp: "item", "item.url contains '/java/time/new/convert/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.java |
+where_exp: "item", "item.url contains '/java/time/new/unit/'" |
 sort: "sequence"
 %}
 <ol>

@@ -1,6 +1,6 @@
 ---
 title: "Lock-Free Data Structures"
-sequence: "103"
+sequence: "113"
 ---
 
 [UP](/java-concurrency.html)

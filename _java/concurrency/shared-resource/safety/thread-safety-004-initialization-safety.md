@@ -1,6 +1,6 @@
 ---
 title: "Initialization Safety: this 逃逸"
-sequence: "104"
+sequence: "114"
 ---
 
 [UP](/java-concurrency.html)

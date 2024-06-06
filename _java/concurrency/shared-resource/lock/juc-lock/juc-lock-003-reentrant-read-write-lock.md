@@ -10,7 +10,12 @@ sequence: "103"
 
 当 Read 操作远远高于 Write 操作时，这时候使用 `ReadWriteLock` 让 “Read-Read” 可以并发，提高性能。
 
-## 类
+Most resources follow the principle of **frequent reads and few write operations**.
+Since reading a variable is thread safe there's no need for a lock
+unless we're in the process of writing to the variable.
+This means **we can optimize reading to an extreme** while **making the write operations slightly slower**.
+
+## API
 
 ### ReadWriteLock
 
@@ -24,6 +29,11 @@ public interface ReadWriteLock {
 ### ReentrantReadWriteLock
 
 `ReentrantReadWriteLock` class implements the `ReadWriteLock` interface.
+
+```java
+public class ReentrantReadWriteLock implements ReadWriteLock, Serializable {
+}
+```
 
 Let's see the rules for acquiring the `ReadLock` or `WriteLock` by a thread:
 
