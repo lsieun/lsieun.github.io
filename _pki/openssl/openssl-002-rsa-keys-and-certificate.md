@@ -8,6 +8,12 @@ sequence: "102"
 
 ## RSA Keys
 
+```text
+           ┌─── rsa-public.key
+ras.key ───┤
+           └─── rsa-private.key
+```
+
 ### Generate RSA Key
 
 ```text

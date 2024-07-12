@@ -10,7 +10,7 @@ https://nginx.org/en/download.html
 ```
 
 ```text
-https://nginx.org/download/nginx-1.25.1.zip
+https://nginx.org/download/nginx-1.26.1.zip
 ```
 
 ## 使用
@@ -21,8 +21,8 @@ https://nginx.org/download/nginx-1.25.1.zip
 
 ```text
 > cd c:\
-> unzip nginx-1.25.1.zip
-> cd nginx-1.25.1
+> unzip nginx-1.26.1.zip
+> cd nginx-1.26.1
 > start nginx
 ```
 
@@ -63,7 +63,7 @@ and it can be managed using the following commands:
 ### 配置
 
 nginx/Windows uses **the directory where it has been run** as the prefix for **relative paths** in the configuration.
-In the example above, the prefix is `C:\nginx-1.25.1\`.
+In the example above, the prefix is `C:\nginx-1.26.1\`.
 Paths in a **configuration file** must be specified in UNIX-style using **forward slashes**:
 
 ```text

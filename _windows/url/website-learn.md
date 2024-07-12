@@ -3,6 +3,16 @@ title: "WebSite Learn"
 sequence: "website"
 ---
 
+- [终身教育平台](https://le.ouchn.cn/)
+- [国家智慧教育公共服务平台](https://www.smartedu.cn/)
+    - [国家中小学智慧教育平台](https://basic.smartedu.cn/)
+    - [国家高等教育智慧教育平台](https://higher.smartedu.cn/)
+- [国家教育资源公共服务平台](https://www.eduyun.cn/)
+
+## IT
+
+- [Web Dev Simplified Blog](https://blog.webdevsimplified.com/)
+
 ## 综合文章
 
 - [PT编程说](https://www.zhihu.com/people/xpp1109)

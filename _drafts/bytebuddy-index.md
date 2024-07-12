@@ -43,11 +43,23 @@ ByteBuddy is a library for generating Java classes dynamically at run-time.
 
 ## Episode 01：Class Generation
 
-### 第一章 DynamicType
+### 第一章 生成类型
 
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">概览</th>
+        <th style="text-align: center;">生成类</th>
+        <th style="text-align: center;">生成方法体</th>
+        <th style="text-align: center;">生成其它类型</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.url contains '/bytebuddy/ch01/'" |
+where_exp: "item", "item.url contains '/bytebuddy/overview/'" |
 sort: "sequence"
 %}
 <ol>
@@ -58,12 +70,11 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
-
-### 第二章 Implementation
-
+        </td>
+        <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.url contains '/bytebuddy/ch02/'" |
+where_exp: "item", "item.url contains '/bytebuddy/generation/'" |
 sort: "sequence"
 %}
 <ol>
@@ -74,12 +85,11 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
-
-### 第三章 不同的 Type
-
+        </td>
+        <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.url contains '/bytebuddy/ch03/'" |
+where_exp: "item", "item.url contains '/bytebuddy/method-body/'" |
 sort: "sequence"
 %}
 <ol>
@@ -90,9 +100,66 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.url contains '/bytebuddy/types/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
-### 第四章 Advice
+### 第二章 查看类型
 
+### 第三章 修改类型
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">匹配</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.url contains '/bytebuddy/match/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Advice</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
 {%
 assign filtered_posts = site.bytebuddy |
 where_exp: "item", "item.url contains '/bytebuddy/advice/'" |
@@ -106,9 +173,20 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
-### 第五章 MethodDelegation
-
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">MethodDelegation</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
 {%
 assign filtered_posts = site.bytebuddy |
 where_exp: "item", "item.url contains '/bytebuddy/delegation/'" |
@@ -122,6 +200,11 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 
 ### buddy
 
@@ -253,21 +336,7 @@ sort: "sequence"
     {% endfor %}
 </ol>
 
-### Match
 
-{%
-assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.url contains '/bytebuddy/match/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
 
 ## TODO
 
@@ -290,6 +359,10 @@ instrument.Instrumentation API.
     - [Google Group](https://groups.google.com/g/byte-buddy)
 - [GitHub: byte-buddy](https://github.com/raphw/byte-buddy)
 - [Stack Overflow: byte-buddy](https://stackoverflow.com/questions/tagged/byte-buddy)
+
+电子书：
+
+- 《Java Interceptor Development with ByteBuddy: Fundamental》 Eric Fong, 2020-10
 
 一定要解决的问题
 
