@@ -52,6 +52,7 @@ collections:
     output: true
   bytebuddy:
     output: true
+    permalink: /:collection/:name:output_ext
   cad:
     output: true
   cad-csharp:

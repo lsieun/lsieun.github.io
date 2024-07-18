@@ -1,7 +1,6 @@
 ---
 title: "Java ByteBuddy"
 image: /assets/images/bytebuddy/byte-buddy-cover.png
-permalink: /bytebuddy.html
 ---
 
 ByteBuddy is a library for generating Java classes dynamically at run-time.
@@ -30,6 +29,7 @@ ByteBuddy is a library for generating Java classes dynamically at run-time.
     - Extention ClassLoader
     - App ClassLoader
 - ClassLoadingStrategy
+- MemberSubstitution
 
 
 
@@ -43,15 +43,14 @@ ByteBuddy is a library for generating Java classes dynamically at run-time.
 
 ## Episode 01：Class Generation
 
-### 第一章 生成类型
+### 第一章 基础
 
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;">概览</th>
-        <th style="text-align: center;">生成类</th>
-        <th style="text-align: center;">生成方法体</th>
-        <th style="text-align: center;">生成其它类型</th>
+        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">核心概念</th>
+        <th style="text-align: center;">其他</th>
     </tr>
     </thead>
     <tbody>
@@ -59,7 +58,7 @@ ByteBuddy is a library for generating Java classes dynamically at run-time.
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.url contains '/bytebuddy/overview/'" |
+where_exp: "item", "item.path contains 'bytebuddy/ch01/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -74,7 +73,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.url contains '/bytebuddy/generation/'" |
+where_exp: "item", "item.path contains 'bytebuddy/ch01/concept/'" |
 sort: "sequence"
 %}
 <ol>
@@ -89,22 +88,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.url contains '/bytebuddy/method-body/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-        <td>
-{%
-assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.url contains '/bytebuddy/types/'" |
+where_exp: "item", "item.path contains 'bytebuddy/ch01/other/'" |
 sort: "sequence"
 %}
 <ol>
@@ -120,9 +104,101 @@ sort: "sequence"
     </tbody>
 </table>
 
-### 第二章 查看类型
+### 第二章 生成类型
 
-### 第三章 修改类型
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">类</th>
+        <th style="text-align: center;">方法体</th>
+        <th style="text-align: center;">其它类型</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/ch02-generation/clazz/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/ch02-generation/method-body/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/ch02-generation/types/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+### 第三章 查看类型
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">TypePool</th>
+        <th style="text-align: center;">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td></td>
+        <td></td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/ch03-analysis/description/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+#### 匹配
 
 <table>
     <thead>
@@ -135,7 +211,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.url contains '/bytebuddy/match/'" |
+where_exp: "item", "item.path contains 'bytebuddy/ch03-analysis/match/'" |
 sort: "sequence"
 %}
 <ol>
@@ -151,10 +227,15 @@ sort: "sequence"
     </tbody>
 </table>
 
+### 第四章 修改类型
+
+#### 基础
+
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;">Advice</th>
+        <th style="text-align: center;">概念</th>
+        <th style="text-align: center;">其它</th>
     </tr>
     </thead>
     <tbody>
@@ -162,7 +243,22 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.url contains '/bytebuddy/advice/'" |
+where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/basic/concept/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/basic/other/'" |
 sort: "sequence"
 %}
 <ol>
@@ -178,10 +274,16 @@ sort: "sequence"
     </tbody>
 </table>
 
+#### Advice
+
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;">MethodDelegation</th>
+        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">实例/字段/名称</th>
+        <th style="text-align: center;">方法</th>
+        <th style="text-align: center;">局部变量</th>
+        <th style="text-align: center;">其它</th>
     </tr>
     </thead>
     <tbody>
@@ -189,7 +291,160 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.url contains '/bytebuddy/delegation/'" |
+where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/advice/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/advice/annotation/outer/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/advice/annotation/method/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/advice/annotation/local/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/advice/annotation/other/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+#### MethodDelegation
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">Annotation1</th>
+        <th style="text-align: center;">Annotation2</th>
+        <th style="text-align: center;">Annotation3</th>
+        <th style="text-align: center;">Other</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/delegation/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/delegation/annotation1/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/delegation/annotation2/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/delegation/annotation3/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/delegation/other/'" |
 sort: "sequence"
 %}
 <ol>
@@ -210,7 +465,7 @@ sort: "sequence"
 
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.url contains '/bytebuddy/buddy/'" |
+where_exp: "item", "item.path contains 'bytebuddy/buddy/'" |
 sort: "sequence"
 %}
 <ol>
@@ -226,7 +481,7 @@ sort: "sequence"
 
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.url contains '/bytebuddy/dynamic/'" |
+where_exp: "item", "item.path contains 'bytebuddy/dynamic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -242,7 +497,7 @@ sort: "sequence"
 
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.url contains '/bytebuddy/asm/'" |
+where_exp: "item", "item.path contains 'bytebuddy/asm/'" |
 sort: "sequence"
 %}
 <ol>
@@ -258,7 +513,7 @@ sort: "sequence"
 
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.url contains '/bytebuddy/implementation/'" |
+where_exp: "item", "item.path contains 'bytebuddy/implementation/'" |
 sort: "sequence"
 %}
 <ol>
@@ -274,7 +529,7 @@ sort: "sequence"
 
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.url contains '/bytebuddy/agent/'" |
+where_exp: "item", "item.path contains 'bytebuddy/agent/'" |
 sort: "sequence"
 %}
 <ol>
@@ -292,7 +547,7 @@ sort: "sequence"
 
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.url contains '/bytebuddy/generic/'" |
+where_exp: "item", "item.path contains 'bytebuddy/generic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -308,7 +563,7 @@ sort: "sequence"
 
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.url contains '/bytebuddy/annotation/'" |
+where_exp: "item", "item.path contains 'bytebuddy/annotation/'" |
 sort: "sequence"
 %}
 <ol>
@@ -319,24 +574,6 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
-
-### Description
-
-{%
-assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.url contains '/bytebuddy/description/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-
-
 
 ## TODO
 
@@ -358,6 +595,7 @@ instrument.Instrumentation API.
     - [question](https://github.com/raphw/byte-buddy/labels/question)
     - [Google Group](https://groups.google.com/g/byte-buddy)
 - [GitHub: byte-buddy](https://github.com/raphw/byte-buddy)
+  - [AdviceLocalValueTest.java](https://github.com/raphw/byte-buddy/blob/master/byte-buddy-dep/src/test/java/net/bytebuddy/asm/AdviceLocalValueTest.java)
 - [Stack Overflow: byte-buddy](https://stackoverflow.com/questions/tagged/byte-buddy)
 
 电子书：
@@ -378,6 +616,8 @@ TO Read
 - [JAVA 动态字节码实现方式对比之 Byte Buddy](https://segmentfault.com/a/1190000039808891)
 - [bytebuddy 简单入门](https://blog.csdn.net/wanxiaoderen/article/details/106544773)
 - [ByteBuddy（史上最全）](https://www.cnblogs.com/crazymakercircle/p/16635330.html)
+- [Using Byte Buddy for proxy creation](https://mydailyjava.blogspot.com/2022/02/using-byte-buddy-for-proxy-creation.html)
+- [ByteBuddy: how to add local variable across enter/exit when transforming a method](https://stackoverflow.com/questions/57167773/bytebuddy-how-to-add-local-variable-across-enter-exit-when-transforming-a-metho)
 
 - [bytebuddy 核心教程](https://www.bilibili.com/video/BV1G24y1a7bd/)
 - [bytebuddy 进阶实战 - skywalking agent 可插拔式架构实现](https://www.bilibili.com/video/BV1Jv4y1a7Kw/)
@@ -389,3 +629,17 @@ Baeldung
 - [GitHub: Rafael Winterhalter](https://github.com/raphw)
 - [The Java memory model explained, Rafael Winterhalter](https://www.youtube.com/watch?v=qADk_tj4wY8&ab_channel=BulgarianJavaUserGroup)
 - [Java Memory Management Garbage Collection, JVM Tuning, and Spotting Memory Leaks](https://www.youtube.com/watch?v=W4SvLYU9H1I&ab_channel=AlphaTutorials-Programming)
+
+Agent
+
+- [When using Advice of byte buddy, Exception of java.lang.NoClassDefFoundError is throwed](https://stackoverflow.com/questions/53625549/when-using-advice-of-byte-buddy-exception-of-java-lang-noclassdeffounderror-is)
+- [Java Agents with Byte-Buddy](https://shehan-a-perera.medium.com/java-agents-with-byte-buddy-93185305c9e9)
+- [Monkey-patching in Java](https://itnext.io/monkey-patching-in-java-dde4122df84c)
+- [How to override private method in Java](https://medium.com/@mark.andreev/how-to-rewrite-private-method-in-java-4e7c0e0ec167)
+- [Comparing Different Ways to Build Proxies In Java](https://levelup.gitconnected.com/comparing-different-ways-to-build-proxies-in-java-2d09ae9c233a)
+
+Spring Boot
+
+- [Instrumentation of Spring Boot application with Byte Buddy](https://medium.com/@jakubhal/instrumentation-of-spring-boot-application-with-byte-buddy-bbd28619b7c)
+- [用 Byte Buddy 於執行期生成程式碼](https://medium.com/java-magazine-translation/%E7%94%A8-byte-buddy-%E6%96%BC%E5%9F%B7%E8%A1%8C%E6%9C%9F%E7%94%9F%E6%88%90%E7%A8%8B%E5%BC%8F%E7%A2%BC-50055bb48e2c)
+

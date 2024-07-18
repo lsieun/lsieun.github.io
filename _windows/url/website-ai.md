@@ -32,6 +32,7 @@ sequence: "ai"
 
 ## 国外
 
+- [ChatGPT](https://chatgpt.com/) - Google 联合登录
 - [微软：Copilot](https://copilot.microsoft.com/)
 - [perplexity.ai](https://www.perplexity.ai/search)
 - [poe](https://poe.com/)

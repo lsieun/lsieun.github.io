@@ -19,7 +19,6 @@ sequence: "video"
 间连
 
 - [欧乐影院](https://www.olehdtv.com/)
-- [风车动漫](https://www.dm530p.me/)
 - [影视大全](https://www.dmzg-cn.com/)
 - [影视大全](https://m.hanguo24.com/)
 - [88影院](https://www.88ved.com/)
