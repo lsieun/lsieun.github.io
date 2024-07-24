@@ -34,21 +34,22 @@ public class HelloWorld {
 }
 ```
 
-```java
-import sample.HelloWorld;
+### 运行
 
+```java
 public class HelloWorldRun {
     public static void main(String[] args) {
         HelloWorld instance = new HelloWorld();
-        instance.test(10);
-        instance.test("Tom");
+        int result1 = instance.test(10);
+        System.out.println("result1 = " + result1);
+
+        String result2 = instance.test("Tom");
+        System.out.println("result2 = " + result2);
     }
 }
 ```
 
-### 编码实现
-
-#### HardWorker
+### 代理类
 
 ```java
 import net.bytebuddy.implementation.bind.annotation.RuntimeType;
@@ -56,20 +57,24 @@ import net.bytebuddy.implementation.bind.annotation.RuntimeType;
 public class HardWorker {
     @RuntimeType
     public static Object doWork(@RuntimeType Object obj) {
-        System.out.println("This is doWork Method: " + obj);
-        return obj;
+        if (obj instanceof Integer) {
+            return (Integer) obj * 2;
+        } else if (obj instanceof String) {
+            return String.format("Hello, %s", obj);
+        } else {
+            return obj;
+        }
     }
 }
 ```
 
-#### Rebase
+### 修改
 
 ```java
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.implementation.MethodDelegation;
 import net.bytebuddy.matcher.ElementMatchers;
-import sample.HelloWorld;
 
 public class HelloWorldRebase {
     public static void main(String[] args) throws Exception {
@@ -83,7 +88,7 @@ public class HelloWorldRebase {
         DynamicType.Builder<?> builder = byteBuddy.rebase(clazz);
 
         builder = builder.method(
-                ElementMatchers.isDeclaredBy(HelloWorld.class)
+                ElementMatchers.named("test")
         ).intercept(
                 MethodDelegation.to(HardWorker.class)
         );
@@ -91,7 +96,27 @@ public class HelloWorldRebase {
 
         // 第三步，输出结果
         DynamicType.Unloaded<?> unloadedType = builder.make();
-        OutputUtils.save(unloadedType);
+        OutputUtils.save(unloadedType, true);
+    }
+}
+```
+
+```java
+public class HelloWorld {
+    public int test(int var1) {
+        return (Integer)HardWorker.doWork(var1);
+    }
+
+    private int test$original$n4pQbQS7(int val) {
+        return val;
+    }
+
+    public String test(String var1) {
+        return (String)HardWorker.doWork(var1);
+    }
+
+    private String test$original$n4pQbQS7(String str) {
+        return str;
     }
 }
 ```

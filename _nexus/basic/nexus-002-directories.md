@@ -11,7 +11,7 @@ After you extract the repository manager archive, two directories will appear:
 ![](/assets/images/nexus3/nexus-install-dir.png)
 {:refdef}
 
-- `$install-dir`: `nexus-3.41.1-01`, contains the **Nexus Repository Manager application** and
+- `$install-dir`: `nexus-3.xx.x`, contains the **Nexus Repository Manager application** and
   all the required additional components
   such as Java libraries and configuration files.
 - `$data-dir`: `sonatype-work/nexus3`, contains all the **repositories**, **components** and

@@ -1,7 +1,6 @@
 ---
-title: "Apache Maven"
-image: /assets/images/apache-maven/apache-maven-cover.png
-permalink: /maven.html
+title: "Maven"
+image: /assets/images/maven/apache-maven-cover.png
 ---
 
 Maven is a build automation tool used primarily for Java projects.
@@ -22,15 +21,14 @@ Maven is a build automation tool used primarily for Java projects.
         <th>Basic</th>
         <th>Properties</th>
         <th>LifeCycle</th>
-        <th>Repository</th>
     </tr>
     </thead>
     <tbody>
     <tr>
         <td>
 {%
-assign filtered_posts = site.apache-maven |
-where_exp: "item", "item.url contains '/apache-maven/basic/'" |
+assign filtered_posts = site.maven |
+where_exp: "item", "item.path contains 'maven/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -44,8 +42,8 @@ sort: "sequence"
         </td>
         <td>
 {%
-assign filtered_posts = site.apache-maven |
-where_exp: "item", "item.url contains '/apache-maven/properties/'" |
+assign filtered_posts = site.maven |
+where_exp: "item", "item.path contains 'maven/properties/'" |
 sort: "sequence"
 %}
 <ol>
@@ -59,8 +57,39 @@ sort: "sequence"
         </td>
         <td>
 {%
-assign filtered_posts = site.apache-maven |
-where_exp: "item", "item.url contains '/apache-maven/lifecycle/'" |
+assign filtered_posts = site.maven |
+where_exp: "item", "item.path contains 'maven/lifecycle/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+### 配置 settings.xml
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">常用配置</th>
+        <th style="text-align: center;">其他</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.maven |
+where_exp: "item", "item.path contains 'maven/config/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -74,8 +103,23 @@ sort: "sequence"
         </td>
         <td>
 {%
-assign filtered_posts = site.apache-maven |
-where_exp: "item", "item.url contains '/apache-maven/repository/'" |
+assign filtered_posts = site.maven |
+where_exp: "item", "item.path contains 'maven/config/common/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.maven |
+where_exp: "item", "item.path contains 'maven/config/other/'" |
 sort: "sequence"
 %}
 <ol>
@@ -94,8 +138,8 @@ sort: "sequence"
 ### JVM
 
 {%
-assign filtered_posts = site.apache-maven |
-where_exp: "item", "item.url contains '/apache-maven/jvm/'" |
+assign filtered_posts = site.maven |
+where_exp: "item", "item.path contains 'maven/jvm/'" |
 sort: "sequence"
 %}
 <ol>
@@ -123,8 +167,8 @@ sort: "sequence"
     <tr>
         <td>
 {%
-assign filtered_posts = site.apache-maven |
-where_exp: "item", "item.url contains '/apache-maven/dependency/'" |
+assign filtered_posts = site.maven |
+where_exp: "item", "item.path contains 'maven/dependency/'" |
 sort: "sequence"
 %}
 <ol>
@@ -156,8 +200,8 @@ sort: "sequence"
     <tr>
         <td>
 {%
-assign filtered_posts = site.apache-maven |
-where_exp: "item", "item.url contains '/apache-maven/plugins/'" |
+assign filtered_posts = site.maven |
+where_exp: "item", "item.path contains 'maven/plugins/'" |
 sort: "sequence"
 %}
 <ol>
@@ -171,8 +215,8 @@ sort: "sequence"
         </td>
         <td>
 {%
-assign filtered_posts = site.apache-maven |
-where_exp: "item", "item.url contains '/apache-maven/plugin-configuration/'" |
+assign filtered_posts = site.maven |
+where_exp: "item", "item.path contains 'maven/plugin-configuration/'" |
 sort: "sequence"
 %}
 <ol>
@@ -186,8 +230,8 @@ sort: "sequence"
         </td>
         <td>
 {%
-assign filtered_posts = site.apache-maven |
-where_exp: "item", "item.url contains '/apache-maven/plugin-manage/'" |
+assign filtered_posts = site.maven |
+where_exp: "item", "item.path contains 'maven/plugin-manage/'" |
 sort: "sequence"
 %}
 <ol>
@@ -208,8 +252,8 @@ sort: "sequence"
 ## Deploy
 
 {%
-assign filtered_posts = site.apache-maven |
-where_exp: "item", "item.url contains '/apache-maven/deploy/'" |
+assign filtered_posts = site.maven |
+where_exp: "item", "item.path contains 'maven/deploy/'" |
 sort: "sequence"
 %}
 <ol>
@@ -268,7 +312,7 @@ sort: "sequence"
 
 ### 第三章 高级应用
 
-- [插件开发]({% link _apache-maven/maven-plugin-dev.md %})
+- [插件开发]({% link _maven/maven-plugin-dev.md %})
 
 ## References
 

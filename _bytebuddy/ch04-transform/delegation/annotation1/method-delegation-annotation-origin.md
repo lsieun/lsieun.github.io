@@ -3,7 +3,48 @@ title: "@Origin"
 sequence: "105"
 ---
 
-## 基础代码
+## 介绍
+
+```java
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.PARAMETER)
+public @interface Origin {
+    /**
+     * Determines if the value that is assigned by this annotation is cached.
+     * For values that can be stored in the constant pool,
+     * this value is ignored as such values are cached implicitly.
+     * As a result, this value currently only affects caching of {@link Method} instances.
+     *
+     * @return {@code true} if the value for this parameter should be cached
+     * in a {@code static} field inside the instrumented class.
+     */
+    boolean cache() default true;
+
+    /**
+     * Determines if the method should be resolved by using an {@code java.security.AccessController} using the privileges of the generated class.
+     * Doing so requires the generation of an auxiliary class that implements {@code java.security.PrivilegedExceptionAction}.
+     *
+     * @return {@code true} if the class should be looked up using an {@code java.security.AccessController}.
+     */
+    boolean privileged() default false;
+}
+```
+
+`@Origin` 可以与**不同的类型**进行搭配：
+
+```text
+           ┌─── Class
+           │
+           ├─── Method, Constructor, Executable
+@Origin ───┤
+           ├─── String, int
+           │
+           └─── MethodHandle, MethodType, Lookup (Java 7)
+```
+
+## 示例
+
+### HelloWorld
 
 ```java
 import java.util.Date;
@@ -14,6 +55,8 @@ public class HelloWorld {
     }
 }
 ```
+
+### 运行
 
 ```java
 import java.util.Date;
@@ -26,6 +69,8 @@ public class HelloWorldRun {
     }
 }
 ```
+
+### 修改
 
 ```java
 import net.bytebuddy.ByteBuddy;
@@ -47,7 +92,7 @@ public class HelloWorldRebase {
         builder = builder.method(
                 ElementMatchers.named("test")
         ).intercept(
-                MethodDelegation.to(LazyWorker.class)
+                MethodDelegation.to(HardWorker.class)
         );
 
 
@@ -58,91 +103,94 @@ public class HelloWorldRebase {
 }
 ```
 
-## 不同的 Origin 类型
+### 代理类
 
-### Class
+#### Class
 
 ```java
 import net.bytebuddy.implementation.bind.annotation.Origin;
 
-public class LazyWorker {
-    public static String test(@Origin Class<?> clazz) {
-        System.out.println("@Origin: " + clazz.getName());
-        return "message from LazyWorker";
+public class HardWorker {
+    public static String doWork(@Origin Class<?> clazz) {
+        return String.format("@Origin: %s", clazz.getName());
     }
 }
 ```
 
-输出结果：
+输出：
 
 ```text
 @Origin: sample.HelloWorld
-message from LazyWorker
 ```
 
 ```java
 public class HelloWorld {
     public String test(String var1, int var2, Date var3) {
-        return LazyWorker.test(HelloWorld.class);
+        return HardWorker.doWork(HelloWorld.class);
     }
 
-    private String test$original$eomJKM5U(String name, int age, Date date) {
+    private String test$original$7WlQkiy0(String name, int age, Date date) {
         return String.format("Name: %s, Age: %s, Date: %s", name, age, date);
     }
 }
 ```
 
-### Method
+#### Method
 
 ```java
 import net.bytebuddy.implementation.bind.annotation.Origin;
 
 import java.lang.reflect.Method;
 
-public class LazyWorker {
-    public static String test(@Origin Method method) {
-        System.out.println("@Origin: " + method.getName() + " from " + method.getDeclaringClass().getName());
-        return "message from LazyWorker";
+public class HardWorker {
+    public static String doWork(@Origin Method method) {
+        return String.format(
+                "@Origin: %s from %s",
+                method.getName(),
+                method.getDeclaringClass().getName()
+        );
     }
 }
 ```
 
-输出结果：
+输出：
 
 ```text
 @Origin: test from sample.HelloWorld
-message from LazyWorker
 ```
 
 ```java
 public class HelloWorld {
-    private static final Method cachedValue$test$Method;
+    private static final Method cachedValue$7we0J5yN$rhudac1;
 
     static {
-        cachedValue$test$Method = HelloWorld.class.getMethod("test", String.class, Integer.TYPE, Date.class);
+        cachedValue$7we0J5yN$rhudac1 = HelloWorld.class.getMethod("test", String.class, Integer.TYPE, Date.class);
     }
 
     public String test(String var1, int var2, Date var3) {
-        return LazyWorker.test(cachedValue$test$Method);
+        return HardWorker.doWork(cachedValue$7we0J5yN$rhudac1);
     }
 
-    private String test$original$vv9i5HRr(String name, int age, Date date) {
+    private String test$original$Rmh3ARNB(String name, int age, Date date) {
         return String.format("Name: %s, Age: %s, Date: %s", name, age, date);
     }
 }
 ```
 
-### Constructor
+#### Constructor （没有成功）
 
 ```java
 import net.bytebuddy.implementation.bind.annotation.Origin;
 
 import java.lang.reflect.Constructor;
 
-public class LazyWorker {
-    public static String test(@Origin Constructor<?> constructor) {
-        System.out.println("@Origin: " + constructor.getName() + " from " + constructor.getDeclaringClass().getName());
-        return "message from LazyWorker";
+public class HardWorker {
+    public static String doWork(@Origin Constructor<?> constructor) {
+        return String.format(
+                "@Origin: %s from %s",
+                constructor.getName(),
+                constructor.getDeclaringClass().getName()
+        );
     }
 }
 ```
@@ -150,31 +198,35 @@ public class LazyWorker {
 出现错误：
 
 ```text
-Exception in thread "main" java.lang.IllegalArgumentException:
-None of [public static java.lang.String lsieun.buddy.delegation.LazyWorker.test(java.lang.reflect.Constructor)]
-allows for delegation from
-public java.lang.String sample.HelloWorld.test(java.lang.String,int,java.util.Date)
+None of [
+    public static String HardWorker.doWork(Constructor)
+] allows for delegation from 
+    public String HelloWorld.test(String,int,Date)
 ```
 
 ```text
 builder = builder.method(
+        // 注意：这里进行了修改
         ElementMatchers.isDefaultConstructor()
 ).intercept(
-        MethodDelegation.to(LazyWorker.class)
+        MethodDelegation.to(HardWorker.class)
 );
 ```
 
-### Executable
+#### Executable
 
 ```java
 import net.bytebuddy.implementation.bind.annotation.Origin;
 
 import java.lang.reflect.Executable;
 
-public class LazyWorker {
-    public static String test(@Origin Executable executable) {
-        System.out.println("@Origin: " + executable.getName() + " from " + executable.getDeclaringClass().getName());
-        return "message from LazyWorker";
+public class HardWorker {
+    public static String doWork(@Origin Executable executable) {
+        return String.format(
+                "@Origin: %s from %s",
+                executable.getName(),
+                executable.getDeclaringClass().getName()
+        );
     }
 }
 ```
@@ -183,38 +235,107 @@ public class LazyWorker {
 
 ```text
 @Origin: test from sample.HelloWorld
-message from LazyWorker
 ```
 
 ```Java
 public class HelloWorld {
-    private static final Method cachedValue$test$Method;
+    private static final Method cachedValue$nrdO0gma$rhudac1;
 
     static {
-        cachedValue$test$Method = HelloWorld.class.getMethod("test", String.class, Integer.TYPE, Date.class);
+        cachedValue$nrdO0gma$rhudac1 = HelloWorld.class.getMethod("test", String.class, Integer.TYPE, Date.class);
     }
 
     public String test(String var1, int var2, Date var3) {
-        return LazyWorker.test(cachedValue$test$Method);
+        return HardWorker.doWork(cachedValue$nrdO0gma$rhudac1);
     }
 
-    private String test$original$W7AuqwQb(String name, int age, Date date) {
+    private String test$original$hpjCDSqG(String name, int age, Date date) {
         return String.format("Name: %s, Age: %s, Date: %s", name, age, date);
     }
 }
 ```
 
-### MethodHandle
+#### String
+
+If the annotated parameter is a `String`,
+the parameter is assigned the value that the Method's `toString` method would have returned.
+
+```java
+import net.bytebuddy.implementation.bind.annotation.Origin;
+
+public class HardWorker {
+    public static String doWork(@Origin String methodStr) {
+        return String.format("@Origin String: %s", methodStr);
+    }
+}
+```
+
+输出结果：
+
+```text
+@Origin String: public java.lang.String sample.HelloWorld.test(java.lang.String,int,java.util.Date)
+```
+
+生成的 `HelloWorld.class` 文件：
+
+```java
+public class HelloWorld {
+    public String test(String var1, int var2, Date var3) {
+        return HardWorker.doWork("public java.lang.String sample.HelloWorld.test(java.lang.String,int,java.util.Date)");
+    }
+
+    private String test$original$yPF1Ol3M(String name, int age, Date date) {
+        return String.format("Name: %s, Age: %s, Date: %s", name, age, date);
+    }
+}
+```
+
+#### int
+
+When using the `@Origin` annotation on a parameter of type `int`, it is assigned the **modifier** of the instrumented method.
+
+```java
+import net.bytebuddy.implementation.bind.annotation.Origin;
+
+import java.lang.reflect.Modifier;
+
+public class HardWorker {
+    public static String doWork(@Origin int modifier) {
+        return String.format("@Origin int: %d (%s)", modifier, Modifier.toString(modifier));
+    }
+}
+```
+
+输出结果：
+
+```text
+@Origin int: 1 (public)
+```
+
+生成的 `HelloWorld.class` 文件：
+
+```java
+public class HelloWorld {
+    public String test(String var1, int var2, Date var3) {
+        return HardWorker.doWork(1);
+    }
+
+    private String test$original$kdL3DIUs(String name, int age, Date date) {
+        return String.format("Name: %s, Age: %s, Date: %s", name, age, date);
+    }
+}
+```
+
+#### MethodHandle
 
 ```java
 import net.bytebuddy.implementation.bind.annotation.Origin;
 
 import java.lang.invoke.MethodHandle;
 
-public class LazyWorker {
-    public static String test(@Origin MethodHandle methodHandle) {
-        System.out.println("@Origin MethodHandle: " + methodHandle);
-        return "message from LazyWorker";
+public class HardWorker {
+    public static String doWork(@Origin MethodHandle methodHandle) {
+        return String.format("@Origin MethodHandle: %s", methodHandle);
     }
 }
 ```
@@ -223,7 +344,6 @@ public class LazyWorker {
 
 ```text
 @Origin MethodHandle: MethodHandle(HelloWorld,String,int,Date)String
-message from LazyWorker
 ```
 
 生成的 `HelloWorld.class` 文件：
@@ -231,10 +351,10 @@ message from LazyWorker
 ```java
 public class HelloWorld {
     public String test(String var1, int var2, Date var3) {
-        return LazyWorker.test("test");
+        return HardWorker.doWork("test");
     }
 
-    private String test$original$yPGgsdmk(String name, int age, Date date) {
+    private String test$original$D6lwihQ6(String name, int age, Date date) {
         return String.format("Name: %s, Age: %s, Date: %s", name, age, date);
     }
 }
@@ -251,31 +371,29 @@ $ javap -v -p sample.HelloWorld
     Code:
       stack=1, locals=4, args_size=4
          0: ldc           #16                 // MethodHandle REF_invokeVirtual sample/HelloWorld.test:(Ljava/lang/String;ILjava/util/Date;)Ljava/lang/String;
-         2: invokestatic  #21                 // Method lsieun/buddy/delegation/LazyWorker.test:(Ljava/lang/invoke/MethodHandle;)Ljava/lang/String;
+         2: invokestatic  #22                 // Method lsieun/buddy/delegation/HardWorker.doWork:(Ljava/lang/invoke/MethodHandle;)Ljava/lang/String;
          5: areturn
 
 ```
 
-### MethodType
+#### MethodType
 
 ```java
 import net.bytebuddy.implementation.bind.annotation.Origin;
 
 import java.lang.invoke.MethodType;
 
-public class LazyWorker {
-    public static String test(@Origin MethodType methodType) {
-        System.out.println("@Origin MethodType: " + methodType);
-        return "message from LazyWorker";
+public class HardWorker {
+    public static String doWork(@Origin MethodType methodType) {
+        return String.format("@Origin MethodType: %s", methodType);
     }
 }
 ```
 
-输出结果：
+输出：
 
 ```text
 @Origin MethodType: (HelloWorld,String,int,Date)String
-message from LazyWorker
 ```
 
 生成的 `HelloWorld.class` 文件：
@@ -286,7 +404,7 @@ public class HelloWorld {
         // $FF: Couldn't be decompiled
     }
 
-    private String test$original$fyuJPwLJ(String name, int age, Date date) {
+    private String test$original$3nnK1Dwv(String name, int age, Date date) {
         return String.format("Name: %s, Age: %s, Date: %s", name, age, date);
     }
 }
@@ -303,81 +421,38 @@ $ javap -v -p sample.HelloWorld
     Code:
       stack=1, locals=4, args_size=4
          0: ldc           #15                 // MethodType (Lsample/HelloWorld;Ljava/lang/String;ILjava/util/Date;)Ljava/lang/String;
-         2: invokestatic  #20                 // Method lsieun/buddy/delegation/LazyWorker.test:(Ljava/lang/invoke/MethodType;)Ljava/lang/String;
+         2: invokestatic  #21                 // Method lsieun/buddy/delegation/HardWorker.doWork:(Ljava/lang/invoke/MethodType;)Ljava/lang/String;
          5: areturn
 
 ```
 
-### String
-
-If the annotated parameter is a `String`,
-the parameter is assigned the value that the Method's `toString` method would have returned.
+#### MethodHandles.Lookup
 
 ```java
 import net.bytebuddy.implementation.bind.annotation.Origin;
 
-public class LazyWorker {
-    public static String test(@Origin String methodDesc) {
-        System.out.println("@Origin String: " + methodDesc);
-        return "message from LazyWorker";
+import java.lang.invoke.MethodHandles;
+
+public class HardWorker {
+    public static String doWork(@Origin MethodHandles.Lookup lookup) {
+        return String.format("@Origin MethodHandles.Lookup: %s", lookup);
     }
 }
 ```
 
-输出结果：
+输出：
 
 ```text
-@Origin String: public java.lang.String sample.HelloWorld.test(java.lang.String,int,java.util.Date)
-message from LazyWorker
+@Origin MethodHandles.Lookup: sample.HelloWorld
 ```
-
-生成的 `HelloWorld.class` 文件：
 
 ```java
 public class HelloWorld {
     public String test(String var1, int var2, Date var3) {
-        return LazyWorker.test("public java.lang.String sample.HelloWorld.test(java.lang.String,int,java.util.Date)");
+        return HardWorker.doWork(MethodHandles.lookup());
     }
 
-    private String test$original$9BFsLHXf(String name, int age, Date date) {
-        return String.format("Name: %s, Age: %s, Date: %s", name, age, date);
-    }
-}
-```
-
-### int
-
-When using the `@Origin` annotation on a parameter of type `int`, it is assigned the **modifier** of the instrumented method.
-
-```java
-import net.bytebuddy.implementation.bind.annotation.Origin;
-
-import java.lang.reflect.Modifier;
-
-public class LazyWorker {
-    public static String test(@Origin int modifier) {
-        System.out.println("@Origin int: " + modifier + " = " + Modifier.toString(modifier));
-        return "message from LazyWorker";
-    }
-}
-```
-
-输出结果：
-
-```text
-@Origin int: 1 = public
-message from LazyWorker
-```
-
-生成的 `HelloWorld.class` 文件：
-
-```java
-public class HelloWorld {
-    public String test(String var1, int var2, Date var3) {
-        return LazyWorker.test(1);
-    }
-
-    private String test$original$yROrq9Xd(String name, int age, Date date) {
+    private String test$original$zofkGVqV(String name, int age, Date date) {
         return String.format("Name: %s, Age: %s, Date: %s", name, age, date);
     }
 }
@@ -404,5 +479,84 @@ such that classes using these constants must at least be of Java version 7.
 Instead of using reflection for reflectively invoking an intercepted method on another object,
 we furthermore recommend the use of the `@Pipe` annotation.
 
+### cache
 
+```java
+import java.lang.reflect.Method;
 
+public class HardWorker {
+    public static String doWork(@Origin(cache = false) Method method) {
+        return String.format(
+                "@Origin: %s from %s",
+                method.getName(),
+                method.getDeclaringClass().getName()
+        );
+    }
+}
+```
+
+```java
+public class HelloWorld {
+    public String test(String var1, int var2, Date var3) {
+        return HardWorker.doWork(HelloWorld.class.getMethod("test", String.class, Integer.TYPE, Date.class));
+    }
+
+    private String test$original$jSdvF8uK(String name, int age, Date date) {
+        return String.format("Name: %s, Age: %s, Date: %s", name, age, date);
+    }
+}
+```
+
+### privileged
+
+```java
+import java.lang.reflect.Method;
+
+public class HardWorker {
+    public static String doWork(@Origin(privileged = true) Method method) {
+        return String.format(
+                "@Origin: %s from %s",
+                method.getName(),
+                method.getDeclaringClass().getName()
+        );
+    }
+}
+```
+
+```java
+public class HelloWorld {
+    private static final Method cachedValue$jPX5LP1Z$rhudac1;
+
+    static {
+        cachedValue$jPX5LP1Z$rhudac1 = (Method)AccessController.doPrivileged(
+                new HelloWorld$auxiliary$OzsoOscE(HelloWorld.class, "test", new Class[]{String.class, Integer.TYPE, Date.class})
+        );
+    }
+
+    public String test(String var1, int var2, Date var3) {
+        return HardWorker.doWork(cachedValue$jPX5LP1Z$rhudac1);
+    }
+
+    private String test$original$S1c2rAMm(String name, int age, Date date) {
+        return String.format("Name: %s, Age: %s, Date: %s", name, age, date);
+    }
+}
+```
+
+```java
+class HelloWorld$auxiliary$OzsoOscE implements PrivilegedExceptionAction {
+    private Class type;
+    private String name;
+    private Class[] parameters;
+
+    public Object run() throws Exception {
+        return this.type.getMethod(this.name, this.parameters);
+    }
+
+    public HelloWorld$auxiliary$OzsoOscE(Class var1, String var2, Class[] var3) {
+        this.type = var1;
+        this.name = var2;
+        this.parameters = var3;
+    }
+}
+```

@@ -8,7 +8,7 @@ sequence: "101"
 第 1 步，下载：
 
 ```text
-https://help.sonatype.com/repomanager3/product-information/download
+https://help.sonatype.com/en/download.html
 ```
 
 第 2 步，查看压缩包内容：
@@ -63,7 +63,7 @@ nexus.exe /uninstall <optional-service-name>
 第 1 步，将 `license-bundle-1.6.0.jar` 替换：
 
 ```text
-nexus-3.56.0-01\system\com\sonatype\licensing\license-bundle\1.6.0\license-bundle-1.6.0.jar
+nexus-3.xx.x\system\com\sonatype\licensing\license-bundle\1.6.0\license-bundle-1.6.0.jar
 ```
 
 第 2 步，修改 `nexus.properties` 文件：
@@ -81,6 +81,6 @@ nexus.loadAsOSS=false
 
 ## Reference
 
-- [Download](https://help.sonatype.com/repomanager3/product-information/download)
+- [Download](https://help.sonatype.com/en/download.html)
 - [Installation Methods](https://help.sonatype.com/repomanager3/installation-and-upgrades/installation-methods)
 - [Run as a Service](https://help.sonatype.com/repomanager3/installation-and-upgrades/run-as-a-service)

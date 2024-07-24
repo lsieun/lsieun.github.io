@@ -1,9 +1,32 @@
 ---
 title: "@Default"
-sequence: "120"
+sequence: "104"
 ---
 
-## 注意事项
+## 介绍
+
+```java
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.PARAMETER)
+public @interface Default {
+    /**
+     * Determines if the generated proxy should be {@link java.io.Serializable}. If the annotated type
+     * already is serializable, such an explicit specification is not required.
+     *
+     * @return {@code true} if the generated proxy should be {@link java.io.Serializable}.
+     */
+    boolean serializableProxy() default false;
+
+    /**
+     * Determines the type that is implemented by the proxy. When this value is set to its default value
+     * {@code void}, the proxy is created as an instance of the parameter's type. It is <b>not</b> possible to
+     * set the value of this property to {@link net.bytebuddy.dynamic.TargetType} as a interface cannot implement itself.
+     *
+     * @return The type of the proxy or an indicator type, i.e. {@code void}.
+     */
+    Class<?> proxyType() default void.class;
+}
+```
 
 Obviously, default method invocation is only available for classes that are defined in a class file version equal to Java 8 or newer.
 
@@ -11,6 +34,10 @@ Similarly, in addition to the `@Super` annotation,
 there is a `@Default` annotation which injects a proxy for invoking a specific default method explicitly.
 
 ## 示例 @Default
+
+### IDog
+
+
 
 ```java
 import java.util.Date;
@@ -22,15 +49,19 @@ public interface IDog {
 }
 ```
 
+### HelloWorld
+
 ```java
 import java.util.Date;
 
 public class HelloWorld implements IDog {
     public String test(String name, int age, Date date) {
-        return String.format("Name: %s, Age: %s, Date: %s", name, age, date);
+        return String.format("HelloWorld: %s - %d - %s", name, age, date);
     }
 }
 ```
+
+### 运行
 
 ```java
 import java.util.Date;
@@ -44,22 +75,28 @@ public class HelloWorldRun {
 }
 ```
 
+### 代理类
+
 ```java
 import net.bytebuddy.implementation.bind.annotation.Argument;
 import net.bytebuddy.implementation.bind.annotation.Default;
+import net.bytebuddy.implementation.bind.annotation.RuntimeType;
+import sample.IDog;
 
 import java.util.Date;
 
-public class LazyWorker {
-    public static String test(@Default IDog dog,
-                              @Argument(0) String name,
-                              @Argument(1) int age,
-                              @Argument(2) Date date) {
-        String message = dog.test(name, age, date);
-        return "message from LazyWorker - " + message;
+public class HardWorker {
+    @RuntimeType
+    public static Object doWork(@Default IDog instance,
+                                @Argument(0) String name,
+                                @Argument(1) int age,
+                                @Argument(2) Date date) {
+        return instance.test(name, age, date);
     }
 }
 ```
+
+### 修改
 
 ```java
 import net.bytebuddy.ByteBuddy;
@@ -81,7 +118,7 @@ public class HelloWorldRebase {
         builder = builder.method(
                 ElementMatchers.named("test")
         ).intercept(
-                MethodDelegation.to(LazyWorker.class)
+                MethodDelegation.to(HardWorker.class)
         );
 
 
@@ -92,62 +129,24 @@ public class HelloWorldRebase {
 }
 ```
 
-> 这里不能使用 subclass
-
-```java
-import net.bytebuddy.ByteBuddy;
-import net.bytebuddy.dynamic.DynamicType;
-import net.bytebuddy.implementation.MethodDelegation;
-import net.bytebuddy.matcher.ElementMatchers;
-
-public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
-        String className = "sample.HelloWorld";
-        Class<?> clazz = Class.forName(className);
-
-
-        // 第二步，生成类
-        ByteBuddy byteBuddy = new ByteBuddy();
-        DynamicType.Builder<?> builder = byteBuddy.subclass(clazz).name("sample.HelloWorldChild");
-
-        builder = builder.method(
-                ElementMatchers.named("test")
-        ).intercept(
-                MethodDelegation.to(LazyWorker.class)
-        );
-
-
-        // 第三步，输出结果
-        DynamicType.Unloaded<?> unloadedType = builder.make();
-        OutputUtils.save(unloadedType, true);
-    }
-}
-```
-
-```java
-class HelloWorld$auxiliary$Default implements IDog {
-    public volatile HelloWorld target;
-
-    public String test(String var1, int var2, Date var3) {
-        return this.target.test$accessor$oWwUpiwh$nfun530(var1, var2, var3);
-    }
-}
-```
+### 修改之后
 
 ```java
 public class HelloWorld implements IDog {
-    public String test(String name, int age, Date date) {
-        HelloWorld$auxiliary$Default auxiliary$Default = new HelloWorld$auxiliary$Default();
-        auxiliary$Default.target = this;
-        return LazyWorker.test(auxiliary$Default, name, age, date);
+    public HelloWorld() {
     }
 
-    private String test$original$xSxp2pP6(String name, int age, Date date) {
+    public String test(String var1, int var2, Date var3) {
+        auxiliary.4YSbr1ac var10000 = new auxiliary.4YSbr1ac();
+        var10000.target = this;
+        return (String)HardWorker.doWork(var10000, var1, var2, var3);
+    }
+
+    private String test$original$a6rt9fui(String name, int age, Date date) {
         return String.format("Name: %s, Age: %s, Date: %s", name, age, date);
     }
 
-    final String test$accessor$oWwUpiwh$nfun530(String var1, int var2, Date var3) {
+    final String test$accessor$FUIy016Y$nfun530(String var1, int var2, Date var3) {
         return super.test(var1, var2, var3);
     }
 }
@@ -156,7 +155,7 @@ public class HelloWorld implements IDog {
 ```text
 > javap -v -p sample.HelloWorld
 
-  final java.lang.String test$accessor$oWwUpiwh$nfun530(java.lang.String, int, java.util.Date);
+  final java.lang.String test$accessor$FUIy016Y$nfun530(java.lang.String, int, java.util.Date);
     descriptor: (Ljava/lang/String;ILjava/util/Date;)Ljava/lang/String;
     flags: (0x0010) ACC_FINAL
     Code:
@@ -165,9 +164,198 @@ public class HelloWorld implements IDog {
          1: aload_1
          2: iload_2
          3: aload_3
-         4: invokespecial #50                 // InterfaceMethod sample/IDog.test:(Ljava/lang/String;ILjava/util/Date;)Ljava/lang/String;
+         4: invokespecial #51                 // InterfaceMethod sample/IDog.test:(Ljava/lang/String;ILjava/util/Date;)Ljava/lang/String;
          7: areturn
 
 ```
+
+```java
+class HelloWorld$auxiliary$4YSbr1ac implements IDog {
+    public volatile HelloWorld target;
+
+    static HelloWorld$auxiliary$4YSbr1ac make() {
+        return (HelloWorld$auxiliary$4YSbr1ac)ReflectionFactory.getReflectionFactory().newConstructorForSerialization(
+                HelloWorld$auxiliary$4YSbr1ac.class,
+                Object.class.getDeclaredConstructor()
+        ).newInstance();
+    }
+
+    // --------------------------- HelloWorld ---------------------------
+    public String test(String var1, int var2, Date var3) {
+        return this.target.test$accessor$FUIy016Y$nfun530(var1, var2, var3);
+    }
+
+    // --------------------------- Object ---------------------------
+    public boolean equals(Object var1) {
+        throw new AbstractMethodError();
+    }
+
+    public String toString() {
+        throw new AbstractMethodError();
+    }
+
+    public int hashCode() {
+        throw new AbstractMethodError();
+    }
+
+    protected Object clone() throws CloneNotSupportedException {
+        throw new AbstractMethodError();
+    }
+}
+```
+
+输出：
+
+```text
+Dog: Tom - 10 - Sun Jul 21 23:07:46 CST 2024
+```
+
+## 属性
+
+### serializableProxy
+
+```java
+import net.bytebuddy.implementation.bind.annotation.Argument;
+import net.bytebuddy.implementation.bind.annotation.Default;
+import net.bytebuddy.implementation.bind.annotation.RuntimeType;
+import sample.IDog;
+
+import java.util.Date;
+
+public class HardWorker {
+    @RuntimeType
+    public static Object doWork(@Default(serializableProxy = true) IDog dog,
+                                @Argument(0) String name,
+                                @Argument(1) int age,
+                                @Argument(2) Date date) {
+        return dog.test(name, age, date);
+    }
+}
+```
+
+```java
+class HelloWorld$auxiliary$b4i7qysC implements IDog, Serializable {
+}
+```
+
+### proxyType
+
+```java
+import java.util.Date;
+
+public interface IAnimal {
+    String test(String name, int age, Date date);
+}
+```
+
+```java
+import net.bytebuddy.implementation.bind.annotation.Argument;
+import net.bytebuddy.implementation.bind.annotation.Default;
+import net.bytebuddy.implementation.bind.annotation.RuntimeType;
+import sample.IAnimal;
+import sample.IDog;
+
+import java.util.Date;
+
+public class HardWorker {
+    @RuntimeType
+    public static Object doWork(@Default(proxyType = IDog.class) IAnimal instance,
+                                @Argument(0) String name,
+                                @Argument(1) int age,
+                                @Argument(2) Date date) {
+        return instance.test(name, age, date);
+    }
+}
+```
+
+```java
+class HelloWorld$auxiliary$IeCgAxel implements IDog {
+}
+```
+
+## 注意事项
+
+### 类型要求
+
+`@Default Xxx` 对于类型有一定的要求：
+
+- `Xxx` 不能使用父类，只能使用接口
+- 接口，只能是直接实现的接口，不能是间接实现的接口
+
+
+```java
+import java.util.Date;
+
+public class Parent {
+    public String test(String name, int age, Date date) {
+        return String.format("Parent: %s - %d - %s", name, age, date);
+    }
+}
+```
+
+```java
+public interface IAnimal {
+    default String test(String name, int age, Date date) {
+        return String.format("Animal: %s - %d - %s", name, age, date);
+    }
+}
+```
+
+```java
+import java.util.Date;
+
+public interface IDog extends IAnimal {
+    default String test(String name, int age, Date date) {
+        return String.format("Dog: %s - %d - %s", name, age, date);
+    }
+}
+```
+
+```java
+import java.util.Date;
+
+public interface ICat extends IAnimal {
+    default String test(String name, int age, Date date) {
+        return String.format("Cat: %s - %d - %s", name, age, date);
+    }
+}
+```
+
+```java
+import java.util.Date;
+
+public class HelloWorld extends Parent implements IDog, ICat {
+    public String test(String name, int age, Date date) {
+        return String.format("HelloWorld: %s - %d - %s", name, age, date);
+    }
+}
+```
+
+```java
+import net.bytebuddy.implementation.bind.annotation.Argument;
+import net.bytebuddy.implementation.bind.annotation.Default;
+import net.bytebuddy.implementation.bind.annotation.RuntimeType;
+import sample.Parent;
+
+import java.util.Date;
+
+public class HardWorker {
+    @RuntimeType
+    public static Object doWork(@Default Parent instance,    // 注意：这里使用 Parent 类型
+                                @Argument(0) String name,
+                                @Argument(1) int age,
+                                @Argument(2) Date date) {
+        return instance.test(name, age, date);
+    }
+}
+```
+
+遇到错误：
+
+```text
+sample.Parent arg0 uses the @Default annotation on an invalid type
+```
+
+`@Default IAnimal instance` 也不可以
 
 

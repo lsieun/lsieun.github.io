@@ -118,7 +118,7 @@ jar -uvf nexus-bootstrap-3.40.1-01.jar org/sonatype/nexus/bootstrap/osgi/Bootstr
 替换Jar包：
 
 ```text
-nexus-3.40.1-01/system/com/sonatype/licensing/license-bundle/1.6.0/license-bundle-1.6.0.jar
+nexus-3.xx.x/system/com/sonatype/licensing/license-bundle/1.6.0/license-bundle-1.6.0.jar
 ```
 
 To downgrade a Nexus Repository Manager (NXRM) 3 PRO instance to OSS:
