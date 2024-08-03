@@ -5,6 +5,12 @@ sequence: "102"
 
 ## TypeDefinition
 
+```text
+                  ┌─── TypeDescription
+TypeDefinition ───┤
+                  └─── TypeDescription.Generic
+```
+
 ```java
 public interface TypeDefinition extends NamedElement, ModifierReviewable.ForTypeDefinition, Iterable<TypeDefinition> {
     TypeDescription.Generic asGenericType();

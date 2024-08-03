@@ -11,39 +11,35 @@ For primitive types, this is the equivalent of the number zero, for reference ty
 
 Using this annotation is meant for voiding an interceptor's parameter.
 
-```java
-import java.util.Base64;
-import java.util.Date;
+## 示例
 
+### HelloWorld
+
+```java
 public class HelloWorld {
-    public String test(String name, int age, Date date) {
-        String str = String.format("%s:%s:%s", name, age, date);
-        byte[] bytes = str.getBytes();
-        return Base64.getEncoder().encodeToString(bytes);
+
+    public String test(String name, int age) {
+        return String.format("HelloWorld: %s - %d", name, age);
     }
 }
 ```
 
+### HelloWorldRun
+
 ```java
-import sample.HelloWorld;
-
-import java.util.Date;
-
 public class HelloWorldRun {
     public static void main(String[] args) {
         HelloWorld instance = new HelloWorld();
-        instance.test("Tom", 10, new Date());
+        String msg = instance.test("Tom", 10);
+        System.out.println("msg = " + msg);
     }
 }
 ```
 
-```java
-import net.bytebuddy.ByteBuddy;
-import net.bytebuddy.dynamic.DynamicType;
-import net.bytebuddy.implementation.MethodDelegation;
-import net.bytebuddy.matcher.ElementMatchers;
+### HelloWorldRebase
 
-public class HelloWorldTransform {
+```java
+public class HelloWorldRebase {
     public static void main(String[] args) throws Exception {
         // 第一步，准备参数
         String className = "sample.HelloWorld";
@@ -57,38 +53,33 @@ public class HelloWorldTransform {
         builder = builder.method(
                 ElementMatchers.named("test")
         ).intercept(
-                MethodDelegation.to(HardWorker.class)
+                MethodDelegation.withDefaultConfiguration()
+                        .withBinders(Pipe.Binder.install(ForwardingType.class))
+                        .to(HardWorker.class)
         );
 
 
         // 第三步，输出结果
         DynamicType.Unloaded<?> unloadedType = builder.make();
-        OutputUtils.save(unloadedType);
+        OutputUtils.save(unloadedType, true);
     }
 }
 ```
 
+### HardWorker
+
 ```java
 import net.bytebuddy.implementation.bind.annotation.Empty;
-import net.bytebuddy.implementation.bind.annotation.SuperCall;
-
-import java.util.Date;
+import net.bytebuddy.implementation.bind.annotation.RuntimeType;
 
 public class HardWorker {
-    public static void doWork(@Empty String name, @Empty int age, @Empty Date date, @SuperCall Runnable superCall) {
-        System.out.println("This is doWork Method");
-        System.out.println("name: " + name);
-        System.out.println("age: " + age);
-        System.out.println("date: " + date);
-        superCall.run();
+    @RuntimeType
+    public static Object doWork(@Empty String str, @Empty int val) {
+        return String.format("HardWorker: %s - %d", str, val);
     }
 }
 ```
 
 ```text
-This is doWork Method
-name: null
-age: 0
-date: null
-Hello Tom, you are 10. Now is Sun May 15 12:57:23 CST 2022
+msg = HardWorker: null - 0
 ```

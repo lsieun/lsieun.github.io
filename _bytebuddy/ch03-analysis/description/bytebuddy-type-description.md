@@ -1,6 +1,6 @@
 ---
 title: "TypeDescription"
-sequence: "150"
+sequence: "103"
 ---
 
 ## TypeDescription

@@ -57,3 +57,50 @@ sequence: "103"
 她的四肢也只是骨头节节相连，筋攣皮缩，靠着气息牵动，就像木人以机关抽牵而活动。
 一旦气息停止，将尸体的头、足等一节节分解，内脏摆得满地狼籍。
 如此虚假、污秽的人体，究竟哪里好呢?”
+
+```text
+《直到最后一口气》
+
+你認為漂亮的肉體
+衰老終將帶它遠去
+似水流年 日以繼夜漂離
+此身總會消逝 無常變化不已
+.
+亮麗的髮絲 終有脫落的一天
+靈活的四肢 將會力乏不如前
+病魔纏身 到處如影隨形不滅
+生老病死 那是不變真理的應驗
+.
+
+《Till The Last Breath》
+
+The body you perceive as beautiful
+At last will end up as dust
+It will wither away as time passes by
+Life is subject to change, nothing is permanent
+.
+Your flawless hair will eventually fall out
+Your limbs will become powerless
+Illnesses are inescapable, they follow you like shadows.
+Birth, aging, illness and death that are certain.
+```
+
+{:refdef: style="text-align: center;"}
+![](/assets/images/thyself/lust/er-ba-jia-ren-ti-mao-su.jpg)
+{:refdef}
+
+{:refdef: style="text-align: center;"}
+![](/assets/images/thyself/lust/guan-xiang-si-wang-ri.jpg)
+{:refdef}
+
+{:refdef: style="text-align: center;"}
+![](/assets/images/thyself/lust/mei-nv-bai-gu.jpg)
+{:refdef}
+
+{:refdef: style="text-align: center;"}
+![](/assets/images/thyself/lust/pi-bao-gu-rou.jpg)
+{:refdef}
+
+
+
+

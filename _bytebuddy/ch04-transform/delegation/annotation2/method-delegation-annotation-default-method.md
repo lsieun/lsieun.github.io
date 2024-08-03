@@ -3,6 +3,13 @@ title: "@DefaultMethod"
 sequence: "105"
 ---
 
+## @DefaultMethod
+
+@DefaultMethod: Similar to `@SuperMethod` but for a default method call.
+The default method is invoked on a unique type if there is only one possibility for a default method invocation.
+
+Otherwise, a type can be specified explicitly as an annotation property.
+
 ## 介绍
 
 ```java

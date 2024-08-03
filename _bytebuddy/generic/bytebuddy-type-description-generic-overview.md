@@ -1,5 +1,5 @@
 ---
-title: "开篇"
+title: "泛型概览"
 sequence: "101"
 ---
 

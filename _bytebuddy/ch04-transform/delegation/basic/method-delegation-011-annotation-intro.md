@@ -73,9 +73,9 @@ MethodDelegation Annotation ───┤                       └─── meth
 
 概念
 
-- instrumented type
+- instrumented type/intercepted type
 - instrumented object
-- source method/instrumented method
+- source method/instrumented method/intercepted method
 - the list of possible binding candidates
   - If a source method has less parameters than specified by value(), the method carrying this parameter annotation is excluded from the list of possible binding candidates to this particular source method.
   - The same happens, if the source method parameter at the specified index is not assignable to the annotated parameter.

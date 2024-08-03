@@ -3,7 +3,9 @@ title: "@Morph"
 sequence: "101"
 ---
 
-## @Morph
+## 介绍
+
+### 区别
 
 @Morph: This annotation works very similar to the `@SuperCall` annotation.
 
@@ -14,57 +16,63 @@ Note that you should only use this annotation
 when you need to invoke a super method with different arguments than the original invocation
 as using the `@Morph` annotation requires a boxing and unboxing of all arguments.
 
-If you want to invoke a specific super method,
+If you want to invoke **a specific super method**,
 consider using the `@Super` annotation for creating a type-safe proxy.
+
+### 如何使用
+
 Before this annotation can be used, it needs to be installed and registered explicitly,
 similarly to the `@Pipe` annotation.
-
 This annotation instructs Byte Buddy to inject a proxy class
 that calls a method's super method with explicit arguments.
+
 For this, the `Morph.Binder` needs to be installed for **an interface type**
 that **takes an argument of the array type `Object`** and **returns a non-array type of `Object`**.
+
 This is an alternative to using the `SuperCall` or `DefaultCall` annotations
 which call a super method using the same arguments as the intercepted method was invoked with.
 
-## 原程序
+## 示例
+
+### HelloWorld
 
 ```java
-import java.util.Date;
-
 public class HelloWorld {
-    public String test(String name, int age, Date date) {
-        return String.format("Name: %s, Age: %s, Date: %s", name, age, date);
+    public String test(String name, int age) {
+        return String.format("HelloWorld: %s - %d", name, age);
     }
 }
 ```
 
-```java
-import lsieun.utils.InvokeUtils;
+### 运行
 
+```java
 public class HelloWorldRun {
-    public static void main(String[] args) throws Exception {
-        String className = "sample.HelloWorld";
-        InvokeUtils.invokeAllMethods(className);
+    public static void main(String[] args) {
+        HelloWorld instance = new HelloWorld();
+        String msg = instance.test("Tom", 10);
+        System.out.println("msg = " + msg);
     }
 }
 ```
 
-## 修改程序
+### HumbleServant
 
 ```java
-public interface MyCallable<R> {
-    R call(Object[] args);
+public interface HumbleServant<R> {
+    R process(Object[] args);
 }
 ```
 
 ```java
-import net.bytebuddy.implementation.bind.annotation.AllArguments;
 import net.bytebuddy.implementation.bind.annotation.Morph;
+import net.bytebuddy.implementation.bind.annotation.RuntimeType;
+import sample.HumbleServant;
 
-public class LazyWorker {
-    public static String test(@Morph MyCallable<String> executable, @AllArguments Object[] args) {
-        String message = executable.call(args);
-        return "message from LazyWorker: " + message;
+public class HardWorker {
+    @RuntimeType
+    public static Object doWork(@Morph HumbleServant<String> executable) {
+        return executable.process(new Object[]{"Jerry", 9});
     }
 }
 ```
@@ -75,7 +83,7 @@ import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.implementation.MethodDelegation;
 import net.bytebuddy.implementation.bind.annotation.Morph;
 import net.bytebuddy.matcher.ElementMatchers;
-import sample.MyCallable;
+import sample.HumbleServant;
 
 public class HelloWorldRebase {
     public static void main(String[] args) throws Exception {
@@ -94,9 +102,9 @@ public class HelloWorldRebase {
                 MethodDelegation
                         .withDefaultConfiguration()
                         .withBinders(
-                                Morph.Binder.install(MyCallable.class)
+                                Morph.Binder.install(HumbleServant.class)
                         )
-                        .to(LazyWorker.class)
+                        .to(HardWorker.class)
         );
 
 
@@ -111,30 +119,30 @@ public class HelloWorldRebase {
 
 ```java
 public class HelloWorld {
-    public String test(String name, int age, Date date) {
-        return LazyWorker.test(new HelloWorld$auxiliary$Morph(this), new Object[]{name, age, date});
+    public String test(String var1, int var2) {
+        return (String)HardWorker.doWork(new HelloWorld$auxiliary$type(this));
     }
 
-    private String test$original$private(String name, int age, Date date) {
-        return String.format("Name: %s, Age: %s, Date: %s", name, age, date);
+    private String test$original$Abc(String name, int age) {
+        return String.format("HelloWorld: %s - %d", name, age);
     }
 
-    final String test$original$private$accessor$final(String name, int age, Date date) {
-        return this.test$original$private(name, age, date);
+    final String test$original$Abc$accessor$Xyz(String var1, int var2) {
+        return this.test$original$Abc(var1, var2);
     }
 }
 ```
 
 ```java
-class HelloWorld$auxiliary$Morph implements MyCallable {
+class HelloWorld$auxiliary$type implements HumbleServant {
     private final HelloWorld target;
 
-    HelloWorld$auxiliary$Morph(HelloWorld target) {
+    HelloWorld$auxiliary$type(HelloWorld target) {
         this.target = target;
     }
-    
-    public Object call(Object[] var1) {
-        return this.target.test$original$private$accessor$final((String)var1[0], (Integer)var1[1], (Date)var1[2]);
+
+    public Object process(Object[] args) {
+        return this.target.test$original$Abc$accessor$Xyz((String)args[0], (Integer)args[1]);
     }
 }
 ```

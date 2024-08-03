@@ -10,7 +10,6 @@ which was inscribed upon the Temple of Apollo in the ancient Greek precinct of D
 ![](/assets/images/thyself/know-thyself-gold.webp)
 {:refdef}
 
-
 ## 戒为良药
 
 <table>

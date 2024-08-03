@@ -63,11 +63,39 @@ Similar to before, the auxiliary type overrides all methods to call their super 
 
 ## 示例
 
+{:refdef: style="text-align: center;"}
+![](/assets/images/bytebuddy/delegation/uml-class-diagram-method-delegation-at-super.png)
+{:refdef}
+
+```text
+@startuml
+'https://plantuml.com/class-diagram
+
+interface ITest {
+    String test(String name, int age);
+}
+class GrandParent implements ITest {}
+class Parent extends GrandParent {}
+
+interface DefaultTest implements ITest {}
+
+class HelloWorld extends Parent implements DefaultTest {}
+
+@enduml
+```
+
+### ITest
+
+```java
+public interface ITest {
+    String test(String name, int age);
+}
+```
 
 ### GrandParent
 
 ```java
-public class GrandParent {
+public class GrandParent implements ITest {
     public String test(String name, int age) {
         return String.format("GrandParent: %s - %d", name, age);
     }
@@ -85,18 +113,20 @@ public class Parent extends GrandParent {
 }
 ```
 
-### ITest
+### DefaultTest
 
 ```java
-public interface ITest {
-    String test(String name, int age);
+public interface DefaultTest {
+    default String test(String name, int age) {
+        return String.format("DefaultTest: %s - %d", name, age);
+    }
 }
 ```
 
 ### HelloWorld
 
 ```java
-public class HelloWorld extends Parent implements ITest {
+public class HelloWorld extends Parent implements DefaultTest {
     @Override
     public String test(String name, int age) {
         return String.format("HelloWorld: %s - %d", name, age);

@@ -1,6 +1,6 @@
 ---
-title: "TypePool"
-sequence: "101"
+title: "TypePool示例"
+sequence: "112"
 ---
 
 ```java
@@ -15,7 +15,8 @@ import java.io.IOException;
 
 public class HelloWorldAnalysis {
     public static void main(String[] args) throws IOException {
-        String jarPath = "C:\\Users\\1\\.m2\\repository\\com\\alibaba\\fastjson\\1.2.37\\fastjson-1.2.37.jar";
+        String jarPath = "C:\\Users\\liusen\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.15.0\\commons-lang3-3.15.0.jar";
+        String className = "org.apache.commons.lang3.StringUtils";
 
         try (
                 ClassFileLocator jarFileLocator = ClassFileLocator.ForJarFile.of(new File(jarPath));
@@ -23,7 +24,7 @@ public class HelloWorldAnalysis {
                 ClassFileLocator compoundLocator = new ClassFileLocator.Compound(jarFileLocator, systemLocator);
         ) {
             TypePool typePool = TypePool.Default.of(compoundLocator);
-            TypeDescription typeDescription = typePool.describe("com.alibaba.fastjson.JSON").resolve();
+            TypeDescription typeDescription = typePool.describe(className).resolve();
 
             System.out.println(typeDescription);
 
@@ -32,7 +33,6 @@ public class HelloWorldAnalysis {
                 System.out.println(field);
             }
         }
-
     }
 }
 ```
@@ -45,13 +45,13 @@ import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.pool.TypePool;
 
 import java.io.File;
+import java.io.IOException;
 
-public class HelloWorldRedefine {
-    public static void main(String[] args) throws Exception {
+public class HelloWorldAnalysis {
+    public static void main(String[] args) throws IOException {
         // 第一步，准备参数
-        String className = "com.alibaba.fastjson.JSON";
-        String jarPath = "C:\\Users\\1\\.m2\\repository\\com\\alibaba\\fastjson\\1.2.37\\fastjson-1.2.37.jar";
-
+        String jarPath = "C:\\Users\\liusen\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.15.0\\commons-lang3-3.15.0.jar";
+        String className = "org.apache.commons.lang3.StringUtils";
 
         try (
                 ClassFileLocator jarFileLocator = ClassFileLocator.ForJarFile.of(new File(jarPath));

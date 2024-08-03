@@ -3,6 +3,15 @@ title: "@SuperMethod"
 sequence: "102"
 ---
 
+## @SuperMethod
+
+@SuperMethod: This annotation can only be used on parameter types that are assignable from Method.
+
+The assigned method is set to be a synthetic accessor method that allows for the invocation of the original code.
+
+Note that using this annotation causes a public accessor to be created for the proxy class
+that allows for the outside invocation of the super method without passing a security manager.
+
 ## 介绍
 
 ```java

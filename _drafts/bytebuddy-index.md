@@ -5,43 +5,7 @@ image: /assets/images/bytebuddy/byte-buddy-cover.png
 
 ByteBuddy is a library for generating Java classes dynamically at run-time.
 
-三个应用场景：
-
-- manually
-- Java agent
-- Build
-
-简而言之，ByteBuddy，或者任何其它技术，都是“易于使用，难以精通”！
-
-代码的编写，“流淌”着一种思路。
-
-- 问题定位：
-    - 字节码修改的问题
-    - 后续处理：
-        - 类加载的问题
-- 本地有 `.class` 会先加载本地的 `.class` 文件
-- 思考的思路是什么
-- 听不懂，没有关系（一次听不懂，没有关系；我会再讲，逐渐熟悉）
-- 有对 jdk 对象增强的例子吗？如：jdk.线程池
-- 在应用的时候发现有的类在 onDiscovery 里监听到，但是 onTransformation 和 onIgnored 里都没有监听到的情况，这是什么原因呢
-- ClassLoader
-    - Bootstrap ClassLoader
-    - Extention ClassLoader
-    - App ClassLoader
-- ClassLoadingStrategy
-- MemberSubstitution
-
-
-
-<table>
-<tr>
-  <th>ByteBuddy 头</th>
-  <th>ByteBuddy 主体</th>
-  <th>ByteBuddy 尾</th>
-</tr>
-</table>
-
-## Episode 01：Class Generation
+## 内容
 
 ### 第一章 基础
 
@@ -170,15 +134,29 @@ sort: "sequence"
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;">Basic</th>
-        <th style="text-align: center;">TypePool</th>
+        <th style="text-align: center;">基础</th>
         <th style="text-align: center;">Description</th>
+        <th style="text-align: center;">TypePool</th>
+        <th style="text-align: center;">匹配</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <td></td>
-        <td></td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/ch03-analysis/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
@@ -194,20 +172,21 @@ sort: "sequence"
     {% endfor %}
 </ol>
         </td>
-    </tr>
-    </tbody>
-</table>
-
-#### 匹配
-
-<table>
-    <thead>
-    <tr>
-        <th style="text-align: center;">匹配</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/ch03-analysis/pool/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
@@ -226,6 +205,7 @@ sort: "sequence"
     </tr>
     </tbody>
 </table>
+
 
 ### 第四章 修改类型
 
@@ -460,39 +440,6 @@ sort: "sequence"
     </tbody>
 </table>
 
-
-### buddy
-
-{%
-assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/buddy/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-
-### dynamic
-
-{%
-assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/dynamic/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-
 ### asm
 
 {%
@@ -543,8 +490,18 @@ sort: "sequence"
 
 - [ ] `AgentBuilder.Transformer` 与 `java.lang.instrument.ClassFileTransformer` 是如何结合到一起的呢？
 
-### 泛型 Generic
+### 泛型和注解
 
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">泛型</th>
+        <th style="text-align: center;">注解</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
 {%
 assign filtered_posts = site.bytebuddy |
 where_exp: "item", "item.path contains 'bytebuddy/generic/'" |
@@ -558,9 +515,8 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
-
-### 注解 Annotation
-
+        </td>
+        <td>
 {%
 assign filtered_posts = site.bytebuddy |
 where_exp: "item", "item.path contains 'bytebuddy/annotation/'" |
@@ -574,11 +530,10 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
-
-## TODO
-
-- net.bytebuddy.dynamic.scaffold.TypeWriter#DUMP_PROPERTY: String DUMP_PROPERTY = "net.bytebuddy.dump"
-- 读取注解 Annotation
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 ## Java Agent
 
