@@ -1,7 +1,61 @@
 ---
-title: "MethodCall"
-sequence: "114"
+title: "MethodCall（调用方法）"
+sequence: "method-call"
 ---
+
+### MethodCall
+
+预期目标：
+
+```java
+public class HelloWorld {
+    public void test() {
+        System.out.println("Hello World");
+    }
+}
+```
+
+编码实现：
+
+```java
+import net.bytebuddy.ByteBuddy;
+import net.bytebuddy.description.modifier.Visibility;
+import net.bytebuddy.dynamic.DynamicType;
+import net.bytebuddy.implementation.MethodCall;
+
+import java.io.PrintStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
+public class HelloWorldSubClass {
+    public static void main(String[] args) throws Exception {
+        // 第一步，准备参数
+        String className = "sample.HelloWorld";
+
+
+        // 第二步，生成类
+        ByteBuddy byteBuddy = new ByteBuddy();
+        DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
+                .modifiers(Visibility.PUBLIC)
+                .name(className);
+
+        Method targetMethod = PrintStream.class.getDeclaredMethod("println", String.class);
+        Field targetField = System.class.getDeclaredField("out");
+
+        builder = builder.defineMethod("test", void.class, Visibility.PUBLIC)
+                .intercept(
+                        MethodCall.invoke(targetMethod)
+                                .onField(targetField)
+                                .with("Hello World")
+                );
+
+
+        // 第三步，输出结果
+        DynamicType.Unloaded<?> unloadedType = builder.make();
+        OutputUtils.save(unloadedType);
+    }
+}
+```
 
 ## MethodCall 的定位
 

@@ -1,6 +1,6 @@
 ---
 title: "ElementMatcher"
-sequence: "109"
+sequence: "102"
 ---
 
 An element matcher is used as a predicate for identifying code elements such as **types**, **methods**, **fields** or **annotations**.

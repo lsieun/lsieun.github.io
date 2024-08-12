@@ -1,6 +1,6 @@
 ---
-title: "StackManipulation"
-sequence: "115"
+title: "StackManipulation（栈操作）"
+sequence: "stack-manipulation"
 ---
 
 Within Byte Buddy, any stack instruction is contained by an implementation of the `StackManipulation` interface.

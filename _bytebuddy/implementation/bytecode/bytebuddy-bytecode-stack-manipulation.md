@@ -1,6 +1,6 @@
 ---
 title: "StackManipulation"
-sequence: "103"
+sequence: "102"
 ---
 
 ```text
@@ -130,4 +130,26 @@ public interface StackManipulation {
 }
 ```
 
+## 具体类
 
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">二次包装</th>
+        <th style="text-align: center;">Opcode</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td></td>
+        <td>
+            <code>DefaultValue</code>
+        </td>
+        <td>
+            <code>MethodReturn</code>
+            <code>NullConstant</code>
+        </td>
+    </tr>
+    </tbody>
+</table>

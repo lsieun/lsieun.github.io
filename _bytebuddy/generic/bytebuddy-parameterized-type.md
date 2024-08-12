@@ -5,7 +5,7 @@ sequence: "103"
 
 ## Concrete Parameterized Type
 
-### 示例一
+### 示例一：List<String>
 
 ```java
 import java.util.List;
@@ -55,7 +55,7 @@ TypeDescription strType = TypeDescription.ForLoadedType.of(String.class);
 TypeDescription.Generic listOfString = TypeDescription.Generic.Builder.parameterizedType(listType, strType).build();
 ```
 
-### 示例二
+### 示例二：List<List<String>>
 
 ```java
 import java.util.List;
@@ -102,7 +102,7 @@ public class HelloWorldGenerate {
 }
 ```
 
-### 示例三
+### 示例三：Map<Integer, Date>
 
 ```java
 import java.util.Date;

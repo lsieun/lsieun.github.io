@@ -1,6 +1,6 @@
 ---
-title: "Implementation"
-sequence: "101"
+title: "Implementation 注意事项"
+sequence: "111"
 ---
 
 Note that Byte Buddy only invokes each `Implementation`'s `prepare` and `appender` methods a single time
@@ -43,6 +43,7 @@ public class HelloWorldSubClass {
                 .withParameters(String.class, int.class)
                 .intercept(methodDelegation); // 第一次使用
 
+        // TODO: 可以生成两次，不知道是哪里出了错误
         builder = builder.defineMethod("test2", String.class, Visibility.PUBLIC)
                 .withParameters(String.class, int.class)
                 .intercept(methodDelegation); // 第二次使用
@@ -56,73 +57,3 @@ public class HelloWorldSubClass {
 ```
 
 
-
-## Implementation
-
-```java
-public interface Implementation extends InstrumentedType.Prepareable {
-    ByteCodeAppender appender(Target implementationTarget);
-}
-```
-
-```java
-public interface InstrumentedType extends TypeDescription {
-    interface Prepareable {
-        InstrumentedType prepare(InstrumentedType instrumentedType);
-    }
-}
-```
-
-## Implementation.Composable
-
-```java
-public interface Implementation extends InstrumentedType.Prepareable {
-    interface Composable extends Implementation {
-        Implementation andThen(Implementation implementation);
-
-        Composable andThen(Composable implementation);
-    }
-}
-```
-
-## Implementation.Target
-
-```java
-public interface Implementation extends InstrumentedType.Prepareable {
-    interface Target {
-        TypeDescription getInstrumentedType();
-        TypeDefinition getOriginType();
-
-        SpecialMethodInvocation invokeSuper(MethodDescription.SignatureToken token);
-        SpecialMethodInvocation invokeDefault(MethodDescription.SignatureToken token);
-        SpecialMethodInvocation invokeDefault(MethodDescription.SignatureToken token, TypeDescription targetType);
-        SpecialMethodInvocation invokeDominant(MethodDescription.SignatureToken token);
-    }
-}
-```
-
-## Implementation.Simple
-
-```java
-public interface Implementation extends InstrumentedType.Prepareable {
-    class Simple implements Implementation {
-        private final ByteCodeAppender byteCodeAppender;
-
-        public Simple(ByteCodeAppender... byteCodeAppender) {
-            this.byteCodeAppender = new ByteCodeAppender.Compound(byteCodeAppender);
-        }
-
-        public Simple(StackManipulation... stackManipulation) {
-            byteCodeAppender = new ByteCodeAppender.Simple(stackManipulation);
-        }
-
-        public InstrumentedType prepare(InstrumentedType instrumentedType) {
-            return instrumentedType;
-        }
-
-        public ByteCodeAppender appender(Target implementationTarget) {
-            return byteCodeAppender;
-        }
-    }
-}
-```

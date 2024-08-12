@@ -1,12 +1,11 @@
 ---
-title: "FixedValue"
-sequence: "101"
+title: "FixedValue（常量值、引用）"
+sequence: "fixed-value"
 ---
 
-`net.bytebuddy.implementation.FixedValue`
+## 介绍
 
-Fixed Value is a utility class provided by ByteBuddy.
-The `FixedValue` provides many convenience methods to create one line method body for the generated Java method.
+The `FixedValue` provides many convenience methods to create **one line method body** for the generated Java method.
 For example, `FixedValue.nullValue()` method creates a method body that returns `null` value.
 
 ```text
@@ -31,21 +30,58 @@ FixedValue ───┤                       ├─── self()
 
 ## 常量
 
-## 方法参数
+### int
 
 预期目标：
 
 ```java
 public class HelloWorld {
-    public Object test(String name, int age) {
-        return name;
+    public int test() {
+        return -1;
     }
 }
 ```
 
+编码实现：
+
+```java
+import net.bytebuddy.ByteBuddy;
+import net.bytebuddy.description.modifier.Visibility;
+import net.bytebuddy.dynamic.DynamicType;
+import net.bytebuddy.implementation.FixedValue;
+
+public class HelloWorldSubClass {
+    public static void main(String[] args) throws Exception {
+        // 第一步，准备参数
+        String className = "sample.HelloWorld";
+
+
+        // 第二步，生成类
+        ByteBuddy byteBuddy = new ByteBuddy();
+        DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
+                .modifiers(Visibility.PUBLIC)
+                .name(className);
+
+        builder = builder.defineMethod("test", int.class, Visibility.PUBLIC)
+                .intercept(FixedValue.value(-1));
+
+
+        // 第三步，输出结果
+        DynamicType.Unloaded<?> unloadedType = builder.make();
+        OutputUtils.save(unloadedType);
+    }
+}
+```
+
+## 方法参数
+
+### int
+
+预期目标：
+
 ```java
 public class HelloWorld {
-    public Object test(String name, int age) {
+    public int test(String name, int age) {
         return age;
     }
 }
@@ -71,7 +107,52 @@ public class HelloWorldSubClass {
                 .modifiers(Visibility.PUBLIC)
                 .name(className);
 
-        builder = builder.defineMethod("test", Object.class, Visibility.PUBLIC)
+        builder = builder.defineMethod("test", int.class, Visibility.PUBLIC)
+                .withParameter(String.class, "name")
+                .withParameter(int.class, "age")
+                .intercept(FixedValue.argument(1));
+
+
+        // 第三步，输出结果
+        DynamicType.Unloaded<?> unloadedType = builder.make();
+        OutputUtils.save(unloadedType);
+    }
+}
+```
+
+### String
+
+预期目标：
+
+```java
+public class HelloWorld {
+    public String test(String name, int age) {
+        return name;
+    }
+}
+```
+
+编码实现：
+
+```java
+import net.bytebuddy.ByteBuddy;
+import net.bytebuddy.description.modifier.Visibility;
+import net.bytebuddy.dynamic.DynamicType;
+import net.bytebuddy.implementation.FixedValue;
+
+public class HelloWorldSubClass {
+    public static void main(String[] args) throws Exception {
+        // 第一步，准备参数
+        String className = "sample.HelloWorld";
+
+
+        // 第二步，生成类
+        ByteBuddy byteBuddy = new ByteBuddy();
+        DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
+                .modifiers(Visibility.PUBLIC)
+                .name(className);
+
+        builder = builder.defineMethod("test", String.class, Visibility.PUBLIC)
                 .withParameter(String.class, "name")
                 .withParameter(int.class, "age")
                 .intercept(FixedValue.argument(0));

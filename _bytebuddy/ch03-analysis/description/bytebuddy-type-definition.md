@@ -43,17 +43,4 @@ public interface TypeDefinition extends NamedElement, ModifierReviewable.ForType
 }
 ```
 
-## TypeDefinition.Sort
 
-```java
-public interface TypeDefinition extends NamedElement, ModifierReviewable.ForTypeDefinition, Iterable<TypeDefinition> {
-    enum Sort {
-        NON_GENERIC,        // non-generic type
-        GENERIC_ARRAY,      // generic array type
-        PARAMETERIZED,      // parameterized type
-        WILDCARD,           // wildcard type
-        VARIABLE,           // type variable that is attached to a TypeVariableSource
-        VARIABLE_SYMBOLIC;  // type variable that is merely symbolic and is not attached to a TypeVariableSource
-    }
-}
-```

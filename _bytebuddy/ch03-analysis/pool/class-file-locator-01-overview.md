@@ -40,10 +40,14 @@ public interface ClassFileLocator extends Closeable {
 `ClassFileLocator` 有不同的实现：
 
 {:refdef: style="text-align: center;"}
-![](/assets/images/bytebuddy/class-file-locator-related-classes.png)
+![](/assets/images/bytebuddy/pool/bytebuddy-class-file-locator-overview.png)
 {:refdef}
 
+
+
 ### 分类
+
+TODO: 这里缺少了 Filtering
 
 ```text
                                      ┌─── none ──────────┼─── NoOp

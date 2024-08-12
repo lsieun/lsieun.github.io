@@ -1,6 +1,6 @@
 ---
-title: "DefaultMethodCall"
-sequence: "115"
+title: "DefaultMethodCall（调用接口默认方法）"
+sequence: "default-method-call"
 ---
 
 With its version 8 release, the Java programming language introduced **default methods for interfaces**.

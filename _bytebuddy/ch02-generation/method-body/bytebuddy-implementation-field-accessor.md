@@ -1,6 +1,6 @@
 ---
-title: "FieldAccessor"
-sequence: "113"
+title: "FieldAccessor（字段方法）"
+sequence: "field-accessor"
 ---
 
 TODO:
@@ -9,6 +9,66 @@ TODO:
     - 作为返回值
     - 存放到其它局部变量
     - 保存到类里的某个字段上
+
+### 字段值 -FieldAccessor
+
+To create the **method body** of the getter method, the `FieldAccessor` is used.
+
+预期目标：
+
+```java
+public class HelloWorld {
+    private String name;
+
+    protected String getName() {
+        return this.name;
+    }
+
+    protected void setName(String str) {
+        this.name = str;
+    }
+}
+```
+
+编码实现：
+
+```java
+import net.bytebuddy.ByteBuddy;
+import net.bytebuddy.description.modifier.Visibility;
+import net.bytebuddy.dynamic.DynamicType;
+import net.bytebuddy.implementation.FieldAccessor;
+
+public class HelloWorldSubClass {
+    public static void main(String[] args) throws Exception {
+        // 第一步，准备参数
+        String className = "sample.HelloWorld";
+
+
+        // 第二步，生成类
+        ByteBuddy byteBuddy = new ByteBuddy();
+        DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
+                .modifiers(Visibility.PUBLIC)
+                .name(className);
+
+        builder = builder.defineField("name", String.class, Visibility.PRIVATE);
+
+        builder = builder.defineMethod("getName", String.class, Visibility.PROTECTED)
+                .intercept(
+                        FieldAccessor.ofField("name")
+                )
+                .defineMethod("setName", void.class, Visibility.PROTECTED)
+                .withParameter(String.class, "str")
+                .intercept(
+                        FieldAccessor.ofField("name")
+                );
+
+
+        // 第三步，输出结果
+        DynamicType.Unloaded<?> unloadedType = builder.make();
+        OutputUtils.save(unloadedType);
+    }
+}
+```
 
 Using the `FieldAccessor`, it is possible to implement a method to read or to write a field value.
 

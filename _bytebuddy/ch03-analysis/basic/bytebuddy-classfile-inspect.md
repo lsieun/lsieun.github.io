@@ -191,13 +191,7 @@ public class HelloWorldAnalysis {
 
 ## 字段
 
-```java
-public class HelloWorld {
 
-    private String name;
-    private int age;
-}
-```
 
 ```java
 import net.bytebuddy.description.field.FieldDescription;
@@ -221,12 +215,41 @@ public class HelloWorldAnalysis {
         for (int i = 0; i < size; i++) {
             FieldDescription fd = fields.get(i);
             String fieldName = fd.getName();
-            TypeDescription.Generic fieldType = fd.getType();
-            String info = String.format("%s: %s", fieldName, fieldType.getTypeName());
-            System.out.println(info);
+            String internalName = fd.getInternalName();
+            String descriptor = fd.getDescriptor();
+            String typeName = fd.getType().getTypeName();
+
+            String[][] matrix = {
+                    {"getName()", "getInternalName()", "getDescriptor()", "getType().getTypeName()"},
+                    {fieldName, internalName, descriptor, typeName}
+            };
+
+            TableUtils.printTable(matrix, TableType.ONE_LINE);
         }
     }
 }
+```
+
+```java
+public class HelloWorld {
+
+    private String name;
+    private int age;
+}
+```
+
+```text
+┌───────────┬───────────────────┬────────────────────┬─────────────────────────┐
+│ getName() │ getInternalName() │  getDescriptor()   │ getType().getTypeName() │
+├───────────┼───────────────────┼────────────────────┼─────────────────────────┤
+│   name    │       name        │ Ljava/lang/String; │    java.lang.String     │
+└───────────┴───────────────────┴────────────────────┴─────────────────────────┘
+
+┌───────────┬───────────────────┬─────────────────┬─────────────────────────┐
+│ getName() │ getInternalName() │ getDescriptor() │ getType().getTypeName() │
+├───────────┼───────────────────┼─────────────────┼─────────────────────────┤
+│    age    │        age        │        I        │           int           │
+└───────────┴───────────────────┴─────────────────┴─────────────────────────┘
 ```
 
 ## 方法
@@ -234,8 +257,20 @@ public class HelloWorldAnalysis {
 ```java
 public class HelloWorld {
 
+    public HelloWorld() {
+        System.out.println("Hello Constructor");
+    }
+
+    static {
+        System.out.println("Hello Static Initializer");
+    }
+
     public String test(String name, int age) {
         return String.format("HelloWorld: %s - %s", name, age);
+    }
+
+    static void foo() {
+        System.out.println("Hello static method");
     }
 }
 ```
@@ -243,8 +278,8 @@ public class HelloWorld {
 ```java
 import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.description.method.MethodList;
-import net.bytebuddy.description.method.ParameterDescription;
 import net.bytebuddy.description.method.ParameterList;
+import net.bytebuddy.description.type.TypeDefinition;
 import net.bytebuddy.description.type.TypeDescription;
 import sample.HelloWorld;
 
@@ -263,27 +298,59 @@ public class HelloWorldAnalysis {
         // 第 3 步，查看 MethodDescription 的详细信息
         for (int i = 0; i < size; i++) {
             MethodDescription md = methods.get(i);
+
+            // 类层面
+            TypeDefinition declaringType = md.getDeclaringType();
+            TypeDescription.Generic receiverType = md.getReceiverType();
+
+            // 方法头
             String methodName = md.getName();
+            String internalName = md.getInternalName();
             TypeDescription.Generic returnType = md.getReturnType();
             ParameterList<?> parameters = md.getParameters();
 
+            // 打印
+            String[][] matrix = {
+                    {
+                            "getDeclaringType()",
+                            "getReceiverType()",
+                            "getName()",
+                            "getInternalName()",
+                            "getReturnType()",
+                            "getParameters()"
+                    },
+                    {
+                            declaringType.toString(),
+                            String.valueOf(receiverType),
+                            methodName,
+                            internalName,
+                            String.valueOf(returnType),
+                            String.valueOf(parameters),
+                    },
+            };
 
-            String info = String.format("%s: %s", methodName, returnType.getTypeName());
-            System.out.println(info);
-            for (ParameterDescription pd : parameters) {
-                String paramName = pd.getName();
-                TypeDescription.Generic paramType = pd.getType();
-                String paramInfo = String.format("    %s: %s", paramName, paramType);
-                System.out.println(paramInfo);
-            }
+            TableUtils.printTable(matrix, TableType.ONE_LINE);
         }
     }
 }
 ```
 
 ```text
-sample.HelloWorld: void
-test: java.lang.String
-    arg0: class java.lang.String
-    arg1: int
+┌─────────────────────────┬─────────────────────────┬───────────────────┬───────────────────┬─────────────────┬─────────────────┐
+│   getDeclaringType()    │    getReceiverType()    │     getName()     │ getInternalName() │ getReturnType() │ getParameters() │
+├─────────────────────────┼─────────────────────────┼───────────────────┼───────────────────┼─────────────────┼─────────────────┤
+│ class sample.HelloWorld │ class sample.HelloWorld │ sample.HelloWorld │      <init>       │      void       │       []        │
+└─────────────────────────┴─────────────────────────┴───────────────────┴───────────────────┴─────────────────┴─────────────────┘
+
+┌─────────────────────────┬─────────────────────────┬───────────┬───────────────────┬────────────────────────┬───────────────────────────────────┐
+│   getDeclaringType()    │    getReceiverType()    │ getName() │ getInternalName() │    getReturnType()     │          getParameters()          │
+├─────────────────────────┼─────────────────────────┼───────────┼───────────────────┼────────────────────────┼───────────────────────────────────┤
+│ class sample.HelloWorld │ class sample.HelloWorld │   test    │       test        │ class java.lang.String │ [java.lang.String arg0, int arg1] │
+└─────────────────────────┴─────────────────────────┴───────────┴───────────────────┴────────────────────────┴───────────────────────────────────┘
+
+┌─────────────────────────┬───────────────────┬───────────┬───────────────────┬─────────────────┬─────────────────┐
+│   getDeclaringType()    │ getReceiverType() │ getName() │ getInternalName() │ getReturnType() │ getParameters() │
+├─────────────────────────┼───────────────────┼───────────┼───────────────────┼─────────────────┼─────────────────┤
+│ class sample.HelloWorld │       null        │    foo    │        foo        │      void       │       []        │
+└─────────────────────────┴───────────────────┴───────────┴───────────────────┴─────────────────┴─────────────────┘
 ```

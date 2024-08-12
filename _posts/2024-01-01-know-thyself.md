@@ -12,6 +12,8 @@ which was inscribed upon the Temple of Apollo in the ancient Greek precinct of D
 
 ## 戒为良药
 
+- abstention: 戒；戒除 the act of not allowing yourself to have or do sth enjoyable or sth that is considered bad
+
 <table>
     <thead>
     <tr>
@@ -71,7 +73,7 @@ sort: "sequence"
     </tbody>
 </table>
 
-## 为人
+## 长大为人
 
 <table>
     <thead>
@@ -116,6 +118,50 @@ sort: "sequence"
     </tbody>
 </table>
 
+## 人生修行
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">学说/教导</th>
+        <th style="text-align: center;">看法/理解/洞察力</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/cultivation/teaching/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/cultivation/perception/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 ## Reference
 
