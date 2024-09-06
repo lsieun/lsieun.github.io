@@ -27,6 +27,11 @@ public class Program {
 }
 ```
 
+```text
+Mirror mirror on the wall.
+Who is the most beautiful woman in the world?
+```
+
 ## Agent
 
 ### pom.xml
@@ -47,7 +52,7 @@ public class Program {
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <byte.buddy.version>1.14.5</byte.buddy.version>
+        <byte.buddy.version>1.14.18</byte.buddy.version>
     </properties>
 
     <dependencies>
@@ -177,4 +182,29 @@ public class LazyWorker {
         System.out.println("===  after ===");
     }
 }
+```
+
+## 运行
+
+### 打包
+
+```text
+mvn clean package
+```
+
+### 运行
+
+来到 `target` 目录：
+
+```text
+> java sample.Program
+Mirror mirror on the wall.
+Who is the most beautiful woman in the world?
+
+> java -javaagent:../learn-byte-buddy-agent-1.0-SNAPSHOT-jar-with-dependencies.jar sample.Program
+processing Class sample.HelloWorld
+=== before ===
+Mirror mirror on the wall.
+Who is the most beautiful woman in the world?
+===  after ===
 ```

@@ -273,6 +273,24 @@ public class HelloWorld<@MyTag T> {
 }
 ```
 
+#### TYPE_USE
+
+```java
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
+
+@Target(ElementType.TYPE_USE)
+public @interface Bar {
+}
+```
+
+```java
+public class Foo<T> {
+    void foo(Foo<@Bar T>this) {
+    }
+}
+```
+
 ## Retention Annotation
 
 You can use annotations for different purposes.

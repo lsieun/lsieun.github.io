@@ -5,15 +5,109 @@ image: /assets/images/bytebuddy/byte-buddy-cover.png
 
 ByteBuddy is a library for generating Java classes dynamically at run-time.
 
-## 内容
+## API
 
-### 第一章 基础
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">Extra</th>
+        <th style="text-align: center;">Implementation</th>
+        <th style="text-align: center;">ASM</th>
+        <th style="text-align: center;">scaffold</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/extra/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/implementation/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/asm/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/scaffold/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+## 系列一：基本篇
+
+### 第一章 入门
 
 <table>
     <thead>
     <tr>
         <th style="text-align: center;">快速开始</th>
         <th style="text-align: center;">核心概念</th>
+        <th style="text-align: center;">配置</th>
         <th style="text-align: center;">扩展概念</th>
     </tr>
     </thead>
@@ -22,7 +116,7 @@ ByteBuddy is a library for generating Java classes dynamically at run-time.
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch01/basic/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch01/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -37,7 +131,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch01/concept/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch01/concept/'" |
 sort: "sequence"
 %}
 <ol>
@@ -52,7 +146,22 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch01/other/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch01/config/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch01/other/'" |
 sort: "sequence"
 %}
 <ol>
@@ -83,7 +192,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch02-generation/clazz/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch02-generation/clazz/'" |
 sort: "sequence"
 %}
 <ol>
@@ -98,7 +207,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch02-generation/method-body/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch02-generation/implementation/'" |
 sort: "sequence"
 %}
 <ol>
@@ -113,7 +222,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch02-generation/types/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch02-generation/types/'" |
 sort: "sequence"
 %}
 <ol>
@@ -145,7 +254,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch03-analysis/basic/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch03-analysis/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -160,7 +269,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch03-analysis/description/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch03-analysis/description/'" |
 sort: "sequence"
 %}
 <ol>
@@ -175,7 +284,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch03-analysis/pool/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch03-analysis/pool/'" |
 sort: "sequence"
 %}
 <ol>
@@ -190,7 +299,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch03-analysis/match/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch03-analysis/match/'" |
 sort: "sequence"
 %}
 <ol>
@@ -222,7 +331,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/basic/concept/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/basic/concept/'" |
 sort: "sequence"
 %}
 <ol>
@@ -237,7 +346,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/basic/other/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/basic/other/'" |
 sort: "sequence"
 %}
 <ol>
@@ -252,6 +361,8 @@ sort: "sequence"
     </tr>
     </tbody>
 </table>
+
+
 
 #### Advice
 
@@ -270,7 +381,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/advice/basic/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/advice/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -285,7 +396,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/advice/annotation/outer/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/advice/annotation/outer/'" |
 sort: "sequence"
 %}
 <ol>
@@ -300,7 +411,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/advice/annotation/method/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/advice/annotation/method/'" |
 sort: "sequence"
 %}
 <ol>
@@ -315,7 +426,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/advice/annotation/local/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/advice/annotation/local/'" |
 sort: "sequence"
 %}
 <ol>
@@ -330,7 +441,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/advice/annotation/other/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/advice/annotation/other/'" |
 sort: "sequence"
 %}
 <ol>
@@ -363,7 +474,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/delegation/basic/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/delegation/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -378,7 +489,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/delegation/annotation1/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/delegation/annotation1/'" |
 sort: "sequence"
 %}
 <ol>
@@ -393,7 +504,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/delegation/annotation2/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/delegation/annotation2/'" |
 sort: "sequence"
 %}
 <ol>
@@ -408,7 +519,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/delegation/annotation3/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/delegation/annotation3/'" |
 sort: "sequence"
 %}
 <ol>
@@ -423,7 +534,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/delegation/other/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/delegation/other/'" |
 sort: "sequence"
 %}
 <ol>
@@ -452,7 +563,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/ch04-transform/asm/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/asm/'" |
 sort: "sequence"
 %}
 <ol>
@@ -468,9 +579,117 @@ sort: "sequence"
     </tbody>
 </table>
 
+## 系列二：专题篇
 
+### 注解
 
-### Agent
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">注解</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/theme/annotation/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+### 泛型
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">泛型</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/theme/generic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+### ByteCode
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">instruction</th>
+        <th style="text-align: center;">opcode</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/theme/bytecode/instruction/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/theme/bytecode/opcode/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+## 系列三：Agent篇
+
+For the creation of Java agents, Byte Buddy offers a convenience API implemented by
+the `net.bytebuddy.agent.builder.AgentBuilder`.
+The API wraps a `ByteBuddy` instance and offers agent-specific configuration opportunities by integrating against the
+instrument.Instrumentation API.
 
 {%
 assign filtered_posts = site.bytebuddy |
@@ -488,52 +707,7 @@ sort: "sequence"
 
 - [ ] `AgentBuilder.Transformer` 与 `java.lang.instrument.ClassFileTransformer` 是如何结合到一起的呢？
 
-### 泛型和注解
-
-<table>
-    <thead>
-    <tr>
-        <th style="text-align: center;">泛型</th>
-        <th style="text-align: center;">注解</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>
-{%
-assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/generic/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-        <td>
-{%
-assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/annotation/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-## 源码
+## 系列四：源码篇
 
 ### Implementation
 
@@ -550,7 +724,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/implementation/overview/'" |
+where_exp: "item", "item.path contains 'bytebuddy/src/implementation/overview/'" |
 sort: "sequence"
 %}
 <ol>
@@ -565,7 +739,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/implementation/basic/'" |
+where_exp: "item", "item.path contains 'bytebuddy/src/implementation/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -580,7 +754,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/implementation/bytecode/'" |
+where_exp: "item", "item.path contains 'bytebuddy/src/implementation/bytecode/'" |
 sort: "sequence"
 %}
 <ol>
@@ -595,13 +769,6 @@ sort: "sequence"
     </tr>
     </tbody>
 </table>
-
-## Java Agent
-
-For the creation of Java agents, Byte Buddy offers a convenience API implemented by
-the `net.bytebuddy.agent.builder.AgentBuilder`.
-The API wraps a `ByteBuddy` instance and offers agent-specific configuration opportunities by integrating against the
-instrument.Instrumentation API.
 
 ## Reference
 
@@ -658,3 +825,4 @@ Spring Boot
 
 - [Instrumentation of Spring Boot application with Byte Buddy](https://medium.com/@jakubhal/instrumentation-of-spring-boot-application-with-byte-buddy-bbd28619b7c)
 - [用 Byte Buddy 於執行期生成程式碼](https://medium.com/java-magazine-translation/%E7%94%A8-byte-buddy-%E6%96%BC%E5%9F%B7%E8%A1%8C%E6%9C%9F%E7%94%9F%E6%88%90%E7%A8%8B%E5%BC%8F%E7%A2%BC-50055bb48e2c)
+

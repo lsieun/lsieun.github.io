@@ -1,11 +1,28 @@
-
 三个应用场景：
 
 - manually
 - Java agent
 - Build
 
-
+- [x] MethodDescription
+    - [x] CONSTRUCTOR_INTERNAL_NAME
+    - [x] TYPE_INITIALIZER_INTERNAL_NAME
+- [x] LoadedTypeInitializers
+- [x] 项目目录介绍
+- [ ] AuxiliaryType
+- [ ] Implementation
+  - [ ] 有哪些子类
+  - [ ] Implementation.Target 是什么？
+- [ ] JavaConstant
+- [ ] TypeProxy implements AuxiliaryType
+- [ ] TypeResolutionStrategy <-- DynamicType.Builder
+- [ ] TypeWriter
+- [ ] DynamicType.Builder.make(TypeResolutionStrategy.Passive.INSTANCE)
+- MethodGraph 和 MethodLocator
+- MethodCall
+- Agent 文章整理
+- [x] net.bytebuddy.asm.Advice.WithCustomMapping
+- ClassLoadingStrategy.BOOTSTRAP_LOADER
 
 简而言之，ByteBuddy，或者任何其它技术，都是“易于使用，难以精通”！
 
@@ -26,6 +43,7 @@
     - App ClassLoader
 - ClassLoadingStrategy
 - MemberSubstitution
+
 
 - MethodDelegationBinder 和 TargetMethodAnnotationDrivenBinder 是进行方法绑定时的概念，需要解决清楚
 
