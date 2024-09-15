@@ -6,7 +6,7 @@ tags: java asm
 published: true
 ---
 
-[上级目录]({% link _posts/2021-06-01-java-asm.md %})
+[上级目录]({% link _posts/2021-06-01-java-asm-index.md %})
 
 ASM is an open-source java library for manipulating bytecode.（艰难挣扎中 ...）
 
@@ -38,52 +38,15 @@ it is up to the user to modify these other classes.
 
 ## 类层面
 
-{%
-assign filtered_posts = site.java-asm-04 |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    {% if num > 100 and num < 200 %}
-    <li>
-        <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
-    </li>
-    {% endif %}
-    {% endfor %}
-</ol>
+
 
 ## 方法层面
 
-{%
-assign filtered_posts = site.java-asm-04 |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    {% if num > 200 and num < 300 %}
-    <li>
-        <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
-    </li>
-    {% endif %}
-    {% endfor %}
-</ol>
+
 
 ## All
 
-{%
-assign filtered_posts = site.java-asm-04 |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
+
 
 ## References
 

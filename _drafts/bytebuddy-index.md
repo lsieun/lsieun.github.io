@@ -5,6 +5,10 @@ image: /assets/images/bytebuddy/byte-buddy-cover.png
 
 ByteBuddy is a library for generating Java classes dynamically at run-time.
 
+{:refdef: style="text-align: center;"}
+![](/assets/images/bytebuddy/bytebuddy-overview.png)
+{:refdef}
+
 ## API
 
 <table>
@@ -13,6 +17,7 @@ ByteBuddy is a library for generating Java classes dynamically at run-time.
         <th style="text-align: center;">Basic</th>
         <th style="text-align: center;">Extra</th>
         <th style="text-align: center;">Implementation</th>
+        <th style="text-align: center;">Operand Stack</th>
         <th style="text-align: center;">ASM</th>
         <th style="text-align: center;">scaffold</th>
     </tr>
@@ -67,6 +72,21 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/operand-stack/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
 where_exp: "item", "item.path contains 'bytebuddy/api/asm/'" |
 sort: "sequence"
 %}
@@ -98,6 +118,81 @@ sort: "sequence"
     </tbody>
 </table>
 
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Description::Basic</th>
+        <th style="text-align: center;">Description::Type</th>
+        <th style="text-align: center;">Description::Member</th>
+        <th style="text-align: center;">Description::Other</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/description/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/description/type/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/description/member/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/description/other/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 ## 系列一：基本篇
 
 ### 第一章 入门
@@ -107,8 +202,9 @@ sort: "sequence"
     <tr>
         <th style="text-align: center;">快速开始</th>
         <th style="text-align: center;">核心概念</th>
-        <th style="text-align: center;">配置</th>
-        <th style="text-align: center;">扩展概念</th>
+        <th style="text-align: center;">ByteBuddy配置</th>
+        <th style="text-align: center;">DynamicType配置</th>
+        <th style="text-align: center;">其它</th>
     </tr>
     </thead>
     <tbody>
@@ -161,6 +257,21 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch01/dynamic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
 where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch01/other/'" |
 sort: "sequence"
 %}
@@ -182,9 +293,10 @@ sort: "sequence"
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;">类</th>
-        <th style="text-align: center;">方法体</th>
-        <th style="text-align: center;">其它类型</th>
+        <th style="text-align: center;">生成类</th>
+        <th style="text-align: center;">生成方法体</th>
+        <th style="text-align: center;">常用语句</th>
+        <th style="text-align: center;">生成其它类型</th>
     </tr>
     </thead>
     <tbody>
@@ -208,6 +320,21 @@ sort: "sequence"
 {%
 assign filtered_posts = site.bytebuddy |
 where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch02-generation/implementation/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch02-generation/common/'" |
 sort: "sequence"
 %}
 <ol>
@@ -331,7 +458,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/basic/concept/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -346,7 +473,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/basic/other/'" |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/asm/'" |
 sort: "sequence"
 %}
 <ol>
@@ -550,12 +677,18 @@ sort: "sequence"
     </tbody>
 </table>
 
-#### ASM
+## 系列二：专题篇
+
+### 注解
 
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;">ASM</th>
+        <th style="text-align: center;">注解::基本</th>
+        <th style="text-align: center;">注解::读取</th>
+        <th style="text-align: center;">注解::创建</th>
+        <th style="text-align: center;">注解::修改</th>
+        <th style="text-align: center;">注解::其他</th>
     </tr>
     </thead>
     <tbody>
@@ -563,7 +696,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/asm/'" |
+where_exp: "item", "item.path contains 'bytebuddy/theme/annotation/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -575,26 +708,55 @@ sort: "sequence"
     {% endfor %}
 </ol>
         </td>
-    </tr>
-    </tbody>
-</table>
-
-## 系列二：专题篇
-
-### 注解
-
-<table>
-    <thead>
-    <tr>
-        <th style="text-align: center;">注解</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/theme/annotation/'" |
+where_exp: "item", "item.path contains 'bytebuddy/theme/annotation/read/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/theme/annotation/create/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/theme/annotation/modify/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/theme/annotation/other/'" |
 sort: "sequence"
 %}
 <ol>
@@ -616,6 +778,8 @@ sort: "sequence"
     <thead>
     <tr>
         <th style="text-align: center;">泛型</th>
+        <th style="text-align: center;">泛型::读取</th>
+        <th style="text-align: center;">泛型::生成</th>
     </tr>
     </thead>
     <tbody>
@@ -623,7 +787,37 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/theme/generic/'" |
+where_exp: "item", "item.path contains 'bytebuddy/theme/generic/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/theme/generic/read/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/theme/generic/create/'" |
 sort: "sequence"
 %}
 <ol>
@@ -638,6 +832,10 @@ sort: "sequence"
     </tr>
     </tbody>
 </table>
+
+### 属性
+
+
 
 ### ByteCode
 

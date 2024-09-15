@@ -3,6 +3,14 @@ title: "学习代码"
 sequence: "103"
 ---
 
+## 依赖
+
+```text
+box-drawing-utils
+```
+
+## 代码目录结构
+
 ```text
 run
 ├─── buddy --> 使用 ByteBuddy 生成类

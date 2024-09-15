@@ -4,7 +4,8 @@ image: /assets/images/java/feature/java-feature-cover.jpg
 permalink: /java-feature.html
 ---
 
-Java Feature
+A takeaway line might be this: **languages need to evolve to track changing hardware or programmer expectations.**
+To endure, Java has to evolve by adding new features.
 
 ## Basic
 

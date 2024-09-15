@@ -6,7 +6,7 @@ tags: java asm
 published: true
 ---
 
-[上级目录]({% link _posts/2021-06-01-java-asm.md %})
+[上级目录]({% link _posts/2021-06-01-java-asm-index.md %})
 
 对于《Java ASM 系列二：OPCODE》有配套的视频讲解，可以点击[这里](https://edu.51cto.com/course/28870.html) 和[这里](https://space.bilibili.com/1321054247/channel/seriesdetail?sid=381716&ctype=0) 进行查看；同时，也可以从[Gitee](https://gitee.com/lsieun/learn-java-asm) 或[Github](https://github.com/lsieun/learn-java-asm) 下载源代码。
 
@@ -17,56 +17,17 @@ published: true
 
 ### 第一章 基础
 
-{%
-assign filtered_posts = site.java-asm-02 |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    {% if num > 100 and num < 200 %}
-    <li>
-        <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
-    </li>
-    {% endif %}
-    {% endfor %}
-</ol>
+
 
 ### 第二章 OPCODE
 
 在 JVM 文档中，一共定义了 205 个[opcode](/static/java/opcode.html)，内容比较多，我们可以根据自己的兴趣进行有选择性的学习。在下面文章的标题后面都带有 `(m/n/sum)` 标识，其中，`m` 表示当前文章当中介绍多少个 opcode，`n` 表示到目前为止介绍了多少个 opcode，`sum` 表示一共有多少个 opcode。
 
-{%
-assign filtered_posts = site.java-asm-02 |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    {% if num > 200 and num < 300 %}
-    <li>
-        <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
-    </li>
-    {% endif %}
-    {% endfor %}
-</ol>
+
 
 ### 第三章 难点解析
 
-{%
-assign filtered_posts = site.java-asm-02 |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    {% if num > 300 and num < 400 %}
-    <li>
-        <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
-    </li>
-    {% endif %}
-    {% endfor %}
-</ol>
+
 
 
 ## 参考资料

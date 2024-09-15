@@ -6,7 +6,7 @@ tags: java asm
 published: true
 ---
 
-[上级目录]({% link _posts/2021-06-01-java-asm.md %})
+[上级目录]({% link _posts/2021-06-01-java-asm-index.md %})
 
 先占位置，文章还没有写。（遥遥无期）
 

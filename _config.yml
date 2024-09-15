@@ -116,23 +116,14 @@ collections:
     output: true
   java:
     output: true
+    permalink: /:collection/:name:output_ext
   javassist:
     output: true
   java-agent:
     output: true
   java-asm:
     output: true
-    permalink: /java/asm/:path:output_ext
-  java-asm-01:
-    output: true
-  java-asm-02:
-    output: true
-  java-asm-03:
-    output: true
-  java-asm-04:
-    output: true
-  java-asm-05:
-    output: true
+    permalink: /:collection/:name:output_ext
   java-core:
     output: true
   java-fx:
@@ -158,6 +149,8 @@ collections:
   k8s:
     output: true
   kafka:
+    output: true
+  law:
     output: true
   libgdx:
     output: true
@@ -453,31 +446,6 @@ defaults:
       layout: "post"
   - scope:
       path: ""
-      type: "java-asm-01"
-    values:
-      layout: "post"
-  - scope:
-      path: ""
-      type: "java-asm-02"
-    values:
-      layout: "post"
-  - scope:
-      path: ""
-      type: "java-asm-03"
-    values:
-      layout: "post"
-  - scope:
-      path: ""
-      type: "java-asm-04"
-    values:
-      layout: "post"
-  - scope:
-      path: ""
-      type: "java-asm-05"
-    values:
-      layout: "post"
-  - scope:
-      path: ""
       type: "java-core"
     values:
       layout: "post"
@@ -539,6 +507,11 @@ defaults:
   - scope:
       path: ""
       type: "kafka"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "law"
     values:
       layout: "post"
   - scope:

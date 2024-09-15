@@ -9,15 +9,24 @@
     - [x] TYPE_INITIALIZER_INTERNAL_NAME
 - [x] LoadedTypeInitializers
 - [x] 项目目录介绍
+- [x] 依赖 box-drawing-utils
+- [x] isVisible 和 isAccessible()
+- [x] 实现打印语句
+- [ ] InvokeDynamic
+- [ ] 使用 ASM 自动生成 ByteBuddy 的代码
 - [ ] AuxiliaryType
 - [ ] Implementation
   - [ ] 有哪些子类
   - [ ] Implementation.Target 是什么？
+  - [ ] SubclassImplementationTarget
+  - [ ] RebaseImplementationTarget
 - [ ] JavaConstant
 - [ ] TypeProxy implements AuxiliaryType
 - [ ] TypeResolutionStrategy <-- DynamicType.Builder
 - [ ] TypeWriter
 - [ ] DynamicType.Builder.make(TypeResolutionStrategy.Passive.INSTANCE)
+- [ ] SubclassDynamicTypeBuilder
+- [ ] 
 - MethodGraph 和 MethodLocator
 - MethodCall
 - Agent 文章整理

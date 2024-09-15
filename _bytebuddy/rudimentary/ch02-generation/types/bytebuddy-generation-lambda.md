@@ -9,7 +9,7 @@ sequence: "111"
 import java.util.function.Consumer;
 
 public class HelloWorld {
-    public Consumer test() {
+    public Consumer<String> test() {
         return GoodChild::study;
     }
 }
@@ -25,9 +25,13 @@ public class GoodChild {
 
 ```java
 import net.bytebuddy.ByteBuddy;
+import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.description.modifier.Visibility;
+import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.implementation.InvokeDynamic;
+import net.bytebuddy.matcher.ElementMatchers;
+
 
 import java.util.function.Consumer;
 
@@ -43,11 +47,20 @@ public class HelloWorldGenerate {
                 .modifiers(Visibility.PUBLIC)
                 .name(className);
 
-        builder = builder.defineMethod("test", Consumer.class, Visibility.PUBLIC)
+
+        TypeDescription.Generic generic = TypeDescription.Generic.Builder
+                .parameterizedType(Consumer.class, String.class)
+                .build();
+        MethodDescription.InDefinedShape implMethod = TypeDescription.ForLoadedType.of(GoodChild.class)
+                .getDeclaredMethods()
+                .filter(ElementMatchers.named("study"))
+                .getOnly();
+
+        builder = builder.defineMethod("test", generic, Visibility.PUBLIC)
                 .intercept(
                         InvokeDynamic.lambda(
-                                GoodChild.class.getDeclaredMethod("study", String.class),
-                                Consumer.class
+                                implMethod,
+                                generic
                         )
                 );
 

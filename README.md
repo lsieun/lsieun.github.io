@@ -58,6 +58,42 @@ bundle exec jekyll serve --unpublished --drafts
 </table>
 ```
 
+根据 `item.path` 划分目录：
+
+```text
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+```
+
+根据 `item.url` 划分目录：
+
+```text
+{%
+assign filtered_posts = site.java-theme |
+where_exp: "item", "item.url contains '/java-theme/lambda/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+```
+
 ## 课程更新
 
 - [ ] Git仓库的README文件

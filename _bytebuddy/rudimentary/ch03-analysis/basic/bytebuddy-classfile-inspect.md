@@ -65,9 +65,7 @@ public class HelloWorldAnalysis {
 
 ### 修饰符信息
 
-{:refdef: style="text-align: center;"}
-![](/assets/images/bytebuddy/description/modifier-reviewable-for-type-definition.png)
-{:refdef}
+
 
 ```java
 import net.bytebuddy.description.type.TypeDescription;

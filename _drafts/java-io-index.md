@@ -6,7 +6,15 @@ permalink: /java-io.html
 
 Java IO
 
-## 控制台
+## API
+
+### OIO
+
+### NIO
+
+## 专题
+
+### 控制台
 
 <table>
     <thead>
@@ -20,7 +28,7 @@ Java IO
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/io/console/in/'" |
+where_exp: "item", "item.path contains 'java/io/console/in/'" |
 sort: "sequence"
 %}
 <ol>
@@ -35,7 +43,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/io/console/out/'" |
+where_exp: "item", "item.path contains 'java/io/console/out/'" |
 sort: "sequence"
 %}
 <ol>
@@ -51,11 +59,69 @@ sort: "sequence"
     </tbody>
 </table>
 
-{:refdef: style="text-align: center;"}
-![](/assets/images/java/io/java-basic-input-output.png)
-{:refdef}
 
-## 文件系统
+### 文件
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">文件::基础</th>
+        <th style="text-align: center;">文件::内容</th>
+        <th style="text-align: center;">文件::属性</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.java |
+where_exp: "item", "item.path contains 'java/io/file/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.java |
+where_exp: "item", "item.path contains 'java/io/file/content/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.java |
+where_exp: "item", "item.path contains 'java/io/file/attribute/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+### 文件系统
 
 <table>
     <thead>
@@ -69,7 +135,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/io/filesystem/directory/'" |
+where_exp: "item", "item.path contains 'java/io/filesystem/directory/'" |
 sort: "sequence"
 %}
 <ol>
@@ -84,7 +150,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/io/filesystem/file/'" |
+where_exp: "item", "item.path contains 'java/io/filesystem/file/'" |
 sort: "sequence"
 %}
 <ol>
@@ -100,16 +166,7 @@ sort: "sequence"
     </tbody>
 </table>
 
-## 文件内容
-
-{:refdef: style="text-align: center;"}
-![](/assets/images/java/io/types-of-java-io-streams.png)
-{:refdef}
-
-
-## 数据传输
-
-
+### 数据流
 
 ## Reference
 

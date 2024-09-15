@@ -6,7 +6,7 @@ tags: java asm
 published: true
 ---
 
-[上级目录]({% link _posts/2021-06-01-java-asm.md %})
+[上级目录]({% link _posts/2021-06-01-java-asm-index.md %})
 
 对于《Java ASM 系列三：Tree API》有配套的视频讲解，可以从[这里](https://edu.51cto.com/course/29459.html) 和[这里](https://space.bilibili.com/1321054247/channel/seriesdetail?sid=381716&ctype=0) 进行查看；同时，也可以从[Gitee](https://gitee.com/lsieun/learn-java-asm) 或[Github](https://github.com/lsieun/learn-java-asm) 下载源代码。
 
@@ -14,71 +14,18 @@ published: true
 
 ### 第一章 基础
 
-{%
-assign filtered_posts = site.java-asm-03 |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    {% if num > 100 and num < 200 %}
-    <li>
-        <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
-    </li>
-    {% endif %}
-    {% endfor %}
-</ol>
 
 ### 第二章 Class Generation
 
-{%
-assign filtered_posts = site.java-asm-03 |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    {% if num > 200 and num < 300 %}
-    <li>
-        <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
-    </li>
-    {% endif %}
-    {% endfor %}
-</ol>
+
 
 ### 第三章 Class Transformation
 
-{%
-assign filtered_posts = site.java-asm-03 |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    {% if num > 300 and num < 400 %}
-    <li>
-        <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
-    </li>
-    {% endif %}
-    {% endfor %}
-</ol>
+
 
 ### 第四章 Method Analysis
 
-{%
-assign filtered_posts = site.java-asm-03 |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    {% if num > 400 and num < 500 %}
-    <li>
-        <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
-    </li>
-    {% endif %}
-    {% endfor %}
-</ol>
+
 
 ## 参考资料
 

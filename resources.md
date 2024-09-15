@@ -181,6 +181,13 @@ Tutorial
 - [subtitlist](https://subtitlist.com/)
 - [my-subs](https://my-subs.co/)
 
+### 视频解析
+
+- YouTube
+    - [yt1d: YouTube下载](https://yt1d.com/en/)
+- B 站
+    - [xiazaitool](https://www.xiazaitool.com/blbl)
+
 ### 动漫
 
 - [B98.TV](https://www.b98.tv/): 动画片
@@ -246,11 +253,13 @@ Tutorial
 
 - 图片网站：[pexels](https://www.pexels.com/)、[pixabay](https://pixabay.com/)、[unsplash](https://unsplash.com/)
 -
+
 ICON网站：[icon-icons](https://icon-icons.com/)[iconfont](https://www.iconfont.cn/)、[flaticon](https://www.flaticon.com/)、[iconpark](https://iconpark.oceanengine.com/home)、[iconfinder](https://www.iconfinder.com/)
 -
 插画网站：[undraw](https://undraw.co/illustrations)、[delesign](https://delesign.com/free-designs/graphics/)、[manypixels](https://www.manypixels.co/gallery)、[iradesign](https://iradesign.io/illustrations)
 -
 背景视频网站：[mixkit](https://mixkit.co/)、[coverr](https://coverr.co/)、[videezy](https://www.videezy.com/)、[videvo](https://www.videvo.net/)
+
 - PNG图片网站：[cleanpng](https://www.cleanpng.com/)、[pngimg](https://pngimg.com/)、[stickpng](https://www.stickpng.com/)
 - Gif:
     - [gifer](https://gifer.com/): [naruto-shippuden](https://gifer.com/en/gifs/naruto-shippuden)
