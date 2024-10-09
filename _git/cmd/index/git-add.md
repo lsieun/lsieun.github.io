@@ -3,7 +3,7 @@ title: "git add"
 sequence: "101"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 ```text

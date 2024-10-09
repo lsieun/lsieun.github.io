@@ -1,9 +1,9 @@
 ---
 title: "Collections"
-categories: jekyll
+sequence: "101"
 ---
 
-[UP]({% link _posts/2021-04-20-jekyll.md %})
+[UP](/jekyll/jekyll-index.html)
 
 Collections are a great way to group related content.
 
@@ -190,12 +190,12 @@ So if your `_config.yml` specifies
 
 {% highlight text %}
 collections:
-  moose_and_goose_stories:
-    title: The Moose and Goose Stories
-  grey_parrot_stories:
-    title: The Grey Parrot Stories
-  predicting_the_present:
-    title: Predicting the Present
+moose_and_goose_stories:
+title: The Moose and Goose Stories
+grey_parrot_stories:
+title: The Grey Parrot Stories
+predicting_the_present:
+title: Predicting the Present
 {% endhighlight %}
 
 and you process the collections using the default ordering
@@ -203,13 +203,14 @@ and you process the collections using the default ordering
 {% highlight plaintext %}
 {% raw %}
 {% for item in site.collections %}
+
 - label: {{ item.label }}
-  - directory: {{ item.directory }}
-  - relative_directory: {{ item.relative_directory }}
-  - output: {{ item.output }}
-{% endfor %}
-{% endraw %}
-{% endhighlight %}
+    - directory: {{ item.directory }}
+    - relative_directory: {{ item.relative_directory }}
+    - output: {{ item.output }}
+      {% endfor %}
+      {% endraw %}
+      {% endhighlight %}
 
 it will give you
 
@@ -249,12 +250,13 @@ it will give you
 {% highlight plaintext %}
 {% raw %}
 {% for item in site.collections %}
-  {% if item.title %}
+{% if item.title %}
+
 - {{ item.title | escape }}
   {% endif %}
-{% endfor %}
-{% endraw %}
-{% endhighlight %}
+  {% endfor %}
+  {% endraw %}
+  {% endhighlight %}
 
 <ul>
   <li>
@@ -274,27 +276,28 @@ Modify the `_config.yml` file, and add a `sequence` attribute to each collection
 
 {% highlight plaintext %}
 collections:
-  moose_and_goose_stories:
-    title: The Moose and Goose Stories
-    sequence: 1
-  grey_parrot_stories:
-    title: The Grey Parrot Stories
-    sequence: 2
-  predicting_the_present:
-    title: Predicting the Present
-    sequence: 3
+moose_and_goose_stories:
+title: The Moose and Goose Stories
+sequence: 1
+grey_parrot_stories:
+title: The Grey Parrot Stories
+sequence: 2
+predicting_the_present:
+title: Predicting the Present
+sequence: 3
 {% endhighlight %}
 
 {% highlight plaintext %}
 {% raw %}
 {% assign collections = site.collections | sort: "sequence" %}
 {% for item in collections %}
-  {% if item.title %}
+{% if item.title %}
+
 - {{ item.title | escape }}
   {% endif %}
-{% endfor %}
-{% endraw %}
-{% endhighlight %}
+  {% endfor %}
+  {% endraw %}
+  {% endhighlight %}
 
 <ul>
   <li>
@@ -336,7 +339,6 @@ Sorting a Jekyll collection in reverse order (latest collection post first) is p
 {% endraw %}
 {% endhighlight %}
 
-
 ### Sort a collection in reverse order and limit the number of results
 
 Now let's look at how we can limit the number of posts from a collection and
@@ -346,7 +348,7 @@ want to create an index with the latest results in a given collection.
 
 {% highlight plaintext %}
 {% raw %}
-{% assign sorted = site.projects | sort: 'date' | reverse  %}
+{% assign sorted = site.projects | sort: 'date' | reverse %}
 
 {% for project in sorted limit: 12 %}
 {% endraw %}

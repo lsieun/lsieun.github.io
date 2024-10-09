@@ -2,7 +2,7 @@
 title: "git blame"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 I'm sure all developers have been in a situation

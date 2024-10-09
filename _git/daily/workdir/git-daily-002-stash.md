@@ -3,7 +3,8 @@ title: "暂存修改 stash"
 sequence: "102"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
+
 
 ## stash
 

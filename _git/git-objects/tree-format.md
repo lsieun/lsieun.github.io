@@ -2,7 +2,7 @@
 title: "git objects: tree format"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 The format of a `tree` object:

@@ -2,7 +2,7 @@
 title: "git index format"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 ## Index Format

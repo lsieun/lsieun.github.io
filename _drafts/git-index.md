@@ -1,7 +1,7 @@
 ---
 title: "Git"
 image: /assets/images/git/git-vs-github.png
-permalink: /git.html
+permalink: /git/git-index.html
 ---
 
 
@@ -45,7 +45,7 @@ git reset --soft HEAD^
         <td>
 {%
 assign filtered_posts = site.git |
-where_exp: "item", "item.url contains '/git/daily/config/'" |
+where_exp: "item", "item.path contains 'git/daily/config/'" |
 sort: "sequence"
 %}
 <ol>
@@ -60,7 +60,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.git |
-where_exp: "item", "item.url contains '/git/daily/commit/'" |
+where_exp: "item", "item.path contains 'git/daily/commit/'" |
 sort: "sequence"
 %}
 <ol>
@@ -75,7 +75,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.git |
-where_exp: "item", "item.url contains '/git/daily/branch/'" |
+where_exp: "item", "item.path contains 'git/daily/branch/'" |
 sort: "sequence"
 %}
 <ol>
@@ -90,7 +90,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.git |
-where_exp: "item", "item.url contains '/git/daily/repo/'" |
+where_exp: "item", "item.path contains 'git/daily/repo/'" |
 sort: "sequence"
 %}
 <ol>
@@ -106,11 +106,22 @@ sort: "sequence"
     </tbody>
 </table>
 
-## Overview
+## 概念
 
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">基础</th>
+        <th style="text-align: center;">HEAD</th>
+        <th style="text-align: center;">其它</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
 {%
 assign filtered_posts = site.git |
-where_exp: "item", "item.url contains '/git/overview/'" |
+where_exp: "item", "item.path contains 'git/concept/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -121,8 +132,89 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.git |
+where_exp: "item", "item.path contains 'git/concept/head/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.git |
+where_exp: "item", "item.path contains 'git/concept/other/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
 
 ## Command
+
+### Basic
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">对比</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.git |
+where_exp: "item", "item.path contains 'git/cmd/basic/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.git |
+where_exp: "item", "item.path contains 'git/cmd/basic/vs/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 ### Workdir + Index + Commit
 
@@ -139,7 +231,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.git |
-where_exp: "item", "item.url contains '/git/cmd/workdir/'" |
+where_exp: "item", "item.path contains 'git/cmd/workdir/'" |
 sort: "sequence"
 %}
 <ol>
@@ -154,7 +246,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.git |
-where_exp: "item", "item.url contains '/git/cmd/index/'" |
+where_exp: "item", "item.path contains 'git/cmd/index/'" |
 sort: "sequence"
 %}
 <ol>
@@ -169,7 +261,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.git |
-where_exp: "item", "item.url contains '/git/cmd/commit/'" |
+where_exp: "item", "item.path contains 'git/cmd/commit/'" |
 sort: "sequence"
 %}
 <ol>
@@ -199,7 +291,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.git |
-where_exp: "item", "item.url contains '/git/cmd/branch/'" |
+where_exp: "item", "item.path contains 'git/cmd/branch/'" |
 sort: "sequence"
 %}
 <ol>
@@ -214,7 +306,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.git |
-where_exp: "item", "item.url contains '/git/cmd/repo/'" |
+where_exp: "item", "item.path contains 'git/cmd/repo/'" |
 sort: "sequence"
 %}
 <ol>
@@ -229,42 +321,12 @@ sort: "sequence"
     </tr>
     </tbody>
 </table>
-
-### VS
-
-<table>
-    <thead>
-    <tr>
-        <th>VS</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>
-{%
-assign filtered_posts = site.git |
-where_exp: "item", "item.url contains '/git/cmd/vs/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-    </tr>
-    </tbody>
-</table>
-
 
 ## Configuration
 
 {%
 assign filtered_posts = site.git |
-where_exp: "item", "item.url contains '/git/config/'" |
+where_exp: "item", "item.path contains 'git/config/'" |
 sort: "sequence"
 %}
 <ol>
@@ -280,7 +342,7 @@ sort: "sequence"
 
 {%
 assign filtered_posts = site.git |
-where_exp: "item", "item.url contains '/git/github/'" |
+where_exp: "item", "item.path contains 'git/github/'" |
 sort: "sequence"
 %}
 <ol>
@@ -296,7 +358,7 @@ sort: "sequence"
 
 {%
 assign filtered_posts = site.git |
-where_exp: "item", "item.url contains '/git/host/'" |
+where_exp: "item", "item.path contains 'git/host/'" |
 sort: "sequence"
 %}
 <ol>
@@ -310,9 +372,25 @@ sort: "sequence"
 
 ## plumbing
 
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;" rowspan="2">Refs</th>
+        <th style="text-align: center;" rowspan="2">Index Area</th>
+        <th style="text-align: center;" colspan="3">Object Store</th>
+    </tr>
+    <tr>
+        <th style="text-align: center;">Common</th>
+        <th style="text-align: center;">Tree</th>
+        <th style="text-align: center;">Blob</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
 {%
 assign filtered_posts = site.git |
-where_exp: "item", "item.url contains '/git/plumbing/'" |
+where_exp: "item", "item.path contains 'git/plumbing/ref/'" |
 sort: "sequence"
 %}
 <ol>
@@ -323,6 +401,72 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.git |
+where_exp: "item", "item.path contains 'git/plumbing/index/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.git |
+where_exp: "item", "item.path contains 'git/plumbing/obj/common/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.git |
+where_exp: "item", "item.path contains 'git/plumbing/obj/tree/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.git |
+where_exp: "item", "item.path contains 'git/plumbing/obj/blob/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
 
 ## Git Internals
 
@@ -330,7 +474,7 @@ Git Objects [lsieun/lsieun-git][lsieun-git]
 
 {%
 assign filtered_posts = site.git |
-where_exp: "item", "item.url contains '/git/git-objects/'" |
+where_exp: "item", "item.path contains 'git/git-objects/'" |
 sort: "sequence"
 %}
 <ol>
@@ -341,7 +485,6 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
-
 
 
 ## References

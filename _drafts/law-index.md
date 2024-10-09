@@ -58,6 +58,7 @@ sort: "sequence"
     <thead>
     <tr>
         <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">其它</th>
     </tr>
     </thead>
     <tbody>
@@ -65,7 +66,22 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/xing-fa/'" |
+where_exp: "item", "item.path contains 'law/penal-code/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/penal-code/other/'" |
 sort: "sequence"
 %}
 <ol>

@@ -1,7 +1,7 @@
 ---
 title: "Java Archive"
 image: /assets/images/java/archive/java-archive-cover.png
-permalink: /java-archive.html
+permalink: /java/java-archive-index.html
 ---
 
 Java Archive
@@ -22,7 +22,7 @@ Java Archive
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/archive/basic/'" |
+where_exp: "item", "item.path contains 'java/archive/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -37,7 +37,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/archive/jar/'" |
+where_exp: "item", "item.path contains 'java/archive/jar/'" |
 sort: "sequence"
 %}
 <ol>
@@ -52,7 +52,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/archive/zip/'" |
+where_exp: "item", "item.path contains 'java/archive/zip/'" |
 sort: "sequence"
 %}
 <ol>
@@ -67,7 +67,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/archive/gzip/'" |
+where_exp: "item", "item.path contains 'java/archive/gzip/'" |
 sort: "sequence"
 %}
 <ol>
@@ -95,4 +95,3 @@ sort: "sequence"
 Baeldung
 
 - [Understanding the JAR Manifest File](https://www.baeldung.com/java-jar-manifest)
-

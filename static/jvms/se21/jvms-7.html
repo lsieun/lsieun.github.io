@@ -1,0 +1,603 @@
+<html lang="zh">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Chapter 7. Opcode Mnemonics by Opcode</title>
+    <link rel="stylesheet" type="text/css" href="../res/javaspec.css"/>
+</head>
+
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div id="logo">
+    <img src="../res/oralogo_small.gif" alt="Oracle Logo"/><br/>
+    <p>
+        <a href="https://docs.oracle.com/en/java/javase/21/">Java SE</a> &gt;
+        <a href="https://docs.oracle.com/javase/specs/index.html">Java SE Specifications</a> &gt;
+        <a href="./index.html">Java Virtual Machine Specification</a>
+    </p>
+</div>
+<div class="navheader">
+    <table width="100%" summary="Navigation header">
+        <tbody>
+        <tr>
+            <th colspan="3" align="center">Chapter 7. Opcode Mnemonics by Opcode</th>
+        </tr>
+        <tr>
+            <td width="20%" align="left">
+                <a accesskey="p" href="./jvms-6.html">Prev</a>
+            </td>
+            <th width="60%" align="center"></th>
+            <td width="20%" align="right">
+                <a accesskey="n" href="./spec-license.html">Next</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <hr/>
+</div>
+<div lang="en" class="chapter">
+    <div class="titlepage">
+        <div>
+            <div>
+                <h1 class="title">
+                    <a id="jvms-7"></a>Chapter 7. Opcode Mnemonics by Opcode
+                </h1>
+            </div>
+        </div>
+    </div>
+    <p class="norm">
+        <a id="jvms-7-100"></a>
+        This chapter gives the mapping from Java Virtual Machine instruction opcodes,
+        including the reserved opcodes
+        (<a class="xref" href="./jvms-6.html#jvms-6.2" title="6.2. Reserved Opcodes">6.2</a>),
+        to the mnemonics for the instructions represented by those opcodes.
+    </p>
+    <p class="norm">
+        <a id="jvms-7-200"></a>Opcode value 186 was not used prior to Java SE 7.
+    </p>
+    <div class="table">
+        <p class="title"><b>Table 7.1. </b></p>
+        <div class="table-contents">
+            <table class="table" border="0">
+                <colgroup>
+                    <col/>
+                    <col/>
+                    <col/>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th align="center">Constants</th>
+                    <th align="center">Loads</th>
+                    <th align="center">Stores</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+
+                        <div class="literallayout">
+                            <p><br/>
+                                <code class="literal">00 (0x00)</code> nop<br/>
+                                <code class="literal">01 (0x01)</code> aconst_null<br/>
+                                <code class="literal">02 (0x02)</code> iconst_m1<br/>
+                                <code class="literal">03 (0x03)</code> iconst_0<br/>
+                                <code class="literal">04 (0x04)</code> iconst_1<br/>
+                                <code class="literal">05 (0x05)</code> iconst_2<br/>
+                                <code class="literal">06 (0x06)</code> iconst_3<br/>
+                                <code class="literal">07 (0x07)</code> iconst_4<br/>
+                                <code class="literal">08 (0x08)</code> iconst_5<br/>
+                                <code class="literal">09 (0x09)</code> lconst_0<br/>
+                                <code class="literal">10 (0x0a)</code> lconst_1<br/>
+                                <code class="literal">11 (0x0b)</code> fconst_0<br/>
+                                <code class="literal">12 (0x0c)</code> fconst_1<br/>
+                                <code class="literal">13 (0x0d)</code> fconst_2<br/>
+                                <code class="literal">14 (0x0e)</code> dconst_0<br/>
+                                <code class="literal">15 (0x0f)</code> dconst_1<br/>
+                                <code class="literal">16 (0x10)</code> bipush<br/>
+                                <code class="literal">17 (0x11)</code> sipush<br/>
+                                <code class="literal">18 (0x12)</code> ldc<br/>
+                                <code class="literal">19 (0x13)</code> ldc_w<br/>
+                                <code class="literal">20 (0x14)</code> ldc2_w<br/>
+
+                            </p>
+                        </div>
+
+                    </td>
+                    <td>
+
+                        <div class="literallayout">
+                            <p><br/>
+                                <code class="literal">21 (0x15)</code> iload<br/>
+                                <code class="literal">22 (0x16)</code> lload<br/>
+                                <code class="literal">23 (0x17)</code> fload<br/>
+                                <code class="literal">24 (0x18)</code> dload<br/>
+                                <code class="literal">25 (0x19)</code> aload<br/>
+                                <code class="literal">26 (0x1a)</code> iload_0<br/>
+                                <code class="literal">27 (0x1b)</code> iload_1<br/>
+                                <code class="literal">28 (0x1c)</code> iload_2<br/>
+                                <code class="literal">29 (0x1d)</code> iload_3<br/>
+                                <code class="literal">30 (0x1e)</code> lload_0<br/>
+                                <code class="literal">31 (0x1f)</code> lload_1<br/>
+                                <code class="literal">32 (0x20)</code> lload_2<br/>
+                                <code class="literal">33 (0x21)</code> lload_3<br/>
+                                <code class="literal">34 (0x22)</code> fload_0<br/>
+                                <code class="literal">35 (0x23)</code> fload_1<br/>
+                                <code class="literal">36 (0x24)</code> fload_2<br/>
+                                <code class="literal">37 (0x25)</code> fload_3<br/>
+                                <code class="literal">38 (0x26)</code> dload_0<br/>
+                                <code class="literal">39 (0x27)</code> dload_1<br/>
+                                <code class="literal">40 (0x28)</code> dload_2<br/>
+                                <code class="literal">41 (0x29)</code> dload_3<br/>
+                                <code class="literal">42 (0x2a)</code> aload_0<br/>
+                                <code class="literal">43 (0x2b)</code> aload_1<br/>
+                                <code class="literal">44 (0x2c)</code> aload_2<br/>
+                                <code class="literal">45 (0x2d)</code> aload_3<br/>
+                                <code class="literal">46 (0x2e)</code> iaload<br/>
+                                <code class="literal">47 (0x2f)</code> laload<br/>
+                                <code class="literal">48 (0x30)</code> faload<br/>
+                                <code class="literal">49 (0x31)</code> daload<br/>
+                                <code class="literal">50 (0x32)</code> aaload<br/>
+                                <code class="literal">51 (0x33)</code> baload<br/>
+                                <code class="literal">52 (0x34)</code> caload<br/>
+                                <code class="literal">53 (0x35)</code> saload<br/>
+
+                            </p>
+                        </div>
+
+                    </td>
+                    <td>
+
+                        <div class="literallayout">
+                            <p><br/>
+                                <code class="literal">54 (0x36)</code> istore<br/>
+                                <code class="literal">55 (0x37)</code> lstore<br/>
+                                <code class="literal">56 (0x38)</code> fstore<br/>
+                                <code class="literal">57 (0x39)</code> dstore<br/>
+                                <code class="literal">58 (0x3a)</code> astore<br/>
+                                <code class="literal">59 (0x3b)</code> istore_0<br/>
+                                <code class="literal">60 (0x3c)</code> istore_1<br/>
+                                <code class="literal">61 (0x3d)</code> istore_2<br/>
+                                <code class="literal">62 (0x3e)</code> istore_3<br/>
+                                <code class="literal">63 (0x3f)</code> lstore_0<br/>
+                                <code class="literal">64 (0x40)</code> lstore_1<br/>
+                                <code class="literal">65 (0x41)</code> lstore_2<br/>
+                                <code class="literal">66 (0x42)</code> lstore_3<br/>
+                                <code class="literal">67 (0x43)</code> fstore_0<br/>
+                                <code class="literal">68 (0x44)</code> fstore_1<br/>
+                                <code class="literal">69 (0x45)</code> fstore_2<br/>
+                                <code class="literal">70 (0x46)</code> fstore_3<br/>
+                                <code class="literal">71 (0x47)</code> dstore_0<br/>
+                                <code class="literal">72 (0x48)</code> dstore_1<br/>
+                                <code class="literal">73 (0x49)</code> dstore_2<br/>
+                                <code class="literal">74 (0x4a)</code> dstore_3<br/>
+                                <code class="literal">75 (0x4b)</code> astore_0<br/>
+                                <code class="literal">76 (0x4c)</code> astore_1<br/>
+                                <code class="literal">77 (0x4d)</code> astore_2<br/>
+                                <code class="literal">78 (0x4e)</code> astore_3<br/>
+                                <code class="literal">79 (0x4f)</code> iastore<br/>
+                                <code class="literal">80 (0x50)</code> lastore<br/>
+                                <code class="literal">81 (0x51)</code> fastore<br/>
+                                <code class="literal">82 (0x52)</code> dastore<br/>
+                                <code class="literal">83 (0x53)</code> aastore<br/>
+                                <code class="literal">84 (0x54)</code> bastore<br/>
+                                <code class="literal">85 (0x55)</code> castore<br/>
+                                <code class="literal">86 (0x56)</code> sastore<br/>
+
+                            </p>
+                        </div>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br class="table-break"/>
+    <div class="table"><a id="d5e25370"></a>
+        <p class="title"><b>Table 7.2. </b></p>
+        <div class="table-contents">
+            <table class="table" border="0">
+                <colgroup>
+                    <col/>
+                    <col/>
+                    <col/>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th align="center">Stack</th>
+                    <th align="center">Math</th>
+                    <th align="center">Conversions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+
+                        <div class="literallayout">
+                            <p><br/>
+                                <code class="literal">87 (0x57)</code> pop<br/>
+                                <code class="literal">88 (0x58)</code> pop2<br/>
+                                <code class="literal">89 (0x59)</code> dup<br/>
+                                <code class="literal">90 (0x5a)</code> dup_x1<br/>
+                                <code class="literal">91 (0x5b)</code> dup_x2<br/>
+                                <code class="literal">92 (0x5c)</code> dup2<br/>
+                                <code class="literal">93 (0x5d)</code> dup2_x1<br/>
+                                <code class="literal">94 (0x5e)</code> dup2_x2<br/>
+                                <code class="literal">95 (0x5f)</code> swap<br/>
+
+                            </p>
+                        </div>
+
+                    </td>
+                    <td>
+
+                        <div class="literallayout">
+                            <p><br/>
+                                <code class="literal"> 96 (0x60)</code> iadd<br/>
+                                <code class="literal"> 97 (0x61)</code> ladd<br/>
+                                <code class="literal"> 98 (0x62)</code> fadd<br/>
+                                <code class="literal"> 99 (0x63)</code> dadd<br/>
+                                <code class="literal">100 (0x64)</code> isub<br/>
+                                <code class="literal">101 (0x65)</code> lsub<br/>
+                                <code class="literal">102 (0x66)</code> fsub<br/>
+                                <code class="literal">103 (0x67)</code> dsub<br/>
+                                <code class="literal">104 (0x68)</code> imul<br/>
+                                <code class="literal">105 (0x69)</code> lmul<br/>
+                                <code class="literal">106 (0x6a)</code> fmul<br/>
+                                <code class="literal">107 (0x6b)</code> dmul<br/>
+                                <code class="literal">108 (0x6c)</code> idiv<br/>
+                                <code class="literal">109 (0x6d)</code> ldiv<br/>
+                                <code class="literal">110 (0x6e)</code> fdiv<br/>
+                                <code class="literal">111 (0x6f)</code> ddiv<br/>
+                                <code class="literal">112 (0x70)</code> irem<br/>
+                                <code class="literal">113 (0x71)</code> lrem<br/>
+                                <code class="literal">114 (0x72)</code> frem<br/>
+                                <code class="literal">115 (0x73)</code> drem<br/>
+                                <code class="literal">116 (0x74)</code> ineg<br/>
+                                <code class="literal">117 (0x75)</code> lneg<br/>
+                                <code class="literal">118 (0x76)</code> fneg<br/>
+                                <code class="literal">119 (0x77)</code> dneg<br/>
+                                <code class="literal">120 (0x78)</code> ishl<br/>
+                                <code class="literal">121 (0x79)</code> lshl<br/>
+                                <code class="literal">122 (0x7a)</code> ishr<br/>
+                                <code class="literal">123 (0x7b)</code> lshr<br/>
+                                <code class="literal">124 (0x7c)</code> iushr<br/>
+                                <code class="literal">125 (0x7d)</code> lushr<br/>
+                                <code class="literal">126 (0x7e)</code> iand<br/>
+                                <code class="literal">127 (0x7f)</code> land<br/>
+                                <code class="literal">128 (0x80)</code> ior<br/>
+                                <code class="literal">129 (0x81)</code> lor<br/>
+                                <code class="literal">130 (0x82)</code> ixor<br/>
+                                <code class="literal">131 (0x83)</code> lxor<br/>
+                                <code class="literal">132 (0x84)</code> iinc<br/>
+
+                            </p>
+                        </div>
+
+                    </td>
+                    <td>
+
+                        <div class="literallayout">
+                            <p><br/>
+                                <code class="literal">133 (0x85)</code> i2l<br/>
+                                <code class="literal">134 (0x86)</code> i2f<br/>
+                                <code class="literal">135 (0x87)</code> i2d<br/>
+                                <code class="literal">136 (0x88)</code> l2i<br/>
+                                <code class="literal">137 (0x89)</code> l2f<br/>
+                                <code class="literal">138 (0x8a)</code> l2d<br/>
+                                <code class="literal">139 (0x8b)</code> f2i<br/>
+                                <code class="literal">140 (0x8c)</code> f2l<br/>
+                                <code class="literal">141 (0x8d)</code> f2d<br/>
+                                <code class="literal">142 (0x8e)</code> d2i<br/>
+                                <code class="literal">143 (0x8f)</code> d2l<br/>
+                                <code class="literal">144 (0x90)</code> d2f<br/>
+                                <code class="literal">145 (0x91)</code> i2b<br/>
+                                <code class="literal">146 (0x92)</code> i2c<br/>
+                                <code class="literal">147 (0x93)</code> i2s<br/>
+
+                            </p>
+                        </div>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br class="table-break"/>
+    <div class="table"><a id="d5e25446"></a>
+        <p class="title"><b>Table 7.3. </b></p>
+        <div class="table-contents">
+            <table class="table" border="0">
+                <colgroup>
+                    <col/>
+                    <col/>
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td>
+
+
+                        <div class="table"><a id="d5e25451"></a>
+                            <p class="title"><b>Table 7.4. </b></p>
+                            <div class="table-contents">
+                                <table class="table" border="0">
+                                    <colgroup>
+                                        <col/>
+                                    </colgroup>
+                                    <thead>
+                                    <tr>
+                                        <th align="center">Comparisons</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+
+                                            <div class="literallayout">
+                                                <p><br/>
+                                                    <code
+                                                            class="literal">148 (0x94)</code> lcmp<br/>
+                                                    <code
+                                                            class="literal">149 (0x95)</code> fcmpl<br/>
+                                                    <code
+                                                            class="literal">150 (0x96)</code> fcmpg<br/>
+                                                    <code
+                                                            class="literal">151 (0x97)</code> dcmpl<br/>
+                                                    <code
+                                                            class="literal">152 (0x98)</code> dcmpg<br/>
+                                                    <code
+                                                            class="literal">153 (0x99)</code> ifeq<br/>
+                                                    <code
+                                                            class="literal">154 (0x9a)</code> ifne<br/>
+                                                    <code
+                                                            class="literal">155 (0x9b)</code> iflt<br/>
+                                                    <code
+                                                            class="literal">156 (0x9c)</code> ifge<br/>
+                                                    <code
+                                                            class="literal">157 (0x9d)</code> ifgt<br/>
+                                                    <code
+                                                            class="literal">158 (0x9e)</code> ifle<br/>
+                                                    <code
+                                                            class="literal">159 (0x9f)</code> if_icmpeq<br/>
+                                                    <code
+                                                            class="literal">160 (0xa0)</code> if_icmpne<br/>
+                                                    <code
+                                                            class="literal">161 (0xa1)</code> if_icmplt<br/>
+                                                    <code
+                                                            class="literal">162 (0xa2)</code> if_icmpge<br/>
+                                                    <code
+                                                            class="literal">163 (0xa3)</code> if_icmpgt<br/>
+                                                    <code
+                                                            class="literal">164 (0xa4)</code> if_icmple<br/>
+                                                    <code
+                                                            class="literal">165 (0xa5)</code> if_acmpeq<br/>
+                                                    <code
+                                                            class="literal">166 (0xa6)</code> if_acmpne<br/>
+
+                                                </p>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table" border="0">
+                                    <colgroup>
+                                        <col/>
+                                    </colgroup>
+                                    <thead>
+                                    <tr>
+                                        <th align="center">Control</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+
+                                            <div class="literallayout">
+                                                <p><br/>
+                                                    <code
+                                                            class="literal">167 (0xa7)</code> goto<br/>
+                                                    <code
+                                                            class="literal">168 (0xa8)</code> jsr<br/>
+                                                    <code
+                                                            class="literal">169 (0xa9)</code> ret<br/>
+                                                    <code
+                                                            class="literal">170 (0xaa)</code> tableswitch<br/>
+                                                    <code
+                                                            class="literal">171 (0xab)</code> lookupswitch<br/>
+                                                    <code
+                                                            class="literal">172 (0xac)</code> ireturn<br/>
+                                                    <code
+                                                            class="literal">173 (0xad)</code> lreturn<br/>
+                                                    <code
+                                                            class="literal">174 (0xae)</code> freturn<br/>
+                                                    <code
+                                                            class="literal">175 (0xaf)</code> dreturn<br/>
+                                                    <code
+                                                            class="literal">176 (0xb0)</code> areturn<br/>
+                                                    <code
+                                                            class="literal">177 (0xb1)</code> return<br/>
+
+                                                </p>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <br class="table-break"/>
+
+
+                    </td>
+                    <td>
+
+
+                        <div class="table"><a id="d5e25499"></a>
+                            <p class="title"><b>Table 7.5. </b></p>
+                            <div class="table-contents">
+                                <table class="table" border="0">
+                                    <colgroup>
+                                        <col/>
+                                    </colgroup>
+                                    <thead>
+                                    <tr>
+                                        <th align="center">References</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+
+                                            <div class="literallayout">
+                                                <p><br/>
+                                                    <code
+                                                            class="literal">178 (0xb2)</code> getstatic<br/>
+                                                    <code
+                                                            class="literal">179 (0xb3)</code> putstatic<br/>
+                                                    <code
+                                                            class="literal">180 (0xb4)</code> getfield<br/>
+                                                    <code
+                                                            class="literal">181 (0xb5)</code> putfield<br/>
+                                                    <code
+                                                            class="literal">182 (0xb6)</code> invokevirtual<br/>
+                                                    <code
+                                                            class="literal">183 (0xb7)</code> invokespecial<br/>
+                                                    <code
+                                                            class="literal">184 (0xb8)</code> invokestatic<br/>
+                                                    <code
+                                                            class="literal">185 (0xb9)</code> invokeinterface<br/>
+                                                    <code
+                                                            class="literal">186 (0xba)</code> invokedynamic<br/>
+                                                    <code
+                                                            class="literal">187 (0xbb)</code> new<br/>
+                                                    <code
+                                                            class="literal">188 (0xbc)</code> newarray<br/>
+                                                    <code
+                                                            class="literal">189 (0xbd)</code> anewarray<br/>
+                                                    <code
+                                                            class="literal">190 (0xbe)</code> arraylength<br/>
+                                                    <code
+                                                            class="literal">191 (0xbf)</code> athrow<br/>
+                                                    <code
+                                                            class="literal">192 (0xc0)</code> checkcast<br/>
+                                                    <code
+                                                            class="literal">193 (0xc1)</code> instanceof<br/>
+                                                    <code
+                                                            class="literal">194 (0xc2)</code> monitorenter<br/>
+                                                    <code
+                                                            class="literal">195 (0xc3)</code> monitorexit<br/>
+
+                                                </p>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table" border="0">
+                                    <colgroup>
+                                        <col/>
+                                    </colgroup>
+                                    <thead>
+                                    <tr>
+                                        <th align="center">Extended</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+
+                                            <div class="literallayout">
+                                                <p><br/>
+                                                    <code
+                                                            class="literal">196 (0xc4)</code> wide<br/>
+                                                    <code
+                                                            class="literal">197 (0xc5)</code> multianewarray<br/>
+                                                    <code
+                                                            class="literal">198 (0xc6)</code> ifnull<br/>
+                                                    <code
+                                                            class="literal">199 (0xc7)</code> ifnonnull<br/>
+                                                    <code
+                                                            class="literal">200 (0xc8)</code> goto_w<br/>
+                                                    <code
+                                                            class="literal">201 (0xc9)</code> jsr_w<br/>
+
+                                                </p>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table" border="0">
+                                    <colgroup>
+                                        <col/>
+                                    </colgroup>
+                                    <thead>
+                                    <tr>
+                                        <th align="center">Reserved</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+
+                                            <div class="literallayout">
+                                                <p><br/>
+                                                    <code
+                                                            class="literal">202 (0xca)</code> breakpoint<br/>
+                                                    <code
+                                                            class="literal">254 (0xfe)</code> impdep1<br/>
+                                                    <code
+                                                            class="literal">255 (0xff)</code> impdep2<br/>
+
+                                                </p>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <br class="table-break"/>
+
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br class="table-break"/>
+</div>
+<div class="navfooter">
+    <hr/>
+    <table width="100%" summary="Navigation footer">
+        <tbody>
+        <tr>
+            <td width="40%" align="left"><a accesskey="p"
+                                            href="./jvms-6.html">Prev</a>
+            </td>
+            <td width="20%" align="center"></td>
+            <td width="40%" align="right"><a accesskey="n"
+                                             href="./spec-license.html">Next</a></td>
+        </tr>
+        <tr>
+            <td width="40%" align="left" valign="top">Chapter 6. The Java Virtual Machine Instruction
+                Set
+            </td>
+            <td width="20%" align="center"><a accesskey="h"
+                                              href="./index.html">Home</a></td>
+            <td width="40%" align="right" valign="top"> Appendix A. Limited License Grant</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+
+</html>

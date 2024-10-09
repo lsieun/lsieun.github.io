@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<company xmlns="https://lsieun.github.io/assets/xml/company"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://lsieun.github.io/assets/xml/company ../xsd/company.xsd"
+         since="2022-01-01">
+
+    <website>https://lsieun.github.io</website>
+
+    <department>
+        <employee>
+            <first-name>Tom</first-name>
+            <last-name>Cat</last-name>
+            <age>10</age>
+        </employee>
+    </department>
+</company>

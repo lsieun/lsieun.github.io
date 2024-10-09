@@ -2,7 +2,7 @@
 title: "git pack format"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 ## The Packfile Index

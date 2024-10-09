@@ -1,9 +1,9 @@
 ---
 title: "Static Files"
-categories: jekyll
+sequence: "107"
 ---
 
-[UP]({% link _posts/2021-04-20-jekyll.md %})
+[UP](/jekyll/jekyll-index.html)
 
 At some point, you'll want to include images, downloads, or other digital assets along with your text content.
 

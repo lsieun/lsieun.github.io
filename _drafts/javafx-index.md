@@ -1,17 +1,46 @@
 ---
 title: "JavaFX"
 image: /assets/images/java/fx/java-fx-cover.png
-permalink: /javafx.html
+permalink: /javafx/javafx-index.html
 ---
 
 JavaFX is a software platform for creating and delivering desktop applications,
 as well as rich web applications that can run across a wide variety of devices.
 
+## API
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Basic</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.javafx |
+where_exp: "item", "item.path contains 'javafx/api/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 ## 基础篇
 
 {%
-assign filtered_posts = site.java-fx |
-where_exp: "item", "item.url contains '/java-fx/basic/'" |
+assign filtered_posts = site.javafx |
+where_exp: "item", "item.path contains 'javafx/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -26,8 +55,8 @@ sort: "sequence"
 ## Properties and Bindings
 
 {%
-assign filtered_posts = site.java-fx |
-where_exp: "item", "item.url contains '/java-fx/property-and-binding/'" |
+assign filtered_posts = site.javafx |
+where_exp: "item", "item.path contains 'javafx/property-and-binding/'" |
 sort: "sequence"
 %}
 <ol>
@@ -41,9 +70,20 @@ sort: "sequence"
 
 ## Stage
 
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Screen</th>
+        <th style="text-align: center;">Window</th>
+        <th style="text-align: center;">Stage</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
 {%
-assign filtered_posts = site.java-fx |
-where_exp: "item", "item.url contains '/java-fx/stage/'" |
+assign filtered_posts = site.javafx |
+where_exp: "item", "item.path contains 'javafx/stage/screen/'" |
 sort: "sequence"
 %}
 <ol>
@@ -54,12 +94,11 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
-
-## API 视角
-
+        </td>
+        <td>
 {%
-assign filtered_posts = site.java-fx |
-where_exp: "item", "item.url contains '/java-fx/api/'" |
+assign filtered_posts = site.javafx |
+where_exp: "item", "item.path contains 'javafx/stage/window/'" |
 sort: "sequence"
 %}
 <ol>
@@ -70,12 +109,33 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.javafx |
+where_exp: "item", "item.path contains 'javafx/stage/stage/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
 
 ## Layout
 
 {%
-assign filtered_posts = site.java-fx |
-where_exp: "item", "item.url contains '/java-fx/layout/'" |
+assign filtered_posts = site.javafx |
+where_exp: "item", "item.path contains 'javafx/layout/'" |
 sort: "sequence"
 %}
 <ol>
@@ -90,8 +150,8 @@ sort: "sequence"
 ## Package
 
 {%
-assign filtered_posts = site.java-fx |
-where_exp: "item", "item.url contains '/java-fx/package/'" |
+assign filtered_posts = site.javafx |
+where_exp: "item", "item.path contains 'javafx/package/'" |
 sort: "sequence"
 %}
 <ol>

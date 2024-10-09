@@ -2,7 +2,7 @@
 title: "git objects: blob format"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 ```text

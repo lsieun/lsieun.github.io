@@ -1,7 +1,7 @@
 ---
 title: "SVG"
 image: /assets/images/svg/svg-cover.png
-permalink: /svg.html
+permalink: /svg-index.html
 ---
 
 SVG: Scalable Vector Graphics
@@ -10,7 +10,7 @@ SVG: Scalable Vector Graphics
 
 {%
 assign filtered_posts = site.svg |
-where_exp: "item", "item.url contains '/svg/basic/'" |
+where_exp: "item", "item.path contains 'svg/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -28,3 +28,4 @@ sort: "sequence"
 
 - [JFreeSVG](https://www.jfree.org/jfreesvg/)
     - [GitHub: jfree/jfreesvg](https://github.com/jfree/jfreesvg)
+

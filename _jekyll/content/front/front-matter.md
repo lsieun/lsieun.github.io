@@ -1,9 +1,9 @@
 ---
 title: "Front Matter"
-categories: jekyll
+sequence: "101"
 ---
 
-[UP]({% link _posts/2021-04-20-jekyll.md %})
+[UP](/jekyll/jekyll-index.html)
 
 Any file that contains a YAML front matter block will be processed by Jekyll as a special file.
 

@@ -1,7 +1,9 @@
 ---
 title: "Post: Future"
-categories: jekyll
+sequence: "105"
 ---
+
+[UP](/jekyll/jekyll-index.html)
 
 ## View post with a future date in Jekyll.
 

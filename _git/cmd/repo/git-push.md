@@ -2,7 +2,7 @@
 title: "git push"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 ## Pushing changes to a remote repository: git push

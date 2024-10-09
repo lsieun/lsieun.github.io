@@ -3,7 +3,7 @@ title: "Github status"
 sequence: "301"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 ## Working with forks

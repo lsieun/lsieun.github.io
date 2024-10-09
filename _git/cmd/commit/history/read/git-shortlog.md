@@ -2,7 +2,7 @@
 title: "git shortlog"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 ## Releasing logs: git shortlog

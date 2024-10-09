@@ -3,7 +3,8 @@ title: "分支"
 sequence: "101"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
+
 
 **In Git, a branch is no more than a pointer to a particular commit**.
 我觉得，这句话谈到了 branch 的本质，就是指向 commit 的指针。

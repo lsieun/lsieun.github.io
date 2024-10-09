@@ -1,9 +1,9 @@
 ---
 title: "Pages and Posts"
-categories: jekyll
+sequence: "102"
 ---
 
-[UP]({% link _posts/2021-04-20-jekyll.md %})
+[UP](/jekyll/jekyll-index.html)
 
 The main types of content for Jekyll sites are **pages** and **posts**.
 

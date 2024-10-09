@@ -2,7 +2,7 @@
 title: "git daemon"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 ## Sharing a repository with other users on the same network: git daemon

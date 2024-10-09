@@ -2,7 +2,7 @@
 title: "git remote"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 There are now two repositories: **a local repository** and **a remote repository**.

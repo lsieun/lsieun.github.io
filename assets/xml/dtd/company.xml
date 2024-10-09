@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE company SYSTEM "company.dtd">
+<company>
+    <website>https://www.example.com</website>
+    <motto>&slogan;</motto>
+    <logo>Example</logo>
+    <contact>
+        <email href="mailto:service@example.com" preferred="true"/>
+        <email href="mailto:admin@example.com"/>
+        <tel>123-456-7890</tel>
+    </contact>
+    <address>
+        <street>ABC</street>
+        <postal-code>DEF</postal-code>
+        <locality>GH</locality>
+        <country>USA</country>
+    </address>
+    <department name="DEV" officer="user-001">
+        <employee id="user-001">
+            <first-name>Tom</first-name>
+            <last-name>Cat</last-name>
+            <salary>1000</salary>
+        </employee>
+        <employee id="user-002">
+            <first-name>Jerry</first-name>
+            <last-name>Mouse</last-name>
+            <salary>1000</salary>
+        </employee>
+    </department>
+    <department name="Market" officer="user-003">
+        <employee id="user-003">
+            <first-name>Lucy</first-name>
+            <last-name>Green</last-name>
+            <birthday>2020-01-01</birthday>
+            <salary>1200</salary>
+        </employee>
+        <employee id="user-004">
+            <first-name>Lily</first-name>
+            <last-name>Green</last-name>
+            <birthday>2020-01-01</birthday>
+            <salary>1200</salary>
+        </employee>
+    </department>
+    <department name="HR" officer="user-005">
+        <employee id="user-005">
+            <name>张三</name>
+            <salary>1500</salary>
+        </employee>
+        <employee id="user-006">
+            <name>李四</name>
+            <salary>1500</salary>
+        </employee>
+    </department>
+</company>

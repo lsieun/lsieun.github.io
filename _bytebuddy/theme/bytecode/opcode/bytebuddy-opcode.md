@@ -425,29 +425,27 @@ Opcode::array ───┤                    │                 └─── O
                                      │
                                      ├─── DOUBLE ───────┼─── Opcodes.DUP2
                                      │
-                                     │                  ┌─── Duplication.ZERO
-                 ┌─── Duplication ───┤                  │
-                 │                   ├─── of() ─────────┼─── Duplication.SINGLE
-                 │                   │                  │
-                 │                   │                  └─── Duplication.DOUBLE
+                 ┌─── Duplication ───┤                  ┌─── param ────┼─── TypeDefinition
+                 │                   ├─── of() ─────────┤
+                 │                   │                  └─── return ───┼─── Duplication
                  │                   │
-                 │                   │                                   ┌─── SINGLE_SINGLE: Opcodes.DUP_X1
-                 │                   │                                   │
-                 │                   │                                   ├─── SINGLE_DOUBLE: Opcodes.DUP_X2
-Opcode::stack ───┤                   └─── flipOver() ───┼─── WithFlip ───┤
-                 │                                                       ├─── DOUBLE_SINGLE: Opcodes.DUP2_X1
-                 │                                                       │
-                 │                                                       └─── DOUBLE_DOUBLE: Opcodes.DUP2_X2
+                 │                   │                  ┌─── param ────┼─── TypeDefinition
+                 │                   │                  │
+                 │                   └─── flipOver() ───┤                               ┌─── SINGLE_SINGLE: Opcodes.DUP_X1
+                 │                                      │                               │
+Opcode::stack ───┤                                      │                               ├─── SINGLE_DOUBLE: Opcodes.DUP_X2
+                 │                                      └─── return ───┼─── WithFlip ───┤
+                 │                                                                      ├─── DOUBLE_SINGLE: Opcodes.DUP2_X1
+                 │                                                                      │
+                 │                                                                      └─── DOUBLE_DOUBLE: Opcodes.DUP2_X2
                  │
                  │                   ┌─── ZERO ─────┼─── Opcodes.NOP
                  │                   │
                  │                   ├─── SINGLE ───┼─── Opcodes.POP
-                 │                   │
-                 └─── Removal ───────┼─── DOUBLE ───┼─── Opcodes.POP2
+                 └─── Removal ───────┤
+                                     ├─── DOUBLE ───┼─── Opcodes.POP2
                                      │
-                                     │              ┌─── Removal.ZERO
-                                     │              │
-                                     └─── of() ─────┼─── Removal.SINGLE
-                                                    │
-                                                    └─── Removal.DOUBLE
+                                     │              ┌─── param ────┼─── TypeDefinition
+                                     └─── of() ─────┤
+                                                    └─── return ───┼─── Removal
 ```

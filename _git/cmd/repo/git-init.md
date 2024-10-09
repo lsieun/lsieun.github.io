@@ -2,7 +2,7 @@
 title: "git init"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 - repository

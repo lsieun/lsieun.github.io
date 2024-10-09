@@ -1,9 +1,9 @@
 ---
-title: "Code"
-categories: jekyll
+title: "代码"
+sequence: "108"
 ---
 
-[UP]({% link _posts/2021-04-20-jekyll.md %})
+[UP](/jekyll/jekyll-index.html)
 
 这个话题属于Liquid Tags的范畴。
 

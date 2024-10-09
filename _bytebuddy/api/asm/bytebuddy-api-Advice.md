@@ -3,6 +3,132 @@ title: "Advice"
 sequence: "102"
 ---
 
+## 概览
+
+### 如何使用
+
+```text
+                                                          ┌─── [p] AsmVisitorWrapper
+          ┌─── DynamicType.Builder ───┼─── [m] visit() ───┤
+          │                                               └─── [r] DynamicType.Builder<T>
+          │
+          │                           ┌─── [m] wrap() ───────────────┼─── [r] ClassVisitor (ASM)
+          ├─── AsmVisitorWrapper ─────┤
+advice ───┤                           │                                                               ┌─── [m] wrap() ───┼─── [r] MethodVisitor (ASM)
+          │                           └─── [s] ForDeclaredMethods ───┼─── [n] MethodVisitorWrapper ───┤
+          │                                                                                           └─── [s] Advice
+          │
+          │                           ┌─── [m] to() ───┼─── [r] Advice
+          └─── Advice ────────────────┤
+                                      └─── [m] on() ───┼─── [r] AsmVisitorWrapper.ForDeclaredMethods
+```
+
+- m: method
+- p: parameter
+- r: return
+- s: subclass
+- n: nested
+
+```java
+public class Advice implements AsmVisitorWrapper.ForDeclaredMethods.MethodVisitorWrapper, Implementation {
+}
+```
+
+## API
+
+```text
+                                                                             ┌─── TypeDescription
+                                                                             │
+                                                              ┌─── params ───┼─── TypeDescription
+                                                              │              │
+                                  ┌─── to() ──────────────────┤              └─── ClassFileLocator
+                                  │                           │
+               ┌─── static ───────┤                           └─── return ───┼─── Advice
+               │                  │
+               │                  └─── withCustomMapping() ───┼─── return ───┼─── Advice.WithCustomMapping
+               │
+               │                                                                                       ┌─── params ───┼─── Assigner
+               │                                                       ┌─── withAssigner() ────────────┤
+               │                                                       │                               └─── return ───┼─── Advice
+               │                                                       │
+               │                                         ┌─── chain ───┤                               ┌─── params ───┼─── Advice.ExceptionHandler
+Advice::api ───┤                                         │             ├─── withExceptionHandler() ────┤
+               │                                         │             │                               └─── return ───┼─── Advice
+               │                  ┌─── builder ──────────┤             │
+               │                  │                      │             └─── withExceptionPrinting() ───┼─── return ───┼─── Advice
+               │                  │                      │
+               │                  │                      │                          ┌─── params ───┼─── ElementMatcher<? super MethodDescription>
+               │                  │                      └─── build ───┼─── on() ───┤
+               │                  │                                                 └─── return ───┼─── AsmVisitorWrapper.ForDeclaredMethods
+               │                  │
+               └─── non-static ───┤                                         ┌─── params ───┼─── InstrumentedType
+                                  │                      ┌─── prepare() ────┤
+                                  │                      │                  └─── return ───┼─── InstrumentedType
+                                  ├─── implementation ───┤
+                                  │                      │                  ┌─── params ───┼─── Implementation.Target
+                                  │                      └─── appender() ───┤
+                                  │                                         └─── return ───┼─── ByteCodeAppender
+                                  │
+                                  └─── asm ──────────────┼─── wrap() ───┼─── [p] MethodVisitor
+```
+
+## Annotation
+
+```text
+                            ┌─── @OnMethodEnter
+          ┌─── method ──────┤
+          │                 └─── @OnMethodExit
+          │
+          │                 ┌─── meta ───────┼─── @Origin
+          │                 │
+          │                 │                ┌─── @This
+          │                 │                │
+Advice ───┤                 │                ├─── @Argument
+          │                 ├─── argument ───┤
+          │                 │                ├─── @AllArguments
+          │                 │                │
+          │                 │                └─── @Unused
+          │                 │
+          │                 ├─── local ──────┼─── @Local
+          └─── parameter ───┤
+                            │                ┌─── @Return
+                            │                │
+                            ├─── exit ───────┼─── @Thrown
+                            │                │
+                            │                └─── @StubValue
+                            │
+                            ├─── field ──────┼─── @FieldValue
+                            │
+                            │
+                            │                ┌─── @Enter
+                            └─── advice ─────┤
+                                             └─── @Exit
+```
+
+```text
+                                 ┌─── meta ─────┼─── @Advice.Origin
+                                 │
+                                 ├─── field ────┼─── @Advice.FieldValue
+          ┌─── Both ─────────────┤
+          │                      │              ┌─── instance ───┼─── @Advice.This
+          │                      │              │
+          │                      │              │                ┌─── @Advice.Argument
+          │                      └─── method ───┼─── arg ────────┤
+          │                                     │                └─── @Advice.AllArguments
+Advice ───┤                                     │
+          │                                     └─── local ──────┼─── @Advice.Local
+          │
+          ├─── @OnMethodEnter
+          │
+          │                      ┌─── local ───┼─── @Advice.Enter
+          │                      │
+          └─── @OnMethodExit ────┤                               ┌─── @Advice.Return
+                                 │             ┌─── return ──────┤
+                                 └─── exit ────┤                 └─── @Advice.StubValue
+                                               │
+                                               └─── exception ───┼─── @Advice.Thrown
+```
+
 ## 示例
 
 ### AsmVisitorWrapper
@@ -36,12 +162,12 @@ import net.bytebuddy.asm.Advice;
 
 public class Expert {
     @Advice.OnMethodEnter
-    public static void methodEnter() {
+    static void methodAbc() {
         System.out.println(">>> >>> >>> >>> >>> >>> >>> >>> >>> Method Enter");
     }
 
     @Advice.OnMethodExit
-    public static void methodExit() {
+    static void methodXyz() {
         System.out.println("<<< <<< <<< <<< <<< <<< <<< <<< <<< Method Exit");
     }
 }
@@ -101,12 +227,12 @@ import net.bytebuddy.asm.Advice;
 
 public class Expert {
     @Advice.OnMethodEnter
-    public static void methodEnter() {
+    static void methodAbc() {
         System.out.println(">>> >>> >>> >>> >>> >>> >>> >>> >>> Method Enter");
     }
 
     @Advice.OnMethodExit
-    public static void methodExit() {
+    static void methodXyz() {
         System.out.println("<<< <<< <<< <<< <<< <<< <<< <<< <<< Method Exit");
     }
 }

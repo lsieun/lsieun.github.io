@@ -3,6 +3,42 @@ title: "URL"
 sequence: "102"
 ---
 
+```text
+       ┌─── static ───────┼─── handler ───┼─── setURLStreamHandlerFactory()
+       │
+       │                                      ┌─── getProtocol()
+       │                                      │
+       │                                      ├─── getUserInfo()
+       │                                      │
+       │                                      ├─── getAuthority()
+       │                                      │
+       │                                      ├─── getHost()
+       │                                      │
+URL ───┤                                      │                      ┌─── getPort()
+       │                  ┌─── parts ─────────┼─── port ─────────────┤
+       │                  │                   │                      └─── getDefaultPort()
+       │                  │                   │
+       │                  │                   ├─── getPath()
+       │                  │                   │
+       │                  │                   ├─── getFile()
+       │                  │                   │
+       │                  │                   ├─── getQuery()
+       │                  │                   │
+       │                  │                   └─── getRef()
+       └─── non-static ───┤
+                          │                   ┌─── openConnection()
+                          │                   │
+                          ├─── connection ────┼─── InputStream ────────┼─── openStream()
+                          │                   │
+                          │                   └─── Object ─────────────┼─── getContent()
+                          │
+                          ├─── compare.two ───┼─── sameFile()
+                          │
+                          │                   ┌─── str ───┼─── toExternalForm()
+                          └─── convert ───────┤
+                                              └─── uri ───┼─── toURI()
+```
+
 The `java.net.URL` class is an abstraction of a **Uniform Resource Locator**
 such as `http://www.lolcats.com/` or `ftp://ftp.redhat.com/pub/`.
 It extends `java.lang.Object`, and it is a `final` class that cannot be subclassed.

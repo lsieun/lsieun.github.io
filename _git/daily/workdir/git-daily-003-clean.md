@@ -3,7 +3,8 @@ title: "清理文件"
 sequence: "103"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
+
 
 ## clean
 

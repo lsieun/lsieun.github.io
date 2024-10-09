@@ -1,8 +1,8 @@
 ---
 title: "Java Agent in Action"
-permalink: /java-agent/index.html
 image: /assets/images/java/agent/java-agent-in-action.png
 tags: java agent instrumentation
+permalink: /java-agent/java-agent-index.html
 ---
 
 Java agent is a powerful tool introduced with Java 5.

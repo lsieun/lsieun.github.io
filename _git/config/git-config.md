@@ -2,7 +2,7 @@
 title: "git config"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 ```text

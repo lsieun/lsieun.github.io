@@ -2,7 +2,7 @@
 title: "git log"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 ## view the commit history

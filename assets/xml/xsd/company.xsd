@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="https://lsieun.github.io/assets/xml/company"
+            xmlns="https://lsieun.github.io/assets/xml/company"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified">
+
+    <xsd:element name="company" type="companyType"/>
+    <xsd:complexType name="companyType">
+        <xsd:sequence>
+            <xsd:element name="website" type="xsd:string" minOccurs="1"/>
+            <xsd:element ref="department" minOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute name="since" type="xsd:date"/>
+    </xsd:complexType>
+
+    <xsd:element name="department" type="departmentType"/>
+    <xsd:complexType name="departmentType">
+        <xsd:sequence>
+            <xsd:element ref="employee" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="employee" type="employeeType"/>
+    <xsd:complexType name="employeeType">
+        <xsd:sequence>
+            <xsd:element name="first-name" type="xsd:string"/>
+            <xsd:element name="last-name" type="xsd:string"/>
+            <xsd:element name="age" type="ageType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="ageType">
+        <xsd:restriction base="xsd:integer">
+            <xsd:minInclusive value="1"/>
+            <xsd:maxInclusive value="100"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

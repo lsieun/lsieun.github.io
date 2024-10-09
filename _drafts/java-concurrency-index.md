@@ -1,7 +1,7 @@
 ---
 title: "Java Concurrency"
 image: /assets/images/java/concurrency/concurrency-vs-parallelism.jpg
-permalink: /java-concurrency.html
+permalink: /java/java-concurrency-index.html
 ---
 
 Java Concurrency. The more ordering we can ensure, the better we can reason about the behaviour of the program.
@@ -21,7 +21,7 @@ Java Concurrency. The more ordering we can ensure, the better we can reason abou
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/basic/overview/'" |
+where_exp: "item", "item.path contains 'java/concurrency/basic/overview/'" |
 sort: "sequence"
 %}
 <ol>
@@ -36,7 +36,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/basic/concept/'" |
+where_exp: "item", "item.path contains 'java/concurrency/basic/concept/'" |
 sort: "sequence"
 %}
 <ol>
@@ -51,7 +51,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/basic/other/'" |
+where_exp: "item", "item.path contains 'java/concurrency/basic/other/'" |
 sort: "sequence"
 %}
 <ol>
@@ -83,7 +83,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/hardware/cpu/'" |
+where_exp: "item", "item.path contains 'java/concurrency/hardware/cpu/'" |
 sort: "sequence"
 %}
 <ol>
@@ -98,7 +98,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/hardware/memory/'" |
+where_exp: "item", "item.path contains 'java/concurrency/hardware/memory/'" |
 sort: "sequence"
 %}
 <ol>
@@ -113,7 +113,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/hardware/os/'" |
+where_exp: "item", "item.path contains 'java/concurrency/hardware/os/'" |
 sort: "sequence"
 %}
 <ol>
@@ -128,7 +128,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/hardware/process/'" |
+where_exp: "item", "item.path contains 'java/concurrency/hardware/process/'" |
 sort: "sequence"
 %}
 <ol>
@@ -162,7 +162,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/thread/individual/basic/'" |
+where_exp: "item", "item.path contains 'java/concurrency/thread/individual/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -177,7 +177,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/thread/individual/lifecycle/'" |
+where_exp: "item", "item.path contains 'java/concurrency/thread/individual/lifecycle/'" |
 sort: "sequence"
 %}
 <ol>
@@ -192,7 +192,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/thread/individual/trivial/'" |
+where_exp: "item", "item.path contains 'java/concurrency/thread/individual/trivial/'" |
 sort: "sequence"
 %}
 <ol>
@@ -207,7 +207,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/thread/individual/faq/'" |
+where_exp: "item", "item.path contains 'java/concurrency/thread/individual/faq/'" |
 sort: "sequence"
 %}
 <ol>
@@ -242,7 +242,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/thread/pool/basic/'" |
+where_exp: "item", "item.path contains 'java/concurrency/thread/pool/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -257,7 +257,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/thread/pool/pool/'" |
+where_exp: "item", "item.path contains 'java/concurrency/thread/pool/pool/'" |
 sort: "sequence"
 %}
 <ol>
@@ -272,7 +272,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/thread/pool/share/'" |
+where_exp: "item", "item.path contains 'java/concurrency/thread/pool/share/'" |
 sort: "sequence"
 %}
 <ol>
@@ -308,7 +308,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/shared-resource/safety/'" |
+where_exp: "item", "item.path contains 'java/concurrency/shared-resource/safety/'" |
 sort: "sequence"
 %}
 <ol>
@@ -340,7 +340,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/shared-resource/lock/basic/'" |
+where_exp: "item", "item.path contains 'java/concurrency/shared-resource/lock/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -355,7 +355,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/shared-resource/lock/synchronized/'" |
+where_exp: "item", "item.path contains 'java/concurrency/shared-resource/lock/synchronized/'" |
 sort: "sequence"
 %}
 <ol>
@@ -370,7 +370,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/shared-resource/lock/juc-lock/'" |
+where_exp: "item", "item.path contains 'java/concurrency/shared-resource/lock/juc-lock/'" |
 sort: "sequence"
 %}
 <ol>
@@ -385,7 +385,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/shared-resource/lock/vs/'" |
+where_exp: "item", "item.path contains 'java/concurrency/shared-resource/lock/vs/'" |
 sort: "sequence"
 %}
 <ol>
@@ -414,7 +414,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/shared-resource/dead-lock/'" |
+where_exp: "item", "item.path contains 'java/concurrency/shared-resource/dead-lock/'" |
 sort: "sequence"
 %}
 <ol>
@@ -446,7 +446,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/shared-resource/cas/basic/'" |
+where_exp: "item", "item.path contains 'java/concurrency/shared-resource/cas/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -461,7 +461,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/shared-resource/cas/num/'" |
+where_exp: "item", "item.path contains 'java/concurrency/shared-resource/cas/num/'" |
 sort: "sequence"
 %}
 <ol>
@@ -476,7 +476,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/shared-resource/cas/obj/'" |
+where_exp: "item", "item.path contains 'java/concurrency/shared-resource/cas/obj/'" |
 sort: "sequence"
 %}
 <ol>
@@ -491,7 +491,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/shared-resource/cas/array/'" |
+where_exp: "item", "item.path contains 'java/concurrency/shared-resource/cas/array/'" |
 sort: "sequence"
 %}
 <ol>
@@ -521,7 +521,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/shared-resource/threadlocal/'" |
+where_exp: "item", "item.path contains 'java/concurrency/shared-resource/threadlocal/'" |
 sort: "sequence"
 %}
 <ol>
@@ -536,7 +536,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/shared-resource/coll/'" |
+where_exp: "item", "item.path contains 'java/concurrency/shared-resource/coll/'" |
 sort: "sequence"
 %}
 <ol>
@@ -568,7 +568,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/cooperate/basic/'" |
+where_exp: "item", "item.path contains 'java/concurrency/cooperate/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -583,7 +583,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/cooperate/juc/'" |
+where_exp: "item", "item.path contains 'java/concurrency/cooperate/juc/'" |
 sort: "sequence"
 %}
 <ol>
@@ -612,7 +612,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/cooperate/data/'" |
+where_exp: "item", "item.path contains 'java/concurrency/cooperate/data/'" |
 sort: "sequence"
 %}
 <ol>
@@ -642,7 +642,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/cooperate/pattern/execution-order/'" |
+where_exp: "item", "item.path contains 'java/concurrency/cooperate/pattern/execution-order/'" |
 sort: "sequence"
 %}
 <ol>
@@ -657,7 +657,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/cooperate/pattern/data-exchange/'" |
+where_exp: "item", "item.path contains 'java/concurrency/cooperate/pattern/data-exchange/'" |
 sort: "sequence"
 %}
 <ol>
@@ -686,7 +686,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/concurrency/problems/'" |
+where_exp: "item", "item.path contains 'java/concurrency/problems/'" |
 sort: "sequence"
 %}
 <ol>
@@ -703,6 +703,11 @@ sort: "sequence"
 </table>
 
 ## Reference
+
+书籍参考
+
+- [ ] 《Mastering Design Patterns in Java: Essential Skills》 Ed Norex
+    - [ ] Chapter 5. Concurrency Patterns in Java: Managing Multi-Threading and Synchronization
 
 - [Baeldung Tag: Java Concurrency](https://www.baeldung.com/category/java/java-concurrency)
     - lifecycle
@@ -739,8 +744,10 @@ sort: "sequence"
 - [Alibaba Java Coding Guidelines](https://alibaba.github.io/Alibaba-Java-Coding-Guidelines/)
 - [SEI CERT Oracle Coding Standard for Java](https://wiki.sei.cmu.edu/confluence/display/java/SEI+CERT+Oracle+Coding+Standard+for+Java)
 
-- [Java Multithreading for Senior Engineering Interviews](https://www.educative.io/courses/java-multithreading-for-senior-engineering-interviews) 付费内容
-  - [Annotations](https://www.educative.io/courses/java-multithreading-for-senior-engineering-interviews/annotations) @ThreadSafe
+- [Java Multithreading for Senior Engineering Interviews](https://www.educative.io/courses/java-multithreading-for-senior-engineering-interviews)
+  付费内容
+    - [Annotations](https://www.educative.io/courses/java-multithreading-for-senior-engineering-interviews/annotations)
+      @ThreadSafe
 - [Guide to Multithreading Annotations in Java](https://medium.com/double-pointer/guide-to-multithreading-annotations-in-java-a61b94e6bf23)
 
 - [Race Conditions and Critical Sections](https://jenkov.com/tutorials/java-concurrency/race-conditions-and-critical-sections.html)
@@ -748,3 +755,4 @@ sort: "sequence"
 - [Java并发全解之并发理论概述](https://www.bilibili.com/video/BV15j411A78S/)
 
 - [全网最硬核 Java 新内存模型解析与实验单篇版（不断更新QA中）](https://juejin.cn/post/7080869319407566879)
+

@@ -3,7 +3,7 @@ title: "用户信息配置"
 sequence: "101"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 ## config

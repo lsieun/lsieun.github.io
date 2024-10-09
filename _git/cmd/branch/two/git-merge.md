@@ -2,7 +2,7 @@
 title: "git merge"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 ## Merging branches and always creating a merge commit

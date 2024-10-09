@@ -2,6 +2,6 @@
 title: "gh"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 

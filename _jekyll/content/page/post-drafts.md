@@ -1,9 +1,9 @@
 ---
 title: "Post: Drafts"
-categories: jekyll
+sequence: "103"
 ---
 
-[UP]({% link _posts/2021-04-20-jekyll.md %})
+[UP](/jekyll/jekyll-index.html)
 
 ## folder and filename
 

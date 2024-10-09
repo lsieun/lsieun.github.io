@@ -1,7 +1,7 @@
 ---
 title: "Java Core"
 image: /assets/images/java/core/learn-java.jpg
-permalink: /java-core.html
+permalink: /java/java-core-index.html
 ---
 
 Java Core covers the basic concept of Java programming language.
@@ -10,13 +10,13 @@ Java Core covers the basic concept of Java programming language.
 
 Basic:
 
-- [JSL, JSR, JEP]({% link _java-core/glossary/jls-jsr-jep.md %})
+- [JSL, JSR, JEP]({% link _java/glossary/jls-jsr-jep.md %})
 
 Java Lang
 
 {%
-assign filtered_posts = site.java-core |
-where_exp: "item", "item.url contains '/java-core/java-lang/'" |
+assign filtered_posts = site.java |
+where_exp: "item", "item.path contains 'java/java-lang/'" |
 sort: "sequence"
 %}
 <ol>
@@ -30,31 +30,25 @@ sort: "sequence"
 
 Basic Type:
 
-- [Number]({% link _java-core/java-number-index.md %})
-- [Text]({% link _java-core/java-text-index.md %})
+- [Number]({% link _java/java-number-index.md %})
+- [Text]({% link _java/java-text-index.md %})
 
 
 Type:
 
-- [Annotation]({% link _java-core/java-annotation-index.md %})
-- [Enum]({% link _java-core/java-enum-index.md %})
-- [Generic]({% link _java-core/java-generic-index.md %})
-- [Interface]({% link _java-core/java-interface-index.md %})
-- [Nested]({% link _java-core/java-nested-classes-index.md %})
-- [Reflection]({% link _java-core/java-reflection-index.md %})
-- [Sealed]({% link _java-core/java-sealed-index.md %})
-- [Serialization]({% link _java-core/java-serialization-index.md %})
+
+
 
 Utils:
 
-- [Resource]({% link _java-core/resource-index.md %})
-- [Properties]({% link _java-core/properties-index.md %})
-- [Invoke]({% link _java-core/java-invoke-index.md %})
+- [Regex]({% link _java/java-regex-index.md %})
+- [Serialization]({% link _java/java-serialization-index.md %})
+- [Properties]({% link _java/properties-index.md %})
 
 
 Glossary:
 
-- [Glossary]({% link _java-core/glossary-index.md %})
+- [Glossary]({% link _java/glossary-index.md %})
 
 ## References
 

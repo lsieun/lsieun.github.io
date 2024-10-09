@@ -3,7 +3,8 @@ title: "取消修改"
 sequence: "101"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
+
 
 ## checkout
 

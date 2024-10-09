@@ -12,25 +12,31 @@
 - [x] 依赖 box-drawing-utils
 - [x] isVisible 和 isAccessible()
 - [x] 实现打印语句
+- [x] net.bytebuddy.asm.Advice.WithCustomMapping
+- [ ] Advice - Assigner
 - [ ] InvokeDynamic
 - [ ] 使用 ASM 自动生成 ByteBuddy 的代码
 - [ ] AuxiliaryType
 - [ ] Implementation
-  - [ ] 有哪些子类
-  - [ ] Implementation.Target 是什么？
-  - [ ] SubclassImplementationTarget
-  - [ ] RebaseImplementationTarget
+    - [ ] 有哪些子类
+    - [ ] Implementation.Target 是什么？
+    - [ ] SubclassImplementationTarget
+    - [ ] RebaseImplementationTarget
 - [ ] JavaConstant
 - [ ] TypeProxy implements AuxiliaryType
 - [ ] TypeResolutionStrategy <-- DynamicType.Builder
 - [ ] TypeWriter
 - [ ] DynamicType.Builder.make(TypeResolutionStrategy.Passive.INSTANCE)
 - [ ] SubclassDynamicTypeBuilder
-- [ ] 
+- [ ] net.bytebuddy.TypeCache
+- [ ] net.bytebuddy.asm.MemberSubstitution
+- [ ] net.bytebuddy.implementation.attribute.TypeAttributeAppender
+- [ ] net.bytebuddy.implementation.attribute.FieldAttributeAppender
+- [ ] net.bytebuddy.implementation.attribute.MethodAttributeAppender
 - MethodGraph 和 MethodLocator
 - MethodCall
 - Agent 文章整理
-- [x] net.bytebuddy.asm.Advice.WithCustomMapping
+- [x] 
 - ClassLoadingStrategy.BOOTSTRAP_LOADER
 
 简而言之，ByteBuddy，或者任何其它技术，都是“易于使用，难以精通”！
@@ -51,15 +57,31 @@
     - Extention ClassLoader
     - App ClassLoader
 - ClassLoadingStrategy
-- MemberSubstitution
-
 
 - MethodDelegationBinder 和 TargetMethodAnnotationDrivenBinder 是进行方法绑定时的概念，需要解决清楚
+
+## 思路
+
+- [ ] 概念：
+- [ ] 本质：
+- [ ] 解读
+    - [ ] API 如何使用，编写代码的思路是什么
+    - [ ] 当前类它自身包含的方法、子类型有哪些
+    - [ ] 表达形式
+        - [ ] UML 表示
+        - [ ] box-drawing
+    - [ ] 注意事项是什么
+- [ ] 学习
+  - [ ] 快速开始
+  - [ ] 普通场景
+  - [ ] 特殊场景
 
 ## TODO
 
 - net.bytebuddy.dynamic.scaffold.TypeWriter#DUMP_PROPERTY: String DUMP_PROPERTY = "net.bytebuddy.dump"
 - 读取注解 Annotation
+
+## 设计模式
 
 ByteBuddy是一个动态的Java字节码生成库，它使得在运行时生成和操作Java类变得更为简单。
 这个库广泛使用了几种设计模式来提供灵活、强大且易于使用的API。以下是一些在ByteBuddy中常见的设计模式：

@@ -1,7 +1,7 @@
 ---
 title: "JVM"
 image: /assets/images/java/jvm/duke-ride-motor-bike.jpg
-permalink: /jvm.html
+permalink: /jvm/jvm-index.html
 ---
 
 Java Virtual Machine
@@ -12,98 +12,6 @@ Java Virtual Machine
 - 垃圾回收器
 - JIT（热点代码缓存）
 
-## ClassFile
-
-{%
-assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/jvm/classfile/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-
-## ClassLoader
-
-<table>
-    <thead>
-    <tr>
-        <th>Basic</th>
-        <th>ClassLoader</th>
-        <th>Resource</th>
-        <th>FAQ</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>
-{%
-assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/jvm/classloader-subsystem/basic/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-        <td>
-{%
-assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/jvm/classloader-subsystem/classloader/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-        <td>
-{%
-assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/jvm/classloader-subsystem/resource/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-        <td>
-{%
-assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/jvm/classloader-subsystem/faq/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-    </tr>
-    </tbody>
-</table>
 
 ## Memory
 
@@ -119,8 +27,8 @@ sort: "sequence"
     <tr>
         <td>
 {%
-assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/jvm/memory/basic/'" |
+assign filtered_posts = site.jvm |
+where_exp: "item", "item.path contains 'jvm/memory/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -134,8 +42,8 @@ sort: "sequence"
         </td>
         <td>
 {%
-assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/jvm/memory/heap/'" |
+assign filtered_posts = site.jvm |
+where_exp: "item", "item.path contains 'jvm/memory/heap/'" |
 sort: "sequence"
 %}
 <ol>
@@ -149,8 +57,8 @@ sort: "sequence"
         </td>
         <td>
 {%
-assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/jvm/memory/other/'" |
+assign filtered_posts = site.jvm |
+where_exp: "item", "item.path contains 'jvm/memory/other/'" |
 sort: "sequence"
 %}
 <ol>
@@ -169,8 +77,8 @@ sort: "sequence"
 ## Engine
 
 {%
-assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/jvm/engine/'" |
+assign filtered_posts = site.jvm |
+where_exp: "item", "item.path contains 'jvm/engine/'" |
 sort: "sequence"
 %}
 <ol>
@@ -196,8 +104,8 @@ sort: "sequence"
     <tr>
         <td>
 {%
-assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/jvm/gc/basic/'" |
+assign filtered_posts = site.jvm |
+where_exp: "item", "item.path contains 'jvm/gc/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -211,8 +119,8 @@ sort: "sequence"
         </td>
         <td>
 {%
-assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/jvm/gc/collector/'" |
+assign filtered_posts = site.jvm |
+where_exp: "item", "item.path contains 'jvm/gc/collector/'" |
 sort: "sequence"
 %}
 <ol>
@@ -226,8 +134,8 @@ sort: "sequence"
         </td>
         <td>
 {%
-assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/jvm/gc/faq/'" |
+assign filtered_posts = site.jvm |
+where_exp: "item", "item.path contains 'jvm/gc/faq/'" |
 sort: "sequence"
 %}
 <ol>
@@ -246,8 +154,8 @@ sort: "sequence"
 ## Performance
 
 {%
-assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/jvm/performance/'" |
+assign filtered_posts = site.jvm |
+where_exp: "item", "item.path contains 'jvm/performance/'" |
 sort: "sequence"
 %}
 <ol>
@@ -262,8 +170,8 @@ sort: "sequence"
 ## Sources
 
 {%
-assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/jvm/source/'" |
+assign filtered_posts = site.jvm |
+where_exp: "item", "item.path contains 'jvm/source/'" |
 sort: "sequence"
 %}
 <ol>
@@ -306,3 +214,5 @@ sort: "sequence"
     - []()
 
 - [JVM Troubleshooting](http://ksoong.org/troubleshooting/)
+
+- [Where Does Java’s String Constant Pool Live, the Heap or the Stack?](https://www.baeldung.com/java-string-constant-pool-heap-stack)

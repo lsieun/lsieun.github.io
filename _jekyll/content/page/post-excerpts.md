@@ -1,9 +1,9 @@
 ---
 title: "Post: Excerpts"
-categories: jekyll
+sequence: "104"
 ---
 
-[UP]({% link _posts/2021-04-20-jekyll.md %})
+[UP](/jekyll/jekyll-index.html)
 
 You can access a snippet of a posts's content by using `excerpt` variable on a post.
 

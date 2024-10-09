@@ -3,7 +3,7 @@ title: "Liquid: Tags(if)"
 categories: jekyll
 ---
 
-[UP]({% link _posts/2021-04-20-jekyll.md %})
+[UP](/jekyll/jekyll-index.html)
 
 ## Basic operators
 

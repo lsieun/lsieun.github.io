@@ -2,7 +2,7 @@
 title: "git cherry"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 If you have a workflow in which you don't merge your commits to other branches but rather have another person do it,

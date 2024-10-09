@@ -3,7 +3,7 @@ title: "git diff"
 sequence: "102"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 ## Viewing the differences between commits: git diff

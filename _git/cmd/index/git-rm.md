@@ -3,7 +3,7 @@ title: "git rm"
 sequence: "103"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 Removing version-controlled files is safer than removing non-version-controlled files

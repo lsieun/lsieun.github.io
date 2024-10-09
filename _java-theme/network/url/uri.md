@@ -3,6 +3,56 @@ title: "URI"
 sequence: "101"
 ---
 
+```text
+       ┌─── static ───────┼─── instance ───┼─── create()
+       │
+       │                                                      ┌─── getScheme()
+       │                                                      │
+       │                                    ┌─── scheme ──────┼─── getRawSchemeSpecificPart()
+       │                                    │                 │
+       │                                    │                 └─── getSchemeSpecificPart()
+       │                                    │
+       │                                    │                 ┌─── getRawAuthority()
+       │                                    │                 │
+       │                                    ├─── authority ───┼─── getAuthority()
+       │                                    │                 │
+       │                                    │                 └─── parseServerAuthority()
+       │                                    │
+       │                                    │                 ┌─── getRawUserInfo()
+URI ───┤                                    ├─── user-info ───┤
+       │                                    │                 └─── getUserInfo()
+       │                  ┌─── component ───┤
+       │                  │                 ├─── host ────────┼─── getHost()
+       │                  │                 │
+       │                  │                 ├─── port ────────┼─── getPort()
+       │                  │                 │
+       │                  │                 │                 ┌─── getRawPath()
+       │                  │                 ├─── path ────────┤
+       │                  │                 │                 └─── getPath()
+       │                  │                 │
+       │                  │                 │                 ┌─── getRawQuery()
+       │                  │                 ├─── query ───────┤
+       │                  │                 │                 └─── getQuery()
+       │                  │                 │
+       │                  │                 │                 ┌─── getRawFragment()
+       └─── non-static ───┤                 └─── fragment ────┤
+                          │                                   └─── getFragment()
+                          │
+                          │                 ┌─── normal ─────┼─── normalize()
+                          ├─── scenario ────┤
+                          │                 │                ┌─── resolve()
+                          │                 └─── relative ───┤
+                          │                                  └─── relativize()
+                          │
+                          │                 ┌─── isAbsolute()
+                          ├─── check ───────┤
+                          │                 └─── isOpaque()
+                          │
+                          │                 ┌─── url ───┼─── toURL()
+                          └─── convert ─────┤
+                                            └─── str ───┼─── toASCIIString()
+```
+
 The `URI` class is an immutable representation of a **Uniform Resource Identifier (URI)**.
 
 A **Uniform Resource Identifier (URI)** is a string of characters in a particular syntax that identifies a resource.
@@ -55,7 +105,17 @@ There is no specific syntax that applies to the **scheme-specific parts** of all
 //authority/path?query
 ```
 
-The `authority` part of the URI names the authority responsible for resolving the rest of the URI. For instance, the URI `http://www.ietf.org/rfc/rfc3986.txt` has the scheme `http`, the authority `www.ietf.org`, and the path `/rfc/rfc3986.txt` (initial slash included). This means the server at `www.ietf.org` is responsible for mapping the path `/rfc/rfc3986.txt` to a resource. This URI does not have a query part. The URI `http://www.powells.com/cgi-bin/biblio?inkey=62-1565928709-0` has the scheme `http`, the authority `www.powells.com`, the path `/cgi-bin/biblio`, and the query `inkey=62-1565928709-0`. The URI `urn:isbn:156592870` has the scheme `urn` but doesn't follow the hierarchical `//authority/path?query` form for scheme-specific parts.
+The `authority` part of the URI names the authority responsible for resolving the rest of the URI.
+For instance, the URI `http://www.ietf.org/rfc/rfc3986.txt` has the scheme `http`,
+the authority `www.ietf.org`, and the path `/rfc/rfc3986.txt` (initial slash included).
+This means the server at `www.ietf.org` is responsible for mapping the path `/rfc/rfc3986.txt` to a resource.
+This URI does not have a query part.
+
+The URI `http://www.powells.com/cgi-bin/biblio?inkey=62-1565928709-0` has the scheme `http`,
+the authority `www.powells.com`, the path `/cgi-bin/biblio`, and the query `inkey=62-1565928709-0`.
+
+The URI `urn:isbn:156592870` has the scheme `urn`
+but doesn't follow the hierarchical `//authority/path?query` form for scheme-specific parts.
 
 ### charset
 
@@ -63,7 +123,12 @@ The `authority` part of the URI names the authority responsible for resolving th
 scheme://authority/path?query
 ```
 
-The scheme part is composed of **lowercase letters**, **digits**, and **the plus sign**, **period**, and **hyphen**. The other three parts of a typical URI (`authority`, `path`, and `query`) should each be composed of **the ASCII alphanumeric characters** (i.e., the letters `A-Z`, `a-z`, and the digits `0-9`). In addition, the punctuation characters - _ . ! and ~ may also be used. Delimiters such as / ? & and = may be used for their predefined purposes. All other characters, including non-ASCII alphanumerics such as `á` and `ζ` as well as delimiters not being used as delimiters should be escaped by a percent sign (`%`) followed by the hexadecimal codes for the character as encoded in UTF-8. For instance, in UTF-8, `á` is the two bytes `0xC3 0xA1` so it would be encoded as `%c3%a1`. The Chinese character `木` is Unicode code point `0x6728`. In UTF-8, this is encoded as the three bytes `E6`, `9C`, and `A8`. Thus, in a URI it would be encoded as `%E6%9C%A8`.
+The scheme part is composed of **lowercase letters**, **digits**, and **the plus sign**, **period**, and **hyphen**.
+The other three parts of a typical URI (`authority`, `path`, and `query`)
+should each be composed of **the ASCII alphanumeric characters** (i.e., the letters `A-Z`, `a-z`, and the digits `0-9`).
+In addition, the punctuation characters - _ . ! and ~ may also be used.
+Delimiters such as / ? & and = may be used for their predefined purposes.
+All other characters, including non-ASCII alphanumerics such as `á` and `ζ` as well as delimiters not being used as delimiters should be escaped by a percent sign (`%`) followed by the hexadecimal codes for the character as encoded in UTF-8. For instance, in UTF-8, `á` is the two bytes `0xC3 0xA1` so it would be encoded as `%c3%a1`. The Chinese character `木` is Unicode code point `0x6728`. In UTF-8, this is encoded as the three bytes `E6`, `9C`, and `A8`. Thus, in a URI it would be encoded as `%E6%9C%A8`.
 
 If you don't hexadecimally encode non-ASCII characters like this, but just include them directly, then instead of a URI you have an IRI (an Internationalized Resource Identifier). IRIs are easier to type and much easier to read, but a lot of software and protocols expect and support only ASCII URIs.
 
@@ -86,16 +151,23 @@ public class URIRun {
 ## URI vs. URL
 
 
-The `URI` supports parsing and textual manipulation of URI strings but does **not** have any direct **networking capabilities** the way that the `URL` class does.
+The `URI` supports parsing and textual manipulation of URI strings
+but does **not** have any direct **networking capabilities** the way that the `URL` class does.
 
-The advantages of the `URI` class over the `URL` class are that the `URI` class provides **more general facilities** for parsing and manipulating URLs than the `URL` class;
+The advantages of the `URI` class over the `URL` class are that
+the `URI` class provides **more general facilities** for parsing and manipulating URLs than the `URL` class;
 
 - it can represent **relative URIs**, which do **not** include **a scheme (or protocol)**; and
 - it can manipulate URIs that include **unsupported or even unknown schemes**.
 
-A `URI` identifies **the name of a resource**, such as a website, or a file on the Internet. It **may** contain **the name of a resource** and **its location**.
+A `URI` identifies **the name of a resource**, such as a website, or a file on the Internet.
+It **may** contain **the name of a resource** and **its location**.
 
-A `URL` specifies **where a resource is located**, and **how to retrieve it**(这里应该是指protocol). **A protocol** forms the first part of the URL, and specifies **how data is retrieved**. URLs always contain protocol, such as `HTTP`, or `FTP`. For example, the following two URLs use different protocols. The first one uses the `HTTPS` protocol, and the second one uses the `FTP` protocol:
+A `URL` specifies **where a resource is located**, and **how to retrieve it**(这里应该是指protocol).
+**A protocol** forms the first part of the URL, and specifies **how data is retrieved**.
+URLs always contain protocol, such as `HTTP`, or `FTP`.
+For example, the following two URLs use different protocols.
+The first one uses the `HTTPS` protocol, and the second one uses the `FTP` protocol:
 
 - `https://www.packtpub.com/`
 - `ftp://speedtest.tele2.net/`
@@ -116,13 +188,20 @@ There are many schemes that are used with a `URI`, including:
 - `mailto`: This is used as part of a mail service
 - `urn`: This is used to identify a resource by name
 
-The **scheme-specific-part** varies by the scheme that is used. URIs can be categorized as **absolute** or **relative**, or as opaque or hierarchical. These distinctions are not of immediate interest to us here, though Java provides methods to determine whether a URI falls into one of these categories.
+The **scheme-specific-part** varies by the scheme that is used.
+URIs can be categorized as **absolute** or **relative**, or as opaque or hierarchical.
+These distinctions are not of immediate interest to us here,
+though Java provides methods to determine whether a URI falls into one of these categories.
 
 ## Construct URI
 
-Obtain a URI with one of the constructors, which allow a URI to be parsed from a single string, or allow the specification of the individual components of a URI. These constructors can throw URISyntaxException, which is a checked exception.
+Obtain a URI with one of the constructors,
+which allow a URI to be parsed from a single string,
+or allow the specification of the individual components of a URI.
+These constructors can throw URISyntaxException, which is a checked exception.
 
-When using hard-coded URIs (rather than URIs based on user input), you may prefer to use the static `create()` method, which does not throw any checked exceptions.
+When using hard-coded URIs (rather than URIs based on user input),
+you may prefer to use the static `create()` method, which does not throw any checked exceptions.
 
 ## URI Info
 
@@ -136,5 +215,8 @@ The `getRaw()` methods are like the `get()` methods, except that they do not dec
 
 `relativize()` performs the reverse operation. It returns a new URI that represents the same resource as the specified URI argument but is relative to this URI.
 
-Finally, the `toURL()` method converts an absolute URI object to the equivalent `URL`. Since the `URI` class provides superior textual manipulation capabilities for URLs, it can be useful to use the `URI` class to resolve relative URLs (for example) and then convert those `URI` objects to `URL` objects when they are ready for networking.
+Finally, the `toURL()` method converts an absolute URI object to the equivalent `URL`.
+Since the `URI` class provides superior textual manipulation capabilities for URLs,
+it can be useful to use the `URI` class to resolve relative URLs (for example) and
+then convert those `URI` objects to `URL` objects when they are ready for networking.
 

@@ -1,8 +1,9 @@
 ---
 title: "git describe"
+sequence: "101"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 You want to generate a version number for a software project based on existing tags in the repository.

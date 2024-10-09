@@ -2,7 +2,7 @@
 title: "git pull"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 ## Pulling changes from another repository: git pull

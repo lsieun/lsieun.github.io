@@ -3,7 +3,8 @@ title: "git rebase"
 sequence: "104"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
+
 
 {:refdef: style="text-align: center;"}
 ![](/assets/images/git/commit/git-rebase-illustrated.png)

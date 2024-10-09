@@ -1,9 +1,9 @@
 ---
 title: "Link"
-categories: jekyll
+sequence: "101"
 ---
 
-[UP]({% link _posts/2021-04-20-jekyll.md %})
+[UP](/jekyll/jekyll-index.html)
 
 ## Liquid Tags
 

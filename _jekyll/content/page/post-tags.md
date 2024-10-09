@@ -1,9 +1,9 @@
 ---
 title: "Post: Tags"
-categories: jekyll
+sequence: "106"
 ---
 
-[UP]({% link _posts/2021-04-20-jekyll.md %})
+[UP](/jekyll/jekyll-index.html)
 
 Jekyll has first class support for `tags` and `categories` in blog posts.
 

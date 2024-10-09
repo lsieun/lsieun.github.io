@@ -1,4 +1,14 @@
+jvms
+javaspec
+oralogo
+Fieldref
+Methodref
 nop
+aconst
+iconst
+lconst
+fconst
+dconst
 aconst_null
 iconst_m1
 iconst_0

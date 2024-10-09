@@ -1,9 +1,9 @@
 ---
 title: "Front Matter Defaults"
-categories: jekyll
+sequence: "102"
 ---
 
-[UP]({% link _posts/2021-04-20-jekyll.md %})
+[UP](/jekyll/jekyll-index.html)
 
 
 ## References

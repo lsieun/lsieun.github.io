@@ -3,7 +3,7 @@ title: "Variables: Global"
 categories: jekyll
 ---
 
-[UP]({% link _posts/2021-04-20-jekyll.md %})
+[UP](/jekyll/jekyll-index.html)
 
 - `site`: Site wide information + configuration settings from `_config.yml`.
   See [Site Variables]({% link _jekyll/liquid/variables-site.md %}) details.

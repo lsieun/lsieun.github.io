@@ -1,7 +1,9 @@
 ---
 title: "Link: permalink"
-categories: jekyll
+sequence: "102"
 ---
+
+[UP](/jekyll/jekyll-index.html)
 
 ## Collections
 

@@ -2,7 +2,7 @@
 title: "merge conflict"
 ---
 
-[UP](/git.html)
+[UP](/git/git-index.html)
 
 
 merge，根据来源区分：两个 local branch 进行 merge，或者一个 local branch 和一个 remote branch 进行 merge。
