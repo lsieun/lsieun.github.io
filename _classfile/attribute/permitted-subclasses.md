@@ -1,6 +1,6 @@
 ---
 title: "PermittedSubclasses"
-sequence: "102"
+sequence: "103"
 ---
 
 The Java programming language uses the modifier `sealed` to indicate a class or interface

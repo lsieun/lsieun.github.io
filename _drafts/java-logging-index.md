@@ -1,7 +1,7 @@
 ---
 title: "Java Logging"
 image: /assets/images/java/log/log-running.jpg
-permalink: /java-logging.html
+permalink: /java/java-logging-index.html
 ---
 
 Logging is the process of printing or recording the activities in an application
@@ -22,7 +22,7 @@ which helps the developers to understand and analyze when there are any unexpect
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/logging/slf4j/basic/'" |
+where_exp: "item", "item.path contains 'java/logging/slf4j/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -37,7 +37,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/logging/slf4j/conf/'" |
+where_exp: "item", "item.path contains 'java/logging/slf4j/conf/'" |
 sort: "sequence"
 %}
 <ol>
@@ -52,7 +52,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/logging/slf4j/advanced/'" |
+where_exp: "item", "item.path contains 'java/logging/slf4j/advanced/'" |
 sort: "sequence"
 %}
 <ol>
@@ -84,7 +84,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/logging/logback/basic/'" |
+where_exp: "item", "item.path contains 'java/logging/logback/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -99,7 +99,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/logging/logback/conf/'" |
+where_exp: "item", "item.path contains 'java/logging/logback/conf/'" |
 sort: "sequence"
 %}
 <ol>
@@ -114,7 +114,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/logging/logback/extra/'" |
+where_exp: "item", "item.path contains 'java/logging/logback/extra/'" |
 sort: "sequence"
 %}
 <ol>

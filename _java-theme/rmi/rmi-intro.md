@@ -5,6 +5,8 @@ sequence: "101"
 
 [UP]({% link _java-theme/java-rmi-index.md %})
 
+在 IntelliJ IDEA 的 `lib\util_rt.jar` 里，在 `com.intellij.execution.rmi` 包下有一些类，我觉得，可能是学习的资料。
+
 The RMI-related classes and interfaces are in the `java.rmi` module.
 
 ## What Is Java Remote Method Invocation?

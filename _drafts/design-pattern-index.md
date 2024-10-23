@@ -340,4 +340,3 @@ Bilibili
 - [深入解读 23 种设计模式](https://www.bilibili.com/video/BV1fR4y1N74H)
 
 - [设计模式之美](https://github.com/jianglinyang8/beauty-of-design-pattern)
-

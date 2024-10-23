@@ -752,6 +752,8 @@ Oracle相关文档：
 
 - [Static Code Analysis in Java](https://www.baeldung.com/java-static-code-analysis-tutorial)
 
+- [How to Compile Java to WASM (Web Assembly)](https://www.baeldung.com/java-wasm-web-assembly)
+
 Java字节码交流群：
 
 {:refdef: style="text-align: center;"}

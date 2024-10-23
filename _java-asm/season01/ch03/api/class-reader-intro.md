@@ -498,6 +498,36 @@ public void accept(final ClassVisitor classVisitor, final int parsingOptions)
 - `ClassReader.SKIP_FRAMES`
 - `ClassReader.EXPAND_FRAMES`
 
+```text
+                               ┌─── SKIP_CODE
+                               │
+                               ├─── SKIP_DEBUG
+ClassReader::parsingOptions ───┤
+                               ├─── SKIP_FRAMES
+                               │
+                               └─── EXPAND_FRAMES
+```
+
+```text
+                               ┌─── SKIP_CODE ───────┼─── method_info ───┼─── Code
+                               │
+                               │                                         ┌─── SourceFile
+                               │                     ┌─── classfile ─────┤
+                               │                     │                   └─── SourceDebugExtension
+                               ├─── SKIP_DEBUG ──────┤
+                               │                     │                   ┌─── MethodParameters
+                               │                     │                   │
+ClassReader::parsingOptions ───┤                     └─── method_info ───┤                        ┌─── LocalVariableTable
+                               │                                         │                        │
+                               │                                         └─── code ───────────────┼─── LocalVariableTypeTable
+                               │                                                                  │
+                               │                                                                  └─── LineNumberTable
+                               │
+                               ├─── SKIP_FRAMES ─────┼─── method_info ───┼─── code ───┼─── StackMapTable
+                               │
+                               └─── EXPAND_FRAMES ───┼─── method_info ───┼─── code ───┼─── StackMapTable
+```
+
 推荐使用：
 
 - 在调用 `ClassReader.accept()` 方法时，其中的 `parsingOptions` 参数，推荐使用 `ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES`。

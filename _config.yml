@@ -44,6 +44,9 @@ collections:
     output: true
   architecture:
     output: true
+  archunit:
+    output: true
+    permalink: /:collection/:name:output_ext
   article:
     output: true
   bash:
@@ -115,8 +118,9 @@ collections:
     output: true
   hydraulic:
     output: true
-  intellij-idea:
+  ide:
     output: true
+    permalink: /:collection/:name:output_ext
   interview:
     output: true
   java:
@@ -132,8 +136,6 @@ collections:
   javafx:
     output: true
     permalink: /:collection/:name:output_ext
-  java-module-system:
-    output: true
   java-native:
     output: true
   java-theme:
@@ -163,6 +165,9 @@ collections:
     output: true
   linux:
     output: true
+  lsieun:
+    output: true
+    permalink: /:collection/:name:output_ext
   markdown:
     output: true
     permalink: /:collection/:name:output_ext
@@ -266,6 +271,11 @@ defaults:
   - scope:
       path: ""
       type: "architecture"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "archunit"
     values:
       layout: "post"
   - scope:
@@ -435,7 +445,7 @@ defaults:
       layout: "post"
   - scope:
       path: ""
-      type: "intellij-idea"
+      type: "ide"
     values:
       layout: "post"
   - scope:
@@ -466,11 +476,6 @@ defaults:
   - scope:
       path: ""
       type: "javafx"
-    values:
-      layout: "post"
-  - scope:
-      path: ""
-      type: "java-module-system"
     values:
       layout: "post"
   - scope:
@@ -541,6 +546,11 @@ defaults:
   - scope:
       path: ""
       type: "linux"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "lsieun"
     values:
       layout: "post"
   - scope:

@@ -1,17 +1,26 @@
 ---
 title: "ArchUnit"
 image: /assets/images/archunit/java-land-banner.jpg
-permalink: /arch-unit.html
+permalink: /archunit/archunit-index.html
 ---
 
 Simply put, ArchUnit is a test library
 that allows us to verify that an application adheres to a given set of architectural rules.
 
-## ArchUnit
+## API
 
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">API</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
 {%
-assign filtered_posts = site.java-theme |
-where_exp: "item", "item.url contains '/java-theme/archunit/'" |
+assign filtered_posts = site.archunit |
+where_exp: "item", "item.path contains 'archunit/api/'" |
 sort: "sequence"
 %}
 <ol>
@@ -22,6 +31,132 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+## ArchUnit
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">快速开始</th>
+        <th style="text-align: center;">Class</th>
+        <th style="text-align: center;">Package</th>
+        <th style="text-align: center;">Architecture</th>
+        <th style="text-align: center;">Other</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.archunit |
+where_exp: "item", "item.path contains 'archunit/basic/quick/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.archunit |
+where_exp: "item", "item.path contains 'archunit/basic/clazz/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.archunit |
+where_exp: "item", "item.path contains 'archunit/basic/pkg/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.archunit |
+where_exp: "item", "item.path contains 'archunit/basic/architecture/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.archunit |
+where_exp: "item", "item.path contains 'archunit/basic/other/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+## PlantUML
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Basic</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.archunit |
+where_exp: "item", "item.path contains 'archunit/plantuml/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 ## Reference
 
@@ -31,9 +166,16 @@ sort: "sequence"
     - [ArchUnit User Guide](https://www.archunit.org/userguide/html/000_Index.html)
 - [ArchUnit: Unit test your Java architecture Spring Boot Example](https://www.youtube.com/watch?v=6R8ghUojHHI)
 
+- GitHub
+    - [TNG/ArchUnit](https://github.com/TNG/ArchUnit)
+    - [TNG/ArchUnit-Examples](https://github.com/TNG/ArchUnit-Examples)
 
 - [Baeldung Architecture](https://www.baeldung.com/category/architecture):
     - [Introduction to ArchUnit](https://www.baeldung.com/java-archunit-intro)
+
+- [ReflectoringIo](https://reflectoring.io/)
+    - [Enforcing Your Architecture with ArchUnit](https://reflectoring.io/enforce-architecture-with-arch-unit/)
+    - [Clean Architecture Boundaries with Spring Boot and ArchUnit](https://reflectoring.io/java-components-clean-boundaries/)
 
 - [实战 Arch Unit](https://zhuanlan.zhihu.com/p/107151861)
 
@@ -49,3 +191,4 @@ sort: "sequence"
 - [ArchUnit: Unit test your Java architecture Spring Boot Example](https://www.youtube.com/watch?v=6R8ghUojHHI)
 - [Unit Test Your Java Architecture With ArchUnit by Roland Weisleder](https://www.youtube.com/watch?v=ef0lUToWxI8)
 - [ArchUnit - Unit Testing Architecture and Design](https://www.youtube.com/watch?v=_ZUtb_hsm4Q)
+

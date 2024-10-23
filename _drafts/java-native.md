@@ -98,12 +98,17 @@ sort: "sequence"
 ## Reference
 
 - [Java Native Interface Specification Contents](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/jniTOC.html)
-- [Guide to JNI (Java Native Interface)](https://www.baeldung.com/jni)
+
 - [How to call a C program from Java?](https://javapapers.com/core-java/how-to-call-a-c-program-from-java/)
 - [Java Native Interface (JNI)](https://www3.ntu.edu.sg/home/ehchua/programming/java/javanativeinterface.html)
 - [The Java Native Interface (JNI)](https://www.ibm.com/docs/en/sdk-java-technology/7?topic=components-java-native-interface-jni)
 - [Wiki: Java Native Interface](https://en.wikipedia.org/wiki/Java_Native_Interface)
 - [Program Library HOWTO](https://tldp.org/HOWTO/Program-Library-HOWTO/index.html)
+
+Baeldung
+
+- [Guide to JNI (Java Native Interface)](https://www.baeldung.com/jni)
+- [Using JNA to Access Native Dynamic Libraries](https://www.baeldung.com/java-jna-dynamic-libraries)
 
 Github:
 

@@ -1,6 +1,6 @@
 ---
 title: "InnerClasses 和 NestMembers"
-sequence: "101"
+sequence: "102"
 ---
 
 ## 示例

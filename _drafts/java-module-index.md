@@ -1,17 +1,28 @@
 ---
 title: "Java Platform Module System"
-categories: java
 image: /assets/images/java/module/java-jpms-logo.png
-permalink: /java-module.html
+permalink: /java/java-module-index.html
 ---
 
-Java 9 introduces a new level of abstraction above packages, formally known as the Java Platform Module System (JPMS).
+Java 9 introduces a new level of abstraction above **packages**,
+formally known as the **Java Platform Module System** (**JPMS**).
 
 ## Basic
 
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">Command Line</th>
+        <th style="text-align: center;">Concept</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
 {%
-assign filtered_posts = site.java-module-system |
-where_exp: "item", "item.url contains '/java-module-system/basic/'" |
+assign filtered_posts = site.java |
+where_exp: "item", "item.path contains 'java/module/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -22,12 +33,11 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
-
-## Command-Line
-
+        </td>
+        <td>
 {%
-assign filtered_posts = site.java-module-system |
-where_exp: "item", "item.url contains '/java-module-system/command-line/'" |
+assign filtered_posts = site.java |
+where_exp: "item", "item.path contains 'java/module/cmd/'" |
 sort: "sequence"
 %}
 <ol>
@@ -38,12 +48,11 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
-
-## Migration
-
+        </td>
+        <td>
 {%
-assign filtered_posts = site.java-module-system |
-where_exp: "item", "item.url contains '/java-module-system/migration/'" |
+assign filtered_posts = site.java |
+where_exp: "item", "item.path contains 'java/module/concept/'" |
 sort: "sequence"
 %}
 <ol>
@@ -54,28 +63,27 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
-
-## Service
-
-{%
-assign filtered_posts = site.java-module-system |
-where_exp: "item", "item.url contains '/java-module-system/services/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 ## Reflection
 
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Reflection</th>
+        <th style="text-align: center;">Service</th>
+        <th style="text-align: center;">Migration</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
 {%
-assign filtered_posts = site.java-module-system |
-where_exp: "item", "item.url contains '/java-module-system/reflection/'" |
+assign filtered_posts = site.java |
+where_exp: "item", "item.path contains 'java/module/reflection/'" |
 sort: "sequence"
 %}
 <ol>
@@ -86,12 +94,11 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
-
-## All
-
+        </td>
+        <td>
 {%
-assign filtered_posts = site.java-module-system |
-where_exp: "item", "item.url contains '/java-module-system/'" |
+assign filtered_posts = site.java |
+where_exp: "item", "item.path contains 'java/module/services/'" |
 sort: "sequence"
 %}
 <ol>
@@ -102,6 +109,29 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.java |
+where_exp: "item", "item.path contains 'java/module/migration/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+
 
 JMPS = Java Platform Module System
 
@@ -222,6 +252,8 @@ JDK tools can be used in different phases:
 - Runtime: Use `java` to launch the JVM and execute the byte code.
 
 ## Reference
+
+- [lsieun/learn-java-module](https://github.com/lsieun/learn-java-module)
 
 Ebook
 

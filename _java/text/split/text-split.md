@@ -5,7 +5,7 @@ sequence: "101"
 
 ## String.split()
 
-We'll start with splitting by a comma:
+用逗号（`,`）分隔：
 
 ```java
 import java.util.Arrays;
@@ -22,7 +22,7 @@ public class TextSplit {
 [peter, james, thomas]
 ```
 
-Let's split by a whitespace:
+用空格（` `）分隔：
 
 ```java
 import java.util.Arrays;
@@ -39,7 +39,7 @@ public class TextSplit {
 [car, jeep, scooter]
 ```
 
-Let's also split by a dot:
+用点（`.`）分隔：
 
 ```java
 import java.util.Arrays;

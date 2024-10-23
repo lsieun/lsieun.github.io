@@ -290,6 +290,10 @@ sort: "sequence"
 
 ## 资源共享
 
+{:refdef: style="text-align: center;"}
+![](/assets/images/java/concurrency/pool/thread-pool-executor-illustration.png)
+{:refdef}
+
 ### 线程安全
 
 ```text
@@ -756,3 +760,4 @@ sort: "sequence"
 
 - [全网最硬核 Java 新内存模型解析与实验单篇版（不断更新QA中）](https://juejin.cn/post/7080869319407566879)
 
+- [Introduction to Thread Pools in Java: A Comprehensive Guide](https://delta-dev-software.fr/introduction-to-thread-pools-in-java-a-comprehensive-guide)

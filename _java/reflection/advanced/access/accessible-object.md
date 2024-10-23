@@ -3,6 +3,16 @@ title: "AccessibleObject"
 sequence: "102"
 ---
 
+```java
+public class AccessibleObject implements AnnotatedElement {
+    // @Since 9
+    public final boolean canAccess(Object obj);
+
+    // @Since 9
+    public final boolean trySetAccessible();
+}
+```
+
 ```text
                                                            ┌─── isAccessible()
                                                ┌─── is ────┤
