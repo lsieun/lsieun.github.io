@@ -579,7 +579,7 @@ a + b = 7
 
 本文内容总结如下：
 
-- 第一点，本文的主要目的是希望大家对 Java Agent 有一个整体的印象，因此不需要理解技术细节（特别是 [ASM]({% link _posts/2021-06-01-java-asm.md %})相关内容）。
+- 第一点，本文的主要目的是希望大家对 Java Agent 有一个整体的印象，因此不需要理解技术细节（特别是 [ASM]({% link _posts/2021-06-01-java-asm-index.md %})相关内容）。
 - 第二点，Agent Jar 当中有三个重要组成部分：manifest、Agent Class 和 ClassFileTransformer。
 - 第三点，当使用 `javac` 命令编译时，如果在程序当中使用到了 `jdk.*` 或 `sun.*` 当中的类，要添加 `-XDignore.symbol.file` 选项。
 - 第四点，当使用 `java` 命令加载 Agent Jar 时（Load-Time Instrumentation），需要添加 `-javaagent` 选项。

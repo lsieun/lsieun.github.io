@@ -9,10 +9,13 @@ that allows us to verify that an application adheres to a given set of architect
 
 ## API
 
+### Core
+
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;">API</th>
+        <th style="text-align: center;">Import</th>
+        <th style="text-align: center;">JavaCode</th>
     </tr>
     </thead>
     <tbody>
@@ -20,7 +23,83 @@ that allows us to verify that an application adheres to a given set of architect
         <td>
 {%
 assign filtered_posts = site.archunit |
-where_exp: "item", "item.path contains 'archunit/api/'" |
+where_exp: "item", "item.path contains 'archunit/api/core/import/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.archunit |
+where_exp: "item", "item.path contains 'archunit/api/core/domain/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+### Lang
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Manage</th>
+        <th style="text-align: center;">Match</th>
+        <th style="text-align: center;">Should</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.archunit |
+where_exp: "item", "item.path contains 'archunit/api/rule/manage/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.archunit |
+where_exp: "item", "item.path contains 'archunit/api/rule/match/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.archunit |
+where_exp: "item", "item.path contains 'archunit/api/rule/constraint/'" |
 sort: "sequence"
 %}
 <ol>

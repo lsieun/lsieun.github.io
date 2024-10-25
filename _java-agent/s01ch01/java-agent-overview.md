@@ -53,7 +53,7 @@ Instrumentation can be inserted in one of three ways: [Link](https://docs.oracle
 那么，编写 Java Agent 的代码，需要哪些知识呢？需要两方面的知识：
 
 - 一方面，熟悉 `java.lang.instrument` 相关的 API。这些 API 是我们编写 Java Agent 的主要依据，是我们关注的重点。
-- 另一方面，需要掌握操作字节码的类库，并不是我们关注的重点。比较常用的字节码的类库有：[ASM]({% link _posts/2021-06-01-java-asm.md %})、ByteBuddy 和 Javassist。
+- 另一方面，需要掌握操作字节码的类库，并不是我们关注的重点。比较常用的字节码的类库有：[ASM]({% link _posts/2021-06-01-java-asm-index.md %})、ByteBuddy 和 Javassist。
 
 知识体系：
 

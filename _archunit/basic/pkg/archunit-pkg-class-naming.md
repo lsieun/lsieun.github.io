@@ -1,5 +1,5 @@
 ---
-title: "类命名"
+title: "类的名字与 Pkg"
 sequence: "101"
 ---
 

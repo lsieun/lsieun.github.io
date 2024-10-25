@@ -7,7 +7,7 @@ permalink: /bytebuddy/bytebuddy-index.html
 ByteBuddy is a library for generating Java classes dynamically at run-time.
 
 {:refdef: style="text-align: center;"}
-![](/assets/images/bytebuddy/bytebuddy-overview.png)
+![](/assets/images/bytebuddy/bytebuddy-overview.svg)
 {:refdef}
 
 ## API
