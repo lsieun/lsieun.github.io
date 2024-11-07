@@ -8,9 +8,7 @@ sequence: "101"
 All JavaFX classes are packaged in a Java Archive (JAR) file named `jfxrt.jar`.
 The JAR file is located in the `jre\lib\ext` directory under the Java home directory.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/fx/jfx-rt-jar.png)
-{:refdef}
 
 If you compile and run JavaFX programs on the command line,
 you do not need to worry about setting the JavaFX runtime JAR file in the `CLASSPATH`.
@@ -24,6 +22,4 @@ The Java 8 installation copies the source in the Java home directory.
 The file name is `javafx-src.zip`.
 Unzip the file to a directory and use your favorite Java editor to open the source code.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/fx/java-fx-src-zip.png)
-{:refdef}

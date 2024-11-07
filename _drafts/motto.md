@@ -50,13 +50,9 @@ Learn to use opportunities
 
 ## Images
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mottos/put-on-your-perspectacles.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mottos/time-and-karma.jpg)
-{:refdef}
 
 
 - 一、信息差：我知道，你不知道；

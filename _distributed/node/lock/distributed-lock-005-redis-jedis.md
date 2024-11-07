@@ -169,9 +169,7 @@ public class JedisLock_004_SetNX_With_Atom_And_Request {
 在这里，「判断是不是当前线程加的锁」和「释放锁」不是一个原子操作。
 如果调用jedis.del()释放锁的时候，可能这把锁已经不属于当前客户端，会解除他人加的锁。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/redis/jedis/not-atom-get-and-del.png)
-{:refdef}
 
 为了更严谨，一般也是用lua脚本代替。lua脚本如下：
 

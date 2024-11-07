@@ -677,9 +677,11 @@ sort: "sequence"
 文章列表：
 
 - 《[Java ASM系列一：Core API]({% link _java-asm/java-asm-season-01.md %})》主要是针对 ASM 当中 Core API 的内容进行展开。
-- 《[Java ASM系列二：OPCODE]({% link _java-asm/java-asm-season-02.md %})》主要是针对 `MethodVisitor.visitXxxInsn()` 方法与 200 个 opcode 之间的关系展开，同时也会涉及到 opcode 对于 Stack Frame 的影响。
+- 《[Java ASM系列二：OPCODE]({% link _java-asm/java-asm-season-02.md %})》主要是针对 `MethodVisitor.visitXxxInsn()` 方法与
+  200 个 opcode 之间的关系展开，同时也会涉及到 opcode 对于 Stack Frame 的影响。
 - 《[Java ASM系列三：Tree API]({% link _java-asm/java-asm-season-03.md %})》主要是针对 ASM 当中 Tree API 的内容进行展开。
-- 《[Java ASM系列四：代码模板]({% link _java-asm/java-asm-season-04.md %})》主要是整理 ASM 代码，将常用的功能编写成“模板”，在使用时进行必要的修改，才能使用。
+- 《[Java ASM系列四：代码模板]({% link _java-asm/java-asm-season-04.md %})》主要是整理 ASM
+  代码，将常用的功能编写成“模板”，在使用时进行必要的修改，才能使用。
 - 《[Java ASM系列五：源码分析]({% link _java-asm/java-asm-season-05.md %})》主要是对 ASM 源代码进行介绍。
 
 ## 资源
@@ -730,7 +732,8 @@ ASM相关：
 - [ASM mailing list](https://mail.ow2.org/wws/info/asm)
 - 参考文献
     - 2002年，[ASM: a code manipulation tool to implement adaptable systems(PDF)](/assets/pdf/asm-eng.pdf)
-    - 2007年，[Using the ASM framework to implement common Java bytecode transformation patterns(PDF)](/assets/pdf/asm-transformations.pdf)
+    -
+    2007年，[Using the ASM framework to implement common Java bytecode transformation patterns(PDF)](/assets/pdf/asm-transformations.pdf)
 
 Oracle相关文档：
 
@@ -753,9 +756,8 @@ Oracle相关文档：
 - [Static Code Analysis in Java](https://www.baeldung.com/java-static-code-analysis-tutorial)
 
 - [How to Compile Java to WASM (Web Assembly)](https://www.baeldung.com/java-wasm-web-assembly)
+    - [CheerpJ](https://cheerpj.com/)
 
 Java字节码交流群：
 
-{:refdef: style="text-align: center;"}
 ![QQ Group](/assets/images/contact/qq-group.jpg)
-{:refdef}

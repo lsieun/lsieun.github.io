@@ -13,9 +13,7 @@ It can be used to modify existing classes or to dynamically generate classes, di
 The goal of the ASM library is to **generate**, **transform** and **analyze** compiled Java classes,
 represented as byte arrays (as they are stored on disk and loaded in the Java Virtual Machine).
 
-{:refdef: style="text-align: center;"}
 ![What ASM Can Do](/assets/images/java/asm/what-asm-can-do.png)
-{:refdef}
 
 - **Program analysis**, which can range from a simple syntactic parsing to a full semantic analysis, can be used to find potential bugs in applications, to detect unused code, to reverse engineer code, etc.
 - **Program generation** is used in compilers. This includes traditional compilers, but also stub or skeleton compilers used for distributed programming, Just in Time compilers, etc.

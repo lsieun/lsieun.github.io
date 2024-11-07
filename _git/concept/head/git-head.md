@@ -61,9 +61,7 @@ ref: refs/heads/main
 - HEAD caret: `HEAD^`
 - HEAD tilde: `HEAD~`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/git/head/git-head-relative-refs.jpg)
-{:refdef}
 
 - `HEAD`: The current reference point in a git log.
 - `HEAD~`: shorthand for `HEAD~1`. It means reference HEAD's first parent.

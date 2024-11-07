@@ -60,9 +60,7 @@ public final class NioEventLoop extends SingleThreadEventLoop {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/eventloop/selector/selector-class-hierarchy.svg)
-{:refdef}
 
 ```java
 package sun.nio.ch;
@@ -89,9 +87,7 @@ final class SelectedSelectionKeySet extends AbstractSet<SelectionKey> {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/eventloop/selector/netty-eventloop-two-selectors.svg)
-{:refdef}
 
 
 ## 使用

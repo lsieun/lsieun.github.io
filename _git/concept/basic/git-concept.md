@@ -114,9 +114,7 @@ add them to the **index**,
 create a new **commit** from the contents of the **index**,
 and repeat this cycle.
 
-{:refdef: style="text-align: center;"}
 ![typical workflow](/assets/images/git/git-typical-workflow.png)
-{:refdef}
 
 ## index staging area
 
@@ -148,9 +146,7 @@ Each commit contains
 The file contents are typically displayed as the **diff**
 (the differences between the files before and the files after the commit).
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/git/commit-parts.png)
-{:refdef}
 
 ## Object store
 
@@ -161,9 +157,7 @@ The file-contents reference is actually a reference to **a tree object**.
 and **other tree objects** if there are any subdirectories.
 **A blob object** stores the contents of a particular version of a particular single file in the Git repository.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/git/commit-blob-tree-objects.png)
-{:refdef}
 
 ## Refs
 
@@ -193,9 +187,7 @@ so it's almost always **the top commit** of **the current branch** you're on.
 If you have the `master` branch checked out, then `master` and `HEAD` (and `6b437c7`) are equivalent.
 See the `master/HEAD` pointers demonstrated in the following figure.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/git/refs-master-head.png)
-{:refdef}
 
 These `git diff` invocations are all equivalent:
 

@@ -3,9 +3,7 @@ title: "享元模式"
 sequence: "flyweight"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/design-pattern/diagrams/flyweight-structure.png)
-{:refdef}
 
 ## Intent
 
@@ -14,9 +12,7 @@ that lets you fit more objects into the available amount of RAM
 by sharing common parts of state between multiple objects
 instead of keeping all the data in each object.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/design-pattern/flyweight.png)
-{:refdef}
 
 ## Usage examples
 

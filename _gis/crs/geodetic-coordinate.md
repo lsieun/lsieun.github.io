@@ -21,15 +21,11 @@ The Hypothetical Surface Of The Earth That Coincides Everywhere With Mean Sea Le
 
 一个两极稍扁、赤道略鼓的不规则球体。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/earth-irregular-surface.png)
-{:refdef}
 
 地球真实不是一个正球体，而是一个极半径略短、赤道半径略长，北极略突出、南极略扁平，近于梨形的椭球体(https://zhuanlan.zhihu.com/p/47810895)。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/1438899-20191004161926836-1074984434.png)
-{:refdef}
 
 ### 大地水准面
 

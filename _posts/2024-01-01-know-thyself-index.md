@@ -7,9 +7,7 @@ permalink: /thyself/know-thyself-index.html
 "Know thyself" is a philosophical maxim
 which was inscribed upon the Temple of Apollo in the ancient Greek precinct of Delphi.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/thyself/know-thyself-gold.webp)
-{:refdef}
 
 ## 戒为良药
 
@@ -119,13 +117,13 @@ sort: "sequence"
     </tbody>
 </table>
 
-## 人生修行
+## 事业
 
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;">学说/教导</th>
-        <th style="text-align: center;">看法/理解/洞察力</th>
+        <th style="text-align: center;">内在（心智/心志）</th>
+        <th style="text-align: center;">外在（方式/方法）</th>
     </tr>
     </thead>
     <tbody>
@@ -133,7 +131,54 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.thyself |
-where_exp: "item", "item.path contains 'thyself/cultivation/teaching/'" |
+where_exp: "item", "item.path contains 'thyself/career/internal/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+## 人生修行
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">情绪</th>
+        <th style="text-align: center;">心志</th>
+        <th style="text-align: center;">看法/理解/洞察力</th>
+        <th style="text-align: center;">学说/教导</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/cultivation/emotion/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/cultivation/grit/'" |
 sort: "sequence"
 %}
 <ol>
@@ -149,6 +194,111 @@ sort: "sequence"
 {%
 assign filtered_posts = site.thyself |
 where_exp: "item", "item.path contains 'thyself/cultivation/perception/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/cultivation/teaching/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+## 医与食
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">医</th>
+        <th style="text-align: center;">食</th>
+        <th style="text-align: center;">医文</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/medicine/base/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/food/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/medicine/extra/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+## 治国
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">治国</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/govern/'" |
 sort: "sequence"
 %}
 <ol>

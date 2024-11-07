@@ -17,9 +17,7 @@ sequence: "102"
 └────────────────┴────────────────────────┘
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/util/netty-util-fast-thread-local-overview.svg)
-{:refdef}
 
 
 ## FastThreadLocalThread
@@ -37,9 +35,7 @@ public class FastThreadLocalThread extends Thread {
 
 ## FastThreadLocal
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/util/netty-util-fast-thread-local-methods.svg)
-{:refdef}
 
 
 ### 数据结构

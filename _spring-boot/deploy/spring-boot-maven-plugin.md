@@ -37,15 +37,11 @@ maven-jar-plugin (package) ---> jar ---> spring-boot-maven-plugin (repackage) --
 
 - 如果**使用**`spring-boot-maven-plugin`插件，生成的Jar包中**包含**依赖的Jar包。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/package-with-spring-boot-maven-plugin.png)
-{:refdef}
 
 - 如果**不使用**`spring-boot-maven-plugin`插件，生成的Jar包中**不包含**依赖的Jar包。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/package-without-spring-boot-maven-plugin.png)
-{:refdef}
 
 ## Jar包内部
 
@@ -55,15 +51,11 @@ maven-jar-plugin (package) ---> jar ---> spring-boot-maven-plugin (repackage) --
     - classes：项目代码
     - lib：依赖的Jar包
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/spring-boot-package-boot-inf-source-lib.png)
-{:refdef}
 
 ### JarLauncher
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/package-spring-boot-loader-jar-launcher.png)
-{:refdef}
 
 ## 插件本身
 
@@ -128,17 +120,11 @@ mvn spring-boot:run
 </plugin>
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/spring-boot-maven-plugin-xml-01.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/spring-boot-maven-plugin-xml-02.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/spring-boot-maven-plugin-repackage-mojo.png)
-{:refdef}
 
 ## 为什么 Spring Boot 的 Jar 可以直接运行
 

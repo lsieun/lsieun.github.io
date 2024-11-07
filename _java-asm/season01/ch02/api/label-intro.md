@@ -214,9 +214,7 @@ mv.visitEnd();
 - 第二步，将两把“苦无”扔到指定位置。
 - 第三步，使用时空间忍术跳转到某一个“苦无”的位置。
 
-{:refdef: style="text-align: center;"}
 ![ 飞雷神之术 ](/assets/images/manga/naruto/yellow-flash-minato-teleportation.gif)
-{:refdef}
 
 相对而言，`Label` 类就是“带有飞雷神标记的苦无”，它的 `bytecodeOffset` 字段就是“苦无的具体位置”。
 

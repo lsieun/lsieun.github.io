@@ -39,9 +39,7 @@ DBText 类只有一个不带参数的构造函数，其属性设置如下：
 
 因此，创建单行文字后，需要对其插入点、文字内容、文字样式、文字高度、倾斜角度、旋转角度和对齐方式等属性设置。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/cad-text-align-position.png)
-{:refdef}
 
 ### 多行文字
 

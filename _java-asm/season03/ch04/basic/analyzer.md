@@ -5,9 +5,7 @@ sequence: "403"
 
 [上级目录]({% link _posts/2021-06-01-java-asm-index.md %})
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/analyzer-frame-interpreter.png)
-{:refdef}
 
 ## Analyzer类
 

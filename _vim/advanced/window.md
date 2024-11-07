@@ -10,7 +10,5 @@ These are the most important commands, but you should look at `:help split`.
 - `<C-w>_` (resp. `<C-w>|`) : maximise the size of the split (resp. vertical split)
 - `<C-w>+` (resp. `<C-w>-`) : Grow (resp. shrink) split
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/vim/split.gif)
-{:refdef}
 

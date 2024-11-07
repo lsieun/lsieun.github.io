@@ -9,7 +9,5 @@ sequence: "right-hand-system"
 把右手放在原点的位置，使大拇指，食指和中指互成直角，
 把大拇指指向x轴的正方向，食指指向y轴的正方向时，中指所指的方向就是z轴的正方向。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/right-hand-system.png)
-{:refdef}
 

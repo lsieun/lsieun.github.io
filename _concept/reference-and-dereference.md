@@ -27,6 +27,4 @@ int n1;
 n1 = *p1;
 ```
 
-{:refdef: style="text-align: center;"}
 ![Reference VS. Dereference](/assets/images/java/asm/reference-vs-dereference.png)
-{:refdef}

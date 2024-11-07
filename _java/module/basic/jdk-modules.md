@@ -5,9 +5,7 @@ sequence: "105"
 
 下图来自[JEP 200: The Modular JDK](http://openjdk.java.net/jeps/200)
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/module/jdk-modules.png)
-{:refdef}
 
 - **Standard modules**, whose specifications are governed by the JCP, have names starting with the string `java.`.
 - **All other modules** are merely part of the JDK, and have names starting with the string `jdk.`.

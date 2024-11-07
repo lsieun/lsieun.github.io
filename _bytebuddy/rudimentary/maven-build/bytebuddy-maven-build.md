@@ -9,7 +9,7 @@ sequence: "101"
 
 ```xml
 <properties>
-    <byte.buddy.version>1.14.18</byte.buddy.version>
+    <byte.buddy.version>1.15.7</byte.buddy.version>
 </properties>
 ```
 

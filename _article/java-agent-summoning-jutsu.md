@@ -7,15 +7,11 @@ sequence: "101"
 
 在《火影忍者》中，通灵之术，属于时空间忍术的一种。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/manga/naruto/tsunade-summoning-jutsu.webp)
-{:refdef}
 
 那么，“通灵之术”，在Java领域，代表什么意思呢？就是将正在运行的JVM当中的class进行导出。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/agent/java-agent-dump-class.png)
-{:refdef}
 
 本文的主要目的：借助于Java Agent将class文件从JVM当中导出。
 
@@ -187,9 +183,7 @@ a - b = -4
 Sometimes it is better to dump `.class` files of generated/modified classes for off-line debugging -
 for example, we may want to view such classes using tools like [jclasslib](https://github.com/ingokegel/jclasslib).
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/manga/naruto/sasuke-summoning-jutsu-hawk.gif)
-{:refdef}
 
 ### 类
 

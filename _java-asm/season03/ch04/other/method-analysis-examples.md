@@ -93,9 +93,7 @@ public class HelloWorld {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/x-less-than-0-and-greater-than-1.png)
-{:refdef}
 
 
 ```text

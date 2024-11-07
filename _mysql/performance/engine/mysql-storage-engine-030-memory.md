@@ -41,9 +41,7 @@ mysql> SELECT * FROM memory_test;
 1 row in set (0.00 sec)
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/storage/windows-storage-data-directory-memory.png)
-{:refdef}
 
 ## Memory 关键参数
 

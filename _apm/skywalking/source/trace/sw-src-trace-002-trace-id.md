@@ -14,9 +14,7 @@ public abstract class DistributedTraceId {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/skywalking/source/sw-src-trace-id-classes.png)
-{:refdef}
 
 `DistributedTraceId` 有两个子类：
 

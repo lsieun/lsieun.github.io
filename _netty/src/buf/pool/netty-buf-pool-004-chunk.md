@@ -17,15 +17,11 @@ sequence: "104"
 | Subpage | PoolSubpage |
 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/netty-buffer-pool-chunk-concept-illustrated.svg)
-{:refdef}
 
 ### Chunk 结构
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/netty-buffer-pool-chunk-structure.svg)
-{:refdef}
 
 ## Handle
 
@@ -204,9 +200,7 @@ runsAvailMap
     - [0, 511]: 8796093022208
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/netty-buffer-pool-chunk-runs-avail.svg)
-{:refdef}
 
 
 ### 添加和移除
@@ -496,9 +490,7 @@ abstract class PoolArena<T> implements PoolArenaMetric {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/netty-buffer-pool-chunk-initial-state.svg)
-{:refdef}
 
 ### 销毁
 

@@ -19,17 +19,11 @@ It fetches changes from the remote repository and automatically merges them into
 - 如果执行 `git fetch` 会将 `index.html` 拉取到 Local Repository，
   然后再执行 `git merge` 会将 Local Repository 中的 `index.html` 拉取到 Local Repository
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/git/workflow/git-workflow.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/git/vs/git-fetch-vs-merge.gif)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/git/vs/git-fetch-vs-merge-2.gif)
-{:refdef}
 
 
 ## Reference

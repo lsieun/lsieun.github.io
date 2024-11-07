@@ -61,9 +61,7 @@ that needs to be created to satisfy dependencies.
 If Spring encounters any exception while creating an object, it will fail fast and quit.
 It does not create any further beans and lets the developer know why it won't progress further.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/spring-overview.png)
-{:refdef}
 
 ## Reference
 

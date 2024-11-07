@@ -153,6 +153,9 @@ collections:
     output: true
   json:
     output: true
+  junit:
+    output: true
+    permalink: /:collection/:name:output_ext
   jvm:
     output: true
   k8s:
@@ -165,6 +168,9 @@ collections:
     output: true
   linux:
     output: true
+  lombok:
+    output: true
+    permalink: /:collection/:name:output_ext
   lsieun:
     output: true
     permalink: /:collection/:name:output_ext
@@ -226,6 +232,7 @@ collections:
     output: true
   uml:
     output: true
+    permalink: /:collection/:name:output_ext
   unicode:
     output: true
   vim:
@@ -520,6 +527,11 @@ defaults:
       layout: "post"
   - scope:
       path: ""
+      type: "junit"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
       type: "jvm"
     values:
       layout: "post"
@@ -546,6 +558,11 @@ defaults:
   - scope:
       path: ""
       type: "linux"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "lombok"
     values:
       layout: "post"
   - scope:

@@ -30,13 +30,13 @@ MethodDelegation::api ───┤                                 ├─── 
                          │                                 └─── toMethodReturnOf() ───┤
                          │                                                            └─── return ───┼─── MethodDelegation
                          │
-                         │                  ┌─── prepare() ────────┼─── from ───┼─── InstrumentedType.Prepareable
-                         │                  │
-                         │                  ├─── appender() ───────┼─── from ───┼─── Implementation
+                         │                                   ┌─── prepare() ────┼─── from ───┼─── InstrumentedType.Prepareable
+                         │                  ┌─── internal ───┤
+                         │                  │                └─── appender() ───┼─── from ───┼─── Implementation
                          └─── non-static ───┤
-                                            ├─── andThen() ────────┼─── from ───┼─── Implementation.Composable
-                                            │
-                                            └─── withAssigner()
+                                            │                ┌─── andThen() ────────┼─── from ───┼─── Implementation.Composable
+                                            └─── external ───┤
+                                                             └─── withAssigner()
 ```
 
 ## WithCustomProperties

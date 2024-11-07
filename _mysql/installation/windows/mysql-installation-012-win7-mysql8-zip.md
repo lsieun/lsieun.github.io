@@ -18,9 +18,7 @@ Windows 版的 MySQL 8.0 依赖 Microsoft Visual C++ 2019 Redistributable Packag
 https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/installation/win/download-vc-redist-x64-exe.png)
-{:refdef}
 
 
 第 2 步，安装（过程略）。
@@ -35,21 +33,15 @@ https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist
 https://dev.mysql.com/downloads/
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/installation/win/mysql-community-downloads-url.png)
-{:refdef}
 
 第 2 步，选择 Windows Zip Archive 版本下载：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/installation/win/mysql-8.2.0-winx64-zip-download.png)
-{:refdef}
 
 第 3 步，选择 `No thanks, just start my download`：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/installation/win/just-start-my-download.png)
-{:refdef}
 
 ### 解压
 
@@ -57,13 +49,9 @@ https://dev.mysql.com/downloads/
 D:\service\MySQL
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/installation/win/extract-mysql8-win-zip.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/installation/win/mysql8-directories.png)
-{:refdef}
 
 
 ### 初始化 data 目录
@@ -76,9 +64,7 @@ D:\service\MySQL
 > mysqld --initialize --console
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/installation/win/mysqld-initialize-console.png)
-{:refdef}
 
 扩展：
 
@@ -103,9 +89,7 @@ mysqld --initialize --console
 ./mysqld --console
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/installation/win/mysqld-console.png)
-{:refdef}
 
 注意：
 
@@ -130,9 +114,7 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY 'new_password';
 ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/installation/win/mysql-alter-root-password.png)
-{:refdef}
 
 ## MySQL 服务
 
@@ -193,9 +175,7 @@ mysqld --remove mysql8
 
 下载 `mysql-8.1.0-winx64.zip` 文件。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/config/win7-mysql8-zip-my-ini-file.png)
-{:refdef}
 
 打开 `my.ini` 文件：
 

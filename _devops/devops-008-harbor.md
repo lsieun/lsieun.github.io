@@ -75,10 +75,6 @@ http://192.168.80.253/
 - 用户：`admin`
 - 密码：`Harbor12345`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/harbor/harbor-001-login.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/harbor/harbor-002-projects.png)
-{:refdef}

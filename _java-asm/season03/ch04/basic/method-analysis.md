@@ -11,9 +11,7 @@ sequence: "401"
 
 Java ASM是一个操作字节码（bytecode）的工具，而字节码（bytecode）的一种具体存在形式就是一个`.class`文件。现在，我们要进行分析，就可以称之为Class Analysis。
 
-{:refdef: style="text-align: center;"}
 ![What ASM Can Do](/assets/images/java/asm/what-asm-can-do.png)
-{:refdef}
 
 在类（Class）当中，主要由字段（Field）和方法（Method）组成。如果我们仔细思考一下，其实字段（Field）本身没有什么太多内容可以分析的，**主要的分析对象是方法（Method）**。因为在方法（Method）中，它包含了主要的代码处理逻辑。
 
@@ -36,9 +34,7 @@ public class HelloWorld {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![方法分析的三个对象](/assets/images/java/asm/method-analysis-three-target.png)
-{:refdef}
 
 对于Frame的分析就是**data flow analysis**，对于control flow graph的分析就是**control flow analysis**。
 

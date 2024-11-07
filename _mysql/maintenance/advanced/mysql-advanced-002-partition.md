@@ -118,9 +118,7 @@ PARTITION BY RANGE (cyear)
 );
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/maintenance/test-partition-ibd-files.png)
-{:refdef}
 
 第 3 步，添加数据：
 

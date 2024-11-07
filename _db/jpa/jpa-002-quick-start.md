@@ -255,16 +255,12 @@ public interface PersistenceProvider {
 
 这里用了 `SPI` 的技术：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/jpa/hibernate-core-persistence-provider.png)
-{:refdef}
 
 
 在 `hibernate-core-x.x.x.jar` 中的 `org.hibernate.cfg.AvailableSettings` 类定义了 `<property>` 元素的 `name` 属性：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/jpa/hibernate-core-jar-cfg-available-settings.png)
-{:refdef}
 
 ## Test
 

@@ -5,9 +5,7 @@ sequence: "101"
 
 [UP](/java-concurrency.html)
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/racing-conditions-two-cars.webp)
-{:refdef}
 
 Race conditions occur when multiple processes or threads access shared resources simultaneously,
 leading to unexpected and detrimental outcomes.

@@ -247,6 +247,4 @@ GoodChild.study
 - `p3`: `(II)I`
 - `p4`: `NAME_AND_DESC`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/agent/jmx-instrumentation-good-child-study.png)
-{:refdef}

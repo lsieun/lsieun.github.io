@@ -27,6 +27,4 @@ class CountSetBit {
 
 `n&(n-1)` 这个操作是算法中常见的，作用是消除数字 `n` 的二进制表示中的最后一个 `1`。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/number/bitwise-n-and-n-minus-1.png)
-{:refdef}

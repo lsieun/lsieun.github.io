@@ -48,7 +48,7 @@ For example, if you need to find `.`, type `\.` in the search field.
 - 特殊字符包括加号、乘号 `+*`，但不包括减号、除号 `-/`。（数学四则运算）
 - 特殊字符包括句号、问号 `.?`，但不包括逗号、分号 `,;`。（英语句子的分隔符号）
 
-## 使用案例
+## 示例
 
 ### 分组
 
@@ -98,6 +98,28 @@ You can use regular expressions to change the case of characters that matches so
 
 ![Switch the character case](/assets/images/intellij/replace-with-regex-example-switch-character-case.png)
 
+### 替换多行为一行
+
+原内容：
+
+```text
+{:refdef: style="text-align: center;"}
+![](/assets/images/java/jvm/jstat-output-reference.png)
+{:refdef}
+```
+
+替换后内容：
+
+```text
+![](/assets/images/java/jvm/jstat-output-reference.png)
+```
+
+- 匹配：`\{:refdef: style="text-align: center;"\}\n(.*?)\n\{:refdef\}`
+- 替换：`$1`
+
+- `\n`：表示换行符（也就是行结束）。
+- `(.*?)`：这是一个非贪婪匹配，它匹配第二行的内容，并将其捕获到一个组中。
+
 ## 正则表达式的逻辑
 
 ```text
@@ -114,18 +136,14 @@ You can use regular expressions to change the case of characters that matches so
 //\p{Lo}
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/find-by-unicode-category.png)
-{:refdef}
 
 进行替换：
 
 - `//(\p{Lo}+.+)$`
 - `// $1`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/find-by-unicode-category-and-replace-with-space.png)
-{:refdef}
 
 
 ## References

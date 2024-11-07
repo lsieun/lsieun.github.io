@@ -187,9 +187,7 @@ class state ───┤
 
 最后，就是不同的时机（load、redefine、retransform）能够接触到的 transformer 也不相同：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/agent/define-redefine-retransform.png)
-{:refdef}
 
 ## 总结
 

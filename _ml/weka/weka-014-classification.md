@@ -99,9 +99,7 @@ public class ClassificationWekaIris {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/ml/weka/iris-classification-weka-j48-tree-view-swing.png)
-{:refdef}
 
 We can build other classifiers by following the same steps:
 initialize a classifier,

@@ -15,9 +15,7 @@ Structured Query Language (SQL)
 - DCL (Data Control Language)
 - TCL (Transaction Control Language)
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/sql/sql-commands-five-categories.png)
-{:refdef}
 
 ## Reference
 

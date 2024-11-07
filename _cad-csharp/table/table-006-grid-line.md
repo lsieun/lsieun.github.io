@@ -100,13 +100,9 @@ namespace Lsieun.Cad.DrawObjects.TableUtility
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/table/table-example-007.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/table/table-example-008.png)
-{:refdef}
 
 ```text
 // 设置表格所有行的外边框的线宽为 0.30 mm
@@ -131,6 +127,4 @@ ts.SetGridLineWeight(
 );
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/table/table-example-009.png)
-{:refdef}

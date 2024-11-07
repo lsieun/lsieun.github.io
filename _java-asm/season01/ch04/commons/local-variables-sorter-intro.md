@@ -364,9 +364,7 @@ public class LocalVariablesSorter extends MethodVisitor {
 
 在上面的代码当中，我们可以看到 `remap` 方法里有 `value + 1` 和 `value--` 的代码：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/local-variable-sorter-remap-plus-one-minus-one.png)
-{:refdef}
 
 为什么进行这样的处理呢？我们来思考这样的问题：当创建一个新的 `int[]` 时，其中的每一个元素的默认值都是 `0`；在 local variable 当中，0 是一个有效的索引值；
 那么，如果从 `int[]` 数组当中取出一个元素，它的值是 `0`，那它是代表元素的“默认值”，还是 local variable 当中的一个有效的索引值 `0` 呢？

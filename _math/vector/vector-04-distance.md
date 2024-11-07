@@ -50,9 +50,7 @@ t_{j} &= t_{0} + t_{c} \cdot \vec v
 记向量\( \vec w = s_{j} - t_{j} \)，记向量\( \vec w_{0} = s_{0} - t_{0} \)：
 </p>
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/skew-line-distance-s-t-w.png)
-{:refdef}
 
 根据上图可以得出：
 

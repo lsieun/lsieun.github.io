@@ -14,9 +14,7 @@ Layers make image distribution very efficient but also help to reduce the storag
 Docker stores each layer only once.
 As you can see in figure 2.8, two containers created from two images that contain the same layers use the same files.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/docker/docker-images-use-same-layers.png)
-{:refdef}
 
 The figure shows that containers A and B share an image layer,
 which means that applications A and B read some of the same files.

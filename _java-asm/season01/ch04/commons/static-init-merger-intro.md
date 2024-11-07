@@ -30,9 +30,7 @@ sequence: "411"
 - 第三步，合并两个类。在这个过程中，要对重复的接口（interface）和 `<init>()` 方法。在代码实现上，会用到 `ClassNode` 类（Tree API）。
 - 第四步，处理重复的 `<clinit>()` 方法。在代码实现上，会用到 `StaticInitMerger` 类。
 
-{:refdef: style="text-align: center;"}
 ![ 合并两个类文件 ](/assets/images/java/asm/merge-two-classes.png)
-{:refdef}
 
 ## StaticInitMerger 类
 

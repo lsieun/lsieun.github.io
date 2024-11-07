@@ -18,9 +18,7 @@ sequence: "101"
   为类（Class）、对象实例（object instance）、局部变量（local variable）提供存储空间。
 - 执行引擎（Execution Engine），主要负责方法体里的 instruction 内容，它是 JVM 的核心部分。
 
-{:refdef: style="text-align: center;"}
 ![JVM Architecture](/assets/images/java/jvm/jvm-architecture.png)
-{:refdef}
 
 ## 方法区
 

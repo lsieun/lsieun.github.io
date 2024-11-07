@@ -9,9 +9,7 @@ sequence: "101"
 
 n 次 Minor GC 后，当对象 age 超过 15 （阈值），对象晋升（Promotion）至老年代。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/jvm/large-object-in-heap.png)
-{:refdef}
 
 ### Minor GC/Full GC/Major GC
 

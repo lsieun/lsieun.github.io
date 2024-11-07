@@ -149,9 +149,7 @@ public class AutoConfigurationImportSelector implements DeferredImportSelector,
 ```
 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/src/auto-configuration-import-selector.png)
-{:refdef}
 
 ```java
 public interface DeferredImportSelector extends ImportSelector {

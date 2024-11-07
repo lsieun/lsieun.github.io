@@ -63,9 +63,7 @@ The agent class is loaded and the JVM attempts to invoke the `agentmain` method.
 JVM 加载每一个的 Agent Jar 都有一个属于自己的 `Instrumentation` 实例。
 每一个 `Instrumentation` 实例管理自己的 `ClassFileTransformer`。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/agent/multi-agent-jar.png)
-{:refdef}
 
 ## 示例：多个 Agent Jar
 

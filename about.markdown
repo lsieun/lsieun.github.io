@@ -41,9 +41,7 @@ permalink: /about/
 - 2021年07月08日，《Java ASM系列一：Core API》（免费课程），视频地址：[51CTO](https://edu.51cto.com/course/28517.html)和[B站 001~090](https://space.bilibili.com/1321054247/channel/seriesdetail?sid=381716)。
 - 2020年11月21日，《Java 8 ClassFile》（付费课程），视频地址：[51CTO](https://edu.51cto.com/course/25908.html)。
 
-{:refdef: style="text-align: center;"}
 ![lsieun.github.io](/assets/images/contact/lsieun-github-io.png)
-{:refdef}
 
 ## 网络课程的思考
 

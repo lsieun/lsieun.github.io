@@ -56,7 +56,5 @@ public class TimeSeriesChart {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/jfreechart/example/jfreechart-example-time-series-chart.png)
-{:refdef}
 

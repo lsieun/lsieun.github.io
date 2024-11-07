@@ -9,9 +9,7 @@ sequence: "208"
 
 JVM Architecture 由 Class Loader SubSystem、Runtime Data Areas 和 Execution Engine 三个主要部分组成，如下图所示。其中，Runtime Data Areas 包括 Method Area、Heap Area、Stack Area、PC Registers 和 Native Method Stack 等部分。
 
-{:refdef: style="text-align: center;"}
 ![JVM Architecture](/assets/images/java/jvm/jvm-architecture.png)
-{:refdef}
 
 在程序运行的过程中，每一个线程（Thread）都对应一个属于自己的**JVM Stack**。当一个新线程（Thread）开始的时候，就会在内存上分配一个属于自己的 JVM Stack；当该线程（Thread）执行结束的时候，相应的 JVM Stack 内存空间也就被回收了。
 
@@ -19,9 +17,7 @@ JVM Architecture 由 Class Loader SubSystem、Runtime Data Areas 和 Execution E
 
 在 Stack Frame 内存空间当中，有两个重要的结构，即**local variables**和**operand stack**。
 
-{:refdef: style="text-align: center;"}
 ![JVM Stack Frame](/assets/images/java/asm/frame-local-variables-operand-stack.png)
-{:refdef}
 
 在 Stack Frame 当中，operand stack 是一个栈的结构，遵循“后进先出”（LIFO）的规则，local variables 则是一个数组，索引从 `0` 开始。
 

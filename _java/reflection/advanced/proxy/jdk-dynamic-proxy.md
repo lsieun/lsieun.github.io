@@ -373,9 +373,7 @@ Exit...
 -Djdk.proxy.ProxyGenerator.saveGeneratedFiles=true
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/reflection/how-jdk-dynamic-proxy-works.png)
-{:refdef}
 
 ```java
 package com.sun.proxy;

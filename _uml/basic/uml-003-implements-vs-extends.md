@@ -5,9 +5,7 @@ sequence: "103"
 
 [UP](/uml.html)
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/uml/plantuml/basic/interface-relation.jpg)
-{:refdef}
 
 ## 第一种方式
 
@@ -24,9 +22,7 @@ AbstractList <|-- ArrayList: extends
 @enduml
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/uml/plantuml/basic/implements-vs-extends.svg)
-{:refdef}
 
 ## 第二种方式
 
@@ -40,6 +36,4 @@ class ArrayList extends AbstractList implements List
 @enduml
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/uml/plantuml/class/class-diagram-link-super-01.svg)
-{:refdef}

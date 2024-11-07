@@ -29,14 +29,10 @@ with the **roles** `manager-gui` and `admin-gui`.
 Now, we restart the server and open the URL `http://localhost:8080` again.
 This time we click on the **Manager App** button and the server asks for credentials.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/tomcat/tomcat-web-manager-app.png)
-{:refdef}
 
 After entering the provided credentials, we should see the following screen:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/tomcat/tomcat-web-application-manager.png)
-{:refdef}
 
 

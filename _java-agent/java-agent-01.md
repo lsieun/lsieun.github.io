@@ -97,6 +97,4 @@ OpenJDK
     - [com.sun.tools.attach Source Code](https://hg.openjdk.java.net/jdk8/jdk8/jdk/file/tip/src/share/classes/com/sun/tools/attach)
     - [sun.instrument Source Code](https://hg.openjdk.java.net/jdk8/jdk8/jdk/file/tip/src/share/classes/sun/instrument)
 
-{:refdef: style="text-align: center;"}
 ![学习字节码技术 - lsieun.github.io](/assets/images/java/bytecode-lsieun.png)
-{:refdef}

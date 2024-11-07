@@ -5,9 +5,7 @@ sequence: "105"
 
 [UP](/netty.html)
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/submarine-below-sea-level.png)
-{:refdef}
 
 核心问题：
 
@@ -90,9 +88,7 @@ abstract class PoolArena<T> implements PoolArenaMetric {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/netty-buffer-pool-arena-chunk-list.svg)
-{:refdef}
 
 ## Chunk 迁移过程
 

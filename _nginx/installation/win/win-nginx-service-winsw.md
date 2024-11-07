@@ -13,15 +13,11 @@ https://github.com/winsw/winsw/releases/download/v2.12.0/WinSW-x64.exe
 
 第 1 步，将 `WinSW-x64.exe` 复制到 `nginx/bin` 目录：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/nginx/win-install/win-nginx-winsw-001-copy-winsw-exe.png)
-{:refdef}
 
 第 2 步，将 `WinSW-x64.exe` 重新命名为 `nginx-service.exe`：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/nginx/win-install/win-nginx-winsw-002-change-name.png)
-{:refdef}
 
 第 3 步，添加 `nginx-service.xml` 文件：
 

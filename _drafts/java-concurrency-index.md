@@ -290,9 +290,7 @@ sort: "sequence"
 
 ## 资源共享
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/pool/thread-pool-executor-illustration.png)
-{:refdef}
 
 ### 线程安全
 

@@ -17,9 +17,7 @@ mysql> show variables like '%datadir%';
 
 每个数据库对应一个文件夹：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/mysql-windows-data-dir.png)
-{:refdef}
 
 ## my.cnf/my.ini
 
@@ -43,13 +41,9 @@ C:\Windows\my.ini C:\Windows\my.cnf C:\my.ini C:\my.cnf C:\Program Files\MySQL\M
 ...
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/mysql-windows-mysql-ini-location.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/mysql-windows-mysql-ini-datadir.png)
-{:refdef}
 
 ```text
 mysql> show variables like 'collation%';

@@ -3,9 +3,7 @@ title: "不淨觀"
 sequence: "103"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/thyself/shi-ri-yi-guo.jpg)
-{:refdef}
 
 
 一.不净观的观想方法：
@@ -85,21 +83,13 @@ Illnesses are inescapable, they follow you like shadows.
 Birth, aging, illness and death that are certain.
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/thyself/lust/er-ba-jia-ren-ti-mao-su.jpg)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/thyself/lust/guan-xiang-si-wang-ri.jpg)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/thyself/lust/mei-nv-bai-gu.jpg)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/thyself/lust/pi-bao-gu-rou.jpg)
-{:refdef}
 
 
 

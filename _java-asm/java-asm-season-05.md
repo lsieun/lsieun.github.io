@@ -16,9 +16,7 @@ published: true
 
 “屠龙之术”，意思是指极为高明的技术或本领，但是在**现实中用不到**。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/chinese-culture/dragon-killing-skill.png)
-{:refdef}
 
 ---
 
@@ -42,6 +40,4 @@ Approach:
 
 
 
-{:refdef: style="text-align: center;"}
 ![QQ Group](/assets/images/contact/qq-group.jpg)
-{:refdef}

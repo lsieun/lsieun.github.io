@@ -209,9 +209,7 @@ There are two other varieties of simple types: **list** and **union types**.
 
 ## Complex types
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/xml/xml-schema-element-content-type-and-model.png)
-{:refdef}
 
 ### Content types
 

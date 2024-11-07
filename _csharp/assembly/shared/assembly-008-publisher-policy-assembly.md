@@ -51,13 +51,9 @@ al /link:CarLibraryPolicy.xml /out:policy.1.0.CarLibrary.dll /keyfile:C:\MyKey\m
 al /link:CarLibraryPolicy.xml /out:policy.1.0.CarLibrary.dll /keyfile:D:\workspace\lab\Lsieun.CSharp\CarLibrary\myKeyPair.snk /v:1.0.0.0
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/cmd/al-car-lib-dll-policy-explorer.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/ildasm/car-lib-policy-dll-manifest-resource-xml.png)
-{:refdef}
 
 
 Here, the XML content is contained within a file named `CarLibraryPolicy.xml`.

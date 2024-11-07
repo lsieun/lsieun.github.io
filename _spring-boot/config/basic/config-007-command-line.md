@@ -48,9 +48,7 @@ server.port = 8080
 
 ## IDEA
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/properties/command-line-args.png)
-{:refdef}
 
 输出：
 

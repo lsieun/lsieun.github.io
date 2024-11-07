@@ -39,10 +39,6 @@ published: true
     - [Chapter 4. The class File Format](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html)
     - [Chapter 6. The Java Virtual Machine Instruction Set](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html)
 
-{:refdef: style="text-align: center;"}
 ![学习字节码技术 - lsieun.github.io](/assets/images/java/bytecode-lsieun.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![QQ Group](/assets/images/contact/qq-group.jpg)
-{:refdef}

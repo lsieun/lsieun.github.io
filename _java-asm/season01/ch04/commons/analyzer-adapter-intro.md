@@ -15,9 +15,7 @@ Indeed, `visitFrame` is only called before some specific instructions in a metho
 and because "the other frames can be easily and quickly inferred from these ones".
 This is what this adapter does.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/frame-local-variables-operand-stack.png)
-{:refdef}
 
 ## AnalyzerAdapter 类
 

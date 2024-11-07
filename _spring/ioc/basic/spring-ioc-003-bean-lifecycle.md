@@ -16,9 +16,7 @@ Spring Bean 的生命周期大体上分为三个阶段：
 - Bean 的完成阶段：经过初始化阶段，Bean 就成为了一个完整的 Spring Bean，被存储到单例池 singletonObjects 中去了，
   即完成了 Spring Bean 的整个生命周期。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/bean/spring-ioc-bean-lifecycle.png)
-{:refdef}
 
 ## 实例化阶段
 
@@ -46,9 +44,7 @@ Spring Bean 的初始化过程涉及如下几个过程：
 BeanDefinition 中有对当前 Bean 实例的注入信息通过 `propertyValues` 属性进行了存储，
 例如 `UserService` 的属性信息如下：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/bean/bean-definition-map-property-values.png)
-{:refdef}
 
 Spring 在进行属性注入时，会分为如下几种情况：
 

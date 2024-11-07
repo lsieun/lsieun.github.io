@@ -6,9 +6,7 @@ sequence: "103"
 [UP](/netty.html)
 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/netty-buffer-pool-size-class-overview.svg)
-{:refdef}
 
 ## 不同的内存规格
 
@@ -16,15 +14,11 @@ sequence: "103"
 
 在 Netty 中，内存规格分为三类： Small、Normal 和 Huge；这三个内存类别是由 jemalloc 演化而来。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/netty-buffer-pool-jemalloc-category.svg)
-{:refdef}
 
 形象类比：小人族、普通人、巨人族。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cartoon/one-piece-001.png)
-{:refdef}
 
 - [Races and Tribes](https://onepiece.fandom.com/wiki/Category:Races_and_Tribes)
     - [Giants](https://onepiece.fandom.com/wiki/Giants)
@@ -41,9 +35,7 @@ sequence: "103"
 | Huge     | 4MB < x          |
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/netty-buffer-pool-size-class-capacity.svg)
-{:refdef}
 
 ### 标准化
 

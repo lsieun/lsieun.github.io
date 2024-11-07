@@ -21,9 +21,7 @@ public interface Channel extends Closeable {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/java-nio-channel-class-hierarchy.svg)
-{:refdef}
 
 ### Netty Channel
 
@@ -37,20 +35,14 @@ public interface Channel extends AttributeMap, ChannelOutboundInvoker, Comparabl
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/netty-channel-class-hierarchy-hide-members.svg)
-{:refdef}
 
 ### 合并
 
 在下图当中，我们要注意：**在 Java NIO 和 Netty 中，都各自定义了 `ServerSocketChannel` 和 `SocketChannel`**。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/netty-channel-class-hierarchy-merged.svg)
-{:refdef}
 
 上图经过简化之后：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/netty-channel-class-hierarchy-merged-simple.svg)
-{:refdef}

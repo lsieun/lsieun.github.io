@@ -15,9 +15,7 @@ https://github.com/prometheus/prometheus/releases/download/v2.45.0/prometheus-2.
 
 ## 解压
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/prometheus/prometheus-win-dir.png)
-{:refdef}
 
 查看帮助：
 

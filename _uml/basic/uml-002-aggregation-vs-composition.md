@@ -27,9 +27,7 @@ Relationship ───┤
                                     └─── Composition (Strong)
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/uml/plantuml/basic/uml-association-vs-aggregation-vs-composition.png)
-{:refdef}
 
 In Object-Oriented Programming, there are many different types of **relationships**
 which can exist between two or more classes.
@@ -92,9 +90,7 @@ Book *-- Page: composition
 @enduml
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/uml/plantuml/basic/aggregation-vs-composition.svg)
-{:refdef}
 
 ```plantuml
 @startuml
@@ -106,9 +102,7 @@ hide empty members
 @enduml
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/uml/plantuml/basic/composition-example-person.svg)
-{:refdef}
 
 ```plantuml
 @startuml
@@ -119,9 +113,7 @@ hide empty members
 @enduml
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/uml/plantuml/basic/aggregation-example-car.svg)
-{:refdef}
 
 ## Reference
 

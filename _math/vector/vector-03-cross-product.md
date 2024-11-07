@@ -7,31 +7,23 @@ sequence: "103"
 
 A vector has **magnitude** (how long it is) and **direction**:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/vector-mag-dir.svg)
-{:refdef}
 
 **Two vectors** can be **multiplied** using the "**Cross Product**"
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/vectors-ab.svg)
-{:refdef}
 
 <p>
 The Cross Product \( a \times b \) of two vectors is <b>another vector</b>
 that is at right angles to both:
 </p>
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/cross-product-simple.svg)
-{:refdef}
 
 The **magnitude** (length) of the cross product equals
 the area of a parallelogram with vectors **a** and **b** for sides:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/cross-product-area.svg)
-{:refdef}
 
 ## Calculating
 
@@ -76,9 +68,7 @@ c_{z} &= a_{x}b_{y} - a_{y}b_{x}
 \]
 </p>
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/cross-product-components.svg)
-{:refdef}
 
 Example: The cross product of **a** = (2,3,4) and **b** = (5,6,7)
 
@@ -102,9 +92,7 @@ The cross product could point in the completely opposite direction
 and still be at right angles to the two other vectors, so we have the:
 "**Right Hand Rule**".
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/right-hand-rule.jpg)
-{:refdef}
 
 With your right-hand, point your index finger along vector **a**,
 and point your middle finger along vector **b**:

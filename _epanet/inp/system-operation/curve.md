@@ -73,21 +73,13 @@ E1    3000    65
 
 ## Power Curve
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/epanet/software/epanet-curve-editor-example-01.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/epanet/software/epanet-curve-editor-example-02.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/epanet/software/epanet-curve-pump-algorithm.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/epanet/software/epanet-curve-pump-c-power-curve-code.png)
-{:refdef}
 
 
 ```java

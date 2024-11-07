@@ -22,9 +22,7 @@ sequence: "101"
 - 从 JVM 的视角来说，一个具体的 `.class` 文件需要加载到 JVM 当中来运行；
   在方法的运行过程当中，每一条 instruction 的执行，会对 Stack Frame 有哪些影响呢？
 
-{:refdef: style="text-align: center;"}
 ![instruction-visitXxxInsn-StackFrame](/assets/images/java/asm/instruction-visitxxxinsn-stack-frame.png)
-{:refdef}
 
 在[The Java Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se8/html/index.html)中，它对于具体 `.class` 文件提供了[ClassFile](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html)结构的支持，对于 JVM Execution Engine 提供了[Instruction Set](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html)的支持。在以后的学习当中，我们需要经常参照[Instruction Set](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html)部分的内容。
 

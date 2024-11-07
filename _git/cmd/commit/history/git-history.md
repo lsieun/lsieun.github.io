@@ -66,9 +66,7 @@ Git is unusual compared to many other version control systems in that it allows 
 Sometimes you may want to highlight only broader changes to files in a version control system over a period of time
 instead of sharing every single change that was made in reaching the final state.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/git/squash-multiple-commits-into-a-single-commit.png)
-{:refdef}
 
 In the figure the **commits** are **squashed** together:
 so instead of having three commits with the latter two fixing mistakes from the first commit,

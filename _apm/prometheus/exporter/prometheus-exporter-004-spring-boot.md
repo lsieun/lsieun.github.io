@@ -9,9 +9,7 @@ sequence: "104"
 
 第 1 步，选择 Spring Initializr，并填写相应信息：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/prometheus/spring-boot/spring-boot-001.png)
-{:refdef}
 
 第 2 步，勾选相应的内容：
 
@@ -19,13 +17,9 @@ sequence: "104"
   - Spring Web
   - Spring Boot Actuator
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/prometheus/spring-boot/spring-boot-002.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/prometheus/spring-boot/spring-boot-003.png)
-{:refdef}
 
 第 3 步，观察 `pom.xml` 文件，有三个依赖项：
 
@@ -188,9 +182,7 @@ http://192.168.80.1:8888/actuator
 http://192.168.80.1:8888/actuator/prometheus
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/prometheus/spring-boot/spring-boot-004-actuator-prometheus.png)
-{:refdef}
 
 ### 添加应用的名称信息
 
@@ -229,9 +221,7 @@ public class PrometheusApplication {
 http://192.168.80.1:8888/actuator/prometheus
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/prometheus/spring-boot/spring-boot-005-actuator-prometheus.png)
-{:refdef}
 
 第 3 步，再次修改：
 
@@ -264,9 +254,7 @@ public class PrometheusApplication {
 
 第 4 步，查看修改后的效果：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/prometheus/spring-boot/spring-boot-006-actuator-prometheus.png)
-{:refdef}
 
 ## Prometheus 配置
 
@@ -367,9 +355,7 @@ $ docker run -d --name=prometheus \
 http://192.168.80.250:9090/targets
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/prometheus/spring-boot/prometheus-001-targets.png)
-{:refdef}
 
 ## Grafana
 
@@ -390,56 +376,38 @@ http://192.168.80.251:3000/
 
 第 1 步，在 Configuration 下选择 Data sources：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/prometheus/spring-boot/grafana-002-configuration-data-source.png)
-{:refdef}
 
 第 2 步，选择 Add data source：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/prometheus/spring-boot/grafana-003-add-data-source.png)
-{:refdef}
 
 第 3 步，选择 Prometheus：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/prometheus/spring-boot/grafana-004-select-data-source.png)
-{:refdef}
 
 第 4 步，输入 URL 地址：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/prometheus/spring-boot/grafana-005-data-source-url.png)
-{:refdef}
 
 第 5 步，选择 `Save & test` 按钮：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/prometheus/spring-boot/grafana-006-save-and-test.png)
-{:refdef}
 
 ### 添加 DashBoard
 
 第 1 步，选择 Create 下的 Import 按钮：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/prometheus/spring-boot/grafana-007-import.png)
-{:refdef}
 
 第 2 步，输入 `4701`，然后点击 Load 按钮：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/prometheus/spring-boot/grafana-008-load-dashboard-4701.png)
-{:refdef}
 
 第 3 步，选择数据源，并点击 Import：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/prometheus/spring-boot/grafana-009-import-dashboard-4701.png)
-{:refdef}
 
 第 4 步，查看到 Dashboard 界面：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/prometheus/spring-boot/grafana-010-dashboard-view.png)
-{:refdef}

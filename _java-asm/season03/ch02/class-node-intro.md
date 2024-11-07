@@ -156,9 +156,7 @@ public class ClassNode extends ClassVisitor {
 
 我们知道，`ClassNode`是Java ASM类库当中的一个类；而在一个具体的`.class`文件中，它包含的是字节码数据，可以表现为`byte[]`的形式。那么`byte[]`和`ClassNode`类之间是不是可以相互转换呢？
 
-{:refdef: style="text-align: center;"}
 ![在字节数组和ClassNode之间转换](/assets/images/java/asm/class-bytes-class-node.png)
-{:refdef}
 
 ### 将字节转换成ClassNode
 

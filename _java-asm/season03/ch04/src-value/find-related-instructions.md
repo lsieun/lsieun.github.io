@@ -51,9 +51,7 @@ test:(II)V
 ================================================================
 ```
 
-{:refdef: style="text-align: center;"}
 ![My Image](/assets/images/manga/naruto/reciprocal-round-robin-jutsu.jpg)
-{:refdef}
 
 那么，我们怎么实现这样一个功能呢？用一个`DestinationInterpreter`类来实现。
 

@@ -44,9 +44,7 @@ public class ZK_Curator_ZNode_CRUD_001_A_Exists {
 stat = 0,0,0,0,0,14,0,0,0,6,4294967369
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/zookeeper/client/curator/check-exists-stat-fields.png)
-{:refdef}
 
 
 ## 创建节点

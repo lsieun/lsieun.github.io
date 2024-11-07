@@ -14,9 +14,7 @@ sequence: "102"
 - 其中，Core API 包括 `asm.jar`、`asm-util.jar` 和 `asm-commons.jar`；
 - 其中，Tree API 包括 `asm-tree.jar` 和 `asm-analysis.jar`。
 
-{:refdef: style="text-align: center;"}
 ![ASM Components](/assets/images/java/asm/asm-components.png)
-{:refdef}
 
 从两者的关系来说，Core API 是基础，而 Tree API 是在 Core API 的这个基础上构建起来的。
 
@@ -54,9 +52,7 @@ ASM Core API 概览，就是对 `asm.jar`、`asm-util.jar` 和 `asm-commons.jar`
 
 在这 10 个类当中，最重要的是三个类，即 `ClassReader`、`ClassVisitor` 和 `ClassWriter` 类。这三个类的关系，可以描述成下图：
 
-{:refdef: style="text-align: center;"}
 ![ASM 里的核心类 ](/assets/images/java/asm/asm-core-classes.png)
-{:refdef}
 
 这三个类的作用，可以简单理解成这样：
 
@@ -77,9 +73,7 @@ ASM Core API 概览，就是对 `asm.jar`、`asm-util.jar` 和 `asm-commons.jar`
 - 以 `Check` 开头的类，主要负责检查（Check），也就是检查生成的 `.class` 文件内容是否正确。
 - 以 `Trace` 开头的类，主要负责追踪（Trace），也就是将 `.class` 文件的内容打印成文字输出，根据输出的文字信息，可以探索或追踪（Trace）`.class` 文件的内部信息。
 
-{:refdef: style="text-align: center;"}
 ![asm-util.jar 里的类 ](/assets/images/java/asm/asm-util-jar-classes.png)
-{:refdef}
 
 在 `asm-util.jar` 当中，主要介绍 `CheckClassAdapter` 类和 `TraceClassVisitor` 类，也会简略的说明一下 `Printer`、`ASMifier` 和 `Textifier` 类。
 
@@ -91,9 +85,7 @@ ASM Core API 概览，就是对 `asm.jar`、`asm-util.jar` 和 `asm-commons.jar`
 
 在下图当中，可以看到 `asm-commons.jar` 里面包含的具体类文件。
 
-{:refdef: style="text-align: center;"}
 ![asm-commons.jar 里的类 ](/assets/images/java/asm/asm-commons-jar-classes.png)
-{:refdef}
 
 我们会介绍到其中的 `AdviceAdapter`、`AnalyzerAdapter`、`ClassRemapper`、`GeneratorAdapter`、`InstructionAdapter`、`LocalVariableSorter`、`SerialVersionUIDAdapter` 和 `StaticInitMerger` 类。
 

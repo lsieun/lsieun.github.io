@@ -96,6 +96,4 @@ builder = builder.visit(
 );
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/advice/bytebuddy-method-advice-with-exception-handler-example-operand-stack.png)
-{:refdef}

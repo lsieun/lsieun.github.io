@@ -35,13 +35,9 @@ iris 以鸢尾花的特征作为数据来源，常用在分类操作中。
 
 - 种类：Iris Setosa（山鸢尾）、Iris Versicolour（杂色鸢尾），以及Iris Virginica（维吉尼亚鸢尾）。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/ml/iris.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/ml/iris.svg)
-{:refdef}
 
 
 ## Energy efficiency

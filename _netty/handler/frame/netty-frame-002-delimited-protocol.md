@@ -14,16 +14,12 @@ often called a **frame**.
 - `LineBasedFrameDecoder` A decoder that extracts frames delimited by the line-endings `\n` or `\r\n`.
   This decoder is faster than `DelimiterBasedFrameDecoder`.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/uml/uml-class-diagram-DelimiterBasedFrameDecoder.png)
-{:refdef}
 
 
 ### LineBasedFrameDecoder
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/frame/frames-delimited-by-line-endings.png)
-{:refdef}
 
 ### DelimiterBasedFrameDecoder
 

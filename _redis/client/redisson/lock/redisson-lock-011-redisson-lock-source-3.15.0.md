@@ -21,9 +21,7 @@ Redisson 分布式锁原理：
 - **可重试**：利用信号量和 PubSub 功能实现等待、唤醒、获取锁失败的重试机制
 - **超时续期**：利用 WatchDog，每隔一段时间（`internalLockLeaseTime/3`），重置超时时间
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/redis/redisson/redisson-lock-aquire-and-release-logic.png)
-{:refdef}
 
 不可重入 Redis 分布式锁：
 

@@ -13,9 +13,7 @@ Most of the built-in types are atomic types, although there are three list types
 
 Types in the XML Schema type system form a hierarchy.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/xml/xml-schema-built-in-type-hierarchy.png)
-{:refdef}
 
 At the top of the hierarchy are three special types:
 

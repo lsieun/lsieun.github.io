@@ -20,9 +20,7 @@ sequence: "101"
 在 `.class` 文件中，存储的是字节码（ByteCode）数据，如下图所示。
 ASM 所操作的对象就是字节码（ByteCode），而在许多情况下，字节码（ByteCode）的具体表现形式是 `.class` 文件。
 
-{:refdef: style="text-align: center;"}
 ![From Java to Class](/assets/images/java/javac-from-dot-java-to-dot-class.jpeg)
-{:refdef}
 
 ---
 
@@ -530,9 +528,7 @@ It can be used to modify existing classes or to dynamically generate classes, di
 The goal of the ASM library is to **generate**, **transform** and **analyze** compiled Java classes,
 represented as byte arrays (as they are stored on disk and loaded in the Java Virtual Machine).
 
-{:refdef: style="text-align: center;"}
 ![What ASM Can Do](/assets/images/java/asm/what-asm-can-do.png)
-{:refdef}
 
 - **Program analysis**, which can range from a simple syntactic parsing to a full semantic analysis,
   can be used to find potential bugs in applications, to detect unused code, to reverse engineer code, etc.
@@ -561,9 +557,7 @@ represented as byte arrays (as they are stored on disk and loaded in the Java Vi
 **ASM 就是一处位于“Java 语言的世界”边界上的一扇大门；
 通过这扇大门，我们可以前往“字节码的世界”。**在“字节码的世界”里，我们会看到不一样的“风景”，能够解决不一样的“问题”。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/java-language-asm-byte-code.png)
-{:refdef}
 
 ASM 往往在一些框架的底层起着重要的作用。
 接下来，我们介绍**两个关于 ASM 的应用场景：Spring 和 JDK**。这两个应用场景例子的目的，就是希望大家了解到 ASM 的重要性。

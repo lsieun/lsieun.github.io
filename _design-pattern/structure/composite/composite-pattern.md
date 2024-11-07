@@ -12,9 +12,7 @@ A node that has no child nodes is a **leaf**.
 A node that has subnodes is called a **composite**.
 The node at the top of the tree is the **root**.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/design-pattern/diagrams/composite-structure.png)
-{:refdef}
 
 There are two different approaches to implement the composite pattern.
 

@@ -21,13 +21,9 @@ Most Prometheus components are written in `Go`, making them easy to build and de
 
 This diagram illustrates the architecture of Prometheus and some of its ecosystem components:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/prometheus/prometheus-architecture.svg)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/prometheus/prometheus-architecture.png)
-{:refdef}
 
 Prometheus scrapes metrics from instrumented jobs,
 either directly or via an intermediary push gateway for short-lived jobs.

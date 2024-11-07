@@ -9,9 +9,7 @@ An **entity** in an XML document is **a storage unit** that can be referenced wi
 
 > 先有entity，再有entity reference
 
-{:refdef: style="text-align: center;"}
 ![entity and entity reference](/assets/images/xml/xml-dtd-entity-and-entity-reference.png)
-{:refdef}
 
 文件：`company.xml`
 
@@ -74,9 +72,7 @@ All entity declarations must be within **an internal DTD subset**(`DOCTYPE`) or 
 
 > 定义的位置：DTD
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/xml/xml-dtd-subset-internal-and-external.png)
-{:refdef}
 
 All entities are declared with the `ENTITY` declaration.
 

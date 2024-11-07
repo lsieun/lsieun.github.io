@@ -15,9 +15,7 @@ https://help.sonatype.com/en/download.html
 
 - 在 `nexus-3.xx.x/bin` 目录下有 `nexus.exe` 文件：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/nexus3/nexus-bin-exe.png)
-{:refdef}
 
 ## 安装
 

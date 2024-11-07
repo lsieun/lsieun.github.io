@@ -7,9 +7,7 @@ sequence: "302"
 
 在现阶段，我们接触了 `ClassVisitor`、`ClassWriter` 和 `ClassReader` 类，因此可以介绍 Class Transformation 的操作。
 
-{:refdef: style="text-align: center;"}
 ![What ASM Can Do](/assets/images/java/asm/what-asm-can-do.png)
-{:refdef}
 
 ## 整体思路
 

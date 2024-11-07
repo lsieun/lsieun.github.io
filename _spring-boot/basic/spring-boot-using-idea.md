@@ -3,9 +3,7 @@ title: "使用IDEA搭建Spring Boot开发环境"
 sequence: "102"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/idea-spring-initializer.png)
-{:refdef}
 
 ## pom.xml
 

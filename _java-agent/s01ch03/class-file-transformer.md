@@ -436,9 +436,7 @@ public interface Instrumentation {
   the transformer will be called for **every new class definition** and **every class redefinition**.
 - **Retransformation capable transformers** will also be called on **every class retransformation**.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/agent/define-redefine-retransform.png)
-{:refdef}
 
 - The request for a **new class definition** is made with `ClassLoader.defineClass` or its native equivalents.
 - The request for a **class redefinition** is made with `Instrumentation.redefineClasses` or its native equivalents.
@@ -574,9 +572,7 @@ The input (via the `classfileBuffer` parameter) to the first transformer is:
 - for **class retransformation**, the bytes passed to the **new class definition** or, **if redefined, the last redefinition**,
   with all transformations made by **retransformation incapable transformers** reapplied automatically and unaltered
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/agent/define-redefine-retransform.png)
-{:refdef}
 
 在 OpenJDK 的源码中，`hotspot/src/share/vm/prims/jvmtiExport.cpp` 文件有如下代码：
 

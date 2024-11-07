@@ -33,13 +33,9 @@ INSERT INTO user (id, name, age, email) VALUES
 
 ## 创建 Spring Boot
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mybatis-plus/spring-boot/001.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mybatis-plus/spring-boot/002.png)
-{:refdef}
 
 ```xml
 <dependencies>
@@ -304,9 +300,7 @@ class UserMapperTest {
 
 使用 `@Autowired` 注解时，`userMapper` 下会标识红色波浪线：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mybatis-plus/spring-boot/003.png)
-{:refdef}
 
 解决方法：为 `UserMapper` 接口添加 `@Repository` 注解
 

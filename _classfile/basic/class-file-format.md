@@ -24,9 +24,7 @@ ClassFile {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/classfile/classfile-structure-mnemonic.png)
-{:refdef}
 
 ## Reference
 

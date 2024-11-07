@@ -318,9 +318,7 @@ First, span data is written (1) to local log files.
 It is then pulled (2) from all production hosts by Dapper daemons and collection infrastructure and
 finally written (3) to a cell in one of several regional Dapper Bigtable repositories.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/apm/dapper/an-overview-of-the-dapper-collection-pipeline.png)
-{:refdef}
 
 ### Out-of-band trace collection
 

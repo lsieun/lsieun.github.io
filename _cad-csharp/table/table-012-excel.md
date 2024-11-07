@@ -9,15 +9,11 @@ sequence: "112"
 
 第 1 步，在 **Reference** 上右键选择 **Manage NuGet Packages...**：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/quick/dev-042-vs-manage-nuget-packages.png)
-{:refdef}
 
 第 2 步，搜索 **EPPlus** 进行安装：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/quick/dev-043-vs-search-epplus.png)
-{:refdef}
 
 ### 编写代码
 

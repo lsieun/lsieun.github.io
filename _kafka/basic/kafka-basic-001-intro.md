@@ -6,9 +6,7 @@ sequence: "101"
 
 ## 核心概念
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/kafka-core-concepts.png)
-{:refdef}
 
 - **Broker**（代理）：Kafka节点，一个 Kafka 节点就是一个 Broker；多个 Broker 可以组成一个 Kafka 集群，每一个 Broker 可以有多个 Topic。
 - **Producer**（生产者）：生产 message （数据）发送到 topic。

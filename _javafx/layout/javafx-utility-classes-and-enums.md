@@ -46,9 +46,7 @@ An inset is the distance between the same edges (from top to top, from left to l
 There are four inset values—one for each side of the rectangles.
 An object of the `Insets` class stores the four distances.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/fx/insets-illustration.png)
-{:refdef}
 
 It is possible for two rectangles to overlap instead of one to be contained fully within another.
 In this case, some inset values may be positive and some negative.

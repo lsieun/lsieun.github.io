@@ -12,9 +12,7 @@ Generic programming in Java requires the program to create
 - 泛型的定义
 - 泛型的使用
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/generic/generic-type-and-parameterized-type-concepts.png)
-{:refdef}
 
 - generic type: 对泛型的定义
 - paramterized type: 对泛型的使用

@@ -15,9 +15,7 @@ ClassReader --> ClassVisitor(1) --> ... --> ClassVisitor(N) --> ClassWriter
 
 其中，`ClassReader` 类负责“读”Class，`ClassWriter` 负责“写”Class，而 `ClassVisitor` 则负责进行“转换”（Transformation）。在 Class Transformation 过程中，可以有多个 `ClassVisitor` 参与。不过要注意，`ClassVisitor` 类是一个抽象类，我们需要写代码来实现一个 `ClassVisitor` 类的子类才能使用。
 
-{:refdef: style="text-align: center;"}
 ![ASM Core Classes](/assets/images/java/asm/asm-core-classes.png)
-{:refdef}
 
 为了解释清楚 Class Transformation 是如何工作的，我们从两个问题来入手：
 
@@ -159,15 +157,11 @@ public abstract class ClassVisitor {
 
 对于 Class Transformation 来说，它具体的代码执行顺序如下图所示：
 
-{:refdef: style="text-align: center;"}
 ![class transformation sequence diagram](/assets/images/java/asm/class-transformation-sequence-diagram.png)
-{:refdef}
 
 为了方便理解代码的执行顺序，我们也结合生活当中的一些经验，来进行这样的类比：在生活当中，天下降下了雨水，这些雨水会慢慢的向下渗透，穿过不同的地层，最后形成地下水；这种“雨水向下渗透，穿过不同地层”的形式，它与多个 `ClassVisitor` 对象调用同名的 `visitXxx()` 方法是非常相似的。
 
-{:refdef: style="text-align: center;"}
 ![ 地层 ](/assets/images/java/asm/stratum.jpg)
-{:refdef}
 
 
 - 第一步，可以将 `ClassReader` 类想像成最上面的土层
@@ -474,15 +468,11 @@ ClassVisitor.visitEnd();
 
 经过上面内容的讲解，相信大家已经了解到多个 `ClassVisitor` 之间是相互连接的，或者说是串联到一起的。
 
-{:refdef: style="text-align: center;"}
 ![ 多个 ClassVisitor 串联到一起 ](/assets/images/java/asm/multiple-class-vistors-connected.png)
-{:refdef}
 
 其实，还有一些“细微之处”的连接，我们也要注意到：不同 `ClassVisitor` 对象里，对应同一个字段的多个 `FieldVisitor` 对象，也是串联到一起；不同 `ClassVisitor` 对象里，对应同一个方法的多个 `MethodVisitor` 对象，也是串联到一起，如下图所示。
 
-{:refdef: style="text-align: center;"}
 ![ 多个 FieldVisitor 和 MethodVisitor 串联到一起 ](/assets/images/java/asm/multiple-field-method-vistors-connected.png)
-{:refdef}
 
 我们在讲删除“字段”和删除“方法”的时候，就是其中的某一个 `FieldVisitor` 或 `MethodVisitor` 不工作了，也就是不向后“传递数据”了，那么，相应的“字段”和“方法”就丢失了，就达到了“删除”的效果。类似的，添加“字段”和“方法”，其实就是“传递了额外的数据”，那么就会出现新的字段和方法，就达到了添加字段和方法的效果。
 
@@ -494,9 +484,7 @@ ClassVisitor.visitEnd();
 
 > In cryptography and computer security, a man-in-the-middle(MITM) attack is a cyberattack where the attacker secretly relays and possibly alters the communications between two parties who believe that they are directly communicating with each other.
 
-{:refdef: style="text-align: center;"}
 ![Man-in-the-middle attack](/assets/images/network/man-in-the-middle-attack.png)
-{:refdef}
 
 在计算机安全领域，我们应该尽量的避免遭受到“中间人攻击”，这样我们的信息就不会被窃取和篡改。但是，在 Java ASM 当中，Class Transformation 的本质就是利用了“中间人攻击”的方式来实现对已有的 Class 文件进行修改或转换。
 

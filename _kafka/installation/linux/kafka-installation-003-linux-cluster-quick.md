@@ -5,9 +5,7 @@ sequence: "103"
 
 ## 集群规划
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/kafka-cluster-servers.png)
-{:refdef}
 
 具体信息：
 

@@ -708,9 +708,7 @@ public class TomcatWebServer implements WebServer {
 
 ### 小结
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/src/how-tomcat-is-created.png)
-{:refdef}
 
 Spring Boot 的内部通过 `new Tomcat()` 的方式启动一个内置 Tomcat。
 但是，这里还有一个问题，这里只是启动了 Tomcat，但是我们的 Spring MVC 是如何加载的呢？

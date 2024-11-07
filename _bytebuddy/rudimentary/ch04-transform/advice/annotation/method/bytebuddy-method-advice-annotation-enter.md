@@ -9,9 +9,7 @@ sequence: "104"
 
 `@Advice.Enter` 作用：定义一个局部变量，负责将 `@Advice.OnMethodEnter` 方法的『返回值』 传递给 `@Advice.OnMethodExit` 方法。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/advice/bytebuddy-method-advice-annotation-enter-illustration.png)
-{:refdef}
 
 ### 注意事项
 
@@ -72,9 +70,7 @@ public class Expert {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cartoon/today-is-a-gift.jpg)
-{:refdef}
 
 
 ```java

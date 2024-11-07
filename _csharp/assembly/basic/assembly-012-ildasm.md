@@ -14,18 +14,14 @@ ildasm.exe
 第 1 步，打开 `CarLibrary.dll` 文件，并点击 `MANIFEST` 图标：
 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/ildasm/ildasm-car-lib-dll-manifest.png)
-{:refdef}
 
 The first code block in a manifest specifies all external assemblies
 required by the current assembly to function correctly.
 As you recall, `CarLibrary.dll` made use of types within `mscorlib.dll` and `System.Windows.Forms.dll`,
 both of which are listed in the manifest using the `.assembly extern` token, as shown here:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/ildasm/ildasm-car-lib-dll-manifest-details.png)
-{:refdef}
 
 在 `.assembly extern` block 中，由 `.publickeytoken` 和 `.ver` 两条 directives 组成：
 
@@ -41,21 +37,15 @@ Typically, these settings are established visually using the **Properties** wind
 Now, switching back to Visual Studio, if you click the **Properties** icon within **Solution Explorer**,
 you can click the **Assembly Information** button located on the (automatically selected) **Application** tab.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/vs/vs-project-application-assembly-information.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/vs/vs-project-application-assembly-information-details.png)
-{:refdef}
 
 ### AssemblyInfo.cs
 
 When you save your changes, the GUI editor updates your project's `AssemblyInfo.cs` file.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/vs/vs-solution-explorer-project-properties-assembly-info.png)
-{:refdef}
 
 ```csharp
 using System.Reflection;
@@ -110,13 +100,9 @@ that can be understood by the target platform.
 For example, back in `ildasm.exe`, if you double-click the `TurboBoost()` method of the `SportsCar` class,
 `ildasm.exe` will open a new window showing the CIL tokens that implement this method.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/ildasm/ildasm-car-lib-dll-sports-car-turbo-boost.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/ildasm/ildasm-car-lib-dll-sports-car-turbo-boost-details.png)
-{:refdef}
 
 ```csharp
 public class SportsCar : Car
@@ -140,9 +126,7 @@ Before you build some applications that use your custom .NET library,
 if you press the `Ctrl+M` keystroke combination in `ildasm.exe`,
 you can see the metadata for each type within the `CarLibrary.dll` assembly.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/ildasm/ildasm-car-lib-dll-meta-info.png)
-{:refdef}
 
 An assembly's metadata is an important element of the .NET platform
 and serves as the backbone for numerous technologies

@@ -8,9 +8,7 @@ permalink: /java-agent/java-agent-index.html
 Java agent is a powerful tool introduced with Java 5.
 It has been highly useful in profiling activities where developers and application users can monitor tasks carried out within servers and applications.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/agent/java-vs-native-agent.png)
-{:refdef}
 
 ## 主要内容
 
@@ -49,6 +47,4 @@ More
 
 - [Reference Index]({% link _java-agent/java-agent-reference-index.md %})
 
-{:refdef: style="text-align: center;"}
 ![学习字节码技术 - lsieun.github.io](/assets/images/java/bytecode-lsieun.png)
-{:refdef}

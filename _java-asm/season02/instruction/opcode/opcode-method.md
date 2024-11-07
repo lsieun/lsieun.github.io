@@ -14,9 +14,7 @@ sequence: "207"
 | 182    | invokevirtual   | 184    | invokestatic    | 186    | invokedynamic   |
 | 183    | invokespecial   | 185    | invokeinterface | 187    |                 |
 
-{:refdef: style="text-align: center;"}
 ![方法调用的分类](/assets/images/java/asm/opcode-method-invocation.png)
-{:refdef}
 
 从 ASM 的角度来说，这些 opcode 与 `MethodVisitor.visitXxxInsn()` 方法对应关系如下：
 

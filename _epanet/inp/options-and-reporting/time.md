@@ -52,9 +52,7 @@ The `[TIMES]` defines various time step parameters used in the simulation.
 </tbody>
 </table>
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/epanet/inp/option-time-start-duration-timestep.png)
-{:refdef}
 
 - 整体视角
   - 什么时候开始：start clock time

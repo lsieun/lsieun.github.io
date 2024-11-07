@@ -12,15 +12,11 @@ sequence: "106"
 - `invokeHandlerAddedIfNeeded()` 主要作用是对 `ChannelHandler.handlerAdded()` 方法调用
 - `readIfIsAutoRead()` 主要是对 `Channel.beginRead()` 方法的调用
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/pipeline/netty-channel-pipeline-propagation-inbound-head-context-event.svg)
-{:refdef}
 
 ### 图示
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/handler/netty-channel-handler-event-add.svg)
-{:refdef}
 
 ## ChannelHandler
 
@@ -119,9 +115,7 @@ public class DefaultChannelPipeline implements ChannelPipeline {
 
 `AbstractChannel.registered` 先变为 `true`，`DefaultChannelPipeline.registered` 后变为 `true`。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/pipeline/netty-channel-pipeline-state-registered.svg)
-{:refdef}
 
 ### 待执行任务链表
 
@@ -136,9 +130,7 @@ public class DefaultChannelPipeline implements ChannelPipeline {
 
 第 2 步，具体的任务：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/pipeline/netty-channel-pipeline-pending-handler-callback.svg)
-{:refdef}
 
 ```java
 public class DefaultChannelPipeline implements ChannelPipeline {
@@ -275,9 +267,7 @@ public class DefaultChannelPipeline implements ChannelPipeline {
 
 ## AbstractChannelHandlerContext
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/context/netty-channel-handler-context-handler-state.svg)
-{:refdef}
 
 
 ### 状态定义

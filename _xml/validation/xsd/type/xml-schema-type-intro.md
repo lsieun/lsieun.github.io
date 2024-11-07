@@ -31,15 +31,11 @@ that are specified in [XML Schema Part 2: Datatypes](https://www.w3.org/TR/xmlsc
 
 XML Schema 1.0 Built-in Datatypes
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/xml/xml-schema-built-in-types.1.0.gif)
-{:refdef}
 
 XML Schema 1.1 Built-in Datatypes
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/xml/xml-schema-built-in-types.1.1.png)
-{:refdef}
 
 These datatypes of course belong to the XML Schema namespace, so we will
 use them with the `xsd:` prefix, as in `xsd:string`.

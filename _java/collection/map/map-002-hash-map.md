@@ -264,9 +264,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/collection/map/hash-map-node-class-hierarchy.png)
-{:refdef}
 
 
 

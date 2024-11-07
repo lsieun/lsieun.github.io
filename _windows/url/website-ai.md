@@ -37,3 +37,4 @@ sequence: "ai"
 - [perplexity.ai](https://www.perplexity.ai/search)
 - [poe](https://poe.com/)
 - [Merlin AI](https://www.getmerlin.in/) Google 登录
+- [NotDiamond](https://www.notdiamond.ai/) Google 登录

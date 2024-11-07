@@ -8,29 +8,17 @@ sequence: "101"
 
 ## 安装证书
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/pki/cert/self-signed-ca-cert-install-win-001.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/pki/cert/self-signed-ca-cert-install-win-002.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/pki/cert/self-signed-ca-cert-install-win-003.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/pki/cert/self-signed-ca-cert-install-win-004.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/pki/cert/self-signed-ca-cert-install-win-005.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/pki/cert/self-signed-ca-cert-install-win-006.png)
-{:refdef}
 
 ## 验证
 
@@ -42,6 +30,4 @@ certlm.msc
 
 第 2 步，查看证书：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/pki/cert/self-signed-ca-cert-install-win-007.png)
-{:refdef}

@@ -19,13 +19,9 @@ EventLoop 的 NIO 线程在何时启动？
 
 - 当首次调用 `execute` 方法时
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/eventloop/thread/netty-eventloop-thread-1.svg)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/eventloop/thread/netty-eventloop-thread-2.svg)
-{:refdef}
 
 ## 避免线程重复启动
 

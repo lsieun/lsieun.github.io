@@ -5,9 +5,7 @@ sequence: "101"
 
 IDEA当中，安装MapStruct Support插件：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/mapstruct/intellij-idea-mapstruct-plugin.png)
-{:refdef}
 
 目前，我对于 MapStruct 的理解是这样的：
 

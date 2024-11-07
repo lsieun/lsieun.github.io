@@ -16,9 +16,7 @@ Channels ───┤
                           └─── getBuffer(int index)
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/skywalking/source/sw-src-data-carrier-channels.png)
-{:refdef}
 
 
 ```java

@@ -139,9 +139,7 @@ embedded within the assembly's CLR header data.
 content of the entire assembly --> hash code + private key --> digital singature
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/car-lib-dll-with-digital-signature.png)
-{:refdef}
 
 ## Generating Strong Names at the Command Line
 
@@ -154,13 +152,9 @@ which instructs the tool to generate a new file containing the public/private ke
 sn -k MyTestKeyPair.snk
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/cmd/sn-generate-snk-file.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/cmd/sn-generate-snk-file-explorer.png)
-{:refdef}
 
 Now that you have your key data, you need to inform the C# compiler exactly where `MyTestKeyPair.snk` is located.
 The `AssemblyInfo.cs` file contains a number of attributes that describe the assembly itself.
@@ -206,9 +200,7 @@ Compile your `CarLibrary.dll` code library, open your assembly into `ildasm.exe`
 You will now see that a new `.publickey` tag is used to document the full public key information,
 while the `.ver` token records the version specified via the `[AssemblyVersion]` attribute.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/ildasm/ildasm-car-lib-dll-public-key-and-token.png)
-{:refdef}
 
 Great! At this point, you could deploy your shared `CarLibrary.dll` assembly to the **GAC**.
 However, remember that these days .NET developers can use Visual Studio to create strongly named assemblies
@@ -229,23 +221,17 @@ To make a new `*.snk` file for the `CarLibrary` project,
 first double-click the Properties icon of the Solution Explorer and select the **Signing** tab.
 Next, select the "**Sign the assembly**" check box, and choose the `<New…>` option from the drop-down list.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/vs/vs-project-properties-signing-new.png)
-{:refdef}
 
 After you have done so, you will be asked to provide a name for your new `*.snk` file (such as `myKeyPair.snk`),
 and you'll have the option to password-protect your file (which is not required for this example)
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/vs/vs-create-strong-name-key.png)
-{:refdef}
 
 At this point, you will see your `*.snk` file within Solution Explorer.
 Every time you build your application, this data will be used to assign a proper strong name to the assembly.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/vs/vs-solution-explorer-my-key-pair-snk.png)
-{:refdef}
 
 ## Installing Strongly Named Assemblies to the GAC
 
@@ -288,9 +274,7 @@ Copyright (c) Microsoft Corporation.  All rights reserved.
 Assembly successfully added to the cache
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/cmd/gacutil-install-car-lib-dll-explorer.png)
-{:refdef}
 
 
 查看：

@@ -9,9 +9,7 @@ sequence: "308"
 
 在修改方法体的代码时，**如何移除一条 Instruction 呢**？其实，很简单，就是**让中间的某一个 `MethodVisitor` 对象不向后“传递该 instruction”就可以了**。
 
-{:refdef: style="text-align: center;"}
 ![ 多个 FieldVisitor 和 MethodVisitor 串联到一起 ](/assets/images/java/asm/multiple-field-method-vistors-connected.png)
-{:refdef}
 
 但是，需要要注意一点：**无论是添加 instruction，还是删除 instruction，还是要替换 instruction，都要保持 operand stack 修改前和修改后是一致的**。这句话该怎么理解呢？我们举个例子来进行说明。
 

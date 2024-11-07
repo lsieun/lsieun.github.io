@@ -6,9 +6,7 @@ sequence: "102"
 [UP](/java-concurrency.html)
 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/pool/share/custom-thread-pool.png)
-{:refdef}
 
 ## 自定义拒绝策略接口
 

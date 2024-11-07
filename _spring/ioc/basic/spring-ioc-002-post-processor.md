@@ -13,9 +13,7 @@ Spring 主要有两种后处理器：
 
 ## Bean 工厂后处理器
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/bean/post-processor-of-factory-and-registry.png)
-{:refdef}
 
 
 ### BeanFactoryPostProcessor
@@ -402,9 +400,7 @@ Bean 被实例化后，到最终缓存到名为 singletonObjects 单例池之前
 
 跟上面的 Bean 工厂后处理器相似，它也是一个接口，实现了该接口并被容器管理的 BeanPostProcessor，会在流程节点上被 Spring 自动调用。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/bean/post-processor-of-factory-and-bean.png)
-{:refdef}
 
 ```java
 public interface BeanPostProcessor {

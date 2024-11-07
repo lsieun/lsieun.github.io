@@ -15,8 +15,6 @@ sequence: "107"
 - `max.poll.records`: 500. The maximum number of records returned in a single call to `poll()`.
 - `fetch.max.bytes`: 52428800 (50 mebibytes) The maximum amount of data the server should return for a fetch request.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/consumer/kafka-consumer-throughout.png)
-{:refdef}
 
 

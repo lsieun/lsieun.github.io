@@ -100,3 +100,30 @@ Assigner ───┤
 │ GenericTypeAwareAssigner │  source  │   target   │       TypeCasting.to(target)       │
 └──────────────────────────┴──────────┴────────────┴────────────────────────────────────┘
 ```
+
+## Typing
+
+```java
+public interface Assigner {
+    enum Typing {
+        STATIC(false),
+        DYNAMIC(true);
+
+        private final boolean dynamic;
+
+        Typing(boolean dynamic) {
+            this.dynamic = dynamic;
+        }
+
+        public boolean isDynamic() {
+            return dynamic;
+        }
+        
+        public static Typing of(boolean dynamic) {
+            return dynamic
+                    ? DYNAMIC
+                    : STATIC;
+        }
+    }
+}
+```

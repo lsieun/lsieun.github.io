@@ -19,9 +19,7 @@ because it uses the dynamic type information regarding the array's (non-exact) c
 
 两个概念：array variable 和 array object
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/generic/array-variable-and-array-object.png)
-{:refdef}
 
 Generally, **reifiable types are permitted as component type of arrays, while arrays with a non-reifiable component type are illegal**
 

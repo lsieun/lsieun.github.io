@@ -12,9 +12,7 @@ sequence: "centos-iso"
 
 问题：我没有下载成功唉！！！
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/linux/concept/centos6.8-download.png)
-{:refdef}
 
 ## 2、CentOS LiveCD、LiveDVD 和 BinDVD 区别在哪里？ ##
 

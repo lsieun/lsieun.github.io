@@ -79,9 +79,7 @@ public class ExcelWrite {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/office/poi/cell-style-example-001.png)
-{:refdef}
 
 ## Common Pitfalls
 

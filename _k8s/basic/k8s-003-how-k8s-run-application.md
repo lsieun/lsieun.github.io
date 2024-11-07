@@ -3,9 +3,7 @@ title: "K8s 如何运行 Application"
 sequence: "103"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/k8s/deploy-an-application-to-k8s.png)
-{:refdef}
 
 These actions take place when you deploy the application:
 

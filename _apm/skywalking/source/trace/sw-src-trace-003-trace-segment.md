@@ -11,13 +11,9 @@ Trace 概念，是由多个 `TraceSegment` 类来实现的。
 - project: `apm-sniffer/apm-agent-core`
 - package: `org.apache.skywalking.apm.agent.core.context.trace`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/skywalking/source/sw-src-trace-trace-segment.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/skywalking/source/sw-src-trace-trace-segment-relation.png)
-{:refdef}
 
 
 ### Fields
@@ -131,9 +127,7 @@ public class TraceSegment {
 
 ## TraceSegmentRef
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/skywalking/source/sw-src-trace-trace-segment-ref.png)
-{:refdef}
 
 
 ```java

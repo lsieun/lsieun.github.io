@@ -89,53 +89,37 @@ Console: http://192.168.80.240:45799 http://127.0.0.1:45799
 http://192.168.80.240:9000/
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/minio/quick/minio-001.png)
-{:refdef}
 
 第 2 步，查看 Dashboard：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/minio/quick/minio-002-dashboard.png)
-{:refdef}
 
 ### Bucket
 
 第 1 步，选择 Creat Bucket：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/minio/quick/minio-003-create-bucket.png)
-{:refdef}
 
 第 2 步，输入 Bucket Name：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/minio/quick/minio-004-create-bucket.png)
-{:refdef}
 
 ### User
 
 第 1 步，选择 Create User：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/minio/quick/minio-005-create-user.png)
-{:refdef}
 
 第 2 步，输入 Access key 和 Secret key，并选择 Policy：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/minio/quick/minio-006-create-user.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/minio/quick/minio-007-create-user.png)
-{:refdef}
 
 第 3 步，查看 Users 列表：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/minio/quick/minio-008-users.png)
-{:refdef}
 
 ## Spring Boot
 

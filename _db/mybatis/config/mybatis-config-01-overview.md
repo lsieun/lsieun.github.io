@@ -14,9 +14,7 @@ sequence: "101"
 - `mybatis-config.xsd`
 - `mybatis-mapper.xsd`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mybatis/mybatis-jar-org-apache-ibatis-builder-xml-package.png)
-{:refdef}
 
 
 

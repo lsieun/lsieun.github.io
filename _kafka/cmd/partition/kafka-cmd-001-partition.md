@@ -53,9 +53,7 @@ Topic: my-favorite-topic	TopicId: FfRu7Pt4Qa2Frln0OyS0YQ	PartitionCount: 16	Repl
 
 需求：创建一个新的 topic，4 个分区，2 个副本，名称为 `test`。将该 topic 的所有副本都存储到 broker1 和 broker2 两台服务器上。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/partition/kafka-partition-reassign-replica-001.png)
-{:refdef}
 
 第 1 步，创建新的 topic：
 
@@ -188,9 +186,7 @@ leader.imbalance.check.interval.seconds = 300
 leader.imbalance.per.broker.percentage = 10
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/partition/kafka-partition-leader-replica-rebalance.png)
-{:refdef}
 
 ## 生产经验-增加副本因子
 

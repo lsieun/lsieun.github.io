@@ -3,9 +3,7 @@ title: "生产者：数据有序和无序"
 sequence: "107"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/producer/producer-data-order-001.png)
-{:refdef}
 
 ## 数据乱序
 

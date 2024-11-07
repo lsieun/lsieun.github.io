@@ -26,6 +26,4 @@ Select **File** -> **Settings** -> **Editor** -> **General** -> **Editor Tabs**.
 
 Change the **Tab Limit** under the **Closing Policy** settings.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/view/editor-tabs-closing-policy.png)
-{:refdef}

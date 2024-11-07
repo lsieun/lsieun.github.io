@@ -11,9 +11,7 @@ Kafka separates **storage** from **compute**.
 **compute** is mainly handled by **consumers** or **frameworks built on top of consumers** (Kafka Streams, ksqlDB).
 
 
-{:refdef: style="text-align: center;"}
 ![Two Hard Problems in Distributed System](/assets/images/kafka/two-hard-problems.jpg)
-{:refdef}
 
 
 ## Basic

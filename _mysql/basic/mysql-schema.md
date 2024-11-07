@@ -13,9 +13,7 @@ which could be tables, columns, data types, views, stored procedures, relationsh
 A database schema can be represented in a visual diagram,
 which shows the database objects and their relationship with each other.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/mysql-schema-music-example.png)
-{:refdef}
 
 Above is a simple example of a schema diagram.
 It shows three tables, along with their data types,
@@ -23,9 +21,7 @@ relationships between the tables, as well as their primary keys and foreign keys
 
 Here is a more complex example of a database schema:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/a-full-database-schema-diagram.png)
-{:refdef}
 
 ## Schema VS. Database
 

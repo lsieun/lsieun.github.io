@@ -82,8 +82,6 @@ https://github.com/alibaba/jvm-sandbox/pull/306 对 native 方法的插桩思路
 
 https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/Instrumentation.html#setNativeMethodPrefix api 有说明思路 场景的话比如 System.currentTimeMillis() 想模拟上一次请求返回结果
 
-{:refdef: style="text-align: center;"}
 ![QQ Group](/assets/images/contact/qq-group.jpg)
-{:refdef}
 
 

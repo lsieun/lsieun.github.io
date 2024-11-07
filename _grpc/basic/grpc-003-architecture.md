@@ -3,9 +3,7 @@ title: "gRPC Architecture"
 sequence: "103"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grpc/landing-2.png)
-{:refdef}
 
 
 I have mentioned several times that gRPC's performance is very good, but you might wonder what makes it so good?
@@ -18,9 +16,7 @@ Here are a few key differences that make gRPC so performant.
 
 HTTP has been with us for a long time. Now, almost all backend services use this protocol.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grpc/history-of-http.png)
-{:refdef}
 
 As the picture above shows, HTTP/1.1 stayed relevant for a long time.
 
@@ -40,9 +36,7 @@ A new connection will need to be created for each of them.
 This kind of request/response multiplexing is made possible in HTTP/2
 with the introduction of a new HTTP/2 layer called **binary framing**.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grpc/http-2.png)
-{:refdef}
 
 This binary layer encapsulates and encodes the data.
 In this layer, the HTTP request/response gets broken down into **frames**.
@@ -64,9 +58,7 @@ HTTP/2 maps the header on both the client and the server side.
 From that, HTTP/2 is able to know if the header contains the same value and only sends the header value
 if it is different from the previous header.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grpc/request-header-frames-diff.png)
-{:refdef}
 
 As seen in the picture above, Request #2 will only send the `path` since the other values are exactly the same.
 And yes, this does cut down a lot on the payload size, and in turn, improves HTTP/2's performance even more.

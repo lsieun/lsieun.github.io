@@ -20,9 +20,7 @@ public @interface Argument {
 
 其中，`value` 是从 `0` 开始，`0` 表示第一个参数，`1` 表示第二个参数，依此类推。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/delegation/bytebuddy-method-delegation-annotation-argument-example.png)
-{:refdef}
 
 ## 示例
 

@@ -33,6 +33,4 @@ partition.assignment.strategy = [
 
 ## Range
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/internal/Kafka_Internals_069.png)
-{:refdef}

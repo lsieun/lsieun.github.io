@@ -7,9 +7,7 @@ sequence: "107"
 
 ## 正常关闭
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/pipeline/netty-channel-pipeline-close-normal.svg)
-{:refdef}
 
 ### 小总结
 
@@ -23,8 +21,6 @@ sequence: "107"
 
 ## 异常关闭
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/pipeline/netty-channel-pipeline-close-exception.svg)
-{:refdef}
 
 

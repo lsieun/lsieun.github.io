@@ -172,9 +172,11 @@ Tutorial
 
 ### 电影网站
 
-- [SOAP2DAY](https://soap2dayx.to/)，英文电影
+- [SOAP2DAY](https://ww25.soap2day.day/)，英文电影
 - [hdepic](https://hdepic.com/)
 - [jexmovie](https://jexmovie.com/)下载的是PNG文件，然后命名成MP4就可以了。下载的时候，必须保持网页打开，应该是Cookie的缘故。
+- [naruto](https://wvv.9anime.com.pl/?s=naruto)
+- [naruto-shippuden-dub](https://hianime.com.lv/anime/naruto-shippuden-dub)
 
 ### 字幕
 

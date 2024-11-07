@@ -24,9 +24,7 @@ Attach API 是在 Java 1.6 引入的。
 
 我们主要使用 Java 8 版本。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/agent/virtual-machine-of-dynamic-instrumentation.png)
-{:refdef}
 
 在 `com.sun.tools.attach` 包当中，包含的类内容如下：
 
@@ -70,9 +68,7 @@ com.sun.tools.attach ───┼─── VirtualMachine
 A `com.sun.tools.attach.VirtualMachine` represents a Java virtual machine to which this Java virtual machine has attached.
 The Java virtual machine to which it is attached is sometimes called the **target virtual machine**, or **target VM**.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/agent/vm-attach-load-agent-detach.png)
-{:refdef}
 
 使用 `VirtualMachine` 类，我们分成三步：
 

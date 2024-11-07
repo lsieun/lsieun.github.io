@@ -14,9 +14,7 @@ public class IdleStateHandler extends ChannelDuplexHandler {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/uml/uml-class-diagram-IdleStateHandler.png)
-{:refdef}
 
 ## 示例
 

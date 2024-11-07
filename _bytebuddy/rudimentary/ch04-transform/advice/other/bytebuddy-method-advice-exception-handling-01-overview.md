@@ -25,9 +25,7 @@ instrumented code ───┼─── functional.code ─────┼──
                      └─── advice.code.exit ────┼─── @Advice.OnMethodExit(suppress = XyzException.class)
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/advice/bytebuddy-method-advice-exception-three-parts.png)
-{:refdef}
 
 ## 基础参照
 

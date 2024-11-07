@@ -3,20 +3,30 @@ title: "@RuntimeType"
 sequence: "106"
 ---
 
+## 介绍
+
 While **static typing** is great for implementing methods, **strict types** can limit the reuse of code.
 
 To overcome this limitation,
 Byte Buddy allows to annotate **methods** and **method parameters** with `@RuntimeType`
 which instructs Byte Buddy to suspend the **strict type check** in favor of a **runtime type casting**.
 
-```java
+- 使用位置：方法、方法参数
 
+```java
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.PARAMETER, ElementType.METHOD})
 public @interface RuntimeType {
 }
 ```
+
+### 注意事项
+
+Note that Byte Buddy is also able to **box and to unbox primitive values**.
+
+However, be aware that the use of `@RuntimeType` comes at the cost of abandoning type safety and
+you might end up with a `ClassCastException` if you got incompatible types mixed up.
 
 ## 示例
 
@@ -120,11 +130,4 @@ public class HelloWorld {
     }
 }
 ```
-
-## 注意事项
-
-Note that Byte Buddy is also able to **box and to unbox primitive values**.
-
-However, be aware that the use of `@RuntimeType` comes at the cost of abandoning type safety and
-you might end up with a `ClassCastException` if you got incompatible types mixed up.
 

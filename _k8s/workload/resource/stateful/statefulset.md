@@ -3,9 +3,7 @@ title: "StatefulSet"
 sequence: "statefulset"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/k8s/database-in-k8s-extra-steps.jpg)
-{:refdef}
 
 StatefulSet 中每个 Pod 的 DNS 格式为 `statefulSetName-{0..N-1}.serviceName.namespace.svc.cluster.local`
 
@@ -141,17 +139,13 @@ $ kubectl run -it --image busybox dns-test --restart=Never --rm /bin/sh
 # ping web-0.nginx
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/k8s/busybox-ping-pod-web-nginx.png)
-{:refdef}
 
 ```text
 $ kubectl run -it --image busybox:1.28.4 dns-test --restart=Never --rm /bin/sh
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/k8s/busybox-nslookup-pod-web-nginx.png)
-{:refdef}
 
 ## Scale
 

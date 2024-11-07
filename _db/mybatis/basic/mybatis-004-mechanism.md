@@ -17,9 +17,7 @@ MyBatis 的工作原理：
 - 第 3 步，`Executor` 对象负责执行 CRUD 的操作方法，根据 SQL 语句的 id 查找映射文件中的 SQL 语句，并委托 `StatementHandler` 对象对 SQL 语句进行预编译。
 - 第 4 步，`StatementHandler` 对象根据映射文件中 SQL 语句的输入映射定义，将**需要的参数**传入到 SQL 语句中（参数赋值），并执行最终的 SQL 语句。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mybatis/mybatis-process.png)
-{:refdef}
 
 ## Reference
 

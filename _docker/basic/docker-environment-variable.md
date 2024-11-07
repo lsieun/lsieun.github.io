@@ -41,9 +41,7 @@ kibana            7.17.10   ba4afcebad69   7 weeks ago   811MB
 
 第三种方式，设置环境变量
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/docker/docker-host-win10-env.png)
-{:refdef}
 
 ```text
 > docker images

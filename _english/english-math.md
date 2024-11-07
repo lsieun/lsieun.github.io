@@ -7,19 +7,13 @@ sequence: "103"
 
 ### Division
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/english/math/math-terms-divi1.jpg)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/english/math/math-terms-divi2.jpg)
-{:refdef}
 
 ### Subtraction
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/english/math/math-terms-subtrahend.jpg)
-{:refdef}
 
 ## Reference
 

@@ -21,9 +21,7 @@ The following classes inherit `Stream` class to provide the functionality to Rea
 - `PipeStream` reads or writes bytes from different processes.
 - `CryptoStream` is for linking data streams to cryptographic transformations.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/stream-classes-heirarchy.png)
-{:refdef}
 
 ```text
           ┌─── file     : FileStream
@@ -51,6 +49,4 @@ It can be used to write strings to different Streams such as `FileStream`, `Memo
 
 `BinaryWriter` writes primitive types in binary.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/stream-relations.png)
-{:refdef}

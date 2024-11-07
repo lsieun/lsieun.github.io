@@ -33,9 +33,7 @@ Or when you need to create global maps.
 Thus, **geographic CRS's are not ideal for measuring distance.**
 This is why other projected CRS have been developed.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/latitude-longitude-globe-ESRI.gif)
-{:refdef}
 
 A geographic coordinate system locates latitude and longitude location using angles.
 Thus, the spacing of each line of latitude moving north and south is not uniform.
@@ -48,9 +46,7 @@ the same units as defined within that particular geographic CRS.
 **Geographic coordinate reference systems are best for global analysis**
 however it is important to remember that **distance is distorted using a geographic lat/long `CRS`**.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/geographic-WGS84-1.png)
-{:refdef}
 
 
 **Data Note**:
@@ -78,9 +74,7 @@ You can see this distortion when you look at a map of the entire globe.
 The mathematical calculations used in spatial projections are designed
 to optimize the relative size and shape of a particular region on the globe.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/spatial-projection-transformations-crs.png)
-{:refdef}
 
 The 3-dimensional globe must be transformed to create a flat 2-dimensional map.
 How that transformation or projection occurs changes the appearance of the final map and the relative size of objects in different parts of the map.
@@ -97,16 +91,12 @@ The origin `(0,0)` for each UTM zone and associated region is located
 at the intersection of the equator and a location, 500,000 meters east of the central meridian of each zone.
 The origin location is placed outside the boundary of the UTM zone, to avoid negative Easting numbers.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/utm-zone-characteristics.png)
-{:refdef}
 
 The `0,0` origin of each UTM zone is located in the **Bottom left** hand corner
 (south west) of the zone - exactly `500,000` m EAST from the central meridian of the zone.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/800px-utm-zones.jpg)
-{:refdef}
 
 ## Coordinate Reference System Formats
 

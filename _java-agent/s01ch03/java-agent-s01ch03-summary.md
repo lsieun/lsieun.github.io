@@ -17,9 +17,7 @@ sequence: "149"
 
 在 Agent Jar 当中有三个主要组成部分：
 
-{:refdef: style="text-align: center;"}
 ![Agent Jar 中的三个组成部分](/assets/images/java/agent/agent-jar-three-components.png)
-{:refdef}
 
 在 Manifest 文件中，与 Java Agent 相关的属性有 7 个：
 
@@ -126,7 +124,5 @@ class state ───┤
 
 在 define、redefine 和 retransform 的情况下，会触发哪些 transformer：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/agent/define-redefine-retransform.png)
-{:refdef}
 

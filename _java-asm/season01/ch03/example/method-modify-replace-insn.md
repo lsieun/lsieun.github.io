@@ -9,9 +9,7 @@ sequence: "310"
 
 有的时候，我们想替换掉某一条 instruction，那应该如何实现呢？其实，实现起来也很简单，就是**先找到该 instruction，然后在同样的位置替换成另一个 instruction 就可以了**。
 
-{:refdef: style="text-align: center;"}
 ![ 多个 FieldVisitor 和 MethodVisitor 串联到一起 ](/assets/images/java/asm/multiple-field-method-vistors-connected.png)
-{:refdef}
 
 同样，我们也要注意：**在替换 instruction 的过程当中，operand stack 在修改前和修改后是一致的**。
 

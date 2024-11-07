@@ -60,13 +60,9 @@ $ docker restart nexus3
 http://192.168.80.130:8081
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/nexus3/sonatype-nexus-repository-pro.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/nexus3/nexus-data-admin-password.png)
-{:refdef}
 
 从 `Host` 上查看 `admin.password`：
 

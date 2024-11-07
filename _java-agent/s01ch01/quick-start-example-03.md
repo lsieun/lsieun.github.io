@@ -9,9 +9,7 @@ sequence: "105"
 
 我们的预期目标：借助于 JDK 内置的 ASM 打印出方法接收的参数，使用 Dynamic Instrumentation 的方式实现。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/agent/virtual-machine-of-dynamic-instrumentation.png)
-{:refdef}
 
 
 开发环境：

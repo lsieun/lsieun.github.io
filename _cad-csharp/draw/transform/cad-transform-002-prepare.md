@@ -70,7 +70,5 @@ namespace Lsieun.Cad.DrawObjects.Transformation
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/transform/cad-transform-001.png)
-{:refdef}
 

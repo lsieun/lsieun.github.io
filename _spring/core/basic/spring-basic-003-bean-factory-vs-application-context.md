@@ -28,9 +28,7 @@ Bean 创建的主要逻辑和功能，都被封装在 BeanFactory 中，
 ApplicationContext 不仅继承了 BeanFactory，而且 ApplicationContext 内部还维护着 BeanFactory 的引用，
 所以，ApplicationContext 与 BeanFactory 既有继承关系，又有融合关系。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/context/application-context-class-hierarchy.png)
-{:refdef}
 
 ## Bean 初始化时机
 
@@ -46,9 +44,7 @@ ApplicationContext 在 BeanFactory 基础上对功能进行了扩展。
 - BeanFactory 的 API 更偏向底层
 - ApplicationContext 的 API 大多数是对这些底层 API 的封装
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/context/application-context-class-hierarchy.png)
-{:refdef}
 
 
 ## BeanFactory
@@ -82,9 +78,7 @@ public interface BeanFactory {
 
 ## DefaultListableBeanFactory
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/bean/default-listable-bean-factory-class-hierarchy.png)
-{:refdef}
 
 ```java
 public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFactory
@@ -101,6 +95,4 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 - `FileSystemXmlApplicationContext`：加载磁盘路径下的 XML 配置的 ApplicationContext
 - `AnnotationConfigApplicationContext`：加载注解配置类的 ApplicationContext
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/context/application-context-sub-classes.png)
-{:refdef}

@@ -41,15 +41,11 @@ sequence: "304"
 
 换句话说，ASM 实现，从本质上来说，是一只脚踩在 Java Language Specification 的范畴，而另一只脚却踩在 JVM Specification 的范畴。ASM，在这两个范畴中，扮演的一个非常重要的角色，就是将 Java Language Specification 范畴的概念和 JVM Specification 范畴的概念进行转换。
 
-{:refdef: style="text-align: center;"}
 ![JLS 与 JVM 之间的关系 ](/assets/images/java/jls-jvms.png)
-{:refdef}
 
 这两个范畴，是相关的，但是又不是那种密不可分的关系。比如说，Java 语言编写的程序可以运行在 JVM 上，Scala 语言编写的程序也可以运行在 JVM 上，甚至 Python 语言编写的程序也可以编写在 JVM 上；也就是说，某一种编程语言和 JVM 之间，并不是一种非常强的依赖关系。
 
-{:refdef: style="text-align: center;"}
 ![ 各种语言与 JVM 之间的关系 ](/assets/images/java/java-scala-python-jvm.png)
-{:refdef}
 
 <table>
 <thead>
@@ -80,9 +76,7 @@ sequence: "304"
 
 在 `.java` 文件中，我们经常使用 `java.lang.Class` 类；而在 `.class` 文件中，需要经常用到 internal name、type descriptor 和 method descriptor；而在 ASM 中，`org.objectweb.asm.Type` 类就是帮助我们进行两者之间的转换。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/asm-type-relation.png)
-{:refdef}
 
 
 ## Type 类

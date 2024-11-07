@@ -12,9 +12,7 @@ sequence: "108"
 
 By default, the **advice method** will be skipped if the **instrumented method** throws exception.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/bytebuddy-concept-instrumented-and-advice-method.png)
-{:refdef}
 
 第 2 点，如果想要继续执行 advice method 的代码，需要设置 `@Advice.OnMethodExit` 的 `onThrowable` 属性。
 在 `onThrowable` 属性中，我们要指明要捕获什么类型的异常：

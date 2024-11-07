@@ -3,9 +3,7 @@ title: "建造者模式"
 sequence: "101"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/design-pattern/diagrams/builder-structure.png)
-{:refdef}
 
 The Builder Pattern assumes **an object whose task is limited to constructing another object.**
 

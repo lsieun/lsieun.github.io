@@ -15,9 +15,7 @@ sequence: "jvm-memory"
         - 虚拟机栈（VM Stack）：存储方法调用与执行过程的数据
         - 本地方法栈（Native Method Stack）：存储本地方法执行的数据
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/jvm/jvm-runtime-data-area.png)
-{:refdef}
 
 **方法区**存储的是：常量池、类信息(类变量)、静态变量(static)以及方法信息(修饰符、方法名、返回值、参数等)等
 
@@ -49,13 +47,9 @@ GC 主要在新生区（伊甸园区）、老年区。
 - 老年区
 - 永久区/元空间：存储的是 java 的运行环境或类信息，这个区域不存在垃圾回收，关闭 jvm 就会释放内存
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/jvm/jvm-heap-8-after.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/jvm/jvm-heap-8-before.png)
-{:refdef}
 
 设置堆空间大小的参数：
 

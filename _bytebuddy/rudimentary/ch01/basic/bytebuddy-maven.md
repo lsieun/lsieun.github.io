@@ -38,9 +38,7 @@ learn-bytebuddy-maven
 
 添加一个 `learn-bytebuddy-maven` 项目：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/idea-maven-java17-bytebuddy.png)
-{:refdef}
 
 ### pom.xml: 添加依赖
 
@@ -74,9 +72,7 @@ module learn.bytebuddy.maven {
 
 如果我们不知道 ByteBuddy 的 module 名字，可以查看：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/bytebuddy-module-name.png)
-{:refdef}
 
 ### 编写代码
 

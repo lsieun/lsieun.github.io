@@ -9,9 +9,7 @@ The MQTT protocol works by exchanging a series of **MQTT Control Packets** in a 
 
 An MQTT Control Packet consists of up to three parts:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mqtt/structure-of-an-mqtt-control-packet.png)
-{:refdef}
 
 ```text
                                                ┌─── MQTT Control Packet type
@@ -29,17 +27,13 @@ MQTT Control Packet ───┤
 
 Each MQTT Control Packet contains a fixed header.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mqtt/fixed-header-format.png)
-{:refdef}
 
 #### MQTT Control Packet type
 
 **Position**: byte 1, bits 7-4. Represented as a 4-bit unsigned value.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mqtt/control-packet-types.png)
-{:refdef}
 
 #### Flags
 
@@ -49,9 +43,7 @@ Where a flag bit is marked as “Reserved”,
 it is reserved for future use and MUST be set to the value listed in that table.
 If invalid flags are received, the receiver MUST close the Network Connection.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mqtt/flag-bits.png)
-{:refdef}
 
 #### Remaining Length
 
@@ -70,9 +62,7 @@ Thus each byte encodes 128 values and a "continuation bit".
 
 **The maximum number of bytes in the Remaining Length field is four.**
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mqtt/size-of-remaining-length-field.png)
-{:refdef}
 
 For example, the number 64 decimal is encoded as a single byte, decimal value 64, hexadecimal `0x40`.
 The number `321` decimal (`= 65 + 2*128`) is encoded as two bytes, least significant first.
@@ -92,16 +82,12 @@ The Packet Identifier field of variable header is common in several packet types
 
 Control Packets that require a Packet Identifier are listed in Table:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mqtt/control-packets-that-contain-a-packet-identifier.png)
-{:refdef}
 
 
 #### Packet Identifier
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mqtt/packet-identifier-bytes.png)
-{:refdef}
 
 The variable header component of many of the Control Packet types includes a 2 byte Packet Identifier field.
 These Control Packets are `PUBLISH` (where `QoS > 0`), `PUBACK`, `PUBREC`, `PUBREL`, `PUBCOMP`,
@@ -148,9 +134,7 @@ In the case of the `PUBLISH` packet this is the Application Message.
 
 The following table lists the Control Packets that require a Payload.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mqtt/control-packets-that-contain-a-payload.png)
-{:refdef}
 
 ## MQTT Control Packets
 
@@ -169,9 +153,7 @@ All but the Client identifier are optional and their presence is determined base
 
 #### Fixed header
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mqtt/connect-packet-fixed-header.png)
-{:refdef}
 
 Remaining Length is the length of the variable header (10 bytes) plus the length of the Payload.
 

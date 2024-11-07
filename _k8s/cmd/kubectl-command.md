@@ -4,9 +4,7 @@ sequence: "kubectl"
 ---
 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/k8s/kubectl-talks-only-to-the-api-server.png)
-{:refdef}
 
 Kubectl is a single executable file that you must download to your computer and place into your path.
 It loads its configuration from a configuration file called `kubeconfig`.

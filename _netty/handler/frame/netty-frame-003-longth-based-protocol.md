@@ -13,9 +13,7 @@ LengthFieldBasedFrameDecoder Extracts frames based on a length value encoded in 
 
 ## 定长解码器
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/frame/decoding-a-frame-length-of-8-bytes.png)
-{:refdef}
 
 让所有数据包长度固定（假设长度为 8 字节），『关键代码』：
 
@@ -138,9 +136,7 @@ public class MyClient {
 
 ## 变长解码器
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/frame/length-field-based-frame-index.png)
-{:refdef}
 
 ```text
   lengthFieldOffset   = 0

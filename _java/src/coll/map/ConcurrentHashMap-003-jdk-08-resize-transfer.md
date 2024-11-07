@@ -9,17 +9,13 @@ sequence: "ConcurrentHashMap-103"
 
 ### 迁移步长
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/src/coll/ConcurrentHashMap-transfer-stride-16.png)
-{:refdef}
 
 ```text
 ConcurrentHashMap --> transfer --> stride
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/src/coll/ConcurrentHashMap-transfer-stride.png)
-{:refdef}
 
 ```java
 public class ArrayTransferStride {
@@ -70,15 +66,11 @@ public class ArrayTransferStride {
 ConcurrentHashMap --> transfer --> nextBound = (nextIndex > stride ? nextIndex - stride : 0)
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/src/coll/ConcurrentHashMap-transfer-stride-range-code.png)
-{:refdef}
 
 迁移区间：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/src/coll/ConcurrentHashMap-transfer-stride-range.png)
-{:refdef}
 
 代码示例：
 
@@ -130,15 +122,11 @@ public class ArrayTransferRange {
 旧数组的长度为 `n`，新数组的长度为 `2n`。
 在旧数组中，索引为 `i` 的元素会迁移到新数组的第 `i` 和 `i + n` 的位置：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/src/coll/ConcurrentHashMap-transfer-pos.png)
-{:refdef}
 
 例如，旧数组长度为 `8`，新数组长度为 `16`，旧数组的索引为 `3` 的元素会迁移到新数组的 `3` 和 `3 + 8` 的位置： 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/src/coll/ConcurrentHashMap-transfer-pos-002.png)
-{:refdef}
 
 代码示例：
 
@@ -412,57 +400,43 @@ public class ConcurrentHashMap<K, V> extends AbstractMap<K, V> implements Concur
 
 - 多线程开始扩容
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/src/coll/ConcurrentHashMap-resize-001.awebp)
-{:refdef}
 
 ---
 
 - lastrun节点
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/src/coll/ConcurrentHashMap-transfer-001.awebp)
-{:refdef}
 
 ---
 
 - 链表迁移
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/src/coll/ConcurrentHashMap-transfer-002.awebp)
-{:refdef}
 
 ---
 
 - 红黑树迁移
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/src/coll/ConcurrentHashMap-transfer-003.awebp)
-{:refdef}
 
 ---
 
 - 迁移过程中get和put的操作的处理
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/src/coll/ConcurrentHashMap-transfer-004.awebp)
-{:refdef}
 
 ---
 
 - 并发迁移
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/src/coll/ConcurrentHashMap-transfer-005.awebp)
-{:refdef}
 
 ---
 
 - 迁移完成
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/src/coll/ConcurrentHashMap-transfer-006.awebp)
-{:refdef}
 
 ### transfer
 

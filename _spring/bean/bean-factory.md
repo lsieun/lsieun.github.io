@@ -127,11 +127,7 @@ BeanDefinition ───┼─── object ───┤                    │ 
                                                      └─── getOriginatingBeanDefinition()
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/ioc/default-listable-bean-factory.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/ioc/spring-resource.png)
-{:refdef}
 

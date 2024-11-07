@@ -53,6 +53,4 @@ mysql> SELECT * FROM csv_test;
 1 row in set (0.00 sec)
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/storage/windows-storage-data-directory-csv.png)
-{:refdef}

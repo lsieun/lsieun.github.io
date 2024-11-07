@@ -51,9 +51,7 @@ enable.idempotence = true
 
 ## 生产者事务
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/producer/producer-transaction-001.png)
-{:refdef}
 
 
 ### Kafka 事务原理

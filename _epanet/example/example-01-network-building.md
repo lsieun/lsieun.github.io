@@ -10,9 +10,7 @@ such as relational database files or GIS/CAD files.
 
 Below is a schematic of the network to be built.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/epanet/epanet-network-example-02.png)
-{:refdef}
 
 ```java
 import com.jm.epanet.EpaNetAPI;

@@ -5,9 +5,7 @@ sequence: "102"
 
 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/architecture/mysql-architecture.png)
-{:refdef}
 
 ## Reference
 

@@ -12,9 +12,7 @@ public interface AopProxy {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/aop/aop-proxy-class-hierarchy.png)
-{:refdef}
 
 <table>
     <thead>

@@ -18,27 +18,19 @@ CMD java -jar myproject.jar
 
 第 1 步，在 `myproject-ci` 下选择 Configure：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-myproject-ci-configure.png)
-{:refdef}
 
 第 2 步，在 Post-build Actions 部分，清空 Exec command，并点击 Add Transfer Set：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-044-exec-command-empty.png)
-{:refdef}
 
 第 3 步，配置 Transfer Set 的信息：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-045-transfer-set.png)
-{:refdef}
 
 第 4 步，在 `myproject-ci` 下，选择 Build Now：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-myproject-ci-build-now.png)
-{:refdef}
 
 
 第 5 步，在 `WebServer` 服务器上验证：
@@ -55,27 +47,19 @@ drwxrwxr-x. 2 devops devops 66 Sep 14 19:27 target
 
 第 1 步，在 `myproject-ci` 下选择 Configure：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-myproject-ci-configure.png)
-{:refdef}
 
 第 2 步，移除 jar 文件的前缀。在 Transfer Set 部分，添加 Remove prefix：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-048-remove-prefix-target.png)
-{:refdef}
 
 第 3 步，移除 Dockerfile 的前缀。在 Transfer Set 部分，添加 Remove prefix：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-049-remove-prefix-docker.png)
-{:refdef}
 
 第 4 步，在 `myproject-ci` 下，选择 Build Now：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-myproject-ci-build-now.png)
-{:refdef}
 
 第 5 步，在 `WebServer` 服务器上验证：
 
@@ -91,9 +75,7 @@ total 17340
 
 第 1 步，在 `myproject-ci` 下选择 Configure：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-myproject-ci-configure.png)
-{:refdef}
 
 第 2 步，配置 Exec command：
 
@@ -103,15 +85,11 @@ docker rm -f myproject
 docker run -d -p 80:80 --name myproject lsieun/myproject:1.0
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-050-exec-docker-build.png)
-{:refdef}
 
 第 3 步，在 `myproject-ci` 下，选择 Build Now：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-myproject-ci-build-now.png)
-{:refdef}
 
 第 4 步，在 `WebServer` 服务器上验证：
 

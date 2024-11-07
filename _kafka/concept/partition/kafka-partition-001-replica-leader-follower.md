@@ -63,21 +63,13 @@ Follower 故障
 - 3、待该 Follower(broker2) 恢复后，Follower(broker2) 会读取本地磁盘记录的上次 HW，并将 Log 文件高于 HW 的部分截取掉，从 HW 开始向 Leader(broker0) 进行同步
 - 4、等该 Follower(broker2) 的 LEO 大于等于该 Partition 的HW，即 Follower(broker2) 追上 Leader(broker0) 之后，就可以重新加入 ISR 了
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/broker/kafka-broker-partition-follower-fail-001.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/broker/kafka-broker-partition-follower-fail-002.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/broker/kafka-broker-partition-follower-fail-003.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/broker/kafka-broker-partition-follower-fail-004.png)
-{:refdef}
 
 ### Leader 故障处理细节
 
@@ -86,9 +78,7 @@ Follower 故障
 
 注意：这只能保证副本之间的数据一致性，并不能保证数据不丢失或者不重复。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/broker/kafka-broker-partition-leader-fail-001.png)
-{:refdef}
 
 
 

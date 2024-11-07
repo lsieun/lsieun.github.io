@@ -104,9 +104,7 @@ public class GoodChildRun {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/method-call-components.png)
-{:refdef}
 
 ```java
 public class MethodCall implements Implementation.Composable {
@@ -143,9 +141,7 @@ public static class WithoutSpecifiedTarget extends MethodCall {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/method-call-without-specified-target.png)
-{:refdef}
 
 ```text
                                            ┌─── on(Object target)

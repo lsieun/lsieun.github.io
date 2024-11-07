@@ -32,9 +32,7 @@ public @interface FieldValue {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/delegation/bytebuddy-method-delegation-annotation-field-value-example.png)
-{:refdef}
 
 ## 示例
 

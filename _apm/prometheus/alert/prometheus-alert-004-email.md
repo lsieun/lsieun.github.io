@@ -23,9 +23,7 @@ Alertmanager 内置了对 SMTP 协议的支持。
 
 获取**授权密码**：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/email/email-163-auth-password.png)
-{:refdef}
 
 在 `alertmanager.yml` 文件中，需要设置 `smtp_auth_password`。
 
@@ -144,14 +142,10 @@ http://localhost:9090/alerts
 
 报警内容：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/prometheus/prometheus-alerts-node-down-example.png)
-{:refdef}
 
 #### 邮件确认
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/email/email-letter-prometheus-alert-manager.png)
-{:refdef}
 
 

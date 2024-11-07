@@ -13,9 +13,7 @@ $ ip addr
 $ ip a
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/network/cmd-ip-address-ethernet-interface.png)
-{:refdef}
 
 从上图可以看到，ethernet interface 的名字是 `ens32`。
 
@@ -25,9 +23,7 @@ $ ip a
 /etc/sysconfig/network-scripts/ifcfg-INTERFACENAME
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/network/ifcfg-ens32.png)
-{:refdef}
 
 
 第 3 步，修改 `ifcfg-INTERFACENAME` 文件：
@@ -89,9 +85,7 @@ PREFIX=24
 
 如果使用 `VMWare Workstation`，那么网关可以参考 NAT 的设置：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/network/vmware-nat-gateway.png)
-{:refdef}
 
 ### BOOTPROTO
 

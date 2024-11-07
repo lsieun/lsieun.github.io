@@ -51,9 +51,7 @@ Parts of a Region:
 - Margin
 - Region insets
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/fx/different-parts-of-a-region.png)
-{:refdef}
 
 A region may have a **background** that is drawn first.
 The **content area** is the area where the content of the `Region` (e.g., controls) is drawn.
@@ -388,9 +386,7 @@ Figure 10-9 shows the positions of positive and negative insets relative to the 
 The rectangle in solid lines is the layout bounds of a `Region`,
 and the rectangles in dashed lines are the insets lines.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/fx/positive-and-negative-insets.png)
-{:refdef}
 
 The border stroke may be drawn inside, outside, or partially inside and partially outside the layout bounds of the Region.
 To determine the exact position of a stroke relative to the layout bounds,

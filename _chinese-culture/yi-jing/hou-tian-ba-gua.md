@@ -27,10 +27,6 @@ sequence: "102"
     </tbody>
 </table>
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/chinese-culture/hou-tian-ba-gua.jpg)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/chinese-culture/tai-chi.png)
-{:refdef}

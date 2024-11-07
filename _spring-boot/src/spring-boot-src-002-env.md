@@ -27,9 +27,7 @@ https://github.com/spring-projects/spring-boot/tree/v2.2.1.RELEASE
 
 ## 编译源码
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/src/spring-boot-2.2.9-release-directories.png)
-{:refdef}
 
 
 在根目录下，执行 Maven 命令：
@@ -91,17 +89,11 @@ and re executed the `mvn clean install -DSkipTests -Pfast`. The problem was reso
 
 ## 新建一个 Module
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/src/spring-boot-2.2.9-new-module.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/src/spring-initializr-spring-boot-mytest.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/src/spring-boot-mytest-spring-web.png)
-{:refdef}
 
 
 ```xml

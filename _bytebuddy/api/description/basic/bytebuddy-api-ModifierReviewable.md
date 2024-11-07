@@ -17,9 +17,7 @@ ModifierReviewable ───┤                               └─── OfEnu
                       └─── ForParameterDescription
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/description/modifier-reviewable-uml.png)
-{:refdef}
 
 ```text
 public interface ModifierReviewable {

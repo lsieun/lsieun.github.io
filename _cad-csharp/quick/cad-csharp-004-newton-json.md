@@ -9,21 +9,15 @@ sequence: "104"
 
 第 1 步，在 `Lsieun.Cad.Bridge` 的 `References` 上右键选择 `Manage Nuget Packages...`：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/quick/dev-035-manage-nuget-packages.png)
-{:refdef}
 
 第 2 步，搜索和安装 `Newtonsoft.Json`：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/quick/dev-036-nuget-newtonsoft-json.png)
-{:refdef}
 
 第 3 步，点击 OK：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/quick/dev-037-nuget-preview-newtonsoft-json.png)
-{:refdef}
 
 
 ### 编写代码

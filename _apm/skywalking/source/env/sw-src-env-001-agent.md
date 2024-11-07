@@ -9,9 +9,7 @@ sequence: "101"
 https://skywalking.apache.org/downloads/
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/skywalking/source/sw-src-env-agent-source-download.png)
-{:refdef}
 
 第 2 步，解压文件。
 

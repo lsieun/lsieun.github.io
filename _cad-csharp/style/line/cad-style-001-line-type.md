@@ -18,9 +18,7 @@ AutoCAD 中的标准线型文件，一共有两个，分别是公制下的 `acad
 C:\Users\<当前用户>\AppData\Roaming\Autodesk\AutoCAD 2014\R19.1\enu\Support
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/gui/cad-two-standard-line-type-files.png)
-{:refdef}
 
 打开 `acadiso.lin` 文件，示例如下：
 
@@ -146,15 +144,11 @@ C:\Users\1\AppData\Roaming\Autodesk\AutoCAD 2014\R19.1\enu\Support
 
 第 1 步，选择 `Format` 菜单下的 `LineType...` 命令：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/gui/gui-menu-format-linetype.png)
-{:refdef}
 
 第 2 步，在打开的 Linetype Manager 中，会看到 `ByLayer`、`ByBlock` 和 `Continuous` 三种线型：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/gui/gui-linetype-manager.png)
-{:refdef}
 
 ## 加载线型
 

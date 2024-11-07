@@ -13,9 +13,7 @@ sequence: "101"
 https://github.com/protocolbuffers/protobuf/releases
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/protobuf/compiler/protoc-26-win64-zip-download.png)
-{:refdef}
 
 ## 环境变量
 
@@ -25,9 +23,7 @@ https://github.com/protocolbuffers/protobuf/releases
 D:\software\protoc-26.1-win64
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/protobuf/compiler/protobuf-home-env-variable.png)
-{:refdef}
 
 第 2 步，修改 `Path` 环境变量，添加如下内容：
 
@@ -35,9 +31,7 @@ D:\software\protoc-26.1-win64
 %PROTOCBUF_HOME%\bin
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/protobuf/compiler/path-variable-protobuf-bin.png)
-{:refdef}
 
 ## 验证
 
@@ -45,7 +39,5 @@ D:\software\protoc-26.1-win64
 > protoc --version
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/protobuf/compiler/cmd-protoc-version.png)
-{:refdef}
 

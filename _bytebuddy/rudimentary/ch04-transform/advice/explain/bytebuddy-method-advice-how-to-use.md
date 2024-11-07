@@ -3,9 +3,7 @@ title: "Advice 的用法"
 sequence: "102"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/advice/bytebuddy-method-advice-how-to-use.png)
-{:refdef}
 
 ## 如何使用
 

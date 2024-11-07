@@ -63,9 +63,7 @@ follow 会成为新的 leader。
 
 ### 生产者向 Kafka 发送消息的执行流程介绍一下？
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/producer/producer-send-record.png)
-{:refdef}
 
 （1）生产者要往 Kafka 发送消息时，需要创建 ProducerRecord,代码如下：
 

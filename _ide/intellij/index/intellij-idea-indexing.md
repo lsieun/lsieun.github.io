@@ -115,9 +115,7 @@ The string is split into trigrams (sequences of three subsequent characters):
 - ert
 - rty
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/trigram-indexes-qwerty.png)
-{:refdef}
 
 These trigrams are stored in a normal tree index. Now consider a query looking for the substring `wert`.
 The query condition is also split into trigrams: `wer` and `ert`.

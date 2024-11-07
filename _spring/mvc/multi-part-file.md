@@ -28,9 +28,7 @@ MultipartFile ───┤                 │                 └─── getS
                                    └─── transferTo(Path dest)
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/mvc/file-form-and-multi-part-file.png)
-{:refdef}
 
 
 

@@ -37,9 +37,7 @@ GradleWrapper 的执行流程：
 
 如下图所示：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gradle/gradle-wrapper-dist.jpeg)
-{:refdef}
 
 `gradle-wrapper.properties` 文件解读:
 

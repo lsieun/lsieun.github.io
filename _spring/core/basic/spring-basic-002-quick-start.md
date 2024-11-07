@@ -82,9 +82,7 @@ public class UserServiceImpl implements UserService {
 
 添加 `src/main/resources/beans.xml` 文件：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/intellij/maven-resource-new-xml-spring-config.png)
-{:refdef}
 
 内容如下：
 

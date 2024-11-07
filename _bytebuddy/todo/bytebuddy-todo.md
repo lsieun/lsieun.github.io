@@ -4,6 +4,22 @@
 - Java agent
 - Build
 
+## 思路
+
+- [ ] 概念：
+- [ ] 本质：
+- [ ] 解读
+    - [ ] API 如何使用，编写代码的思路是什么
+    - [ ] 当前类它自身包含的方法、子类型有哪些
+    - [ ] 表达形式
+        - [ ] UML 表示
+        - [ ] box-drawing
+    - [ ] 注意事项是什么
+- [ ] 学习
+  - [ ] 快速开始
+  - [ ] 普通场景
+  - [ ] 特殊场景
+
 - [x] MethodDescription
     - [x] CONSTRUCTOR_INTERNAL_NAME
     - [x] TYPE_INITIALIZER_INTERNAL_NAME
@@ -60,26 +76,17 @@
 
 - MethodDelegationBinder 和 TargetMethodAnnotationDrivenBinder 是进行方法绑定时的概念，需要解决清楚
 
-## 思路
 
-- [ ] 概念：
-- [ ] 本质：
-- [ ] 解读
-    - [ ] API 如何使用，编写代码的思路是什么
-    - [ ] 当前类它自身包含的方法、子类型有哪些
-    - [ ] 表达形式
-        - [ ] UML 表示
-        - [ ] box-drawing
-    - [ ] 注意事项是什么
-- [ ] 学习
-  - [ ] 快速开始
-  - [ ] 普通场景
-  - [ ] 特殊场景
 
 ## TODO
 
 - net.bytebuddy.dynamic.scaffold.TypeWriter#DUMP_PROPERTY: String DUMP_PROPERTY = "net.bytebuddy.dump"
 - 读取注解 Annotation
+
+## StackOverflow
+
+- [How to redefine class with MethodDelegation?](https://github.com/raphw/byte-buddy/issues/104)
+- [How to dynamically replace methods with Byte Buddy?](https://stackoverflow.com/questions/77778682/how-to-dynamically-replace-methods-with-byte-buddy)
 
 ## 设计模式
 

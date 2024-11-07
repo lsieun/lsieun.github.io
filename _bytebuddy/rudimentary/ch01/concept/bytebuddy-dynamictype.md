@@ -29,9 +29,7 @@ public DynamicType.Builder<?> subclass(Type superType, ConstructorStrategy const
 public DynamicType.Builder<?> subclass(TypeDefinition superType, ConstructorStrategy constructorStrategy)
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/from-byte-buddy-to-dynamic-type.png)
-{:refdef}
 
 ## 代码示例
 

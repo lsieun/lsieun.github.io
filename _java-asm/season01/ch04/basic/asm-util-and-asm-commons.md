@@ -9,9 +9,7 @@ sequence: "401"
 
 在 `asm-util.jar` 当中，主要介绍 `CheckClassAdapter` 和 `TraceClassVisitor` 类。在 `TraceClassVisitor` 类当中，会涉及到 `Printer`、`ASMifier` 和 `Textifier` 类。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/asm-util-package.png)
-{:refdef}
 
 - 其中，`CheckClassAdapter` 类，主要负责检查（Check）生成的 `.class` 文件内容是否正确。
 - 其中，`TraceClassVisitor` 类，主要负责将 `.class` 文件的内容打印成文字输出。根据输出的文字信息，可以探索或追踪（Trace）`.class` 文件的内部信息。
@@ -23,9 +21,7 @@ sequence: "401"
 - 其中，`ClassVisitor` 的子类有 `ClassRemapper`、`StaticInitMerger` 和 `SerialVersionUIDAdder` 类；
 - 其中，`MethodVisitor` 的子类有 `LocalVariablesSorter`、`GeneratorAdapter`、`AdviceAdapter`、`AnalyzerAdapter` 和 `InstructionAdapter` 类。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/asm-commons-package.png)
-{:refdef}
 
 ## util 和 commons 的区别
 
@@ -37,15 +33,11 @@ sequence: "401"
 
 在 [learn-java-asm](https://gitee.com/lsieun/learn-java-asm) 当中，各个 Jar 包之间的依赖关系如下：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/learn-java-asm-depdendencies.png)
-{:refdef}
 
 由上图，我们可以看到：`asm-util.jar` 和 `asm-commons.jar` 两者都对 `asm.jar`、`asm-tree.jar`、`asm-analysis.jar` 有依赖。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/relation-of-asm-jars.png)
-{:refdef}
 
 ## 编程习惯
 

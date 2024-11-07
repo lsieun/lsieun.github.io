@@ -305,17 +305,11 @@ public class SpringApplication {
 ConfigurableEnvironment environment = getOrCreateEnvironment();
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/src/spring-application-class-get-or-create-environment.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/src/spring-application-class-get-or-create-environment-system-properties.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/src/spring-application-class-get-or-create-environment-system-environment.png)
-{:refdef}
 
 ```text
     protected void configureEnvironment(ConfigurableEnvironment environment, String[] args) {
@@ -330,17 +324,11 @@ ConfigurableEnvironment environment = getOrCreateEnvironment();
     }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/src/spring-application-class-configure-environment-command-line-args.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/src/spring-application-class-configure-environment-active-profiles-001.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/src/spring-application-class-configure-environment-active-profiles-002.png)
-{:refdef}
 
 ```java
 /**
@@ -389,9 +377,7 @@ exceptionReporters = getSpringFactoriesInstances(
 );
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/context/configurable-application-context-class-hierarchy.png)
-{:refdef}
 
 ```java
 public class SpringApplication {
@@ -422,9 +408,7 @@ public class SpringApplication {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/src/annotation-config-servlet-web-server-application-context-class-hierarchy.png)
-{:refdef}
 
 ```java
 public class AnnotationConfigServletWebServerApplicationContext extends ServletWebServerApplicationContext
@@ -462,13 +446,9 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 仔细看它的构造方法，会发现一个很熟悉的类 `DefaultListableBeanFactory`，它就是 IoC 容器真实面目了。
 在后面的 `refresh()` 方法分析中，`DefaultListableBeanFactory` 是无处不在的存在感。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/src/spring-application-class-create-application-context-bean-factory.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/src/spring-application-class-exception-reporters.png)
-{:refdef}
 
 ```properties
 # Error Reporters

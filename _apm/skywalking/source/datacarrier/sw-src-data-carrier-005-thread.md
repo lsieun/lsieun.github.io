@@ -19,9 +19,7 @@ ConsumerThread ───┤                │
 
 ### Fields
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/skywalking/source/sw-src-data-carrier-consumer-thread.png)
-{:refdef}
 
 
 ```java
@@ -144,9 +142,7 @@ public class ConsumerThread<T> extends Thread {
 
 ## MultipleChannelsConsumer
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/skywalking/source/sw-src-data-carrier-multiple-channels-consumer.png)
-{:refdef}
 
 ```text
                                                               ┌─── Buffer_1

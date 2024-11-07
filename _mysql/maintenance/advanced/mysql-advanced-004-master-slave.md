@@ -94,9 +94,7 @@ mysql> SHOW MASTER STATUS;
 - `mysql-bin.000001` 是保存的日志文件
 - `Position` 为 `860`，则表示偏移量
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/maintenance/master-slave/data-mysql-bin-000001.png)
-{:refdef}
 
 第 4 步，查看日志文件里记录的事件：
 

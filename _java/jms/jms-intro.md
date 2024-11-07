@@ -151,9 +151,7 @@ Note that there are some common steps that shouldn't be duplicated
 if the client is both producing and consuming messages.
 The following figure depicts the high-level view of the steps:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/jms/jms-produce-and-consume-messages.gif)
-{:refdef}
 
 ### Client to Produce Messages
 

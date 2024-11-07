@@ -55,21 +55,15 @@ final class DefaultChannelHandlerContext extends AbstractChannelHandlerContext {
 
 初始状态：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/pipeline/netty-channel-pipeline-structure-001-init.svg)
-{:refdef}
 
 添加一个 Handler：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/pipeline/netty-channel-pipeline-structure-002-new.svg)
-{:refdef}
 
 添加多个 Handler：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/pipeline/netty-channel-pipeline-structure-003-many.svg)
-{:refdef}
 
 ### 特殊结构：Head 和 Tail
 
@@ -79,9 +73,7 @@ final class DefaultChannelHandlerContext extends AbstractChannelHandlerContext {
 - `HeadContext`: `ChannelInboundHandler` 和 `ChannelOutboundHandler`
 - `TailContext`: `ChannelInboundHandler`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/context/netty-channel-handler-context-head-and-tail.svg)
-{:refdef}
 
 ## 链表操作
 

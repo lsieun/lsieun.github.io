@@ -11,9 +11,7 @@ sequence: "102"
 https://github.com/protocolbuffers/protobuf/releases
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grpc/quick/grpc-quick-001-download-protoc-win.png)
-{:refdef}
 
 第 2 步，添加 `PROTOCBUF_HOME` 环境变量：
 
@@ -21,9 +19,7 @@ https://github.com/protocolbuffers/protobuf/releases
 D:\lib\protoc-24.3-win64
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grpc/quick/grpc-quick-002-os-env-protocbuf-home.png)
-{:refdef}
 
 第 3 步，修改 `Path` 环境变量，添加如下内容：
 
@@ -31,9 +27,7 @@ D:\lib\protoc-24.3-win64
 %PROTOCBUF_HOME%\bin
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grpc/quick/grpc-quick-003-path-protocbuf-bin.png)
-{:refdef}
 
 第 4 步，验证一下：
 
@@ -41,15 +35,11 @@ D:\lib\protoc-24.3-win64
 > protoc --version
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grpc/quick/grpc-quick-004-protoc-version.png)
-{:refdef}
 
 ## 安装 IDEA 插件
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grpc/quick/grpc-quick-005-grpc-protobuf.png)
-{:refdef}
 
 ## pom.xml
 
@@ -130,15 +120,11 @@ like `${os.detected.classifier}`.
 
 第 1 步，新建 `src/main/proto` 目录
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grpc/quick/grpc-quick-006-src-main-proto.png)
-{:refdef}
 
 第 2 步，添加 `src/main/proto/news.proto` 文件：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grpc/quick/grpc-quick-007-src-main-proto-news.png)
-{:refdef}
 
 第 3 步，添加如下内容：
 
@@ -192,33 +178,23 @@ message News {
 
 第 1 步，使用 protobuf 插件的 `protobuf:compile` 命令：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grpc/quick/grpc-quick-008-protobuf-compile.png)
-{:refdef}
 
 会生成相应的 `.java` 文件：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grpc/quick/grpc-quick-009-protobuf-news-proto.png)
-{:refdef}
 
 第 2 步，执行 protobuf 插件的 `protobuf:compile-custom` 命令：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grpc/quick/grpc-quick-010-protobuf-compile-custom.png)
-{:refdef}
 
 会生成相应的 `.java` 文件：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grpc/quick/grpc-quick-011-protobuf-news-service.png)
-{:refdef}
 
 第 3 步，将两个 `.java` 文件移动到 `src/main/java` 目录：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grpc/quick/grpc-quick-012-move-java-file.png)
-{:refdef}
 
 ### NewsService
 

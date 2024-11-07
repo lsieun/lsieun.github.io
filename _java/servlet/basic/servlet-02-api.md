@@ -39,9 +39,7 @@ The `service()` method accepts two parameters: a request object and a response o
 The request object tells the servlet about the request,
 while the response object is used to return a response.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/servlet/a-generic-servlet-handling-a-request.png)
-{:refdef}
 
 ### HttpServlet
 
@@ -53,9 +51,7 @@ depending on the type of requests it needs to handle.
 The `service()` method of `HttpServlet` handles the setup and dispatching to all the `doXXX()` methods,
 which is why it usually should not be overridden.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/servlet/an-http-servlet-handling-get-and-post-requests.png)
-{:refdef}
 
 An HTTP servlet can override the `doPut()` and `doDelete()` methods to handle `PUT` and `DELETE` requests, respectively.
 

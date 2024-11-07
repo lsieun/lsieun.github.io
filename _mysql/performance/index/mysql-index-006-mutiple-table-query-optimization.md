@@ -18,9 +18,7 @@ WHERE tbl1.col3 = tbl2.col3 AND tbl1.col3 = 1
 
 左侧循环的表，称为“驱动表”
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/performance/index/nested-loop-join-driving-table.png)
-{:refdef}
 
 对于驱动表来说，查询出的数据量越少越好。
 如果驱动表查询的数据量很多，那么内侧的循环的数量也会增多。

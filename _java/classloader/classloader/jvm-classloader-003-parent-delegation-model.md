@@ -4,9 +4,7 @@ sequence: "103"
 ---
 
 
-{:refdef: style="text-align: center;"}
 ![Class loader parent delegation model](/assets/images/java/jvm/class-loader-parent-delegation-model.png)
-{:refdef}
 
 ```text
 protected synchronized Class<?> loadClass(String name, boolean resolved) throws ClassNotFoundException {

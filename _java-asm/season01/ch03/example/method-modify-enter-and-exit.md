@@ -49,17 +49,13 @@ public class HelloWorld {
 
 第一步，回顾一下 `ClassVisitor` 类当中主要的 `visitXxx()` 方法有哪些。在 `ClassVisitor` 类当中，有 `visit()`、`visitField()`、`visitMethod()` 和 `visitEnd()` 方法；这些 `visitXxx()` 方法与 `.class` 文件里的不同部分之间是有对应关系的，如下图：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/class-visitor-visit-xxx-methods.png)
-{:refdef}
 
 根据我们的预期目标，现在想要修改的是“方法”的部分，那么就对应着 `ClassVisitor` 类的 `visitMethod()` 方法。`ClassVisitor.visitMethod()` 会返回一个 `MethodVisitor` 类的实例；而 `MethodVisitor` 类就是用来生成方法的“方法体”。
 
 第二步，回顾一下 `MethodVisitor` 类当中定义了哪些 `visitXxx()` 方法。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/method-visitor-visit-xxx-insn-methods.png)
-{:refdef}
 
 在 `MethodVisitor` 类当中，定义的 `visitXxx()` 方法比较多，但是我们可以将这些 `visitXxx()` 方法进行分组：
 

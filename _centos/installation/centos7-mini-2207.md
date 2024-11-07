@@ -30,153 +30,97 @@ https://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64-Minimal-2
 
 第 1 步，新建虚拟机：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-001.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-002.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-003.png)
-{:refdef}
 
 第 2 步，选择 ISO 镜像文件：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-004.png)
-{:refdef}
 
 第 3 步，虚拟机配置：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-005.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-006.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-007.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-008.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-009.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-010.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-011.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-012.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-013.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-014.png)
-{:refdef}
 
 
 ## CentOS 安装
 
 第 1 步，开启虚拟机：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-015.png)
-{:refdef}
 
 第 2 步，安装 CentOS 7：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-016.png)
-{:refdef}
 
 第 3 步，CentOS 7 配置：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-017.png)
-{:refdef}
 
 选择 `Asia/Shanghai` 时区：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-018.png)
-{:refdef}
 
 - 自动分区
 - 禁用 Kdump
 - 网络连接
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-019.png)
-{:refdef}
 
 用户配置：
 
 - `root`/`root`
 - `devops`/`123456`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-020.png)
-{:refdef}
 
 第 4 步，重启：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-021.png)
-{:refdef}
 
 第 5 步，关机
 
 使用 `root` 用户登录：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-022.png)
-{:refdef}
 
 使用 `shutdown -h now` 关机：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-023.png)
-{:refdef}
 
 第 6 步，虚拟机设置（使用物理驱动器）：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-024.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-025.png)
-{:refdef}
 
 第 7 步，添加 `ClearSystem` 快照：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-026.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-027.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-028.png)
-{:refdef}
 
 ## 配置用户
 
@@ -197,9 +141,7 @@ $ ssh root@192.168.80.132
 %wheel  ALL=(ALL)       ALL
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-029.png)
-{:refdef}
 
 第 3 步，将 `devops` 用户加入 `wheel` 用户组：
 
@@ -214,9 +156,7 @@ $ ssh root@192.168.80.132
 [devops@localhost ~]$ sudo ls -la /root
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-030.png)
-{:refdef}
 
 ## Yum 源更新
 
@@ -295,9 +235,7 @@ $ sudo shutdown -h now
 
 第 7 步，快照：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/centos/installation/vmware-centos7-install-031.png)
-{:refdef}
 
 ## Reference
 

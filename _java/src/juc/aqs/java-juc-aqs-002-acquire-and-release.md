@@ -5,9 +5,7 @@ sequence: "102"
 
 ## 获取锁和释放锁
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-acquire-release-mind-map.png)
-{:refdef}
 
 ```java
 public abstract class AbstractQueuedSynchronizer extends AbstractOwnableSynchronizer implements Serializable {
@@ -313,9 +311,7 @@ public abstract class AbstractQueuedSynchronizer extends AbstractOwnableSynchron
 
 - 最初始状态
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-001.png)
-{:refdef}
 
 ### t0 获取锁
 
@@ -323,15 +319,11 @@ public abstract class AbstractQueuedSynchronizer extends AbstractOwnableSynchron
 AbstractQueuedSynchronizer.java --> acquire --> tryAcquire
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-method-acquire-invoke-try-acquire.png)
-{:refdef}
 
 - t0 线程：获取锁，修改 `exclusiveOwnerThread` 和 `state`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-002.png)
-{:refdef}
 
 ### t1 获取锁失败后
 
@@ -341,29 +333,21 @@ AbstractQueuedSynchronizer.java --> acquire --> addWaiter
 
 - t1 线程：获取锁失败后，添加 `node0` 节点
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-003.png)
-{:refdef}
 
 - t1 线程：将 `node1` 节点加入 AQS 队列
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-004.png)
-{:refdef}
 
 ```text
 AbstractQueuedSynchronizer.java --> acquire --> acquireQueued --> shouldParkAfterFailedAcquire & parkAndCheckInterrupt
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-method-acquireQueued-invoke-park.png)
-{:refdef}
 
 - t1 线程：进入阻塞状态
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-005.png)
-{:refdef}
 
 ### t2 获取锁失败后
 
@@ -373,9 +357,7 @@ AbstractQueuedSynchronizer.java --> acquire --> addWaiter
 
 - t2 线程：将 `node2` 加入 AQS 队列
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-006.png)
-{:refdef}
 
 ```text
 AbstractQueuedSynchronizer.java --> acquire --> acquireQueued --> shouldParkAfterFailedAcquire & parkAndCheckInterrupt
@@ -383,9 +365,7 @@ AbstractQueuedSynchronizer.java --> acquire --> acquireQueued --> shouldParkAfte
 
 - t2 线程：进入阻塞状态
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-007.png)
-{:refdef}
 
 ### t3 获取锁失败后
 
@@ -395,9 +375,7 @@ AbstractQueuedSynchronizer.java --> acquire --> addWaiter
 
 - t3 线程：将 `node3` 加入 AQS 队列
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-008.png)
-{:refdef}
 
 ```text
 AbstractQueuedSynchronizer.java --> acquire --> acquireQueued --> shouldParkAfterFailedAcquire & parkAndCheckInterrupt
@@ -405,9 +383,7 @@ AbstractQueuedSynchronizer.java --> acquire --> acquireQueued --> shouldParkAfte
 
 - t3 线程：进入阻塞状态
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-009.png)
-{:refdef}
 
 ### t0 释放锁
 
@@ -417,9 +393,7 @@ AbstractQueuedSynchronizer.java --> release --> tryRelease
 
 - t0 线程：释放锁，修改 `exclusiveOwnerThread` 和 `state`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-010.png)
-{:refdef}
 
 ```text
 AbstractQueuedSynchronizer.java --> release --> unparkSuccessor
@@ -427,9 +401,7 @@ AbstractQueuedSynchronizer.java --> release --> unparkSuccessor
 
 - t0 线程：唤醒 t1 线程
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-011.png)
-{:refdef}
 
 ### t1 获取锁
 
@@ -439,9 +411,7 @@ AbstractQueuedSynchronizer.java --> acquire --> acquireQueued --> tryAcquire
 
 - t1 线程：获取锁，修改 `exclusiveOwnerThread` 和 `state`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-012.png)
-{:refdef}
 
 ```text
 AbstractQueuedSynchronizer.java --> acquire --> acquireQueued --> setHead
@@ -449,17 +419,13 @@ AbstractQueuedSynchronizer.java --> acquire --> acquireQueued --> setHead
 
 - t1 线程：更换 AQS 队列的 `head`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-013.png)
-{:refdef}
 
 ```text
 整理一下
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-014.png)
-{:refdef}
 
 ### t1 释放锁
 
@@ -469,9 +435,7 @@ AbstractQueuedSynchronizer.java --> release --> tryRelease
 
 - t1 线程：释放锁，修改 `exclusiveOwnerThread` 和 `state`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-015.png)
-{:refdef}
 
 ```text
 AbstractQueuedSynchronizer.java --> release --> unparkSuccessor
@@ -479,9 +443,7 @@ AbstractQueuedSynchronizer.java --> release --> unparkSuccessor
 
 - t1 线程：唤醒 t2 线程
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-016.png)
-{:refdef}
 
 ### t2 获取锁
 
@@ -491,9 +453,7 @@ AbstractQueuedSynchronizer.java --> acquire --> acquireQueued --> tryAcquire
 
 - t2 线程：获取锁，修改 `exclusiveOwnerThread` 和 `state`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-017.png)
-{:refdef}
 
 ```text
 AbstractQueuedSynchronizer.java --> acquire --> acquireQueued --> setHead
@@ -501,17 +461,13 @@ AbstractQueuedSynchronizer.java --> acquire --> acquireQueued --> setHead
 
 - t2 线程：更换 AQS 队列的 `head`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-018.png)
-{:refdef}
 
 ```text
 整理一下
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-019.png)
-{:refdef}
 
 
 ### t2 释放锁
@@ -522,9 +478,7 @@ AbstractQueuedSynchronizer.java --> release --> tryRelease
 
 - t2 线程：释放锁，修改 `exclusiveOwnerThread` 和 `state`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-020.png)
-{:refdef}
 
 ```text
 AbstractQueuedSynchronizer.java --> release --> unparkSuccessor
@@ -532,9 +486,7 @@ AbstractQueuedSynchronizer.java --> release --> unparkSuccessor
 
 - t2 线程：唤醒 t3 线程
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-021.png)
-{:refdef}
 
 ### t3 获取锁
 
@@ -544,9 +496,7 @@ AbstractQueuedSynchronizer.java --> acquire --> acquireQueued --> tryAcquire
 
 - t3 线程：获取锁，修改 `exclusiveOwnerThread` 和 `state`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-022.png)
-{:refdef}
 
 ```text
 AbstractQueuedSynchronizer.java --> acquire --> acquireQueued --> setHead
@@ -554,17 +504,13 @@ AbstractQueuedSynchronizer.java --> acquire --> acquireQueued --> setHead
 
 - t3 线程：更换 AQS 队列的 `head`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-023.png)
-{:refdef}
 
 ```text
 整理一下
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-024.png)
-{:refdef}
 
 ### t3 释放锁
 
@@ -574,14 +520,10 @@ AbstractQueuedSynchronizer.java --> release --> tryRelease
 
 - t3 线程：释放锁，修改 `exclusiveOwnerThread` 和 `state`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-025.png)
-{:refdef}
 
 ### 结束状态
 
 - 最终状态
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-demo-026.png)
-{:refdef}

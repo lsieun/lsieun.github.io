@@ -5,9 +5,7 @@ sequence: "103"
 
 ## 哨兵模式介绍
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/redis/ha/redis-sentinel.png)
-{:refdef}
 
 Redis 提供了哨兵的命令，是一个独立的进程。
 

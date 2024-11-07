@@ -16,17 +16,13 @@ Netty provides what it calls an **embedded transport** (`EmbeddedChannel`) for t
 - 第 2 步，将 handler 加入到 channel 的 pipeline 中
 - 第 3 步，将 data (`ByteBuf` 或其它类型的对象) 放入到 channel 中进行测试
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/embedded/embedded-channel-001.png)
-{:refdef}
 
 ## 测试
 
 ### 测试 Inbound Message
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/embedded/embedded-channel-example-inbound-message.png)
-{:refdef}
 
 ```java
 import io.netty.buffer.ByteBuf;
@@ -107,9 +103,7 @@ public class EmbeddedChannelInboundUnitTest {
 
 ### 测试 Outbound Message
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/embedded/embedded-channel-example-outbound-message.png)
-{:refdef}
 
 ```java
 import io.netty.buffer.ByteBuf;
@@ -167,9 +161,7 @@ public class EmbeddedChannelOutboundUnitTest {
 
 ### 测试 exception
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/embedded/embedded-channel-example-exception-handling.png)
-{:refdef}
 
 ```java
 import io.netty.buffer.ByteBuf;

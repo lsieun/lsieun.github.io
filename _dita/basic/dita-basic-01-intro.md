@@ -140,9 +140,7 @@ this is going to be a central, one-time change for any content stored without fo
 Most people author in XML and then publish to PDF, HTML, and either mobile or ePub.
 It's also possible to publish to places you wouldn't expect, like Open Office, Excel, and PowerPoint. You're limited only by your imagination.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/dita/DITA-XML-Flexibility.png)
-{:refdef}
 
 
 [dita-ot-url]: https://www.dita-ot.org/

@@ -31,9 +31,7 @@ IntelliJ IDEA helps you make sure that all your source code, including _variable
 
 For this purpose, IntelliJ IDEA provides a dedicated **Typo** inspection which is enabled by default.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/ij_typo_change_to.png)
-{:refdef}
 
 
 
@@ -59,9 +57,7 @@ IntelliJ IDEA includes **bundled dictionaries** for all configured languages. Yo
   - To edit the contents of a **custom dictionary** in IntelliJ IDEA, select it and click ![the Edit button](/assets/images/intellij/icons.actions.edit.svg) or press `Enter`. The corresponding file will open in a new editor tab.
   - To remove a **custom dictionary** from the list, select it and click ![the Remove button](/assets/images/intellij/icons.general.remove.svg) or press `Alt+Delete`.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/settings-editor-natural-languages-spelling.png)
-{:refdef}
 
 ### Select the default dictionary for saving word
 
@@ -71,9 +67,7 @@ You can choose to save words to the **project-level dictionary** if the spelling
 - Press `Ctrl+Alt+S` to open IDE settings and select `Editor | Natural Languages | Spelling`.
 - Select either the built-in **project-level** or **application-level** dictionary or disable the option to prompt you every time you save a word.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/settings-editor-natural-languages-spelling.png)
-{:refdef}
 
 ### Add accepted words manually
 
@@ -125,9 +119,7 @@ Specify the type of content to check:
 
 **To disable the Typo inspection, clear the checkbox next to it.**
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/settings-editor-inspections-proofreading-typo.png)
-{:refdef}
 
 
 
@@ -145,9 +137,7 @@ The **Typo inspection** detects and highlights words not included in any diction
 - Click ![the Intention action icon](/assets/images/intellij/icons.actions.intentionBulb.svg) or press `Alt+Enter` to show the available intention actions.
 - Select one of the suggested fixes from the list.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/ij_typo_change_to.animated.gif)
-{:refdef}
 
 To jump to the next misspelled word, press `F2`.
 

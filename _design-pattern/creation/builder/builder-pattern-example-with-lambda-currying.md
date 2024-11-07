@@ -3,9 +3,7 @@ title: "示例：Lambda Currying"
 sequence: "104"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/design-pattern/creational/builder/builder-pattern-example-email-lambda-currying.png)
-{:refdef}
 
 
 ```java

@@ -11,9 +11,7 @@ sequence: "103"
 
 解决方法：Netty 提供了 `HttpObjectAggregator` 类，帮助我们将零散的信息组织成完整的 `FullHttpRequest` 或 `FullHttpResponse` 对象。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/protocol/http/http-object-aggregator-illustrated.png)
-{:refdef}
 
 使用 `HttpObjectAggregator` 类，有优点，也有缺点：
 

@@ -61,9 +61,7 @@ public class H2Application {
 http://localhost/h2
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/db/h2/h2-gui-database-not-found.png)
-{:refdef}
 
 
 

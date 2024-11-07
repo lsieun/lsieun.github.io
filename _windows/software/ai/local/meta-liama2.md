@@ -9,14 +9,10 @@ sequence: "meta-llama"
 https://github.com/oobabooga/text-generation-webui
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/windows/software/oobabooga-on-click-installer.png)
-{:refdef}
 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/windows/reg/regedit-long-paths-enabled.png)
-{:refdef}
 
 
 ## 下载语言模型
@@ -32,13 +28,9 @@ https://huggingface.co/meta-llama
 ```
 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/windows/software/llama-model-index.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/windows/software/llama2-agree.png)
-{:refdef}
 
 为了更方便安装，建议安装 LlaMA 2 的 GGML模型：
 

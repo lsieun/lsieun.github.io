@@ -5,9 +5,7 @@ sequence: "214"
 
 [上级目录]({% link _posts/2021-06-01-java-asm-index.md %})
 
-{:refdef: style="text-align: center;"}
 ![What ASM Can Do](/assets/images/java/asm/what-asm-can-do.png)
-{:refdef}
 
 本章内容是围绕着 Class Generation（生成新的类）来展开，在这个过程当中，我们介绍了 ASM Core API 当中的一些类和接口。在本文当中，我们对这些内容进行一个总结。
 
@@ -71,9 +69,7 @@ public class HelloWorld extends Object implements Cloneable {
 
 讲到任何的 API，其实就是讲它的类、接口、方法等内容；谈到 ASM Core API 就是讲其中涉及到的类、接口和里面的方法。在 ASM Core API 中，有三个非常重要的类，即 `ClassReader`、`ClassVisitor` 和 `ClassWriter` 类。但是，在 Class Generation 过程中，不会用到 `ClassReader`，所以我们就主要关注 `ClassVisitor` 和 `ClassWriter` 类。
 
-{:refdef: style="text-align: center;"}
 ![ASM 里的核心类 ](/assets/images/java/asm/asm-core-classes.png)
-{:refdef}
 
 ### ClassVisitor 和 ClassWriter
 

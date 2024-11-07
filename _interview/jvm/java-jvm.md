@@ -5,9 +5,7 @@ sequence: "jvm"
 
 ## JVM 原理
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/jvm/jvm-architecture.png)
-{:refdef}
 
 - ClassLoader Sub System
 - Runtime Data Area

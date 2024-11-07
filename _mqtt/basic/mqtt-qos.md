@@ -50,9 +50,7 @@ For example, if a subscriber specifies that they only want to receive messages w
 the broker will downgrade any QoS 2 messages to QoS 1 before forwarding them to this subscriber.
 Messages with QoS 0 and QoS 1 will be transmitted to the subscriber with their original QoS levels unchanged.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mqtt/mqtt-qos-level-downgrade-example.webp)
-{:refdef}
 
 ## QoS 0 - at most once
 
@@ -61,9 +59,7 @@ QoS 0 is the lowest level of service and is also known as "fire and forget".
 In this mode, the sender does not wait for acknowledgement or store and retransmit the message,
 so the receiver does not need to worry about receiving duplicate messages.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mqtt/mqtt-qos-level-0-example.webp)
-{:refdef}
 
 ### Why are QoS 0 messages lost?
 
@@ -82,9 +78,7 @@ Until then, the sender must store the `PUBLISH` packet for potential retransmiss
 The sender uses the Packet ID in each packet to match the `PUBLISH` packet with the corresponding `PUBACK` packet.
 This allows the sender to identify and delete the correct `PUBLISH` packet from its cache.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mqtt/mqtt-qos-level-1-example.webp)
-{:refdef}
 
 ### Why are QoS 1 messages duplicated?
 
@@ -99,9 +93,7 @@ In the first case, the sender will retransmit the `PUBLISH` packet, but the rece
 
 In the second case, the sender will retransmit the `PUBLISH` packet and the receiver will receive it again, resulting in a duplicate message.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mqtt/mqtt-qos-level-1-sender-retransmit-packet.webp)
-{:refdef}
 
 #### receiver 收到 DUP 的两种情况
 
@@ -110,9 +102,7 @@ the receiver cannot assume that it has already received the message and must sti
 
 It is because that there are two possible scenarios when the receiver receives a `PUBLISH` packet with a `DUP` flag of 1:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mqtt/mqtt-qos-level-1-receiver-publish-packet-with-dup.webp)
-{:refdef}
 
 In the first case, the sender retransmits the `PUBLISH` packet because it did not receive a `PUBACK` packet.
 The receiver receives two `PUBLISH` packets with the same Packet ID and the second `PUBLISH` packet has a DUP flag of 1.
@@ -136,9 +126,7 @@ This can result in the subscriber receiving additional duplicate messages.
 For example, although the publisher only sends one message,
 the receiver may eventually receive three identical messages.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mqtt/mqtt-qos-level-1-additional-duplicate-messages.webp)
-{:refdef}
 
 These are the drawbacks of using QoS 1.
 
@@ -148,9 +136,7 @@ QoS 2 ensures that messages are not lost or duplicated, unlike in QoS 0 and 1.
 However, it also has the most complex interactions and the highest overhead,
 as it requires at least two request/response flows between the sender and receiver for each message delivery.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mqtt/mqtt-qos-level-2-example.webp)
-{:refdef}
 
 To initiate a QoS 2 message transmission,
 the sender first stores and sends a `PUBLISH` packet with QoS 2 and then waits for a `PUBREC` response packet from the receiver.
@@ -199,17 +185,13 @@ is a retransmission from the sender due to not receiving the `PUBACK` response,
 or if the sender has reused the Packet ID to send a new message after receiving the `PUBACK` response.
 This is why QoS 1 cannot avoid message duplication.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mqtt/mqtt-qos-level-1-cannot-avoid-message-duplication.webp)
-{:refdef}
 
 In QoS 2, the sender and receiver use the `PUBREL` and `PUBCOMP` packets to synchronize the release of Packet IDs,
 ensuring that there is a consensus on whether the sender is retransmitting a message or sending a new one.
 This is the key to avoiding the issue of duplicate messages that can occur in QoS 1.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mqtt/mqtt-qos-level-2-avoid-duplicate-messages.webp)
-{:refdef}
 
 In QoS 2, the sender is permitted to retransmit the `PUBLISH` packet
 before receiving the `PUBREC` packet from the receiver.
@@ -217,9 +199,7 @@ Once the sender receives the `PUBREC` and sends a `PUBREL` packet, it enters the
 The sender cannot retransmit the `PUBLISH` packet or send a new message with the current Packet ID
 until it receives a `PUBCOMP` packet from the receiver.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mqtt/mqtt-qos-level-2-publish-compare.webp)
-{:refdef}
 
 As a result, the **receiver** can use the `PUBREL` packet as a boundary and consider any `PUBLISH` packet
 that arrives before it as a duplicate and any `PUBLISH` packet that arrives after it as new.
@@ -248,9 +228,7 @@ but the subscriber receives them in the order 1, 2, 1, 2,
 with 1 representing a command to turn a light on and 2 representing a command to turn it off,
 it may not be desirable for the light to repeatedly turn on and off due to duplicate messages.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mqtt/mqtt-qos-level-1-duplicate-message-on-off.webp)
-{:refdef}
 
 ### QoS 2
 

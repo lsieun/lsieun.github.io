@@ -18,9 +18,7 @@ sequence: "103"
 
 更大范围，形成整体
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/implementation/bytebuddy-implementation-overview.png)
-{:refdef}
 
 Within Byte Buddy, any stack instruction is contained by an implementation of the `StackManipulation` interface.
 

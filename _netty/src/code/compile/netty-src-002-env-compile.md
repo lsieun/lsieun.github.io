@@ -11,9 +11,7 @@ sequence: "102"
 https://github.com/netty/netty/tags
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/env/netty-github-download-src.png)
-{:refdef}
 
 ## 编译
 
@@ -21,9 +19,7 @@ https://github.com/netty/netty/tags
 
 第 1 步，解压之后，删除其中 `testsuite` 相关的文件夹：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/env/netty-src-env-delete-testsuite.png)
-{:refdef}
 
 ### 编译
 

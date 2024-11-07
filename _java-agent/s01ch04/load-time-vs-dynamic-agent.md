@@ -7,15 +7,11 @@ sequence: "151"
 
 Load-Time Instrumentation 只涉及到一个虚拟机：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/agent/virtual-machine-of-load-time-instrumentation.png)
-{:refdef}
 
 Dynamic Instrumentation 涉及到两个虚拟机：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/agent/virtual-machine-of-dynamic-instrumentation.png)
-{:refdef}
 
 ## 时机不同
 

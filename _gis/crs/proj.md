@@ -51,9 +51,7 @@ We can see that `lat_1` and `lat_2` specify the standard parallels.
 This is an example of a “secant”(割线) projection which touches the globe in two places in order to minimize distortion.
 The central meridian `lon_0` is moved away from **Greenwich England** 96 degrees W to be over roughly **Dallas TX**.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/lambert-proj-code.png)
-{:refdef}
 
 We can look at another example for a UTM projection with the proj4 string:
 
@@ -65,18 +63,14 @@ This projection by comparison has a central meridian `lon_0` directly over **Dal
 which is 99 degrees W of Greenwich.
 This central meridan is assigned the 'false easting' `x_0` of `500,000` meters.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/mercator-proj-code.png)
-{:refdef}
 
 ## Ellipsoids
 
 An **ellipsoid** is a mathematically defined surface which approximates the **geoid**:
 the surface of the Earth's gravity field, which is approximately the same as mean sea level.
 
-{:refdef: style="text-align: center;"}
 ![Global and local fitting of the ellipsoid](/assets/images/gis/crs/general-ellipsoid.png)
-{:refdef}
 
 A complete **ellipsoid** definition comprises a **size** (primary) and a **shape** (secondary) parameter.
 

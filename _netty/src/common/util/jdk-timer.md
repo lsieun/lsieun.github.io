@@ -16,9 +16,7 @@ sequence: "103"
 - TimerThread：定时器线程，从 TaskQueue 中取出任务进行执行
 - Timer：定时器，是一个“协调者”，将 Task、TaskQueue 和 TimerThread 进行整合到一起。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/util/jdk-timer-concept.svg)
-{:refdef}
 
 简单来说，一个新的 task 会提交给 Timer，Timer 会把 task 存储到 TaskQueue 中，TimerThread 从 TaskQueue 中取出 task，执行 task。
 
@@ -113,9 +111,7 @@ public abstract class TimerTask implements Runnable {
 
 - 任务状态：VIRGIN、SCHEDULED、EXECUTED、CANCELLED
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/util/jdk-timer-task-state.svg)
-{:refdef}
 
 
 ```java
@@ -232,16 +228,12 @@ public class Timer {
 需要注意的是，此时至少有两个线程在运行：
 一个是 `TimerThread` 线程，另一个是创建 `Timer` 对象的线程（例如，`main` 线程）。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/util/jdk-timer-two-threads.svg)
-{:refdef}
 
 
 ### 任务执行
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/util/jdk-timer-thread-mainloop-logic.svg)
-{:refdef}
 
 在 `TimerThread` 类中，主要逻辑在 `mainLoop()` 方法中：
 

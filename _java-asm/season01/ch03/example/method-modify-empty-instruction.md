@@ -12,9 +12,7 @@ sequence: "309"
 - 第一种思路，就是将 instruction 一条一条的移除掉，直到最后只剩下 return 语句。（不推荐）
 - 第二种思路，就是忽略原来的方法体，重新生成一个新的方法体。（推荐使用）
 
-{:refdef: style="text-align: center;"}
 ![ 多个 FieldVisitor 和 MethodVisitor 串联到一起 ](/assets/images/java/asm/multiple-field-method-vistors-connected.png)
-{:refdef}
 
 对于第二种思路，“忽略原来的方法体，重新生成一个新的方法体”，想法很好，具体如何实现呢？假设有一个中间的 `MethodVisitor` 来负责做这个工作，通过两个步骤来实现：
 

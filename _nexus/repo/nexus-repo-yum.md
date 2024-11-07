@@ -7,9 +7,7 @@ sequence: "yum"
 
 ### 创建 blob 存储
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/nexus3/yum/yum-repo-001-create-blob-store.png)
-{:refdef}
 
 ### 创建 Yum 库
 
@@ -27,9 +25,7 @@ Yum 私服同样有三种类型：
 - Storage Blob store，我们下拉选择前面创建好的专用 blob：`yum-hub`。
 - Hosted：开发环境，我们运行重复发布，因此 Deployment policy 我们选择 `Allow redeploy`。这个很重要！
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/nexus3/yum/yum-repo-002-create-repo-hosted.png)
-{:refdef}
 
 #### 创建一个 proxy 类型的 yum 仓库
 
@@ -41,9 +37,7 @@ Yum 私服同样有三种类型：
 
 这里就先创建一个代理 `tsinghua` 的仓库，其实还可以多创建几个，诸如阿里云的，搜狐的，等等，这个根据个人需求来定义。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/nexus3/yum/yum-repo-003-create-repo-proxy.png)
-{:refdef}
 
 #### 创建一个 group 类型的 yum 仓库
 
@@ -51,9 +45,7 @@ Yum 私服同样有三种类型：
 - Storage：选择专用的 blob 存储 yum-blob。
 - group : 将左边可选的2个仓库，添加到右边的members下。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/nexus3/yum/yum-repo-004-create-repo-group.png)
-{:refdef}
 
 ## 使用 Nexus
 
@@ -74,9 +66,7 @@ PING nexus.lsieun.cn (192.168.80.1) 56(84) bytes of data.
 
 ### CentOS
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/nexus3/yum/yum-repo-005-repo-group-url.png)
-{:refdef}
 
 ```text
 $ cd /etc/yum.repos.d/

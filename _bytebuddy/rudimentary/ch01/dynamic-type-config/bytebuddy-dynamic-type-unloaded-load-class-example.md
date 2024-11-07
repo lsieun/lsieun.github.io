@@ -46,9 +46,7 @@ public interface ClassLoadingStrategy<T extends ClassLoader> {
 - 第一个问题，到底使用哪一个 ClassLoader 来加载呢？
 - 第二个问题，该不该保存动态生成的 `byte[]` 内容呢？
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/dynamic-type-loading.png)
-{:refdef}
 
 ## 示例程序
 

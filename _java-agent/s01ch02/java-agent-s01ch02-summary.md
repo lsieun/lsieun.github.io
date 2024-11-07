@@ -11,9 +11,7 @@ sequence: "117"
 -javaagent:jarpath[=options]
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/agent/java-agent-command-line-options.png)
-{:refdef}
 
 在 Load-Time Instrumentation 过程中，会用到 `premain` 方法，我们关注两个问题：
 

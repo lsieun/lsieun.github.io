@@ -19,9 +19,7 @@ Instruction --> Block --> Box（图形） --> Graph（图形）
 - 第二步，将Block封装成Box。Block就是单纯的Instruction的有序集合，而Box在Block的基础上添加了Rectangle图形信息。
 - 第三步，将多个Box组织到一起，形成一个整体的Graph。
 
-{:refdef: style="text-align: center;"}
 ![instruction-block-box-graph](/assets/images/java/asm/instruction-block-box-graph.png)
-{:refdef}
 
 ### 难点解析
 
@@ -160,9 +158,7 @@ https://horstmann.com/sjsu/graphics/
 
 接下来，我们要将抽象思路转换成具体的代码实现。
 
-{:refdef: style="text-align: center;"}
 ![instruction-block-box-graph](/assets/images/java/asm/instruction-block-box-graph.png)
-{:refdef}
 
 | 概念 | 类 |
 |-----|----|
@@ -273,9 +269,7 @@ public class InsnBox {
 
 ### InsnGraph
 
-{:refdef: style="text-align: center;"}
 ![instruction-block-box-graph](/assets/images/java/asm/instruction-block-box-graph.png)
-{:refdef}
 
 ```java
 public class InsnGraph {

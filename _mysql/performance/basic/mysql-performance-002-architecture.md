@@ -14,8 +14,6 @@ sequence: "102"
         - 查询优化器：对 SQL 语句在执行过程中进行优化
     - 存储引擎层：MyISAM、InnoDB
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/mysql-architecture.png)
-{:refdef}
 
 

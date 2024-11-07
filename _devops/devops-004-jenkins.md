@@ -113,46 +113,32 @@ d57dee4d707b40ce96b41f15f47b0fae
 http://192.168.80.252:8080/
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-001-unlock-jenkins.png)
-{:refdef}
 
 
 第 2 步，选择 Select plugins to install：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-002-customize-jenkins.png)
-{:refdef}
 
 第 3 步，不做修改，直接点击 Install：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-003-install.png)
-{:refdef}
 
 第 4 步，等待安装：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-004-getting-started.png)
-{:refdef}
 
 第 5 步，创建第一个管理员：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-005-create-first-admin-user.png)
-{:refdef}
 
 第 6 步，Instance Configuration：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-006-instance-configuration.png)
-{:refdef}
 
 第 7 步，开始使用 Jenkins：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-007-start-using-jenkins.png)
-{:refdef}
 
 ## 配置 Jenkins
 
@@ -160,76 +146,52 @@ http://192.168.80.252:8080/
 
 第 1 步，选择 Manage Jenkins：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-008-manage-jenkins.png)
-{:refdef}
 
 第 2 步，在 System Configuration 下选择 Plugins：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-009-plugins.png)
-{:refdef}
 
 第 3 步，在 Available plugins 中，搜索 Git Parameter：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-010-git-parameter.png)
-{:refdef}
 
 第 4 步，继续搜索 Publish Over SSH：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-011-publish-over-ssh.png)
-{:refdef}
 
 第 5 步，选择 Install：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-012-install-plugin.png)
-{:refdef}
 
 第 6 步，等待安装完成：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-013-download-progress.png)
-{:refdef}
 
 ### 配置 JDK 和 Maven
 
 第 1 步，选择 Manage Jenkins：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-014-manage-jenkins.png)
-{:refdef}
 
 第 2 步，在 System Configuration 下选择 Tools：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-015-tools.png)
-{:refdef}
 
 第 3 步，选择 Add JDK：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-016-add-jdk.png)
-{:refdef}
 
 第 4 步，输入 JDK 的相关信息：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-017-jdk-installation.png)
-{:refdef}
 
 第 5 步，选择 Add Maven：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-018-add-maven.png)
-{:refdef}
 
 第 6 步，输入 Maven 相关信息：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-019-maven-installation.png)
-{:refdef}
 
 第 7 步，进行保存。

@@ -32,9 +32,7 @@ Spring 的默认标签用到是 Spring 的默认命名空间：
 
 `Ctrl+Alt+Space`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/intellij/auto-import-xml-namespace.png)
-{:refdef}
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

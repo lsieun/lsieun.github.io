@@ -355,15 +355,11 @@ MapStruct processor options
   The `comment` contains information about
   the version of MapStruct and about the compiler used for the annotation processing.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/mapstruct/mapstruct-generated-source-code-suppress-xxx.png)
-{:refdef}
 
 
 - `mapstruct.verbose`: If set to `true`, MapStruct in which MapStruct logs its major decisions.
   Note, at the moment of writing in Maven, also `showWarnings` needs to be added
   due to a problem in the `maven-compiler-plugin` configuration.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/mapstruct/maven-compiler-plugin-jar-show-warnings.png)
-{:refdef}

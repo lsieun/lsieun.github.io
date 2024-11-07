@@ -25,9 +25,7 @@ so that they can interact more closely than with other pods.
 原来的时候，我一直不理解为什么要引入 Pod 的概念
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/k8s/relationship-between-containers-pods-and-worker-nodes.png)
-{:refdef}
 
 Each pod has its own IP, hostname, processes, network interfaces and other resources.
 Containers that are part of the same pod think that they're the only ones running on the computer.

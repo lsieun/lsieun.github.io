@@ -6,228 +6,11 @@ permalink: /bytebuddy/bytebuddy-index.html
 
 ByteBuddy is a library for generating Java classes dynamically at run-time.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/bytebuddy-overview.svg)
-{:refdef}
 
-## API
+## 系列一：基础篇
 
-<table>
-    <thead>
-    <tr>
-        <th style="text-align: center;">Basic</th>
-        <th style="text-align: center;">ASM</th>
-        <th style="text-align: center;">scaffold</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>
-{%
-assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/api/basic/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-        <td>
-{%
-assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/api/asm/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-        <td>
-{%
-assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/api/scaffold/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-### description
-
-<table>
-    <thead>
-    <tr>
-        <th style="text-align: center;">Description::Basic</th>
-        <th style="text-align: center;">Description::Type</th>
-        <th style="text-align: center;">Description::Member</th>
-        <th style="text-align: center;">Description::Other</th>
-        <th style="text-align: center;">Matcher</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>
-{%
-assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/api/description/basic/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-        <td>
-{%
-assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/api/description/type/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-        <td>
-{%
-assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/api/description/member/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-        <td>
-{%
-assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/api/description/other/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-        <td>
-{%
-assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/api/matcher/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-### implementation
-
-<table>
-    <thead>
-    <tr>
-        <th style="text-align: center;">Implementation</th>
-        <th style="text-align: center;">bytecode</th>
-        <th style="text-align: center;">auxiliary</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>
-{%
-assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/api/implementation/basic/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-        <td>
-{%
-assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/api/implementation/bytecode/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-        <td>
-{%
-assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/api/implementation/auxiliary/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-## 系列一：基本篇
-
-### 第一章 入门
+### 第一章 快速入门
 
 <table>
     <thead>
@@ -525,7 +308,7 @@ sort: "sequence"
     <tr>
         <th style="text-align: center;">学习</th>
         <th style="text-align: center;">解读</th>
-        <th style="text-align: center;">扩展</th>
+        <th style="text-align: center;">拾遗</th>
     </tr>
     </thead>
     <tbody>
@@ -584,8 +367,8 @@ sort: "sequence"
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;" rowspan="2">方法注解（代码位置）</th>
-        <th style="text-align: center;" colspan="3">方法参数注解（参数值映射）</th>
+        <th style="text-align: center;" rowspan="2">注解：方法（代码位置）</th>
+        <th style="text-align: center;" colspan="3">注解：方法参数（参数值映射）</th>
     </tr>
     <tr>
         <th style="text-align: center;">类层面</th>
@@ -666,7 +449,7 @@ sort: "sequence"
     <tr>
         <th style="text-align: center;">学习</th>
         <th style="text-align: center;">解读</th>
-        <th style="text-align: center;">扩展</th>
+        <th style="text-align: center;">拾遗</th>
     </tr>
     </thead>
     <tbody>
@@ -1149,6 +932,222 @@ sort: "sequence"
     </tbody>
 </table>
 
+## API 参考
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">ASM</th>
+        <th style="text-align: center;">scaffold</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/asm/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/scaffold/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+### description
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Description::Basic</th>
+        <th style="text-align: center;">Description::Type</th>
+        <th style="text-align: center;">Description::Member</th>
+        <th style="text-align: center;">Description::Other</th>
+        <th style="text-align: center;">Matcher</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/description/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/description/type/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/description/member/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/description/other/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/matcher/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+### implementation
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Implementation</th>
+        <th style="text-align: center;">bytecode</th>
+        <th style="text-align: center;">auxiliary</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/implementation/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/implementation/bytecode/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/api/implementation/auxiliary/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
 ## Reference
 
 - [ByteBuddy](https://bytebuddy.net/)
@@ -1200,8 +1199,10 @@ Agent
 - [Monkey-patching in Java](https://itnext.io/monkey-patching-in-java-dde4122df84c)
 - [How to override private method in Java](https://medium.com/@mark.andreev/how-to-rewrite-private-method-in-java-4e7c0e0ec167)
 - [Comparing Different Ways to Build Proxies In Java](https://levelup.gitconnected.com/comparing-different-ways-to-build-proxies-in-java-2d09ae9c233a)
+- [ByteBuddy杂谈](https://www.bilibili.com/video/BV13m42137Ct/)
 
 Spring Boot
 
 - [Instrumentation of Spring Boot application with Byte Buddy](https://medium.com/@jakubhal/instrumentation-of-spring-boot-application-with-byte-buddy-bbd28619b7c)
 - [用 Byte Buddy 於執行期生成程式碼](https://medium.com/java-magazine-translation/%E7%94%A8-byte-buddy-%E6%96%BC%E5%9F%B7%E8%A1%8C%E6%9C%9F%E7%94%9F%E6%88%90%E7%A8%8B%E5%BC%8F%E7%A2%BC-50055bb48e2c)
+

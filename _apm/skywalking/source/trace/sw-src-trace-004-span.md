@@ -3,9 +3,7 @@ title: "Span"
 sequence: "104"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/skywalking/source/sw-src-trace-span-hierarchy-classes.png)
-{:refdef}
 
 ```text
                                                                                             ┌─── EntrySpan

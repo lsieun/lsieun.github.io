@@ -7,9 +7,7 @@ sequence: "102"
 
 在 NuGet 下搜索 NPOI，找到合适的版本进行安装
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/office/poi/npoi/nuget-npoi-package.png)
-{:refdef}
 
 ## 示例
 

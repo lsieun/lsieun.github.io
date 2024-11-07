@@ -13,9 +13,7 @@ sequence: "102"
 
 ### Channel IO
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/eventloop/thread/netty-eventloop-thread-run-channel-io.svg)
-{:refdef}
 
 ```java
 public final class NioEventLoop extends SingleThreadEventLoop {
@@ -93,9 +91,7 @@ public final class NioEventLoop extends SingleThreadEventLoop {
 - runAllTasks();
 - runAllTasks(long timeoutNanos)
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/eventloop/thread/netty-eventloop-task-queue.svg)
-{:refdef}
 
 #### 无时间限制
 

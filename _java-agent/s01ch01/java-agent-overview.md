@@ -36,9 +36,7 @@ Instrumentation can be inserted in one of three ways: [Link](https://docs.oracle
 
 其实，这里就是讲了对 `.class` 文件进行修改（Instrumentation）的三个不同的时机（时间和机会）：没有被加载、正在被加载、已经被加载。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/agent/three-ways-of-instrumentation.png)
-{:refdef}
 
 对于 Java Agent 这部分内容来说，我们只关注 **Load-Time Instrumentation** 和 **Dynamic Instrumentation** 两种情况。
 
@@ -111,9 +109,7 @@ public class VMAttach {
 - 第三个层面，**Java 层面**。也就是说，我们在使用 Java 语言开发 Java Agent，主要是利用 `java.lang.instrument` 包的 API 来实现一些功能。
 - 第四个层面，**JVM 层面**。也就是说，Java Agent 也是要运行在 JVM 之上的，它要与 JVM 进行“沟通”，理解其中一些细节之处，能够帮助我们更好的掌握 Java Agent。
 
-{:refdef: style="text-align: center;"}
 ![Java Agent 的四个层次](/assets/images/java/agent/java-agent-mindmap.png)
-{:refdef}
 
 ## 总结
 

@@ -6,17 +6,11 @@ permalink: /java-servlet.html
 
 Java Servlet
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/servlet/servlet-architecture-main.webp)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/servlet/servlet-class-hierarchy.jpg)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/servlet/servlet-class-hierarchy-2.jpg)
-{:refdef}
 
 ## Content
 

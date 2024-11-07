@@ -25,9 +25,7 @@ and depending on your requirements, you might consider the one or the other.
 which means you are not tight to the number of threads available.
 With this library, one thread can handle multiple connections at once.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/nio/server-socket-channel.png)
-{:refdef}
 
 Main elements:
 

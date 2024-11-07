@@ -34,24 +34,18 @@ public class VariableVisibility {
 
 第 1 步，初始状态，t 线程刚开始从主内存读取了 `run` 的值到工作内存。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/memory/jmm/variable-visibility-problem-001.png)
-{:refdef}
 
 第 2 步，因为 t 线程要频繁从主内存中读取 `run` 的值，
 JIT 编译器会将 `run` 的值缓存至自己工作内存中的高速缓存中，
 减少对主存中 `run` 的访问，提高效率。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/memory/jmm/variable-visibility-problem-002.png)
-{:refdef}
 
 第 3 步，1 秒之后，main 线程修改了 `run` 的值，并同步至主存，
 而 t 是从自己工作内存中的高速缓存中读取这个变量的值，结果永远是旧值。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/memory/jmm/variable-visibility-problem-003.png)
-{:refdef}
 
 ### 解决方法
 

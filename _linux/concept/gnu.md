@@ -57,9 +57,7 @@ In `1991`, Linus Torvalds released the first version of the Linux kernel.
 There was now enough software for a completely free operating system, and distributors
 (like modern “Linux distributions”) assmbled the Linux kernel, GNU software, and X Window System together.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/linux/concept/gnu-linux-naming-controversy.jpg)
-{:refdef}
 
 Many users installed the **GNU tools** on many different computers as replacements for vendor supplied tools.
 This provided these users with **a consistency** across the **many different platforms** they used.
@@ -85,9 +83,7 @@ GNU Project 的 tools，这里举了两种类型的例子：
 - （1） 文件管理：ls/mkdir/mv/rm
 - （2） 文件内容：cat/head/sort/wc
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/linux/concept/gnu-love.jpg)
-{:refdef}
 
 ## GNU Software
 

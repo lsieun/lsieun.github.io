@@ -41,9 +41,7 @@ Data ID：相当于一个配置文件，比如相当于 `application.properties`
 
 配置内容：写具体的配置项，可以用 `properties` 的格式，也可以用 `yaml` 的格式。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-cloud/nacos/nacos-configuration-details-mytest.png)
-{:refdef}
 
 ## Group
 

@@ -5,9 +5,7 @@ sequence: "102"
 
 [UP](/java-concurrency.html)
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/spurious-wakeup-midnight.jpg)
-{:refdef}
 
 
 ## 介绍

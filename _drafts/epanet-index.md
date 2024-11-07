@@ -7,9 +7,7 @@ permalink: /epanet.html
 
 EPANET is a software application used throughout the world to model water distribution systems.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/epanet/EPANET-220px.gif)
-{:refdef}
 
 ## Overview
 

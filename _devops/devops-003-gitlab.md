@@ -61,29 +61,21 @@ http://192.168.80.251:80
 - 密码：如上
 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/gitlab/gitlab-001-login.png)
-{:refdef}
 
 第 4 步，选择 Preferences 菜单项：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/gitlab/gitlab-002-menu-preferences.png)
-{:refdef}
 
 第 5 步，选择 Password 选项卡，然后修改密码：
 
 - 用户：`root`
 - 密码：`123@Abc.com`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/gitlab/gitlab-003-change-password.png)
-{:refdef}
 
 
 第 6 步，重新登录：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/gitlab/gitlab-004-sign-in-again.png)
-{:refdef}
 

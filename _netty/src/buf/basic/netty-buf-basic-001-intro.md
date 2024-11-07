@@ -23,8 +23,6 @@ sequence: "101"
 
 ## 方法分类
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/netty-buffer-structure.svg)
-{:refdef}
 
 

@@ -29,9 +29,7 @@ that work on top of the Java logging package to standardize the logging and make
 These frameworks in general are called **loggers,**
 and they have a lot of flexibility like printing logs to separate log files and rotate the log files etc
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/log/application-logger-appender-filter-destination.png)
-{:refdef}
 
 **Loggers** are nothing but Java objects that trigger log events.
 Loggers are included as objects in all the Java class files, and they belong to that specific class.
@@ -74,9 +72,7 @@ There is an Integer value for each log level and the higher value indicates high
 LoggerFactory --> Logger --> Message --> Appender
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/log/slf4j-concrete-bindings.png)
-{:refdef}
 
 
 ## Slf4j 版本

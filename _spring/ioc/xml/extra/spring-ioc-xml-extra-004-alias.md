@@ -67,6 +67,4 @@ public class Main {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/bean/bean-alias-map.png)
-{:refdef}

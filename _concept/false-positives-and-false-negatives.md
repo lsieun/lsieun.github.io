@@ -15,9 +15,7 @@ A false negative means something that is there was not detected; something was m
 
 ## Example
 
-{:refdef: style="text-align: center;"}
 ![Jar of candy](/assets/images/concept/jar-of-candy.png)
-{:refdef}
 
 For example, a teacher puts out a jar full of candy and asks each student to hypothesize how many candy pieces are in the jar.  
 John hypothesizes that there are 42 candies.  

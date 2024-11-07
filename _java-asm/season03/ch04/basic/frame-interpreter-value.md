@@ -7,9 +7,7 @@ sequence: "402"
 
 在本文当中，我们介绍`Frame`、`Interpreter`和`Value`三个类。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/analyzer-frame-interpreter.png)
-{:refdef}
 
 ## Frame类
 

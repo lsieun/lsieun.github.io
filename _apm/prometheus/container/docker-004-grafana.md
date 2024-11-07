@@ -66,9 +66,7 @@ http://192.168.80.130:3000
 
 ### 添加数据源：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grafana/grafana-administration-data-source-prometheus.png)
-{:refdef}
 
 ### Dashboard
 
@@ -76,18 +74,12 @@ http://192.168.80.130:3000
 https://grafana.com/grafana/dashboards/
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grafana/grafana-dashboard-new-import.png)
-{:refdef}
 
 ```text
 https://grafana.com/grafana/dashboards/8919-1-node-exporter-for-prometheus-dashboard-cn-0413-consulmanager/
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grafana/grafana-dashboard-import-load.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grafana/grafana-dashboard-new-prometheus-import.png)
-{:refdef}

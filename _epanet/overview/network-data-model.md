@@ -20,9 +20,7 @@ EPANET models a pipe network as a collection of **links** connected to **nodes**
 
 The figure below illustrates how these objects can be connected to one another to form a network.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/epanet/epanet-network-example-01.png)
-{:refdef}
 
 In addition to these **physical objects** an EPANET model can also contain the following data objects:
 

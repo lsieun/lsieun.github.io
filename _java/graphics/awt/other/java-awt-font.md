@@ -141,9 +141,7 @@ public class MyComponentForText  extends JComponent {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![My Image](/assets/images/java/graphics/java-awt-graphics-draw-string-with-font.png)
-{:refdef}
 
 ## 多行文本
 
@@ -186,7 +184,5 @@ public class Font_E_TextArea {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![My Image](/assets/images/java/graphics/java-awt-graphics-text-area-with-font.png)
-{:refdef}
 

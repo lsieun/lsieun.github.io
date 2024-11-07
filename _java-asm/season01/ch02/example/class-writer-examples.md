@@ -5,9 +5,7 @@ sequence: "203"
 
 [上级目录]({% link _posts/2021-06-01-java-asm-index.md %})
 
-{:refdef: style="text-align: center;"}
 ![What ASM Can Do](/assets/images/java/asm/what-asm-can-do.png)
-{:refdef}
 
 在当前阶段，我们只能进行 Class Generation 的操作。
 

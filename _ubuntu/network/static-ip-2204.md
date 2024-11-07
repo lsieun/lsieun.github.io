@@ -17,9 +17,7 @@ Ubuntu 22.04 uses the **Netplan** as a network manager.
 $ ip address
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/ubuntu/network/ip-address-cmd.png)
-{:refdef}
 
 第 2 步，编辑配置文件：
 
@@ -45,9 +43,7 @@ network:
 
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/ubuntu/network/etc-netplan-network-manager-all-ens32.png)
-{:refdef}
 
 - `ens32` – is the network interface name
 - `addresses` – is used to configure IPv4 address on an interface. Make sure to define **CIDR**.

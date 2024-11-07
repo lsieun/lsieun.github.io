@@ -13,9 +13,7 @@ To configure the Mosquitto broker you will need to:
 To create a password file you need to use the `mosquitto_passwd` utility
 that comes with the client tools when installing the mosquitto broker.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/mqtt/mosquitto-passwd-exe.png)
-{:refdef}
 
 ### 方法一
 

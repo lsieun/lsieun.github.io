@@ -18,9 +18,7 @@ sequence: "101"
 一个哈希表，其实就是一个数组，数组的每个元素称为一个哈希桶。
 所以，我们常说，一个哈希表是由多个哈希桶组成的，每个哈希桶中保存了 key-value pair 数据。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/redis/mechanism/redis-global-hash-table.png)
-{:refdef}
 
 哈希桶中的 entry 元素中保存了 key 和 value 的指针，分别指向了实际的键和值，这样一来，
 即使是一个集合，也是通过 value 指针被查找到。
@@ -35,9 +33,7 @@ sequence: "101"
 当我们往哈希表中写入更多数据时，哈希冲突是不可避免的问题。
 这里的哈希冲突，两个 key 的哈希值和哈希桶计算对应关系时，正好落在同一个哈希桶中。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/redis/mechanism/redis-global-hash-table-hash-collision.png)
-{:refdef}
 
 Redis 解决哈希冲突的方式，就是链式哈希。
 链式哈希也很容易理解，就是指同一个哈希桶中的多个元素用一个链表来保存，它们之间依次用指针连接。
@@ -63,9 +59,7 @@ Redis 解决哈希冲突的方式，就是链式哈希。
 会造成 Redis 线程阻塞，无法服务其它请求。
 此时，Redis 就无法快速访问数据了。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/redis/mechanism/redis-global-hash-table-rehash.png)
-{:refdef}
 
 在 Redis 开始执行 rehash 时，Redis 仍然正常处理客户端请求，但是要加入一个额外的处理：
 

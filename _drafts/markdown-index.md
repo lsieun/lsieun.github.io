@@ -1,6 +1,6 @@
 ---
 title: "Markdown"
-image: /assets/images/git/git-vs-github.png
+image: /assets/images/markdown/markdown-index.png
 permalink: /markdown/markdown-index.html
 ---
 

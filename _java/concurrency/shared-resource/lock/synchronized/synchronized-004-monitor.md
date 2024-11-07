@@ -62,9 +62,7 @@ So, in this analogy:
 - entry set is a “hallway”
 - threads are people who want to get to the exclusive room
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/obj/monitor/monitors-analogy.webp)
-{:refdef}
 
 Also, it's important to mention the steps that threads go through during this process, using the same analogy:
 

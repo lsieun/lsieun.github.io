@@ -1,11 +1,9 @@
 ---
 title: "Overview"
-sequence: "101"
+sequence: "111"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/beauty/mirror-mirror-on-the-wall.jpg)
-{:refdef}
 
 TODO：
 

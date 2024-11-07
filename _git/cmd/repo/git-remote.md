@@ -7,9 +7,7 @@ title: "git remote"
 
 There are now two repositories: **a local repository** and **a remote repository**.
 
-{:refdef: style="text-align: center;"}
 ![Git add/commit/push/pull/checkout cycle](/assets/images/git/git-local-remote-workflow-cycle.png)
-{:refdef}
 
 
 ## Adding a remote repository: git remote add

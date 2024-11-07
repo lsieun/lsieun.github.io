@@ -529,18 +529,12 @@ public class HelloWorld {
 23.52.628 [t5] INFO 执行完成
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-read-write-demo-000.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-initial-state.png)
-{:refdef}
 
 
 ### t1 获取锁
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/aqs/aqs-read-write-demo-001.png)
-{:refdef}
 

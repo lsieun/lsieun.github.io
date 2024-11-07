@@ -7,9 +7,7 @@ sequence: "154"
 
 在数学的概念当中，有一个迫敛定理或三明治定理（英文：Squeeze Theorem、Sandwich Theorem），可以帮助我们确定某一点的函数值到底是多少：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/agent/sandwich-theorem.png)
-{:refdef}
 
 这种“三明治”思路可以应用到 Multiple Agents 当中，这样我们就可以检测某一个 Agent Jar 修改了什么内容。
 

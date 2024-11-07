@@ -12,16 +12,12 @@ and produces the **instrumented code**.
 functional code + advice code = instrumented code
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/advice/bytebuddy-method-advice-functional-code-advice-code-instrumented-code.png)
-{:refdef}
 
 ## 映射 Mapping
 
 advice mapping parameter
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/advice/bytebuddy-method-advice-annotation-illustration.png)
-{:refdef}
 
 

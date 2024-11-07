@@ -7,9 +7,7 @@ sequence: "102"
 
 In Excel, we sometimes want to display a string across two or more cells.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/office/poi/excel-cell-merge-example-001.png)
-{:refdef}
 
 **To achieve this, we can use `addMergedRegion` to merge several cells defined by `CellRangeAddress`.**
 There are two ways to set the cell range.

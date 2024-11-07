@@ -36,9 +36,7 @@ Now we have the **mapstruct-processor** as well as **Lombok** in the Maven compi
 </plugin>
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/mapstruct/intellij-idea-settings-annotation-processors-processor-path.png)
-{:refdef}
 
 在 Processor Path 中，包含了 4 个 Jar 文件：
 

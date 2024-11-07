@@ -26,13 +26,9 @@ Before reading design patterns, I suggest reading some useful oops design princi
 - 5、迪米特法则，又称最少知道原则（Demeter Principle）
 - 6、开闭原则（Open Close Principle）
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/design-pattern/principle/design-solid-principle-mind-map.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/design-pattern/principle/design-solid-principle-relation.png)
-{:refdef}
 
 
 ## SOLID

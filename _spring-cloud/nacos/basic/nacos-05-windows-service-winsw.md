@@ -15,9 +15,7 @@ https://github.com/winsw/winsw/releases/download/v2.12.0/WinSW-x64.exe
 
 ### 进行配置
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-cloud/nacos/nacos-windows-service-01.png)
-{:refdef}
 
 
 第一步，将 `WinSW-x64.exe` 文件重命名为 `nacos-service.exe` 文件，并放到 Nacos 的 `bin` 目录下。
@@ -57,13 +55,9 @@ nacos-service.exe uninstall
 
 进行验证。按 `Windows + R` 键打开运行窗口，输入 `services.msc`：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-cloud/nacos/windows-win-r-services-msc.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-cloud/nacos/nacos-service-install-windows-service.png)
-{:refdef}
 
 
 ### 启动和停止服务

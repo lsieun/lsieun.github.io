@@ -3,9 +3,7 @@ title: "CAD API"
 sequence: "101"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/autocad-object-hierarchy.png)
-{:refdef}
 
 Some of the objects represented in the AutoCAD .NET API are:
 

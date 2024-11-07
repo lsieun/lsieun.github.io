@@ -299,9 +299,7 @@ StackMapTable_attribute {
 
 如果我们在创建 `ClassWriter(flags)` 对象的时候，将 `flags` 参数设置为 `ClassWriter.COMPUTE_FRAMES`，那么 ASM 会自动帮助我们计算 `StackMapTable_attribute` 的内容。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/max-stacks-max-locals-stack-map-frames.png)
-{:refdef}
 
 我们推荐使用 `ClassWriter.COMPUTE_FRAMES`。因为 `ClassWriter.COMPUTE_FRAMES` 这个选项，能够让 ASM 帮助我们自动计算 max stacks、max locals 和 stack map frame 的具体内容。
 

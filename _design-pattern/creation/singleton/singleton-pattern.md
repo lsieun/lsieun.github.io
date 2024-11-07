@@ -3,12 +3,13 @@ title: "单例模式"
 sequence: "101"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/design-pattern/diagrams/singleton-structure.png)
-{:refdef}
 
 
 ## 为什么要使用单例？
+
+Singleton is a design pattern that assures a single instance of a `Class` for the lifetime of an application.
+It also provides a global point of access to that instance.
 
 ## 如何实现单例？
 

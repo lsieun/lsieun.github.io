@@ -8,9 +8,7 @@ the difference between **automatic modules** and **explicit modules** when it co
 - An **explicit module** can read only other **explicit modules**, and **automatic modules**.
 - An **automatic module** reads **all modules** including the **unnamed module**.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/module/explicit-automatic-unnamed-module.png)
-{:refdef}
 
 The readability to the **unnamed module** is only a mechanism to facilitate **automatic modules**
 in a mixed classpath/module path migration scenario. 

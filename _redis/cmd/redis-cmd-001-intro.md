@@ -3,9 +3,7 @@ title: "Redis 命令"
 sequence: "101"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/redis/redis-data-type.jpg)
-{:refdef}
 
 ## 数据类型
 

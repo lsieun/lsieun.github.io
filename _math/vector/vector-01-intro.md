@@ -7,15 +7,11 @@ sequence: "101"
 
 This is a vector:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/vector.gif)
-{:refdef}
 
 A vector has **magnitude** (size) and **direction**:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/vector-mag-dir.svg)
-{:refdef}
 
 The length of the line shows its magnitude and the arrowhead points in the direction.
 
@@ -23,15 +19,11 @@ The length of the line shows its magnitude and the arrowhead points in the direc
 
 We can add two vectors by joining them head-to-tail:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/vector-add.svg)
-{:refdef}
 
 And it doesn't matter which order we add them, we get the same result:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/vector-add2.gif)
-{:refdef}
 
 ### Subtract
 
@@ -40,9 +32,7 @@ We can also subtract one vector from another:
 - first we reverse the direction of the vector we want to subtract,
 - then add them as usual:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/vector-subtract.gif)
-{:refdef}
 
 ### Notation
 
@@ -51,9 +41,7 @@ A vector is often written in **bold**, like **a** or **b**.
 A vector can also be written as the letters
 of its head and tail with an arrow above it, like this:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/vector-notation.svg)
-{:refdef}
 
 ## Calculations
 
@@ -61,9 +49,7 @@ Now ... how do we do the calculations?
 
 The most common way is to first break up vectors into `x` and `y` parts, like this:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/vector-xy-components.gif)
-{:refdef}
 
 <p>
 The vector <b>a</b> is broken up into
@@ -74,9 +60,7 @@ the two vectors \(a_{x}\) and \(a_{y}\).
 
 We can then add vectors by **adding the x parts** and **adding the y parts**:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/vector-add3.gif)
-{:refdef}
 
 The vector `(8, 13)` and the vector `(26, 7)` add up to the vector `(34, 20)`
 
@@ -168,9 +152,7 @@ because we change how big or small the vector is.
 
 Example: multiply the vector **m** = (7, 3) by the scalar 3
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/vector-scaling.gif)
-{:refdef}
 
 **a** = 3**m** = (3×7, 3×3) = (21, 9)
 
@@ -186,9 +168,7 @@ How do we **multiply two vectors** together? There is more than one way!
 - The scalar or **Dot Product** (the result is a scalar).
 - The vector or **Cross Product** (the result is a vector).
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/dot-product-1.svg)
-{:refdef}
 
 ## Reference
 

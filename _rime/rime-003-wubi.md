@@ -7,15 +7,11 @@ sequence: "103"
 
 第 1 步，在开始菜单中点击 `【小狼毫】输入法设定`，任务栏输入法图标上点右键也可以。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/rime/wubi/weasel-setting.png)
-{:refdef}
 
 第 2 步，在弹出的 `【小狼毫】方案选单设定` 里点击 `获取更多输入方案`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/rime/wubi/weasel-more.png)
-{:refdef}
 
 第 3 步，在弹出的 CMD 窗口中安装 `袖珍简化字拼音`
 
@@ -29,9 +25,7 @@ sequence: "103"
 https://github.com/rime/rime-pinyin-simp
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/rime/wubi/rime-wubi-001.png)
-{:refdef}
 
 第 4 步，在弹出的 CMD 窗口中安装 `五笔字型`
 
@@ -39,12 +33,8 @@ https://github.com/rime/rime-pinyin-simp
 https://github.com/rime/rime-wubi
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/rime/wubi/rime-wubi-002.png)
-{:refdef}
 
 第 5 步，选择『五笔拼音』
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/rime/wubi/rime-wubi-003.png)
-{:refdef}

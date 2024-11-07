@@ -97,9 +97,7 @@ public class DateBenchmark {
 https://jmh.morethan.io
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/jmh/jmh-visualizer-date-benchmark.png)
-{:refdef}
 
 
 ## 总结

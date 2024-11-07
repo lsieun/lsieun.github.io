@@ -211,7 +211,5 @@ public class Main {
 
 ## 比较
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/aop/spring-aop-compare-xml-vs-anno.png)
-{:refdef}
 

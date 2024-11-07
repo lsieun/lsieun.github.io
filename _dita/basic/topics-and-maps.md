@@ -11,9 +11,7 @@ As its name suggests, a topic addresses a single subject.
 The overall contents of a DITA document are specified using a **topic map** (also simply called a **map**).
 **A map mainly contains a hierarchy of topic references.**
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/dita/tutorial-dita-map-file-layout.svg)
-{:refdef}
 
 Remember
 

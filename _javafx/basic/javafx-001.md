@@ -78,9 +78,7 @@ public class HelloApplication extends Application {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/fx/example-stage-without-a-scene.png)
-{:refdef}
 
 The main area of the window is empty.
 This is the content area in which the stage will show its scene.
@@ -156,9 +154,7 @@ public class HelloApplication extends Application {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/fx/example-txt-hello-javafx.png)
-{:refdef}
 
 You will use a `VBox` as the root node. `VBox` stands for vertical box,
 which arranges its children vertically in a column.

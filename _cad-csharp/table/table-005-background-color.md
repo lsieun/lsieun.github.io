@@ -101,9 +101,7 @@ namespace Lsieun.Cad.DrawObjects.TableUtility
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/table/table-example-003.png)
-{:refdef}
 
 ### RowType
 
@@ -126,21 +124,15 @@ public enum RowType {
 
 - `RowType.TitleRow`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/table/table-example-003.png)
-{:refdef}
 
 - `RowType.HeaderRow`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/table/table-example-004.png)
-{:refdef}
 
 - `RowType.DataRow`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/table/table-example-005.png)
-{:refdef}
 
 ## 单元格背景色
 
@@ -277,10 +269,6 @@ namespace Lsieun.Cad.DrawObjects.TableUtility
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/table/table-example-006.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/table/table-example-color-index.png)
-{:refdef}

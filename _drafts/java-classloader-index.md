@@ -1,6 +1,6 @@
 ---
 title: "Java ClassLoader"
-image: /assets/images/java/classfile/java-class-file-cover.jpg
+image: /assets/images/java/classloader/java-classloader-cover.jpg
 permalink: /java/java-classloader-index.html
 ---
 
@@ -10,6 +10,10 @@ Java ClassLoader
     - [ ] `MethodHandles.Lookup.defineClass(byte[])`
     - [ ] `MethodHandles.Lookup.defineHiddenClass()`
     - [ ] `jdk.internal.misc.Unsafe.defineClass()`
+- [ ] 有哪些方式，可以创建对象
+  - [ ] new 创建
+  - [ ] 反序列化
+  - [ ] 在 ByteBuddy 中，MethodDelegation 为 `@Super` 注解生成对象时，会使用 `ReflectionFactory.getReflectionFactory().newConstructorForSerialization()` 方法
 
 ## ClassLoader
 
@@ -90,4 +94,4 @@ sort: "sequence"
 
 ## Reference
 
-
+- [Diagrams, diagrams, diagrams: Classloaders and the Java Developer Roadmap - JVM Weekly vol. 99](https://www.jvm-weekly.com/p/diagrams-diagrams-diagrams-classloaders)

@@ -18,18 +18,14 @@ sequence: "102"
 - 第 4 步，在此之后 master 服务器会将在此期间缓存的命令通过 Redis 传输协议发送给 Slave 服务器
 - 第 5 步，然后 Slave 服务器将这些命令依次作用于自己本地的数据集上最终达到数据的一致性
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/redis/ha/master-slave-sync-data-full.png)
-{:refdef}
 
 ### 增量复制
 
 - 第 1 步，Slave 初始化后开始正常工作时主服务器发生的写操作同步到从服务器的过程
 - 第 2 步，服务器每执行一个写命令就会向从服务器发送相同的写命令，从服务器接收并执行收到的写命令
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/redis/ha/master-slave-sync-data-increment.png)
-{:refdef}
 
 ### 全量/增量特点
 

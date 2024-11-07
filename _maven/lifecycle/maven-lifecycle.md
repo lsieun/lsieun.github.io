@@ -6,9 +6,7 @@ sequence: "102"
 [UP](/maven-index.html)
 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/maven/thinking-in-maven.png)
-{:refdef}
 
 
 

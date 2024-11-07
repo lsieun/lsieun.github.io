@@ -29,9 +29,7 @@ From the figure below,
 you will have a general idea about the difference between
 when different ellipsoid models are applied to the earth surface (WGS84 vs GRS80).
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/ellipsoid-wgs84-vs-grs80.png)
-{:refdef}
 
 The following table lists the primary ellipsoid parameters of GRS80 and WGS84.
 

@@ -11,15 +11,11 @@ sequence: "101"
 
 ### Monitor 结构
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/obj/obj-monitor-owner-entry-set-wait-set-trim.gif)
-{:refdef}
 
 ### 线程状态
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/obj/obj-monitor-state-waiting-and-blocked.png)
-{:refdef}
 
 - Runnable --> Waiting: Owner 线程发现条件不满足，调用 `wait` 方法，即可进入 WaitSet 变为 `WAITING` 状态
 - `BLOCKED` 和 `WAITING` 的线程都处于阻塞状态，不占用 CPU 时间片

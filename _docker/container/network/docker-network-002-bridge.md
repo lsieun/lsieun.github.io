@@ -440,9 +440,7 @@ $ docker network rm alpine-net
 
 ## Bridge 本质
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/docker/network/bridge-network.jpg)
-{:refdef}
 
 第 1 步，从 Host 上查看：
 

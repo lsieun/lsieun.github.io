@@ -64,9 +64,7 @@ Examples include the North American Vertical Datum of 1988;
 the Ordnance Datum Newlyn (used in Great Britain); and the Australian Height Datum.
 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/vertical-control-datum.gif)
-{:refdef}
 
 ## tidal datum
 

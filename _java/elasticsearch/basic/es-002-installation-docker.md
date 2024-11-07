@@ -208,9 +208,7 @@ kibana:7.17.7
 
 ### DevTools
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/elk/kibana/kibana-management-dev-tools.png)
-{:refdef}
 
 ## 部署 ES 集群
 

@@ -28,9 +28,7 @@ The stages are as follows:
   - signaling the computer to stop monitoring hardware devices for user input,
   - and closing any windows that were created by the game.
 
-{:refdef: style="text-align: center;"}
 ![The stages of a game program](/assets/images/libgdx/the-stages-of-a-game-program.png)
-{:refdef}
 
 Most of these stages are handled by a corresponding method in LibGDX.
 For example, the **startup stage** is carried out by a method named `create`,

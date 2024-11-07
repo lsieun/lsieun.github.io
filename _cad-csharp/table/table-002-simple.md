@@ -71,9 +71,7 @@ namespace Lsieun.Cad.DrawObjects.TableUtility
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/table/table-example-001.png)
-{:refdef}
 
 
 ```csharp

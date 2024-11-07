@@ -90,9 +90,7 @@ Unnamed modules —Modules that aren't named (spoiler: class path content) and h
 Both **automatic** and **unnamed modules** become relevant in the context of
 migrating an application to the module system.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/module/module-types.png)
-{:refdef}
 
 
 

@@ -94,9 +94,7 @@ public class ConcurrentHashMapSample {
 
 ConcurrentHashMap 采用 ”分段锁“的方式
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/juc/coll/concurrent-hash-map-segment-lock.png)
-{:refdef}
 
 Hashtable 为了保证线程安全，所有的 kv 要进行同步，所以 t1、t2、t3...tn 这么多线程都一个一个操作来完成工作，
 那效率自然就低了。

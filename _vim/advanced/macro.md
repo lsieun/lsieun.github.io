@@ -22,7 +22,5 @@ On a line containing only the number 1, type this:
 - `@@` → write 3 under the 2
 - Now do `100@@` will create a list of increasing numbers until 103.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/vim/macros.gif)
-{:refdef}
 

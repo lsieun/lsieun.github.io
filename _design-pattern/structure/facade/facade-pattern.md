@@ -3,9 +3,7 @@ title: "门面模式"
 sequence: "facade"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/design-pattern/diagrams/facade-structure.png)
-{:refdef}
 
 
 ## Intent
@@ -13,9 +11,7 @@ sequence: "facade"
 **Facade** is a **structural design pattern**
 that **provides a simplified (but limited) interface** to **a complex system of classes, library or framework.**
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/design-pattern/facade.png)
-{:refdef}
 
 ## Problem
 

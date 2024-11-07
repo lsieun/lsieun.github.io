@@ -13,9 +13,7 @@ http://192.168.80.251/
 
 第 2 步，新建项目 `myproject-ci`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/gitlab/gitlab-005-create-blank-project.png)
-{:refdef}
 
 第 3 步，拉取代码
 
@@ -29,17 +27,13 @@ $ git clone http://192.168.80.251/root/myproject-ci
 
 第 1 步，选择 Spring Initializr：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/gitlab/gitlab-006-idea-spring-initializer.png)
-{:refdef}
 
 第 2 步，选择 Spring Web：
 
 - 2.7.15 版本
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/gitlab/gitlab-007-spring-web.png)
-{:refdef}
 
 
 
@@ -128,12 +122,8 @@ http://localhost:8888/hello/world
 
 第 1 步，提交代码
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/gitlab/gitlab-008-initial-commit.png)
-{:refdef}
 
 第 2 步，网页上验证
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/gitlab/gitlab-009-web-page-initial-commit.png)
-{:refdef}

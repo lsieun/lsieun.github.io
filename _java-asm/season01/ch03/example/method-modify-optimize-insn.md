@@ -416,9 +416,7 @@ public class sample.HelloWorld {
 
 ### 编码实现
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/state_machine_for_aload0_aload0_getfield_putfield.png)
-{:refdef}
 
 ```java
 import org.objectweb.asm.ClassVisitor;

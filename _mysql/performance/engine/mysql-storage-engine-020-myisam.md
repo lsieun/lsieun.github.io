@@ -19,9 +19,7 @@ sequence: "120"
 - `*.MYD`："D"数据信息文件，是表的数据文件。
 - `*.MYI`："I"索引信息文件，是表数据文件中任何索引的数据树
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/storage/windows-storage-data-directory-myisam.png)
-{:refdef}
 
 
 ### 实践

@@ -9,9 +9,7 @@ sequence: "103"
 $ dive apache/skywalking-java-agent:8.16.0-java17
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/skywalking/skywalking-java-agent-docker-files.png)
-{:refdef}
 
 ```text
 $ docker inspect apache/skywalking-java-agent:8.16.0-java17

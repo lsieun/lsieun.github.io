@@ -16,9 +16,7 @@ sequence: "minikube"
 https://minikube.sigs.k8s.io/docs/start/
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/k8s/minikube-windows-exe-download.png)
-{:refdef}
 
 或者直接下载：
 
@@ -32,9 +30,7 @@ https://storage.googleapis.com/minikube/releases/latest/minikube-installer.exe
 C:\Program Files\Kubernetes\Minikube
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/k8s/minikube-installation-directory-win10.png)
-{:refdef}
 
 
 第 3 步，将 `minikube.exe` 添加到 `PATH` 环境变量。
@@ -79,13 +75,9 @@ minikube dashboard
 This command opens a site in our **default browser**,
 which provides an extensive overview about the state of our cluster.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/k8s/powershell-minikube-start.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/k8s/kubernetes-dashboard.png)
-{:refdef}
 
 
 ```text

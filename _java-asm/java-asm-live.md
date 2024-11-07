@@ -115,6 +115,4 @@ https://ke.qq.com/course/4156657
   <img width="500" height="500" src="/assets/images/contact/we-app-code.jpg" alt=""/>
 </p>
 
-{:refdef: style="text-align: center;"}
 ![QQ Group](/assets/images/contact/qq-group-java-asm.png)
-{:refdef}

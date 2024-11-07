@@ -6,9 +6,7 @@ sequence: "101"
 [UP](/java-concurrency.html)
 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/thread/life-cycle-of-a-thread-in-java.jpg)
-{:refdef}
 
 ```text
                 ┌─── NEW

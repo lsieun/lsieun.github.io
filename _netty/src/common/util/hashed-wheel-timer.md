@@ -12,13 +12,9 @@ sequence: "106"
 
 Hashed 本意，
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/util/netty-util-timer-structure.svg)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/util/netty-util-timer-method-call.svg)
-{:refdef}
 
 HashedWheelTimer 延迟队列（定时任务）
 

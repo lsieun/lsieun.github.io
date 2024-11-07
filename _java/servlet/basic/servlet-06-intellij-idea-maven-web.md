@@ -22,9 +22,7 @@ sequence: "106"
 
 ## Add Web Framework
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/servlet/intellij-idea-servlet-xml-add-web-framework.png)
-{:refdef}
 
 ## 编写Servlet
 

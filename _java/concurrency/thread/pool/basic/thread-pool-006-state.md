@@ -115,9 +115,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 
 ## 线程池的状态转换
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/pool/thread-pool-5-states.png)
-{:refdef}
 
 ```java
 import java.lang.reflect.Field;

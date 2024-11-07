@@ -9,9 +9,7 @@ DITA stands for "Darwin Information Typing Architecture."
 The word “Darwin” in the name makes sense when you realize that the system is built on the idea of **inheritance**.
 Child elements “evolve” from the parent elements and are based on them.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/dita/dita-logo.png)
-{:refdef}
 
 ## Basic
 

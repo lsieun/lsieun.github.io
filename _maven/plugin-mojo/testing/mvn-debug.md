@@ -11,23 +11,15 @@ sequence: "113"
 - In IDEA, add a **Remote JVM Debug** Configuration.
   - Under Settings, set Transport: Socket, Debugger Mode: Attach, Host: localhost, Port: 8000 (default port of mvnDebug).
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/idea-menu-run-edit-configurations.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/run-debug-configuration-remote-jvm-debug.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/maven-remote-debug-configration.png)
-{:refdef}
 
 Run the Configuration in **Debug** mode. It should connect to the waiting `mvnDebug` jvm.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/maven-remote-debug-start.png)
-{:refdef}
 
 ```text
 $ mvnDebug hello-mojo:simple

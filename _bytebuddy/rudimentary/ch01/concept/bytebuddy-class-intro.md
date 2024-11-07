@@ -5,9 +5,7 @@ sequence: "102"
 
 `ByteBuddy` 类是 ByteBuddy 框架的入手点。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/bytebuddy-overview.png)
-{:refdef}
 
 ## 创建 ByteBuddy 对象
 

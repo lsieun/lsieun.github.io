@@ -12,13 +12,9 @@ A **hard link** is a directory entry that associates a name with a file on a fil
 It's basically the same entity as the original file.
 All attributes are identical: they have the same file permissions, timestamps, and so on.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/io/soft-link.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/io/hard-link.png)
-{:refdef}
 
 The upper half of each diagram shows the **user perception** of
 a soft link or a hard link as an alias for some file.

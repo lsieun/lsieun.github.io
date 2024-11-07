@@ -78,7 +78,5 @@ UserDao userDao2 = (UserDao) applicationContext.getBean("aaa");
 UserDao userDao3 = (UserDao) applicationContext.getBean("bbb");
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/bean/bean-factory-singleton-objects-and-alias-map.png)
-{:refdef}
 

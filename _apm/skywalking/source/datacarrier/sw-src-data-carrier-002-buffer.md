@@ -39,9 +39,7 @@ public enum BufferStrategy {
 
 ## Buffer
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/skywalking/source/sw-src-data-carrier-buffer.png)
-{:refdef}
 
 ```java
 /**

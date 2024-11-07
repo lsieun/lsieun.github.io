@@ -98,7 +98,5 @@ Figure 4.8 provides an example of when a message can get out of order.
 Even though message 1 was sent first,
 it does not make it into the log in an ordered manner because retries were enabled.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/producer/producer-retry-impact-on-order.png)
-{:refdef}
 

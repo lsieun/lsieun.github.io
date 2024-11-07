@@ -6,9 +6,7 @@ permalink: /java-collection.html
 
 Java Collection
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/collection/java-collection-framework-hierarchy.webp)
-{:refdef}
 
 ## Map
 

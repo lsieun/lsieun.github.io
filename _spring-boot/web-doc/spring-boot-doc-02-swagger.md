@@ -67,9 +67,7 @@ http://localhost:8080/swagger-ui/index.html
 
 出现如下界面：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/spring-boot-swagger-ui-default.png)
-{:refdef}
 
 ## 第二版
 
@@ -139,9 +137,7 @@ http://localhost:8080/swagger-ui/index.html
 
 出现如下界面：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/spring-boot-swagger-ui-with-config.png)
-{:refdef}
 
 ### Controller
 
@@ -241,9 +237,7 @@ http://localhost:8080/doc.html
 
 出现如下界面：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-boot/spring-boot-swagger-knife4j-doc.png)
-{:refdef}
 
 ## Reference
 

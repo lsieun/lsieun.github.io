@@ -15,47 +15,47 @@ public class Advice implements AsmVisitorWrapper.ForDeclaredMethods.MethodVisito
         String value() default OffsetMapping.ForField.Unresolved.BEAN_PROPERTY;
         Class<?> declaringType() default void.class;
 
-        boolean readOnly() default true;
-        Assigner.Typing typing() default Assigner.Typing.STATIC;
+        boolean readOnly() default true;                            // <-- readOnly
+        Assigner.Typing typing() default Assigner.Typing.STATIC;    // <-- typing
     }
 
     public @interface Return {
-        boolean readOnly() default true;
-        Assigner.Typing typing() default Assigner.Typing.STATIC;
+        boolean readOnly() default true;                            // <-- readOnly
+        Assigner.Typing typing() default Assigner.Typing.STATIC;    // <-- typing
     }
 }
 ```
 
 ```text
-                                      ┌─── clazz ────┼─── @This
-                                      │
-                                      ├─── field ────┼─── @FieldValue
-                                      │
-                  ┌─── support ───────┤                            ┌─── @Argument
-                  │                   │              ┌─── arg ─────┤
-                  │                   │              │             └─── @AllArguments
-                  │                   │              │
-                  │                   │              │             ┌─── @Enter
-                  │                   └─── method ───┼─── local ───┤
-                  │                                  │             └─── @Exit
-                  │                                  │
-                  │                                  │             ┌─── @Return
-advice::change ───┤                                  └─── exit ────┤
-                  │                                                └─── @Thrown
-                  │
-                  │                   ┌─── clazz ────┼─── @Origin
-                  │                   │
-                  │                   │              ┌─── @FieldGetterHandle
-                  │                   ├─── field ────┤
-                  │                   │              └─── @FieldSetterHandle
-                  │                   │
-                  └─── not-support ───┤              ┌─── local ────┼─── @Local
-                                      │              │
-                                      ├─── method ───┼─── invoke ───┼─── @SelfCallHandle
-                                      │              │
-                                      │              └─── return ───┼─── @StubValue
-                                      │
-                                      └─── unused ───┼─── @Unused
+                                                               ┌─── clazz ────┼─── @This
+                                                               │
+                                                               ├─── field ────┼─── @FieldValue
+                                                               │
+                                           ┌─── support ───────┤                            ┌─── @Argument
+                                           │                   │              ┌─── arg ─────┤
+                                           │                   │              │             └─── @AllArguments
+                                           │                   │              │
+                                           │                   │              │             ┌─── @Enter
+                                           │                   └─── method ───┼─── local ───┤
+                                           │                                  │             └─── @Exit
+                                           │                                  │
+                                           │                                  │             ┌─── @Return
+advice::annotation::writable.and.typing ───┤                                  └─── exit ────┤
+                                           │                                                └─── @Thrown
+                                           │
+                                           │                   ┌─── clazz ────┼─── @Origin
+                                           │                   │
+                                           │                   │              ┌─── @FieldGetterHandle
+                                           │                   ├─── field ────┤
+                                           │                   │              └─── @FieldSetterHandle
+                                           │                   │
+                                           └─── not-support ───┤              ┌─── local ────┼─── @Local
+                                                               │              │
+                                                               ├─── method ───┼─── invoke ───┼─── @SelfCallHandle
+                                                               │              │
+                                                               │              └─── return ───┼─── @StubValue
+                                                               │
+                                                               └─── unused ───┼─── @Unused
 ```
 
 ## 类型转换

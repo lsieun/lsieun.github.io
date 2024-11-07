@@ -16,9 +16,7 @@ Each **piece** consists of one **atom** and an optional **quantifier**.
 </xsd:simpleType>
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/xml/structure-of-a-regular-expression.png)
-{:refdef}
 
 One difference between **XML Schema regular expressions** and **other regular expression languages** is that
 XML Schema assumes **anchors** to be present at the **beginning** and **end** of the expression.

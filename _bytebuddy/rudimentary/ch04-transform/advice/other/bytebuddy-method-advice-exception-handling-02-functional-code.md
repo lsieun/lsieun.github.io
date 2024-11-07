@@ -17,9 +17,7 @@ advice::functional.code::exception ───┤
                                                       └─── replace ────┼─── throw new RuntimeException()
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/advice/bytebuddy-method-advice-exception-handling-of-functional-code.png)
-{:refdef}
 
 ## 示例
 

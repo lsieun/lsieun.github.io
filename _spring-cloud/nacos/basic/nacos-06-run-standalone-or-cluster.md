@@ -17,9 +17,7 @@ set MODE="cluster"
 set MODE="standalone"
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring-cloud/nacos/nacos-bin-startup-cmd-26-set-mode-cluster.png)
-{:refdef}
 
 
 

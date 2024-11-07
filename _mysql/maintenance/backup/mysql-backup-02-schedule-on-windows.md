@@ -43,74 +43,52 @@ set backupfile=%back_path%\%dbname%-%now%.sql
 
 第一种方式，打开控制面板 > 系统和安全 > 管理工具 > 计划程序，：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/windows-control-panel-task-schedule.png)
-{:refdef}
 
 第二种方式，在运行对话框，输入 `taskschd.msc`：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/windows-run-taskched-msc.png)
-{:refdef}
 
 
 ### 创建任务
 
 第一步，在**任务计划程序**中，点击**创建任务**：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/taskschd-new-task.png)
-{:refdef}
 
 第二步，在**常规**选项卡，填写任务信息：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/taskschd-new-task-detail.png)
-{:refdef}
 
 第三步，在**触发器**选项卡，点击**新建**按钮：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/taskschd-new-task-trigger.png)
-{:refdef}
 
 在**新建触发器**，填写配置：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/taskschd-new-task-trigger-detail.png)
-{:refdef}
 
 点击**确定**，回到**触发器**界面：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/taskschd-new-task-trigger-complete.png)
-{:refdef}
 
 第四步，在**操作**选项卡，点击**新建**按钮：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/taskschd-new-task-operation.png)
-{:refdef}
 
 在**新建操作**中，选择之前的 `bat` 文件：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/taskschd-new-task-operation-detail.png)
-{:refdef}
 
 点击**确定**，返回**操作**界面：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/taskschd-new-task-operation-complete.png)
-{:refdef}
 
 ### 测试
 
 选中刚刚添加的任务，在右侧中点击**运行**按钮，进行测试：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/taskschd-run.png)
-{:refdef}
 
 
 ## Reference

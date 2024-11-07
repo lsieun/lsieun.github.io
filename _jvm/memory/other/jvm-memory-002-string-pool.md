@@ -113,9 +113,7 @@ public class HelloWorld {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/string-value-coder-abc.png)
-{:refdef}
 
 ```java
 public class HelloWorld {
@@ -126,9 +124,7 @@ public class HelloWorld {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/string-value-coder-chinese-character.png)
-{:refdef}
 
 ### 不可变性
 
@@ -359,9 +355,7 @@ public class HelloWorld {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/idea-debug-memory-string.png)
-{:refdef}
 
 ## 字符串拼接操作
 

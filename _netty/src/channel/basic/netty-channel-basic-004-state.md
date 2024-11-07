@@ -34,9 +34,7 @@ public interface Channel extends AttributeMap, ChannelOutboundInvoker, Comparabl
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/netty-channel-state.svg)
-{:refdef}
 
 
 ## 方法实现

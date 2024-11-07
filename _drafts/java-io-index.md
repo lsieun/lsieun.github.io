@@ -208,6 +208,8 @@ sort: "sequence"
     </tbody>
 </table>
 
+- [File System Mocking with Jimfs](https://www.baeldung.com/jimfs-file-system-mocking)
+
 ### 目录和连接
 
 <table>

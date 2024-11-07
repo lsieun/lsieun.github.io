@@ -9,9 +9,7 @@ sequence: "101"
 平移，是将对象从一个位置 \((x,y)\) 移到另一个位置 \((x',y')\) 的变换。
 </p>
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/geometry/transformation/geometry-2d-translation.svg)
-{:refdef}
 
 <div>
 $$ \begin{align}
@@ -36,9 +34,7 @@ y' &= y + T_{y}
 变成新的坐标\((x',y')\)的变换。
 </p>
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/geometry/transformation/geometry-2d-rotate.svg)
-{:refdef}
 
 ### 参考点为零
 
@@ -92,9 +88,7 @@ y' &= y_{r} + (y - y_{r}) \times cos(\theta) + (x - x_{r}) \times sin(\theta)
 变比，是使对象按比例因子 \((S_{x}, S_{y})\) 放大或缩小的变换。
 </p>
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/geometry/transformation/geometry-2d-scaling.svg)
-{:refdef}
 
 变比计算公式为：
 

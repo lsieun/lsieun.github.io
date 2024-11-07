@@ -37,17 +37,11 @@ During the installation process, make sure to select at least the following indi
 - Windows Universal CRT SDK.
 - Windows 10 SDK (10.0.19041.0 or later).
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/graalvm/vs-installer-english-language-pack.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/graalvm/vs-installer-win10-sdk--and-c-plus-plus-build-tools.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/graalvm/vs-installer-windows-universal-crt-sdk.png)
-{:refdef}
 
 ```xml
 <build>

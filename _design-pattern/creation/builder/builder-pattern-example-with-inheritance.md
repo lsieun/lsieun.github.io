@@ -3,9 +3,7 @@ title: "示例：继承"
 sequence: "105"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/design-pattern/creational/builder/builder-patter-example-vehicle-builder.svg)
-{:refdef}
 
 ## 第一版：存在的问题
 

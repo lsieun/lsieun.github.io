@@ -423,9 +423,7 @@ visitEnd
 
 The ASM core API for **generating** and **transforming** compiled Java classes is based on the `ClassVisitor` abstract class.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/what-asm-can-do.png)
-{:refdef}
 
 在现阶段，我们接触了 `ClassVisitor`、`ClassWriter` 和 `ClassReader` 类，因此可以介绍 Class Transformation 的操作。
 
@@ -478,9 +476,7 @@ public class HelloWorldTransformCore {
 - 第四步，结合 `ClassReader` 和 `ClassVisitor`。在 `ClassReader` 类上，有一个 `accept()` 方法，它接收一个 `ClassVisitor` 类型的对象；换句话说，就是将“河流”的“源头”和后续的“水库”连接起来。
 - 第五步，生成 `byte[]`。到这一步，就是所有的“河水”都流入 `ClassWriter` 这个“大海”当中，这个时候我们调用 `ClassWriter.toByteArray()` 方法，就能够得到 `byte[]` 内容。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/asm-core-classes.png)
-{:refdef}
 
 ## parsingOptions 参数
 

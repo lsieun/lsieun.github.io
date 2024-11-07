@@ -9,41 +9,29 @@ sequence: "103"
 
 第 1 步，新建一个项目
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/quick/dev-022-vs-add-new-project.png)
-{:refdef}
 
 第 2 步，选择项目类型为 Class Library：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/quick/dev-023-add-new-class-library.png)
-{:refdef}
 
 第 3 步，配置项目名称：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/quick/dev-024-configure-project.png)
-{:refdef}
 
 ### 添加引用
 
 第 1 步，为 `Lsieun.Cad.Bridge` 项目添加引用：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/quick/dev-025-add-reference.png)
-{:refdef}
 
 第 2 步，选择 3 个 dll 文件：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/quick/dev-026-select-dll.png)
-{:refdef}
 
 第 3 步，将 Copy Local 属性设置为 False：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/quick/dev-027-dll-copy-local-false.png)
-{:refdef}
 
 ### 编写代码
 
@@ -96,35 +84,25 @@ namespace Lsieun.Cad.Bridge
 
 第 1 步，修改 `Lsieun.Cad.Basic` 的属性：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/quick/dev-028-cad-basic-properties.png)
-{:refdef}
 
 第 2 步，在 `Build` 选项卡，将 `Lsieun.Cad.Basic.dll` 生成到 `..\Lsieun.Cad.Bridge\bin\Debug\` 目录：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/quick/dev-029-cad-basic-output-path.png)
-{:refdef}
 
 ## 构建解决方案
 
 第 1 步，选择 `Build -> Build Solution`：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/quick/dev-032-build-solution.png)
-{:refdef}
 
 第 2 步，在 Output 中可以看到生成了两个 dll 文件：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/quick/dev-033-output-dll.png)
-{:refdef}
 
 第 3 步，在 `Lsieun.Cad.Bridge\bin\Debug` 目录中，也可以看到这两个文件：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/cad/csharp/quick/dev-034-two-dll-libraries.png)
-{:refdef}
 
 ## AutoCAD 测试
 

@@ -128,9 +128,7 @@ masterauth str0ng_passw0rd
 
 ## M1S2
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/redis/ha/redis-ha.png)
-{:refdef}
 
 | Role   | IP               |
 |--------|------------------|

@@ -337,6 +337,4 @@ public class Executors {
 除了有可能造成 OOM 之外，我们使用 `Executors` 来创建线程池，也不能自定义线程的名字，
 不利于排查问题，所以建议直接使用 `ThreadPoolExecutor` 来定义线程池，这样可以灵活控制。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/pool/alibaba-forbid-executors-thread-pool.png)
-{:refdef}

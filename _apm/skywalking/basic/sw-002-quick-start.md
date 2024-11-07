@@ -93,9 +93,7 @@ mv apache-skywalking-apm-bin/ /usr/local/skywalking-apm
 
 ### 启动
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/skywalking/apache-skywalking-apm-tar-gz-directories.png)
-{:refdef}
 
 
 进入 `bin` 目录，选择启动脚本运行
@@ -104,9 +102,7 @@ mv apache-skywalking-apm-bin/ /usr/local/skywalking-apm
 - `oapService.sh`：单独启动 OAP 服务，第一次启动需要初始化数据，因此可能会比较慢
 - `webappService.sh`：单独启动 UI 服务
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/skywalking/apache-skywalking-apm-bin-scripts.png)
-{:refdef}
 
 You can use `bin/startup.sh` (or `cmd`) to start up the backend and UI with their default settings, set out as follows:
 

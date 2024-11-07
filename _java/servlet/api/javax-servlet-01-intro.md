@@ -5,9 +5,7 @@ sequence: "101"
 
 ## The javax.servlet Package
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/servlet/java-servlet-package-prominent-members.png)
-{:refdef}
 
 At the center of Servlet technology is `Servlet`,
 an interface that all servlet classes must implement either directly or indirectly.

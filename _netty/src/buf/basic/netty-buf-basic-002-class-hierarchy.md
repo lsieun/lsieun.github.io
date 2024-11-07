@@ -7,9 +7,7 @@ sequence: "102"
 
 ## 类层次结构
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/netty-buf-class-hierarchy.svg)
-{:refdef}
 
 ## 分类
 
@@ -17,9 +15,7 @@ sequence: "102"
 - Pooled, UnPooled
 - Safe, Unsafe
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/netty-buffer-concept-classify.svg)
-{:refdef}
 
 
 排序：

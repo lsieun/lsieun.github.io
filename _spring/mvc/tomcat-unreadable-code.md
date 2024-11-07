@@ -59,9 +59,7 @@ public class HelloWorld {
 淇℃伅
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/mvc/tomcat-log-unreadable-character-code.png)
-{:refdef}
 
 ## 解决方式
 

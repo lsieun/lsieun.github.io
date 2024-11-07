@@ -17,9 +17,7 @@ And return the data.
 We call this **Cache Aside** model.
 It is the default way of working with cache for most applications.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/distributed/cache/cache-aside.png)
-{:refdef}
 
 ## Read-Through Cache
 
@@ -27,9 +25,7 @@ In **Read Through Cache**, the application always requests data from the cache.
 If cache has no data, it is responsible for retrieving the data from the DB using an underlying provider plugin.
 After retrieving the data, the cache updates itself and returns the data to the calling application.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/distributed/cache/read-through.png)
-{:refdef}
 
 ## Write-Through Cache
 
@@ -37,9 +33,7 @@ In this write strategy, data is first written to the cache and then to the datab
 The cache sits in-line with the database and writes always go through the cache to the main database.
 This helps cache maintain consistency with the main database.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/distributed/cache/write-through.png)
-{:refdef}
 
 ## Cache Aside vs Read Through Cache
 

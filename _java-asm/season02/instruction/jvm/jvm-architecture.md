@@ -14,9 +14,7 @@ sequence: "104"
   为类（Class）、对象实例（object instance）、局部变量（local variable）提供存储空间。
 - 执行引擎（Execution Engine），主要负责方法体里的 instruction 内容，它是 JVM 的核心部分。
 
-{:refdef: style="text-align: center;"}
 ![JVM Architecture](/assets/images/java/jvm/jvm-architecture.png)
-{:refdef}
 
 在 JVM 当中，数据类型分成 primitive type 和 reference type 两种，那么 ClassLoader 负责加载哪些类型呢？
 
@@ -61,9 +59,7 @@ A Java Virtual Machine implementation may use other threads invisible to the run
 - 时间维度。上面谈到执行引擎（Execution Engine），一条一条的执行 instruction 的内容，会引起相应事物的状态发生变化，这就是“时间维度”的视角。
 - 空间维度。接下来要讲的 JVM Stack 和 Stack Frame，它们都是运行时数据区（Runtime Data Areas）具体的内存空间分配，用于存储相应的数据，这就是“空间维度”视角。
 
-{:refdef: style="text-align: center;"}
 ![JVM Architecture](/assets/images/java/jvm/jvm-architecture.png)
-{:refdef}
 
 ### thread 对应于 JVM Stack
 
@@ -121,9 +117,7 @@ Only one frame, the frame for the executing method, is active at any point in a 
 - 第一个数据，`instructions`，它表示指令集合，是由 `Code` 属性中的 `code[]` 解析之后的结果。（准确的来说，这里是不对的，instructions 可能是位于 Method Area 当中。我们为了看起来方便，把它放到了这里。）
 - 第二个数据，`ref`，它是一个指向 runtime constant pool 的引用。这个 runtime constant pool 是由具体 `.class` 文件中的 constant pool 解析之后的结果。
 
-{:refdef: style="text-align: center;"}
 ![JVM Execution Model](/assets/images/java/asm/jvm-execution-model.png)
-{:refdef}
 
 ```text
 Code_attribute {
@@ -157,9 +151,7 @@ Code_attribute {
 在方法执行的时候，或者说方法里的 instruction 在执行的时候，需要将相关的数据加载到 Stack Frame 里；
 更进一步的说，就是将数据加载到 operand stack 和 local variables 两个子区域当中。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/jvm-execution-model-2.png)
-{:refdef}
 
 当数据加载到 operand stack 和 local variables 当中时，需要注意三点：
 

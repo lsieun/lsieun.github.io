@@ -173,6 +173,34 @@ sort: "sequence"
     </tbody>
 </table>
 
+## 使用技巧
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">技巧</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.jekyll |
+where_exp: "item", "item.path contains 'jekyll/trick/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 ## Reference
 
@@ -180,3 +208,4 @@ sort: "sequence"
 - [GitHub Pages Documentation](https://docs.github.com/en/pages)
 - [The GitHub Training Team: GitHub Pages](https://lab.github.com/githubtraining/github-pages)  
 - [Jekyll Notes](http://stories.upthebuzzard.com/jekyll_notes/)
+

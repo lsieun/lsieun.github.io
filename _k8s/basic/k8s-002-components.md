@@ -3,9 +3,7 @@ title: "Components"
 sequence: "102"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/k8s/components-of-kubernetes.svg)
-{:refdef}
 
 在 production environment，为了保证稳定性，应该最少两个 master node。
 

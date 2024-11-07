@@ -323,4 +323,4 @@ Baeldung
 - [How to Stop or Limit Indexing in Intellij IDEA](https://www.baeldung.com/intellij-stop-limit-indexing)
 - Config
     - [What Is the .idea Directory?](https://www.baeldung.com/intellij-idea-directory)
-- []()
+

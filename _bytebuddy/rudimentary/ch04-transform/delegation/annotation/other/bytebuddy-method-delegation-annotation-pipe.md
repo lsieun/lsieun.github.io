@@ -3,9 +3,7 @@ title: "@Pipe"
 sequence: "102"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/delegation/delegation-pipe-anime.webp)
-{:refdef}
 
 ```text
 创作一张动漫风格的画作，一个富豪将一件价值连城的宝贝交给儿子

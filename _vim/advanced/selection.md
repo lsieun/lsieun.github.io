@@ -46,9 +46,7 @@ Suppose the cursor is on the first `o` of `(map (+) ("foo"))`.
 - `v2i)` → will select `map (+) ("foo")`
 - `v2a)` → will select `(map (+) ("foo"))`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/vim/text-objects.png)
-{:refdef}
 
 ## Select rectangular blocks
 
@@ -66,9 +64,7 @@ Typically:
 - `<C-d>` → move down (could also be `jjj` or `%`, etc…)
 - `I-- [ESC]` → write `--` to comment each line
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/vim/rectangular-blocks.gif)
-{:refdef}
 
 Note: in Windows you might have to use `<C-q>` instead of `<C-v>` if your clipboard is not empty.
 
@@ -82,9 +78,7 @@ Once the selection has been made, you can:
 - `<` (resp. `>`) → indent to the left (resp. to the right).
 - `=` → auto indent
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/vim/auto-indent.gif)
-{:refdef}
 
 Add something at the end of all visually selected lines:
 
@@ -93,8 +87,6 @@ Add something at the end of all visually selected lines:
 - `$` go to the end of the line
 - `A`, write text, `ESC`.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/vim/append-to-many-lines.gif)
-{:refdef}
 
 

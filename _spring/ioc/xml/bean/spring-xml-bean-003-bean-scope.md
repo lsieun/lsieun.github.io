@@ -79,6 +79,4 @@ lsieun.dao.impl.UserDaoImpl@4566e5bd
 
 那么，`<bean>` 的 `scope` 属性会增加 `request` 和 `session` 的额外选项：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/bean/bean-scope-web-mvc-request-session.png)
-{:refdef}

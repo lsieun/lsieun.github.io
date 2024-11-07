@@ -3,9 +3,7 @@ title: "生产者：如何提高吞吐量"
 sequence: "110"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/producer/producer-send-record-detail-002.png)
-{:refdef}
 
 - `batch.size`：批次大小，默认 16K，可以改成 32K
 - `liger.ms`：等待时间，默认为 0ms，可以修改为 5~100ms。如果等待时间的太长，会导致数据的『延迟』。

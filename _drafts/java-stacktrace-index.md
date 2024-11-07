@@ -1,11 +1,10 @@
 ---
 title: "Java Stack Trace"
-image: /assets/images/java/java-development.jpg
+image: /assets/images/java/stacktrace/java-stacktrace-cover.webp
 permalink: /java/java-stacktrace-index.html
 ---
 
 Stack Trace
-
 
 ## Content
 

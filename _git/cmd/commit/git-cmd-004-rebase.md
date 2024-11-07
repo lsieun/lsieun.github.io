@@ -6,29 +6,17 @@ sequence: "104"
 [UP](/git/git-index.html)
 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/git/commit/git-rebase-illustrated.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/git/commit/rebase/git-rebase-example-001.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/git/commit/rebase/git-rebase-example-002.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/git/commit/rebase/git-rebase-example-003.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/git/commit/rebase/git-rebase-example-004.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/git/commit/rebase/git-rebase-example-005.png)
-{:refdef}
 
 
 A **rebase** is a method of rewriting history in Git that is similar to a **merge**.

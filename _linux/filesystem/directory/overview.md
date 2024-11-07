@@ -218,6 +218,4 @@ The `/snap` directory contains all the files and the software installed from sna
 
 ## Digging Deeper
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/linux/standard-unix-filesystem-hierarchy.webp)
-{:refdef}

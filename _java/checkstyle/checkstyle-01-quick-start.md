@@ -5,15 +5,11 @@ sequence: "101"
 
 ## 安装插件
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/plugin/checkstyle-idea-plugin.png)
-{:refdef}
 
 ## 选择配置文件
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/plugin/checkstyle-idea-setting-configuration-file.png)
-{:refdef}
 
 - File: `checkstyle.xml`
 
@@ -32,27 +28,19 @@ sequence: "101"
 
 ## 进行检查
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/plugin/checkstyle-idea-tool.png)
-{:refdef}
 
 ### 整个项目检查
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/plugin/checkstyle-idea-tool-check-project.png)
-{:refdef}
 
 ### 单个文件检查
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/plugin/checkstyle-idea-tool-check-current-file.png)
-{:refdef}
 
 ### 重新读取规则
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/plugin/checkstyle-idea-tool-reload-rules-files.png)
-{:refdef}
 
 ## Apache Maven Checkstyle Plugin
 

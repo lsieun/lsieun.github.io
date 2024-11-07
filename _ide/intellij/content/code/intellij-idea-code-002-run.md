@@ -21,9 +21,7 @@ sequence: "102"
 
 ### 运行多次
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/code/code-allow-multiple-instances.png)
-{:refdef}
 
 ### 断点
 
@@ -34,6 +32,4 @@ The following policies are available for the breakpoints that suspend program ex
 
 If you want a policy to be used as the default one, click the **Make default** button.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/code/code-suspend-all-or-thread.png)
-{:refdef}

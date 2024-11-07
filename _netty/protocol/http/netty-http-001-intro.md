@@ -6,13 +6,9 @@ sequence: "101"
 [UP](/netty.html)
 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/protocol/http/http-request-components-parts.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/protocol/http/http-response-components-parts.png)
-{:refdef}
 
 - `HttpRequestEncoder` Encodes `HttpRequest`, `HttpContent`, and `LastHttpContent` messages to bytes.
 - `HttpResponseEncoder` Encodes `HttpResponse`, `HttpContent`, and `LastHttpContent` messages to bytes.

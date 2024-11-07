@@ -75,9 +75,7 @@ InnoDB 存储引擎的解决方法是采用 redo log 机制。
 然后 MySQL 重启后，会查询 id=8 的页放至 Buffer Pool 中，然后在读取 redo log，
 这个时候相当于 Buffer Pool 中的数据就是修改后的数据了，也就避免了 MySQL 挂掉数据丢失的问题了。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/architecture/innodb-architecture-8-0.png)
-{:refdef}
 
 ## 为什么在 Redo Log 中，默认有两个文件
 

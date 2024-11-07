@@ -22,9 +22,7 @@ sequence: "103"
 - lock（锁定）
 - unlock（解锁）
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/volatile/jmm-8-ops.png)
-{:refdef}
 
 ## volatile 缓存可见性实现原理
 
@@ -72,9 +70,7 @@ OpenJDK hsdis (HotSpot disassembly plugin) downloads
 https://chriswhocodes.com/hsdis/
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/volatile/openjdk-hsdis-downloads.png)
-{:refdef}
 
 将 `hsdis-amd64.dll` 文件放到如下目录：
 

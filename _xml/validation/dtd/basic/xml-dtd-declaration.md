@@ -335,9 +335,7 @@ A document can have internal and external DTDs:
 The **internal DTD** is referred to as the **internal DTD subset** and
 the **external DTD** is referred to as the **external DTD subset**.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/xml/xml-dtd-subset-internal-and-external.png)
-{:refdef}
 
 Neither subset can override the element declarations of the other subset.
 

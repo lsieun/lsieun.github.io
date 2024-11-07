@@ -14,9 +14,7 @@ how it fits in your Java based application.
 The class level architecture explains how various classes from the library interact with each other
 to create various types of charts.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/jfreechart/class-level-architecture.jpg)
-{:refdef}
 
 - **File**: The source having user input to be used for creating a **dataset** in the file.
 - **Database**: The source having user input to be used for creating a **dataset** in the database.
@@ -33,9 +31,7 @@ to create various types of charts.
 
 The application level architecture explains where JFreeChart library sits inside a Java Application.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/jfreechart/application-level-architecture.jpg)
-{:refdef}
 
 The client program receives user data,
 and then it uses standard Java and JFreeChart APIs based on requirements
@@ -52,9 +48,7 @@ JFreeChart 主要由三个部分构成：title(标题)，legend(图释) 和 plot
 JFrame --> JPanel --> ChartPanel --> JFreeChart --> Dataset
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/jfreechart/jfreechart-server-classes.png)
-{:refdef}
 
 
 在 JFreeChart 库中，`JFrame`、`JPanel`、`ChartPanel`、`JFreeChart` 和 `Dataset` 是用于创建和展示图表的几个关键类。

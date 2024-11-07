@@ -45,9 +45,7 @@ A RPC is a form of Client-Server Communication that uses a function call rather 
 
 It uses IDL (Interface Definition Language) as a form of contract on functions to be called and on the data type.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grpc/operating-system-remote-call-procedure-working.png)
-{:refdef}
 
 If you all haven't realized it yet, the RPC in gRPC stands for Remote Procedure Call.
 And yes, gRPC does replicate this architectural style of client server communication, via function calls.

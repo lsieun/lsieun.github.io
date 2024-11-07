@@ -45,33 +45,23 @@ The below table shows a summary of 3/4 bit version of ANSI-color
 
 前景色：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/linux/bash-scripts/foreground-color.gif)
-{:refdef}
 
 背景色：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/linux/bash-scripts/background-color.gif)
-{:refdef}
 
 color-mode shot
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/linux/bash-scripts/color_mod_0_2.png)
-{:refdef}
 
 text mode shot
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/linux/bash-scripts/text_mod_3_9.png)
-{:refdef}
 
 combining is OK
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/linux/bash-scripts/combine_mod.png)
-{:refdef}
 
 How to calculate the length of code?
 
@@ -109,6 +99,4 @@ echo "normal  message" && $SETCOLOR_NORMAL
 
 ASCII stands for American Standard Code for Information Interchange.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/linux/bash-scripts/ascii-code.gif)
-{:refdef}

@@ -22,9 +22,7 @@ https://rubyinstaller.org/downloads/
 
 第 2 步，在安装结束时，进行 `ridk install` 的步骤：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/jekyll/ruby-setup-ridk-install.png)
-{:refdef}
 
 查看 Ruby 版本：
 

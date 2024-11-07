@@ -3,9 +3,7 @@ title: "字段、方法和构造方法：define()"
 sequence: "106"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/manga/naruto/the-copy-ninjia-kakashi.jpg)
-{:refdef}
 
 
 The `define` method is used to declare instance variable and Java method.

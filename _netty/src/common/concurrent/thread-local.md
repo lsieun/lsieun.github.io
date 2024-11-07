@@ -3,9 +3,7 @@ title: "ThreadLocal"
 sequence: "101"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/geometry/golden-ratio.jpg)
-{:refdef}
 
 [UP](/netty.html)
 
@@ -22,9 +20,7 @@ public class Thread implements Runnable {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/util/netty-util-thread-local-overview.svg)
-{:refdef}
 
 
 ## ThreadLocal
@@ -58,9 +54,7 @@ public class ThreadLocal<T> {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/util/netty-util-thread-local-hash.svg)
-{:refdef}
 
 
 #### 验证黄金分隔比
@@ -70,9 +64,7 @@ public class ThreadLocal<T> {
 0x61C88647 + 0x9E3779B8 = 0xFFFFFFFF
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/util/netty-util-thread-local-golden-ratio.svg)
-{:refdef}
 
 
 ```java
@@ -262,9 +254,7 @@ totalCols = 4
 
 ### 主要方法
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/util/netty-util-thread-local.svg)
-{:refdef}
 
 #### 基本操作
 
@@ -385,9 +375,7 @@ public class HelloWorld {
 
 ## ThreadLocalMap
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/util/netty-util-thread-local-map.svg)
-{:refdef}
 
 
 

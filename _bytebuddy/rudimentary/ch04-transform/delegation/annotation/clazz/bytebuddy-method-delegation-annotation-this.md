@@ -1,7 +1,9 @@
 ---
 title: "@This"
-sequence: "103"
+sequence: "102"
 ---
+
+## 介绍
 
 A typical reason for using the `@This` annotation to gain access to an instance's fields.
 
@@ -14,7 +16,7 @@ A typical reason for using the `@This` annotation to gain access to an instance'
 
 只能在非静态方法里获取到 this
 
-## 介绍
+
 
 ```java
 @Retention(RetentionPolicy.RUNTIME)

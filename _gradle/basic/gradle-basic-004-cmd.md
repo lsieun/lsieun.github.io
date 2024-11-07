@@ -11,7 +11,5 @@ sequence: "104"
 - `gradle build`：构建项目
 - `gradle build -x test`：跳过测试，进行构建
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gradle/gradle-vs-maven-directory.png)
-{:refdef}
 

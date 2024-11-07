@@ -67,9 +67,7 @@ and was developed during the 80s at the University of California Berkeley.
 - （3） 在 90 ～ 2000 年，这十年，Linux 出现，分成两个分支：Debian（社区运营）和 Red Hat（公司运营）
 - （4） 在 2000 ～ 2010 年，这十年，从 Debian 和 Red Hat 又产生了更多的分支
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/linux/concept/linux-distribution-timeline.svg)
-{:refdef}
 
 ### Two distinct branches
 

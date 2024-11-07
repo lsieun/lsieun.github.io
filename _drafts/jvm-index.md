@@ -216,3 +216,5 @@ sort: "sequence"
 - [JVM Troubleshooting](http://ksoong.org/troubleshooting/)
 
 - [Where Does Java’s String Constant Pool Live, the Heap or the Stack?](https://www.baeldung.com/java-string-constant-pool-heap-stack)
+
+- [The java.security.egd JVM Option](https://www.baeldung.com/java-security-egd)

@@ -7,9 +7,7 @@ sequence: "103"
 
 `@Advice.Local` 作用：定义一个局部变量，负责从 `@Advice.OnMethodEnter` 向 `@Advice.OnMethodExit` 传递数据。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/advice/bytebuddy-method-advice-annotation-local-illustration.png)
-{:refdef}
 
 
 ## 示例

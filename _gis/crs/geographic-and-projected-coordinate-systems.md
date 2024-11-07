@@ -36,9 +36,7 @@ An example is:
 
 - WGS84 coordinate system with unique EPSG code 4326
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/wgs84-epsg-code-4326.png)
-{:refdef}
 
 ## Projected Coordinate System
 
@@ -58,9 +56,7 @@ from which it is projected (GEOGCS) and other projection parameters like the mea
     - projection parameters
     - projection technique
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/utm-wgs84-epsg-code-32633.png)
-{:refdef}
 
 ## Reference
 

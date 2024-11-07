@@ -260,13 +260,9 @@ public class Main {
 
 在调用 `applicationContext.getBean("userDao")` 之前：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/bean/factory-bean-before-get-bean.png)
-{:refdef}
 
 在调用 `applicationContext.getBean("userDao")` 之后：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/bean/factory-bean-after-get-bean.png)
-{:refdef}
 

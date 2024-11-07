@@ -13,9 +13,7 @@ sequence: "212"
 - 在 `method_info` 结构中，方法体的代码存储在 `Code` 结构内；
 - 在 `Code` 结构中，frame 的变化存储在 `StackMapTable` 结构中。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/max-stacks-max-locals-stack-map-frames.png)
-{:refdef}
 
 假如有一个 `HelloWorld` 类，内容如下：
 

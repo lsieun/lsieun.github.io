@@ -57,9 +57,7 @@ good.child.age=9
 
 `Ctrl+Alt+Space`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/intellij/auto-import-xml-namespace.png)
-{:refdef}
 
 ### Main
 

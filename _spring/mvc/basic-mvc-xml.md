@@ -93,9 +93,7 @@ learn-spring-mvc
 
 在IDEA当中，`File ---> Project Structure...`，添加`web.xml`文件：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/mvc/project-structure-modules-web-framework-web-xml.png)
-{:refdef}
 
 文件路径：`src/main/webapp/WEB-INF/web.xml`
 
@@ -304,6 +302,4 @@ public class HelloController {
   - URL: `http://localhost:8080/portal/`
   - On 'Update' action: `Redeploy`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/mvc/tomcat-deploy-spring-mvc.gif)
-{:refdef}

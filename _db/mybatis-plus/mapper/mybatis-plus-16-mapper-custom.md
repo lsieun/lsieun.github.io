@@ -7,9 +7,7 @@ sequence: "116"
 
 在默认情况下，`classpath*:/mapper/**/*.xml` 都是 MyBatis Plus 的配置文件。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mybatis-plus/mapper-defaut-locations.png)
-{:refdef}
 
 ```java
 

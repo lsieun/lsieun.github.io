@@ -22,13 +22,9 @@ sequence: "101"
 
 ## 简介
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mybatis/mybatis-logo.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mybatis-plus/relationship-with-mybatis.png)
-{:refdef}
 
 ## 特性
 
@@ -51,6 +47,4 @@ MySQL、Oracle、DB2、H2、HSQL、SQLite、PostgreSQL、SQLServer
 
 ## 框架结构
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mybatis-plus/mybatis-plus-framework.jpg)
-{:refdef}

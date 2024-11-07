@@ -10,9 +10,7 @@ sequence: "102"
 - 在 main 线程中，创建一个**双端队列 RecordAccumulator**，main 线程将消息发送给 RecordAccumulator
 - sender 线程，不断从 RecordAccumulator 中拉取消息发送到 Kafka Broker。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/producer/producer-send-record-detail-001.png)
-{:refdef}
 
 目标：将『外部数据』发送到『Kafka 集群』。
 
@@ -58,9 +56,7 @@ NetworkClient 和 Selector 通常是在不同的线程中运行的，
 - `1`:生产者发送过来的数据，Leader 收到数据后应答。
 - `-1`（`all`）:生产者发送过来的数据，Leader 和 ISR 队列里面的所有节点收齐数据后应答。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/producer/producer-send-record-detail-002.png)
-{:refdef}
 
 第 9 步，如果 selector 发送 Request 成功了，就会让 NetworkClient 删除相应的 Request，并从 RecordAccumulator 中删除相应的数据。
 

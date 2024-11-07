@@ -100,9 +100,7 @@ INSERT INTO `innodb_test1`(id, name) VALUE (2, '李四');
 - `*.frm`：表结构的文件，例如字段名称、字段类型。
 - `*.ibd`：表数据和索引的文件。该表的索引(B+树)的每个非叶子节点存储索引，叶子节点存储索引和索引对应的数据。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/storage/windows-storage-data-directory-innodb.png)
-{:refdef}
 
 ## InnoDB 的事务
 

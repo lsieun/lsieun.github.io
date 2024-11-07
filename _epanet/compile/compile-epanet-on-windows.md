@@ -7,9 +7,7 @@ sequence: "202"
 
 - [OWA:EPANET 2.2](https://github.com/OpenWaterAnalytics/EPANET/releases/tag/v2.2)
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/epanet/compile/epanet-2-2-win32-64-github.png)
-{:refdef}
 
 ## CMake
 

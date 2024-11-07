@@ -42,9 +42,7 @@ http://192.168.80.130:8081/
 
 点击右上角的`Sign in`按钮：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/nexus3/nexus-data-admin-password.png)
-{:refdef}
 
 ```text
 $ docker exec -it nexus3 /bin/bash
@@ -55,17 +53,11 @@ $ docker exec -it nexus3 /bin/bash
 5b47fb59-ae73-4894-9fa5-d7af8c6c50e5
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/nexus3/choose-new-password-for-admin.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/nexus3/configure-annoymous-access.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/nexus3/nexus3-setup-complete.png)
-{:refdef}
 
 在docker环境下，破解Nexus Repository：
 第一步，通过docker安装nexus

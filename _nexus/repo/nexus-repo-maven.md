@@ -20,15 +20,11 @@ https://developer.aliyun.com/mvn/guide
 
 第 1 步，添加一个 Maven Proxy 仓库：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/nexus3/maven/maven-repo-001-create-maven-proxy-repo.png)
-{:refdef}
 
 第 2 步，将 `maven-proxy-aliyun` 添加到 `maven-public` 仓库：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/nexus3/maven/maven-repo-002-add-proxy-aliyun.png)
-{:refdef}
 
 ## Maven 配置
 

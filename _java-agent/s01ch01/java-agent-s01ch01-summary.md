@@ -13,9 +13,7 @@ sequence: "108"
 - Agent Class
 - ClassFileTransformer
 
-{:refdef: style="text-align: center;"}
 ![Agent Jar 中的三个组成部分](/assets/images/java/agent/agent-jar-three-components.png)
-{:refdef}
 
 三个组成部分：
 
@@ -41,9 +39,7 @@ Manifest --> Agent Class --> Instrumentation --> ClassFileTransformer
 
 在 Load-Time Instrumentation 当中，只涉及到一个 JVM：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/agent/virtual-machine-of-load-time-instrumentation.png)
-{:refdef}
 
 在 Manifest 部分，需要定义 `Premain-Class` 属性。
 
@@ -66,9 +62,7 @@ java -cp ./target/classes/ -javaagent:./target/TheAgent.jar sample.Program
 
 在 Dynamic Instrumentation 当中，涉及到两个 JVM：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/agent/virtual-machine-of-dynamic-instrumentation.png)
-{:refdef}
 
 
 在 Manifest 部分，需要定义 `Agent-Class` 属性。

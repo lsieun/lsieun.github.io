@@ -64,9 +64,7 @@ public class LoadTimeAgent {
 
 The agent `options` are passed as a single string, any additional parsing should be performed by the agent itself.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/agent/java-agent-command-line-options.png)
-{:refdef}
 
 ## 示例一：读取 agentArgs
 

@@ -64,9 +64,7 @@ Dumping 00000000000000000000.index
 offset: 0 position: 0
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/partition/kafka-partition-segment-001.png)
-{:refdef}
 
 ```java
 import org.apache.kafka.clients.producer.KafkaProducer;

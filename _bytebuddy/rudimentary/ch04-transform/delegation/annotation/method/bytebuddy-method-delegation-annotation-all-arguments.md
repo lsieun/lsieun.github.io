@@ -35,9 +35,7 @@ public @interface AllArguments {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/delegation/bytebuddy-method-delegation-annotation-all-arguments-example.png)
-{:refdef}
 
 
 ## 示例

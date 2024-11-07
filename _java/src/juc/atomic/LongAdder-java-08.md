@@ -9,23 +9,17 @@ sequence: "102"
 
 ### 基本结构
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/src/coll/LongAdder-main-logic-001.png)
-{:refdef}
 
 ### 实现思路
 
 #### 分：单独计数
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/src/coll/LongAdder-main-logic-002.png)
-{:refdef}
 
 #### 和：汇总求和
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/src/coll/LongAdder-main-logic-003.png)
-{:refdef}
 
 ## Striped64
 
@@ -113,9 +107,7 @@ public class LongAdder extends Striped64 implements Serializable {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/src/coll/LongAdder-thread-frame-local-variable.png)
-{:refdef}
 
 重写 `add` 方法的代码（不改变原有逻辑）：
 
@@ -172,16 +164,12 @@ public class LongAdder extends Striped64 implements Serializable {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/src/coll/LongAdder-add-logic.png)
-{:refdef}
 
 
 ### longAccumulate
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/src/coll/LongAdder-longAccumulate-logic.png)
-{:refdef}
 
 #### 第 1 种情况：base 累加
 

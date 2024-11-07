@@ -59,9 +59,7 @@ retransform 操作会触发：
 
 - retransformation capable transformer
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/agent/define-redefine-retransform.png)
-{:refdef}
 
 ## 总结
 

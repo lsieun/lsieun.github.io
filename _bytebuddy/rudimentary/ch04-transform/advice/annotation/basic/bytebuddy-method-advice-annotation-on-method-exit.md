@@ -7,9 +7,7 @@ sequence: "102"
 
 - [ ] 出现次数：一次
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/advice/bytebuddy-method-advice-annotation-on-method-exit-notice.png)
-{:refdef}
 
 ## 示例
 

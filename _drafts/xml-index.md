@@ -1,6 +1,6 @@
 ---
 title: "XML"
-image: /assets/images/java/java-development.jpg
+image: /assets/images/xml/xml-index.jpg
 permalink: /xml/xml-index.html
 ---
 

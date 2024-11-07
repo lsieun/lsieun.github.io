@@ -32,6 +32,4 @@ https://docs.spring.io/spring-framework/docs/5.2.25.RELEASE/spring-framework-ref
 
 ### 架构
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/spring-overview.png)
-{:refdef}

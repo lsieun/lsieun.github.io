@@ -44,9 +44,7 @@ sequence: "105"
 
 找 `spring-aop` 包下的 `META-INF` 中的 `spring.handlers`：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/aop/spring-aop-jar-meta-inf-spring-handlers.png)
-{:refdef}
 
 ```text
 http\://www.springframework.org/schema/aop=org.springframework.aop.config.AopNamespaceHandler
@@ -153,15 +151,11 @@ public abstract class AopConfigUtils {
 
 执行 `step 6` 时，`registry.beanDefinitionMap` 内容如下：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/aop/spring-aop-source-code-analysis-registry-bean-definition-map-001.png)
-{:refdef}
 
 执行 `step 7` 之后，`registry.beanDefinitionMap` 内容如下：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/aop/spring-aop-source-code-analysis-registry-bean-definition-map-002.png)
-{:refdef}
 
 ### 小总结
 
@@ -171,9 +165,7 @@ public abstract class AopConfigUtils {
 
 ### AspectJAwareAdvisorAutoProxyCreator
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/aop/aspectj-aware-advisor-auto-proxy-creator-class-hierarchy.png)
-{:refdef}
 
 ```java
 public interface BeanPostProcessor {
@@ -257,9 +249,7 @@ public class ProxyFactory extends ProxyCreatorSupport {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/aop/proxy-factory-create-aop-proxy-jdk-dynamic-aop-proxy.png)
-{:refdef}
 
 ```java
 public interface AopProxy {
@@ -267,9 +257,7 @@ public interface AopProxy {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/aop/aop-proxy-class-hierarchy.png)
-{:refdef}
 
 ### JdkDynamicAopProxy
 
@@ -302,7 +290,5 @@ final class JdkDynamicAopProxy implements AopProxy, InvocationHandler, Serializa
 
 在 `ApplicationContext.beanFactory.singleObjects` 中，`userService` 代表的 Bean 是生成的代理对象：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/spring/aop/application-context-user-service-jdk-proxy-obj.png)
-{:refdef}
 

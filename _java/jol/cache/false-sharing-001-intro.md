@@ -340,65 +340,49 @@ We will now go through some examples of how the MESI protocol works.
 For simplicity, we will assume that we are running on a two-processor system
 where each processor has its own private cache on a single cache level:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/memory/cache/cc-system.png)
-{:refdef}
 
 In these examples data transfers are drawn in red, while downgrade and invalidation traffic is drawn in blue.
 
 If a thread reads data not present in any cache, it will fetch the line into its cache in exclusive state (E):
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/memory/cache/cc-example-1.png)
-{:refdef}
 
 If a thread reads from a cache line that is in shared state (S) in another thread's cache,
 it fetches the cache line into its cache in shared state (S):
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/memory/cache/cc-example-2.png)
-{:refdef}
 
 If a thread reads from a cache line that is in exclusive state (E) in another thread's cache,
 it fetches the cache line to its cache in shared state (S) and
 downgrades the cache line to shared state (S) in the other cache:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/memory/cache/cc-example-3.png)
-{:refdef}
 
 If a thread reads from a cache line that is in modified state (M) in another thread's cache,
 the other cache must first write-back its modified version of the cache line and downgrade it to shared state (S).
 The thread doing the read can then add the cache line to its cache in shared state (S):
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/memory/cache/cc-example-4.png)
-{:refdef}
 
 When a thread has a cache line in exclusive (E) or modified state (M) it can write to it with very low overhead,
 since it knows that no other thread can have a copy of the line that needs to be invalidated.
 A write to an exclusive cache line makes it modified (M):
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/memory/cache/cc-example-5.png)
-{:refdef}
 
 When a thread writes to a cache line that it has in shared state (S) it must upgrade the line to modified state (M).
 In order to do this it must invalidate (I) any copies of the line in other caches,
 so that they do not retain an outdated copy:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/memory/cache/cc-example-6.png)
-{:refdef}
 
 When a thread writes to a cache line that it does not have in its cache,
 it must fetch the line and invalidate (I) it in all other caches.
 If another thread has a modified (M) copy of the cache line
 it must first write it back before the thread doing the write can fetch it.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/memory/cache/cc-example-7.png)
-{:refdef}
 
 The above is not a complete enumeration of coherence interaction,
 and in reality there are other access types to consider such as prefetches and cache line flushes,

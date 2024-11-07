@@ -9,9 +9,7 @@ sequence: "101"
 
 ## 类层次结构
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/netty-buf-allocator-class-hierarchy.svg)
-{:refdef}
 
 ## 不同分类
 

@@ -3,13 +3,9 @@ title: "Kafka Consumer"
 sequence: "104"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/src/kafka-src-consumer-001.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/src/kafka-src-consumer-002.png)
-{:refdef}
 
 ## 初始化
 

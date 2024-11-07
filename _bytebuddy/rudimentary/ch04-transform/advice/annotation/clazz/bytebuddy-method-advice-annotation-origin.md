@@ -9,9 +9,7 @@ sequence: "101"
 
 `@Advice.Origin` 作用：映射『ClassFile』和『`Class<?>`』的信息到方法参数中。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/advice/bytebuddy-method-advice-annotation-origin-illustration.png)
-{:refdef}
 
 
 ### 如何使用

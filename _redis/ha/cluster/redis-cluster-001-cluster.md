@@ -3,9 +3,7 @@ title: "Redis Cluster"
 sequence: "101"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/redis/ha/redis-cluster.jpg)
-{:refdef}
 
 ## 端口
 

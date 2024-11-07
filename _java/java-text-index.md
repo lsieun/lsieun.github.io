@@ -155,3 +155,5 @@ sort: "sequence"
 - [ ] [Java I/O, NIO and NIO.2]() Jeff Friesen
     - [ ] Chapter 09. Regular Expressions
     - [ ] Chapter 10. Charsets
+
+- [Introduction to HexFormat in Java](https://www.baeldung.com/java-hexformat)

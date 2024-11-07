@@ -39,9 +39,7 @@ public interface ClassFileLocator extends Closeable {
 
 `ClassFileLocator` 有不同的实现：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/pool/bytebuddy-class-file-locator-overview.png)
-{:refdef}
 
 
 

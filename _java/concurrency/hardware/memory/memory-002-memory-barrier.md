@@ -96,9 +96,7 @@ Compilers and CPUs can re-order instructions, provided the end result is the sam
 **what happened before that command needs to stay before that command,
 and what happens after needs to stay after.**
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/memory/memory-barrier.png)
-{:refdef}
 
 The other thing a memory barrier does is **force an update of the various CPU caches** - for example,
 a write barrier will flush all the data that was written before the barrier out to cache,
@@ -112,9 +110,7 @@ If your field is `volatile`, the Java Memory Model inserts
 a write barrier instruction after you write to it,
 and a read barrier instruction before you read from it.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/memory/memory-barrier-write.png)
-{:refdef}
 
 This means if you write to a `volatile` field, you know that:
 

@@ -583,9 +583,7 @@ sort: "sequence"
     {% endfor %}
 </ol>
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/k8s/running-applications-in-containers-on-kubernetes.webp)
-{:refdef}
 
 
 ## Reference

@@ -9,9 +9,7 @@ sequence: "101"
 
 ## 问题描述
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/problems/dp0.png)
-{:refdef}
 
 There are five silent philosophers (P1 – P5) sitting around a circular table, spending their lives eating and thinking.
 

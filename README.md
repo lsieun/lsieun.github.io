@@ -38,9 +38,7 @@ bundle exec jekyll serve --unpublished --drafts
 ```
 
 ```text
-{:refdef: style="text-align: center;"}
 ![My Image]({{ site.baseimg }}/images/example1.png)
-{:refdef}
 ```
 
 ```html

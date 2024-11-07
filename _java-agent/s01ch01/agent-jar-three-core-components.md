@@ -13,9 +13,7 @@ sequence: "102"
 - Agent Class
 - ClassFileTransformer
 
-{:refdef: style="text-align: center;"}
 ![Agent Jar 中的三个组成部分](/assets/images/java/agent/agent-jar-three-components.png)
-{:refdef}
 
 ```text
                 ┌─── Manifest ───────────────┼─── META-INF/MANIFEST.MF

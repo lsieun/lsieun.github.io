@@ -3,9 +3,7 @@ title: "策略模式"
 sequence: "strategy"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/design-pattern/diagrams/strategy-structure.png)
-{:refdef}
 
 ```text
 Concrete Strategies --> Strategy --> Context

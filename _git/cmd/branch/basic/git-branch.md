@@ -114,9 +114,7 @@ To switch to an existing branch:
 $ git checkout <branch-name>
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/git/branch-pointers.png)
-{:refdef}
 
 You wish to change to a local branch named `chapter-two` from the current (`master`) branch:
 
@@ -127,9 +125,7 @@ $ git checkout chapter-two
 `git checkout` is requesting the checkout of **a particular branch**
 so the current state of that branch is checked out into **the working directory**.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/git/head-pointer-with-multiple-branches.png)
-{:refdef}
 
 **Make sure you've committed any changes on the current branch before checking out a new branch**.
 If you don't do this, `git checkout` will refuse to check out the new branch

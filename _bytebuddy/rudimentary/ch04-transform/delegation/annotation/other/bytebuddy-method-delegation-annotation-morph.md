@@ -3,7 +3,41 @@ title: "@Morph"
 sequence: "101"
 ---
 
+![](/assets/images/bytebuddy/delegation/bytebuddy-method-delegation-annotation-morph-class-diagram.svg)
+
 ## 介绍
+
+### 如何使用
+
+Before this annotation can be used, it needs to be installed and registered explicitly,
+similarly to the `@Pipe` annotation.
+This annotation instructs Byte Buddy to inject a proxy class
+that calls a method's super method with explicit arguments.
+
+```text
+MethodDelegation.withDefaultConfiguration()
+    .withBinders(Morph.Binder.install(HumbleServant.class))
+    .to(HardWorker.class)
+```
+
+For this, the `Morph.Binder` needs to be installed for **an interface type**
+that **takes an argument of the array type `Object`** and **returns a non-array type of `Object`**.
+
+```text
+Morph.Binder.install(HumbleServant.class)
+```
+
+```java
+public interface HumbleServant<R> {
+    R process(Object[] args);
+}
+```
+
+![](/assets/images/bytebuddy/delegation/humble-servant.png)
+
+This is an alternative to using the `SuperCall` or `DefaultCall` annotations
+which call a super method using the same arguments as the intercepted method was invoked with.
+
 
 ### 区别
 
@@ -19,18 +53,7 @@ as using the `@Morph` annotation requires a boxing and unboxing of all arguments
 If you want to invoke **a specific super method**,
 consider using the `@Super` annotation for creating a type-safe proxy.
 
-### 如何使用
 
-Before this annotation can be used, it needs to be installed and registered explicitly,
-similarly to the `@Pipe` annotation.
-This annotation instructs Byte Buddy to inject a proxy class
-that calls a method's super method with explicit arguments.
-
-For this, the `Morph.Binder` needs to be installed for **an interface type**
-that **takes an argument of the array type `Object`** and **returns a non-array type of `Object`**.
-
-This is an alternative to using the `SuperCall` or `DefaultCall` annotations
-which call a super method using the same arguments as the intercepted method was invoked with.
 
 ## 示例
 
@@ -51,7 +74,7 @@ public class HelloWorldRun {
     public static void main(String[] args) {
         HelloWorld instance = new HelloWorld();
         String msg = instance.test("Tom", 10);
-        System.out.println("msg = " + msg);
+        System.out.println(msg);
     }
 }
 ```
@@ -64,6 +87,8 @@ public interface HumbleServant<R> {
 }
 ```
 
+### HardWorker
+
 ```java
 import net.bytebuddy.implementation.bind.annotation.Morph;
 import net.bytebuddy.implementation.bind.annotation.RuntimeType;
@@ -75,6 +100,8 @@ public class HardWorker {
     }
 }
 ```
+
+### Weaver
 
 ```java
 import net.bytebuddy.ByteBuddy;
@@ -117,8 +144,8 @@ public class HelloWorldRebase {
 
 ```java
 public class HelloWorld {
-    public String test(String var1, int var2) {
-        return (String)HardWorker.doWork(new HelloWorld$auxiliary$type(this));
+    public String test(String name, int age) {
+        return (String)HardWorker.doWork(new HelloWorld$auxiliary$Proxy(this));
     }
 
     private String test$original$Abc(String name, int age) {
@@ -132,10 +159,10 @@ public class HelloWorld {
 ```
 
 ```java
-class HelloWorld$auxiliary$type implements HumbleServant {
+class HelloWorld$auxiliary$Proxy implements HumbleServant {
     private final HelloWorld target;
 
-    HelloWorld$auxiliary$type(HelloWorld target) {
+    HelloWorld$auxiliary$Proxy(HelloWorld target) {
         this.target = target;
     }
 

@@ -3,9 +3,7 @@ title: "Dynamic Volume Provisioning"
 sequence: "102"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/k8s/dynamic-provisioning-of-persistent-volumes.png)
-{:refdef}
 
 ## Example01
 

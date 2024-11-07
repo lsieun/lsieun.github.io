@@ -6,9 +6,7 @@ permalink: /hydraulic.html
 
 Hydraulic
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/hydraulic/laminar-left-transitional-middle-and-turbulent-right-flow-arrows.png)
-{:refdef}
 
 ## Formula
 

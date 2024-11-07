@@ -43,9 +43,7 @@ So when we try to approximate the shape of our earth, we need to have a better m
 Such a model is the ellipsoid and an example is the WGS84 ellipsoid,
 which has a certain defined radius at the equator and a flattening at the top.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/planet-earth-vs-sphere-vs-wgs84.png)
-{:refdef}
 
 ## A Horizontal Datum
 
@@ -67,9 +65,7 @@ When you determine the elevation of your position
 you can measure that elevation with respect to the WGS84 ellipsoid.
 In this case, WGS84 refers to a **vertical datum** or a vertical reference level.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/wgs84-ellipsoid-elevation.png)
-{:refdef}
 
 Important to know here is that the elevation —
 that comes with the pictures acquired by your drone(无人驾驶飞机) —
@@ -92,9 +88,7 @@ This coordinate system also has a unique reference code, the so-called EPSG code
 The illustration below lists the WGS84 system with all its properties:
 **EPSG code**, **Datum**, **Spheroid** (Ellipsoid), **Prime Meridian** and **the units**.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/wgs84-epsg-code-4326.png)
-{:refdef}
 
 The most known use case is GPS, which uses WGS84 as its coordinate system.
 Your drone also contains a GPS
@@ -110,9 +104,7 @@ the WGS84 Datum will one day be replaced.
 
 The origin is the center of mass of the Earth, the **geocenter**.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/three-dimensional-cartesian-coordinate.png)
-{:refdef}
 
 The **x-axis** is a line from the geocenter through its intersection
 at the zero meridian as it was January 1, 1903, with the internationally defined conventional equator.
@@ -132,9 +124,7 @@ One aspect of the variation is called **polar motion**.
 It is a consequence of the actual movement of the Earth's spin axis
 as it describes an irregular circle with respect to the Earth's surface.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/the-wandering-of-the-earth-pole.png)
-{:refdef}
 
 The circle described by the wandering pole has a period of about 435 d, and is known as the Chandler period.
 In other words, it takes about that long for the location of the pole to complete a circle

@@ -9,9 +9,7 @@ sequence: "106-01"
 
 在 Netty 当中，PoolSubpage 的作用是对 Small 内存块的管理；Small 的空间范围是 `0~28KB`。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/netty-buffer-pool-size-class-capacity.svg)
-{:refdef}
 
 ```text
 PoolSubpage helps manage a subset of a chunk of memory in Netty's arena-based memory allocation system.
@@ -24,15 +22,11 @@ This helps in minimizing memory wastage and improving locality.
 reqCapacity --> normCapacity = elemSize --> runSize --> maxNumElems --> bitmapLength --> bitmap
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/netty-buffer-pool-subpage-concept.svg)
-{:refdef}
 
 ### 从 PoolArena 到 Subpage
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/netty-buffer-pool-subpage-relation-to-arena.svg)
-{:refdef}
 
 ### handle
 

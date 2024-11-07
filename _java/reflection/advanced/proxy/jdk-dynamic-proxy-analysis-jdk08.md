@@ -318,9 +318,7 @@ public class ProxyGenerator {
 
 ## 总结
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/reflection/proxy-and-proxy-generator-jdk08.png)
-{:refdef}
 
 ## Reference
 

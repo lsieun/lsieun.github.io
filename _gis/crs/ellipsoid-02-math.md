@@ -30,9 +30,7 @@ sequence: "ellipsoid-02-math"
 
 ### alpha = 0
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/ellipsoid-flattening-0.0.png)
-{:refdef}
 
 ```text
 a = 0.500000
@@ -44,9 +42,7 @@ b = 0.500000
 
 ### alpha = 0.2
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/ellipsoid-flattening-0.2.png)
-{:refdef}
 
 ```text
 a = 0.500000
@@ -58,9 +54,7 @@ b = 0.400000
 
 ### alpha = 0.4
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/ellipsoid-flattening-0.4.png)
-{:refdef}
 
 ```text
 a = 0.500000
@@ -72,9 +66,7 @@ b = 0.300000
 
 ### alpha = 0.6
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/ellipsoid-flattening-0.6.png)
-{:refdef}
 
 ```text
 a = 0.500000
@@ -86,9 +78,7 @@ b = 0.200000
 
 ### alpha = 0.8
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/ellipsoid-flattening-0.8.png)
-{:refdef}
 
 ```text
 a = 0.500000
@@ -100,9 +90,7 @@ b = 0.100000
 
 ### alpha = 0.98
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/ellipsoid-flattening-0.98.png)
-{:refdef}
 
 ```text
 a = 0.500000
@@ -114,9 +102,7 @@ b = 0.010000
 
 ### alpha = 0.998
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/ellipsoid-flattening-0.998.png)
-{:refdef}
 
 ```text
 a = 0.500000

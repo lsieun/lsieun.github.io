@@ -75,9 +75,7 @@ that is followed by **data** referred to by entries from the program header tabl
 Each segment contains information that is necessary for run-time execution of the file,
 while sections contain important data for linking and relocation.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/linux/elf/elf-basic-format.webp)
-{:refdef}
 
 ## Reference
 

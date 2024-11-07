@@ -106,9 +106,7 @@ public class CountDown_001_Simple {
 
 ### Waiting Worker
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/juc/tool/count-down-latch-waiting-worker.png)
-{:refdef}
 
 ```java
 import java.util.List;

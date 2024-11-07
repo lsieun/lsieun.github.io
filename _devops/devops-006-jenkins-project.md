@@ -15,41 +15,29 @@ http://192.168.80.252:8080/
 
 第 2 步，在 Dashboard 中选择 New Item：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-020-new-item.png)
-{:refdef}
 
 第 3 步，输入名称，并选择 Freestyle project：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-021-enter-an-item-name.png)
-{:refdef}
 
 ### 源码管理
 
 第 1 步，找到 Source Code Management：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-022-source-code-management.png)
-{:refdef}
 
 第 2 步，选择 Build Now：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-023-build-now.png)
-{:refdef}
 
 第 3 步，在 Build History 下面选择 `#1`：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-024-build-history.png)
-{:refdef}
 
 第 4 步，查看 Console Output：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-025-console-output.png)
-{:refdef}
 
 第 5 步，在 Linux 服务器上验证代码拉取成功：
 
@@ -68,15 +56,11 @@ drwxr-xr-x. 4 devops devops 79 Sep 13 19:12 myproject-ci
 
 第 1 步，在当前项目下选择 Configure：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-026-configure.png)
-{:refdef}
 
 第 2 步，在 Build Steps 部分，选择 Add Build step 下的 Execute shell： 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-027-build-steps.png)
-{:refdef}
 
 第 3 步，输入命令：
 
@@ -84,21 +68,15 @@ drwxr-xr-x. 4 devops devops 79 Sep 13 19:12 myproject-ci
 sh /usr/local/maven/bin/mvn clean package -DskipTests
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-028-execute-shell.png)
-{:refdef}
 
 第 4 步，选择 Build Now：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-029-build-now.png)
-{:refdef}
 
 第 5 步，查看 Console Output：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-030-build-success.png)
-{:refdef}
 
 第 6 步，在 Linux 上，验证是否生成 jar 文件成功：
 
@@ -123,54 +101,38 @@ drwxr-xr-x. 3 devops devops       20 Sep 13 19:33 test-classes
 
 第 1 步，选择 Manage Jenkins：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-031-manage-jenkins.png)
-{:refdef}
 
 第 2 步，选择 System：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-032-system-config.png)
-{:refdef}
 
 第 3 步，在 Publish over SSH 部分，选择 SSH Servers 下的 Add 按钮：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-033-add-ssh-server.png)
-{:refdef}
 
 第 4 步，输入服务器信息：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-034-ssh-server-info.png)
-{:refdef}
 
 第 5 步，测试是否连接成功：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-035-test-connection.png)
-{:refdef}
 
 
 #### 发布的目标服务器
 
 第 1 步，在当前项目下，选择 Configure：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-036-configure.png)
-{:refdef}
 
 第 2 步，找到 Post-build Actions 部分：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-037-post-build-actions.png)
-{:refdef}
 
 第 3 步，选择 Send build artifacts over SSH：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-038-send-build-artifacts-over-ssh.png)
-{:refdef}
 
 第 4 步，输入相应信息：
 
@@ -179,27 +141,19 @@ pkill java
 nohup java -jar /home/devops/target/myproject-ci-0.0.1-SNAPSHOT.jar & sleep 1
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-039-ssh-publisher.png)
-{:refdef}
 
 第 5 步，在 Advanced 下勾选 Exec in pty：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-040-exec-in-pty.png)
-{:refdef}
 
 第 6 步，选择 Build Now：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-041-build-now.png)
-{:refdef}
 
 第 7 步，查看 Console Output：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/devops/jenkins/jenkins-042-console-output.png)
-{:refdef}
 
 第 8 步，在 Linux 上进行验证：
 

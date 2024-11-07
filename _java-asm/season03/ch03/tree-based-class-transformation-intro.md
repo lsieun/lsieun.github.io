@@ -29,9 +29,7 @@ ClassReader --> ClassVisitor(1) --> ... --> ClassVisitor(N) --> ClassWriter
 
 > In cryptography and computer security, a man-in-the-middle(MITM) attack is a cyberattack where the attacker secretly relays and possibly alters the communications between two parties who believe that they are directly communicating with each other.
 
-{:refdef: style="text-align: center;"}
 ![Man-in-the-middle attack](/assets/images/network/man-in-the-middle-attack.png)
-{:refdef}
 
 ## Tree Based Class Transformation
 

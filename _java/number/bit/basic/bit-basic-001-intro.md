@@ -101,9 +101,7 @@ NOT is useful for **flipping unsigned numbers** to **the mirrored value** on the
 
 For 8-bit unsigned integers, `NOT x = 255 - x`.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/core/bit-manipulation-not-x.svg)
-{:refdef}
 
 ### XOR Operator
 

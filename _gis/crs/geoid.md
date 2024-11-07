@@ -14,9 +14,7 @@ Any point on the **geoid** is subject to the same level of gravity and the earth
 To compare the difference between **geoid** and **ellipsoid**.
 The deviation between the Geoid and a reference ellipsoid is called geoid separation (N):
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/geoid-vs-ellipsoid.png)
-{:refdef}
 
 The `geoid` is defined as the surface of the earth's gravity field,
 which is approximately the same as mean sea level.

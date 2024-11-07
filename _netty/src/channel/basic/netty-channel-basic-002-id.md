@@ -37,9 +37,7 @@ public interface ChannelId extends Serializable, Comparable<ChannelId> {
 
 `ChannelId` 接口提供了 `DefaultChannelId` 和 `EmbeddedChannelId` 两类实现：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/netty-channel-id-class-hierarchy.svg)
-{:refdef}
 
 ## DefaultChannelId 的组成部分
 

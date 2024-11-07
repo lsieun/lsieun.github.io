@@ -11,9 +11,7 @@ sequence: "102"
 
 ## 目录结构
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/tomcat/tomcat-08-directory-and-file.png)
-{:refdef}
 
 - `bin`：该目录下存放的是二进制可执行文件
   - `startup.bat`：启动Tomcat

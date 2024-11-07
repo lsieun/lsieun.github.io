@@ -1,7 +1,7 @@
 ---
 title: "Lombok"
 image: /assets/images/java/lombok/lombok-cover.png
-permalink: /lombok.html
+permalink: /lombok/lombok-index.html
 ---
 
 Project Lombok is a java library that automatically plugs into your editor and build tools, spicing up your java.
@@ -20,8 +20,8 @@ The way Lombok works is by plugging into our build process and auto-generating J
     <tr>
         <td>
 {%
-assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/lombok/basic/'" |
+assign filtered_posts = site.lombok |
+where_exp: "item", "item.path contains 'lombok/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -52,8 +52,8 @@ sort: "sequence"
     <tr>
         <td>
 {%
-assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/lombok/annotation/intern/'" |
+assign filtered_posts = site.lombok |
+where_exp: "item", "item.path contains 'lombok/annotation/intern/'" |
 sort: "sequence"
 %}
 <ol>
@@ -67,8 +67,8 @@ sort: "sequence"
         </td>
         <td>
 {%
-assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/lombok/annotation/theme/'" |
+assign filtered_posts = site.lombok |
+where_exp: "item", "item.path contains 'lombok/annotation/theme/'" |
 sort: "sequence"
 %}
 <ol>
@@ -82,8 +82,8 @@ sort: "sequence"
         </td>
         <td>
 {%
-assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/lombok/annotation/extern/'" |
+assign filtered_posts = site.lombok |
+where_exp: "item", "item.path contains 'lombok/annotation/extern/'" |
 sort: "sequence"
 %}
 <ol>
@@ -97,8 +97,8 @@ sort: "sequence"
         </td>
         <td>
 {%
-assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/lombok/annotation/experimental/'" |
+assign filtered_posts = site.lombok |
+where_exp: "item", "item.path contains 'lombok/annotation/experimental/'" |
 sort: "sequence"
 %}
 <ol>
@@ -126,8 +126,8 @@ sort: "sequence"
     <tr>
         <td>
 {%
-assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/lombok/config/'" |
+assign filtered_posts = site.lombok |
+where_exp: "item", "item.path contains 'lombok/config/'" |
 sort: "sequence"
 %}
 <ol>

@@ -14,7 +14,5 @@ sequence: "105"
 
 In Insert mode, just type the start of a word, then type `<C-p>`, magic…
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/vim/completion.gif)
-{:refdef}
 

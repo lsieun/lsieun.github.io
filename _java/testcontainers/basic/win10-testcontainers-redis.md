@@ -7,9 +7,7 @@ sequence: "103"
 
 ### 开启 Daemon
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/docker/docker-desktop-settings-general-expose-daemon.png)
-{:refdef}
 
 ### 进行配置
 

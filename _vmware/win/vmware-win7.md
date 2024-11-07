@@ -21,9 +21,7 @@ KB4474419
 
 第 2 步，下载官方驱动补丁：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/vmware/win/win7-x64-kb4474419.png)
-{:refdef}
 
 
 第 3 步，Win7 虚拟机安装补丁后，重启 Win7 虚拟机。

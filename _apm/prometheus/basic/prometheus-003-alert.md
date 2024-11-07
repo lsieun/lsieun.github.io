@@ -14,9 +14,7 @@ Alerting with Prometheus setup steps are mentioned below:
 
 ## Architecture
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/prometheus/basic-architecture-of-alert-manager-with-prometheus.png)
-{:refdef}
 
 Alert rules are defined in Prometheus configuration.
 Prometheus just scrapes (pull) metrics from its client application(the Node Exporter).

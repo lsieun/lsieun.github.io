@@ -15,9 +15,7 @@ PoolSubpage的创建过程：
 - 详细讲解PoolSubpage是如何被创建和初始化的。
 - 描述在Netty中是如何管理内存池的，以及PoolSubpage是如何被添加到内存池中的过程。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/netty-buffer-pool-subpage-arena-smallSubpagePools.svg)
-{:refdef}
 
 ### PoolArena
 
@@ -134,9 +132,7 @@ final class PoolSubpage<T> implements PoolSubpageMetric {
 
 ## 对象使用：内存分配
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/netty-buffer-pool-subpage-allocation.svg)
-{:refdef}
 
 内存分配算法：
 
@@ -470,13 +466,9 @@ final class PoolSubpage<T> implements PoolSubpageMetric {
 
 - 回收内存块：将内存块标记为空闲，并可能触发内存池的清理操作。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/netty-buffer-pool-subpage-free-overview.svg)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/netty-buffer-pool-subpage-free-detail.svg)
-{:refdef}
 
 ### PoolArena
 
@@ -688,9 +680,7 @@ final class PoolSubpage<T> implements PoolSubpageMetric {
 
 ## 对象销毁
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/buf/netty-buffer-pool-subpage-destroy.svg)
-{:refdef}
 
 
 ### PoolArena

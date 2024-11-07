@@ -1,7 +1,7 @@
 ---
 title: "Java Time"
 image: /assets/images/java/time/java-time-cover.png
-permalink: /java-time.html
+permalink: /java/java-time-index.html
 ---
 
 Java 8 Date/Time API
@@ -10,7 +10,7 @@ Java 8 Date/Time API
 
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/time/basic/'" |
+where_exp: "item", "item.path contains 'java/time/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -36,7 +36,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/time/old/basic/'" |
+where_exp: "item", "item.path contains 'java/time/old/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -51,7 +51,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/time/old/format/'" |
+where_exp: "item", "item.path contains 'java/time/old/format/'" |
 sort: "sequence"
 %}
 <ol>
@@ -83,7 +83,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/time/new/basic/'" |
+where_exp: "item", "item.path contains 'java/time/new/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -98,7 +98,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/time/new/format/'" |
+where_exp: "item", "item.path contains 'java/time/new/format/'" |
 sort: "sequence"
 %}
 <ol>
@@ -113,7 +113,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/time/new/convert/'" |
+where_exp: "item", "item.path contains 'java/time/new/convert/'" |
 sort: "sequence"
 %}
 <ol>
@@ -128,7 +128,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/time/new/unit/'" |
+where_exp: "item", "item.path contains 'java/time/new/unit/'" |
 sort: "sequence"
 %}
 <ol>
@@ -160,7 +160,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/time/common/long/'" |
+where_exp: "item", "item.path contains 'java/time/common/long/'" |
 sort: "sequence"
 %}
 <ol>
@@ -175,7 +175,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/time/common/day/'" |
+where_exp: "item", "item.path contains 'java/time/common/day/'" |
 sort: "sequence"
 %}
 <ol>
@@ -190,7 +190,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/time/common/month/'" |
+where_exp: "item", "item.path contains 'java/time/common/month/'" |
 sort: "sequence"
 %}
 <ol>
@@ -205,7 +205,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.url contains '/java/time/common/quarter/'" |
+where_exp: "item", "item.path contains 'java/time/common/quarter/'" |
 sort: "sequence"
 %}
 <ol>

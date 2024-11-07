@@ -3,17 +3,11 @@ title: "生产者：数据可靠性-ACK + Retry"
 sequence: "104"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/producer/producer-ack-reliability.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/producer/producer-ack-reliability-002.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/producer/producer-ack-reliability-003.png)
-{:refdef}
 
 - Producer configuration
     - `acks`: the number of brokers who need to acknowledge receiving the message
@@ -53,9 +47,7 @@ The default value of `acks` has changed with Kafka v3.0:
 
 If set to zero then the producer will not wait for any acknowledgment from the server at all.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/producer/producer-conf-ack-0.webp)
-{:refdef}
 
 应用场景：As a sample use case, say that we have a web-tracking platform that collects the clicks on a
 page and sends these events to Kafka. In this situation, it might not be a big deal to lose
@@ -66,17 +58,13 @@ a single link press or hover event. If one is lost, there is no real business im
 This will mean the leader will write the record to its local log
 but will respond without awaiting full acknowledgement from all followers.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/producer/producer-conf-ack-1.webp)
-{:refdef}
 
 #### ACK: -1 or all
 
 This means the leader will wait for the full set of in-sync replicas to acknowledge the record.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/producer/producer-conf-ack-all.webp)
-{:refdef}
 
 思考：Leader 收到数据，所有 Follower 都开始同步数据，但有一个 Follower，因为某种故障，迟迟不能与 Leader 进行同步，那这个问题怎么解决？
 

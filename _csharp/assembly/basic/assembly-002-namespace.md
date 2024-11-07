@@ -54,6 +54,4 @@ If you want to change the name of the default namespace,
 simply access the "**Default namespace**" option
 using the **Application** tab of the project's properties window.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/vs/vs-application-default-namespace.png)
-{:refdef}

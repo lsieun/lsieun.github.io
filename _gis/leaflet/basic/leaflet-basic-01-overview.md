@@ -92,9 +92,7 @@ Leaflet ───┤                    │               │             │
                                                 └─── TouchZoom
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/leaflet/leaflet-class-diagram.png)
-{:refdef}
 
 ```text
                                               ┌─── DrawToolbar

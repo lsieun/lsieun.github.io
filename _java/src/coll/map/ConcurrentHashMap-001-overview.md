@@ -27,17 +27,13 @@ sequence: "ConcurrentHashMap-101"
 
 ### HashMap
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/collection/map/hash-map-class-hierarchy.png)
-{:refdef}
 
 ### ConcurrentHashMap
 
 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/collection/map/concurrent-hash-map-class-hierarchy.png)
-{:refdef}
 
 ## 优化
 

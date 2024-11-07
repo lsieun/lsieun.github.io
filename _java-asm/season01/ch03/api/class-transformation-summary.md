@@ -7,23 +7,17 @@ sequence: "313"
 
 在本章当中，从 Core API 的角度来说（第二个层次），我们介绍了 `asm.jar` 当中的 `ClassReader` 和 `Type` 两个类；同时，从应用的角度来说（第一个层次），我们也介绍了 Class Transformation 的原理和示例。
 
-{:refdef: style="text-align: center;"}
 ![ASM 的学习层次 ](/assets/images/java/asm/asm-study-three-levels.png)
-{:refdef}
 
 ## Class Transformation 的原理
 
 在 Class Transformation 的过程中，主要使用到了 `ClassReader`、`ClassVisitor` 和 `ClassWriter` 三个类；其中 `ClassReader` 类负责“读”Class，`ClassWriter` 负责“写”Class，而 `ClassVisitor` 则负责进行“转换”（Transformation）。
 
-{:refdef: style="text-align: center;"}
 ![ 多个 ClassVisitor 串联到一起 ](/assets/images/java/asm/multiple-class-vistors-connected.png)
-{:refdef}
 
 在 Java ASM 当中，Class Transformation 的本质就是利用了“中间人攻击”的方式来实现对已有的 Class 文件进行修改或转换。
 
-{:refdef: style="text-align: center;"}
 ![Man-in-the-middle attack](/assets/images/network/man-in-the-middle-attack.png)
-{:refdef}
 
 详细的来说，我们自己定义的 `ClassVisitor` 类就是一个“中间人”，那么这个“中间人”可以做什么呢？可以做三种类型的事情：
 
@@ -85,9 +79,7 @@ public class HelloWorld extends Object implements Cloneable {
 
 再有，**如何删除一个字段或者方法呢？**其实很简单，我们只要让中间的某一个 `ClassVisitor` 在遇到该字段或方法时，不向后传递就可以了。在具体的代码实现上，我们只要让 `visitField()` 或 `visitMethod()` 方法返回一个 `null` 值就可以了。
 
-{:refdef: style="text-align: center;"}
 ![ 多个 FieldVisitor 和 MethodVisitor 串联到一起 ](/assets/images/java/asm/multiple-field-method-vistors-connected.png)
-{:refdef}
 
 最后，**如何添加一个字段或方法呢？**我们只要让中间的某一个 `ClassVisitor` 向后多传递一个字段和方法就可以了。在具体的代码实现上，我们是在 `visitEnd()` 方法完成对字段或方法的添加，而不是在 `visitField()` 或 `visitMethod()` 当中添加。因为我们要避免“一个类里有重复的字段和方法出现”，在 `visitField()` 或 `visitMethod()` 方法中，我们要判断该字段或方法是否已经存在；如果该字段或方法不存在，那我们就在 `visitEnd()` 方法进行添加；如果该字段或方法存在，那么我们就不需要在 `visitEnd()` 方法中添加了。
 

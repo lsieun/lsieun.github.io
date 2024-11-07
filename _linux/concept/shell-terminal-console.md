@@ -12,9 +12,7 @@ URL:
 - http://linuxcommand.org/lc3_lts0010.php
 - https://superuser.com/questions/144666/what-is-the-difference-between-shell-console-and-terminal
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/linux/concept/cmd-console-terminal-shell-schema.png)
-{:refdef}
 
 In ye olden days, these three items were **separate hardware**.
 **The console** was nothing more than **a monitor** and **keyboard**;
@@ -31,9 +29,7 @@ allowing them to work without having administrative access to the mainframe.
 **Consoles** and **terminals** eventually merged in **a single device**,
 the most notorious being the **VT terminals** emulated in modern Linux distributions.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/linux/concept/cmd-vt100-vt101.png)
-{:refdef}
 
 **The shell** is the actual program capable of reading the user's input and providing the result on the screen.
 A shell can be textual (like the CLI) or graphical (like Windows' GUI).

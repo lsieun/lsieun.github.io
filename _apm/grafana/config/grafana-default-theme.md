@@ -18,7 +18,5 @@ vim /etc/grafana/grafana.ini
 default_theme = light
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/grafana/grafana-administration-default-preference-light.png)
-{:refdef}
 

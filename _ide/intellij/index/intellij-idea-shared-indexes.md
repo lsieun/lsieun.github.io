@@ -31,9 +31,7 @@ When you launch a project, IntelliJ IDEA processes local and shared indexes toge
 This might increase CPU usage on your computer.
 If you want to avoid this, enable the `Wait for shared indexes` option in `Settings/ Preferences | Tools | Shared Indexes`.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/settings-tools-shared-indexes.png)
-{:refdef}
 
 
 
@@ -43,9 +41,7 @@ Indexes for JDKs and Maven libraries are built by JetBrains and stored
 on the dedicated [CDN resource](https://index-cdn.jetbrains.com/?_ga=2.246546948.1061344926.1627717955-380037762.1608477184).
 When you open a project, IntelliJ IDEA shows a notification prompting you to enable the automatic download.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/download-pre-built-shared-indexes.png)
-{:refdef}
 
 If you miss the notification, you can configure these options in the settings.
 
@@ -53,9 +49,7 @@ If you miss the notification, you can configure these options in the settings.
 - Select the `Download automatically` option for JDKs and Maven libraries to allow IntelliJ IDEA to download the indexes silently whenever they are needed.
 - Alternatively, select `Ask before download` if you prefer to confirm every download manually.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/settings-tools-shared-indexes.png)
-{:refdef}
 
 ### 下载到哪里了
 
@@ -78,9 +72,7 @@ From the main menu, select `File | Invalidate Caches`.
 
 In the dialog that opens, select `Clear downloaded shared indexes` and click `Invalidate and Restart`.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/clear-downloaded-shared-indexes.png)
-{:refdef}
 
 ## shared project indexes
 

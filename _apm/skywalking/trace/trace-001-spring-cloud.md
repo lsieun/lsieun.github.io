@@ -17,7 +17,5 @@ sequence: "101"
 
 ## Spring Cloud Gateway
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/skywalking/skywalking-agent-optional-plugins-spring-cloud-gateway-plugin.png)
-{:refdef}
 

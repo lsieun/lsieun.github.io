@@ -7,9 +7,7 @@ sequence: "102"
 
 After you extract the repository manager archive, two directories will appear:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/nexus3/nexus-install-dir.png)
-{:refdef}
 
 - `$install-dir`: `nexus-3.xx.x`, contains the **Nexus Repository Manager application** and
   all the required additional components
@@ -26,15 +24,11 @@ After you extract the repository manager archive, two directories will appear:
 - `public/`: This directory contains public resources of the application
 - `system/`: This directory contains all components and plugins that constitute the application
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/nexus3/nexus-install-dir-files.png)
-{:refdef}
 
 ## Data directory
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/nexus3/nexus-data-dir-files.png)
-{:refdef}
 
 Files and directories under the data directory include:
 
@@ -74,9 +68,7 @@ Only 90 days of rotated logs are automatically kept.
   These log files include messages that would typically be too noisy to put into the main application log.
   Logs are named by task internal name and a timestamp. See Task Logging for more details about these files.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/nexus3/nexus-data-log-files.png)
-{:refdef}
 
 ## Reference
 

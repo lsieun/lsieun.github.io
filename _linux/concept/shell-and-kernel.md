@@ -30,15 +30,11 @@ After which it starts the process all over again.
 **Shell** is basically Bridge between **kernel** and **the user**,
 **a Command Interpreter** where user can type command and the command is conveyed to the kernel and it will be executed.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/linux/concept/kernel-shell-user-input.jpg)
-{:refdef}
 
 > 这个图展示了“用户”、“Shell”、“Kernel”三者之间的关系。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/linux/concept/shell-kernel-hardware.png)
-{:refdef}
 
 > 这个图展示了 Shell、Kernel 和 Hardware 三者之间的关系。
 > Hardware 就像是一个人的身体。Kernel 就像一个人的心脏，没有这个 Kernel“心脏”的话，整个机器就无法运转起来。
@@ -50,9 +46,7 @@ Basically **the kernel** is the center of the operating system that manages ever
 **The shell** is just a particular program,
 a friendly interface that translates your commands into some low-level calls to the kernel.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/linux/concept/main-components-of-linux-os.png)
-{:refdef}
 
 Kernel is “the Linux” itself.
 It's a bunch of code that deals with networking, managing memory, talking to hardware devices
@@ -79,8 +73,6 @@ and the shell will treat them as new programs/commands.
 
 In a running Linux system, there is always **exactly one running kernel**. But you can have zero, **one or more shells** running in parallel. There are many different shells, such as `bash`, `zsh`, `ksh` and so on, each with its own strengths and weaknesses. As far as I know, `bash` is the most popular. You can learn more about it if you type “man bash”.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/linux/concept/multi-shells-kernel.svg)
-{:refdef}
 
 > 这张图显示了在 Kernel 之上存在不同的 shell 类型，用户通过选择其中的某一种 Shell 来与 Kernel 进行交互。

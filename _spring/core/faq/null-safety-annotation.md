@@ -69,9 +69,7 @@ For IntelliJ, we can activate the annotation checking:
 Settings --> Build, Execution, Deployment --> Compiler
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/compiler/intellij-idea-setting-compiler-runtime-assertions-for-not-null.png)
-{:refdef}
 
 ## Automated Build Checks
 

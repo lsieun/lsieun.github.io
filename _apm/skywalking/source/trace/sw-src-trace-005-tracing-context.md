@@ -3,9 +3,7 @@ title: "TracingContext"
 sequence: "105"
 ---
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/skywalking/source/sw-src-tracing-context-hierarchy-classes.png)
-{:refdef}
 
 ## AbstractTracerContext
 

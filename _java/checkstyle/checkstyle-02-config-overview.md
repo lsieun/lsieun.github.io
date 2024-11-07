@@ -28,9 +28,7 @@ A Checkstyle configuration specifies which **modules** to plug in and apply to J
 
 在 `checkstyle.jar` 中，提供了 `google_checks.xml` 和 `sun_checks.xml` 示例文件：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/checkstyle/checkstyle-jar-built-in-checks-xml.png)
-{:refdef}
 
 ## 语法
 

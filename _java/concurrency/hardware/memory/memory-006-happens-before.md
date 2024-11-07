@@ -29,9 +29,7 @@ Some points to keep in mind are as follows:
 - A thread executes on a CPU core but its data is stored and accessed from RAM
   where the local variables lie inside the "Thread Stack" and the objects lie inside the "Heap."
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/memory/jmm/jmm.png)
-{:refdef}
 
 The local variables and the references to objects inside a thread are stored in the Thread Stack,
 whereas the objects themselves are stored inside the Heap.

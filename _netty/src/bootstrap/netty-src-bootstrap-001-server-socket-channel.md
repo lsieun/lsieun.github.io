@@ -5,21 +5,13 @@ sequence: "101"
 
 [UP](/netty.html)
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/bootstrap/netty-bootstrap-invoke-java-nio-1.svg)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/bootstrap/netty-bootstrap-invoke-java-nio-2.svg)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/bootstrap/netty-bootstrap-invoke-java-nio-3.svg)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/bootstrap/server-bootstrap-channel-java-nio.svg)
-{:refdef}
 
 ```text
 Selector selector = Selector.open();

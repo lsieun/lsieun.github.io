@@ -22,6 +22,4 @@ public class HelloWorld {
 
 如果我们选中 `hour * 3600 + minutes * 60` 部分，然后按下两次 `Ctrl + Shift + P`，就可以看到这个表达式的取值范围（`{0..86340}`）。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/intellij/keyboard/ctrl-shift-p-twice.png)
-{:refdef}

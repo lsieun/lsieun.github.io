@@ -190,29 +190,17 @@ public class HelloWorld {
 31.46.261 [main] INFO taskNum: 0, pool size: 5, active: 1, queue size: 0
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/pool/thread-pool-size-001.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/pool/thread-pool-size-002.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/pool/thread-pool-size-001-task.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/pool/thread-pool-size-002-pool-and-queue.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/pool/thread-pool-size-003-pool-and-queue.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/pool/thread-pool-size-004-pool-and-queue.png)
-{:refdef}
 
 
 ## 线程池为什么是先添加队列而不是先创建最大线程？

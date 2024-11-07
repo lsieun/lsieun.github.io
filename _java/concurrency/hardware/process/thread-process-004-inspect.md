@@ -136,17 +136,11 @@ java -Djava.rmi.server.hostname=192.168.80.130 \
 HelloWorld
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/process/jconsole-remote-process.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/process/jconsole-insecure-connection.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/concurrency/process/jconsole-overview.png)
-{:refdef}
 
 
 修改 /etc/hosts 文件将 127.0.0.1 映射至主机名

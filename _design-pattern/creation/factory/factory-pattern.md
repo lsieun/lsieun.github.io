@@ -5,9 +5,7 @@ sequence: "102"
 
 A factory is a class that creates objects of a prototype class, aka interface, from a method call:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/design-pattern/creational/factory-method-instance.jpg)
-{:refdef}
 
 The factory pattern is good when we want to create objects of a common interface
 while hiding the creation logic from the user.
@@ -21,13 +19,9 @@ These are major differences between Factory, Factory Method and Abstract Factory
 - Factory Method — Consists of a Factory Class with a Create Method which can produce only one kind of objects.
 - Abstract Factory — Creates abstraction of Factory Class using interface, which can produce different kind of objects.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/design-pattern/diagrams/factory-method-structure.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/design-pattern/diagrams/abstract-factory-structure.png)
-{:refdef}
 
 
 ## Simple Factory

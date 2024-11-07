@@ -13,9 +13,7 @@ sequence: "102"
 
 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/consumer/consumer-partition-assignment-strategy.png)
-{:refdef}
 
 ## 分区分配策略详细
 
@@ -34,19 +32,13 @@ $ kafka-topics.sh --bootstrap-server 0.0.0.0:9092 \
 
 ### Range
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/consumer/kafka-consumer-partition-assign-strategy-range.png)
-{:refdef}
 
 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/consumer/kafka-consumer-partition-assign-strategy-range-002.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/consumer/kafka-consumer-partition-assign-strategy-range-003.png)
-{:refdef}
 
 ```java
 import org.apache.kafka.clients.consumer.*;
@@ -104,17 +96,11 @@ public class KafkaConsumer_001 {
 
 ### RoundRobin
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/consumer/kafka-consumer-partition-assign-strategy-round-robin.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/consumer/kafka-consumer-partition-assign-strategy-round-robin-002.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/consumer/kafka-consumer-partition-assign-strategy-round-robin-003.png)
-{:refdef}
 
 ```java
 import org.apache.kafka.clients.consumer.*;
@@ -171,9 +157,7 @@ public class KafkaConsumer_001 {
 
 ### Sticky
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/consumer/kafka-consumer-partition-assign-strategy-sticky.png)
-{:refdef}
 
 
 ## 触发再平衡的时机

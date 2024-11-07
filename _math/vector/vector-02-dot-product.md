@@ -5,15 +5,11 @@ sequence: "102"
 
 A vector has **magnitude** (how long it is) and **direction**:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/vector-mag-dir.svg)
-{:refdef}
 
 Here are two vectors:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/vectors.svg)
-{:refdef}
 
 They can be **multiplied** using the "**Dot Product**"
 
@@ -29,9 +25,7 @@ a \cdot b
 
 This means the Dot Product of **a** and **b**
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/dot-product-1.svg)
-{:refdef}
 
 ### 第一种计算方式
 
@@ -66,9 +60,7 @@ a \cdot b = a_{x} \times b_{x} + a_{y} \times b_{y}
 
 So we multiply the x's, multiply the y's, then add.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/dot-product-2.svg)
-{:refdef}
 
 ### 计算结果
 
@@ -78,9 +70,7 @@ And the result is a **number** (called a "scalar" to show it is not a vector).
 
 Example: Calculate the dot product of vectors **a** and **b**:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/dot-product-ex1.gif)
-{:refdef}
 
 <p>
 \[
@@ -114,15 +104,11 @@ OK, to multiply two vectors it makes sense to multiply their lengths together
 
 So we make one "point in the same direction" as the other by multiplying by cos(θ):
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/dot-product-a-cos.svg)
-{:refdef}
 
 We take the component of **a** that lies alongside **b**
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/dot-product-light.svg)
-{:refdef}
 
 Like shining a light to see where the shadow lies
 
@@ -130,9 +116,7 @@ THEN we multiply!
 
 It works exactly the same if we "projected" **b** alongside **a** then multiplied:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/dot-product-b-cos.gif)
-{:refdef}
 
 Because it doesn't matter which order we do the multiplication:
 
@@ -148,9 +132,7 @@ When two vectors are at right angles to each other the dot product is **zero**.
 
 Example: calculate the Dot Product for:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/dot-product-right-angle.gif)
-{:refdef}
 
 <p>
 \[
@@ -182,9 +164,7 @@ This can be a handy way to find out **if two vectors are at right angles**.
 
 This all works fine in 3 (or more) dimensions, too.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/dot-product-ex2.gif)
-{:refdef}
 
 We have 3 dimensions, so don't forget the z-components:
 
@@ -293,9 +273,7 @@ cos(\theta) &= 0.7855... \\
 \]
 </p>
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/vector-dot-product-a-b-cos-theta.jpg)
-{:refdef}
 
 ### 几何意义
 
@@ -399,9 +377,7 @@ x_{1}x_{2} + y_{1}y_{2} + z_{1}z_{2} = \vec a \cdot \vec b
 其运算结果是一个向量，并且与这两个向量都**垂直**，是这两个向量所在平面的**法线向量**。
 使用右手定则确定其方向。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/right-hand-rule-cross-product.svg)
-{:refdef}
 
 ### 几何意义
 
@@ -410,9 +386,7 @@ x_{1}x_{2} + y_{1}y_{2} + z_{1}z_{2} = \vec a \cdot \vec b
 那么这两个向量外积的模长与这个平行四边形的面积相等。
 </p>
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/math/vector/vector-cross-product-parallelogram.jpg)
-{:refdef}
 
 ## dot vs cross
 

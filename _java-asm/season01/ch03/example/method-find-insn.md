@@ -13,9 +13,7 @@ sequence: "311"
 
 让我们回顾一下 `MethodVisitor` 类当中定义了哪些 `visitXxx()` 方法。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/method-visitor-visit-xxx-insn-methods.png)
-{:refdef}
 
 在 `MethodVisitor` 类当中，定义的主要 `visitXxx()` 方法可以分成四组：
 
@@ -32,25 +30,19 @@ sequence: "311"
 
 **简而言之，查找 Instruction 的过程，就是对 `visitXxxInsn()` 方法接收的参数进行检查的过程。** 举一个形象的例子，平时我们坐地铁，随身物品要过安检，其实就是对书包（方法）里的物品（参数）进行检查，如下图：
 
-{:refdef: style="text-align: center;"}
 ![ 安检机器 ](/assets/images/java/asm/security-instrument.jpg)
-{:refdef}
 
 ### Class Analysis
 
 **查找 Instruction 的过程，** 并不属于 Class Transformation（因为没有生成新的类），而**是属于 Class Analysis。** 在下图当中，Class Analysis 包括 find potential bugs、detect unused code 和 reverse engineer code 等操作。但是，这些分析操作（analysis）是比较困难的，它需要编程经验的积累和对问题模式的识别，需要编码处理各种不同情况，所以不太容易实现。
 
-{:refdef: style="text-align: center;"}
 ![What ASM Can Do](/assets/images/java/asm/what-asm-can-do.png)
-{:refdef}
 
 但是，Class Analysis，并不是只包含复杂的分析操作，也包含一些简单的分析操作。例如，当前方法里调用了哪些其它的方法、当前的方法被哪些别的方法所调用。对于方法的调用，就对应着 `MethodVisitor.visitMethodInsn(int opcode, String owner, String name, String descriptor, boolean isInterface)` 方法。
 
 另外，要注意一点：在 Class Transformation 当中，需要用到 `ClassReader`、`ClassVisitor` 和 `ClassWriter` 类；但是，在 Class Analysis 中，我们只需要用到 `ClassReader` 和 `ClassVisitor` 类，而不需要用到 `ClassWriter` 类。
 
-{:refdef: style="text-align: center;"}
 ![ASM Core Classes](/assets/images/java/asm/asm-core-classes.png)
-{:refdef}
 
 ## 示例一：调用了哪些方法
 
@@ -212,15 +204,11 @@ INVOKEVIRTUAL java/io/PrintStream.println(Ljava/lang/String;)V
 
 在 IDEA 当中，有一个 Find Usages 功能：在类名、字段名、或方法名上，右键之后，选择 Find Usages，就可以查看该项内容在哪些地方被使用了。
 
-{:refdef: style="text-align: center;"}
 ![Find Usages](/assets/images/java/asm/find-usages.png)
-{:refdef}
 
 查找结果如下：
 
-{:refdef: style="text-align: center;"}
 ![Find Usages Result](/assets/images/java/asm/find-usgaes-result.png)
-{:refdef}
 
 这样一个功能，如果我们自己来实现，那该怎么编写 ASM 代码呢？
 

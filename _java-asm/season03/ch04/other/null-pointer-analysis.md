@@ -89,9 +89,7 @@ public class HelloWorld {
 - dereference的概念，它是一个过程，是从“变量”到“结果”的分析过程。
 - nullness相关的概念，它是一个工具，是解释从“变量”到“结果”的原因。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/null-ability-dereference.png)
-{:refdef}
 
 在nullness这个概念当中，有四个状态：unknown、not-null、null和nullable。not-null和null两个比较好理解，但是unknown和nullable的区别是什么呢？
 
@@ -119,9 +117,7 @@ public class HelloWorld {
 髮為星辰，皮膚為草木，齒骨為金石，精髓為珠玉，汗流為雨澤，身之諸蟲，因風所感，化為黎甿。
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/chinese-culture/chaos-heaven-earth.png)
-{:refdef}
 
 ### 太极
 
@@ -129,9 +125,7 @@ public class HelloWorld {
 《周易大传·系辞上》云：“易有太极，是生两仪，两仪生四象，四象生八卦，八卦定吉凶，吉凶生大业。是故法象莫大乎天地，变通莫大乎四时，县象著明莫大乎日月。”
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/chinese-culture/tai-chi.png)
-{:refdef}
 
 ### Nullability
 
@@ -144,9 +138,7 @@ Nullness kinds有四种状态：
 
 其中，`unknown`可以理解成“混沌”的状态，它代表“纯净”的物质；而`not-null`和`null`可以理解成由`unknown`衍生出的“纯净”的“阳”和“阴”两种物质；最后，`nullable`可以理解成不同比例`not-null`和`null`结合成的“混合”物质。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/nullable-unknown.png)
-{:refdef}
 
 我们将任意两个状态进行合并（merge），合并的规律就是“只能向前演进，不能向后退化”。那么，任意两个状态合并之后的结果，可以使用表格来进行表示：
 
@@ -211,9 +203,7 @@ public enum Nullability {
 
 举个生活当中的例子，`nullable`可以理解成不同颜色混合在一起的烟雾，加入任何其它烟雾（单纯的黄色、紫色），它仍然是混合颜色的烟雾。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/colorful-smoke.gif)
-{:refdef}
 
 那么，`unknown`、`not-null`、`null`和`nullable`四种状态与`NullPointerException`异常的关系：
 

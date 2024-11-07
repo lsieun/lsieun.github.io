@@ -7,9 +7,7 @@ sequence: "201"
 
 在 ASM Core API 中，最重要的三个类就是 `ClassReader`、`ClassVisitor` 和 `ClassWriter` 类。在进行 Class Generation 操作的时候，`ClassVisitor` 和 `ClassWriter` 这两个类起着重要作用，而并不需要 `ClassReader` 类的参与。在本文当中，我们将对 `ClassVisitor` 类进行介绍。
 
-{:refdef: style="text-align: center;"}
 ![ASM 里的核心类 ](/assets/images/java/asm/asm-core-classes.png)
-{:refdef}
 
 ## ClassVisitor 类
 
@@ -59,9 +57,7 @@ public abstract class ClassVisitor {
 - `api` 字段：它是一个 `int` 类型的数据，指出了当前使用的 ASM 版本，其可取值为 `Opcodes.ASM4`~`Opcodes.ASM9`。我们使用的 ASM 版本是 9.0，因此我们在给 `api` 字段赋值的时候，选择 `Opcodes.ASM9` 就可以了。
 - `cv` 字段：它是一个 `ClassVisitor` 类型的数据，它的作用是将多个 `ClassVisitor` 串连起来。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/class-visitor-cv-field.png)
-{:refdef}
 
 ### constructors
 

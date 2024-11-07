@@ -423,9 +423,7 @@ public class HelloWorldTransformCore {
 
 在 JVM 执行的过程中，在内存空间中，每一个运行的方法（method）都对应一个 frame 空间；在 frame 空间当中，有两个重要的结构，即 local variables 和 operand stack，如下图所示。其中，local variables 是一个数组结构，它通过索引来读取或设置数据；而 operand stack 是一个栈结构，符合“后进先出”（LIFO, Last in, First out）的规则。
 
-{:refdef: style="text-align: center;"}
 ![stack frame](/assets/images/java/asm/frame-local-variables-operand-stack.png)
-{:refdef}
 
 
 在方法刚进入时，operand stack 的初始状态是什么样的呢？回答：operand stack 是空的，换句话说，“栈上没有任何元素”。
@@ -483,9 +481,7 @@ private void printLong() {
 
 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/swap-int-and-long.png)
-{:refdef}
 
 ## 第三个版本
 

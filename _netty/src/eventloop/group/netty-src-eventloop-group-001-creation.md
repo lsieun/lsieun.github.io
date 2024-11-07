@@ -5,21 +5,15 @@ sequence: "101"
 
 [UP](/netty.html)
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/eventloop/netty-eventloop-relation.svg)
-{:refdef}
 
 ## EventLoopGroup 相关类
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/eventloop/group/netty-eventloop-group-class-hierarchy.svg)
-{:refdef}
 
 ## 创建过程
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/eventloop/group/netty-eventloop-group-parameter.svg)
-{:refdef}
 
 
 ### 线程数量

@@ -12,9 +12,7 @@ sequence: "101"
 - 其中，Core API包括`asm.jar`、`asm-util.jar`和`asm-commons.jar`；
 - 其中，Tree API包括`asm-tree.jar`和`asm-analysis.jar`。
 
-{:refdef: style="text-align: center;"}
 ![ASM Components](/assets/images/java/asm/asm-components.png)
-{:refdef}
 
 从两者的关系来说，Core API是基础，而Tree API是在Core API的这个基础上构建起来的。
 

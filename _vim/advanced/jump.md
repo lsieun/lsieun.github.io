@@ -15,9 +15,7 @@ If you want to consider `WORD`S, then just use uppercase characters:
 - `W` → go to the start of the following WORD,
 - `E` → go to the end of this WORD.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/vim/word-moves.jpg)
-{:refdef}
 
 ## bracket
 
@@ -55,9 +53,7 @@ But what was true for `y` (yank), is also true for
 - `3fa` → find the 3rd occurrence of a on this line.
 - `F` and `T` → like `f` and `t` but backward.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/vim/line-moves.jpg)
-{:refdef}
 
 A useful tip is: `dt"` → remove everything until the `"`.
 

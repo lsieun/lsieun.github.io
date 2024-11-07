@@ -5,9 +5,7 @@ sequence: "103"
 
 [UP](/netty.html)
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/pipeline/netty-channel-pipeline-class-hierarchy.svg)
-{:refdef}
 
 ## Inbound
 
@@ -42,13 +40,9 @@ public class DefaultChannelPipeline implements ChannelPipeline {
 
 这些方法的总体逻辑如下：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/pipeline/netty-channel-pipeline-propagation-inbound-fire-event.svg)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/pipeline/netty-channel-pipeline-propagation-inbound-invoker-handler.svg)
-{:refdef}
 
 
 
@@ -82,9 +76,7 @@ public class DefaultChannelPipeline implements ChannelPipeline {
 
 这些方法的总体逻辑如下：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/pipeline/netty-channel-pipeline-propagation-outbound-invoke-xxx.svg)
-{:refdef}
 
 
 ## Exception

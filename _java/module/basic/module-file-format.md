@@ -114,9 +114,7 @@ Compiling as well as launching an application will fail if modules are missing.
 - With plain JARs, the JVM sees only relations between **classes**.
 - With the module system, the JVM can see relations between **modules**, operating on a higher level of abstraction.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/module/plain-jar-vs-module-system.png)
-{:refdef}
 
 ### exporting packages to define a module's api
 

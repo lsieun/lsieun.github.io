@@ -220,9 +220,7 @@ MyBatis 中可以面向接口操作数据，要保证两个一致
 - mapper 接口中方法的方法名和映射文件中编写 SQL 的标签的 `id` 属性保持一致
 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mybatis/mapper-classname-namespace-method-name-id.png)
-{:refdef}
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>

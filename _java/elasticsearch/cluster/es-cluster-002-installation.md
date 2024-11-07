@@ -180,9 +180,7 @@ built using Scala, Play Framework, AngularJS and Bootstrap.
 
 > 注意：我使用 JDK 17 的时候，出错了；后来切换成了 JDK 8，可以运行
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/elk/cerebro/cerebro-bin-bat.png)
-{:refdef}
 
 在浏览器中访问：
 
@@ -196,17 +194,11 @@ http://localhost:9000/
 http://192.168.80.130:9201
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/elk/cerebro/cerebro-node-address-connect.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/elk/cerebro/cerebro-web-overview.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/elk/cerebro/cerebro-web-overview-02.png)
-{:refdef}
 
 ## 创建索引库
 
@@ -233,17 +225,11 @@ PUT /student
 
 利用 Cerebro 也可以创建索引库：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/elk/cerebro/cerebro-web-more-create-index.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/elk/cerebro/cerebro-web-more-create-index-student.png)
-{:refdef}
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/elk/cerebro/cerebro-web-more-create-index-student-overview.png)
-{:refdef}
 
 
 ## Virtual Memory

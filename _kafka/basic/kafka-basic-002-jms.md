@@ -53,9 +53,7 @@ sequence: "102"
 
 ## JMS 对象模型
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/jms-object-model.png)
-{:refdef}
 
 <table>
     <thead>

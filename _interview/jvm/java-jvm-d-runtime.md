@@ -48,9 +48,7 @@ java -jar -XX:+UseG1GC -Xms2G -Xmx2G -Xss256k
 - jmap：生成统计、生成堆 dump 文件 `jmap -histo PID | head -n 20`, `jmap -dump:live,format=b,file=dump.hprof PID`
 - jhat：dump 分析工具 `jhat dump.hprof`
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/jvm/jstat-output-reference.png)
-{:refdef}
 
 ## Reference
 

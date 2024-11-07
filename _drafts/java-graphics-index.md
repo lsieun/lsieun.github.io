@@ -1,6 +1,6 @@
 ---
 title: "Java Graphics"
-image: /assets/images/java/fx/java-fx-cover.png
+image: /assets/images/java/graphics/java-swing.png
 permalink: /java/java-graphics-index.html
 ---
 
@@ -100,3 +100,6 @@ sort: "sequence"
     - [ ] Chapter 14. A.W.T (Abstract Window Toolkit)
     - [ ] Chapter 15. Layouts
     - [ ] Chapter 16. Event Handling
+
+- [Simple Java Graphics](https://horstmann.com/sjsu/graphics/)
+- [Java Games Code - Copy And Paste](https://copyassignment.com/java-games-code-copy-and-paste/)

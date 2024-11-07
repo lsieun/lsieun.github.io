@@ -3,9 +3,7 @@ title: "Layered Architecture"
 sequence: "101"
 ---
 
-{:refdef: style="text-align: center;"}
 ![三层架构](/assets/images/architecture/three-layer-architecture.png)
-{:refdef}
 
 - 表现层（presentation layer、user interface layer、view layer）
     - 是什么：就是user interface，这里是application与user进行交流互动的地方。

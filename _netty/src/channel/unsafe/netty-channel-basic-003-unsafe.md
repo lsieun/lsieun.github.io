@@ -5,9 +5,7 @@ sequence: "103"
 
 [UP](/netty.html)
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/netty-channel-unsafe-class-hierarchy.svg)
-{:refdef}
 
 ```java
 public interface Channel extends AttributeMap, ChannelOutboundInvoker, Comparable<Channel> {
@@ -57,7 +55,5 @@ public interface Channel extends AttributeMap, ChannelOutboundInvoker, Comparabl
 | `outboundBuffer`     | OK     | OK     |
 
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/unsafe/netty-channel-unsafe-methods.svg)
-{:refdef}
 

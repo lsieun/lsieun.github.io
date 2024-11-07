@@ -5,9 +5,7 @@ sequence: "101"
 
 ## 什么是 Instrumentation
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/transformation/bytebuddy-transformation-instrumentation-type-and-method.png)
-{:refdef}
 
 
 ```text

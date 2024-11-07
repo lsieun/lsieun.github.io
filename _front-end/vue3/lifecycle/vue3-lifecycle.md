@@ -5,9 +5,7 @@ sequence: "201"
 
 ## 流程图
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/front-end/vue3/vue3-lifecycle.png)
-{:refdef}
 
 ## 示例
 

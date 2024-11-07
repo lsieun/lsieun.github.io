@@ -30,9 +30,7 @@ file system ───┼─── files ───┼─── directories
 
 ## API
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/io/filesystem-and-provider.png)
-{:refdef}
 
 ### FileSystem
 

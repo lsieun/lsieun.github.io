@@ -20,9 +20,7 @@ For efficiency of high-volume read operations, the buffer pool is divided into p
 Knowing how to take advantage of the buffer pool to
 keep frequently accessed data in memory is an important aspect of MySQL tuning.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/db/mysql/architecture/innodb-architecture-8-0.png)
-{:refdef}
 
 ## Reference
 

@@ -238,9 +238,7 @@ By default, a new Visual Studio project will contain a configuration file for ed
 If you ever need to add one manually, you may do so via the Project ➤ Add New Item menu option.
 Notice, you have left the name of this file as the suggested `App.config`.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/csharp/vs/vs-add-app-config.png)
-{:refdef}
 
 If you open this file for viewing, you'll see a minimal set of instructions,
 to which you will add additional elements.

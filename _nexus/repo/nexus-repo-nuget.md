@@ -9,9 +9,7 @@ sequence: "nuget"
 https://api.nuget.org/v3/index.json
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/nexus3/nuget/nuget-repo-nuget-org-proxy.png)
-{:refdef}
 
 Once complete the V3 entry point for the proxy repository becomes:
 

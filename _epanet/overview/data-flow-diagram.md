@@ -32,9 +32,7 @@ EPANET Toolkit ───┤                              └─── analyze op
 
 The data flow diagram for analyzing a pipe network is shown below.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/epanet/epanet-toolkit-data-flow-diagram.png)
-{:refdef}
 
 The processing steps depicted in this diagram can be summarized as follows:
 

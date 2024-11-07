@@ -21,9 +21,7 @@ sequence: "105"
 在一般的描述当中，都是将 Stack Frame 描述成 local variable 和 operand stack 两个部分；
 但是，如果我们为了知识的完整性，就可以考虑添加上 frame data 这个部分。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/jvm-execution-model-2.png)
-{:refdef}
 
 另外，方法的执行与 Stack Frame 之间有一个非常紧密的关系：
 
@@ -84,9 +82,7 @@ do {
 } while (there is more to do);
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/jvm-execution-model-2.png)
-{:refdef}
 
 需要注意的是，虽然 local variable 和 operand stack 是 Stack Frame 当中两个最重要的结构，
 两者是处于一个平等的地位上，缺少任何一个都无法正常工作；

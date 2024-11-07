@@ -15,9 +15,7 @@ sequence: "103"
 当第一个消费者尝试加入一个新的 Consumer Group 时，Kafka 集群会自动选择一个 Broker 作为该 Consumer Group 的 Group Coordinator，
 并将其分配给该 Consumer Group。这个选举过程是在第一个消费者发起 JoinGroup 请求时触发的。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/internal/Kafka_Internals_065.png)
-{:refdef}
 
 ### Group Leader
 
@@ -52,9 +50,7 @@ it would be impossible to configure a custom assignment strategy without rebooti
 
 ### Step 1 – Find Group Coordinator
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/internal/Kafka_Internals_066.png)
-{:refdef}
 
 - Consumer：当一个 consumer 启动的时候，它会向某一个 `broker(i)` 发送 `FindCoordinatorRequest`，其中包含 `group.id`。
 - Broker：
@@ -80,9 +76,7 @@ my-java-group             192.168.80.133:9092 (3)   range                Stable 
 
 ### Step 2 – Members Join
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/internal/Kafka_Internals_067.png)
-{:refdef}
 
 - Consumer: consumer 向 `broker(x)` 发送一个 `JoinGroupRequest`，其中包含着 topic subscription 信息。
 - Broker：
@@ -100,9 +94,7 @@ Group Leader 是在 Consumer 一侧的
 
 ### Step 3 – Partitions Assigned
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/internal/Kafka_Internals_068.png)
-{:refdef}
 
 - Consumer
     - `consumer(leader)` 会向 Group Coordinator 发送 `SyncGroupRequest`，其中包含 `memberId`、group partition assignments
@@ -116,18 +108,14 @@ Group Leader 是在 Consumer 一侧的
 
 ### Tracking Partition Consumption
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/internal/Kafka_Internals_071.png)
-{:refdef}
 
 - Consumer：consumer 向 Group Coordinator 发送 `CommitOffsetRequest`
 - Broker：Group Coordinator 将 `offset` 信息存储在 `__consumer_offsets` topic 中
 
 ### Determining Starting Offset to Consume
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/internal/Kafka_Internals_072.png)
-{:refdef}
 
 - Consumer：当 consumer 重启的时候，它会向 Group Coordinator 发送 `OffsetFetchRequest`
 - Broker：
@@ -137,9 +125,7 @@ Group Leader 是在 Consumer 一侧的
 
 ## Group Coordinator Failover
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/internal/Kafka_Internals_073.png)
-{:refdef}
 
 The internal `__consumer_offsets` topic is replicated like any other Kafka topic.
 Also, recall that the group coordinator is the broker
@@ -151,9 +137,7 @@ and then everything will continue as normal.
 
 ## Consumer Group Rebalance Triggers
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/internal/Kafka_Internals_074.png)
-{:refdef}
 
 One of the key features of consumer groups is rebalancing.
 Let's consider some of the events that can trigger a rebalance:
@@ -220,18 +204,14 @@ Rebalance 的过程是由 Consumer Group Coordinator 协调并触发的，主要
 
 ### Consumer Group Rebalance Notification
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/internal/Kafka_Internals_075.png)
-{:refdef}
 
 The rebalance process begins with the coordinator notifying the consumer instances that a rebalance has begun.
 It does this by piggybacking on the `HeartbeatResponse` or the `OffsetFetchResponse`.
 
 ### Stop-the-World Rebalance
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/internal/Kafka_Internals_076.png)
-{:refdef}
 
 The traditional rebalance process is rather involved.
 Once the consumers receive the rebalance notification from the coordinator,
@@ -248,9 +228,7 @@ This process, while effective, has some drawbacks. Let's look at a couple of tho
 
 ### Stop-the-World Problem #1 – Rebuilding State
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/internal/Kafka_Internals_077.png)
-{:refdef}
 
 The first problem is the need to **rebuild state**.
 If a consumer application was maintaining state based on the events in the partition it had been assigned to,
@@ -262,9 +240,7 @@ a significant amount of wasted processing may occur.
 
 ### Stop-the-World Problem #2 – Paused Processing
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/internal/Kafka_Internals_078.png)
-{:refdef}
 
 The second problem is that we're required to pause all processing while the rebalance is occurring,
 hence the name “Stop-the-world.”
@@ -277,9 +253,7 @@ Let's see some of the improvements that have been made to deal with these proble
 
 ### Avoid Needless State Rebuild with StickyAssignor
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/internal/Kafka_Internals_079.png)
-{:refdef}
 
 First, using the new `StickyAssignor` we can avoid unnecessary state rebuilding.
 The main difference with the `StickyAssignor`, is that the state cleanup is moved to a later step,
@@ -290,9 +264,7 @@ In our example, state would only need to be rebuilt for partition `p2`, which is
 
 ### Avoid Pause with CooperativeStickyAssignor Step 1
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/internal/Kafka_Internals_080.png)
-{:refdef}
 
 To solve the problem of **paused processing**, we introduced the `CooperativeStickyAssignor`.
 This assignor works in a two-step process.
@@ -302,9 +274,7 @@ The partitions that are not revoked can continue to be processed.
 
 ### Avoid Pause with CooperativeStickyAssignor Step 2
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/internal/Kafka_Internals_081.png)
-{:refdef}
 
 In the second rebalance step, the revoked partitions will be assigned.
 In our example, partition 2 was the only one revoked, and it is assigned to the new consumer 3.
@@ -314,9 +284,7 @@ can continue to be processed without the world grinding to a halt.
 
 ## Avoid Rebalance with Static Group Membership
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/kafka/internal/Kafka_Internals_082.png)
-{:refdef}
 
 As the saying goes, the fastest rebalance is the one that doesn't happen.
 That's the goal of static group membership.

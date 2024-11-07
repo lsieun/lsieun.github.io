@@ -12,9 +12,7 @@ sequence: "101"
 
 ## Single Redis Instance
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/redis/ha/redis-standalone.png)
-{:refdef}
 
 缺点：
 if this instance fails or is unavailable,
@@ -22,9 +20,7 @@ all client calls to Redis will fail and therefore degrade the system's overall p
 
 ## Redis HA
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/redis/ha/redis-ha.png)
-{:refdef}
 
 Another popular setup with Redis is the main deployment with a secondary deployment
 that is kept in sync with replication.
@@ -36,12 +32,8 @@ These instances can help scale reads from Redis or provide failover in case the 
 
 ### Redis Sentinel
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/redis/ha/redis-sentinel.png)
-{:refdef}
 
 ### Redis Cluster
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/redis/ha/redis-cluster.jpg)
-{:refdef}

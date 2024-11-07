@@ -19,9 +19,7 @@ WGS-84坐标系（World Geodetic System一1984 Coordinate System）
 
 称为1984年世界大地坐标系统。
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/gis/crs/20190111184410104.jpg)
-{:refdef}
 
 ## WGS84 Web墨卡托
 

@@ -32,9 +32,7 @@ public class HelloWorld<T extends Number> { /* The TypeParameter that "introduce
 做一个比喻。在《火影忍者》中鸣人有一个忍术叫“影分身之术”， 使用查克拉制造出有实体的分身，具有独立于施术者本体的意识和一定的抗击打能力，解除后分身的记忆和经验会回到本体。
 Type Parameter 相当于“本体”，而 Type Variable 则相当于“分身”。
 
-{:refdef: style="text-align: center;"}
 ![影分身之术](/assets/images/manga/naruto/shadow-clone-technique.gif)
-{:refdef}
 
 - Generic Type
   - Type Parameter

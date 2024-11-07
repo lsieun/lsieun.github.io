@@ -7,9 +7,7 @@ sequence: "410"
 
 `ClassRemapper` 类的特点是，可以实现从“一个类”向“另一个类”的映射。借助于这个类，我们可以将 class 文件进行简单的混淆处理（obfuscate）：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/asm/class-remap.png)
-{:refdef}
 
 ## ClassRemapper 类
 

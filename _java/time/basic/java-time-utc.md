@@ -13,9 +13,7 @@ It is within about one second of mean solar time (such as UT1) at 0° longitude
 and is not adjusted for daylight saving time.
 It is effectively a successor to Greenwich Mean Time (GMT).
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/java/time/world-time-zones-map.png)
-{:refdef}
 
 ## UTC 和 GMT 的区别
 

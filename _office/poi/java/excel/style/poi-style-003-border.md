@@ -12,9 +12,7 @@ To add more variety, we can have colored borders.
 
 This image shows some of these variety borders:
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/office/poi/excel-cell-border-example-001.webp)
-{:refdef}
 
 - Cell `B2` is with thick line border
 - `D2` cell is with a wide violet border

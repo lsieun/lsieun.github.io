@@ -44,9 +44,7 @@ final class ChannelHandlerMask {
 
 这些常量是与 `ChannelInboundHandler` 和 `ChannelOutboundHandler` 里定义的方法彼此关联的：
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/netty/channel/handler/netty-channel-handler-class-hierarchy.svg)
-{:refdef}
 
 `ChannelHandlerMask` 类，还定义了一些聚合之后的常量：
 

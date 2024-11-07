@@ -23,9 +23,7 @@ public class HelloWorld {
 }
 ```
 
-{:refdef: style="text-align: center;"}
 ![](/assets/images/bytebuddy/annotation-source-list-description-value.png)
-{:refdef}
 
 ```text
 AnnotationSource --> AnnotationList --> AnnotationDescription --> AnnotationValue
