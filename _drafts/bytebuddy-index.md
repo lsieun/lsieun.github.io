@@ -508,30 +508,15 @@ sort: "sequence"
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;">Basic</th>
         <th style="text-align: center;">类层面</th>
         <th style="text-align: center;">字段层面</th>
         <th style="text-align: center;">方法层面</th>
+        <th style="text-align: center;">Hierarchy</th>
         <th style="text-align: center;">Other</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <td>
-{%
-assign filtered_posts = site.bytebuddy |
-where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/delegation/annotation/basic/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
         <td>
 {%
 assign filtered_posts = site.bytebuddy |
@@ -566,6 +551,21 @@ sort: "sequence"
 {%
 assign filtered_posts = site.bytebuddy |
 where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/delegation/annotation/method/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/delegation/annotation/hierarchy/'" |
 sort: "sequence"
 %}
 <ol>
@@ -1205,4 +1205,3 @@ Spring Boot
 
 - [Instrumentation of Spring Boot application with Byte Buddy](https://medium.com/@jakubhal/instrumentation-of-spring-boot-application-with-byte-buddy-bbd28619b7c)
 - [用 Byte Buddy 於執行期生成程式碼](https://medium.com/java-magazine-translation/%E7%94%A8-byte-buddy-%E6%96%BC%E5%9F%B7%E8%A1%8C%E6%9C%9F%E7%94%9F%E6%88%90%E7%A8%8B%E5%BC%8F%E7%A2%BC-50055bb48e2c)
-

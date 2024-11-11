@@ -29,3 +29,7 @@ sort: "sequence"
 - [JFreeSVG](https://www.jfree.org/jfreesvg/)
     - [GitHub: jfree/jfreesvg](https://github.com/jfree/jfreesvg)
 
+- [Writing systems worldwide.svg](https://en.wikipedia.org/wiki/File:Writing_systems_worldwide.svg)
+
+- [jenkov.com](https://jenkov.com/)
+    - [SVG Tutorial](https://jenkov.com/tutorials/svg/index.html)

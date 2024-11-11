@@ -1,0 +1,12 @@
+@startuml
+
+class Father {}
+interface ITest {
+    + String test(String name, int age)
+}
+
+class HelloWorld extends Father implements ITest {
+    + String test(String name, int age)
+}
+
+@enduml

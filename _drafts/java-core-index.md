@@ -31,17 +31,9 @@ sort: "sequence"
 Basic Type:
 
 - [Number]({% link _java/java-number-index.md %})
-- [Text]({% link _java/java-text-index.md %})
-
-
-Type:
-
-
-
 
 Utils:
 
-- [Regex]({% link _java/java-regex-index.md %})
 - [Serialization]({% link _java/java-serialization-index.md %})
 - [Properties]({% link _java/properties-index.md %})
 

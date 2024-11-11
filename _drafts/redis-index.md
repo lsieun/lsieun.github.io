@@ -1,7 +1,7 @@
 ---
 title: "Redis"
 image: /assets/images/redis/redis-explained.jpg
-permalink: /redis.html
+permalink: /redis/redis-index.html
 ---
 
 Redis (**RE**mote **DI**ctionary **S**ervice) is an open-source key-value database server.
@@ -23,7 +23,7 @@ Redis (**RE**mote **DI**ctionary **S**ervice) is an open-source key-value databa
         <td>
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/basic/'" |
+where_exp: "item", "item.path contains 'redis/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -38,7 +38,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/cmd/'" |
+where_exp: "item", "item.path contains 'redis/cmd/'" |
 sort: "sequence"
 %}
 <ol>
@@ -53,7 +53,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/installation/'" |
+where_exp: "item", "item.path contains 'redis/installation/'" |
 sort: "sequence"
 %}
 <ol>
@@ -68,7 +68,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/docker/official/'" |
+where_exp: "item", "item.path contains 'redis/docker/official/'" |
 sort: "sequence"
 %}
 <ol>
@@ -83,7 +83,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/docker/bitnami/'" |
+where_exp: "item", "item.path contains 'redis/docker/bitnami/'" |
 sort: "sequence"
 %}
 <ol>
@@ -103,7 +103,7 @@ sort: "sequence"
 
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/conf/'" |
+where_exp: "item", "item.path contains 'redis/conf/'" |
 sort: "sequence"
 %}
 <ol>
@@ -129,7 +129,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/memory/'" |
+where_exp: "item", "item.path contains 'redis/memory/'" |
 sort: "sequence"
 %}
 <ol>
@@ -144,7 +144,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/persistence/'" |
+where_exp: "item", "item.path contains 'redis/persistence/'" |
 sort: "sequence"
 %}
 <ol>
@@ -164,7 +164,7 @@ sort: "sequence"
 
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/lua/'" |
+where_exp: "item", "item.path contains 'redis/lua/'" |
 sort: "sequence"
 %}
 <ol>
@@ -193,7 +193,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/ha/basic/'" |
+where_exp: "item", "item.path contains 'redis/ha/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -208,7 +208,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/ha/replication/'" |
+where_exp: "item", "item.path contains 'redis/ha/replication/'" |
 sort: "sequence"
 %}
 <ol>
@@ -223,7 +223,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/ha/sentinel/'" |
+where_exp: "item", "item.path contains 'redis/ha/sentinel/'" |
 sort: "sequence"
 %}
 <ol>
@@ -238,7 +238,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/ha/cluster/'" |
+where_exp: "item", "item.path contains 'redis/ha/cluster/'" |
 sort: "sequence"
 %}
 <ol>
@@ -253,7 +253,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/ha/vs/'" |
+where_exp: "item", "item.path contains 'redis/ha/vs/'" |
 sort: "sequence"
 %}
 <ol>
@@ -273,7 +273,7 @@ sort: "sequence"
 
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/security/'" |
+where_exp: "item", "item.path contains 'redis/security/'" |
 sort: "sequence"
 %}
 <ol>
@@ -301,7 +301,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/client/jedis/basic/'" |
+where_exp: "item", "item.path contains 'redis/client/jedis/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -316,7 +316,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/client/jedis/advanced/'" |
+where_exp: "item", "item.path contains 'redis/client/jedis/advanced/'" |
 sort: "sequence"
 %}
 <ol>
@@ -346,7 +346,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/client/lettuce/basic/'" |
+where_exp: "item", "item.path contains 'redis/client/lettuce/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -361,7 +361,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/client/lettuce/advanced/'" |
+where_exp: "item", "item.path contains 'redis/client/lettuce/advanced/'" |
 sort: "sequence"
 %}
 <ol>
@@ -392,7 +392,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/client/redisson/basic/'" |
+where_exp: "item", "item.path contains 'redis/client/redisson/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -407,7 +407,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/client/redisson/lock/'" |
+where_exp: "item", "item.path contains 'redis/client/redisson/lock/'" |
 sort: "sequence"
 %}
 <ol>
@@ -422,7 +422,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/client/redisson/other/'" |
+where_exp: "item", "item.path contains 'redis/client/redisson/other/'" |
 sort: "sequence"
 %}
 <ol>
@@ -452,7 +452,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/client/spring/basic/'" |
+where_exp: "item", "item.path contains 'redis/client/spring/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -467,7 +467,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/client/spring/boot/'" |
+where_exp: "item", "item.path contains 'redis/client/spring/boot/'" |
 sort: "sequence"
 %}
 <ol>
@@ -487,7 +487,7 @@ sort: "sequence"
 
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/extra/'" |
+where_exp: "item", "item.path contains 'redis/extra/'" |
 sort: "sequence"
 %}
 <ol>
@@ -503,7 +503,7 @@ sort: "sequence"
 
 {%
 assign filtered_posts = site.redis |
-where_exp: "item", "item.url contains '/redis/faq/'" |
+where_exp: "item", "item.path contains 'redis/faq/'" |
 sort: "sequence"
 %}
 <ol>

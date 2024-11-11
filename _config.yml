@@ -153,6 +153,9 @@ collections:
     output: true
   json:
     output: true
+  jsoup:
+    output: true
+    permalink: /:collection/:name:output_ext
   junit:
     output: true
     permalink: /:collection/:name:output_ext
@@ -208,6 +211,10 @@ collections:
     output: true
   redis:
     output: true
+    permalink: /:collection/:name:output_ext
+  res:
+    output: true
+    permalink: /:collection/:name:output_ext
   rime:
     output: true
   scala:
@@ -233,8 +240,6 @@ collections:
   uml:
     output: true
     permalink: /:collection/:name:output_ext
-  unicode:
-    output: true
   vim:
     output: true
   vmware:
@@ -527,6 +532,11 @@ defaults:
       layout: "post"
   - scope:
       path: ""
+      type: "jsoup"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
       type: "junit"
     values:
       layout: "post"
@@ -652,6 +662,11 @@ defaults:
       layout: "post"
   - scope:
       path: ""
+      type: "res"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
       type: "rime"
     values:
       layout: "post"
@@ -703,11 +718,6 @@ defaults:
   - scope:
       path: ""
       type: "uml"
-    values:
-      layout: "post"
-  - scope:
-      path: ""
-      type: "unicode"
     values:
       layout: "post"
   - scope:

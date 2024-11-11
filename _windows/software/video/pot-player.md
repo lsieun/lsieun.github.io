@@ -24,3 +24,7 @@ Playback --> Speed -->
 - Decrease Brightness by 1% (`W`)
 - Increase Brightness by 1% (`E`)
 
+## Subtitle
+
+`,` 和 `.`
+

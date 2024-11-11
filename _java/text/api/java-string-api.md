@@ -1,6 +1,6 @@
 ---
 title: "String"
-sequence: "101"
+sequence: "102"
 ---
 
 ```text
@@ -104,3 +104,9 @@ String ───┤                  │                 │
                              │
                              └─── format ──────┼─── formatted()
 ```
+
+- [Java String](https://www.dariawan.com/tutorials/java/java-string/)
+- [Java String Methods](https://www.dariawan.com/tutorials/java/java-string-methods/)
+- [Java 9 - Compact String and String New Methods](https://www.dariawan.com/tutorials/java/java-9-compact-string-and-string-new-methods/)
+- [Java 11 - New Methods in java.lang.String](https://www.dariawan.com/tutorials/java/java-11-new-methods-java-lang-string/)
+- [Java 12 - New Methods in String](https://www.dariawan.com/tutorials/java/java-12-new-methods-string/)

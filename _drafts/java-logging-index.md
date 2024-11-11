@@ -7,6 +7,16 @@ permalink: /java/java-logging-index.html
 Logging is the process of printing or recording the activities in an application
 which helps the developers to understand and analyze when there are any unexpected errors in the system.
 
+## JUL
+
+Java Logging API (`java.util.logging`, also called **JUL**):
+The Java Logging API is a built-in logging framework in the Java standard library.
+It provides basic logging features such as log levels, loggers, and handlers,
+but lacks some advanced features compared to other logging frameworks.
+
+- [jenkov.com](https://jenkov.com/)
+    - [Java Logging](https://jenkov.com/tutorials/java-logging/index.html)
+
 ## SLF4J
 
 <table>
@@ -67,7 +77,6 @@ sort: "sequence"
     </tr>
     </tbody>
 </table>
-
 
 ## Logback
 
@@ -185,7 +194,6 @@ sort: "sequence"
 - [Logback Tutorial](https://howtodoinjava.com/logback/logback-tutorial/)
 
 - [How to Log to the Console in Color](https://www.baeldung.com/java-log-console-in-color)
-
 
 [mvn-repo-logback-classic-url]: https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
 
