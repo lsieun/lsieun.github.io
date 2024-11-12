@@ -23,13 +23,13 @@ import net.bytebuddy.description.modifier.Visibility;
 import net.bytebuddy.dynamic.DynamicType;
 
 public class HelloWorldGenerate {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String outerClassName = "sample.OuterClass";
         String innerClassName = "sample.OuterClass$InnerClass";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
 
         DynamicType.Builder<Object> outerBuilder = byteBuddy.subclass(Object.class)
@@ -43,7 +43,7 @@ public class HelloWorldGenerate {
         outerBuilder = outerBuilder.declaredTypes(innerBuilder.toTypeDescription());
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = outerBuilder.make().include(innerBuilder.make());
         OutputUtils.save(unloadedType);
     }
@@ -73,12 +73,12 @@ import net.bytebuddy.implementation.FixedValue;
 import net.bytebuddy.jar.asm.Opcodes;
 
 public class HelloWorldGenerate {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld$InnerClass";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
 
         TypeDescription innerClassDesc = new TypeDescription.Latent(
@@ -111,7 +111,7 @@ public class HelloWorldGenerate {
                 .intercept(FixedValue.nullValue());
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }

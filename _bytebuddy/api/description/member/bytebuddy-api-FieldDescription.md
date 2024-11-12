@@ -54,7 +54,7 @@ import java.lang.reflect.Field;
 public class HelloWorldAnalysis {
     public static void main(String[] args) throws ClassNotFoundException, NoSuchFieldException {
         String className = "sample.HelloWorld";
-        Class<?> clazz = Class.forName(className);
+        Class<?> clazz = ClassUtils.loadClass(className);
         Field field = clazz.getDeclaredField("intValue");
         FieldDescription fieldDesc = new FieldDescription.ForLoadedField(field);
 

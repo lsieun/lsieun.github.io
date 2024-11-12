@@ -6,7 +6,11 @@ sequence: "103"
 ## 依赖
 
 ```text
-box-drawing-utils
+box-drawing
+```
+
+```text
+$ git clone https://github.com/lsieun/box-drawing
 ```
 
 ## 代码目录结构

@@ -3,7 +3,7 @@
 !include bytebuddy-method-delegation-sample-common.iuml
 
 class HelloWorld extends Father implements ICat, IDog {
-    + String sayGoodNight()
+    + sayFromHelloWorld()
     + String test(String name, int age)
 }
 

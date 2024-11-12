@@ -215,13 +215,13 @@ import net.bytebuddy.implementation.MethodDelegation;
 import net.bytebuddy.matcher.ElementMatchers;
 
 public class HelloWorldRebase {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
-        Class<?> clazz = Class.forName(className);
+        Class<?> clazz = ClassUtils.loadClass(className);
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.rebase(clazz);
 
@@ -232,7 +232,7 @@ public class HelloWorldRebase {
         );
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType, true);
     }
@@ -326,14 +326,14 @@ import net.bytebuddy.description.modifier.Visibility;
 import net.bytebuddy.dynamic.DynamicType;
 
 public class HelloWorldGenerate {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String outerClassName = "sample.OuterClass";
         String innerClassName1 = "sample.OuterClass$FirstInnerClass";
         String innerClassName2 = "sample.OuterClass$SecondInnerClass";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
 
         DynamicType.Builder<Object> outerBuilder = byteBuddy.subclass(Object.class)

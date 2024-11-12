@@ -3,6 +3,9 @@ title: "法律参考地址"
 sequence: "102"
 ---
 
+[UP](/law/law-index.html)
+
+
 ## 社会危害性
 
 - [社会危害性判断应坚持客观主义刑法立场](https://www.spp.gov.cn/spp/llyj/201712/t20171212_206554.shtml)
@@ -29,12 +32,12 @@ sequence: "102"
 
 - [关于办理组织、利用邪教组织破坏法律实施等刑事案件适用法律若干问题的解释](https://www.spp.gov.cn/spp/zdgz/201701/t20170126_179794.shtml)
 
-- [中华人民共和国刑法（2024年最新版）](http://www.chnlawyer.net/law/subs/xingfa.html)
+- [中华人民共和国刑法（2024 年最新版）](http://www.chnlawyer.net/law/subs/xingfa.html)
 
 - [国家法律法规数据库](https://flk.npc.gov.cn/index.html)
     - [刑法修正案](https://flk.npc.gov.cn/detail2.html?MmM5MDlmZGQ2NzhiZjE3OTAxNjc4YmY2ODNmOTA0NWI)
 
-- [国家新闻出版总署令 第50号](https://www.gov.cn/gongbao/content/2011/content_1960695.htm)
+- [国家新闻出版总署令 第 50 号](https://www.gov.cn/gongbao/content/2011/content_1960695.htm)
 
 - [大咖说丨陈兴良教授：刑法的“三个理念”与定罪的“四个规则”](https://new.qq.com/rain/a/20230106A04N5T00)
 

@@ -54,12 +54,12 @@ import net.bytebuddy.dynamic.DynamicType;
 import java.lang.reflect.Field;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .modifiers(Visibility.PUBLIC)
@@ -70,7 +70,7 @@ public class HelloWorldSubClass {
                 .value("智慧是知识凝结的宝石，文化是智慧放出的异彩。");
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }
@@ -97,12 +97,12 @@ import net.bytebuddy.description.modifier.Visibility;
 import net.bytebuddy.dynamic.DynamicType;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .modifiers(Visibility.PUBLIC)
@@ -113,7 +113,7 @@ public class HelloWorldSubClass {
                 .define(Celebrity.class.getDeclaredField("birthDay"));
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }
@@ -143,12 +143,12 @@ import java.lang.reflect.Constructor;
 import java.util.Date;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .modifiers(Visibility.PUBLIC)
@@ -163,7 +163,7 @@ public class HelloWorldSubClass {
                 );
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }
@@ -193,12 +193,12 @@ import net.bytebuddy.implementation.FixedValue;
 import java.lang.reflect.Method;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .modifiers(Visibility.PUBLIC)
@@ -209,7 +209,7 @@ public class HelloWorldSubClass {
                 .intercept(FixedValue.value(-1));
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }

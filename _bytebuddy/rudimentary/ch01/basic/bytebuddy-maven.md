@@ -152,13 +152,13 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 public class HelloByteBuddy {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .modifiers(Visibility.PUBLIC)
@@ -232,19 +232,19 @@ import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.dynamic.DynamicType;
 
 public class HelloWorldGenerate {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.MyClass";
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .name(className);
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         DynamicType.Loaded<?> loadedType = unloadedType.load(classLoader);
         Class<?> clazz = loadedType.getLoaded();

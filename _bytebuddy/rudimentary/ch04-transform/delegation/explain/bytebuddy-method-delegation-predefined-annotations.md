@@ -88,3 +88,50 @@ Byte Buddy allows you to define your own annotations by registering one or sever
 There are several more predefined annotations that can be used with a `MethodDelegation` that we only want to name briefly.
 If you want to read more about these annotations, you can find further information in the in-code documentation.
 These annotations are:
+
+
+```text
+                                                     ┌─── @This
+                                                     │
+                               ┌─── obj ─────────────┼─── @Super
+                               │                     │
+                               │                     └─── @Default
+                               │
+                               │                     ┌─── @FieldValue
+                               │                     │
+                               │                     ├─── @FieldProxy
+                               ├─── field ───────────┤
+                               │                     ├─── @FieldGetterHandle
+                               │                     │
+                               │                     └─── @FieldSetterHandle
+                               │
+                               │                                            ┌─── cached()
+                               │                                            │
+                               │                     ┌─── common ───────────┼─── privileged()
+                               │                     │                      │
+                               │                     │                      └─── nullIfImpossible()
+                               ├─── method ──────────┤
+                               │                     ├─── @DefaultMethod ───┼─── targetType()    // 父类只有一个，而接口可以有多个
+MethodDelegation::hierarchy ───┤                     │
+                               │                     └─── @SuperMethod ─────┼─── fallbackToDefault()
+                               │
+                               │                     ┌─── common ───────────────┼─── nullIfImpossible()
+                               │                     │
+                               ├─── method.handle ───┼─── @DefaultCallHandle ───┼─── targetType()
+                               │                     │
+                               │                     └─── @SuperCallHandle ─────┼─── fallbackToDefault()
+                               │
+                               │                                          ┌─── serializableProxy()
+                               │                     ┌─── common ─────────┤
+                               │                     │                    └─── nullIfImpossible()
+                               ├─── call ────────────┤
+                               │                     ├─── @DefaultCall ───┼─── targetType()
+                               │                     │
+                               │                     └─── @SuperCall ─────┼─── fallbackToDefault()
+                               │
+                               │                     ┌─── common ───────────────┼─── nullIfImpossible()
+                               │                     │
+                               └─── call.handle ─────┼─── @DefaultCallHandle ───┼─── targetType()
+                                                     │
+                                                     └─── @SuperCallHandle ─────┼─── fallbackToDefault()
+```

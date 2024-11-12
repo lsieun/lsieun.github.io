@@ -90,7 +90,7 @@ import net.bytebuddy.NamingStrategy;
 import net.bytebuddy.dynamic.DynamicType;
 
 public class HelloWorldGenerate {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         ByteBuddy byteBuddy = new ByteBuddy();
         // 对比
         byteBuddy.with(new NamingStrategy.SuffixingRandom("suffix"));
@@ -109,7 +109,7 @@ import net.bytebuddy.NamingStrategy;
 import net.bytebuddy.dynamic.DynamicType;
 
 public class HelloWorldGenerate {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         ByteBuddy byteBuddy = new ByteBuddy();
         // 对比
         byteBuddy = byteBuddy.with(new NamingStrategy.SuffixingRandom("suffix"));

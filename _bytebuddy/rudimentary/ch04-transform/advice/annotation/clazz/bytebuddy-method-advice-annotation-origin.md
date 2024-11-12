@@ -135,13 +135,13 @@ import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.matcher.ElementMatchers;
 
 public class HelloWorldRedefine {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
-        Class<?> clazz = Class.forName(className);
+        Class<?> clazz = ClassUtils.loadClass(className);
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.redefine(clazz)
                 .name(className);
@@ -151,7 +151,7 @@ public class HelloWorldRedefine {
         );
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType, true);
     }
@@ -162,7 +162,7 @@ public class HelloWorldRedefine {
 import java.time.LocalDate;
 
 public class HelloWorldRun {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         HelloWorld instance = new HelloWorld();
         String msg = instance.test("Tom", 10, LocalDate.now());
         System.out.println(msg);
@@ -217,7 +217,7 @@ builder = builder.visit(
 
 ```java
 public class HelloWorldRun {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         HelloWorld instance = new HelloWorld();
         instance.setName("Tom");
         String name = instance.getName();
@@ -331,13 +331,13 @@ import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.matcher.ElementMatchers;
 
 public class HelloWorldRedefine {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
-        Class<?> clazz = Class.forName(className);
+        Class<?> clazz = ClassUtils.loadClass(className);
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.redefine(clazz)
                 .name(className);
@@ -351,7 +351,7 @@ public class HelloWorldRedefine {
         );
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType, true);
     }
@@ -362,7 +362,7 @@ public class HelloWorldRedefine {
 import java.time.LocalDate;
 
 public class HelloWorldRun {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         HelloWorld instance = new HelloWorld();
         String msg = instance.test("Tom", 10, LocalDate.now());
         System.out.println(msg);
@@ -489,13 +489,13 @@ import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.matcher.ElementMatchers;
 
 public class HelloWorldRedefine {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
-        Class<?> clazz = Class.forName(className);
+        Class<?> clazz = ClassUtils.loadClass(className);
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.redefine(clazz)
                 .name(className);
@@ -505,7 +505,7 @@ public class HelloWorldRedefine {
         );
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType, true);
     }
@@ -516,7 +516,7 @@ public class HelloWorldRedefine {
 import java.time.LocalDate;
 
 public class HelloWorldRun {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         HelloWorld instance = new HelloWorld();
         String msg = instance.test("Tom", 10, LocalDate.now());
         System.out.println(msg);

@@ -21,17 +21,17 @@ import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.dynamic.DynamicType;
 
 public class HelloWorldGenerate {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.makeInterface()
                 .name(className);
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }
@@ -60,12 +60,12 @@ import net.bytebuddy.description.modifier.Visibility;
 import net.bytebuddy.dynamic.DynamicType;
 
 public class HelloWorldGenerate {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.makeInterface()
                 .name(className);
@@ -79,7 +79,7 @@ public class HelloWorldGenerate {
                 )
                 .value("HelloWorld");
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }
@@ -104,12 +104,12 @@ import net.bytebuddy.description.modifier.Visibility;
 import net.bytebuddy.dynamic.DynamicType;
 
 public class HelloWorldGenerate {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.makeInterface()
                 .name(className);
@@ -117,7 +117,7 @@ public class HelloWorldGenerate {
         builder = builder.defineMethod("test", void.class, Visibility.PUBLIC)
                 .withoutCode();
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }
@@ -144,12 +144,12 @@ import net.bytebuddy.description.modifier.Visibility;
 import net.bytebuddy.dynamic.DynamicType;
 
 public class HelloWorldGenerate {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.MyInterface";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.makeInterface()
                 .name(className);
@@ -160,7 +160,7 @@ public class HelloWorldGenerate {
                         ImplementationUtils.print("Hello World")
                 );
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }
@@ -176,12 +176,12 @@ import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.dynamic.DynamicType;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .modifiers(Visibility.PUBLIC)
@@ -194,7 +194,7 @@ public class HelloWorldSubClass {
         );
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }
@@ -206,12 +206,12 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 public class HelloWorldRun {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Class<?> myInterface = Class.forName("sample.MyInterface");
         Method method = myInterface.getDeclaredMethod("test");
 
         String className = "sample.HelloWorld";
-        Class<?> clazz = Class.forName(className);
+        Class<?> clazz = ClassUtils.loadClass(className);
         Constructor<?> constructor = clazz.getConstructor();
         Object instance = constructor.newInstance();
 
@@ -241,12 +241,12 @@ import net.bytebuddy.dynamic.DynamicType;
 import java.io.Serializable;
 
 public class HelloWorldGenerate {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.makeInterface(
                         Cloneable.class,
@@ -254,7 +254,7 @@ public class HelloWorldGenerate {
                 )
                 .name(className);
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }
@@ -362,12 +362,12 @@ import net.bytebuddy.matcher.ElementMatchers;
 import sample.MyImplementation;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class, ConstructorStrategy.Default.NO_CONSTRUCTORS)
                 .modifiers(Visibility.PUBLIC)
@@ -410,7 +410,7 @@ public class HelloWorldSubClass {
         builder = builder.withToString();
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }
@@ -424,9 +424,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 public class HelloWorldRun {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         String className = "sample.HelloWorld";
-        Class<?> clazz = Class.forName(className);
+        Class<?> clazz = ClassUtils.loadClass(className);
 
         Constructor<?> constructor = clazz.getConstructor(int.class);
         Object instance1 = constructor.newInstance(10);

@@ -31,12 +31,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 public class HelloWorldGenerate {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.makeAnnotation()
                 .name(className);
@@ -66,7 +66,7 @@ public class HelloWorldGenerate {
                 .withoutCode();
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }
@@ -136,12 +136,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 public class HelloWorldGenerate {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.makeAnnotation()
                 .name(className);
@@ -175,7 +175,7 @@ public class HelloWorldGenerate {
                 );
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }

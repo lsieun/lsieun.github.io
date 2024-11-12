@@ -51,12 +51,12 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .modifiers(Visibility.PUBLIC)
@@ -79,7 +79,7 @@ public class HelloWorldSubClass {
                 .intercept(methodCall);
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }
@@ -101,12 +101,12 @@ import net.bytebuddy.matcher.ElementMatchers;
 import java.io.PrintStream;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .modifiers(Visibility.PUBLIC)
@@ -133,7 +133,7 @@ public class HelloWorldSubClass {
                 .intercept(methodCall);
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }
@@ -159,12 +159,12 @@ import java.io.PrintStream;
 import java.util.List;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .modifiers(Visibility.PUBLIC)
@@ -202,7 +202,7 @@ public class HelloWorldSubClass {
                 .intercept(methodCall);
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }
@@ -220,12 +220,12 @@ import net.bytebuddy.dynamic.DynamicType;
 import sample.MyImplementation;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .modifiers(Visibility.PUBLIC)
@@ -234,7 +234,7 @@ public class HelloWorldSubClass {
         builder = builder.defineMethod("test", void.class, Visibility.PUBLIC)
                 .intercept(MyImplementation.of("Hello Test"));
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType, true);
     }

@@ -31,7 +31,7 @@ public class HelloWorld {
 
 ```java
 public class HelloWorldRun {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         Class.forName("sample.HelloWorld", true, classLoader);
     }
@@ -47,7 +47,7 @@ public class HelloWorld {
 
 ```java
 public class HelloWorldRun {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         Class.forName("sample.HelloWorld", true, classLoader);
         System.out.println("Hello Class Initializer");
@@ -85,12 +85,12 @@ import net.bytebuddy.description.modifier.Visibility;
 import net.bytebuddy.dynamic.DynamicType;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .modifiers(Visibility.PUBLIC)
@@ -99,7 +99,7 @@ public class HelloWorldSubClass {
         builder = builder.initializer(SysOutPrint.of("Hello Type Initializer"));
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }
@@ -182,12 +182,12 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .modifiers(Visibility.PUBLIC)
@@ -204,7 +204,7 @@ public class HelloWorldSubClass {
                 );
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }
@@ -239,12 +239,12 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy().with(TypeValidation.DISABLED); // 注意，这里使用了 TypeValidation.DISABLED
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .modifiers(Visibility.PUBLIC)
@@ -261,7 +261,7 @@ public class HelloWorldSubClass {
                 );
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }
@@ -297,12 +297,12 @@ import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .modifiers(Visibility.PUBLIC)
@@ -312,7 +312,7 @@ public class HelloWorldSubClass {
         builder = builder.initializer(new MyLoadedTypeInitializer());
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
 
@@ -342,12 +342,12 @@ import net.bytebuddy.implementation.LoadedTypeInitializer;
 import java.lang.reflect.Field;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .modifiers(Visibility.PUBLIC)
@@ -360,7 +360,7 @@ public class HelloWorldSubClass {
         builder = builder.initializer(new LoadedTypeInitializer.ForStaticField("obj", child));
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
 

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" contentstyletype="text/css" height="974.4px" preserveAspectRatio="none" style="width:1526px;height:974px;background:#FFFFFF;" version="1.1" viewBox="0 0 1526 974" width="1526.4px" zoomAndPan="magnify">
+  <g>
+    <g id="elem_Object">
+      <rect codeline="1" fill="#F1F1F1" height="57.6" id="Object" rx="3" ry="3" style="stroke:#181818;stroke-width:0.6;" width="86.9543" x="99.6" y="19.8"/>
+      <ellipse cx="117.6" cy="39" fill="#ADD1B2" rx="13.2" ry="13.2" style="stroke:#181818;stroke-width:1.2;"/>
+      <path d="M120.9187,34.05 Q121.1062,33.7875 121.3313,33.6563 Q121.5562,33.525 121.8188,33.525 Q122.2688,33.525 122.55,33.8438 Q122.8313,34.1438 122.8313,34.875 L122.8313,36.6188 Q122.8313,37.35 122.55,37.6687 Q122.2688,37.9875 121.8188,37.9875 Q121.4063,37.9875 121.1625,37.7438 Q120.9187,37.5188 120.7875,36.9 Q120.7312,36.4688 120.5063,36.2438 Q120.1125,35.7937 119.3813,35.5313 Q118.65,35.2688 117.9,35.2688 Q116.9812,35.2688 116.2125,35.6625 Q115.4625,36.0563 114.8625,36.9563 Q114.2813,37.8562 114.2813,39.0938 L114.2813,40.4063 Q114.2813,41.8875 115.35,42.8813 Q116.4187,43.8562 118.3313,43.8562 Q119.4563,43.8562 120.2437,43.5563 Q120.7125,43.3688 121.2188,42.8438 Q121.5375,42.525 121.7063,42.4313 Q121.8938,42.3375 122.1375,42.3375 Q122.5313,42.3375 122.8313,42.6563 Q123.15,42.9563 123.15,43.3688 Q123.15,43.7813 122.7375,44.2688 Q122.1375,44.9625 121.1812,45.3562 Q119.8875,45.9 118.3313,45.9 Q116.5125,45.9 115.0688,45.15 Q113.8875,44.55 113.0625,43.275 Q112.2375,41.9812 112.2375,40.4438 L112.2375,39.0563 Q112.2375,37.4625 112.9688,36.0938 Q113.7188,34.7063 115.0313,33.975 Q116.3438,33.225 117.825,33.225 Q118.7063,33.225 119.475,33.4313 Q120.2625,33.6188 120.9187,34.05 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="48.5543" x="134.4" y="45.9563" style="white-space: pre;">Object</text>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="100.8" x2="185.3543" y1="58.2" y2="58.2"/>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="100.8" x2="185.3543" y1="67.8" y2="67.8"/>
+    </g>
+    <g id="elem_ITest">
+      <rect codeline="3" fill="#F1F1F1" height="79.9453" id="ITest" rx="3" ry="3" style="stroke:#181818;stroke-width:0.6;" width="251.577" x="277.2" y="8.4"/>
+      <ellipse cx="379.2182" cy="27.6" fill="#B4A7E5" rx="13.2" ry="13.2" style="stroke:#181818;stroke-width:1.2;"/>
+      <path d="M380.3619,23.5687 L380.3619,31.5563 L382.4244,31.5563 Q383.1557,31.5563 383.4744,31.8375 Q383.7932,32.1188 383.7932,32.5875 Q383.7932,33.0375 383.4744,33.3188 Q383.1557,33.6 382.4244,33.6 L376.2557,33.6 Q375.5244,33.6 375.2057,33.3188 Q374.8869,33.0375 374.8869,32.5688 Q374.8869,32.1188 375.2057,31.8375 Q375.5244,31.5563 376.2557,31.5563 L378.3182,31.5563 L378.3182,23.5687 L376.2557,23.5687 Q375.5244,23.5687 375.2057,23.2875 Q374.8869,23.0062 374.8869,22.5375 Q374.8869,22.0875 375.2057,21.8063 Q375.5244,21.525 376.2557,21.525 L382.4244,21.525 Q383.1557,21.525 383.4744,21.8063 Q383.7932,22.0875 383.7932,22.5375 Q383.7932,23.0062 383.4744,23.2875 Q383.1557,23.5687 382.4244,23.5687 L380.3619,23.5687 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" font-style="italic" lengthAdjust="spacing" textLength="37.3406" x="403.8182" y="34.5563" style="white-space: pre;">ITest</text>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="278.4" x2="527.577" y1="46.8" y2="46.8"/>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="278.4" x2="527.577" y1="56.4" y2="56.4"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" font-style="italic" lengthAdjust="spacing" textLength="237.177" x="284.4" y="79.3289" style="white-space: pre;">String test(String name, int age)</text>
+    </g>
+    <g id="elem_Ancestor">
+      <rect codeline="7" fill="#F1F1F1" height="102.2906" id="Ancestor" rx="3" ry="3" style="stroke:#181818;stroke-width:0.6;" width="268.377" x="8.4" y="160.8"/>
+      <ellipse cx="104.3396" cy="180" fill="#ADD1B2" rx="13.2" ry="13.2" style="stroke:#181818;stroke-width:1.2;"/>
+      <path d="M107.6584,175.05 Q107.8459,174.7875 108.0709,174.6563 Q108.2959,174.525 108.5584,174.525 Q109.0084,174.525 109.2896,174.8438 Q109.5709,175.1437 109.5709,175.875 L109.5709,177.6188 Q109.5709,178.35 109.2896,178.6688 Q109.0084,178.9875 108.5584,178.9875 Q108.1459,178.9875 107.9021,178.7438 Q107.6584,178.5187 107.5271,177.9 Q107.4709,177.4688 107.2459,177.2438 Q106.8521,176.7938 106.1209,176.5313 Q105.3896,176.2687 104.6396,176.2687 Q103.7209,176.2687 102.9521,176.6625 Q102.2021,177.0563 101.6021,177.9562 Q101.0209,178.8563 101.0209,180.0938 L101.0209,181.4063 Q101.0209,182.8875 102.0896,183.8813 Q103.1584,184.8563 105.0709,184.8563 Q106.1959,184.8563 106.9834,184.5563 Q107.4521,184.3688 107.9584,183.8438 Q108.2771,183.525 108.4459,183.4313 Q108.6334,183.3375 108.8771,183.3375 Q109.2709,183.3375 109.5709,183.6563 Q109.8896,183.9562 109.8896,184.3688 Q109.8896,184.7813 109.4771,185.2687 Q108.8771,185.9625 107.9209,186.3563 Q106.6271,186.9 105.0709,186.9 Q103.2521,186.9 101.8084,186.15 Q100.6271,185.55 99.8021,184.275 Q98.9771,182.9813 98.9771,181.4438 L98.9771,180.0563 Q98.9771,178.4625 99.7084,177.0938 Q100.4584,175.7062 101.7709,174.975 Q103.0834,174.225 104.5646,174.225 Q105.4459,174.225 106.2146,174.4313 Q107.0021,174.6188 107.6584,175.05 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="66.2977" x="128.9396" y="186.9562" style="white-space: pre;">Ancestor</text>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="9.6" x2="275.577" y1="199.2" y2="199.2"/>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="9.6" x2="275.577" y1="208.8" y2="208.8"/>
+      <ellipse cx="21.6" cy="226.5727" fill="#84BE84" rx="3.6" ry="3.6" style="stroke:#038048;stroke-width:1.2;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="178.3113" x="32.4" y="231.7289" style="white-space: pre;">void sayFromAncestor()</text>
+      <ellipse cx="21.6" cy="248.918" fill="#84BE84" rx="3.6" ry="3.6" style="stroke:#038048;stroke-width:1.2;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="237.177" x="32.4" y="254.0742" style="white-space: pre;">String test(String name, int age)</text>
+    </g>
+    <g id="elem_GrandFather">
+      <rect codeline="12" fill="#F1F1F1" height="102.2906" id="GrandFather" rx="3" ry="3" style="stroke:#181818;stroke-width:0.6;" width="268.377" x="8.4" y="334.8"/>
+      <ellipse cx="89.8652" cy="354" fill="#ADD1B2" rx="13.2" ry="13.2" style="stroke:#181818;stroke-width:1.2;"/>
+      <path d="M93.184,349.05 Q93.3715,348.7875 93.5965,348.6563 Q93.8215,348.525 94.084,348.525 Q94.534,348.525 94.8152,348.8438 Q95.0965,349.1438 95.0965,349.875 L95.0965,351.6188 Q95.0965,352.35 94.8152,352.6688 Q94.534,352.9875 94.084,352.9875 Q93.6715,352.9875 93.4277,352.7438 Q93.184,352.5188 93.0527,351.9 Q92.9965,351.4688 92.7715,351.2438 Q92.3777,350.7938 91.6465,350.5313 Q90.9152,350.2688 90.1652,350.2688 Q89.2465,350.2688 88.4777,350.6625 Q87.7277,351.0563 87.1277,351.9563 Q86.5465,352.8563 86.5465,354.0938 L86.5465,355.4063 Q86.5465,356.8875 87.6152,357.8812 Q88.684,358.8563 90.5965,358.8563 Q91.7215,358.8563 92.509,358.5563 Q92.9777,358.3688 93.484,357.8438 Q93.8027,357.525 93.9715,357.4313 Q94.159,357.3375 94.4027,357.3375 Q94.7965,357.3375 95.0965,357.6563 Q95.4152,357.9563 95.4152,358.3688 Q95.4152,358.7813 95.0027,359.2688 Q94.4027,359.9625 93.4465,360.3563 Q92.1527,360.9 90.5965,360.9 Q88.7777,360.9 87.334,360.15 Q86.1527,359.55 85.3277,358.275 Q84.5027,356.9813 84.5027,355.4437 L84.5027,354.0563 Q84.5027,352.4625 85.234,351.0938 Q85.984,349.7063 87.2965,348.975 Q88.609,348.225 90.0902,348.225 Q90.9715,348.225 91.7402,348.4313 Q92.5277,348.6188 93.184,349.05 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="95.2465" x="114.4652" y="360.9563" style="white-space: pre;">GrandFather</text>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="9.6" x2="275.577" y1="373.2" y2="373.2"/>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="9.6" x2="275.577" y1="382.8" y2="382.8"/>
+      <ellipse cx="21.6" cy="400.5727" fill="#84BE84" rx="3.6" ry="3.6" style="stroke:#038048;stroke-width:1.2;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="207.2602" x="32.4" y="405.7289" style="white-space: pre;">void sayFromGrandFather()</text>
+      <ellipse cx="21.6" cy="422.918" fill="#84BE84" rx="3.6" ry="3.6" style="stroke:#038048;stroke-width:1.2;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="237.177" x="32.4" y="428.0742" style="white-space: pre;">String test(String name, int age)</text>
+    </g>
+    <g id="elem_Father">
+      <rect codeline="16" fill="#F1F1F1" height="102.2906" id="Father" rx="3" ry="3" style="stroke:#181818;stroke-width:0.6;" width="268.377" x="8.4" y="508.8"/>
+      <ellipse cx="113.2113" cy="528" fill="#ADD1B2" rx="13.2" ry="13.2" style="stroke:#181818;stroke-width:1.2;"/>
+      <path d="M116.5301,523.05 Q116.7176,522.7875 116.9426,522.6563 Q117.1676,522.525 117.4301,522.525 Q117.8801,522.525 118.1613,522.8438 Q118.4426,523.1438 118.4426,523.875 L118.4426,525.6188 Q118.4426,526.35 118.1613,526.6687 Q117.8801,526.9875 117.4301,526.9875 Q117.0176,526.9875 116.7738,526.7438 Q116.5301,526.5188 116.3988,525.9 Q116.3426,525.4688 116.1176,525.2438 Q115.7238,524.7937 114.9926,524.5313 Q114.2613,524.2688 113.5113,524.2688 Q112.5926,524.2688 111.8238,524.6625 Q111.0738,525.0563 110.4738,525.9563 Q109.8926,526.8562 109.8926,528.0938 L109.8926,529.4063 Q109.8926,530.8875 110.9613,531.8813 Q112.0301,532.8562 113.9426,532.8562 Q115.0676,532.8562 115.8551,532.5563 Q116.3238,532.3688 116.8301,531.8438 Q117.1488,531.525 117.3176,531.4313 Q117.5051,531.3375 117.7488,531.3375 Q118.1426,531.3375 118.4426,531.6563 Q118.7613,531.9563 118.7613,532.3688 Q118.7613,532.7813 118.3488,533.2688 Q117.7488,533.9625 116.7926,534.3562 Q115.4988,534.9 113.9426,534.9 Q112.1238,534.9 110.6801,534.15 Q109.4988,533.55 108.6738,532.275 Q107.8488,530.9812 107.8488,529.4438 L107.8488,528.0563 Q107.8488,526.4625 108.5801,525.0938 Q109.3301,523.7063 110.6426,522.975 Q111.9551,522.225 113.4363,522.225 Q114.3176,522.225 115.0863,522.4313 Q115.8738,522.6188 116.5301,523.05 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="48.5543" x="137.8113" y="534.9563" style="white-space: pre;">Father</text>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="9.6" x2="275.577" y1="547.2" y2="547.2"/>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="9.6" x2="275.577" y1="556.8" y2="556.8"/>
+      <ellipse cx="21.6" cy="574.5727" fill="#84BE84" rx="3.6" ry="3.6" style="stroke:#038048;stroke-width:1.2;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="160.568" x="32.4" y="579.7289" style="white-space: pre;">void sayFromFather()</text>
+      <ellipse cx="21.6" cy="596.918" fill="#84BE84" rx="3.6" ry="3.6" style="stroke:#038048;stroke-width:1.2;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="237.177" x="32.4" y="602.0742" style="white-space: pre;">String test(String name, int age)</text>
+    </g>
+    <g id="elem_IAnimal">
+      <rect codeline="21" fill="#F1F1F1" height="102.2906" id="IAnimal" rx="3" ry="3" style="stroke:#181818;stroke-width:0.6;" width="268.377" x="319.2" y="160.8"/>
+      <ellipse cx="420.2789" cy="180" fill="#B4A7E5" rx="13.2" ry="13.2" style="stroke:#181818;stroke-width:1.2;"/>
+      <path d="M421.4227,175.9688 L421.4227,183.9562 L423.4852,183.9562 Q424.2164,183.9562 424.5352,184.2375 Q424.8539,184.5187 424.8539,184.9875 Q424.8539,185.4375 424.5352,185.7188 Q424.2164,186 423.4852,186 L417.3164,186 Q416.5852,186 416.2664,185.7188 Q415.9477,185.4375 415.9477,184.9688 Q415.9477,184.5187 416.2664,184.2375 Q416.5852,183.9562 417.3164,183.9562 L419.3789,183.9562 L419.3789,175.9688 L417.3164,175.9688 Q416.5852,175.9688 416.2664,175.6875 Q415.9477,175.4063 415.9477,174.9375 Q415.9477,174.4875 416.2664,174.2062 Q416.5852,173.925 417.3164,173.925 L423.4852,173.925 Q424.2164,173.925 424.5352,174.2062 Q424.8539,174.4875 424.8539,174.9375 Q424.8539,175.4063 424.5352,175.6875 Q424.2164,175.9688 423.4852,175.9688 L421.4227,175.9688 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" font-style="italic" lengthAdjust="spacing" textLength="56.0191" x="444.8789" y="186.9562" style="white-space: pre;">IAnimal</text>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="320.4" x2="586.377" y1="199.2" y2="199.2"/>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="320.4" x2="586.377" y1="208.8" y2="208.8"/>
+      <ellipse cx="332.4" cy="226.5727" fill="#84BE84" rx="3.6" ry="3.6" style="stroke:#038048;stroke-width:1.2;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="163.3652" x="343.2" y="231.7289" style="white-space: pre;">void sayFromAnimal()</text>
+      <ellipse cx="332.4" cy="248.918" fill="#84BE84" rx="3.6" ry="3.6" style="stroke:#038048;stroke-width:1.2;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="237.177" x="343.2" y="254.0742" style="white-space: pre;">String test(String name, int age)</text>
+    </g>
+    <g id="elem_IMammal">
+      <rect codeline="26" fill="#F1F1F1" height="102.2906" id="IMammal" rx="3" ry="3" style="stroke:#181818;stroke-width:0.6;" width="268.377" x="319.2" y="334.8"/>
+      <ellipse cx="413.7533" cy="354" fill="#B4A7E5" rx="13.2" ry="13.2" style="stroke:#181818;stroke-width:1.2;"/>
+      <path d="M414.8971,349.9688 L414.8971,357.9563 L416.9596,357.9563 Q417.6908,357.9563 418.0096,358.2375 Q418.3283,358.5188 418.3283,358.9875 Q418.3283,359.4375 418.0096,359.7188 Q417.6908,360 416.9596,360 L410.7908,360 Q410.0596,360 409.7408,359.7188 Q409.4221,359.4375 409.4221,358.9688 Q409.4221,358.5188 409.7408,358.2375 Q410.0596,357.9563 410.7908,357.9563 L412.8533,357.9563 L412.8533,349.9688 L410.7908,349.9688 Q410.0596,349.9688 409.7408,349.6875 Q409.4221,349.4063 409.4221,348.9375 Q409.4221,348.4875 409.7408,348.2063 Q410.0596,347.925 410.7908,347.925 L416.9596,347.925 Q417.6908,347.925 418.0096,348.2063 Q418.3283,348.4875 418.3283,348.9375 Q418.3283,349.4063 418.0096,349.6875 Q417.6908,349.9688 416.9596,349.9688 L414.8971,349.9688 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" font-style="italic" lengthAdjust="spacing" textLength="69.0703" x="438.3533" y="360.9563" style="white-space: pre;">IMammal</text>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="320.4" x2="586.377" y1="373.2" y2="373.2"/>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="320.4" x2="586.377" y1="382.8" y2="382.8"/>
+      <ellipse cx="332.4" cy="400.5727" fill="#84BE84" rx="3.6" ry="3.6" style="stroke:#038048;stroke-width:1.2;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="176.4164" x="343.2" y="405.7289" style="white-space: pre;">void sayFromMammal()</text>
+      <ellipse cx="332.4" cy="422.918" fill="#84BE84" rx="3.6" ry="3.6" style="stroke:#038048;stroke-width:1.2;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="237.177" x="343.2" y="428.0742" style="white-space: pre;">String test(String name, int age)</text>
+    </g>
+    <g id="elem_ICat">
+      <rect codeline="31" fill="#F1F1F1" height="102.2906" id="ICat" rx="3" ry="3" style="stroke:#181818;stroke-width:0.6;" width="268.377" x="319.2" y="508.8"/>
+      <ellipse cx="432.883" cy="528" fill="#B4A7E5" rx="13.2" ry="13.2" style="stroke:#181818;stroke-width:1.2;"/>
+      <path d="M434.0268,523.9688 L434.0268,531.9563 L436.0893,531.9563 Q436.8205,531.9563 437.1393,532.2375 Q437.458,532.5188 437.458,532.9875 Q437.458,533.4375 437.1393,533.7188 Q436.8205,534 436.0893,534 L429.9205,534 Q429.1893,534 428.8705,533.7188 Q428.5518,533.4375 428.5518,532.9688 Q428.5518,532.5188 428.8705,532.2375 Q429.1893,531.9563 429.9205,531.9563 L431.983,531.9563 L431.983,523.9688 L429.9205,523.9688 Q429.1893,523.9688 428.8705,523.6875 Q428.5518,523.4063 428.5518,522.9375 Q428.5518,522.4875 428.8705,522.2063 Q429.1893,521.925 429.9205,521.925 L436.0893,521.925 Q436.8205,521.925 437.1393,522.2063 Q437.458,522.4875 437.458,522.9375 Q437.458,523.4063 437.1393,523.6875 Q436.8205,523.9688 436.0893,523.9688 L434.0268,523.9688 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" font-style="italic" lengthAdjust="spacing" textLength="30.8109" x="457.483" y="534.9563" style="white-space: pre;">ICat</text>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="320.4" x2="586.377" y1="547.2" y2="547.2"/>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="320.4" x2="586.377" y1="556.8" y2="556.8"/>
+      <ellipse cx="332.4" cy="574.5727" fill="#84BE84" rx="3.6" ry="3.6" style="stroke:#038048;stroke-width:1.2;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="138.157" x="343.2" y="579.7289" style="white-space: pre;">void sayFromCat()</text>
+      <ellipse cx="332.4" cy="596.918" fill="#84BE84" rx="3.6" ry="3.6" style="stroke:#038048;stroke-width:1.2;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="237.177" x="343.2" y="602.0742" style="white-space: pre;">String test(String name, int age)</text>
+    </g>
+    <g id="elem_IDog">
+      <rect codeline="36" fill="#F1F1F1" height="102.2906" id="IDog" rx="3" ry="3" style="stroke:#181818;stroke-width:0.6;" width="268.377" x="630" y="508.8"/>
+      <ellipse cx="741.3451" cy="528" fill="#B4A7E5" rx="13.2" ry="13.2" style="stroke:#181818;stroke-width:1.2;"/>
+      <path d="M742.4889,523.9688 L742.4889,531.9563 L744.5514,531.9563 Q745.2826,531.9563 745.6014,532.2375 Q745.9201,532.5188 745.9201,532.9875 Q745.9201,533.4375 745.6014,533.7188 Q745.2826,534 744.5514,534 L738.3826,534 Q737.6514,534 737.3326,533.7188 Q737.0139,533.4375 737.0139,532.9688 Q737.0139,532.5188 737.3326,532.2375 Q737.6514,531.9563 738.3826,531.9563 L740.4451,531.9563 L740.4451,523.9688 L738.3826,523.9688 Q737.6514,523.9688 737.3326,523.6875 Q737.0139,523.4063 737.0139,522.9375 Q737.0139,522.4875 737.3326,522.2063 Q737.6514,521.925 738.3826,521.925 L744.5514,521.925 Q745.2826,521.925 745.6014,522.2063 Q745.9201,522.4875 745.9201,522.9375 Q745.9201,523.4063 745.6014,523.6875 Q745.2826,523.9688 744.5514,523.9688 L742.4889,523.9688 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" font-style="italic" lengthAdjust="spacing" textLength="35.4867" x="765.9451" y="534.9563" style="white-space: pre;">IDog</text>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="631.2" x2="897.177" y1="547.2" y2="547.2"/>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="631.2" x2="897.177" y1="556.8" y2="556.8"/>
+      <ellipse cx="643.2" cy="574.5727" fill="#84BE84" rx="3.6" ry="3.6" style="stroke:#038048;stroke-width:1.2;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="142.8328" x="654" y="579.7289" style="white-space: pre;">void sayFromDog()</text>
+      <ellipse cx="643.2" cy="596.918" fill="#84BE84" rx="3.6" ry="3.6" style="stroke:#038048;stroke-width:1.2;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="237.177" x="654" y="602.0742" style="white-space: pre;">String test(String name, int age)</text>
+    </g>
+    <g id="elem_HelloWorld">
+      <rect codeline="4" fill="#F1F1F1" height="142.1813" id="HelloWorld" rx="3" ry="3" style="stroke:#181818;stroke-width:0.6;" width="420.5859" x="243.6" y="701.4"/>
+      <ellipse cx="407.7158" cy="720.6" fill="#ADD1B2" rx="13.2" ry="13.2" style="stroke:#181818;stroke-width:1.2;"/>
+      <path d="M411.0346,715.65 Q411.2221,715.3875 411.4471,715.2563 Q411.6721,715.125 411.9346,715.125 Q412.3846,715.125 412.6658,715.4438 Q412.9471,715.7438 412.9471,716.475 L412.9471,718.2188 Q412.9471,718.95 412.6658,719.2688 Q412.3846,719.5875 411.9346,719.5875 Q411.5221,719.5875 411.2783,719.3438 Q411.0346,719.1188 410.9033,718.5 Q410.8471,718.0688 410.6221,717.8438 Q410.2283,717.3938 409.4971,717.1313 Q408.7658,716.8688 408.0158,716.8688 Q407.0971,716.8688 406.3283,717.2625 Q405.5783,717.6563 404.9783,718.5563 Q404.3971,719.4563 404.3971,720.6938 L404.3971,722.0063 Q404.3971,723.4875 405.4658,724.4812 Q406.5346,725.4563 408.4471,725.4563 Q409.5721,725.4563 410.3596,725.1563 Q410.8283,724.9688 411.3346,724.4438 Q411.6533,724.125 411.8221,724.0313 Q412.0096,723.9375 412.2533,723.9375 Q412.6471,723.9375 412.9471,724.2563 Q413.2658,724.5563 413.2658,724.9688 Q413.2658,725.3813 412.8533,725.8688 Q412.2533,726.5625 411.2971,726.9563 Q410.0033,727.5 408.4471,727.5 Q406.6283,727.5 405.1846,726.75 Q404.0033,726.15 403.1783,724.875 Q402.3533,723.5813 402.3533,722.0437 L402.3533,720.6563 Q402.3533,719.0625 403.0846,717.6938 Q403.8346,716.3063 405.1471,715.575 Q406.4596,714.825 407.9408,714.825 Q408.8221,714.825 409.5908,715.0313 Q410.3783,715.2188 411.0346,715.65 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="82.1543" x="432.3158" y="727.5563" style="white-space: pre;">HelloWorld</text>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="244.8" x2="662.9859" y1="739.8" y2="739.8"/>
+      <ellipse cx="256.8" cy="784.718" fill="#84BE84" rx="3.6" ry="3.6" style="stroke:#038048;stroke-width:1.2;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="158.6813" x="267.6" y="789.8742" style="white-space: pre;">sayFromHelloWorld()</text>
+      <ellipse cx="256.8" cy="807.0633" fill="#84BE84" rx="3.6" ry="3.6" style="stroke:#038048;stroke-width:1.2;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="237.177" x="267.6" y="812.2195" style="white-space: pre;">String test(String name, int age)</text>
+      <polygon fill="#4177AF" points="256.8,824.6086,252,831.8086,261.6,831.8086" style="stroke:#1963A0;stroke-width:1.2;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="389.3859" x="267.6" y="834.5648" style="white-space: pre;">String test$accessor$Abc$Xyz(String name, int age)</text>
+      <line style="stroke:#181818;stroke-width:1.2;" x1="244.8" x2="412.8158" y1="760.5727" y2="760.5727"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="82.1543" x="412.8158" y="766.9289" style="white-space: pre;">HelloWorld</text>
+      <line style="stroke:#181818;stroke-width:1.2;" x1="494.9701" x2="662.9859" y1="760.5727" y2="760.5727"/>
+    </g>
+    <g id="elem_HardWorker">
+      <rect codeline="11" fill="#F1F1F1" height="79.9453" id="HardWorker" rx="3" ry="3" style="stroke:#181818;stroke-width:0.6;" width="467.5242" x="725.4" y="732.6"/>
+      <ellipse cx="908.7891" cy="751.8" fill="#ADD1B2" rx="13.2" ry="13.2" style="stroke:#181818;stroke-width:1.2;"/>
+      <path d="M912.1078,746.85 Q912.2953,746.5875 912.5203,746.4563 Q912.7453,746.325 913.0078,746.325 Q913.4578,746.325 913.7391,746.6438 Q914.0203,746.9438 914.0203,747.675 L914.0203,749.4187 Q914.0203,750.15 913.7391,750.4688 Q913.4578,750.7875 913.0078,750.7875 Q912.5953,750.7875 912.3516,750.5437 Q912.1078,750.3188 911.9766,749.7 Q911.9203,749.2688 911.6953,749.0437 Q911.3016,748.5938 910.5703,748.3313 Q909.8391,748.0688 909.0891,748.0688 Q908.1703,748.0688 907.4016,748.4625 Q906.6516,748.8562 906.0516,749.7563 Q905.4703,750.6563 905.4703,751.8938 L905.4703,753.2063 Q905.4703,754.6875 906.5391,755.6813 Q907.6078,756.6563 909.5203,756.6563 Q910.6453,756.6563 911.4328,756.3562 Q911.9016,756.1687 912.4078,755.6438 Q912.7266,755.325 912.8953,755.2312 Q913.0828,755.1375 913.3266,755.1375 Q913.7203,755.1375 914.0203,755.4563 Q914.3391,755.7563 914.3391,756.1687 Q914.3391,756.5813 913.9266,757.0688 Q913.3266,757.7625 912.3703,758.1563 Q911.0766,758.7 909.5203,758.7 Q907.7016,758.7 906.2578,757.95 Q905.0766,757.35 904.2516,756.075 Q903.4266,754.7813 903.4266,753.2438 L903.4266,751.8562 Q903.4266,750.2625 904.1578,748.8938 Q904.9078,747.5063 906.2203,746.775 Q907.5328,746.025 909.0141,746.025 Q909.8953,746.025 910.6641,746.2312 Q911.4516,746.4187 912.1078,746.85 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="90.5461" x="933.3891" y="758.7563" style="white-space: pre;">HardWorker</text>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="726.6" x2="1191.7242" y1="771" y2="771"/>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="726.6" x2="1191.7242" y1="780.6" y2="780.6"/>
+      <ellipse cx="738.6" cy="798.3727" fill="#84BE84" rx="3.6" ry="3.6" style="stroke:#038048;stroke-width:1.2;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" text-decoration="underline" textLength="436.3242" x="749.4" y="803.5289" style="white-space: pre;">Object doWork(@DefaultCall Callable&lt;String&gt; executable)</text>
+    </g>
+    <g id="elem_HelloWorld$auxiliary$Proxy">
+      <rect codeline="15" fill="#F1F1F1" height="169.3266" id="HelloWorld$auxiliary$Proxy" rx="3" ry="3" style="stroke:#181818;stroke-width:0.6;" width="243.8062" x="1253.4" y="687.6"/>
+      <ellipse cx="1271.4" cy="706.8" fill="#ADD1B2" rx="13.2" ry="13.2" style="stroke:#181818;stroke-width:1.2;"/>
+      <path d="M1274.7188,701.85 Q1274.9063,701.5875 1275.1313,701.4563 Q1275.3563,701.325 1275.6187,701.325 Q1276.0688,701.325 1276.35,701.6438 Q1276.6313,701.9438 1276.6313,702.675 L1276.6313,704.4187 Q1276.6313,705.15 1276.35,705.4688 Q1276.0688,705.7875 1275.6187,705.7875 Q1275.2063,705.7875 1274.9625,705.5437 Q1274.7188,705.3188 1274.5875,704.7 Q1274.5313,704.2688 1274.3062,704.0437 Q1273.9125,703.5938 1273.1812,703.3313 Q1272.45,703.0688 1271.7,703.0688 Q1270.7813,703.0688 1270.0125,703.4625 Q1269.2625,703.8562 1268.6625,704.7563 Q1268.0813,705.6563 1268.0813,706.8938 L1268.0813,708.2063 Q1268.0813,709.6875 1269.15,710.6813 Q1270.2188,711.6563 1272.1313,711.6563 Q1273.2563,711.6563 1274.0438,711.3562 Q1274.5125,711.1687 1275.0188,710.6438 Q1275.3375,710.325 1275.5063,710.2312 Q1275.6938,710.1375 1275.9375,710.1375 Q1276.3313,710.1375 1276.6313,710.4563 Q1276.95,710.7563 1276.95,711.1687 Q1276.95,711.5813 1276.5375,712.0688 Q1275.9375,712.7625 1274.9813,713.1563 Q1273.6875,713.7 1272.1313,713.7 Q1270.3125,713.7 1268.8687,712.95 Q1267.6875,712.35 1266.8625,711.075 Q1266.0375,709.7813 1266.0375,708.2438 L1266.0375,706.8562 Q1266.0375,705.2625 1266.7688,703.8938 Q1267.5188,702.5063 1268.8313,701.775 Q1270.1438,701.025 1271.625,701.025 Q1272.5063,701.025 1273.275,701.2312 Q1274.0625,701.4187 1274.7188,701.85 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="205.4063" x="1288.2" y="713.7563" style="white-space: pre;">HelloWorld$auxiliary$Proxy</text>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="1254.6" x2="1496.0063" y1="726" y2="726"/>
+      <rect fill="none" height="7.2" style="stroke:#C82930;stroke-width:1.2;" width="7.2" x="1263" y="740.1727"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="129.7816" x="1277.4" y="748.9289" style="white-space: pre;">HelloWorld target</text>
+      <rect fill="none" height="7.2" style="stroke:#C82930;stroke-width:1.2;" width="7.2" x="1263" y="762.518"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="90.5789" x="1277.4" y="771.2742" style="white-space: pre;">String name</text>
+      <rect fill="none" height="7.2" style="stroke:#C82930;stroke-width:1.2;" width="7.2" x="1263" y="784.8633"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="50.441" x="1277.4" y="793.6195" style="white-space: pre;">int age</text>
+      <line style="stroke:#181818;stroke-width:1.2;" x1="1254.6" x2="1496.0063" y1="802.6359" y2="802.6359"/>
+      <ellipse cx="1266.6" cy="820.4086" fill="#84BE84" rx="3.6" ry="3.6" style="stroke:#038048;stroke-width:1.2;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="89.6191" x="1277.4" y="825.5648" style="white-space: pre;">Object call()</text>
+      <ellipse cx="1266.6" cy="842.7539" fill="#84BE84" rx="3.6" ry="3.6" style="stroke:#038048;stroke-width:1.2;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" lengthAdjust="spacing" textLength="70.957" x="1277.4" y="847.9102" style="white-space: pre;">void run()</text>
+    </g>
+    <g id="elem_Runnable">
+      <rect fill="#F1F1F1" height="57.6" id="Runnable" rx="3" ry="3" style="stroke:#181818;stroke-width:0.6;" width="110.325" x="1245.6" y="531"/>
+      <ellipse cx="1263.6" cy="550.2" fill="#B4A7E5" rx="13.2" ry="13.2" style="stroke:#181818;stroke-width:1.2;"/>
+      <path d="M1264.7437,546.1687 L1264.7437,554.1563 L1266.8062,554.1563 Q1267.5375,554.1563 1267.8563,554.4375 Q1268.175,554.7188 1268.175,555.1875 Q1268.175,555.6375 1267.8563,555.9187 Q1267.5375,556.2 1266.8062,556.2 L1260.6375,556.2 Q1259.9063,556.2 1259.5875,555.9187 Q1259.2688,555.6375 1259.2688,555.1687 Q1259.2688,554.7188 1259.5875,554.4375 Q1259.9063,554.1563 1260.6375,554.1563 L1262.7,554.1563 L1262.7,546.1687 L1260.6375,546.1687 Q1259.9063,546.1687 1259.5875,545.8875 Q1259.2688,545.6062 1259.2688,545.1375 Q1259.2688,544.6875 1259.5875,544.4063 Q1259.9063,544.125 1260.6375,544.125 L1266.8062,544.125 Q1267.5375,544.125 1267.8563,544.4063 Q1268.175,544.6875 1268.175,545.1375 Q1268.175,545.6062 1267.8563,545.8875 Q1267.5375,546.1687 1266.8062,546.1687 L1264.7437,546.1687 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" font-style="italic" lengthAdjust="spacing" textLength="71.925" x="1280.4" y="557.1563" style="white-space: pre;">Runnable</text>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="1246.8" x2="1354.725" y1="569.4" y2="569.4"/>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="1246.8" x2="1354.725" y1="579" y2="579"/>
+    </g>
+    <g id="elem_Callable">
+      <rect fill="#F1F1F1" height="57.6" id="Callable" rx="3" ry="3" style="stroke:#181818;stroke-width:0.6;" width="99.1031" x="1398.6" y="531"/>
+      <ellipse cx="1416.6" cy="550.2" fill="#B4A7E5" rx="13.2" ry="13.2" style="stroke:#181818;stroke-width:1.2;"/>
+      <path d="M1417.7437,546.1687 L1417.7437,554.1563 L1419.8062,554.1563 Q1420.5375,554.1563 1420.8563,554.4375 Q1421.175,554.7188 1421.175,555.1875 Q1421.175,555.6375 1420.8563,555.9187 Q1420.5375,556.2 1419.8062,556.2 L1413.6375,556.2 Q1412.9063,556.2 1412.5875,555.9187 Q1412.2688,555.6375 1412.2688,555.1687 Q1412.2688,554.7188 1412.5875,554.4375 Q1412.9063,554.1563 1413.6375,554.1563 L1415.7,554.1563 L1415.7,546.1687 L1413.6375,546.1687 Q1412.9063,546.1687 1412.5875,545.8875 Q1412.2688,545.6062 1412.2688,545.1375 Q1412.2688,544.6875 1412.5875,544.4063 Q1412.9063,544.125 1413.6375,544.125 L1419.8062,544.125 Q1420.5375,544.125 1420.8563,544.4063 Q1421.175,544.6875 1421.175,545.1375 Q1421.175,545.6062 1420.8563,545.8875 Q1420.5375,546.1687 1419.8062,546.1687 L1417.7437,546.1687 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="16.8" font-style="italic" lengthAdjust="spacing" textLength="60.7031" x="1433.4" y="557.1563" style="white-space: pre;">Callable</text>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="1399.8" x2="1496.5031" y1="569.4" y2="569.4"/>
+      <line style="stroke:#181818;stroke-width:0.6;" x1="1399.8" x2="1496.5031" y1="579" y2="579"/>
+    </g>
+    <g id="elem_GMN29">
+      <path d="M1231.8,933.6 L1231.8,966.3492 A0,0 0 0 0 1231.8,966.3492 L1518.8637,966.3492 A0,0 0 0 0 1518.8637,966.3492 L1518.8637,945.6 L1506.8637,933.6 L1380,933.6 L1375.2,862.032 L1370.4,933.6 L1231.8,933.6 A0,0 0 0 0 1231.8,933.6 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.6;"/>
+      <path d="M1506.8637,933.6 L1506.8637,945.6 L1518.8637,945.6 L1506.8637,933.6 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.6;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="15.6" lengthAdjust="spacing" textLength="261.8637" x="1239" y="956.434" style="white-space: pre;">Proxy Class Generated by ByteBuddy</text>
+    </g>
+    <g id="link_Object_Ancestor">
+      <path d="M142.8,99.048 C142.8,121.848 142.8,133.2 142.8,160.62 " fill="none" id="Object-backto-Ancestor" style="stroke:#181818;stroke-width:1.2;"/>
+      <polygon fill="none" points="142.8,77.448,135.6,99.048,150,99.048,142.8,77.448" style="stroke:#181818;stroke-width:1.2;"/>
+    </g>
+    <g id="link_ITest_Ancestor">
+      <path d="M321.4498,100.281 C286.5298,121.845 261.18,137.496 223.788,160.584 " fill="none" id="ITest-backto-Ancestor" style="stroke:#181818;stroke-width:1.2;stroke-dasharray:7.0,7.0;"/>
+      <polygon fill="none" points="339.828,88.932,317.6668,94.155,325.2328,106.4071,339.828,88.932" style="stroke:#181818;stroke-width:1.2;"/>
+    </g>
+    <g id="link_Ancestor_GrandFather">
+      <path d="M142.8,284.7 C142.8,307.248 142.8,312.216 142.8,334.74 " fill="none" id="Ancestor-backto-GrandFather" style="stroke:#181818;stroke-width:1.2;"/>
+      <polygon fill="none" points="142.8,263.1,135.6,284.7,150,284.7,142.8,263.1" style="stroke:#181818;stroke-width:1.2;"/>
+    </g>
+    <g id="link_GrandFather_Father">
+      <path d="M142.8,458.7 C142.8,481.248 142.8,486.216 142.8,508.74 " fill="none" id="GrandFather-backto-Father" style="stroke:#181818;stroke-width:1.2;"/>
+      <polygon fill="none" points="142.8,437.1,135.6,458.7,150,458.7,142.8,437.1" style="stroke:#181818;stroke-width:1.2;"/>
+    </g>
+    <g id="link_ITest_IAnimal">
+      <path d="M421.9889,109.7458 C428.7569,131.3218 430.74,137.664 437.964,160.704 " fill="none" id="ITest-backto-IAnimal" style="stroke:#181818;stroke-width:1.2;"/>
+      <polygon fill="none" points="415.524,89.136,415.119,111.9008,428.8589,107.5908,415.524,89.136" style="stroke:#181818;stroke-width:1.2;"/>
+    </g>
+    <g id="link_IAnimal_IMammal">
+      <path d="M453.6,284.7 C453.6,307.248 453.6,312.216 453.6,334.74 " fill="none" id="IAnimal-backto-IMammal" style="stroke:#181818;stroke-width:1.2;"/>
+      <polygon fill="none" points="453.6,263.1,446.4,284.7,460.8,284.7,453.6,263.1" style="stroke:#181818;stroke-width:1.2;"/>
+    </g>
+    <g id="link_IMammal_ICat">
+      <path d="M453.6,458.7 C453.6,481.248 453.6,486.216 453.6,508.74 " fill="none" id="IMammal-backto-ICat" style="stroke:#181818;stroke-width:1.2;"/>
+      <polygon fill="none" points="453.6,437.1,446.4,458.7,460.8,458.7,453.6,437.1" style="stroke:#181818;stroke-width:1.2;"/>
+    </g>
+    <g id="link_IMammal_IDog">
+      <path d="M562.8189,447.3046 C603.6789,469.8766 632.976,486.036 673.86,508.608 " fill="none" id="IMammal-backto-IDog" style="stroke:#181818;stroke-width:1.2;"/>
+      <polygon fill="none" points="543.912,436.86,559.3374,453.6069,566.3004,441.0023,543.912,436.86" style="stroke:#181818;stroke-width:1.2;"/>
+    </g>
+    <g id="link_Father_HelloWorld">
+      <path d="M234.7495,623.121 C272.4535,648.597 301.152,668.004 343.02,696.276 " fill="none" id="Father-backto-HelloWorld" style="stroke:#181818;stroke-width:1.2;"/>
+      <polygon fill="none" points="216.852,611.028,230.7184,629.0868,238.7805,617.1552,216.852,611.028" style="stroke:#181818;stroke-width:1.2;"/>
+    </g>
+    <g id="link_ICat_HelloWorld">
+      <path d="M453.6,632.904 C453.6,658.38 453.6,668.232 453.6,696.456 " fill="none" id="ICat-backto-HelloWorld" style="stroke:#181818;stroke-width:1.2;stroke-dasharray:7.0,7.0;"/>
+      <polygon fill="none" points="453.6,611.304,446.4,632.904,460.8,632.904,453.6,611.304" style="stroke:#181818;stroke-width:1.2;"/>
+    </g>
+    <g id="link_IDog_HelloWorld">
+      <path d="M672.4505,623.121 C634.7465,648.597 606.048,668.004 564.18,696.276 " fill="none" id="IDog-backto-HelloWorld" style="stroke:#181818;stroke-width:1.2;stroke-dasharray:7.0,7.0;"/>
+      <polygon fill="none" points="690.348,611.028,668.4195,617.1552,676.4816,629.0868,690.348,611.028" style="stroke:#181818;stroke-width:1.2;"/>
+    </g>
+    <g id="link_Runnable_HelloWorld$auxiliary$Proxy">
+      <path d="M1317.8963,609.2455 C1326.4043,633.2335 1331.916,648.828 1343.832,682.476 " fill="none" id="Runnable-backto-HelloWorld$auxiliary$Proxy" style="stroke:#181818;stroke-width:1.2;stroke-dasharray:7.0,7.0;"/>
+      <polygon fill="none" points="1310.676,588.888,1311.1105,611.6523,1324.6822,606.8387,1310.676,588.888" style="stroke:#181818;stroke-width:1.2;"/>
+    </g>
+    <g id="link_Callable_HelloWorld$auxiliary$Proxy">
+      <path d="M1431.5685,609.2838 C1423.2045,633.2718 1417.788,648.828 1406.064,682.476 " fill="none" id="Callable-backto-HelloWorld$auxiliary$Proxy" style="stroke:#181818;stroke-width:1.2;stroke-dasharray:7.0,7.0;"/>
+      <polygon fill="none" points="1438.68,588.888,1424.7699,606.9133,1438.3671,611.6542,1438.68,588.888" style="stroke:#181818;stroke-width:1.2;"/>
+    </g>
+    <g id="link_HelloWorld_HardWorker">
+      <path codeline="26" d="M664.8,804.6 C691.728,804.6 690.672,796.2 717.6,796.2 " fill="none" id="HelloWorld-to-HardWorker" style="stroke:#181818;stroke-width:1.2;"/>
+      <polygon fill="#181818" points="724.8,796.2,714,791.4,718.8,796.2,714,801,724.8,796.2" style="stroke:#181818;stroke-width:1.2;"/>
+    </g>
+    <g id="link_HardWorker_HelloWorld$auxiliary$Proxy">
+      <path codeline="27" d="M1194,796.2 C1210.08,800.268 1219.7031,802.1603 1236.3231,803.0843 " fill="none" id="HardWorker-to-HelloWorld$auxiliary$Proxy" style="stroke:#181818;stroke-width:1.2;"/>
+      <polygon fill="#181818" points="1243.512,803.484,1232.9951,798.0919,1237.5213,803.1509,1232.4622,807.6771,1243.512,803.484" style="stroke:#181818;stroke-width:1.2;"/>
+    </g>
+    <g id="link_HelloWorld_HelloWorld$auxiliary$Proxy">
+      <path codeline="28" d="M 672 826.2 C 704.556 826.2 697.642 860.044 752.325 883.659 C 827.3 916.037 1103.501 921.723 1150.887 895.834 C 1172.489 884.032 1222.068 817.8 1252.8 817.8" fill="none" id="HelloWorld-backto-HelloWorld$auxiliary$Proxy" style="stroke:#181818;stroke-width:1.2;"/>
+      <polygon fill="#181818" points="664.8,826.2,675.6,831,670.8,826.2,675.6,821.4,664.8,826.2" style="stroke:#181818;stroke-width:1.2;"/>
+    </g>
+  </g>
+</svg>

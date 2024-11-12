@@ -88,12 +88,12 @@ import java.io.File;
 import java.util.Map;
 
 public class HelloWorldTransform {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
-        Class<?> clazz = Class.forName(className);
+        Class<?> clazz = ClassUtils.loadClass(className);
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.rebase(clazz);
 
@@ -103,7 +103,7 @@ public class HelloWorldTransform {
                 MethodDelegation.to(HardWorker.class)
         );
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         Map<TypeDescription, File> map = unloadedType.saveIn(FileUtils.OUTPUT_DIR);
         for (Map.Entry<TypeDescription, File> entry : map.entrySet()) {

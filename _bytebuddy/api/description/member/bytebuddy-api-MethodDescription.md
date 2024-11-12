@@ -266,7 +266,7 @@ public class HelloWorldAnalysis {
         int index = 0;
         for (String[] methodNameArray : methodNameMatrix) {
             String className = methodNameArray[0];
-            Class<?> clazz = Class.forName(className);
+            Class<?> clazz = ClassUtils.loadClass(className);
 
 
             TypeDescription typeDesc = TypeDescription.ForLoadedType.of(clazz);

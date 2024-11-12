@@ -25,14 +25,14 @@ import net.bytebuddy.description.modifier.Visibility;
 import net.bytebuddy.dynamic.DynamicType;
 
 public class HelloWorldGenerate {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String parentAnimal = "sample.Animal";
         String childCat = "sample.Cat";
         String childDog = "sample.Dog";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
 
         DynamicType.Builder<?> animalBuilder = byteBuddy.subclass(Object.class)
@@ -48,7 +48,7 @@ public class HelloWorldGenerate {
         animalBuilder = animalBuilder.permittedSubclass(catBuilder.toTypeDescription(), dogBuilder.toTypeDescription());
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = animalBuilder.make().include(catBuilder.make(), dogBuilder.make());
         OutputUtils.save(unloadedType);
     }

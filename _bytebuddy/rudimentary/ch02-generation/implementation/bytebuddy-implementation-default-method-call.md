@@ -46,7 +46,7 @@ public class HelloWorld implements Dog, Cat {
 import lsieun.utils.InvokeUtils;
 
 public class HelloWorldRun {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         InvokeUtils.invokeAllMethods("sample.HelloWorld");
     }
 }
@@ -59,12 +59,12 @@ import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.implementation.DefaultMethodCall;
 
 public class HelloWorldGenerate {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .implement(Dog.class, Cat.class)
@@ -77,7 +77,7 @@ public class HelloWorldGenerate {
                 );
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }
@@ -111,12 +111,12 @@ import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.implementation.DefaultMethodCall;
 
 public class HelloWorldGenerate {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy(ClassFileVersion.JAVA_V7);    // 使用 Java 7 版本
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .implement(Dog.class, Cat.class)
@@ -129,7 +129,7 @@ public class HelloWorldGenerate {
                 );
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }
@@ -166,12 +166,12 @@ import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.implementation.DefaultMethodCall;
 
 public class HelloWorldGenerate {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .implement(Dog.class)    // 注意一：这里只有 Dog 接口
@@ -184,7 +184,7 @@ public class HelloWorldGenerate {
                 );
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }

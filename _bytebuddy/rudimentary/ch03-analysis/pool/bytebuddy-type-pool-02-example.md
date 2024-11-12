@@ -49,7 +49,7 @@ import java.io.IOException;
 
 public class HelloWorldAnalysis {
     public static void main(String[] args) throws IOException {
-        // 第一步，准备参数
+        // 1. prepare
         String jarPath = "C:\\Users\\liusen\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.15.0\\commons-lang3-3.15.0.jar";
         String className = "org.apache.commons.lang3.StringUtils";
 
@@ -61,12 +61,12 @@ public class HelloWorldAnalysis {
             TypePool typePool = TypePool.Default.of(compoundLocator);
             TypeDescription typeDescription = typePool.describe(className).resolve();
 
-            // 第二步，生成类
+            // 2. weave
             ByteBuddy byteBuddy = new ByteBuddy();
             // 这里的重点是：使用了 redefine(TypeDescription type, ClassFileLocator classFileLocator) 方法
             DynamicType.Builder<?> builder = byteBuddy.redefine(typeDescription, compoundLocator);
 
-            // 第三步，输出结果
+            // 3. output
             DynamicType.Unloaded<?> unloadedType = builder.make();
             OutputUtils.save(unloadedType, true);
         }

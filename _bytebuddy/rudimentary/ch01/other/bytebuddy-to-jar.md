@@ -18,7 +18,7 @@ import java.io.File;
 import java.io.PrintStream;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .name("sample.HelloWorld");
@@ -66,7 +66,7 @@ import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .name("sample.HelloWorld");
@@ -117,7 +117,7 @@ import java.io.File;
 import java.io.PrintStream;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .name("sample.HelloWorld2");

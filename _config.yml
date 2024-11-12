@@ -114,6 +114,9 @@ collections:
     output: true
   guava:
     output: true
+  health:
+    output: true
+    permalink: /:collection/:name:output_ext
   hotspot:
     output: true
   hydraulic:
@@ -167,6 +170,7 @@ collections:
     output: true
   law:
     output: true
+    permalink: /:collection/:name:output_ext
   libgdx:
     output: true
   linux:
@@ -443,6 +447,11 @@ defaults:
   - scope:
       path: ""
       type: "guava"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "health"
     values:
       layout: "post"
   - scope:

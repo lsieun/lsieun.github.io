@@ -30,13 +30,13 @@ import net.bytebuddy.dynamic.DynamicType;
 import java.lang.annotation.Annotation;
 
 public class HelloWorldTransform {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
-        Class<?> clazz = Class.forName(className);
+        Class<?> clazz = ClassUtils.loadClass(className);
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.redefine(clazz);
 
@@ -46,7 +46,7 @@ public class HelloWorldTransform {
         }
 
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }
@@ -83,7 +83,7 @@ public class HelloWorld extends Parent {
 import java.lang.annotation.Annotation;
 
 public class HelloWorldRun {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Class<?> clazz = HelloWorld.class;
         Annotation[] annotations = clazz.getAnnotations();
         for (Annotation ann : annotations) {
@@ -124,19 +124,19 @@ import net.bytebuddy.implementation.attribute.AnnotationRetention;
 import net.bytebuddy.matcher.ElementMatchers;
 
 public class HelloWorldRedefine {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy().with(AnnotationRetention.ENABLED);
         DynamicType.Builder<?> builder = byteBuddy.redefine(Parent.class).name(className);
 
         builder = builder.method(ElementMatchers.named("speak"))
                 .intercept(StubMethod.INSTANCE);
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         OutputUtils.save(unloadedType);
     }

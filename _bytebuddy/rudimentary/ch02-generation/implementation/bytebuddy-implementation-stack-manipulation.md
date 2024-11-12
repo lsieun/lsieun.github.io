@@ -94,11 +94,11 @@ import java.io.File;
 import java.util.Map;
 
 public class HelloWorldGenerate {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .modifiers(Visibility.PUBLIC)
@@ -109,7 +109,7 @@ public class HelloWorldGenerate {
                         SumImplementation.INSTANCE
                 );
 
-        // 第三步，输出结果
+        // 3. output
         DynamicType.Unloaded<?> unloadedType = builder.make();
         Map<TypeDescription, File> map = unloadedType.saveIn(FileUtils.OUTPUT_DIR);
         for (Map.Entry<TypeDescription, File> entry : map.entrySet()) {
@@ -126,7 +126,7 @@ public class HelloWorldGenerate {
 import java.lang.reflect.Method;
 
 public class HelloWorldRun {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Class<?> clazz = Class.forName("sample.HelloWorld");
         Method method = clazz.getDeclaredMethod("test");
 

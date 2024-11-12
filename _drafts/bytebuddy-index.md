@@ -508,15 +508,34 @@ sort: "sequence"
 <table>
     <thead>
     <tr>
+        <th style="text-align: center;" rowspan="2">注解：方法</th>
+        <th style="text-align: center;" colspan="5">注解：方法参数</th>
+    </tr>
+    <tr>
         <th style="text-align: center;">类层面</th>
         <th style="text-align: center;">字段层面</th>
         <th style="text-align: center;">方法层面</th>
         <th style="text-align: center;">Hierarchy</th>
-        <th style="text-align: center;">Other</th>
+        <th style="text-align: center;">其它</th>
     </tr>
     </thead>
     <tbody>
     <tr>
+        <td>
+{%
+assign filtered_posts = site.bytebuddy |
+where_exp: "item", "item.path contains 'bytebuddy/rudimentary/ch04-transform/delegation/annotation/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
         <td>
 {%
 assign filtered_posts = site.bytebuddy |

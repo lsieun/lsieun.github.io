@@ -4,7 +4,7 @@
 
 class HelloWorld extends Father implements ICat, IDog {
     -- HelloWorld --
-    + String sayGoodNight()
+    + sayFromHelloWorld()
     + String test(String name, int age)
     - String test$original$Abc(String name, int age)
     -- GrandFather --

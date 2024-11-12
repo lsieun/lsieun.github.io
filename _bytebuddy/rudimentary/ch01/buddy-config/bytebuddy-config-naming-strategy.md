@@ -10,7 +10,7 @@ import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.dynamic.DynamicType;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .name("sample.HelloWorld");
@@ -47,7 +47,7 @@ import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.dynamic.DynamicType;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class);
         DynamicType.Unloaded<?> unloadedType = builder.make();
@@ -82,7 +82,7 @@ import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.dynamic.DynamicType;
 
 public class HelloWorldGenerate {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         ByteBuddy byteBuddy = new ByteBuddy();
         byteBuddy = byteBuddy.with(new NamingStrategy.AbstractBase() {
             @Override
@@ -113,7 +113,7 @@ import net.bytebuddy.NamingStrategy;
 import net.bytebuddy.dynamic.DynamicType;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         NamingStrategy namingStrategy = new NamingStrategy.SuffixingRandom("xyz");
 
         ByteBuddy byteBuddy = new ByteBuddy()
@@ -137,7 +137,7 @@ import net.bytebuddy.NamingStrategy;
 import net.bytebuddy.dynamic.DynamicType;
 
 public class HelloWorldSubClass {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         NamingStrategy namingStrategy = new NamingStrategy.PrefixingRandom("xyz");
 
         ByteBuddy byteBuddy = new ByteBuddy()

@@ -224,66 +224,7 @@ sort: "sequence"
     </tbody>
 </table>
 
-## 医与食
 
-<table>
-    <thead>
-    <tr>
-        <th style="text-align: center;">医</th>
-        <th style="text-align: center;">食</th>
-        <th style="text-align: center;">医文</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>
-{%
-assign filtered_posts = site.thyself |
-where_exp: "item", "item.path contains 'thyself/medicine/base/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-        <td>
-{%
-assign filtered_posts = site.thyself |
-where_exp: "item", "item.path contains 'thyself/food/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-        <td>
-{%
-assign filtered_posts = site.thyself |
-where_exp: "item", "item.path contains 'thyself/medicine/extra/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-    </tr>
-    </tbody>
-</table>
 
 ## 治国
 
@@ -318,3 +259,4 @@ sort: "sequence"
 
 - [Know thyself: how self-awareness helps you at work](https://www.atlassian.com/blog/teamwork/know-thyself-how-self-awareness-helps-you-at-work)
 - [How to Develop Self-Knowledge and Why it Matters](https://proveritas.com.au/blog-home/how-to-develop-self-knowledge-and-why-it-matters)
+

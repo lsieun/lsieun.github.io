@@ -60,13 +60,13 @@ import net.bytebuddy.implementation.FixedValue;
 import java.io.InputStream;
 
 public class HelloWorldLoad {
-    public static void main(String[] args) throws Exception {
-        // 第一步，准备参数
+    public static void main(String[] args) {
+        // 1. prepare
         String className = "sample.HelloWorld";
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
 
 
-        // 第二步，生成类
+        // 2. weave
         ByteBuddy byteBuddy = new ByteBuddy();
         DynamicType.Builder<?> builder = byteBuddy.subclass(Object.class)
                 .name(className);
