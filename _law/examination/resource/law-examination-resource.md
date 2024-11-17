@@ -33,3 +33,13 @@ sequence: "110"
 - [竹马](https://zhumavip.com/w/about)
 
 - [夸克网盘](https://pan.quark.cn/s/98d9b615dc94#/list/share)
+
+## 机构
+
+- [方圆众合教育](https://www.zhongheschool.com/)
+- [瑞达法考](https://www.ruidaedu.com/)
+- [优学教育](https://youxuejiaoyu.net/)
+
+
+- [2025年法考客观题【精讲卷】刑法 众合柏浪涛](https://www.bilibili.com/video/BV1r8mxYNECZ/)
+- [2025年法考客观题【精讲卷】民法 众合孟献贵](https://www.bilibili.com/video/BV1hsSvY7Ev1/)

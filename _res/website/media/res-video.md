@@ -16,12 +16,27 @@ sequence: "102"
 - [Camtasia](https://foxirj.com/techsmith-camtasia-win.html)
 - [Bandicam](https://foxirj.com/bandicam.html)
 
-### 编辑、录屏
+## 编辑、录屏
 
 - 视频编辑：[DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve)
 - 视频转换器：[Handbrake](https://handbrake.fr)
 - [Camtasia Studio](https://lrepacks.net/repaki-multimedia-programm/315-techsmith-camtasia-amp-portable.html)
 - 录屏软件：[OBS](https://obsproject.com)
+
+- [CapCut](https://www.capcut.com/)
+
+### 技巧
+
+```text
+画面暗，调亮度；
+局部暗，调光感；
+色彩淡，饱和度；
+不清晰，调锐化；
+要质感，颗粒度；
+年代感，调褪色；
+肤色黄，降色温；
+肤色沉，拉高光。
+```
 
 ## 视频素材
 

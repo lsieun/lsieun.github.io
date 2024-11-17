@@ -5,7 +5,7 @@ sequence: "101"
 
 [UP](/res/res-index.html)
 
-直连
+## 国内
 
 - [爱优影视](https://iuys.tv/), [爱优影视 2](https://iuys.cc/)
 - [白嫖者联盟](https://www.baipiaozhe123.com/)
@@ -17,24 +17,23 @@ sequence: "101"
 - [樱花动漫](http://www.yinghua8.io/)
 - [追剧达人](https://www.npjtjx.cn/)
 
-间连
+## 国外
 
-- [欧乐影院](https://www.olehdtv.com/)
+- [努努影院](https://www.nnvod.com/)
+- [4K 极客影院](https://www.i8k.cc/)
+- [泥巴影院](https://www.nbys1.tv/)
+- [素白白影视](https://www.subaibaiys.com/)
+- [欧乐影院](https://olevod.com/)
+    - [olehdtv.com](https://www.olehdtv.com/)
+    - [脱口秀大会 第四季](https://olevod.com/index.php/vod/detail/id/29113.html)
 - [88 影院](https://www.88ved.com/)
-
-## 电视剧
-
-- [卧薪尝胆](https://www.dadatu.net/v/115238.html)
-
-## 待确定
-
 - [海兔影院](https://www.haituu.tv/)
     - [摄政王妃](https://www.haituu.tv/voddetail/356186.html)
 - [DailyMotion](https://www.dailymotion.com/)
     - [The Empress of Ayodhaya (2024) Episode 1 English SUB](https://www.dailymotion.com/video/x9816lo)
     - [The Empress of Ayodhaya (2024) Episode 2 English SUB](https://www.dailymotion.com/video/x98ffa0)
 
-## 视频
+## 主题
 
 ### 电视剧
 
@@ -42,13 +41,8 @@ sequence: "101"
     - [动物世界](http://tv.cctv.com/lm/dwsj/index.shtml?spm=C31267.PzXj0D8UJUyC.EuVgsDNuNsvy.1)
     - [龙门飞甲](https://tv.cctv.com/2018/08/16/VIDAzFeInQPP4aQhmXQF4ljf180816.shtml)
     - [明天我们好好过](https://tv.cctv.com/2021/04/04/VIDEYbTYHjwt9We1lI0Znjki210404.shtml)
-- [努努影院](https://www.nnvod.com/)
-- [4K 极客影院](https://www.i8k.cc/)
-- [泥巴影院](https://www.nbys1.tv/)
-- [素白白影视](https://www.subaibaiys.com/)
-- [欧乐影院](https://olevod.com/)
-    - [脱口秀大会 第四季](https://olevod.com/index.php/vod/detail/id/29113.html)
-    - [小巷人家](https://www.olevod.com/details-2-60683.html)
+- [卧薪尝胆](https://www.dadatu.net/v/115238.html)
+- [小巷人家](https://www.olevod.com/details-2-60683.html)
 
 ### 电影网站
 

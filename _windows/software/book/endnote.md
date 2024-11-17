@@ -1,4 +1,0 @@
----
-title: "EndNote"
-sequence: "endnote"
----

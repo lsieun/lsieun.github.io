@@ -9,6 +9,7 @@ which was inscribed upon the Temple of Apollo in the ancient Greek precinct of D
 
 ![](/assets/images/thyself/know-thyself-gold.webp)
 
+
 ## 戒为良药
 
 - abstention: 戒；戒除 the act of not allowing yourself to have or do sth enjoyable or sth that is considered bad
@@ -77,7 +78,7 @@ sort: "sequence"
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;">成长</th>
+        <th style="text-align: center;">对联</th>
         <th style="text-align: center;">做人</th>
     </tr>
     </thead>
@@ -86,7 +87,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.thyself |
-where_exp: "item", "item.path contains 'thyself/person/'" |
+where_exp: "item", "item.path contains 'thyself/couplet/'" |
 sort: "sequence"
 %}
 <ol>
@@ -102,6 +103,99 @@ sort: "sequence"
 {%
 assign filtered_posts = site.thyself |
 where_exp: "item", "item.path contains 'thyself/be-a-man/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+## 人生修行
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">心</th>
+        <th style="text-align: center;">行</th>
+        <th style="text-align: center;">情</th>
+        <th style="text-align: center;">看法/理解/洞察力</th>
+        <th style="text-align: center;">学说/教导</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/self-cultivation/mind/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/self-cultivation/action/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/self-cultivation/emotion/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/self-cultivation/perception/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/self-cultivation/teaching/'" |
 sort: "sequence"
 %}
 <ol>
@@ -147,15 +241,19 @@ sort: "sequence"
     </tbody>
 </table>
 
-## 人生修行
+## 齐家 + 社会
 
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;">情绪</th>
-        <th style="text-align: center;">心志</th>
-        <th style="text-align: center;">看法/理解/洞察力</th>
-        <th style="text-align: center;">学说/教导</th>
+        <th style="text-align: center;" rowspan="2">齐家</th>
+        <th style="text-align: center;" colspan="3">社会</th>
+    </tr>
+    <tr>
+        <th style="text-align: center;">认知</th>
+        <th style="text-align: center;">谋生</th>
+        <th style="text-align: center;">人情</th>
+        <th style="text-align: center;">阶层</th>
     </tr>
     </thead>
     <tbody>
@@ -163,7 +261,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.thyself |
-where_exp: "item", "item.path contains 'thyself/cultivation/emotion/'" |
+where_exp: "item", "item.path contains 'thyself/family-management/'" |
 sort: "sequence"
 %}
 <ol>
@@ -178,7 +276,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.thyself |
-where_exp: "item", "item.path contains 'thyself/cultivation/grit/'" |
+where_exp: "item", "item.path contains 'thyself/society/cognition/'" |
 sort: "sequence"
 %}
 <ol>
@@ -193,7 +291,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.thyself |
-where_exp: "item", "item.path contains 'thyself/cultivation/perception/'" |
+where_exp: "item", "item.path contains 'thyself/society/make-a-living/'" |
 sort: "sequence"
 %}
 <ol>
@@ -208,7 +306,22 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.thyself |
-where_exp: "item", "item.path contains 'thyself/cultivation/teaching/'" |
+where_exp: "item", "item.path contains 'thyself/society/interpersonal-relationship/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/society/social-status/'" |
 sort: "sequence"
 %}
 <ol>
@@ -224,14 +337,13 @@ sort: "sequence"
     </tbody>
 </table>
 
-
-
-## 治国
+## 国家 + 天下
 
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;">治国</th>
+        <th style="text-align: center;">国家</th>
+        <th style="text-align: center;">天下</th>
     </tr>
     </thead>
     <tbody>
@@ -239,7 +351,22 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.thyself |
-where_exp: "item", "item.path contains 'thyself/govern/'" |
+where_exp: "item", "item.path contains 'thyself/state-governance/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/under-heaven/'" |
 sort: "sequence"
 %}
 <ol>
@@ -259,4 +386,3 @@ sort: "sequence"
 
 - [Know thyself: how self-awareness helps you at work](https://www.atlassian.com/blog/teamwork/know-thyself-how-self-awareness-helps-you-at-work)
 - [How to Develop Self-Knowledge and Why it Matters](https://proveritas.com.au/blog-home/how-to-develop-self-knowledge-and-why-it-matters)
-

@@ -21,7 +21,7 @@ sequence: "os"
 
 ## Host
 
-- [SwitchHosts]() D:\Software\SwitchHosts._windows_portable_3.5.4.5517.exe
+- [SwitchHosts](https://github.com/oldj/SwitchHosts/releases)
 
 ## 清理
 

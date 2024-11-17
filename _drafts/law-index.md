@@ -18,6 +18,10 @@ permalink: /law/law-index.html
 
 ## 考试
 
+```text
+因与果：因上努力，果上随缘。
+```
+
 <table>
     <thead>
     <tr>
@@ -115,12 +119,19 @@ sort: "sequence"
 同时也以所谓的专业意见拒绝民众一切的意见与质疑。
 ```
 
+- [2025年法考客观题【精讲卷】刑法 众合柏浪涛](https://www.bilibili.com/video/BV1r8mxYNECZ/)
+
+```text
+在刑法总论里，『犯罪论』是主体部分，考的最多。刑罚论考的要少很多。
+```
+
 <table>
     <thead>
     <tr>
         <th style="text-align: center;">Basic</th>
         <th style="text-align: center;">总论</th>
         <th style="text-align: center;">分论</th>
+        <th style="text-align: center;">人物</th>
         <th style="text-align: center;">其它</th>
     </tr>
     </thead>
@@ -174,7 +185,106 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/penal-code/person/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
 where_exp: "item", "item.path contains 'law/penal-code/other/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+## 刑诉法
+
+## 生活
+
+- 警察权的原则：法无授权不可为
+- 公民权的原则：法无禁止即可为
+
+最有效的刑事辩护，一定是技巧性的进攻。
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">看守所</th>
+        <th style="text-align: center;">警察</th>
+        <th style="text-align: center;">检察院</th>
+        <th style="text-align: center;">法院</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/life/detention/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/life/police/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/life/procuratorate/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/life/court/'" |
 sort: "sequence"
 %}
 <ol>
@@ -192,3 +302,4 @@ sort: "sequence"
 
 ## 参考
 
+- [中国刑事辩护网](http://www.chnlawyer.net/)

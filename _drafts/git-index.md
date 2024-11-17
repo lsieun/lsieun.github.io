@@ -519,3 +519,6 @@ Tools
 - [Shields IO](https://shields.io/)
 
 [lsieun-git]: https://github.com/lsieun/lsieun-git
+
+- [10 Must Know Git Commands That Almost Nobody Knows](https://blog.webdevsimplified.com/2021-10/advanced-git-commands/)
+

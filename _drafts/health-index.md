@@ -9,6 +9,13 @@ In general, it refers to physical and emotional well-being,
 especially that associated with normal functioning of the human body,
 absent of disease, pain (including mental pain), or injury.
 
+```text
+山河依旧人见老，
+余生只盼身体好；
+富贵贫穷都看浅，
+健康才是无价宝。
+```
+
 ## 人体
 
 <table>
@@ -72,7 +79,8 @@ sort: "sequence"
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">观点</th>
+        <th style="text-align: center;">做饭</th>
     </tr>
     </thead>
     <tbody>
@@ -80,7 +88,22 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.health |
-where_exp: "item", "item.path contains 'health/food/'" |
+where_exp: "item", "item.path contains 'health/food/view/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.health |
+where_exp: "item", "item.path contains 'health/food/cook/'" |
 sort: "sequence"
 %}
 <ol>
@@ -101,6 +124,7 @@ sort: "sequence"
 <table>
     <thead>
     <tr>
+        <th style="text-align: center;">不舒服</th>
         <th style="text-align: center;">中医</th>
         <th style="text-align: center;">西医</th>
         <th style="text-align: center;">医文</th>
@@ -108,6 +132,21 @@ sort: "sequence"
     </thead>
     <tbody>
     <tr>
+        <td>
+{%
+assign filtered_posts = site.health |
+where_exp: "item", "item.path contains 'health/heal/discomfort/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
         <td>
 {%
 assign filtered_posts = site.health |
@@ -165,4 +204,4 @@ sort: "sequence"
 
 - [12 Tips for Maintaining a Healthy Lifestyle](https://www.healthline.com/health/how-to-maintain-a-healthy-lifestyle)
 - [A Guide to a Healthy Lifestyle](https://www.news-medical.net/health/A-Guide-to-a-Healthy-Lifestyle.aspx)
-- []()
+
