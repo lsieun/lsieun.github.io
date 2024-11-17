@@ -3,7 +3,7 @@ title: "Java Logging in Containers"
 sequence: "101"
 ---
 
-[UP](/java-logging.html)
+[UP](/java/java-logging-index.html)
 
 
 Think about the environment your application is going to be running in.

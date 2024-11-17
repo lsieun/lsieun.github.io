@@ -3,7 +3,7 @@ title: "配置 Logger"
 sequence: "102"
 ---
 
-[UP](/java-logging.html)
+[UP](/java/java-logging-index.html)
 
 
 ## Modifying Loggers

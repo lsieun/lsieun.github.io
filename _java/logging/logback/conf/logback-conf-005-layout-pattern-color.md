@@ -3,7 +3,7 @@ title: "配置 Layout: Pattern Color"
 sequence: "105"
 ---
 
-[UP](/java-logging.html)
+[UP](/java/java-logging-index.html)
 
 
 ```xml

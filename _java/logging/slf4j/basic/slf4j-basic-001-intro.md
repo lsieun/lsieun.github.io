@@ -3,7 +3,7 @@ title: "SLF4J 介绍"
 sequence: "101"
 ---
 
-[UP](/java-logging.html)
+[UP](/java/java-logging-index.html)
 
 
 ## Java Logging

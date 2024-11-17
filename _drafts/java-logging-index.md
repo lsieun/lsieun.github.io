@@ -196,4 +196,3 @@ sort: "sequence"
 - [How to Log to the Console in Color](https://www.baeldung.com/java-log-console-in-color)
 
 [mvn-repo-logback-classic-url]: https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
-

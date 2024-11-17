@@ -3,7 +3,7 @@ title: "调试信息"
 sequence: "101"
 ---
 
-[UP](/java-logging.html)
+[UP](/java/java-logging-index.html)
 
 
 Logback configuration files can get complicated, so there are several built-in mechanisms for troubleshooting.

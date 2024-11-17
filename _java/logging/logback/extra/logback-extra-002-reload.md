@@ -3,7 +3,7 @@ title: "自动重新加载配置"
 sequence: "102"
 ---
 
-[UP](/java-logging.html)
+[UP](/java/java-logging-index.html)
 
 
 ## Reloading Configuration Automatically

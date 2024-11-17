@@ -3,7 +3,7 @@ title: "Parameterized Logging"
 sequence: "102"
 ---
 
-[UP](/java-logging.html)
+[UP](/java/java-logging-index.html)
 
 
 The SLF4J API is well-designed and allows not only for **simple messages**.

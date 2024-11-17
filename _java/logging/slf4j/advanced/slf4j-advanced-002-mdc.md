@@ -3,7 +3,7 @@ title: "Mapped Diagnostic Context"
 sequence: "104"
 ---
 
-[UP](/java-logging.html)
+[UP](/java/java-logging-index.html)
 
 
 SLF4J supports the **Mapped Diagnostic Context**

@@ -3,7 +3,7 @@ title: "配置 Appender"
 sequence: "103"
 ---
 
-[UP](/java-logging.html)
+[UP](/java/java-logging-index.html)
 
 
 Loggers pass `LoggingEvent`s to `Appender`s.

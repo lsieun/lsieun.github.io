@@ -3,7 +3,7 @@ title: "slf4j-simple"
 sequence: "101"
 ---
 
-[UP](/java-logging.html)
+[UP](/java/java-logging-index.html)
 
 
 ## pom.xml

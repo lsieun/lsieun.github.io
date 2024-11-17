@@ -3,7 +3,7 @@ title: "Logback 配置"
 sequence: "101"
 ---
 
-[UP](/java-logging.html)
+[UP](/java/java-logging-index.html)
 
 
 ## 没有配置的情况

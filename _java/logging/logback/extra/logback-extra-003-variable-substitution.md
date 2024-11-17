@@ -3,7 +3,7 @@ title: "变量替换"
 sequence: "103"
 ---
 
-[UP](/java-logging.html)
+[UP](/java/java-logging-index.html)
 
 
 ## Variable Substitution

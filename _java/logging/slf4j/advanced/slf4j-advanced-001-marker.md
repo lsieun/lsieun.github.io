@@ -3,7 +3,7 @@ title: "SLF4J Markers"
 sequence: "103"
 ---
 
-[UP](/java-logging.html)
+[UP](/java/java-logging-index.html)
 
 
 Markers are named objects

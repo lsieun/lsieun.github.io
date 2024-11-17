@@ -3,7 +3,7 @@ title: "Logback Intro"
 sequence: "101"
 ---
 
-[UP](/java-logging.html)
+[UP](/java/java-logging-index.html)
 
 
 The Logback project is organized in main 3 modules:

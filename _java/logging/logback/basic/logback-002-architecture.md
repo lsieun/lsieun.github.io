@@ -3,7 +3,7 @@ title: "Logback Architecture"
 sequence: "102"
 ---
 
-[UP](/java-logging.html)
+[UP](/java/java-logging-index.html)
 
 
 ## Logback Architecture

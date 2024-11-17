@@ -3,7 +3,7 @@ title: "配置 Layout"
 sequence: "104"
 ---
 
-[UP](/java-logging.html)
+[UP](/java/java-logging-index.html)
 
 
 Layouts format log messages.
