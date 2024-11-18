@@ -13,6 +13,7 @@ sequence: "103"
     - [dbooks](https://www.dbooks.org/)
     - LibGen
         - [libgen.is](https://libgen.is/)
+        - [libgen.st](https://libgen.st/)
         - [libgen.mx](https://libgen.mx/)
     - [PDF Drive](https://www.pdfdrive.com/)
     - [NanChaos/book](https://github.com/NanChaos/book)

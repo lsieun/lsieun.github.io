@@ -1,0 +1,17 @@
+@startmindmap
+
+!include ../style/mind-map-style.iuml
+
+title 财产犯罪
+
+* 财产犯罪
+    * 贷款诈骗罪
+        * 个人构成
+        * 单位不构成
+    * 洗钱罪
+        *_ 洗钱罪，就是你帮人家用金融手段掩饰、隐瞒犯罪所得
+        * 洗钱罪的对象：上游犯罪所得，只有七种
+            * 没有--合同诈骗罪--
+
+
+@endmindmap

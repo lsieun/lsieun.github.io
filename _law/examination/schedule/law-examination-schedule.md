@@ -17,7 +17,7 @@ sequence: "109"
     </thead>
     <tbody>
     <tr>
-        <td rowspan="8">第一阶段<br/>（听课+做题）</td>
+        <td rowspan="8">第一阶段<br/>（听课 + 做题）</td>
         <td>刑法</td>
         <td>一个月</td>
     </tr>
@@ -27,15 +27,15 @@ sequence: "109"
     </tr>
     <tr>
         <td>刑诉</td>
-        <td>20天</td>
+        <td>20 天</td>
     </tr>
     <tr>
         <td>民诉</td>
-        <td>20天</td>
+        <td>20 天</td>
     </tr>
     <tr>
         <td>行政法</td>
-        <td>15天</td>
+        <td>15 天</td>
     </tr>
     <tr>
         <td>理论法</td>
@@ -43,11 +43,11 @@ sequence: "109"
     </tr>
     <tr>
         <td>三国法</td>
-        <td>7天</td>
+        <td>7 天</td>
     </tr>
     <tr>
         <td>商经知</td>
-        <td>14天</td>
+        <td>14 天</td>
     </tr>
     <tr>
         <td>第二阶段<br/>（第二遍做题）</td>
@@ -60,4 +60,3 @@ sequence: "109"
     </tr>
     </tbody>
 </table>
-

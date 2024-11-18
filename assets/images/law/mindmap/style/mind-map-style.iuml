@@ -1,0 +1,16 @@
+<style>
+mindmapDiagram {
+  .green {
+    BackgroundColor lightgreen
+  }
+  .orange {
+    BackgroundColor orange
+  }
+  .rose {
+    BackgroundColor #FFBBCC
+  }
+  .your_style_name {
+    BackgroundColor lightblue
+  }
+}
+</style>

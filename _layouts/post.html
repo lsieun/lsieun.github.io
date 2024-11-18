@@ -16,6 +16,7 @@ layout: default
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
+    {% capture content %}{% include plantuml.liquid html=content %}{% endcapture %}
     {{ content }}
   </div>
 

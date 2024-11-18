@@ -7,6 +7,11 @@ sequence: "101"
 
 GitHub Pages sites created after June 15, 2016 and using `github.io` domains are served over HTTPS.
 
+## Dependency versions
+
+- [GitHub Pages Dependency versions](https://pages.github.com/versions/)
+- [versions.json](https://pages.github.com/versions.json)
+
 ## Usage limits
 
 GitHub Pages sites are subject to the following usage limits:

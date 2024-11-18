@@ -1,0 +1,18 @@
+@startmindmap
+
+!include ../style/mind-map-style.iuml
+
+title 刑法研究
+
+* 刑法研究
+    * 立法论研究
+    * 解释论研究
+        * 解释对象
+            * 刑法典 <<green>>
+                *_ 1997年生效
+                *_ 到2024年，有 12 个刑法修正案
+            * 单行刑法
+        * 解释方法
+            * 解释技巧
+            * 解释理由
+@endmindmap

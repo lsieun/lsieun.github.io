@@ -217,8 +217,11 @@ sort: "sequence"
     - [Class Diagram](https://plantuml.com/class-diagram)
     - [Preprocessing](https://plantuml.com/preprocessing)
     - [在线测试](https://www.plantuml.com/plantuml/uml/)
+    - [MindMap](https://plantuml.com/mindmap-diagram)
 
-- [GitHub: plantuml/plantuml.js](https://github.com/plantuml/plantuml.js)
+- GitHub
+    - [plantuml/plantuml.js](https://github.com/plantuml/plantuml.js)
+    - [plantuml/plantuml](https://github.com/plantuml/plantuml)
 
 - [What is Unified Modeling Language (UML)?](https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-uml/)
 - [PlantUML tutorial to create diagrams as code](https://www.augmentedmind.de/2021/01/03/plantuml-tutorial-diagrams-as-code/)

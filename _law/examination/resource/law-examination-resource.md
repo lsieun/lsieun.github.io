@@ -41,5 +41,5 @@ sequence: "110"
 - [优学教育](https://youxuejiaoyu.net/)
 
 
-- [2025年法考客观题【精讲卷】刑法 众合柏浪涛](https://www.bilibili.com/video/BV1r8mxYNECZ/)
-- [2025年法考客观题【精讲卷】民法 众合孟献贵](https://www.bilibili.com/video/BV1hsSvY7Ev1/)
+- [2025 年法考客观题【精讲卷】刑法 众合柏浪涛](https://www.bilibili.com/video/BV1r8mxYNECZ/)
+- [2025 年法考客观题【精讲卷】民法 众合孟献贵](https://www.bilibili.com/video/BV1hsSvY7Ev1/)

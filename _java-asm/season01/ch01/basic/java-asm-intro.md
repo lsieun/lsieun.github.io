@@ -530,6 +530,23 @@ represented as byte arrays (as they are stored on disk and loaded in the Java Vi
 
 ![What ASM Can Do](/assets/images/java/asm/what-asm-can-do.png)
 
+```plantuml
+@startmindmap
+
+* ASM
+    * analysis
+        * find potential bugs
+        * detect unused code
+        * reverse engineer code
+    * generation
+    * transformation
+        * optimize programs
+        * obfuscate programs
+        * insert performance monitoring code
+
+@endmindmap
+```
+
 - **Program analysis**, which can range from a simple syntactic parsing to a full semantic analysis,
   can be used to find potential bugs in applications, to detect unused code, to reverse engineer code, etc.
 - **Program generation** is used in compilers.
