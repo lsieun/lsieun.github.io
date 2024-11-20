@@ -1,0 +1,16 @@
+@startmindmap
+
+!include ../style/mind-map-style.iuml
+
+title 法益侵害事实分类（思路）
+
+* 行为主体
+    * 意识
+        * 危害行为
+            * 法益侵害事实（结果）<<green>>
+                * 样态分类
+                    * 危险状态<<green>>
+                    * 实害结果<<green>>
+
+
+@endmindmap

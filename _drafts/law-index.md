@@ -131,8 +131,6 @@ sort: "sequence"
         <th style="text-align: center;">Basic</th>
         <th style="text-align: center;">总论</th>
         <th style="text-align: center;">分论</th>
-        <th style="text-align: center;">人物</th>
-        <th style="text-align: center;">其它</th>
     </tr>
     </thead>
     <tbody>
@@ -182,6 +180,21 @@ sort: "sequence"
     {% endfor %}
 </ol>
         </td>
+    </tr>
+    </tbody>
+</table>
+
+---
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">人物</th>
+        <th style="text-align: center;">其它</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
         <td>
 {%
 assign filtered_posts = site.law |
@@ -223,7 +236,7 @@ sort: "sequence"
 - 警察权的原则：法无授权不可为
 - 公民权的原则：法无禁止即可为
 
-最有效的刑事辩护，一定是技巧性的进攻。
+最有效的刑事辩护，一定是**技巧性的进攻**。
 
 <table>
     <thead>

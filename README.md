@@ -37,6 +37,14 @@ bundle exec jekyll serve --unpublished --drafts
 {% endhighlight %}
 ```
 
+```plantuml
+@startmindmap
+
+* MindMap
+
+@endmindmap
+```
+
 ```text
 ![My Image]({{ site.baseimg }}/images/example1.png)
 ```

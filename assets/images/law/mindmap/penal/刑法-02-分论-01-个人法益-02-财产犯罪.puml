@@ -1,0 +1,25 @@
+@startmindmap
+
+!include ../style/mind-map-style.iuml
+
+title 财产犯罪
+
+* 财产犯罪
+    * 是否占有
+        * 不占有
+            * 故意毁坏财物<<green>>
+        * 占有 → 是否转移
+            * 不转移
+                * 侵占罪<<green>>
+            * 转移 → 谁转移
+                * 被害人
+                    * 诈骗罪（被骗）<<green>>
+                    * 敲诈勒索罪（被迫）<<green>>
+                * 犯罪人
+                    * 手段暴力程度
+                        * 盗窃罪（对物平和，对人没危险）<<green>>
+                        * 抢夺罪（对物暴力，对人有危险）<<green>>
+                        * 抢劫罪（对人暴力，压制反抗）<<green>>
+
+
+@endmindmap

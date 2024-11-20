@@ -9,7 +9,7 @@ sequence: "101"
 
 - [爱优影视](https://iuys.tv/), [爱优影视 2](https://iuys.cc/)
 - [白嫖者联盟](https://www.baipiaozhe123.com/)
-- [茶杯狐](https://www.xcupfox.com/), [茶杯狐 2](https://cupfoxcc.com/)
+- [茶杯狐](https://cupfoxcc.com/)
 - [达达兔](https://www.dadatu.net/)
 - [港剧网](https://www.yunduolp.com/)
 - [看剧网](https://www.kanjuw.net/)

@@ -209,6 +209,9 @@ collections:
     output: true
   pki:
     output: true
+  plantuml:
+    output: true
+    permalink: /:collection/:name:output_ext
   protobuf:
     output: true
   reactor:
@@ -652,6 +655,11 @@ defaults:
   - scope:
       path: ""
       type: "pki"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "plantuml"
     values:
       layout: "post"
   - scope:
