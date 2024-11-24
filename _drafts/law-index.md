@@ -120,6 +120,8 @@ sort: "sequence"
 ```
 
 - [2025年法考客观题【精讲卷】刑法 众合柏浪涛](https://www.bilibili.com/video/BV1r8mxYNECZ/)
+- [中华人民共和国刑法（英文版）](https://www.bilibili.com/video/BV1yF411n7iP/)
+- [Criminal Law of the People's Republic of China](http://en.npc.gov.cn.cdurl.cn/2020-12/26/c_921604.htm)
 
 ```text
 在刑法总论里，『犯罪论』是主体部分，考的最多。刑罚论考的要少很多。
@@ -131,6 +133,8 @@ sort: "sequence"
         <th style="text-align: center;">Basic</th>
         <th style="text-align: center;">总论</th>
         <th style="text-align: center;">分论</th>
+        <th style="text-align: center;">场景</th>
+        <th style="text-align: center;">知识点</th>
     </tr>
     </thead>
     <tbody>
@@ -169,6 +173,36 @@ sort: "sequence"
 {%
 assign filtered_posts = site.law |
 where_exp: "item", "item.path contains 'law/penal-code/sub/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/penal-code/theme/scenario/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/penal-code/theme/keypoint/'" |
 sort: "sequence"
 %}
 <ol>
@@ -316,3 +350,5 @@ sort: "sequence"
 ## 参考
 
 - [中国刑事辩护网](http://www.chnlawyer.net/)
+
+- [高效学习方法教程](https://www.bilibili.com/video/BV1eCDWYbEQk/)

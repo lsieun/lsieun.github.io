@@ -348,4 +348,3 @@ sort: "sequence"
 
 - HTML
     - [Remove HTML Tags Using Java](https://www.baeldung.com/java-remove-html-tags)
-

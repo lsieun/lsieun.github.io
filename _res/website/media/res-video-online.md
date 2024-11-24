@@ -43,6 +43,7 @@ sequence: "101"
     - [明天我们好好过](https://tv.cctv.com/2021/04/04/VIDEYbTYHjwt9We1lI0Znjki210404.shtml)
 - [卧薪尝胆](https://www.dadatu.net/v/115238.html)
 - [小巷人家](https://www.olevod.com/details-2-60683.html)
+- [小说剧《将夜》](https://www.bilibili.com/video/BV1CE421P7nr)
 
 ### 电影网站
 

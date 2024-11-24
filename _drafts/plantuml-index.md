@@ -6,9 +6,40 @@ permalink: /plantuml/plantuml-index.html
 
 PlantUML is an open-source tool allowing users to create diagrams from a plain text language.
 
+## Basic
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Basic</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.plantuml |
+where_exp: "item", "item.path contains 'plantuml/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 ## UML
 
 ### Class Diagram
+
+- [Class Diagram](https://plantuml.com/class-diagram)
 
 <table>
     <thead>
@@ -25,7 +56,7 @@ PlantUML is an open-source tool allowing users to create diagrams from a plain t
         <td>
 {%
 assign filtered_posts = site.plantuml |
-where_exp: "item", "item.path contains 'plantuml/class/type/'" |
+where_exp: "item", "item.path contains 'plantuml/uml/class/type/'" |
 sort: "sequence"
 %}
 <ol>
@@ -40,7 +71,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.plantuml |
-where_exp: "item", "item.path contains 'plantuml/class/member/'" |
+where_exp: "item", "item.path contains 'plantuml/uml/class/member/'" |
 sort: "sequence"
 %}
 <ol>
@@ -55,7 +86,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.plantuml |
-where_exp: "item", "item.path contains 'plantuml/class/link/'" |
+where_exp: "item", "item.path contains 'plantuml/uml/class/link/'" |
 sort: "sequence"
 %}
 <ol>
@@ -70,7 +101,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.plantuml |
-where_exp: "item", "item.path contains 'plantuml/class/pkg/'" |
+where_exp: "item", "item.path contains 'plantuml/uml/class/pkg/'" |
 sort: "sequence"
 %}
 <ol>
@@ -85,7 +116,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.plantuml |
-where_exp: "item", "item.path contains 'plantuml/class/other/'" |
+where_exp: "item", "item.path contains 'plantuml/uml/class/other/'" |
 sort: "sequence"
 %}
 <ol>
@@ -103,6 +134,8 @@ sort: "sequence"
 
 ### Object Diagram
 
+- [Object Diagram](https://plantuml.com/object-diagram)
+
 <table>
     <thead>
     <tr>
@@ -115,7 +148,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.plantuml |
-where_exp: "item", "item.path contains 'plantuml/object/component/'" |
+where_exp: "item", "item.path contains 'plantuml/uml/object/component/'" |
 sort: "sequence"
 %}
 <ol>
@@ -130,7 +163,70 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.plantuml |
-where_exp: "item", "item.path contains 'plantuml/object/link/'" |
+where_exp: "item", "item.path contains 'plantuml/uml/object/link/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+### State Diagram
+
+- [State Diagram](https://plantuml.com/state-diagram)
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">Structure</th>
+        <th style="text-align: center;">Style</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.plantuml |
+where_exp: "item", "item.path contains 'plantuml/uml/state/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.plantuml |
+where_exp: "item", "item.path contains 'plantuml/uml/state/structure/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.plantuml |
+where_exp: "item", "item.path contains 'plantuml/uml/state/style/'" |
 sort: "sequence"
 %}
 <ol>
@@ -244,11 +340,10 @@ sort: "sequence"
 
 - [PlantUML](https://plantuml.com/)
     - [Guide](https://plantuml.com/guide)
-    - [Class Diagram](https://plantuml.com/class-diagram)
     - [Preprocessing](https://plantuml.com/preprocessing)
     - [在线测试](https://www.plantuml.com/plantuml/uml/)
-    - [Creole](https://plantuml.com/creole)
-    - [Colors](https://plantuml.com/color)
+
+
 
 - GitHub
     - [plantuml/plantuml.js](https://github.com/plantuml/plantuml.js)
