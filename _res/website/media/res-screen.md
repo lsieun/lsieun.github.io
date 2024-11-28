@@ -6,7 +6,9 @@ sequence: "105"
 ## 屏幕画笔
 
 - [ ] [Epic Pen](http://www.sd173.com/soft/7705.html)
+  - [52PoJie](https://www.52pojie.cn/thread-1984357-1-1.html)
 - [ ] [ZoomIt](https://learn.microsoft.com/en-us/sysinternals/downloads/zoomit)
+- [PixPin](https://pixpinapp.com/)
 - [ ] [Snipaste](https://zh.snipaste.com/)
 - [ ] [Pointofix](https://www.pointofix.de/download.php)
   copy the desired translation file from the language pack into the Pointofix directory and

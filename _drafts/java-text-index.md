@@ -38,6 +38,7 @@ sort: "sequence"
 ## Unicode
 
 - [jenkov.com: Unicode](https://jenkov.com/tutorials/unicode/index.html)
+- [EmojiAll](https://www.emojiall.com/zh-hans)
 
 <table>
     <thead>

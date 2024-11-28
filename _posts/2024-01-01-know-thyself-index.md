@@ -9,7 +9,6 @@ which was inscribed upon the Temple of Apollo in the ancient Greek precinct of D
 
 ![](/assets/images/thyself/know-thyself-gold.webp)
 
-
 ## 戒为良药
 
 - abstention: 戒；戒除 the act of not allowing yourself to have or do sth enjoyable or sth that is considered bad
@@ -247,7 +246,7 @@ sort: "sequence"
     <thead>
     <tr>
         <th style="text-align: center;" rowspan="2">齐家</th>
-        <th style="text-align: center;" colspan="3">社会</th>
+        <th style="text-align: center;" colspan="4">社会</th>
     </tr>
     <tr>
         <th style="text-align: center;">认知</th>
@@ -386,3 +385,6 @@ sort: "sequence"
 
 - [Know thyself: how self-awareness helps you at work](https://www.atlassian.com/blog/teamwork/know-thyself-how-self-awareness-helps-you-at-work)
 - [How to Develop Self-Knowledge and Why it Matters](https://proveritas.com.au/blog-home/how-to-develop-self-knowledge-and-why-it-matters)
+
+- [Mental Models 思维模型](https://idtimw.com/tag/mental-models/)
+    - [思维模型03 - First Principle 第一性原理](https://idtimw.com/first-principle/)

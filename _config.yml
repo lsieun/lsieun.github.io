@@ -68,6 +68,9 @@ collections:
   classfile:
     output: true
     permalink: /:collection/:name:output_ext
+  cognition:
+    output: true
+    permalink: /:collection/:name:output_ext
   concept:
     output: true
   cplusplus:
@@ -93,6 +96,7 @@ collections:
     output: true
   english:
     output: true
+    permalink: /:collection/:name:output_ext
   epanet:
     output: true
   front-end:
@@ -340,6 +344,11 @@ defaults:
   - scope:
       path: ""
       type: "classfile"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "cognition"
     values:
       layout: "post"
   - scope:

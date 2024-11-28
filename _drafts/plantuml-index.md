@@ -8,6 +8,8 @@ PlantUML is an open-source tool allowing users to create diagrams from a plain t
 
 ## Basic
 
+- [Skinparam command](https://plantuml.com/skinparam)
+
 <table>
     <thead>
     <tr>
@@ -242,7 +244,9 @@ sort: "sequence"
     </tbody>
 </table>
 
-## MindMap
+## Non-UML
+
+### MindMap
 
 - [MindMap](https://plantuml.com/mindmap-diagram)
 
@@ -305,6 +309,69 @@ sort: "sequence"
     </tbody>
 </table>
 
+### WBS
+
+- [Work Breakdown Structure (WBS)](https://plantuml.com/wbs-diagram)
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">Structure</th>
+        <th style="text-align: center;">Style</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.plantuml |
+where_exp: "item", "item.path contains 'plantuml/wbs/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.plantuml |
+where_exp: "item", "item.path contains 'plantuml/wbs/structure/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.plantuml |
+where_exp: "item", "item.path contains 'plantuml/wbs/style/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 ## Preprocessing
 
 - [Preprocessing](https://plantuml.com/preprocessing)
@@ -340,9 +407,12 @@ sort: "sequence"
 
 - [PlantUML](https://plantuml.com/)
     - [Guide](https://plantuml.com/guide)
-    - [Preprocessing](https://plantuml.com/preprocessing)
+    - [Language specification](https://plantuml.com/sitemap-language-specification)
+        - [AsciiMaths](https://plantuml.com/ascii-math)
+        - [Gantt Chart](https://plantuml.com/gantt-diagram)
+    - [Advanced Usage](https://plantuml.com/sitemap-advanced-usage)
+        - [Ditaa](https://plantuml.com/ditaa)
     - [在线测试](https://www.plantuml.com/plantuml/uml/)
-
 
 
 - GitHub
@@ -350,4 +420,3 @@ sort: "sequence"
     - [plantuml/plantuml](https://github.com/plantuml/plantuml)
 
 - [UML Modeling with PlantUML: A Comprehensive Guide with Examples](https://mycodingdays.com/uml_modeling_with_plantuml_a_comprehensive_guide_with_examples/)
-

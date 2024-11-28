@@ -142,7 +142,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/penal-code/basic/'" |
+where_exp: "item", "item.path contains 'law/criminal/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -157,7 +157,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/penal-code/general/'" |
+where_exp: "item", "item.path contains 'law/criminal/general/'" |
 sort: "sequence"
 %}
 <ol>
@@ -172,7 +172,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/penal-code/sub/'" |
+where_exp: "item", "item.path contains 'law/criminal/sub/'" |
 sort: "sequence"
 %}
 <ol>
@@ -187,7 +187,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/penal-code/theme/scenario/'" |
+where_exp: "item", "item.path contains 'law/criminal/theme/scenario/'" |
 sort: "sequence"
 %}
 <ol>
@@ -202,7 +202,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/penal-code/theme/keypoint/'" |
+where_exp: "item", "item.path contains 'law/criminal/theme/keypoint/'" |
 sort: "sequence"
 %}
 <ol>
@@ -220,6 +220,10 @@ sort: "sequence"
 
 ---
 
+![](/assets/images/law/criminal/人.svg)
+
+---
+
 <table>
     <thead>
     <tr>
@@ -232,7 +236,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/penal-code/person/'" |
+where_exp: "item", "item.path contains 'law/criminal/person/'" |
 sort: "sequence"
 %}
 <ol>
@@ -247,7 +251,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/penal-code/other/'" |
+where_exp: "item", "item.path contains 'law/criminal/other/'" |
 sort: "sequence"
 %}
 <ol>
