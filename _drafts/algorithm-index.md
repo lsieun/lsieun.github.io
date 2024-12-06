@@ -1,7 +1,7 @@
 ---
 title: "Algorithm"
-image: /assets/images/algorithm/algorithm-cover.png
-permalink: /algorithm.html
+image: /assets/images/algorithm/data-structures-and-algorithms.png
+permalink: /algorithm/algorithm-index.html
 ---
 
 An algorithm is a set of instructions for solving a problem or accomplishing a task.
@@ -10,7 +10,7 @@ An algorithm is a set of instructions for solving a problem or accomplishing a t
 
 {%
 assign filtered_posts = site.algorithm |
-where_exp: "item", "item.url contains '/algorithm/ip/'" |
+where_exp: "item", "item.path contains 'algorithm/ip/'" |
 sort: "sequence"
 %}
 <ol>
@@ -26,7 +26,7 @@ sort: "sequence"
 
 {%
 assign filtered_posts = site.algorithm |
-where_exp: "item", "item.url contains '/algorithm/list/'" |
+where_exp: "item", "item.path contains 'algorithm/list/'" |
 sort: "sequence"
 %}
 <ol>
@@ -42,7 +42,7 @@ sort: "sequence"
 
 {%
 assign filtered_posts = site.algorithm |
-where_exp: "item", "item.url contains '/algorithm/sort/'" |
+where_exp: "item", "item.path contains 'algorithm/sort/'" |
 sort: "sequence"
 %}
 <ol>
@@ -56,9 +56,11 @@ sort: "sequence"
 
 ## 动态规划
 
+- [What is Dynamic Programming? Working, Algorithms, and Examples](https://www.linkedin.com/pulse/what-dynamic-programming-working-algorithms-examples-rohit-bhatu-us9hf/)
+
 {%
 assign filtered_posts = site.algorithm |
-where_exp: "item", "item.url contains '/algorithm/dynamic-programming/'" |
+where_exp: "item", "item.path contains 'algorithm/dynamic-programming/'" |
 sort: "sequence"
 %}
 <ol>
@@ -85,7 +87,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.algorithm |
-where_exp: "item", "item.url contains '/algorithm/timer/basic/'" |
+where_exp: "item", "item.path contains 'algorithm/timer/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -100,7 +102,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.algorithm |
-where_exp: "item", "item.url contains '/algorithm/timer/timing-wheel/'" |
+where_exp: "item", "item.path contains 'algorithm/timer/timing-wheel/'" |
 sort: "sequence"
 %}
 <ol>
@@ -115,7 +117,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.algorithm |
-where_exp: "item", "item.url contains '/algorithm/timer/summary/'" |
+where_exp: "item", "item.path contains 'algorithm/timer/summary/'" |
 sort: "sequence"
 %}
 <ol>
@@ -138,3 +140,6 @@ sort: "sequence"
     - [Min Heap](https://www.cs.usfca.edu/~galles/visualization/Heap.html)
 - [wangkuiwu.github.io](https://wangkuiwu.github.io/2100/01/01/index/)
     - [第3部分 数据结构和算法](https://wangkuiwu.github.io/2013/01/01/datastruct-index/)
+
+- [ALGORITHMS INSIGHT](https://algorithmsinsight.wordpress.com/)
+- [Types of Algorithms](https://www.educba.com/types-of-algorithms/)

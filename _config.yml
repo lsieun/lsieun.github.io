@@ -38,6 +38,7 @@ permalink: none
 collections:
   algorithm:
     output: true
+    permalink: /:collection/:name:output_ext
   apache-commons:
     output: true
   apm:

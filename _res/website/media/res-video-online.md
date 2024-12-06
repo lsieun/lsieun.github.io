@@ -61,6 +61,13 @@ sequence: "101"
 - [naruto](https://wvv.9anime.com.pl/?s=naruto)
 - [naruto-shippuden-dub](https://hianime.com.lv/anime/naruto-shippuden-dub)
 
+### 综艺
+
+- [《再见爱人4》第四季]()
+    - [YouTube](https://www.youtube.com/playlist?list=PLJKk4isdgkt9iDzUyTdDVMif2JUDU7_jL)
+    - [欧乐影院](https://www.olevod.com/details-3-60229.html)
+    - [再见爱人 第三季](https://www.olevod.com/details-1-49819.html)
+
 ### 字幕
 
 - [subtitlist](https://subtitlist.com/)
@@ -79,3 +86,7 @@ sequence: "101"
 - [ZORO](https://zoroxtv.to/home)
 - [9Anime](https://9animetv.to/home)
 - [AniWave](https://aniwave.to/home)
+
+### 心理
+
+- [黄执中-35天超级说服力训练营](https://www.bilibili.com/video/BV14GBCYMEkb)

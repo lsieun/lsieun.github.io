@@ -372,6 +372,51 @@ sort: "sequence"
     </tbody>
 </table>
 
+### Gantt
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">Style</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.plantuml |
+where_exp: "item", "item.path contains 'plantuml/gantt/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.plantuml |
+where_exp: "item", "item.path contains 'plantuml/gantt/style/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 ## Preprocessing
 
 - [Preprocessing](https://plantuml.com/preprocessing)
@@ -412,6 +457,7 @@ sort: "sequence"
         - [Gantt Chart](https://plantuml.com/gantt-diagram)
     - [Advanced Usage](https://plantuml.com/sitemap-advanced-usage)
         - [Ditaa](https://plantuml.com/ditaa)
+    - [Calling PlantUML from Java](https://plantuml.com/api) 
     - [在线测试](https://www.plantuml.com/plantuml/uml/)
 
 

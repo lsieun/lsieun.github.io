@@ -22,6 +22,15 @@ sequence: "105"
 
 ![](/assets/images/thyself/career/think-like-a-farmer.jpg)
 
+Think like a Farmer!
+
+- ✅ Don't shout at the crops
+- ✅ Don't blame the crop for not growing fast enough
+- ✅ Don't uproot crops before they've had a chance to grow
+- ✅ Choose the best plants for the soil
+- ✅ Irrigate and fertilise
+- ✅ Remove weeds
+- ✅ Remember you will have good seasons and bad seasons - you can't control the weather only be prepared for it.
 
 ## 枝叶花实-王阳明
 
