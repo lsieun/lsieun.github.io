@@ -388,5 +388,3 @@ sort: "sequence"
 
 - [Mental Models 思维模型](https://idtimw.com/tag/mental-models/)
     - [思维模型03 - First Principle 第一性原理](https://idtimw.com/first-principle/)
-
-

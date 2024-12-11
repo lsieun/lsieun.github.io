@@ -132,9 +132,9 @@ sort: "sequence"
     <tr>
         <th style="text-align: center;">Basic</th>
         <th style="text-align: center;">总论</th>
-        <th style="text-align: center;">分论</th>
-        <th style="text-align: center;">场景</th>
-        <th style="text-align: center;">知识点</th>
+        <th style="text-align: center;">分论-个人法益</th>
+        <th style="text-align: center;">分论-社会法益</th>
+        <th style="text-align: center;">分论-国家法益</th>
     </tr>
     </thead>
     <tbody>
@@ -172,7 +172,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/criminal/sub/'" |
+where_exp: "item", "item.path contains 'law/criminal/sub/person/'" |
 sort: "sequence"
 %}
 <ol>
@@ -184,6 +184,57 @@ sort: "sequence"
     {% endfor %}
 </ol>
         </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/criminal/sub/society/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/criminal/sub/state/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+---
+
+![](/assets/images/law/criminal/人.svg)
+
+---
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">场景</th>
+        <th style="text-align: center;">知识点</th>
+        <th style="text-align: center;">人物</th>
+        <th style="text-align: center;">其它</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
         <td>
 {%
 assign filtered_posts = site.law |
@@ -214,25 +265,6 @@ sort: "sequence"
     {% endfor %}
 </ol>
         </td>
-    </tr>
-    </tbody>
-</table>
-
----
-
-![](/assets/images/law/criminal/人.svg)
-
----
-
-<table>
-    <thead>
-    <tr>
-        <th style="text-align: center;">人物</th>
-        <th style="text-align: center;">其它</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
         <td>
 {%
 assign filtered_posts = site.law |
@@ -387,5 +419,4 @@ sort: "sequence"
 - [中国审判流程信息公开网](https://splcgk.court.gov.cn/gzfwww/)
 
 - [人民法院案例库](https://rmfyalk.court.gov.cn/)
-
 

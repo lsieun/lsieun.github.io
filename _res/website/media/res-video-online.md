@@ -90,3 +90,4 @@ sequence: "101"
 ### 心理
 
 - [黄执中-35天超级说服力训练营](https://www.bilibili.com/video/BV14GBCYMEkb)
+- [说服力](https://www.youtube.com/playlist?list=PL5fLgI8BVPrT-8yCwA_LGD888XVFc62jA)

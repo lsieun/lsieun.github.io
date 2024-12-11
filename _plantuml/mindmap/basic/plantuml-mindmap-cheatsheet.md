@@ -11,7 +11,7 @@ sequence: "103"
 * MindMap
     * Text
         * character
-            * 『』「」〖〗【】
+            * 『』「」〖〗【】★☆✔️⭕❌
             * ①、②、③、④、⑤、⑥、⑦、⑧、⑨、⑩
         * style
             * font
@@ -26,9 +26,12 @@ sequence: "103"
                 * This is <color:red>Red</color>
                 * This is <back:orange>Orange background</back>
     * Emoji
-        * <:triangular_flag_on_post:>
-        * <#red:heavy_check_mark:> <#red:heavy_multiplication_x:>
-        * <:question:><:exclamation:>
+        * <:triangular_flag_on_post:> <:white_flag:> <:black_flag:>
+        * <:heavy_check_mark:> <#red:heavy_check_mark:> <#green:heavy_check_mark:> <#blue:heavy_check_mark:> <#60EE60:heavy_check_mark:>
+        * <:x:> <#red:x:> <#green:x:> <#blue:x:>
+        * <:heavy_plus_sign:> <:heavy_minus_sign:> <:heavy_multiplication_x:> <:heavy_division_sign:>
+        * <#red:question:><#red:exclamation:>
+        * <:smirk:> <:sweat:> <:relieved:> <:sob:>
         * <:heart:><:black_heart:>
         * <:red_circle:><:large_blue_circle:><#green:red_circle:>
 
@@ -41,7 +44,7 @@ sequence: "103"
 * MindMap
     * Text
         * character
-            * 『』「」〖〗【】
+            * 『』「」〖〗【】★☆✔️⭕❌
             * ①、②、③、④、⑤、⑥、⑦、⑧、⑨、⑩
         * style
             * font
@@ -56,9 +59,12 @@ sequence: "103"
                 * This is <color:red>Red</color>
                 * This is <back:orange>Orange background</back>
     * Emoji
-        * <:triangular_flag_on_post:>
-        * <#red:heavy_check_mark:> <#red:heavy_multiplication_x:>
-        * <:question:><:exclamation:>
+        * <:triangular_flag_on_post:> <:white_flag:> <:black_flag:>
+        * <:heavy_check_mark:> <#red:heavy_check_mark:> <#green:heavy_check_mark:> <#blue:heavy_check_mark:> <#60EE60:heavy_check_mark:>
+        * <:x:> <#red:x:> <#green:x:> <#blue:x:>
+        * <:heavy_plus_sign:> <:heavy_minus_sign:> <:heavy_multiplication_x:> <:heavy_division_sign:>
+        * <#red:question:><#red:exclamation:>
+        * <:smirk:> <:sweat:> <:relieved:> <:sob:>
         * <:heart:><:black_heart:>
         * <:red_circle:><:large_blue_circle:><#green:red_circle:>
 
