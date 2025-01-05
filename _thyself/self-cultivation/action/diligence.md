@@ -48,3 +48,11 @@ sequence: "104"
 
 当然，勤与懒也不是一成不变的，懒的可以通过反思、习惯的培养等训练由懒变勤，有些人也可能一不注意就由勤变成了懒。
 
+
+## 起床
+
+```text
+Maybe you don’t need to find more energy,
+maybe you just need to find a dream
+that makes you actually want to get up in the morning.
+```

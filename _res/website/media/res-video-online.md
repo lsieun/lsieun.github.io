@@ -78,7 +78,8 @@ sequence: "101"
 - YouTube
     - [yt1d: YouTube 下载](https://yt1d.com/en/)
 - B 站
-    - [xiazaitool](https://www.xiazaitool.com/blbl)
+    - [xiazaitool](https://www.xiazaitool.com/blbl) ❌
+    - [ShowBL](https://www.showbl.com/lab/bilibili/)
 
 ### 动漫
 

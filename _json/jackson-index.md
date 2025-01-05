@@ -169,6 +169,7 @@ sort: "sequence"
 Github:
 
 - [lsieun/learn-java-json](https://github.com/lsieun/learn-java-json)
+- [lsieun/learn-java-jackson](https://github.com/lsieun/learn-java-jackson)
 
 Baeldung:
 

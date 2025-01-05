@@ -26,6 +26,7 @@ sequence: "101"
     - [通义千问](https://tongyi.aliyun.com/qianwen/)：对话
     - [通义灵码](https://tongyi.aliyun.com/lingma)：代码
     - [通义万相](https://tongyi.aliyun.com/wanxiang/)：作画
+    - [通义听吾](https://tingwu.aliyun.com/)
 - [百度 - 对话](https://chat.baidu.com/)
     - [文心一言](https://yiyan.baidu.com/)
 - [Kimi](https://kimi.moonshot.cn/) - 微信登录

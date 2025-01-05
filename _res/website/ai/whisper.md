@@ -3,6 +3,10 @@ title: "whisper"
 sequence: "103"
 ---
 
+- [](https://tingwu.aliyun.com/home)
+
+https://extract-text-online.com/zh
+
 ## 本地转换
 
 ### 软件下载
@@ -40,3 +44,8 @@ https://huggingface.co/spaces/sanchit-gandhi/whisper-jax
 - [openai/whisper](https://github.com/openai/whisper)
 - [Const-me/Whisper](https://github.com/Const-me/Whisper)
 - [GiviMAD/whisper-jni](https://github.com/GiviMAD/whisper-jni)
+
+
+- [vizard.ai](https://vizard.ai/)
+- [goodtape.io](https://goodtape.io/) Google联合登陆
+- [whisperui.com](https://whisperui.com/)
