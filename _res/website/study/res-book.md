@@ -9,7 +9,10 @@ sequence: "103"
 ## 网站
 
 - Ebook
-    - [Zlibrary](https://z-library.se/) [Mirror](https://singlelogin.re/)
+    - Z-Library
+      - [https://zh.z-lib.gd/](https://zh.z-lib.gd/)（需梯，√）
+      - [Zlibrary](https://z-library.se/)
+      - [Mirror](https://singlelogin.re/)
     - [dbooks](https://www.dbooks.org/)
     - LibGen
         - [libgen.is](https://libgen.is/)

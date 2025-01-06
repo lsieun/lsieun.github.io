@@ -7,6 +7,8 @@ sequence: "software"
 
 ## 软件网站
 
+- [52 破解](https://www.52pojie.cn/)
+
 - [佛系软件](https://foxirj.com/)
 - [懒得勤快](https://masuit.com/)
 - [蓝点网](https://www.landiannews.com/)

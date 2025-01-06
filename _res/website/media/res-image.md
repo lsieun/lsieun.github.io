@@ -37,6 +37,10 @@ sequence: "103"
         - [naruto-shippuden](https://gifer.com/en/gifs/naruto-shippuden)
     - [giphy](https://giphy.com/)
 
+## OCR
+
+- [windows 微信OCR离线版](https://www.52pojie.cn/thread-1996549-1-1.html)
+
 ## 工具
 
 - [Upscayl AI 图像放大增强](https://foxirj.com/upscayl-win.html)

@@ -69,7 +69,7 @@ Tutorial
 
 ### IT 技术网站
 
-- [52 破解](https://www.52pojie.cn/)
+
 - [All It Books](https://allitbooks.net/)
 - [Baeldung](https://www.baeldung.com/)
   - [Full Archive](https://www.baeldung.com/full_archive)
