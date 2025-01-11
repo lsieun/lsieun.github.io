@@ -1,6 +1,6 @@
 ---
 title: "中文：简体和繁体"
-sequence: "105"
+sequence: "101"
 ---
 
 ```xml

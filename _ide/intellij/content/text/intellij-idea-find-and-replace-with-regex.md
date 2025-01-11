@@ -145,6 +145,11 @@ You can use regular expressions to change the case of characters that matches so
 
 ![](/assets/images/intellij/find-by-unicode-category-and-replace-with-space.png)
 
+### Markdown 添加标题
+
+- 查找：`^第([零一二三四五六七八九十]+)章`
+- 替换：`## 第$1章`
+
 
 ## References
 
