@@ -183,6 +183,7 @@ sort: "sequence"
         <th style="text-align: center;">总则编</th>
         <th style="text-align: center;">物权编</th>
         <th style="text-align: center;">债权编</th>
+        <th style="text-align: center;">合同编</th>
     </tr>
     </thead>
     <tbody>
@@ -221,6 +222,21 @@ sort: "sequence"
 {%
 assign filtered_posts = site.law |
 where_exp: "item", "item.path contains 'law/civil/txt/p3/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/civil/txt/p4/'" |
 sort: "sequence"
 %}
 <ol>

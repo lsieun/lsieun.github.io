@@ -466,4 +466,3 @@ sort: "sequence"
     - [plantuml/plantuml](https://github.com/plantuml/plantuml)
 
 - [UML Modeling with PlantUML: A Comprehensive Guide with Examples](https://mycodingdays.com/uml_modeling_with_plantuml_a_comprehensive_guide_with_examples/)
-

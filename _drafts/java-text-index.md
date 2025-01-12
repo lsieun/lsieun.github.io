@@ -368,6 +368,7 @@ sort: "sequence"
 
 - [lsieun/learn-java-unicode](https://github.com/lsieun/learn-java-unicode)
 - [lsieun/learn-java-text](https://github.com/lsieun/learn-java-text)
+- [lsieun/learn-java-text-chinese](https://github.com/lsieun/learn-java-text-chinese)
 - [lsieun/learn-java-regex](https://github.com/lsieun/learn-java-regex)
 
 书籍

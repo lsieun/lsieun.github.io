@@ -1,6 +1,6 @@
 ---
 title: "Emoji"
-sequence: "102"
+sequence: "103"
 ---
 
 [UP](/plantuml/plantuml-index.html)

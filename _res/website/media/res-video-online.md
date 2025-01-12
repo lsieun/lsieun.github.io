@@ -80,6 +80,24 @@ sequence: "101"
 - B 站
     - [xiazaitool](https://www.xiazaitool.com/blbl) ❌
     - [ShowBL](https://www.showbl.com/lab/bilibili/)
+    - [Online Video and Image Downloader](https://snapany.com/)
+
+IDM
+
+```text
+Downloads --> Options
+General --> Customize IDM Download panels in browsers --> Edit...
+Add
+
+M4S
+XS
+
+File Types
+M4S XS
+
+Don't start downloading automatically from the following sites:
+*.bilibili.com
+```
 
 ### 动漫
 

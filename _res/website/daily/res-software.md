@@ -22,6 +22,12 @@ sequence: "software"
 - [零度解说](https://www.freedidi.com/)
 - [ALLEN](https://allencj.com/) - OKK
 
+- [Game Giveaway of the Day](https://www.giveawayoftheday.com/)
+
+Email
+
+- [mail.td](https://mail.td/en)
+
 ## 国外
 
 - [LRepacks](https://lrepacks.net/)
