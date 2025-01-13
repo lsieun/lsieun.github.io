@@ -1,7 +1,9 @@
 ---
-title: "中文字符"
+title: "中文字符：Unicode范围"
 sequence: "101"
 ---
+
+## 范围
 
 ```text
 Block                                   Range       Comment
@@ -17,6 +19,8 @@ CJK Unified Ideographs Extension H      31350–323AF Rare, historic
 CJK Compatibility Ideographs            F900-FAFF   Duplicates, unifiable variants, corporate characters
 CJK Compatibility Ideographs Supplement 2F800-2FA1F Unifiable variants
 ```
+
+## 参考
 
 - [What's the complete range for Chinese characters in Unicode?](https://stackoverflow.com/questions/1366068/whats-the-complete-range-for-chinese-characters-in-unicode)
 - [汉字部首Unicode对照表](https://blog.csdn.net/CNnumen/article/details/5736271)

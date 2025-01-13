@@ -133,7 +133,36 @@ sort: "sequence"
     </tbody>
 </table>
 
-## Reference
+## 专题处理
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">文本处理</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.algorithm |
+where_exp: "item", "item.path contains 'algorithm/theme/text/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+## 参考
 
 - [labuladong 的算法笔记](https://labuladong.online/algo/)
 
@@ -145,3 +174,7 @@ sort: "sequence"
 
 - [ALGORITHMS INSIGHT](https://algorithmsinsight.wordpress.com/)
 - [Types of Algorithms](https://www.educba.com/types-of-algorithms/)
+
+代码
+
+- [GitHub: arksha/Algorithm](https://github.com/arksha/Algorithm)

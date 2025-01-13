@@ -277,8 +277,10 @@ sort: "sequence"
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">API</th>
+        <th style="text-align: center;">Syntax</th>
         <th style="text-align: center;">Check</th>
+        <th style="text-align: center;">Replace</th>
     </tr>
     </thead>
     <tbody>
@@ -286,7 +288,22 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.java |
-where_exp: "item", "item.path contains 'java/regex/basic/'" |
+where_exp: "item", "item.path contains 'java/regex/api/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.java |
+where_exp: "item", "item.path contains 'java/regex/syntax/'" |
 sort: "sequence"
 %}
 <ol>
@@ -313,11 +330,42 @@ sort: "sequence"
     {% endfor %}
 </ol>
         </td>
+        <td>
+{%
+assign filtered_posts = site.java |
+where_exp: "item", "item.path contains 'java/regex/replace/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
     </tr>
     </tbody>
 </table>
 
+
+
+- [Baeldung Tag: Regex](https://www.baeldung.com/tag/regex)
+    - [Regular Expressions](https://www.baeldung.com/cs/regular-expressions)
+    - [A Guide To Java Regular Expressions API](https://www.baeldung.com/regular-expressions-java)
+    - [Lookahead and Lookbehind in Java Regex](https://www.baeldung.com/java-regex-lookahead-lookbehind)
+    - [Regular Expressions \s and \s+ in Java](https://www.baeldung.com/java-regex-s-splus)
+    - [How to Use Regular Expressions to Replace Tokens in Strings in Java](https://www.baeldung.com/java-regex-token-replacement)
+    - [Case-Insensitive String Matching in Java](https://www.baeldung.com/java-case-insensitive-string-matching)
+    - [Difference Between Java Matcher find() and matches()](https://www.baeldung.com/java-matcher-find-vs-matches)
+    - [Pre-compile Regex Patterns Into Pattern Objects](https://www.baeldung.com/java-regex-pre-compile)
+    - [An Overview of Regular Expressions Performance in Java](https://www.baeldung.com/java-regex-performance)
+    - [Replacing Strings in Java Using Regex: Back Reference vs. Lookaround](https://www.baeldung.com/java-regex-replace-strings-back-reference-vs-lookaround)
+
 - [Java Regex - Java Regular Expressions](https://jenkov.com/tutorials/java-regex/index.html)
+
+- [Introduction to regular expressions in Java](https://www.javamex.com/tutorials/regular_expressions/index.shtml)
 
 ## 中文
 
@@ -379,19 +427,6 @@ sort: "sequence"
 
 - [Introduction to HexFormat in Java](https://www.baeldung.com/java-hexformat)
 
-- [Baeldung Tag: Regex](https://www.baeldung.com/tag/regex)
-    - [A Guide To Java Regular Expressions API](https://www.baeldung.com/regular-expressions-java)
-    - [Lookahead and Lookbehind in Java Regex](https://www.baeldung.com/java-regex-lookahead-lookbehind)
-    - [Regular Expressions \s and \s+ in Java](https://www.baeldung.com/java-regex-s-splus)
-    - [How to Use Regular Expressions to Replace Tokens in Strings in Java](https://www.baeldung.com/java-regex-token-replacement)
-    - [Case-Insensitive String Matching in Java](https://www.baeldung.com/java-case-insensitive-string-matching)
-    - [Difference Between Java Matcher find() and matches()](https://www.baeldung.com/java-matcher-find-vs-matches)
-    - [Pre-compile Regex Patterns Into Pattern Objects](https://www.baeldung.com/java-regex-pre-compile)
-    - [An Overview of Regular Expressions Performance in Java](https://www.baeldung.com/java-regex-performance)
-    - [Replacing Strings in Java Using Regex: Back Reference vs. Lookaround](https://www.baeldung.com/java-regex-replace-strings-back-reference-vs-lookaround)
-
-
-- [Introduction to regular expressions in Java](https://www.javamex.com/tutorials/regular_expressions/index.shtml)
 
 - HTML
     - [Remove HTML Tags Using Java](https://www.baeldung.com/java-remove-html-tags)

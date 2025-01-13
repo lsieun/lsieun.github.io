@@ -175,15 +175,16 @@ sort: "sequence"
     </tbody>
 </table>
 
+
 ## 视频内容
 
 <table>
     <thead>
     <tr>
         <th style="text-align: center;">总则编</th>
-        <th style="text-align: center;">物权编</th>
-        <th style="text-align: center;">债权编</th>
+        <th style="text-align: center;">物权编和债权编</th>
         <th style="text-align: center;">合同编</th>
+        <th style="text-align: center;">人格家庭</th>
     </tr>
     </thead>
     <tbody>

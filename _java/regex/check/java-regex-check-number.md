@@ -3,6 +3,9 @@ title: "检查数字"
 sequence: "101"
 ---
 
+[UP](/java/java-text-index.html)
+
+
 ```java
 import java.util.regex.Pattern;
 
