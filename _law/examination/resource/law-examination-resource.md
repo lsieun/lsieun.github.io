@@ -40,6 +40,8 @@ sequence: "110"
 - [瑞达法考](https://www.ruidaedu.com/)
 - [优学教育](https://youxuejiaoyu.net/)
 
-
-- [2025 年法考客观题【精讲卷】刑法 众合柏浪涛](https://www.bilibili.com/video/BV1r8mxYNECZ/)
-- [2025 年法考客观题【精讲卷】民法 众合孟献贵](https://www.bilibili.com/video/BV1hsSvY7Ev1/)
+- [众合教育](https://space.bilibili.com/417302260)
+    - [2025 年法考客观题【精讲卷】刑法 众合柏浪涛](https://www.bilibili.com/video/BV1r8mxYNECZ/)
+    - [2025 年法考客观题【精讲卷】民法 众合孟献贵](https://www.bilibili.com/video/BV1hsSvY7Ev1/)
+    - [2025年法考客观题【精讲卷】刑诉法 众合左宁](https://www.bilibili.com/video/BV14jrrYBExd/)
+    - [2025年法考客观题【精讲卷】行政法 众合李佳](https://www.bilibili.com/video/BV1Tyc1eeExu/)
