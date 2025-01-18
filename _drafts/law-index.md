@@ -40,6 +40,13 @@ permalink: /law/law-index.html
 民法当中也是要强调一种秩序
 ```
 
+```text
+想不清楚某个法律问题（制度、权利）时，
+就想里面涉及的哪几方，
+这个制度和权利对谁是有利的，
+因为这里面涉及的利益的均衡
+```
+
 - 法律体系
     - 宪法
     - 民商法
@@ -51,6 +58,7 @@ permalink: /law/law-index.html
 
 - [刑法]({% link _law/criminal-law-index.md %})
 - [民法]({% link _law/civil-law-index.md %})
+- [刑诉法]({% link _law/criminal-procedure-law-index.md %})
 
 ## 考试
 
@@ -269,4 +277,3 @@ sort: "sequence"
 - [中国审判流程信息公开网](https://splcgk.court.gov.cn/gzfwww/)
 
 - [人民法院案例库](https://rmfyalk.court.gov.cn/)
-
