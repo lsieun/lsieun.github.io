@@ -150,6 +150,9 @@ You can use regular expressions to change the case of characters that matches so
 - 查找：`^第([零一二三四五六七八九十]+)章`
 - 替换：`## 第$1章`
 
+```text
+^[~a-z A-Z]+$
+```
 
 ## References
 

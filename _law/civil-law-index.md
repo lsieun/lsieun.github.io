@@ -59,6 +59,7 @@ sort: "sequence"
         <th style="text-align: center;">人</th>
         <th style="text-align: center;">财产</th>
         <th style="text-align: center;">商业</th>
+        <th style="text-align: center;">公权力</th>
     </tr>
     </thead>
     <tbody>
@@ -112,6 +113,21 @@ sort: "sequence"
 {%
 assign filtered_posts = site.law |
 where_exp: "item", "item.path contains 'law/civil/glossary/business/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/civil/glossary/power/'" |
 sort: "sequence"
 %}
 <ol>
