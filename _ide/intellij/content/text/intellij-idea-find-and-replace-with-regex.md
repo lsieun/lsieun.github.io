@@ -151,7 +151,7 @@ You can use regular expressions to change the case of characters that matches so
 - 替换：`## 第$1章`
 
 ```text
-^[~a-z A-Z]+$
+^[-~,.a-z A-Z]+$
 ```
 
 ## References
