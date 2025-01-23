@@ -52,14 +52,15 @@ sort: "sequence"
 
 ## 概念理解
 
+### 基础
+
 <table>
     <thead>
     <tr>
         <th style="text-align: center;">基础</th>
-        <th style="text-align: center;">人</th>
-        <th style="text-align: center;">财产</th>
-        <th style="text-align: center;">商业</th>
-        <th style="text-align: center;">公权力</th>
+        <th style="text-align: center;">权利</th>
+        <th style="text-align: center;">责任</th>
+        <th style="text-align: center;">时间</th>
     </tr>
     </thead>
     <tbody>
@@ -79,6 +80,67 @@ sort: "sequence"
     {% endfor %}
 </ol>
         </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/civil/glossary/right/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/civil/glossary/liability/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/civil/glossary/time/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+### 人财
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">人</th>
+        <th style="text-align: center;">财产</th>
+        <th style="text-align: center;">商业</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
         <td>
 {%
 assign filtered_posts = site.law |
@@ -124,6 +186,20 @@ sort: "sequence"
     {% endfor %}
 </ol>
         </td>
+    </tr>
+    </tbody>
+</table>
+
+### 公权力
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">公权力</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
         <td>
 {%
 assign filtered_posts = site.law |
@@ -144,6 +220,8 @@ sort: "sequence"
 </table>
 
 ## 考试
+
+### 1
 
 <table>
     <thead>
@@ -174,6 +252,51 @@ sort: "sequence"
 {%
 assign filtered_posts = site.law |
 where_exp: "item", "item.path contains 'law/civil/exam/summary/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+### 2
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">时间</th>
+        <th style="text-align: center;">情景</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/civil/exam/time/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/civil/exam/situation/'" |
 sort: "sequence"
 %}
 <ol>
