@@ -18,7 +18,6 @@ $ git push -f origin main
 $ git gc --aggressive --prune=all
 ```
 
-cd
 **Checkout/Create Orphan Branch** - Create a new orphan branch in your git repository.
 This branch will not show in `git branch` command.
 

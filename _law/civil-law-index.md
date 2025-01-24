@@ -58,9 +58,9 @@ sort: "sequence"
     <thead>
     <tr>
         <th style="text-align: center;">基础</th>
+        <th style="text-align: center;">原则/原理</th>
         <th style="text-align: center;">权利</th>
         <th style="text-align: center;">责任</th>
-        <th style="text-align: center;">时间</th>
     </tr>
     </thead>
     <tbody>
@@ -69,6 +69,21 @@ sort: "sequence"
 {%
 assign filtered_posts = site.law |
 where_exp: "item", "item.path contains 'law/civil/glossary/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/civil/glossary/principle/'" |
 sort: "sequence"
 %}
 <ol>
@@ -99,21 +114,6 @@ sort: "sequence"
 {%
 assign filtered_posts = site.law |
 where_exp: "item", "item.path contains 'law/civil/glossary/liability/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-        <td>
-{%
-assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/civil/glossary/time/'" |
 sort: "sequence"
 %}
 <ol>
@@ -274,6 +274,7 @@ sort: "sequence"
     <tr>
         <th style="text-align: center;">时间</th>
         <th style="text-align: center;">情景</th>
+        <th style="text-align: center;">法院</th>
     </tr>
     </thead>
     <tbody>
@@ -297,6 +298,21 @@ sort: "sequence"
 {%
 assign filtered_posts = site.law |
 where_exp: "item", "item.path contains 'law/civil/exam/situation/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/civil/exam/power/'" |
 sort: "sequence"
 %}
 <ol>
