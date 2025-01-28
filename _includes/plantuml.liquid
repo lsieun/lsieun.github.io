@@ -1,0 +1,50 @@
+{% comment %}
+  Copyright 2023 Richard Dominick
+{% endcomment %}
+{%- assign types = "plantuml, puml" | split: ", " -%}
+{%- assign nodes = include.html
+  | strip
+  | split: '<pre><code class="language-'
+-%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pako/1.0.11/pako.min.js" integrity="sha512-euWc/Qv8Kp0CbTX1M+Q3BvUyoOaq9Au50TT7vz3MFf5ver39ybq6zV+RngDY8eN8AIQFigxjwYv6jhoP546vfQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+  // Adapted from
+  // https://github.com/markushedvall/plantuml-encoder/blob/master/lib/encode64.js
+  function encodeToPlantumlEncoded(text) {
+    function encodeFromB64(c) {
+      const i = "=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".indexOf(c)
+      return "00123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_".at(i) || "?"
+    }
+
+    return [...btoa(text)].map(encodeFromB64).join("")
+  }
+</script>
+{{ nodes.first }}
+{%- for node in nodes offset:1 -%}
+  {% assign tag = node | split: '">' | first %}
+  {%- if types contains tag -%}
+    {% assign contents = node
+      | replace_first: tag, ''
+      | replace_first: '">', ''
+      | strip
+      | split: '</code></pre>'
+    %}
+    {%- capture text %}{% include capturehtml.liquid text=contents.first %}{% endcapture %}
+    {%- assign placeholder_name = "https://httpstat.us/200/PUML-PLACEHOLDER-" | append: forloop.index -%}
+    {% if include.only_img -%}
+    <img src="{{ placeholder_name }}">
+    {% else -%}
+    <p>
+      <img src="{{ placeholder_name }}">
+    </p>
+    {% endif -%}
+    <script>
+      document.querySelector("img[src='{{ placeholder_name }}']").src = `https://www.plantuml.com/plantuml/png/${encodeToPlantumlEncoded(pako.deflateRaw(`{{ text }}`.trim(), { level: 9, to: 'string' }))}`
+    </script>
+    {%- for tail in contents offset:1 -%}
+      {{ tail }}</code></pre>
+    {%- endfor -%}
+  {%-else -%}
+    <pre><code class="language-{{ node }}
+  {%- endif -%}
+{%- endfor -%}

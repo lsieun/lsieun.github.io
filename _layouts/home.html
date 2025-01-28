@@ -1,0 +1,392 @@
+---
+layout: default
+---
+
+<div class="home w3-row">
+    {%- if page.title -%}
+    <h1 class="page-heading">{{ page.title }}</h1>
+    {%- endif -%}
+
+    {{ content }}
+
+    <!-- Blog entries -->
+    <div class="w3-col l8 s12">
+        {%- if site.posts.size > 0 -%}
+        {%- for post in site.posts -%}
+        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+        <!-- Blog entry -->
+        <div class="w3-card-4 w3-margin w3-white">
+            {%- if post.image -%}
+            <img src="{{ post.image }}" style="width:100%" alt=""/>
+            {%- endif -%}
+
+            <div class="w3-container">
+                <h2><b>{{ post.title | escape }}</b></h2>
+            </div>
+
+            <div class="w3-container">
+                {%- if site.show_excerpts -%}
+                <p>
+                    {{ post.excerpt }}
+                </p>
+                {%- endif -%}
+
+                <div class="w3-row">
+                    <div class="w3-col m8 s12">
+                        <p><a class="w3-button w3-padding-large w3-white w3-border"
+                              href="{{ post.url | relative_url }}"><b>READ MORE »</b></a></p>
+                    </div>
+                    <div class="w3-col m4 w3-hide-small">
+                        <p><span class="w3-padding-large w3-right"><b>{{ post.date | date: date_format }}</b></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        {%- endfor -%}
+
+        <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+        {%- endif -%}
+    </div>
+
+    <!-- Introduction menu -->
+    <div class="w3-col l4">
+        <!-- About Card -->
+        <div class="w3-card w3-margin w3-margin-top">
+            <img src="/assets/images/avatar_g.jpg" style="width:100%" alt="">
+            <div class="w3-container w3-white">
+                <h4><b>靡不有初，鲜克有终</b></h4>
+                <p>
+                    上士闻道，勤而行之；<br/>
+                    中士闻道，若存若亡；<br/>
+                    下士闻道，大笑之，不笑不足以为道。<br/>
+                    --春秋战国老子《道德经》
+                </p>
+                <p>
+                    人身难得，中土难生，<br/>
+                    明师难遇，佛法难闻。
+                </p>
+                <p>
+                    人身难得今已得，佛法难闻今已闻。<br/>
+                    此身不向今生度，更向何生度此身！
+                </p>
+                <p>
+                    不要为生命忧虑吃什么，为身体忧虑穿什么；<br/>
+                    因为生命胜于饮食，身体胜于衣裳。
+                </p>
+                <p>
+                    知命者不怨天，知己者不怨人。<br/>
+                    破山中贼易，破心中贼难。<br/>
+                    知而不行，只是未知。<br/>
+                    凡学之不勤，必其志未笃也。<br/>
+                    唯天下之至诚，然后能立天下之大本。<br/>
+                    --《王阳明心学》
+                </p>
+                <p>
+                    勤学，如春起之苗，不见其增，日有所长；<br/>
+                    辍学，如磨刀之石，不见其损，日有所亏。<br/>
+                    --陶渊明
+                </p>
+                <p>
+                    博学之，审问之，慎思之，明辨之，笃行之。<br/>
+                    有弗学，学之弗能，弗措也；<br/>
+                    有弗问，问之弗知，弗措也；<br/>
+                    有弗思，思之弗得，弗措也；<br/>
+                    有弗辨，辨之弗明，弗措也；<br/>
+                    有弗行，行之弗笃，弗措也。<br/>
+                    人一能之，己百之，人十能之，己千之。<br/>
+                    果能此道矣，虽愚必明，虽柔必强。<br/>
+                    --《礼记·中庸》
+                </p>
+                <p>
+                    历览前贤国与家，成由勤俭破由奢。<br/>
+                    --李商隐《咏史二首·其二》
+                </p>
+                <p>
+                    古人学问无遗力，少壮工夫老始成。<br/>
+                    纸上得来终觉浅，绝知此事要躬行。<br/>
+                    --陆游《冬夜读书示子聿》
+                </p>
+                <p>
+                    井蛙不可以语于海者，拘于虚也；（空间限制）<br/>
+                    夏虫不可以语于冰者，笃于时也；（时间限制）<br/>
+                    曲士不可以语于道者，束于教也。（认知限制）<br/>
+                    --《庄子·秋水》
+                </p>
+                <p>
+                    二八佳人体似酥，腰间仗剑斩凡夫。<br/>
+                    虽然不见人头落，暗里教君骨髓枯。<br/>
+                    --吕洞宾《警世》
+                </p>
+                <p>
+                    蜗牛角上争何事，石火光中寄此身。<br/>
+                    随富随贫且欢乐，不开口笑是痴人。<br/>
+                    --唐·白居易《对酒五首》
+                </p>
+                <p>
+                    古之所谓豪杰之士者，必有过人之节。<br/>
+                    人情有所不能忍者，<br/>
+                    匹夫见辱，拔剑而起，挺身而斗，<br/>
+                    此不足为勇也。<br/>
+                    天下有大勇者，<br/>
+                    卒然临之而不惊，无故加之而不怒。<br/>
+                    此其所挟持者甚大，而其志甚远也。<br/>
+                    --宋·苏轼《留侯论》
+                </p>
+                <p>
+                    天生我材必有用，千金散尽还复来。<br/>
+                    --唐·李白《将进酒》
+                </p>
+                <p>
+                    故天将降大任于是人也，<br/>
+                    必先苦其心志，劳其筋骨，<br/>
+                    饿其体肤，空乏其身，行拂乱其所为，<br/>
+                    所以动心忍性，曾益其所不能。<br/>
+                    --先秦《孟子》
+                </p>
+                <p>
+                    天行健，君子以自强不息；<br/>
+                    地势坤，君子以厚德载物。<br/>
+                    --《周易》
+                </p>
+                <p>
+                    手把青秧插满田，低头便见水中天。<br/>
+                    六根清净方为道，退步原来是向前。<br/>
+                    --五代后梁时期僧人契此和尚《插秧诗》
+                </p>
+                <p>
+                    人事有代谢，往来成古今。<br/>
+                    江山留胜迹，我辈复登临。<br/>
+                    水落鱼梁浅，天寒梦泽深。<br/>
+                    羊公碑尚在，读罢泪沾襟。<br/>
+                    --唐朝诗人孟浩然《与诸子登岘山》
+                </p>
+                <p>
+                    业精于勤，荒于嬉；<br/>
+                    行成于思，毁于随。<br/>
+                    --唐朝韩愈《进学解》
+                </p>
+                <p>
+                    为天地立心，<br/>
+                    为生民立命，<br/>
+                    为往圣继绝学，<br/>
+                    为万世开太平。<br/>
+                    --北宋张载《横渠语录》
+                </p>
+                <p>
+                    操千曲而后晓声，<br/>
+                    观千剑而后识器。<br/>
+                    --南朝刘勰《文心雕龙》
+                </p>
+                <p>
+                    静坐常思己过，<br/>
+                    闲谈莫论人非。<br/>
+                    --晚清学者金缨《格言联壁》
+                </p>
+                <p>
+                    道也者，不可须臾离也；<br/>
+                    可离，非道也！<br/>
+                    是故君子<br/>
+                    戒慎乎其所不睹，<br/>
+                    恐惧乎其所不闻。<br/>
+                    莫见乎隐，莫显乎微，<br/>
+                    故君子慎其独也。<br/>
+                    --《礼记·中庸》
+                </p>
+                <p>
+                    夫君子之行，<br/>
+                    静以修身，俭以养德，<br/>
+                    非淡泊无以明志，<br/>
+                    非宁静无以致远。<br/>
+                    夫学须静也，才须学也，<br/>
+                    非学无以广才，<br/>
+                    非志无以成学。<br/>
+                    --三国蜀汉诸葛亮《诫子书》
+                </p>
+                <p>
+                    人心惟危，道心惟微；<br/>
+                    惟精惟一，允执厥中。<br/>
+                    --《虞书·大禹谟》
+                </p>
+                <p>
+                    盖文王拘而演《周易》；<br/>
+                    仲尼厄而作《春秋》；<br/>
+                    屈原放逐，乃赋《离骚》；<br/>
+                    左丘失明，厥有《国语》；<br/>
+                    孙子膑脚，《兵法》修列；<br/>
+                    不韦迁蜀，世传《吕览》；<br/>
+                    韩非囚秦，《说难》《孤愤》；<br/>
+                    《诗》三百篇，大抵圣贤发奋之所为作也。<br/>
+                    --西汉司马迁《报任安书》
+                </p>
+                <p>
+                    泰山不让土壤，故能成其大；<br/>
+                    河海不择细流，故能就其深；<br/>
+                    王者不却众庶，故能明其德。<br/>
+                    --西汉司马迁《史记·李斯列传》
+                </p>
+                <p>
+                    女色者，世间之枷锁，凡夫恋著不能自拔！<br/>
+                    女色者，世间之重患，凡夫困之至死不免！<br/>
+                    女色者，世间之衰祸，凡夫遭之无厄不至！<br/>
+                    --《菩萨诃色欲法经》节录
+                </p>
+                <p>
+                    难难难，道最玄，<br/>
+                    莫把金丹作等闲。<br/>
+                    不遇至人传妙诀，<br/>
+                    空言口困舌头干。<br/>
+                    --《西游记》第二回
+                </p>
+                <p>
+                    凡遇事务，须要明白参问，具陈情实，<br/>
+                    精思、详虑、熟议可否，择善而行。<br/>
+                    勿执己见，勿恃己能，勿遂己欲。<br/>
+                    --《虑得集·家劝二》
+                </p>
+                <p>
+                    自小多才学，平生志气高；<br/>
+                    别人怀宝剑，我有笔如刀。<br/>
+                    朝为田舍郎，暮登天子堂；<br/>
+                    将相本无种，男儿当自强。<br/>
+                    学乃身之宝，儒为席上珍；<br/>
+                    君看为宰相，必用读书人。<br/>
+                    莫道儒冠误，诗书不负人；<br/>
+                    达而相天下，穷则善其身。<br/>
+                    --宋·汪洙《神童诗》
+                </p>
+                <p>
+                    常将有日思无日，莫待无时思有时。<br/>
+                    --《警世通言·卷二十五》
+                </p>
+                <p>
+                    法不轻传，道不贱卖，<br/>
+                    师不顺路，医不叩门。<br/>
+                    千金不传无义子，万才不渡忘恩人。<br/>
+                    医逢信者但可救，道遇无明枉费心。<br/>
+                    甘露不润无根草，妙法只渡有缘人。<br/>
+                    --《警世通言》
+                </p>
+                <p>
+                    与君子游，苾乎如入兰芷之室，<br/>
+                    久而不闻，则与之化矣；<br/>
+                    与小人游，贷乎如入鲍鱼之次，<br/>
+                    久而不闻，则与之化矣；<br/>
+                    是故，君子慎其所去就。<br/>
+                    --《大戴礼记·曾子疾病》
+                </p>
+                <p>
+                    酒肉穿肠过，佛祖心中留；<br/>
+                    世人若学我，如同进魔道。<br/>
+                    --《济公李修缘》
+                </p>
+                <p>
+                    才不足则多谋，识不足则多虑，<br/>
+                    威不足则多怒，信不足则多言，<br/>
+                    勇不足则多劳，明不足则多察，<br/>
+                    理不足则多辩，情不足则多仪。<br/>
+                    --清代·陈宏谋《养正遗规》
+                </p>
+                <p>
+                    无冥冥之志者，无昭昭之明；<br/>
+                    无惛惛之事者，无赫赫之功。<br/>
+                    --战国·荀子《劝学》
+                </p>
+                <p>
+                    既自以心为形役，奚惆怅而独悲？<br/>
+                    悟已往之不谏，知来者之可追。<br/>
+                    实迷途其未远，觉今是而昨非。<br/>
+                    --魏晋·陶渊明《归去来兮辞·并序》
+                </p>
+                <p>
+                    躬身入局，借势造势，方能谋局翻身。<br/>
+                    器不利，可磨；术不精，可练；<br/>
+                    道不通，可悟；法不强，可学；<br/>
+                    时不逢，可等。<br/>
+                    命由天定，运由己策；<br/>
+                    谋事在人，成事在天。<br/>
+                </p>
+                <p>
+                    不乱于心，不困于情，不畏将来，不念过往。<br/>
+                    --丰子恺《劝学》
+                </p>
+                <p>
+                    不驰于空想，不骛于虚声。<br/>
+                    --李大钊
+                </p>
+                <p>
+                    三更灯火五更鸡，正是男儿读书时。<br/>
+                    黑发不知勤学早，白首方悔读书迟。<br/>
+                    --颜真卿
+                </p>
+                <p>
+                    少年易老学难成，一寸光阴不可轻。<br/>
+                    未觉池塘春草梦，阶前梧叶已秋声。<br/>
+                    --宋朝·朱熹《偶成》
+                </p>
+            </div>
+        </div>
+        <hr>
+
+        <!-- Labels / tags -->
+        <div class="w3-card w3-margin">
+            <div class="w3-container w3-padding">
+                <h4>Tags</h4>
+            </div>
+            <div class="w3-container w3-white">
+                <p>
+                    {%- if site.tags.size > 0 -%}
+                    {%- assign sorted_tags = site.tags | sort -%}
+                    {%- for tag in sorted_tags -%}
+                    {%- assign tagName = tag | first | downcase -%}
+                    <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">{{ tagName | escape }}</span>
+                    {%- endfor -%}
+                    {%- endif -%}
+                </p>
+            </div>
+        </div>
+
+        <!-- Excellent Website -->
+        <div class="w3-card w3-margin">
+            <div class="w3-container w3-padding">
+                <h4>Excellent Website</h4>
+            </div>
+            <ul class="w3-ul w3-hoverable w3-white">
+                <li class="w3-padding-16">
+                    <a href="https://mreinhold.org/blog/" target="_blank">Mark Reinhold Blog</a>
+                    : the Chief Architect of the Java Platform Group at Oracle.
+                    <code>java.nio.ByteBuffer</code>类的作者
+                </li>
+
+                <li class="w3-padding-16">
+                    <a href="https://shipilev.net/" target="_blank">Aleksey Shipilëv: One Stop Page</a>
+                </li>
+
+                <li class="w3-padding-16">
+                    <a href="https://www.baeldung.com/category/series" target="_blank">Baeldung Series</a>
+                </li>
+
+                <li class="w3-padding-16">
+                    <a href="https://www.jvm-weekly.com/" target="_blank">JVM Weekly</a>
+                </li>
+
+                <li class="w3-padding-16">
+                    <a href="https://www.nayuki.io/" target="_blank">Project Nayuki</a>
+                    : a <strike>magical girl</strike> software developer in Toronto, Canada.
+                </li>
+
+                <li class="w3-padding-16">
+                    <a href="https://alblue.bandlem.com/" target="_blank">AlBlue's Blog</a>
+                </li>
+
+                <li class="w3-padding-16">
+                    <a href="https://www.un.org/en/about-us/universal-declaration-of-human-rights" target="_blank">Universal Declaration of Human Rights</a>
+                </li>
+
+            </ul>
+        </div>
+        <hr>
+
+    </div>
+    <!-- END Introduction Menu -->
+</div>

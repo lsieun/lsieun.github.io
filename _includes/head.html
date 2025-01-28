@@ -1,0 +1,29 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%- seo -%}
+  <link rel="stylesheet" href="{{ "/assets/css/w3.css" | relative_url }}">
+  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
+  <link rel="stylesheet" href="{{ "/assets/css/extra.css" | relative_url }}">
+  <script type="text/javascript" src="{{ "/assets/js/jquery-3.6.0.min.js" | relative_url }}"></script>
+  <script type="text/javascript" src="{{ "/assets/js/mathjax/MathJax.js?config=TeX-AMS_CHTML" | relative_url }}"></script>
+  <script type="text/javascript" src="{{ "/assets/js/auto-toc.js" | relative_url }}"></script>
+  <script type="text/javascript" src="{{ "/assets/js/copyCode.js" | relative_url }}" defer></script>
+  {%- feed_meta -%}
+  {%- if jekyll.environment == 'production' and site.google_analytics -%}
+    {%- include google-analytics.html -%}
+  {%- endif -%}
+  <script type="text/javascript">
+    // Javascript inside this file
+    $(function() {
+      $(".at").autoToc();
+
+      MathJax.Hub.Config({
+        "CommonHTML": {
+          scale: 138
+        }
+      });
+    });
+  </script>
+</head>

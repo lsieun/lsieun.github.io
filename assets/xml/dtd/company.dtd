@@ -1,0 +1,36 @@
+<!ELEMENT company (website,motto,logo?,contact,address,department*)>
+
+<!ELEMENT website (#PCDATA)>
+<!ELEMENT motto (#PCDATA)>
+<!ELEMENT logo ANY>
+
+<!ELEMENT contact (email|tel)+>
+<!ELEMENT email EMPTY>
+<!ATTLIST email href CDATA #REQUIRED
+        preferred (true | false) "false">
+<!ELEMENT tel (#PCDATA)>
+
+
+<!ELEMENT address (street,region?,postal-code,locality,country)>
+<!ELEMENT street (#PCDATA)>
+<!ELEMENT region (#PCDATA)>
+<!ELEMENT postal-code (#PCDATA)>
+<!ELEMENT locality (#PCDATA)>
+<!ELEMENT country (#PCDATA)>
+
+<!ELEMENT department (employee*)>
+<!ATTLIST department name CDATA #REQUIRED
+        officer IDREF #IMPLIED>
+
+<!ELEMENT employee ((name|(first-name,last-name?)),birthday?,salary)>
+<!ATTLIST employee id ID #REQUIRED>
+
+
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT first-name (#PCDATA)>
+<!ELEMENT last-name (#PCDATA)>
+<!ELEMENT birthday (#PCDATA)>
+<!ELEMENT salary (#PCDATA)>
+<!ATTLIST salary currency NMTOKEN #FIXED "Dollar">
+
+<!ENTITY slogan "Where there is a will, there is a way. 有志者，事竟成">

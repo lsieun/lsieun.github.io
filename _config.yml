@@ -1,0 +1,813 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+#
+# If you need help with YAML syntax, here are some quick references for you: 
+# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
+# https://learnxinyminutes.com/docs/yaml/
+#
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+
+title: lsieun
+email:
+description: >- # this means to ignore newlines until "baseurl:"
+  Every search begins with beginner's luck.
+  And every search ends with the victor's being severely tested. -- The Alchemist
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username:
+github_username: lsieun
+future: false
+
+host: 0.0.0.0
+port: 4321
+
+max_width: 1280
+show_excerpts: true
+permalink: none
+collections:
+  algorithm:
+    output: true
+    permalink: /:collection/:name:output_ext
+  apache-commons:
+    output: true
+  apm:
+    output: true
+  architecture:
+    output: true
+  archunit:
+    output: true
+    permalink: /:collection/:name:output_ext
+  article:
+    output: true
+  bash:
+    output: true
+  bytebuddy:
+    output: true
+    permalink: /:collection/:name:output_ext
+  cad:
+    output: true
+  cad-csharp:
+    output: true
+  centos:
+    output: true
+  cert:
+    output: true
+  chinese-culture:
+    output: true
+    permalink: /:collection/:name:output_ext
+  classfile:
+    output: true
+    permalink: /:collection/:name:output_ext
+  cognition:
+    output: true
+    permalink: /:collection/:name:output_ext
+  concept:
+    output: true
+  cplusplus:
+    output: true
+  csharp:
+    output: true
+  data-compression:
+    output: true
+  davinci-resolve:
+    output: true
+  db:
+    output: true
+  design-pattern:
+    output: true
+    permalink: /:collection/:name:output_ext
+  devops:
+    output: true
+  distributed:
+    output: true
+  dita:
+    output: true
+  docker:
+    output: true
+  english:
+    output: true
+    permalink: /:collection/:name:output_ext
+  epanet:
+    output: true
+  front-end:
+    output: true
+  gis:
+    output: true
+  git:
+    output: true
+    permalink: /:collection/:name:output_ext
+  google-guava:
+    output: true
+  google-guice:
+    output: true
+  graalvm:
+    output: true
+  gradle:
+    output: true
+  grpc:
+    output: true
+  guava:
+    output: true
+  health:
+    output: true
+    permalink: /:collection/:name:output_ext
+  hotspot:
+    output: true
+  hydraulic:
+    output: true
+  ide:
+    output: true
+    permalink: /:collection/:name:output_ext
+  interview:
+    output: true
+  java:
+    output: true
+    permalink: /:collection/:name:output_ext
+  javassist:
+    output: true
+  java-agent:
+    output: true
+  java-asm:
+    output: true
+    permalink: /:collection/:name:output_ext
+  javafx:
+    output: true
+    permalink: /:collection/:name:output_ext
+  java-native:
+    output: true
+  java-theme:
+    output: true
+  jdk-tools:
+    output: true
+  jekyll:
+    output: true
+    permalink: /:collection/:name:output_ext
+  jenkins:
+    output: true
+  jfreechart:
+    output: true
+  jgit:
+    output: true
+  json:
+    output: true
+  jsoup:
+    output: true
+    permalink: /:collection/:name:output_ext
+  junit:
+    output: true
+    permalink: /:collection/:name:output_ext
+  jvm:
+    output: true
+  k8s:
+    output: true
+  kafka:
+    output: true
+  law:
+    output: true
+    permalink: /:collection/:name:output_ext
+  libgdx:
+    output: true
+  linux:
+    output: true
+  lombok:
+    output: true
+    permalink: /:collection/:name:output_ext
+  lsieun:
+    output: true
+    permalink: /:collection/:name:output_ext
+  markdown:
+    output: true
+    permalink: /:collection/:name:output_ext
+  math:
+    output: true
+  maven:
+    output: true
+    permalink: /:collection/:name:output_ext
+  minio:
+    output: true
+  mitmproxy:
+    output: true
+  ml:
+    output: true
+  mqtt:
+    output: true
+  mysql:
+    output: true
+  netty:
+    output: true
+  nexus:
+    output: true
+  nginx:
+    output: true
+  office:
+    output: true
+  pki:
+    output: true
+  plantuml:
+    output: true
+    permalink: /:collection/:name:output_ext
+  protobuf:
+    output: true
+  reactor:
+    output: true
+  redis:
+    output: true
+    permalink: /:collection/:name:output_ext
+  res:
+    output: true
+    permalink: /:collection/:name:output_ext
+  rime:
+    output: true
+  scala:
+    output: true
+  spring:
+    output: true
+  spring-boot:
+    output: true
+  spring-cloud:
+    output: true
+  spring-mvc:
+    output: true
+  svg:
+    output: true
+    permalink: /:collection/:name:output_ext
+  thyself:
+    output: true
+    permalink: /:collection/:name:output_ext
+  trove4j:
+    output: true
+  ubuntu:
+    output: true
+  uml:
+    output: true
+    permalink: /:collection/:name:output_ext
+  vim:
+    output: true
+  vmware:
+    output: true
+  windows:
+    output: true
+  writing:
+    output: true
+  xml:
+    output: true
+    permalink: /:collection/:name:output_ext
+  zookeeper:
+    output: true
+
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "home"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "algorithm"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "apache-commons"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "apm"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "architecture"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "archunit"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "article"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "bash"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "bytebuddy"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "cad"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "cad-csharp"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "centos"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "cert"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "chinese-culture"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "classfile"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "cognition"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "concept"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "cplusplus"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "csharp"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "data-compression"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "davinci-resolve"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "db"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "design-pattern"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "devops"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "distributed"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "dita"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "docker"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "english"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "epanet"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "front-end"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "gis"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "git"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "google-guava"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "google-guice"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "graalvm"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "gradle"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "grpc"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "guava"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "health"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "hotspot"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "hydraulic"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "ide"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "interview"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "java"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "javassist"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "java-agent"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "java-asm"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "javafx"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "java-native"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "java-theme"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "jdk-tools"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "jekyll"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "jenkins"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "jfreechart"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "jgit"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "json"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "jsoup"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "junit"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "jvm"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "k8s"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "kafka"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "law"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "libgdx"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "linux"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "lombok"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "lsieun"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "markdown"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "math"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "maven"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "minio"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "mitmproxy"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "ml"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "mqtt"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "mysql"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "netty"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "nexus"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "nginx"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "office"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "pki"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "plantuml"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "protobuf"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "reactor"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "redis"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "res"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "rime"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "scala"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "spring"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "spring-boot"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "spring-cloud"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "spring-mvc"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "svg"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "thyself"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "trove4j"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "ubuntu"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "uml"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "vim"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "vmware"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "windows"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "writing"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "xml"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "zookeeper"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Build settings
+#theme: minima
+plugins:
+  - jekyll-feed
+
+# Exclude from processing.
+# The following items will not be processed, by default.
+# Any item listed under the `exclude:` key here will be automatically added to
+# the internal "default list".
+#
+# Excluded items can be processed by explicitly listing the directories or
+# their entries' file path in the `include:` list.
+#
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - .idea/
+  - just-run.sh
+  - shutdown.sh
+  - startup.sh
+  - gemfiles/
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/

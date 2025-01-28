@@ -1,0 +1,52 @@
+# 相关的规则设置定义在一个 group 下。在每一个 group 中，我们可以定义多个告警规则（rule）
+groups: # 组名。报警规则组名称
+  - name: 内存预警
+    rules:
+      - alert: 内存使用率预警
+        # expr: 基于 PromQL 表达式告警触发条件，用于计算是否有时间序列满足该条件
+        expr: (node_memory_MemTotal_bytes - (node_memory_MemFree_bytes + node_memory_Buffers_bytes + node_memory_Cached_bytes)) / node_memory_MemTotal_bytes * 100 > 98
+        # for: 评估等待时间，可选参数。用于表示只有当触发条件持续一段时间后才发送告警。在等待期间新产生告警的状态为 pending。
+        for: 1m
+        # labels: 自定义标签，允许用户指定要附加到告警上的一组附加标签
+        labels:
+          # severity: 指定告警级别。有三种等级，分别为 warning、critical 和 emergency，严重等级依次递增
+          severity: critical
+        # annotations: 附加信息，比如用于描述告警详细信息的文字等，annotations 的内容在告警产生时，会一同作为参数发送到 AlertManager
+        annotations:
+          title: "内存使用率预警"
+          serviceName: "{{ $labels.serviceName }}"
+          instance: "{{ $labels.instance }}"
+          value: "{{ $value }}"
+          btn: "点击查看详情"
+          link: "http://www.xyz.com"
+          template: "**${serviceName}**(${instance})内存使用率已经超过域值 **98%**，请及时处理！\n当前值：${value}%"
+  - name: 磁盘预警
+    rules:
+      - alert: 磁盘使用率预警
+        expr: (node_filesystem_size_bytes - node_filesystem_avail_bytes) / node_filesystem_size_bytes * 100 > 90
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          title: "磁盘使用率预警"
+          serviceName: "{{ $labels.serviceName }}"
+          instance: "{{ $labels.instance }}"
+          mountpoint: "{{ $lables.mountpoint }}"
+          value: "{{ $value }}"
+          btn: "点击查看详情"
+          link: "http://www.xyz.com"
+          template: "**${serviceName}**(${instance})服务器磁盘使用率超过域值 **90%**，请及时处理！\n挂载点：${mountpoint}\n当前值：${value}%！"
+  - name: 实例存活报警
+    rules:
+      - alert: 实例存活报警
+        expr: up == 0
+        for: 30s
+        labels:
+          severity: emergency
+        annotations:
+          title: "节点宕机报警"
+          serviceName: "{{ $labels.serviceName }}"
+          instance: "{{ $labels.instance }}"
+          btn: "点击查看详情"
+          link: "http://www.xyz.com"
+          template: "节点 **${serviceName}**(${instance}) 断联，请及时处理！"

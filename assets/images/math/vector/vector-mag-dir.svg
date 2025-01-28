@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Copyright 2017 mathsisfun.com -->
+
+<svg
+   width="267.1"
+   height="137.3"
+   version="1.1"
+   id="svg31"
+   sodipodi:docname="vector-mag-dir.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview33"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:current-layer="svg31" />
+  <defs
+     id="defs11">
+    <marker
+       id="id1"
+       style="overflow:visible"
+       orient="auto">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="stroke:black;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path2" />
+    </marker>
+    <marker
+       id="id2"
+       style="overflow:visible"
+       orient="auto">
+      <path
+         transform="scale(0.6)"
+         style="font-size:12px;fill:#ff9900;stroke:#ff9900;stroke-width:0.63;stroke-linejoin:round"
+         d="M 8.7,4 -2.2,0 8.7,-4 c -1.7,2.4 -1.7,5.6 0,8 z"
+         id="path5" />
+    </marker>
+    <marker
+       id="id3"
+       style="overflow:visible"
+       orient="auto">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#ff9900;stroke:#ff9900;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path8" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       orient="auto"
+       id="id13690"
+       inkscape:stockid="id13690">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="stroke:#3465a4;stroke-width:1pt;stroke-opacity:1;fill-opacity:1;fill:#3465a4"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path918" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       orient="auto"
+       id="id27261"
+       inkscape:stockid="id27261">
+      <path
+         transform="scale(0.6)"
+         style="font-size:12px;fill:#ff9900;stroke:#ff9900;stroke-width:0.63;stroke-linejoin:round;stroke-opacity:1;fill-opacity:1"
+         d="M 8.7,4 -2.2,0 8.7,-4 c -1.7,2.4 -1.7,5.6 0,8 z"
+         id="path1115" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       orient="auto"
+       id="id35019"
+       inkscape:stockid="id35019">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#ff9900;stroke:#ff9900;stroke-width:1pt;stroke-opacity:1;fill-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1118" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       orient="auto"
+       inkscape:stockid="id136905893"
+       id="id136905893">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="stroke:#f57900;stroke-width:1pt;stroke-opacity:1;fill-opacity:1;fill:#f57900"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1276" />
+    </marker>
+  </defs>
+  <path
+     style="fill:none;stroke:#f57900;stroke-width:4.21;marker-end:url(#id136905893);stroke-miterlimit:4;stroke-dasharray:none"
+     d="m 80.26,96.69 129.8,-67"
+     id="path13" />
+  <path
+     style="fill:none;stroke:#d76cff;stroke-width:0.8;stroke-dasharray:2.4, 2.4;stroke-miterlimit:4;stroke-dashoffset:0"
+     d="M 2.36,136.89 266.86,0.49"
+     id="path15" />
+  <text
+     x="-51.5206"
+     y="116.283"
+     transform="rotate(-27.2112)"
+     style="color:#000000;fill:#d76cff;font-family:Trebuchet MS;font-size:24px;font-style:italic;overflow:visible;stroke-width:1px"
+     id="text17">direction</text>
+  <path
+     style="fill:#ff9900;stroke:#ff9900;stroke-width:0.5px"
+     d="m 83.96,102.69 12.6,24.5"
+     id="path19" />
+  <path
+     style="fill:#ff9900;stroke:#ff9900;stroke-width:0.5px"
+     d="m 218.26,33.59 12.6,24.5"
+     id="path21" />
+  <path
+     style="fill:none;stroke:#ff9900;stroke-width:1.19;marker-start:url(#id27261)"
+     d="m 95.96,122.59 41.2,-20.3"
+     id="path23" />
+  <text
+     x="119.814"
+     y="100.351"
+     transform="rotate(-1.47978)"
+     style="color:#000000;font-size:24px;font-family:'Trebuchet MS';overflow:visible;fill:#ff9900;stroke-width:1px"
+     id="text25">magnitude</text>
+  <path
+     style="fill:none;stroke:#ff9900;stroke-width:1.19;marker-end:url(#id35019)"
+     d="m 191.16,73.49 36.8,-18"
+     id="path27" />
+</svg>

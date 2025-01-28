@@ -1,0 +1,10 @@
+@startuml
+
+!include bytebuddy-method-delegation-sample-common.iuml
+
+class HelloWorld extends Father implements ICat, IDog {
+    + sayFromHelloWorld()
+    + String test(String name, int age)
+}
+
+@enduml

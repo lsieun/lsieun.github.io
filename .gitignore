@@ -1,0 +1,21 @@
+_site
+.idea
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
+
+# IDEA
+
+*.iml
+*.kotlin_module
+target/
+lib/
+build/
+dist/
+.*
+!.gitignore
+google.txt
+Gemfile.lock
+*.cer
+*.key

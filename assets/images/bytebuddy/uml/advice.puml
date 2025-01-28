@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/class-diagram
+!pragma useIntermediatePackages false
+
+interface net.bytebuddy.dynamic.DynamicType$Builder {
+    {abstract} +visit(AsmVisitorWrapper): Builder
+}
+
+interface net.bytebuddy.asm.AsmVisitorWrapper {
+    {abstract} +wrap(): ClassVisitor
+}
+
+class net.bytebuddy.asm.ForDeclaredMethods {
+    +wrap(): ClassVisitor
+}
+
+interface net.bytebuddy.asm.MethodVisitorWrapper {
+    {abstract} +wrap(): MethodVisitor
+}
+
+class net.bytebuddy.asm.Advice {
+    {static} +to(): Advice
+    ---
+    +on(ElementMatcher): ForDeclaredMethods
+}
+
+abstract class org.objectweb.asm.ClassVisitor {
+    +visitMethod(): MethodVisitor
+}
+
+abstract class org.objectweb.asm.MethodVisitor {
+}
+
+DynamicType$Builder::visit --> AsmVisitorWrapper
+
+ForDeclaredMethods .up.|> AsmVisitorWrapper
+AsmVisitorWrapper::wrap --> ClassVisitor
+
+MethodVisitorWrapper::wrap --> MethodVisitor
+
+Advice ..|> MethodVisitorWrapper
+Advice::on --> ForDeclaredMethods
+
+ClassVisitor::visitMethod --> MethodVisitor
+@enduml

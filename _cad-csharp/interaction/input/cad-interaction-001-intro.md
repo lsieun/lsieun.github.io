@@ -1,0 +1,79 @@
+---
+title: "用户交互"
+sequence: "101"
+---
+
+
+<table>
+    <thead>
+    <tr>
+        <th>函数名</th>
+        <th>作用</th>
+        <th>提示选项类</th>
+        <th>提示结果类</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>GetAngle</td>
+        <td>提示用户输入一个角度值</td>
+        <td>PromptAngleOptions</td>
+        <td>PromptDoubleResult</td>
+    </tr>
+    <tr>
+        <td>GetCorner</td>
+        <td>提示用户拾取矩形的角点</td>
+        <td>PromptCornerOptions</td>
+        <td>PromptPointResult</td>
+    </tr>
+    <tr>
+        <td>GetDistance</td>
+        <td>提示用户输入一段距离</td>
+        <td>PromptDistanceOptions</td>
+        <td>PromptDoubleResult</td>
+    </tr>
+    <tr>
+        <td>GetDouble</td>
+        <td>提示用户输入一个实数</td>
+        <td>PromptDoubleOptions</td>
+        <td>PromptDoubleResult</td>
+    </tr>
+    <tr>
+        <td>GetEntity</td>
+        <td>提示用户拾取一个实体</td>
+        <td>PromptEntityOptions</td>
+        <td>PromptEntityResult</td>
+    </tr>
+    <tr>
+        <td>GetInteger</td>
+        <td>提示用户输入一个整数</td>
+        <td>PromptIntegerOptions</td>
+        <td>PromptIntegerResult</td>
+    </tr>
+    <tr>
+        <td>GetKeywords</td>
+        <td>提示用户输入关键字</td>
+        <td>PromptKeywordOptions</td>
+        <td>PromptResult</td>
+    </tr>
+    <tr>
+        <td>GetNestedEntity</td>
+        <td>提示用户拾取嵌套实体</td>
+        <td>PromptNestedEntityOptions</td>
+        <td>PromptNestedEntityResult</td>
+    </tr>
+    <tr>
+        <td>GetPoint</td>
+        <td>提示用户输入一个点</td>
+        <td>PromptPointOptions</td>
+        <td>PromptPointResult</td>
+    </tr>
+    <tr>
+        <td>GetString</td>
+        <td>提示用户输入一个字符串</td>
+        <td>PromptStringOptions</td>
+        <td>PromptResult</td>
+    </tr>
+    </tbody>
+</table>
+

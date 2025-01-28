@@ -1,0 +1,91 @@
+---
+title: "Mirror"
+sequence: "106"
+---
+
+## Matrix3d.Mirroring
+
+```csharp
+namespace Autodesk.AutoCAD.Geometry
+{
+    public struct Matrix3d : IFormattable
+    {
+        public static Matrix3d Mirroring(Point3d pointValue)
+        {
+        }
+        
+        public static Matrix3d Mirroring(Plane plane)
+        {
+        }
+        
+        public static Matrix3d Mirroring(Line3d line)
+        {
+        }
+    }
+}
+```
+
+## 示例
+
+```csharp
+using Autodesk.AutoCAD.ApplicationServices;
+using Autodesk.AutoCAD.Colors;
+using Autodesk.AutoCAD.DatabaseServices;
+using Autodesk.AutoCAD.Geometry;
+using Autodesk.AutoCAD.Runtime;
+
+namespace Lsieun.Cad.DrawObjects.Transformation
+{
+    public class Mirror01LineUtility
+    {
+        [CommandMethod("Mirror01Line")]
+        public void MirrorLine()
+        {
+            Document doc = Application.DocumentManager.MdiActiveDocument;
+            Database db = doc.Database;
+
+            using (Transaction trans = db.TransactionManager.StartTransaction())
+            {
+                // 第 1 步，添加线
+                Point3d pt1 = new Point3d(100, 100, 0);
+                Point3d pt2 = new Point3d(200, 200, 0);
+                Line line = new Line();
+                line.StartPoint = pt1;
+                line.EndPoint = pt2;
+                line.Color = Color.FromRgb(0, 255, 0);
+
+
+                // A.
+                Point3d mirrorPt1 = new Point3d(50, 150, 0);
+                Point3d mirrorPt2 = new Point3d(150, 50, 0);
+                Line3d mirrorLine = new Line3d(mirrorPt1, mirrorPt2);
+                Matrix3d mt = Matrix3d.Mirroring(mirrorLine);
+
+                // B.
+                // 注意：这里不能调用 UpgradeOpen，因为还没有添加的数据库
+                // line.UpgradeOpen();
+                line.TransformBy(mt);
+                // line.DowngradeOpen();
+
+
+                // 第 2 步，添加到数据库
+                BlockTable table = (BlockTable)trans.GetObject(
+                    db.BlockTableId,
+                    OpenMode.ForRead
+                );
+                BlockTableRecord block = (BlockTableRecord)trans.GetObject(
+                    table[BlockTableRecord.ModelSpace],
+                    OpenMode.ForWrite
+                );
+
+                block.AppendEntity(line);
+                trans.AddNewlyCreatedDBObject(line, true);
+
+                // 第 3 步，提交事务
+                trans.Commit();
+            }
+        }
+    }
+}
+```
+

@@ -1,0 +1,24 @@
+User-agent: Baiduspider
+Disallow: /about
+Disallow: /english
+Disallow: /books
+
+User-agent: Googlebot
+Disallow: /about
+Disallow: /english
+Disallow: /books
+
+User-agent: MSNBot
+Disallow: /about
+Disallow: /english
+Disallow: /books
+
+User-agent: Baiduspider-image
+Disallow: /about
+Disallow: /english
+Disallow: /books
+
+User-agent: *
+Disallow: /about
+Disallow: /english
+Disallow: /books

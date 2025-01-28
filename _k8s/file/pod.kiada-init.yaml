@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kiada-init
+spec:
+  initContainers:
+  - name: init-demo
+    image: lsieun/init-demo:0.1
+  - name: network-check
+    image: lsieun/network-connectivity-checker:0.1
+  containers:
+  - name: kiada
+    image: lsieun/kiada:0.2
+    stdin: true
+    ports:
+    - name: http
+      containerPort: 8080
+  - name: envoy
+    image: lsieun/kiada-ssl-proxy:0.1
+    ports:
+    - name: https
+      containerPort: 8443
+    - name: admin
+      containerPort: 9901

@@ -1,0 +1,53 @@
+---
+title: "Jackson Annotation: Intro"
+sequence: "101"
+---
+
+## Reference
+
+- [Jackson Annotation Examples](https://www.baeldung.com/jackson-annotations)
+  - Jackson Serialization Annotations
+    - @JsonAnyGetter
+    - @JsonGetter
+    - @JsonPropertyOrder
+    - @JsonRawValue
+    - @JsonValue
+    - @JsonRootName
+    - @JsonSerialize
+  - Jackson Deserialization Annotations
+    - @JsonCreator
+    - @JacksonInject
+    - @JsonAnySetter
+    - @JsonSetter
+    - @JsonDeserialize
+    - @JsonAlias
+  - Jackson Property Inclusion Annotations
+    - @JsonIgnoreProperties
+    - @JsonIgnore
+    - @JsonIgnoreType
+    - @JsonInclude
+    - @JsonAutoDetect
+  - Jackson Polymorphic Type Handling Annotations
+    - @JsonTypeInfo
+    - @JsonSubTypes
+    - @JsonTypeName
+  - Jackson General Annotations
+    - @JsonProperty
+    - @JsonFormat
+    - @JsonUnwrapped
+    - @JsonView
+    - @JsonManagedReference, @JsonBackReference
+    - @JsonIdentityInfo
+    - @JsonFilter
+  - Custom Jackson Annotation
+    - @JacksonAnnotationsInside
+  - Jackson MixIn Annotations
+  - Disable Jackson Annotation
+- [More Jackson Annotations](https://www.baeldung.com/jackson-advanced-annotations)
+  - @JsonIdentityReference
+  - @JsonAppend
+  - @JsonNaming
+  - @JsonPropertyDescription
+  - @JsonPOJOBuilder
+  - @JsonTypeId
+  - @JsonTypeIdResolver

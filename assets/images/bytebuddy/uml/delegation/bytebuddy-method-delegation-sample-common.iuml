@@ -1,0 +1,41 @@
+@startuml
+class Object
+
+interface ITest {
+    {abstract} String test(String name, int age)
+}
+
+class Ancestor extends Object implements ITest {
+    + void sayFromAncestor()
+    + String test(String name, int age)
+}
+
+class GrandFather extends Ancestor {
+    + void sayFromGrandFather()
+    + String test(String name, int age)
+}
+class Father extends GrandFather {
+    + void sayFromFather()
+    + String test(String name, int age)
+}
+
+interface IAnimal extends ITest {
+    + void sayFromAnimal()
+    + String test(String name, int age)
+}
+
+interface IMammal extends IAnimal {
+    + void sayFromMammal()
+    + String test(String name, int age)
+}
+
+interface ICat extends IMammal {
+    + void sayFromCat()
+    + String test(String name, int age)
+}
+
+interface IDog extends IMammal {
+    + void sayFromDog()
+    + String test(String name, int age)
+}
+@enduml
