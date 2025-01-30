@@ -20,6 +20,8 @@ sequence: "101"
 - [通义千问](https://tongyi.aliyun.com/qianwen/)：能给出英文的回答，信息丰富
 - [TalkAI](https://talkai.info/chat/)：给出的答案比较简洁，有一定的总结性
 
+- [在问](https://zaiwen.xueban.org.cn)
+
 ### 大公司
 
 - [阿里：通义](https://tongyi.aliyun.com/) 手机号登录
