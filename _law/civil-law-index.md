@@ -221,14 +221,16 @@ sort: "sequence"
 
 ## 考试
 
-### 1
+### 维度1
 
 <table>
     <thead>
     <tr>
         <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">概览</th>
         <th style="text-align: center;">法律</th>
         <th style="text-align: center;">权利</th>
+        <th style="text-align: center;">赔偿</th>
     </tr>
     </thead>
     <tbody>
@@ -237,6 +239,21 @@ sort: "sequence"
 {%
 assign filtered_posts = site.law |
 where_exp: "item", "item.path contains 'law/civil/exam/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/civil/exam/overview/'" |
 sort: "sequence"
 %}
 <ol>
@@ -278,11 +295,26 @@ sort: "sequence"
     {% endfor %}
 </ol>
         </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/civil/exam/compensation/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
     </tr>
     </tbody>
 </table>
 
-### 2
+### 维度2
 
 <table>
     <thead>
@@ -339,6 +371,67 @@ sort: "sequence"
     {% endfor %}
 </ol>
         </td>
+    </tr>
+    </tbody>
+</table>
+
+### 财产
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">物权</th>
+        <th style="text-align: center;">债权</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/civil/exam/property/real/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/civil/exam/property/credit/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+### 人身
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">人格权</th>
+        <th style="text-align: center;">身份权</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td></td>
     </tr>
     </tbody>
 </table>
@@ -549,3 +642,4 @@ sort: "sequence"
 - [中华人民共和国民法典](http://www.npc.gov.cn/npc/c2/c30834/202006/t20200602_306457.html)
 - 参考书籍
     - 《中华人民共和国民法典注释本（第三版）》
+
