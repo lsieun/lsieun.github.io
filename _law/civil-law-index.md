@@ -5,52 +5,8 @@ sequence: "102"
 
 [UP](/law/law-index.html)
 
-## 基础
 
-<table>
-    <thead>
-    <tr>
-        <th style="text-align: center;">基础</th>
-        <th style="text-align: center;">法条</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>
-{%
-assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/civil/basic/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-        <td>
-{%
-assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/civil/article/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-## 概念理解
+## 基础知识
 
 ### 基础
 
@@ -58,9 +14,9 @@ sort: "sequence"
     <thead>
     <tr>
         <th style="text-align: center;">基础</th>
-        <th style="text-align: center;">原则/原理</th>
         <th style="text-align: center;">权利</th>
-        <th style="text-align: center;">责任</th>
+        <th style="text-align: center;">义务/责任</th>
+        <th style="text-align: center;">维权/救济</th>
     </tr>
     </thead>
     <tbody>
@@ -68,7 +24,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/civil/glossary/basic/'" |
+where_exp: "item", "item.path contains 'law/civil/fundamental/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -83,7 +39,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/civil/glossary/principle/'" |
+where_exp: "item", "item.path contains 'law/civil/fundamental/right/'" |
 sort: "sequence"
 %}
 <ol>
@@ -98,7 +54,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/civil/glossary/right/'" |
+where_exp: "item", "item.path contains 'law/civil/fundamental/liability/'" |
 sort: "sequence"
 %}
 <ol>
@@ -113,7 +69,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/civil/glossary/liability/'" |
+where_exp: "item", "item.path contains 'law/civil/fundamental/remedy/'" |
 sort: "sequence"
 %}
 <ol>
@@ -129,12 +85,11 @@ sort: "sequence"
     </tbody>
 </table>
 
-### 人财
+### 财产
 
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;">人</th>
         <th style="text-align: center;">财产</th>
         <th style="text-align: center;">商业</th>
     </tr>
@@ -144,7 +99,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/civil/glossary/person/'" |
+where_exp: "item", "item.path contains 'law/civil/fundamental/property/'" |
 sort: "sequence"
 %}
 <ol>
@@ -159,7 +114,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/civil/glossary/property/'" |
+where_exp: "item", "item.path contains 'law/civil/fundamental/business/'" |
 sort: "sequence"
 %}
 <ol>
@@ -171,10 +126,24 @@ sort: "sequence"
     {% endfor %}
 </ol>
         </td>
+    </tr>
+    </tbody>
+</table>
+
+### 人身
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">人身</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
         <td>
 {%
 assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/civil/glossary/business/'" |
+where_exp: "item", "item.path contains 'law/civil/fundamental/person/'" |
 sort: "sequence"
 %}
 <ol>
@@ -203,7 +172,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/civil/glossary/power/'" |
+where_exp: "item", "item.path contains 'law/civil/fundamental/power/'" |
 sort: "sequence"
 %}
 <ol>
@@ -221,7 +190,7 @@ sort: "sequence"
 
 ## 考试
 
-### 维度1
+### 权利义务
 
 <table>
     <thead>
@@ -441,10 +410,10 @@ sort: "sequence"
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;">总则编</th>
-        <th style="text-align: center;">财产关系</th>
-        <th style="text-align: center;">合同编</th>
-        <th style="text-align: center;">身份关系</th>
+        <th style="text-align: center;">总则</th>
+        <th style="text-align: center;">财产</th>
+        <th style="text-align: center;">合同</th>
+        <th style="text-align: center;">人身</th>
     </tr>
     </thead>
     <tbody>
@@ -620,6 +589,51 @@ sort: "sequence"
 {%
 assign filtered_posts = site.law |
 where_exp: "item", "item.path contains 'law/civil/video/p6/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+## 基础
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">法条</th>
+        <th style="text-align: center;">司法解释</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/civil/article/raw/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/civil/article/explain/'" |
 sort: "sequence"
 %}
 <ol>

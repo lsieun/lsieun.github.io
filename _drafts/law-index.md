@@ -10,6 +10,10 @@ permalink: /law/law-index.html
 ![](/assets/images/law/合格的法律人.svg)
 
 ```text
+法律越完善，（坏人的）人性越复杂
+```
+
+```text
 兩個翅膀
 一個是正確的價值觀
 一個是精湛的方法論
@@ -277,3 +281,4 @@ sort: "sequence"
 
 - [中国法院网](https://www.chinacourt.org/index.shtml)
     - [审判](https://www.chinacourt.org/article/index/id/MzAwNDAwMgCRhAEA.shtml)
+
