@@ -45,3 +45,4 @@ sequence: "110"
     - [2025 年法考客观题【精讲卷】民法 众合孟献贵](https://www.bilibili.com/video/BV1hsSvY7Ev1/)
     - [2025年法考客观题【精讲卷】刑诉法 众合左宁](https://www.bilibili.com/video/BV14jrrYBExd/)
     - [2025年法考客观题【精讲卷】行政法 众合李佳](https://www.bilibili.com/video/BV1Tyc1eeExu/)
+    - [2025年法考客观题【精讲卷】民诉法 众合戴鹏](https://www.bilibili.com/video/BV1F1w3efEwf/)
