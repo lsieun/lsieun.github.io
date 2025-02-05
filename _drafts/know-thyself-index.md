@@ -9,6 +9,8 @@ which was inscribed upon the Temple of Apollo in the ancient Greek precinct of D
 
 ![](/assets/images/thyself/know-thyself-gold.webp)
 
+## Everyday
+
 ## 戒为良药
 
 - abstention: 戒；戒除 the act of not allowing yourself to have or do sth enjoyable or sth that is considered bad
