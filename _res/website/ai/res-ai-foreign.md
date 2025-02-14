@@ -14,6 +14,7 @@ sequence: "102"
 - [poe](https://poe.com/)
 - [Merlin AI](https://www.getmerlin.in/) Google 登录
 - [NotDiamond](https://www.notdiamond.ai/) Google 登录
+- [Gemini](https://gemini.google.com/)
 
 ## 生成图片
 

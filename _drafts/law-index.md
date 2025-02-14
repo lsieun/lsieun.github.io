@@ -76,6 +76,7 @@ permalink: /law/law-index.html
         <th style="text-align: center;">Basic</th>
         <th style="text-align: center;">资料</th>
         <th style="text-align: center;">规划</th>
+        <th style="text-align: center;">共同问题</th>
     </tr>
     </thead>
     <tbody>
@@ -114,6 +115,21 @@ sort: "sequence"
 {%
 assign filtered_posts = site.law |
 where_exp: "item", "item.path contains 'law/examination/schedule/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/examination/scenario/'" |
 sort: "sequence"
 %}
 <ol>
@@ -282,3 +298,30 @@ sort: "sequence"
 - [中国法院网](https://www.chinacourt.org/index.shtml)
     - [审判](https://www.chinacourt.org/article/index/id/MzAwNDAwMgCRhAEA.shtml)
 
+- [人民检察院刑事诉讼规则（2019）](https://www.spp.gov.cn/spp/xwfbh/wsfbh/201912/t20191230_451490.shtml)
+
+- [法律文库](http://lawdb.cncourt.org/)
+
+宪法
+
+- [中华人民共和国宪法](http://www.npc.gov.cn/c2/c30834/201905/t20190521_281393.html)
+
+刑诉法
+
+- [中华人民共和国刑事诉讼法](http://www.npc.gov.cn/npc/c2/c12435/201905/t20190521_276591.html)
+- [最高法关于适用《中华人民共和国刑事诉讼法》的解释](https://www.court.gov.cn/fabu/xiangqing/286491.html)
+
+公安
+
+- [中华人民共和国人民警察法](https://www.gov.cn/ziliao/flfg/2005-08/05/content_20891.htm)
+- [公安机关办理刑事案件程序规定](https://www.gov.cn/zhengce/2021-12/25/content_5712867.htm)
+
+行政
+
+- [中华人民共和国行政许可法](http://www.npc.gov.cn/npc/c2/c30834/201906/t20190608_298033.html)
+- [中华人民共和国行政处罚法](https://www.gov.cn/xinwen/2021-01/23/content_5582030.htm)
+- [中华人民共和国行政复议法](https://www.gov.cn/yaowen/liebiao/202309/content_6901584.htm)
+
+最高法
+
+- [最高法司法解释列表](https://www.court.gov.cn/fabu/gengduo/16.html)
