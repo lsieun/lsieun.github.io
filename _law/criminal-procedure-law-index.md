@@ -14,7 +14,8 @@ sequence: "103"
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">P1</th>
+        <th style="text-align: center;">P2</th>
     </tr>
     </thead>
     <tbody>
@@ -23,6 +24,21 @@ sequence: "103"
 {%
 assign filtered_posts = site.law |
 where_exp: "item", "item.path contains 'law/criminalp/note/p1/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/criminalp/note/p2/'" |
 sort: "sequence"
 %}
 <ol>
