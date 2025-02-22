@@ -9,6 +9,14 @@ sequence: "103"
 - [民法]({% link _law/civil-law-index.md %})
 - [刑诉法]({% link _law/criminal-procedure-law-index.md %})
 
+```text
+大家可能『知道』
+『判决』是解决『实体』『问题』
+就是『定罪』『量刑』是叫『判决』
+而『裁定』是解决『程序』『问题』
+比如说『裁定』『中止』『审理』
+```
+
 ## 考试
 
 <table>
