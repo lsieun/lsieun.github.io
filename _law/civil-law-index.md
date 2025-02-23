@@ -5,9 +5,15 @@ sequence: "102"
 
 [UP](/law/law-index.html)
 
+- [主页]({% link _law/law-home.md %})
 - [刑法]({% link _law/criminal-law-index.md %})
 - [民法]({% link _law/civil-law-index.md %})
 - [刑诉法]({% link _law/criminal-procedure-law-index.md %})
+
+```text
+以上，以下，是包括本数的
+不满，超过，是不包括本数的
+```
 
 ## 基础知识
 

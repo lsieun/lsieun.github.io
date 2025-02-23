@@ -154,6 +154,14 @@ You can use regular expressions to change the case of characters that matches so
 ^[-~,.a-z A-Z]+$
 ```
 
+```text
+^第(.{1,3})章(.*)$
+## 第$1章$2
+
+^第(.{1,3})节(.*)$
+### 第$1节$2
+```
+
 ## References
 
 - [jetbrains.com: Find and replace text using regular expressions][find-and-replac-with-regex]
