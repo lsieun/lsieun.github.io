@@ -61,3 +61,7 @@ permalink: /law/law-index.html
     - 程序法
 
 - [主页]({% link _law/law-home.md %})
+- [刑法]({% link _law/criminal-law-index.md %})
+- [民法]({% link _law/civil-law-index.md %})
+- [刑诉法]({% link _law/criminal-procedure-law-index.md %})
+

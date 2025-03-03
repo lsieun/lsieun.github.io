@@ -17,7 +17,7 @@ https://jekyllrb.com/docs/installation/windows/
 https://rubyinstaller.org/downloads/
 ```
 
-安装 `rubyinstaller-devkit-3.2.4-1-x64.exe` 成功，但是安装 `rubyinstaller-devkit-3.3.4-1-x64.exe` 不成功
+安装 `rubyinstaller-devkit-3.4.2-1-x64.exe` 成功
 
 
 第 2 步，在安装结束时，进行 `ridk install` 的步骤：
