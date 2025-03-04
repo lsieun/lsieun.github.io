@@ -17,3 +17,6 @@ A virtual private network extends a private network across a public network and 
 - [Geph](https://geph.io/)
 
 - [nthLink](https://www.nthlink.com/)
+
+- [Edge VPN](https://liteapks.com/edge-vpn-super-vpn-proxy.html)
+- [Bolt VPN](https://liteapks.com/bolt-vpn-super-vpn-proxy.html)

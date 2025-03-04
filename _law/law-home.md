@@ -231,6 +231,7 @@ sort: "sequence"
 
 - [中华人民共和国人民警察法](https://www.gov.cn/ziliao/flfg/2005-08/05/content_20891.htm)
 - [公安机关办理刑事案件程序规定](https://www.gov.cn/zhengce/2021-12/25/content_5712867.htm)
+- [公安机关人民警察执法过错责任追究规定](https://www.gov.cn/zhengce/2021-12/25/content_5712901.htm)
 
 行政
 
