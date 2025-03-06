@@ -20,6 +20,24 @@ sequence: "103"
 比如说『裁定』『中止』『审理』
 ```
 
+```text
+在『一审』『专题』最后一个『知识点』
+就是区分『判决』『裁定』和『决定』
+
+我们说这个『判决』
+它是只解决『实体』『问题』，就是『定罪』量型
+
+『裁定』主要解决『程序』『问题』
+比如说『裁定』『中止审理』
+『裁定』按『撤诉』『处理』等等的
+但是也解决一点点『实体』『问题』
+就是这儿『执行阶段』
+『裁定』『减刑』和『裁定』『假释』
+它是用『裁定』的
+不是『判决』也不是『决定』
+『注意即可』
+```
+
 ## 考试
 
 <table>
@@ -28,6 +46,7 @@ sequence: "103"
         <th style="text-align: center;">P1</th>
         <th style="text-align: center;">P2</th>
         <th style="text-align: center;">P3</th>
+        <th style="text-align: center;">P4</th>
     </tr>
     </thead>
     <tbody>
@@ -66,6 +85,21 @@ sort: "sequence"
 {%
 assign filtered_posts = site.law |
 where_exp: "item", "item.path contains 'law/criminalp/note/p3/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/criminalp/note/p4/'" |
 sort: "sequence"
 %}
 <ol>

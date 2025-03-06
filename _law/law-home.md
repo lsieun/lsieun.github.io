@@ -129,6 +129,7 @@ sort: "sequence"
 <table>
     <thead>
     <tr>
+        <th style="text-align: center;">律师</th>
         <th style="text-align: center;">看守所</th>
         <th style="text-align: center;">警察</th>
         <th style="text-align: center;">检察院</th>
@@ -137,6 +138,21 @@ sort: "sequence"
     </thead>
     <tbody>
     <tr>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/life/lawyer/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
         <td>
 {%
 assign filtered_posts = site.law |
@@ -225,12 +241,12 @@ sort: "sequence"
 刑诉法
 
 - [中华人民共和国刑事诉讼法](http://www.npc.gov.cn/npc/c2/c12435/201905/t20190521_276591.html)
-- [最高法关于适用《中华人民共和国刑事诉讼法》的解释](https://www.court.gov.cn/fabu/xiangqing/286491.html)
+- [刑诉解释（最高法关于适用《中华人民共和国刑事诉讼法》的解释）](https://www.court.gov.cn/fabu/xiangqing/286491.html)
 
 公安
 
 - [中华人民共和国人民警察法](https://www.gov.cn/ziliao/flfg/2005-08/05/content_20891.htm)
-- [公安机关办理刑事案件程序规定](https://www.gov.cn/zhengce/2021-12/25/content_5712867.htm)
+- [公安部规定（公安机关办理刑事案件程序规定）](https://www.gov.cn/zhengce/2021-12/25/content_5712867.htm)
 - [公安机关人民警察执法过错责任追究规定](https://www.gov.cn/zhengce/2021-12/25/content_5712901.htm)
 
 行政
@@ -243,3 +259,7 @@ sort: "sequence"
 
 - [最高法司法解释列表](https://www.court.gov.cn/fabu/gengduo/16.html)
 
+检察院
+
+- [高检规则（人民检察院刑事诉讼规则）](https://www.spp.gov.cn/spp/xwfbh/wsfbh/201912/t20191230_451490.shtml)
+- [人民检察院司法责任追究条例 2024-07-24](https://www.spp.gov.cn/xwfbh/wsfbh/202407/t20240724_661172.shtml)

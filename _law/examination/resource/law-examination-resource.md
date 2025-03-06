@@ -5,7 +5,6 @@ sequence: "110"
 
 [UP](/law/law-index.html)
 
-
 - [法考就找神探，独家押题](http://sifalianmemg.ysepan.com/)
 
 下载厚大法考 或者瑞达法考 里面有免费的视频的
@@ -26,7 +25,7 @@ sequence: "110"
     - [小白学姐吧](https://space.bilibili.com/33578813)
 
 - 百度网盘
-  - 『法考』文件夹
+    - 『法考』文件夹
 
 ## App
 
@@ -44,5 +43,7 @@ sequence: "110"
     - [2025 年法考客观题【精讲卷】刑法 众合柏浪涛](https://www.bilibili.com/video/BV1r8mxYNECZ/)
     - [2025 年法考客观题【精讲卷】民法 众合孟献贵](https://www.bilibili.com/video/BV1hsSvY7Ev1/)
     - [2025年法考客观题【精讲卷】刑诉法 众合左宁](https://www.bilibili.com/video/BV14jrrYBExd/)
-    - [2025年法考客观题【精讲卷】行政法 众合李佳](https://www.bilibili.com/video/BV1Tyc1eeExu/)
     - [2025年法考客观题【精讲卷】民诉法 众合戴鹏](https://www.bilibili.com/video/BV1F1w3efEwf/)
+    - [2025年法考客观题【精讲卷】行政法 众合李佳](https://www.bilibili.com/video/BV1Tyc1eeExu/)
+        - [李佳-司法赔偿程序](https://pan.baidu.com/s/1xXmTyVCb8ftPwBvafQ69ew?pwd=k180)
+    - [2025年法考客观题【精讲卷】商经知 众合郄鹏恩](https://www.bilibili.com/video/BV19NApeUEVa/)
