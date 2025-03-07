@@ -150,7 +150,7 @@ sort: "sequence"
     <thead>
     <tr>
         <th style="text-align: center;">Basic</th>
-        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">法律</th>
         <th style="text-align: center;">Basic</th>
         <th style="text-align: center;">Basic</th>
         <th style="text-align: center;">Basic</th>

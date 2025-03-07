@@ -47,6 +47,7 @@ sequence: "103"
         <th style="text-align: center;">P2</th>
         <th style="text-align: center;">P3</th>
         <th style="text-align: center;">P4</th>
+        <th style="text-align: center;">总结</th>
     </tr>
     </thead>
     <tbody>
@@ -100,6 +101,21 @@ sort: "sequence"
 {%
 assign filtered_posts = site.law |
 where_exp: "item", "item.path contains 'law/criminalp/note/p4/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/criminalp/note/summary/'" |
 sort: "sequence"
 %}
 <ol>
@@ -225,3 +241,4 @@ sort: "sequence"
 
 - [左宁刑诉](https://space.bilibili.com/1631268420)
 - [2025年法考客观题【精讲卷】刑诉法 众合左宁](https://www.bilibili.com/video/BV14jrrYBExd/)
+
