@@ -7,6 +7,8 @@ sequence: "301"
 
 ```text
 69.16.230.165 www.github.com
+20.205.243.166 www.github.com
+140.82.116.3 www.github.com
 ```
 
 ## Reference

@@ -68,6 +68,14 @@ sort: "sequence"
     </tbody>
 </table>
 
+```text
+《专一》
+靡不有初鲜有终，
+一事未了他心生。
+思东想西皆拖延，
+专注唯一事必成。
+```
+
 ## 戒为良药
 
 - abstention: 戒；戒除 the act of not allowing yourself to have or do sth enjoyable or sth that is considered bad

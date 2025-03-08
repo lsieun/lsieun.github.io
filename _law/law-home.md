@@ -90,6 +90,8 @@ sort: "sequence"
     </tbody>
 </table>
 
+![](/assets/images/law/exam/judicial-exam-score.jpg)
+
 ## 基础
 
 <table>
@@ -263,3 +265,7 @@ sort: "sequence"
 
 - [高检规则（人民检察院刑事诉讼规则）](https://www.spp.gov.cn/spp/xwfbh/wsfbh/201912/t20191230_451490.shtml)
 - [人民检察院司法责任追究条例 2024-07-24](https://www.spp.gov.cn/xwfbh/wsfbh/202407/t20240724_661172.shtml)
+
+- [中华人民共和国司法部](https://www.moj.gov.cn/)
+    - [司法部国家司法考试中心](https://www.moj.gov.cn/pub/sfbgw/jgsz/jgszzsdw/zsdwgjsfkszx/)
+        - [国家统一法律职业资格考试实施办法 2018-04-29](https://www.moj.gov.cn/pub/sfbgw/jgsz/jgszzsdw/zsdwgjsfkszx/gjsfkszcfg/202106/t20210622_428245.html)
