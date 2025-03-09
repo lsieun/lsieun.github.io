@@ -236,6 +236,8 @@ sort: "sequence"
 
 - [法律文库](http://lawdb.cncourt.org/)
 
+- [国家法律法规数据库](https://flk.npc.gov.cn/)
+
 宪法
 
 - [中华人民共和国宪法](http://www.npc.gov.cn/c2/c30834/201905/t20190521_281393.html)

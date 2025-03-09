@@ -117,6 +117,58 @@ But it's never the same
 ```
 
 ```text
+何为文明？
+这段话放到以前
+是要坐牢的
+
+哈耶克说
+如果允许人类自由迁徙
+那么人流的方向
+即是文明的方向
+在他的书中《通往奴役之路》（The Road to Serfdom）
+还有5个惊人的观点
+there are five amazing viewpoints,
+
+1、金钱是穷人唯一能接触到的自由工具
+而权力（Power）永远不会向他们开放
+First, money
+It's the only tool that poor people have access to
+And power will never be open to them
+
+
+2、集体主义的最大错误是
+假设个体的自由
+可以通过政府计划来实现
+这是致命的自负
+
+3、社会主义的最危险之处
+不是他的理想
+而是他的实现
+理想看似美好
+但在实际操作中
+会带来无尽的灾难
+
+4、地狱之门的打开
+通常都是由于
+人们想要在人间
+建立地上天国的幻想
+
+
+
+
+serf （旧时的）农奴
+(in the past) a person
+who was forced to live and work on land
+that belonged to a landowner whom they had to obey
+
+serfdom
+农奴制；农奴身份
+the system
+under which crops were grown by serfs;
+the state of being a serf
+```
+
+```text
 比如说你有一万块钱
 你被人偷了十块钱
 你会把你剩下的钱全部扔掉吗

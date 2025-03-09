@@ -213,7 +213,8 @@ sort: "sequence"
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">刑诉法</th>
+        <th style="text-align: center;">监察法</th>
     </tr>
     </thead>
     <tbody>
@@ -233,6 +234,21 @@ sort: "sequence"
     {% endfor %}
 </ol>
         </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/criminalp/article/supervisory/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
     </tr>
     </tbody>
 </table>
@@ -241,3 +257,4 @@ sort: "sequence"
 
 - [左宁刑诉](https://space.bilibili.com/1631268420)
 - [2025年法考客观题【精讲卷】刑诉法 众合左宁](https://www.bilibili.com/video/BV14jrrYBExd/)
+
