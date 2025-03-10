@@ -519,13 +519,16 @@ $ javac -cp "${JAVA_HOME}/lib/tools.jar"\;. -d out/ src/attach/VMAttach.java
 $ cd java-agent-manual-03/
 $ cd out/
 
-# 编译 VMAttach.java（Windows)
+# 运行 sample.Program
+$ java sample.Program
+
+# 运行 VMAttach.java（Windows)
 $ java -cp "%JAVA_HOME%/lib/tools.jar";. attach.VMAttach
 
-# 编译 VMAttach.java（Linux)
+# 运行 VMAttach.java（Linux)
 $ java -cp "${JAVA_HOME}/lib/tools.jar":. attach.VMAttach
 
-# 编译 VMAttach.java（MINGW64)
+# 运行 VMAttach.java（MINGW64)
 $ java -cp "${JAVA_HOME}/lib/tools.jar"\;. attach.VMAttach
 ```
 
