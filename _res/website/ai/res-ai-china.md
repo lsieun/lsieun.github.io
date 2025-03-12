@@ -33,6 +33,7 @@ sequence: "101"
     - [文心一言](https://yiyan.baidu.com/)
 - [Kimi](https://kimi.moonshot.cn/) - 微信登录
 - [天工 AI](https://www.tiangong.cn/)
+- [DeepSeek](https://chat.deepseek.com/) 微信登录
 
 ### 小众
 
