@@ -294,5 +294,6 @@ sort: "sequence"
 ## 参考
 
 - [左宁刑诉](https://space.bilibili.com/1631268420)
+    - [2024左宁刑诉通关口诀](https://space.bilibili.com/1631268420/lists/2518861?type=season)
 - [2025年法考客观题【精讲卷】刑诉法 众合左宁](https://www.bilibili.com/video/BV14jrrYBExd/)
 
