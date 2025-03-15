@@ -54,7 +54,6 @@ Learn to use opportunities
 
 ![](/assets/images/mottos/time-and-karma.jpg)
 
-
 - 一、信息差：我知道，你不知道；
 - 二、认知差：我懂的，你不懂；
 - 三、执行差：你我都懂，你不做，我做；

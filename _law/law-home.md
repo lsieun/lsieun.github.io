@@ -273,3 +273,12 @@ sort: "sequence"
 - [中华人民共和国司法部](https://www.moj.gov.cn/)
     - [司法部国家司法考试中心](https://www.moj.gov.cn/pub/sfbgw/jgsz/jgszzsdw/zsdwgjsfkszx/)
         - [国家统一法律职业资格考试实施办法 2018-04-29](https://www.moj.gov.cn/pub/sfbgw/jgsz/jgszzsdw/zsdwgjsfkszx/gjsfkszcfg/202106/t20210622_428245.html)
+
+- [中华人民共和国立法法](https://www.gov.cn/xinwen/2023-03/14/content_5746569.htm)
+
+```text
+部门规章规定的事项应当属于执行法律或者国务院的行政法规、决定、命令的事项。
+没有法律或者国务院的行政法规、决定、命令的依据，
+部门规章不得设定减损公民、法人和其他组织权利或者增加其义务的规范，
+不得增加本部门的权力或者减少本部门的法定职责。
+```
