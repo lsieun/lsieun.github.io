@@ -67,7 +67,46 @@ sort: "sequence"
     </tbody>
 </table>
 
+## 法条
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Basic</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/administration/article/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 ## 参考
 
-- [中华人民共和国行政诉讼法](http://www.ahdhf.com/law/xz/3378.html)
+- [行政诉讼法](http://www.ahdhf.com/law/xz/3378.html)
+- [行政诉讼法司法解释](http://gongbao.court.gov.cn/Details/ff963094d7a6d678980d4972b5961e.html)
 
+- [行政许可法](http://www.npc.gov.cn/npc/c2/c30834/201906/t20190608_298033.html)
+- [行政处罚法](http://www.npc.gov.cn/c2/c30834/202101/t20210122_309857.html)
+- [治安管理处罚法](https://www.gov.cn/ziliao/flfg/2005-08/29/content_27130.htm)
+- [行政强制法](https://www.gov.cn/flfg/2011-07/01/content_1897308.htm)
+- [行政复议法](http://www.npc.gov.cn/zgrdw//npc//////xinwen/2017-09/12/content_2028693.htm)
+
+案例
+
+- [老农卖芹菜赚14元罚10万](https://www.thepaper.cn/newsDetail_forward_23530436)
