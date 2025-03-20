@@ -14,6 +14,7 @@ sequence: "101"
     <tr>
         <th style="text-align: center;">内</th>
         <th style="text-align: center;">外</th>
+        <th style="text-align: center;">时间</th>
         <th style="text-align: center;">思考</th>
     </tr>
     </thead>
@@ -38,6 +39,21 @@ sort: "sequence"
 {%
 assign filtered_posts = site.thyself |
 where_exp: "item", "item.path contains 'thyself/everyday/exclude/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/everyday/time/'" |
 sort: "sequence"
 %}
 <ol>
