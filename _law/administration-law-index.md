@@ -27,8 +27,8 @@ sequence: "xing-zheng-fa"
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;">P1</th>
-        <th style="text-align: center;">P2</th>
+        <th style="text-align: center;">行政实体法</th>
+        <th style="text-align: center;">行政救济法</th>
     </tr>
     </thead>
     <tbody>
@@ -105,7 +105,7 @@ sort: "sequence"
 - [行政处罚法](http://www.npc.gov.cn/c2/c30834/202101/t20210122_309857.html)
 - [治安管理处罚法](https://www.gov.cn/ziliao/flfg/2005-08/29/content_27130.htm)
 - [行政强制法](https://www.gov.cn/flfg/2011-07/01/content_1897308.htm)
-- [行政复议法](http://www.npc.gov.cn/zgrdw//npc//////xinwen/2017-09/12/content_2028693.htm)
+- [行政复议法](https://www.gov.cn/yaowen/liebiao/202309/content_6901584.htm)
 
 案例
 
