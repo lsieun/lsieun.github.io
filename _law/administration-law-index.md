@@ -67,6 +67,51 @@ sort: "sequence"
     </tbody>
 </table>
 
+## 总结
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">行政实体法</th>
+        <th style="text-align: center;">行政诉讼法</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/administration/summary/p1/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/administration/summary/p2/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 ## 法条
 
 <table>
