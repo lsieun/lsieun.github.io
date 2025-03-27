@@ -3,6 +3,8 @@ title: "马背上的夫人"
 sequence: "999"
 ---
 
+[UP](/thyself/thyself-home.html)
+
 ![](/assets/images/painting/godiva.jpg)
 ![](/assets/images/painting/Lady_Godiva_by_John_Collier.webp)
 

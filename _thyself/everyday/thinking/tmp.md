@@ -3,6 +3,8 @@ title: "tmp"
 sequence: "999"
 ---
 
+[UP](/thyself/thyself-home.html)
+
 ```text
 《Someone You Loved》
 I need somebody to heal

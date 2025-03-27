@@ -3,6 +3,8 @@ title: "starve it"
 sequence: "999"
 ---
 
+[UP](/thyself/thyself-home.html)
+
 ```text
 Alan Watts
 1915-1973
