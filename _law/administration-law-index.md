@@ -151,8 +151,13 @@ sort: "sequence"
 - [治安管理处罚法](https://www.gov.cn/ziliao/flfg/2005-08/29/content_27130.htm)
 - [行政强制法](https://www.gov.cn/flfg/2011-07/01/content_1897308.htm)
 - [行政复议法](https://www.gov.cn/yaowen/liebiao/202309/content_6901584.htm)
+- [行政协议司法解释](http://www.npc.gov.cn/c2/c30834/201912/t20191210_303149.html)
 
 案例
 
 - [老农卖芹菜赚14元罚10万](https://www.thepaper.cn/newsDetail_forward_23530436)
 
+梁慧星王利明之争
+
+一本是梁慧星老师的民法总则 绿色封皮的
+一本儿是蔡定剑先生的宪法精解
