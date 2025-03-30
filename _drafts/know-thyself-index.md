@@ -11,3 +11,4 @@ which was inscribed upon the Temple of Apollo in the ancient Greek precinct of D
 
 - [主页]({% link _thyself/thyself-home.md %})
 
+![](/assets/images/beauty/sophia.png)

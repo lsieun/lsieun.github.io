@@ -34,6 +34,7 @@ sequence: "101"
 - [Kimi](https://kimi.moonshot.cn/) - 微信登录
 - [天工 AI](https://www.tiangong.cn/)
 - [DeepSeek](https://chat.deepseek.com/) 微信登录
+- [bolt.new](https://bolt.new/)
 
 ### 小众
 

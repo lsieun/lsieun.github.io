@@ -41,6 +41,7 @@ sequence: "103"
 
 ## 工具
 
+- [Free Watermark Remover](https://www.apeaksoft.com/watermark-remover/)
 - [Upscayl AI 图像放大增强](https://foxirj.com/upscayl-win.html)
 - [ScreenToGif](https://foxirj.com/screentogif.html)
 - [FastStone Capture](https://foxirj.com/faststone-capture.html)
