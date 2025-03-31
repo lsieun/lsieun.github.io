@@ -142,10 +142,11 @@ sort: "sequence"
 
 最有效的刑事辩护，一定是**技巧性的进攻**。
 
+### 公检法
+
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;">律师</th>
         <th style="text-align: center;">看守所</th>
         <th style="text-align: center;">警察</th>
         <th style="text-align: center;">检察院</th>
@@ -154,21 +155,6 @@ sort: "sequence"
     </thead>
     <tbody>
     <tr>
-        <td>
-{%
-assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/life/lawyer/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
         <td>
 {%
 assign filtered_posts = site.law |
@@ -218,6 +204,51 @@ sort: "sequence"
 {%
 assign filtered_posts = site.law |
 where_exp: "item", "item.path contains 'law/life/court/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+### 律师和当事人
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">律师</th>
+        <th style="text-align: center;">陷阱</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/life/lawyer/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/life/trap/'" |
 sort: "sequence"
 %}
 <ol>
@@ -314,3 +345,7 @@ sort: "sequence"
 - [微博：行政法李佳](https://weibo.com/u/1552849431)
 - [微博：民商法孟献贵](https://weibo.com/u/2342740757)
 - [微博：民法钟秀勇](https://www.weibo.com/u/1313315380)
+
+- [博茨纳迩](https://www.zhihu.com/people/lu-ran-10-99/posts)
+- [法理学经典案例十一•洛阳种子-李慧娟](https://zhuanlan.zhihu.com/p/522500653)
+

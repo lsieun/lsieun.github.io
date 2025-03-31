@@ -84,7 +84,9 @@ sort: "sequence"
     </tbody>
 </table>
 
-## 戒为良药
+## 修身
+
+### 戒为良药
 
 - abstention: 戒；戒除 the act of not allowing yourself to have or do sth enjoyable or sth that is considered bad
 
@@ -147,7 +149,7 @@ sort: "sequence"
     </tbody>
 </table>
 
-## 长大为人
+### 长大为人
 
 <table>
     <thead>
@@ -192,13 +194,12 @@ sort: "sequence"
     </tbody>
 </table>
 
-## 人生修行
+### 人生修行
 
 <table>
     <thead>
     <tr>
         <th style="text-align: center;">心</th>
-        <th style="text-align: center;">行</th>
         <th style="text-align: center;">情</th>
         <th style="text-align: center;">看法/理解/洞察力</th>
         <th style="text-align: center;">学说/教导</th>
@@ -209,7 +210,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.thyself |
-where_exp: "item", "item.path contains 'thyself/self-cultivation/mind/'" |
+where_exp: "item", "item.path contains 'thyself/self/mind/'" |
 sort: "sequence"
 %}
 <ol>
@@ -224,7 +225,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.thyself |
-where_exp: "item", "item.path contains 'thyself/self-cultivation/action/'" |
+where_exp: "item", "item.path contains 'thyself/self/emotion/'" |
 sort: "sequence"
 %}
 <ol>
@@ -239,7 +240,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.thyself |
-where_exp: "item", "item.path contains 'thyself/self-cultivation/emotion/'" |
+where_exp: "item", "item.path contains 'thyself/self/perception/'" |
 sort: "sequence"
 %}
 <ol>
@@ -254,22 +255,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.thyself |
-where_exp: "item", "item.path contains 'thyself/self-cultivation/perception/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-        <td>
-{%
-assign filtered_posts = site.thyself |
-where_exp: "item", "item.path contains 'thyself/self-cultivation/teaching/'" |
+where_exp: "item", "item.path contains 'thyself/self/teaching/'" |
 sort: "sequence"
 %}
 <ol>
@@ -285,7 +271,52 @@ sort: "sequence"
     </tbody>
 </table>
 
-## 事业
+### 身言
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">行</th>
+        <th style="text-align: center;">言</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/self/action/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/self/word/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+### 事业
 
 <table>
     <thead>
@@ -311,31 +342,10 @@ sort: "sequence"
     {% endfor %}
 </ol>
         </td>
-    </tr>
-    </tbody>
-</table>
-
-## 齐家 + 社会
-
-<table>
-    <thead>
-    <tr>
-        <th style="text-align: center;" rowspan="2">齐家</th>
-        <th style="text-align: center;" colspan="4">社会</th>
-    </tr>
-    <tr>
-        <th style="text-align: center;">认知</th>
-        <th style="text-align: center;">谋生</th>
-        <th style="text-align: center;">人情</th>
-        <th style="text-align: center;">阶层</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
         <td>
 {%
 assign filtered_posts = site.thyself |
-where_exp: "item", "item.path contains 'thyself/family-management/'" |
+where_exp: "item", "item.path contains 'thyself/career/external/'" |
 sort: "sequence"
 %}
 <ol>
@@ -347,6 +357,116 @@ sort: "sequence"
     {% endfor %}
 </ol>
         </td>
+    </tr>
+    </tbody>
+</table>
+
+## 齐家
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">通用</th>
+        <th style="text-align: center;">父母</th>
+        <th style="text-align: center;">夫妻</th>
+        <th style="text-align: center;">子女</th>
+        <th style="text-align: center;">亲戚朋友</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/family/common/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/family/elder/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/family/couple/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/family/child/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/family/friend/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+## 社会
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">认知</th>
+        <th style="text-align: center;">谋生</th>
+        <th style="text-align: center;">人情</th>
+        <th style="text-align: center;">阶层</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
         <td>
 {%
 assign filtered_posts = site.thyself |
@@ -411,13 +531,13 @@ sort: "sequence"
     </tbody>
 </table>
 
-## 国家 + 天下
+## 国家
 
 <table>
     <thead>
     <tr>
-        <th style="text-align: center;">国家</th>
-        <th style="text-align: center;">天下</th>
+        <th style="text-align: center;">治理</th>
+        <th style="text-align: center;">经济</th>
     </tr>
     </thead>
     <tbody>
@@ -425,7 +545,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.thyself |
-where_exp: "item", "item.path contains 'thyself/state-governance/'" |
+where_exp: "item", "item.path contains 'thyself/state/governance/'" |
 sort: "sequence"
 %}
 <ol>
@@ -440,7 +560,36 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.thyself |
-where_exp: "item", "item.path contains 'thyself/under-heaven/'" |
+where_exp: "item", "item.path contains 'thyself/state/economy/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+## 宇宙
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">佛教</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/cosmos/buddhism/'" |
 sort: "sequence"
 %}
 <ol>
@@ -463,4 +612,3 @@ sort: "sequence"
 
 - [Mental Models 思维模型](https://idtimw.com/tag/mental-models/)
     - [思维模型03 - First Principle 第一性原理](https://idtimw.com/first-principle/)
-
