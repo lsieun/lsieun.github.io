@@ -10,6 +10,7 @@ sequence: "102"
 - [刑诉法]({% link _law/criminal-procedure-law-index.md %})
 - [民法]({% link _law/civil-law-index.md %})
 - [行政法]({% link _law/administration-law-index.md %})
+- [法律案例]({% link _law/law-case-index.md %})
 
 ## 考试
 
@@ -226,6 +227,7 @@ sort: "sequence"
     <tr>
         <th style="text-align: center;">律师</th>
         <th style="text-align: center;">陷阱</th>
+        <th style="text-align: center;">举报</th>
     </tr>
     </thead>
     <tbody>
@@ -249,6 +251,21 @@ sort: "sequence"
 {%
 assign filtered_posts = site.law |
 where_exp: "item", "item.path contains 'law/life/trap/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/life/report/'" |
 sort: "sequence"
 %}
 <ol>
@@ -345,7 +362,3 @@ sort: "sequence"
 - [微博：行政法李佳](https://weibo.com/u/1552849431)
 - [微博：民商法孟献贵](https://weibo.com/u/2342740757)
 - [微博：民法钟秀勇](https://www.weibo.com/u/1313315380)
-
-- [博茨纳迩](https://www.zhihu.com/people/lu-ran-10-99/posts)
-- [法理学经典案例十一•洛阳种子-李慧娟](https://zhuanlan.zhihu.com/p/522500653)
-

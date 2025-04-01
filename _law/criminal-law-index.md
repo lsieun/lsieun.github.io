@@ -10,6 +10,7 @@ sequence: "101"
 - [刑诉法]({% link _law/criminal-procedure-law-index.md %})
 - [民法]({% link _law/civil-law-index.md %})
 - [行政法]({% link _law/administration-law-index.md %})
+- [法律案例]({% link _law/law-case-index.md %})
 
 ```text
 法律要追求公平和正义，刑法更是如此。

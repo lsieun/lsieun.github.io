@@ -55,6 +55,8 @@ sequence: "101"
 启发，开拓思路和观点。
 ```
 
+- [PaywallBuster](https://paywallbuster.com/)
+- [MD2Card](https://md2card.com/zh)
 
 ## AI
 
