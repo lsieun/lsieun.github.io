@@ -69,10 +69,17 @@ sequence: "101"
     - [欧乐影院](https://www.olevod.com/details-3-60229.html)
     - [再见爱人 第三季](https://www.olevod.com/details-1-49819.html)
 
+## 工具
+
 ### 字幕
 
 - [subtitlist](https://subtitlist.com/)
 - [my-subs](https://my-subs.co/)
+
+- YouTube
+    - [DownSub](https://downsub.com/)
+    - [Download Youtube Subtitles](https://www.downloadyoutubesubtitles.com/)
+    - [Get Subs](https://getsubs.cc/)
 
 ### 视频解析
 

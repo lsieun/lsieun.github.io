@@ -3,6 +3,8 @@ title: "介绍"
 sequence: "101"
 ---
 
+[UP](/thyself/thyself-home.html)
+
 - [善書堂](https://shanshutang.wordpress.com/)
     - [戒淫遊記](https://shanshutang.wordpress.com/%E5%9B%A0%E6%9E%9C%E9%A1%9E%E5%96%84%E6%9B%B8/%E6%88%92%E6%B7%AB%E9%81%8A%E8%A8%98/)
 - [【戒為良藥】第127季：易經智慧與戒色之道](https://jeise.pixnet.net/blog/post/67132311)

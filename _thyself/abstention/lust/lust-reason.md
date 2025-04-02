@@ -3,7 +3,7 @@ title: "恋癖"
 sequence: "101"
 ---
 
-
+[UP](/thyself/thyself-home.html)
 
 ## 关于恋癖
 

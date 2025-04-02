@@ -3,6 +3,8 @@ title: "如何避免色的勾引"
 sequence: "101"
 ---
 
+[UP](/thyself/thyself-home.html)
+
 <p class="indented">
     Most people don't set out to cheat on their spouse.<br/>
     It all starts small.<br/>

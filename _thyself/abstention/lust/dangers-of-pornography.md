@@ -3,6 +3,8 @@ title: "Dangers of Pornography"
 sequence: "102"
 ---
 
+[UP](/thyself/thyself-home.html)
+
 <p class="indented">
     There are some beautiful beaches in the world that have hidden dangers.
     When water floods sand below the surface, the sand particles get pushed apart.

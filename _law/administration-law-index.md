@@ -71,6 +71,7 @@ sequence: "xing-zheng-fa"
     <tr>
         <th style="text-align: center;">行政实体法</th>
         <th style="text-align: center;">行政救济法</th>
+        <th style="text-align: center;">总结</th>
     </tr>
     </thead>
     <tbody>
@@ -94,6 +95,21 @@ sort: "sequence"
 {%
 assign filtered_posts = site.law |
 where_exp: "item", "item.path contains 'law/administration/note/p2/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/administration/note/p3/'" |
 sort: "sequence"
 %}
 <ol>
@@ -156,6 +172,10 @@ sort: "sequence"
 
 ## 法条
 
+- 《行政处罚法》，开始于 1996 年，最新修改于 2021 年
+- 《行政许可法》，开始于 2003 年，最新修改于 2019 年
+- 《行政强制法》，开始于 2011 年
+
 <table>
     <thead>
     <tr>
@@ -203,3 +223,5 @@ sort: "sequence"
 
 一本是梁慧星老师的民法总则 绿色封皮的
 一本儿是蔡定剑先生的宪法精解
+
+- [森林法](https://www.mee.gov.cn/ywgz/fgbz/fl/202106/t20210608_836755.shtml)
