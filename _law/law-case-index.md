@@ -31,6 +31,11 @@ sequence: "109"
 
 ## 行政法
 
+案例
+
+- [老农卖芹菜赚14元罚10万](https://www.thepaper.cn/newsDetail_forward_23530436)
+
+
 ## 参考
 
 - [法理学经典案例](https://www.zhihu.com/column/c_1437059756926574592)

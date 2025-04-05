@@ -6,6 +6,10 @@ sequence: "info-addict"
 [UP](/thyself/thyself-home.html)
 
 ```text
+
+```
+
+```text
 Have you ever heard of information addiction
 it might be a new term for you
 but the behavior is something

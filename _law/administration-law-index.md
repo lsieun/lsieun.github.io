@@ -215,10 +215,6 @@ sort: "sequence"
 - [行政复议法](https://www.gov.cn/yaowen/liebiao/202309/content_6901584.htm)
 - [行政协议司法解释](http://www.npc.gov.cn/c2/c30834/201912/t20191210_303149.html)
 
-案例
-
-- [老农卖芹菜赚14元罚10万](https://www.thepaper.cn/newsDetail_forward_23530436)
-
 梁慧星王利明之争
 
 一本是梁慧星老师的民法总则 绿色封皮的
