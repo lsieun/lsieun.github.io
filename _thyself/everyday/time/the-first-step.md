@@ -1,9 +1,48 @@
 ---
-title: "马上开始行动"
+title: "The First Step"
 sequence: "xing-dong"
 ---
 
 [UP](/thyself/thyself-home.html)
+
+```text
+if something feels too hard to start
+it just means that
+the first step isn't small enough
+
+so if something feels too hard to do
+it doesn't mean it's my fault
+it doesn't mean I can't
+it doesn't mean I'm stupid
+
+It literally just means
+the first step isn't small enough
+that's very actionable
+
+Okay, I have to write a new article and
+I'm like I can't do that
+so I'll make it literally
+I'll just make it smaller
+I'm gonna write a page today
+and then often I'm like I can't do that
+okay, smaller
+a paragraph
+and some days it's a word
+and I go: oh, you know what
+I could write a word
+
+when things are hard
+it's not your fault
+and there's something you can do
+to build the circuit of capability
+and we have to give ourselves
+the opportunity to build momentum
+which really usually only starts
+by taking the smallest step
+
+
+ 
+```
 
 ```text
 人太努力
@@ -110,7 +149,7 @@ sequence: "xing-dong"
 如何对学习上瘾
 
 用心理学方法
-眞的可以让学习上癃
+眞的可以让学习上瘾
 当你排斥厌恶学习
 感受不到学习的乐趣时
 心理学家丹尼尔·卡内曼
@@ -135,5 +174,8 @@ sequence: "xing-dong"
 除了学习
 任何你恐惧厌恶的事
 都能用峰终定律克服它
-
 ```
+
+## 参考
+
+- [The First Step is Always the Hardest](https://donnaleighbliss.com/inspiring-ideas/the-first-step-is-always-the-hardest/)

@@ -58,6 +58,12 @@ sequence: "101"
 - [PaywallBuster](https://paywallbuster.com/)
 - [MD2Card](https://md2card.com/zh)
 
+- [Imagine Explainers](https://imagineexplainers.com/)
+- [Calculating Empires](https://calculatingempires.net/)
+
+- [Sacred Heart University Library](https://library.sacredheart.edu/home)
+- [FlySheep](https://www.flysheep6.com/)
+
 ## AI
 
 - [binjie](https://chat18.aichatos.xyz/)

@@ -9,6 +9,7 @@ sequence: "102"
 - [刑法]({% link _law/criminal-law-index.md %})
 - [刑诉法]({% link _law/criminal-procedure-law-index.md %})
 - [民法]({% link _law/civil-law-index.md %})
+- [民诉法]({% link _law/civil-procedure-law-index.md %})
 - [行政法]({% link _law/administration-law-index.md %})
 - [法律案例]({% link _law/law-case-index.md %})
 
@@ -143,6 +144,11 @@ sort: "sequence"
 
 最有效的刑事辩护，一定是**技巧性的进攻**。
 
+```text
+“盖天下之事，不难于立法，而难于法之必行”
+出自明代张居正的《请稽查章奏随事考成以修实政疏》。
+```
+
 ### 公检法
 
 <table>
@@ -227,7 +233,6 @@ sort: "sequence"
     <tr>
         <th style="text-align: center;">律师</th>
         <th style="text-align: center;">陷阱</th>
-        <th style="text-align: center;">举报</th>
     </tr>
     </thead>
     <tbody>
@@ -262,10 +267,62 @@ sort: "sequence"
     {% endfor %}
 </ol>
         </td>
+    </tr>
+    </tbody>
+</table>
+
+### 控告
+
+```text
+在法律之外，
+还有一个更狠、更公平的东西叫
+因果!
+```
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">对象</th>
+        <th style="text-align: center;">到哪儿</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
         <td>
 {%
 assign filtered_posts = site.law |
-where_exp: "item", "item.path contains 'law/life/report/'" |
+where_exp: "item", "item.path contains 'law/life/report/general/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/life/report/obj/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.law |
+where_exp: "item", "item.path contains 'law/life/report/to/'" |
 sort: "sequence"
 %}
 <ol>
@@ -336,6 +393,8 @@ sort: "sequence"
         - [国家统一法律职业资格考试实施办法 2018-04-29](https://www.moj.gov.cn/pub/sfbgw/jgsz/jgszzsdw/zsdwgjsfkszx/gjsfkszcfg/202106/t20210622_428245.html)
 
 - [中华人民共和国立法法](https://www.gov.cn/xinwen/2023-03/14/content_5746569.htm)
+
+- [法官法](http://www.npc.gov.cn/zgrdw/npc/xinwen/2019-04/23/content_2086082.htm)
 
 ```text
 《立法法》
