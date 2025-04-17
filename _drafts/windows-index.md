@@ -1,7 +1,7 @@
 ---
 title: "Windows"
 image: /assets/images/windows/novo-windows-microsoft.jpg
-permalink: /windows.html
+permalink: /windows/windows-index.html
 ---
 
 Microsoft Windows
@@ -21,6 +21,35 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
+
+## Script
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Basic</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.windows |
+where_exp: "item", "item.path contains 'windows/script/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 ## Software
 

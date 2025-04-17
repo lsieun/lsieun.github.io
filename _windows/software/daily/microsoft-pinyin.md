@@ -3,6 +3,8 @@ title: "微软拼音"
 sequence: "input"
 ---
 
+[UP](/windows/windows-index.html)
+
 ```text
 路径：系统设置——语言——中文简体·选项——键盘——微软拼音选项
 ```

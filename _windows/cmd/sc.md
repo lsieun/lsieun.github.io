@@ -3,6 +3,8 @@ title: "sc"
 sequence: "sc"
 ---
 
+[UP](/windows/windows-index.html)
+
 ```text
 sc = Service Control Manager
 ```

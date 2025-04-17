@@ -3,6 +3,8 @@ title: "PotPlayer"
 sequence: "pot-player"
 ---
 
+[UP](/windows/windows-index.html)
+
 ## 播放速度
 
 在右键菜单中：
@@ -50,6 +52,10 @@ Playback --> Speed -->
 点击底部工具栏带放大镜的按钮，打开浏览器。再点击三条杠的播放列表按钮，打开播放列表。
 
 “浏览器 - 章节场景”显示所有的章节，双击即可跳转播放。
+
+## 旋转
+
+右键 --> 视频 --> 图像旋转
 
 ## Reference
 

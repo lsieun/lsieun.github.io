@@ -3,6 +3,8 @@ title: "port"
 sequence: "port"
 ---
 
+[UP](/windows/windows-index.html)
+
 查询端口：
 
 ```text

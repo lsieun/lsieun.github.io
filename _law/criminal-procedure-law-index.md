@@ -3,7 +3,7 @@ title: "刑诉法"
 sequence: "103"
 ---
 
-[UP](/law/law-index.html)
+[UP](/law/law-home.html)
 
 - [主页]({% link _law/law-home.md %})
 - [刑法]({% link _law/criminal-law-index.md %})
@@ -11,6 +11,7 @@ sequence: "103"
 - [民法]({% link _law/civil-law-index.md %})
 - [民诉法]({% link _law/civil-procedure-law-index.md %})
 - [行政法]({% link _law/administration-law-index.md %})
+- [法律法规]({% link _law/law-ref-index.md %})
 - [法律案例]({% link _law/law-case-index.md %})
 
 ```text
@@ -213,10 +214,10 @@ sort: "sequence"
 
 ## 法条
 
-- [中华人民共和国刑事诉讼法](http://www.npc.gov.cn/npc/c2/c12435/201905/t20190521_276591.html)
+- [刑事诉讼法](http://www.npc.gov.cn/npc/c2/c12435/201905/t20190521_276591.html)
 - [公安部规定（公安机关办理刑事案件程序规定）](https://www.gov.cn/zhengce/2021-12/25/content_5712867.htm)
 - [高检规则（人民检察院刑事诉讼规则）](https://www.spp.gov.cn/spp/xwfbh/wsfbh/201912/t20191230_451490.shtml)
-- [刑诉解释（最高法关于适用《中华人民共和国刑事诉讼法》的解释）](https://www.court.gov.cn/fabu/xiangqing/286491.html)
+- [刑诉解释（最高法关于适用《刑事诉讼法》的解释）](https://www.court.gov.cn/fabu/xiangqing/286491.html)
 
 <table>
     <thead>

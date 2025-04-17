@@ -3,7 +3,7 @@ title: "法考资源"
 sequence: "110"
 ---
 
-[UP](/law/law-index.html)
+[UP](/law/law-home.html)
 
 - [法考就找神探，独家押题](http://sifalianmemg.ysepan.com/)
 

@@ -3,7 +3,7 @@ title: "法考时间线"
 sequence: "101"
 ---
 
-[UP](/law/law-index.html)
+[UP](/law/law-home.html)
 
 
 - 5 月份，法考考试大纲，是一本实体书。

@@ -3,6 +3,8 @@ title: "process"
 sequence: "process"
 ---
 
+[UP](/windows/windows-index.html)
+
 ## tasklist
 
 `tasklist` 命令会列出当前运行的进程列表：

@@ -162,6 +162,13 @@ You can use regular expressions to change the case of characters that matches so
 ### 第$1节$2
 ```
 
+粘贴AI的 Markdown 内容：
+
+```text
+原来：^(#{2,4}) \w\. (.*)$
+替换：$1 $2
+```
+
 ## References
 
 - [jetbrains.com: Find and replace text using regular expressions][find-and-replac-with-regex]

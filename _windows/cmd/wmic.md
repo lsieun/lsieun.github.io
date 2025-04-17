@@ -3,6 +3,8 @@ title: "wmic"
 sequence: "wmic"
 ---
 
+[UP](/windows/windows-index.html)
+
 `wimc` 是 Windows management instrumentation 的缩写，Window管理工具，
 提供从命令行接口和批处理脚本执行系统管理的支持。
 

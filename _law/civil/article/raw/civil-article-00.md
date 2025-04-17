@@ -306,5 +306,5 @@ sequence: "100"
 
 ## Reference
 
-- [中华人民共和国民法典](http://www.npc.gov.cn/npc/c2/c30834/202006/t20200602_306457.html)
+- [民法典](http://www.npc.gov.cn/npc/c2/c30834/202006/t20200602_306457.html)
 - [最高法出台民法典总则编司法解释（附全文）](https://ipc.court.gov.cn/zh-cn/news/view-1792.html)

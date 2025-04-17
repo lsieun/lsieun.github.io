@@ -20,6 +20,8 @@ sequence: "104"
 
 - [winXP](https://github.com/ShizukuIchi/winXP)
 
+- [Anki中文资源网](https://file.ankichinas.cn/)
+
 ## 语雀
 
 - [许大仙：K8s 指南](https://www.yuque.com/fairy-era/yg511q/szg74m)

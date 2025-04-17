@@ -3,6 +3,8 @@ title: "IDM"
 sequence: "idm"
 ---
 
+[UP](/windows/windows-index.html)
+
 However, for informational purposes only, here are some Serial Number IDM that you can try:
 
 - HUDWE-UO689-6D27B-YM28M

@@ -36,3 +36,9 @@ sequence: "emotion"
 如果哭一场我会好过点，那我就哭，
 如果我低落会让我更舒服，那我就允许自己低落
 ```
+
+- [Shame](https://emotionalcompetency.com/shame.htm)
+- [Sin, Shame, Isolation — The Ugly Cycle](https://www.weaponsofgrace.com/content/you-are-too-dirty-for-god-to-care)
+- [12 Practical Steps to Break the Cycle of Sin](https://believersfactory.com/break-the-cycle-of-sin/)
+- [The Truth About Lust: 7 Deadly Sins Part 5](https://genewhitehead.com/7-sins-lust/)
+- [5 Key Insights: Unveiling the Mystery of Lust (Explained)](https://www.enotalone.com/article/relationships/5-key-insights-unveiling-the-mystery-of-lust-explained-r10480/)

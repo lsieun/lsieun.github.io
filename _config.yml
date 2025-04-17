@@ -258,6 +258,7 @@ collections:
     output: true
   windows:
     output: true
+    permalink: /:collection/:name:output_ext
   writing:
     output: true
   xml:

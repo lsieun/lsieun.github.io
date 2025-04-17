@@ -3,6 +3,8 @@ title: "U盘 + Win10"
 sequence: "win10"
 ---
 
+[UP](/windows/windows-index.html)
+
 ## OS
 
 HelloWindows.cn:

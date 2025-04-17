@@ -3,7 +3,7 @@ title: "POI"
 sequence: "101"
 ---
 
-[UP](/law/law-index.html)
+[UP](/law/law-home.html)
 
 
 - 侵犯通信自由

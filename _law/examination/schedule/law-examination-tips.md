@@ -3,7 +3,7 @@ title: "法考 Tips"
 sequence: "111"
 ---
 
-[UP](/law/law-index.html)
+[UP](/law/law-home.html)
 
 
 ## 学习 Tips

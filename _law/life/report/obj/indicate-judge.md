@@ -3,7 +3,7 @@ title: "控告法官"
 sequence: "judge"
 ---
 
-[UP](/law/law-index.html)
+[UP](/law/law-home.html)
 
 ## 思路
 

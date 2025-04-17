@@ -80,3 +80,9 @@ https://zhuanlan.zhihu.com/p/8607265996
 - [水浒传](http://shuihu.5000yan.com/)
 - [西游记](http://xiyouji.5000yan.com/)
 - [封神演义](https://www.xyyuedu.com/gdmz/fengshenbangxs/)
+
+心理学
+
+- 《津巴多普通心理学》，比小说还好看的心理学入门
+- 阿伦森《社会心理学》，让人身更出彩
+- 《犯罪心理学》，叫你看透身边所有套路

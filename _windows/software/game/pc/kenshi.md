@@ -3,6 +3,8 @@ title: "Kenshi"
 sequence: "kenshi"
 ---
 
+[UP](/windows/windows-index.html)
+
 ## Building
 
 - [Better Crop Fences](https://www.nexusmods.com/kenshi/mods/322)

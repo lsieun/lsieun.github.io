@@ -3,7 +3,7 @@ title: "刑法"
 sequence: "101"
 ---
 
-[UP](/law/law-index.html)
+[UP](/law/law-home.html)
 
 - [主页]({% link _law/law-home.md %})
 - [刑法]({% link _law/criminal-law-index.md %})
@@ -11,6 +11,7 @@ sequence: "101"
 - [民法]({% link _law/civil-law-index.md %})
 - [民诉法]({% link _law/civil-procedure-law-index.md %})
 - [行政法]({% link _law/administration-law-index.md %})
+- [法律法规]({% link _law/law-ref-index.md %})
 - [法律案例]({% link _law/law-case-index.md %})
 
 ```text
@@ -386,7 +387,7 @@ sort: "sequence"
 ## 参考
 
 - [2025年法考客观题【精讲卷】刑法 众合柏浪涛](https://www.bilibili.com/video/BV1r8mxYNECZ/)
-- [中华人民共和国刑法（英文版）](https://www.bilibili.com/video/BV1yF411n7iP/)
+- [刑法（英文版）](https://www.bilibili.com/video/BV1yF411n7iP/)
 - [Criminal Law of the People's Republic of China](http://en.npc.gov.cn.cdurl.cn/2020-12/26/c_921604.htm)
 
 ```text
@@ -400,6 +401,8 @@ sort: "sequence"
 
 目前，中国法律体系中对于罚没收入的管理已经有了更加严格的规定。
 根据现行法律法规，所有罚没收入应当全额上缴国库，不得截留、挪用或私分。
-比如，《中华人民共和国行政处罚法》明确规定了罚没财物必须上缴国库，
+比如，《行政处罚法》明确规定了罚没财物必须上缴国库，
 任何单位和个人不得以任何形式截留、私分或者变相私分。
 ```
+
+- [徐昕：一场“杀猪式”审判](https://www.weibo.com/ttarticle/p/show?id=2309634372619532044997)

@@ -5,13 +5,15 @@ sequence: "daily"
 
 [UP](/res/res-index.html)
 
-
 https://github.com/hellzerg/optimizer
 
 https://github.com/henrypp/memreduct
 
 https://gopeed.com/zh-CN
 
+- 文件
+    - [ReNamer](https://www.den4b.com/products/renamer)
+    - [OneCommander Pro 3.52.0 双窗口文件管理器](https://foxirj.com/onecommander-pro.html)
 - 办公
     - [WinRAR](https://foxirj.com/winrar.html)
     - [MathType](https://foxirj.com/mathtype.html)
@@ -20,20 +22,16 @@ https://gopeed.com/zh-CN
     - [搜狗拼音输入法](https://foxirj.com/sogoupyinput-win.html)
 
 
-
 - 思维导图
     - [SimpleMind Pro](https://foxirj.com/simplemind-pro-win.html)
     - [XMind](https://foxirj.com/xmind-pro-win.html)
 - 打印
     - [PRIPRINTER PROFESSIONAL](https://lrepacks.net/repaki-programm-dlya-ofisa/540-priprinter-professional-repack-amp-portable.html)
       虚拟打印机，可以将内容打印成 PDF
-- 文件管理
-    - [OneCommander Pro 3.52.0 双窗口文件管理器](https://foxirj.com/onecommander-pro.html)
 
 - 数学
     - [GeoGebra Classic 6.0.801.0 动态数学绘图](https://foxirj.com/geogebra-classic-win.html)
     - [MathWorks MATLAB R2023a Update 5 9.14.0.2337262 算法开发/数据分析/模型创建](https://foxirj.com/mathworks-matlab-win.html)
-
 
 
 - CAD

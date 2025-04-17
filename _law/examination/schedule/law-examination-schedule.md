@@ -3,7 +3,7 @@ title: "法考时间规划"
 sequence: "109"
 ---
 
-[UP](/law/law-index.html)
+[UP](/law/law-home.html)
 
 
 <table>

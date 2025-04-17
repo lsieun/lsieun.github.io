@@ -9,6 +9,12 @@ sequence: "101"
 
 ## Everyday
 
+```text
+The magic you are looking for
+is in the work you are avoiding.
+你所寻找的“魔法”，就藏在你所逃避的事情中
+```
+
 <table>
     <thead>
     <tr>
@@ -103,7 +109,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.thyself |
-where_exp: "item", "item.path contains 'thyself/abstention/basic/'" |
+where_exp: "item", "item.path contains 'thyself/self/abstention/basic/'" |
 sort: "sequence"
 %}
 <ol>
@@ -118,7 +124,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.thyself |
-where_exp: "item", "item.path contains 'thyself/abstention/lust/'" |
+where_exp: "item", "item.path contains 'thyself/self/abstention/lust/'" |
 sort: "sequence"
 %}
 <ol>
@@ -133,7 +139,7 @@ sort: "sequence"
         <td>
 {%
 assign filtered_posts = site.thyself |
-where_exp: "item", "item.path contains 'thyself/abstention/other/'" |
+where_exp: "item", "item.path contains 'thyself/self/abstention/other/'" |
 sort: "sequence"
 %}
 <ol>
@@ -154,12 +160,28 @@ sort: "sequence"
 <table>
     <thead>
     <tr>
+        <th style="text-align: center;">自我管理</th>
         <th style="text-align: center;">对联</th>
         <th style="text-align: center;">做人</th>
     </tr>
     </thead>
     <tbody>
     <tr>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/self/autonomy/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
         <td>
 {%
 assign filtered_posts = site.thyself |

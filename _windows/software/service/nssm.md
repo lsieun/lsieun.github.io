@@ -3,6 +3,7 @@ title: "NSSM: the Non-Sucking Service Manager"
 sequence: "nssm"
 ---
 
+[UP](/windows/windows-index.html)
 
 ```text
 nssm = 你算什么

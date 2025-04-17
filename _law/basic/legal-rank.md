@@ -3,7 +3,7 @@ title: "法律位阶"
 sequence: "101"
 ---
 
-[UP](/law/law-index.html)
+[UP](/law/law-home.html)
 
 
 法律位阶，就是上位法和下位法的问题。

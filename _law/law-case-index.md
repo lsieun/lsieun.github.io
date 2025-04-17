@@ -3,7 +3,7 @@ title: "法律案例"
 sequence: "109"
 ---
 
-[UP](/law/law-index.html)
+[UP](/law/law-home.html)
 
 - [主页]({% link _law/law-home.md %})
 - [刑法]({% link _law/criminal-law-index.md %})
@@ -11,6 +11,7 @@ sequence: "109"
 - [民法]({% link _law/civil-law-index.md %})
 - [民诉法]({% link _law/civil-procedure-law-index.md %})
 - [行政法]({% link _law/administration-law-index.md %})
+- [法律法规]({% link _law/law-ref-index.md %})
 - [法律案例]({% link _law/law-case-index.md %})
 
 ## 刑法
