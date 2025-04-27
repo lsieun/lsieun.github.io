@@ -16,6 +16,7 @@ sequence: "102"
 - [NotDiamond](https://www.notdiamond.ai/) Google 登录
 - [Gemini](https://gemini.google.com/)
 - [Grok](https://grok.com) Google 联合登录
+- [NotebookLM](https://notebooklm.google.com/)
 
 ## 生成图片
 

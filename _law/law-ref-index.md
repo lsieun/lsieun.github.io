@@ -95,7 +95,6 @@ SPP = The Supreme People's Procuratorate 最高人民检察院
 - `www.spp.gov.cn` 最高人民检察院
 
 
-
 - [国家法律法规数据库](https://flk.npc.gov.cn/index.html)
     - [刑法修正案](https://flk.npc.gov.cn/detail2.html?MmM5MDlmZGQ2NzhiZjE3OTAxNjc4YmY2ODNmOTA0NWI)
 
@@ -148,7 +147,6 @@ SPP = The Supreme People's Procuratorate 最高人民检察院
 
 ## 法律
 
-
 - [民主法制网](http://www.mzyfz.com/)
 - [中国法律服务网](https://www.12348.gov.cn/)
 
@@ -186,8 +184,19 @@ SPP = The Supreme People's Procuratorate 最高人民检察院
 - [人民法院案例库](https://rmfyalk.court.gov.cn/)
 
 
-
 - [人民检察院刑事诉讼规则（2019）](https://www.spp.gov.cn/spp/xwfbh/wsfbh/201912/t20191230_451490.shtml)
 
 - [厚德汇法](http://www.ahdhf.com/)
 - [法律文库](http://lawdb.cncourt.org/)
+
+## 律师参考
+
+- 机械司法
+    - [论机械司法](http://iolaw.cssn.cn/zxzp/202308/t20230829_5682082.shtml)
+    - [“三个善于”：揭示司法办案客观规律与本质要求](https://www.spp.gov.cn/spp/llyj/202405/t20240523_654818.shtml)
+    - [人工智能与刑事司法：从各执一词到多元平衡](https://www.spp.gov.cn/llyj/202305/t20230524_614789.shtml)
+    - [延安时期如何避免机械司法](https://www.chinacourt.org/article/detail/2023/12/id/7705133.shtml)
+    - [张建伟：司法机械主义有哪些基本特点](https://www.sohu.com/a/676112282_163278)
+    - [张建伟：司法机械主义现象及其原因分析](https://www.law.tsinghua.edu.cn/info/1036/19275.htm)
+    - [张建伟：司法机械主义的基本特点](https://www.tsinghua.edu.cn/info/1662/103862.htm)
+    - [“Artificial Intelligence” Makes the Court System More Just, Efficient and Authoritative](https://law.stanford.edu/china-law-and-policy-association-clpa/articles/)

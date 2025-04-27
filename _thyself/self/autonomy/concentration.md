@@ -30,3 +30,30 @@ sequence: "concentration"
 不要思虑别人太多，
 不要关注太多处部的东西。
 ```
+
+```text
+对自己期望过高的人
+people with very high expectations
+适应能力往往很弱
+have very low resilience
+不幸的是
+and unfortunately
+韧性在成功中至关重要
+resilience matters in success
+我无法教你坚韧
+I don't know how to teach it to you
+你只能自己经历磨炼
+except for I hope suffering happens to you
+只是聪明没什么了不起
+and greatness is not intelligence
+伟大源于人格
+greatness comes from character
+人格和聪明的关系不大
+and character isn't formed out of smart people
+而是被捶打和塑造出来的
+it's formed out of people who suffered
+```
+
+```text
+当一个人一心一意做好事情的时候，他最终是必然会成功
+```

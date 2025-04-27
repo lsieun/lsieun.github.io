@@ -15,6 +15,12 @@ is in the work you are avoiding.
 你所寻找的“魔法”，就藏在你所逃避的事情中
 ```
 
+```text
+The Chinese philosopher Lao Tzu advised,
+"To attain knowledge add things every day.
+To attain wisdom subtract things every day."
+```
+
 <table>
     <thead>
     <tr>
@@ -223,6 +229,7 @@ sort: "sequence"
     <tr>
         <th style="text-align: center;">心</th>
         <th style="text-align: center;">情</th>
+        <th style="text-align: center;">特质</th>
         <th style="text-align: center;">看法/理解/洞察力</th>
         <th style="text-align: center;">学说/教导</th>
     </tr>
@@ -248,6 +255,21 @@ sort: "sequence"
 {%
 assign filtered_posts = site.thyself |
 where_exp: "item", "item.path contains 'thyself/self/emotion/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/self/character/'" |
 sort: "sequence"
 %}
 <ol>

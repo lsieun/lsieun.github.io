@@ -1,5 +1,5 @@
 ---
-title: English
+title: "English"
 image: /assets/images/english/english-cover.jpg
 permalink: /english/english-index.html
 ---

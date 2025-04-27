@@ -89,6 +89,7 @@ sequence: "101"
     - [xiazaitool](https://www.xiazaitool.com/blbl) ❌
     - [ShowBL](https://www.showbl.com/lab/bilibili/)
     - [Online Video and Image Downloader](https://snapany.com/)
+    - [GreenVideo](https://greenvideo.cc/)
 
 IDM
 

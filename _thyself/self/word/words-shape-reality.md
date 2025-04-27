@@ -5,6 +5,31 @@ sequence: "101"
 
 [UP](/thyself/thyself-home.html)
 
+```text
+今天我想强调一个重要的心理现象，叫做自我实现的预言。
+什么意思？
+就是一个人如果反复说一句话，时间一长，
+他会不自觉地推动事情朝那句话的方向发展。
+为什么会这样？
+因为人有一种倾向，希望自己是对的，
+你说出口的那些话很快就会变成你要捍卫的立场，
+而不是单纯的想法，
+你会开始为他寻找证据，
+构建支持调整行为，
+慢慢的你就活进了你自己说过的话里。
+就像有人总说，
+我这人就是没用，
+我这辈子也就这样了，
+我哪配得到更好的？
+这些话说多了，你会开始抗拒一切和他相反的可能性，
+你甚至会下意识去证明它是真的。
+所以我们常说，语言是有方向的，
+你说的每句话不只是情绪表达，
+也是一次无意识的自我暗示。
+与其说你是变成了某种样子，
+不如说你一直在回应你说过的那些话。
+```
+
 The Power of Words: How Language Shapes Our Reality.
 Words carry immense power, more than we often recognize.
 Through language, humans are capable of influencing

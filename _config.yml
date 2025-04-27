@@ -95,6 +95,9 @@ collections:
     output: true
   docker:
     output: true
+  edu:
+    output: true
+    permalink: /:collection/:name:output_ext
   english:
     output: true
     permalink: /:collection/:name:output_ext
@@ -406,6 +409,11 @@ defaults:
   - scope:
       path: ""
       type: "docker"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "edu"
     values:
       layout: "post"
   - scope:
