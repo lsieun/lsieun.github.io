@@ -106,7 +106,7 @@ sort: "sequence"
     <thead>
     <tr>
         <th style="text-align: center;">基础</th>
-        <th style="text-align: center;">色情</th>
+        <th style="text-align: center;">色欲</th>
         <th style="text-align: center;">其他</th>
     </tr>
     </thead>
@@ -322,6 +322,8 @@ sort: "sequence"
     <tr>
         <th style="text-align: center;">行</th>
         <th style="text-align: center;">言</th>
+        <th style="text-align: center;">外貌</th>
+        <th style="text-align: center;">改变</th>
     </tr>
     </thead>
     <tbody>
@@ -345,6 +347,36 @@ sort: "sequence"
 {%
 assign filtered_posts = site.thyself |
 where_exp: "item", "item.path contains 'thyself/self/word/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/self/appearance/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.thyself |
+where_exp: "item", "item.path contains 'thyself/self/change/'" |
 sort: "sequence"
 %}
 <ol>

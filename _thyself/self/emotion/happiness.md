@@ -17,3 +17,10 @@ Someone to love
 and something to hope for.
 有可以期待的未来
 ```
+
+```text
+其实多数人，
+追求的并不是幸福，
+而是高人一等的优越感，
+这是动物的天性，但人尤为明显。——卡耐基
+```

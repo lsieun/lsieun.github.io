@@ -37,6 +37,17 @@ sequence: "emotion"
 如果我低落会让我更舒服，那我就允许自己低落
 ```
 
+```text
+真正厉害的人，早已戒掉了情绪。
+读完王阳明心学才明白
+为什么高手是没有情绪的。
+情绪就像心魔，你不控制他他便吞噬你。
+欲成大事，必先修心，
+情绪稳定是一个人的顶级修养。
+生活即修行，修行即修心。
+万事万物都受自己内心的控制。
+```
+
 - [Shame](https://emotionalcompetency.com/shame.htm)
 - [Sin, Shame, Isolation — The Ugly Cycle](https://www.weaponsofgrace.com/content/you-are-too-dirty-for-god-to-care)
 - [12 Practical Steps to Break the Cycle of Sin](https://believersfactory.com/break-the-cycle-of-sin/)

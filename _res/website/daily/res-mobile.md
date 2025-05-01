@@ -13,3 +13,8 @@ sequence: "mobile"
 - [Goat VPN](https://liteapks.com/goat-vpn-super-fastsafe-vpn.html)
 - [1.1.1.1](https://liteapks.com/1-1-1-1.html)
 - [Vpnify](https://liteapks.com/vpnify-unlimited-vpn-proxy.html)
+
+## 文件传输
+
+- [LocalSend]() 免费 电脑、Android、IOS 都支持
+
