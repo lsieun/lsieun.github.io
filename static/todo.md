@@ -11,7 +11,7 @@ published: false
 
 - [ ] [Java微服务Undertow高性能框架](https://www.bilibili.com/video/BV1fK4y1Q7pM)
 - [ ] [Java并发编程框架源码](https://www.bilibili.com/video/BV1iM4y1K7P1)
-- [ ] [Tomcat底层源码剖析](https://www.bilibili.com/video/BV1S5411A7MA/)
+
 - [ ] [2022年最新阿里核心架构RocketMQ源码分析](https://www.bilibili.com/video/BV1AF411v7yp/)
 - [ ] [Java安全框架Shiro框架从入门到精通实战教程](https://www.bilibili.com/video/BV1zg411G7iL)
 - [ ] [使用JUnit5和SpringBoot实战Testcontainers](https://www.bilibili.com/video/BV1SV4y1B7j6/)
@@ -19,7 +19,7 @@ published: false
 - [ ] [Docker Test Containers in Java Tests](https://www.baeldung.com/docker-test-containers)
 - [ ] [Java测试框架Junit5与Allure测试报告免费课](https://www.bilibili.com/video/BV1jP4y1E74T/)
 - [ ] [初探java+testng接口自动化测试](https://www.bilibili.com/video/BV1MB4y1A73K/)
-- [ ] [Java+selenium自动化测试实战](https://www.bilibili.com/video/BV1Ts4y1f7gM/)
+
 - [ ] [Mockito + Junit 5 快速入门](https://www.bilibili.com/video/BV15S4y1F7Xr/)
 - [ ] [Java自动化测试全套视频（从基础到精通）](https://www.bilibili.com/video/BV1Pd4y1t7WL/)
 - [ ] [最系统的java自动化+接口测试的教学视频](https://www.bilibili.com/video/BV1W8411j7Bz/)

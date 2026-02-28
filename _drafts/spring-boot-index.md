@@ -1,12 +1,20 @@
 ---
 title: "Spring Boot"
 image: /assets/images/spring-boot/spring-boot-planter.avif
-permalink: /spring-boot.html
+permalink: /spring-boot/index.html
 ---
 
 Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run".
 
 - [Spring Boot Web]({% link _spring-boot/spring-boot-web-index.md %})
+
+- [System Requirements](https://docs.spring.io/spring-boot/system-requirements.html)
+
+```text
+Spring Boot 4.0.3 requires at least Java 17 and
+is compatible with versions up to and including Java 25.
+Spring Framework 7.0.5 or above is also required.
+```
 
 ## Basic
 
@@ -244,7 +252,7 @@ sort: "sequence"
         - [Appendix](https://docs.spring.io/spring-framework/docs/current/reference/html/appendix.html)
         - [Wiki](https://github.com/spring-projects/spring-framework/wiki)
     - [Spring Boot Project](https://spring.io/projects/spring-boot/)
-        - [Spring Boot Reference Documentation](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)
+        - [Spring Boot Reference Documentation](https://docs.spring.io/spring-boot/index.html)
         - [Spring Boot Core Features](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html)
     - [Spring Boot - Introduction](https://www.tutorialspoint.com/spring_boot/spring_boot_introduction.htm)
 - [Spring Boot 框架入门教程（快速学习版）](http://c.biancheng.net/spring_boot/)
