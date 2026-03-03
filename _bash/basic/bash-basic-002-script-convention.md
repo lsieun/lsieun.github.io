@@ -48,7 +48,30 @@ There must also be no spaces before the `#` or between the `!` and the path to t
 
 > 不能有空格
 
+添加 `-x` 可以调试：先打印命令，再执行命令
 
+```text
+$ vi helloworld.sh
+```
+
+```text
+#!/bin/bash -x
+
+echo "Hello, World!"
+ls /nonexistent_directory
+```
+
+```text
+$ chmod u+x helloworld.sh
+```
+
+```text
+$ ./helloworld.sh
++ echo 'Hello, World!'
+Hello, World!
++ ls /nonexistent_directory
+ls: cannot access '/nonexistent_directory': No such file or directory
+```
 
 ### 版本 + 版权信息
 

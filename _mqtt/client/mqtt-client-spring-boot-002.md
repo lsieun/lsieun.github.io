@@ -17,7 +17,7 @@ sequence: "302"
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <!-- resource -->
+        <!-- Resource -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 

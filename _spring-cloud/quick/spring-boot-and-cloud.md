@@ -25,7 +25,7 @@ https://start.spring.io/actuator/info
 ```xml
 
 <properties>
-    <!-- resource -->
+    <!-- Resource -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 

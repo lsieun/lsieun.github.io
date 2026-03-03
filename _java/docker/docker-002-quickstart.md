@@ -5,7 +5,7 @@ sequence: "102"
 
 ```xml
 <properties>
-    <!-- resource -->
+    <!-- Resource -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 

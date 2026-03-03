@@ -234,8 +234,14 @@ collections:
     output: true
   scala:
     output: true
+  selenium:
+    output: true
+    permalink: /:collection/:name:output_ext
   spring:
     output: true
+  spring-ai:
+    output: true
+    permalink: /:collection/:name:output_ext
   spring-boot:
     output: true
   spring-cloud:
@@ -713,7 +719,17 @@ defaults:
       layout: "post"
   - scope:
       path: ""
+      type: "selenium"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
       type: "spring"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "spring-ai"
     values:
       layout: "post"
   - scope:
