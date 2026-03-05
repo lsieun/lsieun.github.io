@@ -2,7 +2,7 @@
 title: "git tag"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ## Creating a tag: git tag

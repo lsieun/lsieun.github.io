@@ -1,7 +1,7 @@
 ---
 title: "Windows"
 image: /assets/images/windows/novo-windows-microsoft.jpg
-permalink: /windows/windows-index.html
+permalink: /windows/index.html
 ---
 
 Microsoft Windows

@@ -3,7 +3,7 @@ title: "HEAD 介绍"
 sequence: "101"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 HEAD answers the question: **Where am I right now in the repository?**

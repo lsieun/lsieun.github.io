@@ -3,7 +3,7 @@ title: "Pom file"
 sequence: "103"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 Every Maven project has **a pom file** that defines **what the project is all about** and **how it should be built**.

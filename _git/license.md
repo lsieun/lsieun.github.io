@@ -3,7 +3,7 @@ title: "License"
 sequence: "503"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 - [Choose an open source license](https://choosealicense.com/)

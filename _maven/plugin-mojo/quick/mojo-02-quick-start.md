@@ -3,7 +3,7 @@ title: "Mojo: Quick Start"
 sequence: "102"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 ## pom.xml

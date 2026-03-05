@@ -3,7 +3,7 @@ title: "Maven Goals"
 sequence: "103"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 A **goal** is a **task** contained in a **Maven plugin**.

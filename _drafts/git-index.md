@@ -1,7 +1,7 @@
 ---
 title: "Git"
 image: /assets/images/git/git-vs-github.png
-permalink: /git/git-index.html
+permalink: /git/index.html
 ---
 
 
@@ -340,6 +340,15 @@ sort: "sequence"
 
 ## Github
 
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Basic</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
 {%
 assign filtered_posts = site.git |
 where_exp: "item", "item.path contains 'git/github/'" |
@@ -353,6 +362,10 @@ sort: "sequence"
     </li>
     {% endfor %}
 </ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 ## Host
 

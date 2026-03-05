@@ -3,7 +3,7 @@ title: "Github Hosts"
 sequence: "301"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 ```text
 69.16.230.165 www.github.com
@@ -13,5 +13,6 @@ sequence: "301"
 
 ## Reference
 
-- [Fetch GitHub Hosts](https://hosts.gitcdn.top/)
+- [Fetch GitHub Hosts](https://hosts.gitcdn.top/) ★★★
+- [GitHub-Hosts](https://github.com/maxiaof/github-hosts)
 - [DNS在线解析](http://www.ip33.com/dns.html)

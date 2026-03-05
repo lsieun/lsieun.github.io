@@ -3,7 +3,7 @@ title: "maven-plugin-plugin"
 sequence: "301"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 ```xml

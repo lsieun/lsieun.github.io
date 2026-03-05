@@ -3,7 +3,7 @@ title: "将Ref解析成SHA1：git rev-parse"
 sequence: "102"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ```text

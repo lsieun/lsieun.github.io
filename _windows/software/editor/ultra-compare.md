@@ -3,7 +3,7 @@ title: "UltraCompare"
 sequence: "ultra-compare"
 ---
 
-[UP](/windows/windows-index.html)
+[UP](/windows/index.html)
 
 ## 修改主题
 

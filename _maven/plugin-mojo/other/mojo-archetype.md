@@ -3,7 +3,7 @@ title: "Mojo Archetype"
 sequence: "102"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 To create a new plugin project, you could using the Mojo archetype with the following command line:

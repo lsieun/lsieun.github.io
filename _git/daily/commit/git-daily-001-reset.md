@@ -3,7 +3,7 @@ title: "让 branch 指向某次 Commit"
 sequence: "101"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ## 撤销某次 Commit 提交

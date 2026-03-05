@@ -2,7 +2,7 @@
 title: "git objects: commit format"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 要考虑 commit 的三种情况：

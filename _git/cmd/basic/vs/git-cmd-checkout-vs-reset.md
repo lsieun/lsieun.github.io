@@ -3,7 +3,7 @@ title: "checkout vs reset"
 sequence: "101"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 - `git reset` modifies **the current branch pointer,** so it points to another commit.

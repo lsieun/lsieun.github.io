@@ -2,7 +2,7 @@
 title: "git bisect"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 The only thing worse than finding a bug in software and having to fix it is having to fix the same bug multiple times.

@@ -3,7 +3,7 @@ title: "HEAD 与 Detached State"
 sequence: "102"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ## Attached & detached state

@@ -2,7 +2,7 @@
 title: "git show"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 `git show` is a command similar to `git log`, but it shows a single commit.

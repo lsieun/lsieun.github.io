@@ -3,7 +3,7 @@ title: "Mojo Parameters：不同的输入方式（输入）"
 sequence: "103"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 Each Mojo specifies the parameters that it expects in order to work.

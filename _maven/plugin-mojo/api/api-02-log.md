@@ -3,7 +3,7 @@ title: "Log（输出）"
 sequence: "102"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 ## Logging

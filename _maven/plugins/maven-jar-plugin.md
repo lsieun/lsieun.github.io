@@ -3,7 +3,7 @@ title: "maven-jar-plugin"
 sequence: "301"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 - [Apache Maven Archiver](https://maven.apache.org/shared/maven-archiver/index.html)

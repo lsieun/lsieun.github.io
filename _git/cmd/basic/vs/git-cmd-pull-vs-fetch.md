@@ -3,7 +3,7 @@ title: "pull vs fetch"
 sequence: "102"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ```text

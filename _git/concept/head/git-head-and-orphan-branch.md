@@ -3,7 +3,7 @@ title: "HEAD 与 Orphan 分支"
 sequence: "103"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ## HEAD

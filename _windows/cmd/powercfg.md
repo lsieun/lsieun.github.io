@@ -3,7 +3,7 @@ title: "powercfg"
 sequence: "powercfg"
 ---
 
-[UP](/windows/windows-index.html)
+[UP](/windows/index.html)
 
 用管理员身份运行 `cmd` 命令，然后输入：
 

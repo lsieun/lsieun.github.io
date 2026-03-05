@@ -3,7 +3,7 @@ title: "Maven Install"
 sequence: "102"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 ## Windows
 

@@ -3,7 +3,7 @@ title: "Resource Filtering"
 sequence: "102"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 Resource filtering 是将 resource 中的 maven properties 替换成真实的值。

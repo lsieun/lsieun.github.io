@@ -3,7 +3,7 @@ title: "Mojo: Maven Project"
 sequence: "106"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 ## pom.xml

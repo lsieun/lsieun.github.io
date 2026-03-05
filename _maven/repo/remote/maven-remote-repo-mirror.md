@@ -5,8 +5,8 @@ sequence: "103"
 
 ## Maven 配置
 
-打开 Maven 的配置文件(windows机器一般在maven安装目录的conf/settings.xml)，
-在 `<mirrors></mirrors>` 标签中添加 `mirror` 子节点:
+在 `settings.xml` 文件中，
+`<mirrors></mirrors>` 标签中添加 `mirror` 子节点:
 
 ```xml
 <mirror>
@@ -16,7 +16,6 @@ sequence: "103"
     <url>https://maven.aliyun.com/repository/public</url>
 </mirror>
 ```
-
 
 ## Reference
 

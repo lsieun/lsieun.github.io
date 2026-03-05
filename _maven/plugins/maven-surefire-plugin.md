@@ -3,7 +3,7 @@ title: "Maven Surefire Plugin"
 sequence: "303"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 The execution of unit tests is handled by the [Maven Surefire Plugin](https://maven.apache.org/surefire/maven-surefire-plugin/).

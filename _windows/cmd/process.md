@@ -3,7 +3,7 @@ title: "process"
 sequence: "process"
 ---
 
-[UP](/windows/windows-index.html)
+[UP](/windows/index.html)
 
 ## tasklist
 

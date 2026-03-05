@@ -3,7 +3,7 @@ title: "Mojo: Unit Test"
 sequence: "109"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 Currently, Maven only supports **unit testing** out of the box.

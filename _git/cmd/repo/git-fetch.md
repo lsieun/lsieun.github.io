@@ -2,7 +2,7 @@
 title: "git fetch"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ## Fetching changes from a remote without modifying local branches: git fetch

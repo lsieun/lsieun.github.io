@@ -3,7 +3,7 @@ title: "Win10 关闭搜索广告"
 sequence: "101"
 ---
 
-[UP](/windows/windows-index.html)
+[UP](/windows/index.html)
 
 第 1 步，按下 `Win + R`
 

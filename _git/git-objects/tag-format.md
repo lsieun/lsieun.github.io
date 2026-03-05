@@ -2,7 +2,7 @@
 title: "git objects: tag format"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 The content of a tag object is as follows:

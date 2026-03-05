@@ -3,7 +3,7 @@ title: "Maven 插件开发"
 sequence: "102"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 ## 主要内容

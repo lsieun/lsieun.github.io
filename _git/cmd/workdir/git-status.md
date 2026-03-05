@@ -3,7 +3,7 @@ title: "git status"
 sequence: "108"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ```text

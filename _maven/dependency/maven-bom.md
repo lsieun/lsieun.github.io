@@ -3,7 +3,7 @@ title: "BOM"
 sequence: "104"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 ## Spring Data

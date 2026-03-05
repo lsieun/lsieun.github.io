@@ -3,7 +3,7 @@ title: "git write-tree"
 sequence: "101"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 Before peering at the contents of the tree object in more detail,

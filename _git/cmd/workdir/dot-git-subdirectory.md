@@ -3,7 +3,7 @@ title: ".git subdirectory"
 sequence: "111"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ## .git subdirectory

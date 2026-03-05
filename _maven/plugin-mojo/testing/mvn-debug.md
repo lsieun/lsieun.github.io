@@ -3,7 +3,7 @@ title: "Mvn Debug"
 sequence: "113"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 - run maven goal with `mvnDebug` instead of `mvn`. E.g. `mvnDebug clean`

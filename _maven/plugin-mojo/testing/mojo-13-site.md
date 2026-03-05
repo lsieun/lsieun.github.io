@@ -3,7 +3,7 @@ title: "Mojo: Site"
 sequence: "113"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 ```xml

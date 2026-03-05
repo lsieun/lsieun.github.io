@@ -3,7 +3,7 @@ title: "Dependency version ranges"
 sequence: "104"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 Instead of specifying a certain version number for a dependency, we can also specify a range of versions.

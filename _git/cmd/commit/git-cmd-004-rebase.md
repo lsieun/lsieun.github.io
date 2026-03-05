@@ -3,7 +3,7 @@ title: "git rebase"
 sequence: "104"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ![](/assets/images/git/commit/git-rebase-illustrated.png)

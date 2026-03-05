@@ -2,7 +2,7 @@
 title: "git branch"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 To create a new branch and switch to it:

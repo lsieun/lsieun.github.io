@@ -3,7 +3,7 @@ title: "Plugin Descriptor"
 sequence: "106"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 ## What is a Plugin?

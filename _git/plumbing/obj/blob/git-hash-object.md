@@ -3,7 +3,7 @@ title: "git hash-object"
 sequence: "101"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ```bash

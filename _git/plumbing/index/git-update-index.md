@@ -3,7 +3,7 @@ title: "更新：git update-index"
 sequence: "102"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ```bash

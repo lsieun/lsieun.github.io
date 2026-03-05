@@ -2,7 +2,7 @@
 title: "git instaweb"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ## Displaying a repository in a browser: git instaweb

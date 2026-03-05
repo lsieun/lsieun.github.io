@@ -3,7 +3,7 @@ title: "Dependency Scopes"
 sequence: "103"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 When we declare a dependency, we can specify a **dependency scope**.

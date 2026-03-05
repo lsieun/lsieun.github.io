@@ -3,7 +3,7 @@ title: "Maven JVM: Configuring the heap size"
 sequence: "104"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 Once you have Maven installed in your system, the very next step is to fine-tune it for an optimal performance.

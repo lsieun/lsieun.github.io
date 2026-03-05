@@ -3,7 +3,7 @@ title: "Maven Wrapper"
 sequence: "110"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 ## Reference

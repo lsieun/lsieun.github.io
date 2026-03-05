@@ -3,7 +3,7 @@ title: "Maven Intro"
 sequence: "101"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 Maven is a build tool.

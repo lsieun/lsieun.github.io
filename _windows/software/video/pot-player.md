@@ -3,7 +3,7 @@ title: "PotPlayer"
 sequence: "pot-player"
 ---
 
-[UP](/windows/windows-index.html)
+[UP](/windows/index.html)
 
 ## 播放速度
 

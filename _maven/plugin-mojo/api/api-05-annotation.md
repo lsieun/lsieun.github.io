@@ -3,7 +3,7 @@ title: "Mojo: Annotation"
 sequence: "105"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 ## @Mojo

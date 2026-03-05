@@ -3,7 +3,7 @@ title: "重命名文件"
 sequence: "101"
 ---
 
-[UP](/windows/windows-index.html)
+[UP](/windows/index.html)
 
 ## 去除
 

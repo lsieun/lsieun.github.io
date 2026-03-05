@@ -3,7 +3,7 @@ title: "Dependency injection"
 sequence: "107"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 ## Reference

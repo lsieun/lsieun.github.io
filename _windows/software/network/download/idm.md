@@ -3,7 +3,7 @@ title: "IDM"
 sequence: "idm"
 ---
 
-[UP](/windows/windows-index.html)
+[UP](/windows/index.html)
 
 However, for informational purposes only, here are some Serial Number IDM that you can try:
 

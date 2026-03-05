@@ -3,7 +3,7 @@ title: "git revert"
 sequence: "103"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 Reverting a previous commit: git revert

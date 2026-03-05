@@ -3,7 +3,7 @@ title: "AbstractMojo"
 sequence: "101"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 在编写示例的时候，我们引入了 `maven-plugin-api` 依赖：

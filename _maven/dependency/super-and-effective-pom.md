@@ -3,7 +3,7 @@ title: "The super and the effective POMs"
 sequence: "105"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 ## The Super POM

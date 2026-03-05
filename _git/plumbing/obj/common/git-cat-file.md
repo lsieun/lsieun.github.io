@@ -3,7 +3,7 @@ title: "查看：git cat-file"
 sequence: "101"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ## Options

@@ -3,7 +3,7 @@ title: "Introduction to Plexus"
 sequence: "103"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 The most important feature of an IoC container implemented in Java is

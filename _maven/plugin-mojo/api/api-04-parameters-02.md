@@ -3,7 +3,7 @@ title: "Mojo Parameters：不同的数据类型（输入）"
 sequence: "104"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 It is unlikely that a mojo will be very useful without parameters.

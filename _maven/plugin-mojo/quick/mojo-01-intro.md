@@ -3,7 +3,7 @@ title: "Mojo Intro"
 sequence: "101"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 **What is a Mojo**? A mojo is a **Maven plain Old Java Object**.

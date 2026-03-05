@@ -3,7 +3,7 @@ title: "git concept"
 sequence: "101"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ## Two primary data structures

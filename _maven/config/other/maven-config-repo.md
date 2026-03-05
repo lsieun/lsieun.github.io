@@ -3,7 +3,7 @@ title: "Configuring Repositories"
 sequence: "102"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 In addition to the Maven central repository, we can also configure other repositories

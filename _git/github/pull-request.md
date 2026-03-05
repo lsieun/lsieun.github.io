@@ -2,7 +2,7 @@
 title: "pull request (PR)"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 Pull requests are used to request that someone with commit access to the repository

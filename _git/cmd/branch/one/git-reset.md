@@ -2,7 +2,7 @@
 title: "git reset"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 There are times when you've made changes to files in the working directory

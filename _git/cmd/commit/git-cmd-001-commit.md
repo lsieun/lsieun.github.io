@@ -3,7 +3,7 @@ title: "Commit"
 sequence: "101"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ## 命令格式

@@ -2,7 +2,7 @@
 title: "git clean"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ## Deleting untracked files: git clean

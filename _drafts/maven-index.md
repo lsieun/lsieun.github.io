@@ -1,6 +1,7 @@
 ---
 title: "Maven"
 image: /assets/images/maven/apache-maven-cover.png
+permalink: /maven/index.html
 ---
 
 Maven is a build automation tool used primarily for Java projects.
@@ -120,6 +121,67 @@ sort: "sequence"
 {%
 assign filtered_posts = site.maven |
 where_exp: "item", "item.path contains 'maven/config/other/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+## 仓库
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">本地仓库（个人电脑）</th>
+        <th style="text-align: center;">部署仓库（公司）</th>
+        <th style="text-align: center;">远程仓库（全网）</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.maven |
+where_exp: "item", "item.path contains 'maven/repo/local/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.maven |
+where_exp: "item", "item.path contains 'maven/repo/deploy/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.maven |
+where_exp: "item", "item.path contains 'maven/repo/remote/'" |
 sort: "sequence"
 %}
 <ol>
@@ -322,8 +384,10 @@ Ebook
 
 - 《Apache Maven Cookbook》，作者 Raghuram Bharathan
 
+Maven Repository
+
 - [MVN Repository](https://mvnrepository.com/)
-- [sonatype/Maven Central Repository Search](https://central.sonatype.com/) [New](https://central.sonatype.dev/)
+- [sonatype/Maven Central Repository Search](https://central.sonatype.com/)
 
 Baeldung
 

@@ -3,7 +3,7 @@ title: "WinSW：Windows Service Wrapper"
 sequence: "winsw"
 ---
 
-[UP](/windows/windows-index.html)
+[UP](/windows/index.html)
 
 ## WinSW：Windows Service Wrapper
 

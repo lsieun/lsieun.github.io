@@ -3,6 +3,6 @@ title: "Geph"
 sequence: "geph"
 ---
 
-[UP](/windows/windows-index.html)
+[UP](/windows/index.html)
 
 https://next.geph.io/

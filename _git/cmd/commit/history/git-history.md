@@ -3,7 +3,7 @@ title: "history"
 sequence: "105"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 The **history** in Git is the complete list of all **commits** made since the repository was created. The history also

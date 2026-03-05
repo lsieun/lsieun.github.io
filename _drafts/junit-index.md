@@ -1,7 +1,7 @@
 ---
 title: "JUnit"
 image: /assets/images/java/junit/junit5-banner.png
-permalink: /junit/junit-index.html
+permalink: /junit/index.html
 ---
 
 JUnit is one of the most popular unit-testing frameworks in the Java ecosystem.
@@ -137,3 +137,5 @@ sort: "sequence"
     - [Guide to JUnit 5 Parameterized Tests](https://www.baeldung.com/parameterized-tests-junit-5)
 - [Baeldung Category: Testing](https://www.baeldung.com/category/testing)
 - [Baeldung Tag: AssertJ](https://www.baeldung.com/tag/assertj)
+
+- [MVN Repository](https://mvnrepository.com/)

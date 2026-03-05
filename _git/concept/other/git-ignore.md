@@ -2,7 +2,7 @@
 title: ".gitignore"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 ## 查看帮助
 

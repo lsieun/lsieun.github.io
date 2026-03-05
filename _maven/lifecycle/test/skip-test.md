@@ -3,7 +3,7 @@ title: "Skip Test"
 sequence: "101"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 ```text

@@ -2,7 +2,7 @@
 title: "git stash"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ## Temporarily stashing some changes: git stash

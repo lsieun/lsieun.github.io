@@ -3,7 +3,7 @@ title: "Maven Plugin Plugin"
 sequence: "110"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 ## 问题与解决

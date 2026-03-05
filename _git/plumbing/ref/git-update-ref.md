@@ -3,7 +3,7 @@ title: "git update-ref"
 sequence: "101"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ```text

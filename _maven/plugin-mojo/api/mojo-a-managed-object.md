@@ -3,7 +3,7 @@ title: "Mojo 与 IOC 容器"
 sequence: "106"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 ## A Managed Object

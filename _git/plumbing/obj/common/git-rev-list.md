@@ -3,7 +3,7 @@ title: "查看提交的对象列表：git rev-list"
 sequence: "103"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ```bash

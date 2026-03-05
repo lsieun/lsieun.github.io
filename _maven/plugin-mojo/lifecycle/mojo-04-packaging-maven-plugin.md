@@ -3,7 +3,7 @@ title: "Mojo: <packaging>maven-plugin</packaging>"
 sequence: "104"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 What the `maven-plugin` packaging primarily brings to the table is that the `maven-plugin-plugin`

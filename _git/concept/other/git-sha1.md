@@ -3,7 +3,7 @@ title: "git SHA1"
 sequence: "102"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ## What is a SHA-1 Hash?

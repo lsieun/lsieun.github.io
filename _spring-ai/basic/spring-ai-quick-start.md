@@ -1,14 +1,7 @@
 ---
-title: "快速开始"
-sequence: "102"
+title: "Spring AI + DashScope"
+sequence: "112"
 ---
-
-## 开发环境
-
-- Java 版本: 17 或更高版本
-- Spring Boot 版本: 3.x
-
-
 
 ## 代码实践
 

@@ -2,7 +2,7 @@
 title: "git reflog"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 Each commit points to the previous (parent) commit

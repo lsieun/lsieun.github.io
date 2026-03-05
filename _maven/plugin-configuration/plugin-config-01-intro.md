@@ -3,7 +3,7 @@ title: "Configuring Plug-ins"
 sequence: "101"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 In Maven, there are two kinds of plugins, **build** and **reporting**:

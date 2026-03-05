@@ -3,7 +3,7 @@ title: "查看：git ls-files"
 sequence: "101"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ```bash

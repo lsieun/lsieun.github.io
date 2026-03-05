@@ -3,7 +3,7 @@ title: "Maven Lifecycle"
 sequence: "102"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 ![](/assets/images/maven/thinking-in-maven.png)

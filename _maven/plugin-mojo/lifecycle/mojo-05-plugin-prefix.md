@@ -3,7 +3,7 @@ title: "Mojo: Plugin Prefix"
 sequence: "105"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 ```text

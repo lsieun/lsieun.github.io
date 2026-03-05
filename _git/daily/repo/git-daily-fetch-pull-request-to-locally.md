@@ -3,7 +3,7 @@ title: "将 Pull Request 拉取到本地"
 sequence: "101"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ## GitHub

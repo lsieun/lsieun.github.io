@@ -2,7 +2,7 @@
 title: "git cherry-pick"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 Sometimes you may wish to include only a single commit from a branch onto the current branch

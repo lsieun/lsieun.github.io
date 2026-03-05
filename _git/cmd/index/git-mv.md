@@ -3,7 +3,7 @@ title: "git mv"
 sequence: "102"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ## Renaming or moving a file: git mv

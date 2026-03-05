@@ -3,7 +3,7 @@ title: "Initial Setup"
 sequence: "101"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ## Git author

@@ -2,7 +2,7 @@
 title: "git clone"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 The process of creating **a new local repository** from **an existing remote repository** is known as **cloning a repository**.

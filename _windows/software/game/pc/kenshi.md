@@ -3,7 +3,7 @@ title: "Kenshi"
 sequence: "kenshi"
 ---
 
-[UP](/windows/windows-index.html)
+[UP](/windows/index.html)
 
 ## Building
 

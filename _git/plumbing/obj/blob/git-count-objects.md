@@ -3,7 +3,7 @@ title: "git count-objects"
 sequence: "103"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ```bash

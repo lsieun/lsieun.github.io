@@ -3,7 +3,7 @@ title: "删除所有 Git 提交历史"
 sequence: "102"
 ---
 
-[UP](/git/git-index.html)
+[UP](/git/index.html)
 
 
 ## 方法一

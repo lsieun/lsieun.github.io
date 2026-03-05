@@ -3,7 +3,7 @@ title: "Unit Testing Overview"
 sequence: "101"
 ---
 
-[UP](/maven-index.html)
+[UP](/maven/index.html)
 
 
 The execution of unit tests is handled by the
