@@ -1,3 +1,9 @@
+---
+title: "快速开始：Spring AI + Ollama"
+sequence: "102"
+---
+
+[UP](/spring-ai/index.html)
 
 
 ```text

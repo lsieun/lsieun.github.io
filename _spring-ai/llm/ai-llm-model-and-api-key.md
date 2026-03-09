@@ -3,6 +3,8 @@ title: "LLM 模型和 API Key"
 sequence: "101"
 ---
 
+[UP](/spring-ai/index.html)
+
 ## 模型
 
 [Chat Models Comparison](https://docs.spring.io/spring-ai/reference/api/chat/comparison.html)

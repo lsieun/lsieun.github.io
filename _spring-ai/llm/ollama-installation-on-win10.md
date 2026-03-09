@@ -3,6 +3,8 @@ title: "Win10: Ollama 安装"
 sequence: "102"
 ---
 
+[UP](/spring-ai/index.html)
+
 ## Ollama
 
 ### 下载
@@ -162,6 +164,10 @@ writing manifest
 success
 ```
 
+```text
+ollama pull qwen3-embedding:0.6b
+```
+
 ## API
 
 Many model services provide an API which is compatible with OpenAI.
@@ -217,6 +223,8 @@ The property to configure the Ollama model is `spring.ai.ollama.chat.options.mod
 - [Ollama](https://ollama.com/)
     - [Qwen3](https://ollama.com/library/qwen3)
         - [qwen3:0.6b](https://ollama.com/library/qwen3:0.6b)
+    - [qwen3-embedding](https://ollama.com/library/qwen3-embedding)
+        - [qwen3-embedding:0.6b](https://ollama.com/library/qwen3-embedding:0.6b)
     - [Qwen 3.5](https://ollama.com/library/qwen3.5)
         - [qwen3.5:0.8b](https://ollama.com/library/qwen3.5:0.8b)
     - [Gemma3](https://ollama.com/library/gemma3)

@@ -93,8 +93,6 @@ sort: "sequence"
     </tbody>
 </table>
 
-
-
 ## 易经
 
 <table>
@@ -123,3 +121,15 @@ sort: "sequence"
     </tr>
     </tbody>
 </table>
+
+## Reference
+
+- [国学梦](https://www.guoxuemeng.com/)
+    - [论语](https://www.guoxuemeng.com/guoxue/lunyu/)
+        - [论语名句](https://www.guoxuemeng.com/guoxue/lunyu/mingju/)
+    - [周易](https://www.guoxuemeng.com/guoxue/zhouyi/)
+    - [大学](https://www.guoxuemeng.com/guoxue/daxue/)
+    - [中庸](https://www.guoxuemeng.com/guoxue/zhongyong/)
+    - [四大名著](https://www.guoxuemeng.com/guoxue/sidamingzhu/)
+- []()
+- []()

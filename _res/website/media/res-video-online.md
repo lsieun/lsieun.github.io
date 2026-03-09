@@ -21,15 +21,10 @@ sequence: "101"
 ## 国外
 
 - [努努影院](https://www.nnvod.com/)
-- [4K 极客影院](https://www.i8k.cc/)
-- [泥巴影院](https://www.nbys1.tv/)
-- [素白白影视](https://www.subaibaiys.com/)
 - [欧乐影院](https://olevod.com/)
     - [olehdtv.com](https://www.olehdtv.com/)
     - [脱口秀大会 第四季](https://olevod.com/index.php/vod/detail/id/29113.html)
 - [88 影院](https://www.88ved.com/)
-- [海兔影院](https://www.haituu.tv/)
-    - [摄政王妃](https://www.haituu.tv/voddetail/356186.html)
 - [DailyMotion](https://www.dailymotion.com/)
     - [The Empress of Ayodhaya (2024) Episode 1 English SUB](https://www.dailymotion.com/video/x9816lo)
     - [The Empress of Ayodhaya (2024) Episode 2 English SUB](https://www.dailymotion.com/video/x98ffa0)

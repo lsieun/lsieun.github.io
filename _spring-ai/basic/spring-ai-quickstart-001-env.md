@@ -3,6 +3,8 @@ title: "Spring AI 开发环境"
 sequence: "101"
 ---
 
+[UP](/spring-ai/index.html)
+
 ## 开发环境
 
 - Java 版本: 21（17 或更高版本）

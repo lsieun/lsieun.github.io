@@ -105,3 +105,7 @@ public class Singleton {
 
 - [DCL 详解](https://blog.csdn.net/qq_43230007/article/details/131162795)
 - [Double-Checked Locking with Singleton](https://www.baeldung.com/java-singleton-double-checked-locking)
+
+代码示例：
+
+- [ ] `spring-core.jar` 中的 `org.springframework.core.convert.support.DefaultConversionService` 使用了 DCL，需要整理一下

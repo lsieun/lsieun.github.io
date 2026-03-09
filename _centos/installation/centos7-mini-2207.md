@@ -12,8 +12,8 @@ ISO 下载 --> VMWare 创建虚拟机 --> CentOS 安装 --> 配置用户 --> Yum
 打开网页：
 
 ```text
-https://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/
-https://mirrors.ustc.edu.cn/centos/7.9.2009/isos/x86_64/
+https://mirrors.aliyun.com/centos/7/isos/x86_64/
+https://mirrors.huaweicloud.com/centos/7/isos/x86_64/
 ```
 
 下载文件：
@@ -23,7 +23,7 @@ CentOS-7-x86_64-Minimal-2207-02.iso
 ```
 
 ```text
-https://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64-Minimal-2207-02.iso
+https://mirrors.huaweicloud.com/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-2207-02.iso
 ```
 
 ## VMWare 创建虚拟机
@@ -176,67 +176,38 @@ $ ssh devops@192.168.80.132
 [devops@localhost yum.repos.d]$ ls
 CentOS-Base.repo  CentOS-Debuginfo.repo  CentOS-Media.repo    CentOS-Vault.repo
 CentOS-CR.repo    CentOS-fasttrack.repo  CentOS-Sources.repo  CentOS-x86_64-kernel.repo
-[devops@localhost yum.repos.d]$ cat CentOS-Base.repo 
-[base]
-name=CentOS-$releasever - Base
-mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os&infra=$infra
-#baseurl=http://mirror.centos.org/centos/$releasever/os/$basearch/
-gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
-
-......
+$ sudo mkdir /etc/yum.repos.d/backup
+$ sudo mv /etc/yum.repos.d/CentOS-*.repo /etc/yum.repos.d/backup/
 ```
 
-第 3 步，替换为清华 Yum 源：
+第 3 步，替换为阿里 Yum 源：
 
 ```text
-sudo sed -e 's|^mirrorlist=|#mirrorlist=|g' \
-         -e 's|^#baseurl=http://mirror.centos.org/centos|baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos|g' \
-         -i.bak \
-         /etc/yum.repos.d/CentOS-*.repo
+# CentOS 7 基础源
+sudo curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+
+# EPEL 扩展源（可选但推荐）
+sudo curl -o /etc/yum.repos.d/epel.repo https://mirrors.aliyun.com/repo/epel-7.repo
 ```
 
-```text
-$ sudo mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
-$ sudo curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
-```
 
-第 4 步，确认修改：
-
-```text
-[devops@localhost yum.repos.d]$ ls
-CentOS-Base.repo      CentOS-Debuginfo.repo      CentOS-Media.repo        CentOS-Vault.repo
-CentOS-Base.repo.bak  CentOS-Debuginfo.repo.bak  CentOS-Media.repo.bak    CentOS-Vault.repo.bak
-CentOS-CR.repo        CentOS-fasttrack.repo      CentOS-Sources.repo      CentOS-x86_64-kernel.repo
-CentOS-CR.repo.bak    CentOS-fasttrack.repo.bak  CentOS-Sources.repo.bak  CentOS-x86_64-kernel.repo.bak
-[devops@localhost yum.repos.d]$ cat CentOS-Base.repo
-[base]
-name=CentOS-$releasever - Base
-#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os&infra=$infra
-baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos/$releasever/os/$basearch/
-gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
-
-......
-```
-
-第 5 步，缓存和更新：
+第 4 步，缓存和更新：
 
 ```text
 sudo yum makecache
 sudo yum -y update
 ```
 
-第 6 步，关机：
+第 5 步，关机：
 
 ```text
 $ sudo shutdown -h now
 ```
 
-第 7 步，快照：
+第 6 步，快照：
 
 ![](/assets/images/centos/installation/vmware-centos7-install-031.png)
 
 ## Reference
 
-- [CentOS 软件仓库镜像使用帮助](https://mirrors.tuna.tsinghua.edu.cn/help/centos/)
+- [CentOS 软件仓库镜像使用帮助](https://developer.aliyun.com/mirror/centos)

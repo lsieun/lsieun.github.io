@@ -3,6 +3,8 @@ title: "Spring AI + DashScope"
 sequence: "112"
 ---
 
+[UP](/spring-ai/index.html)
+
 ## 代码实践
 
 ### pom.xml

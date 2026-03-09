@@ -58,14 +58,64 @@ sort: "sequence"
     </tbody>
 </table>
 
+## RAG
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">API</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.spring-ai |
+where_exp: "item", "item.path contains 'spring-ai/rag/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.spring-ai |
+where_exp: "item", "item.path contains 'spring-ai/rag/api/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 ## Reference
 
 - [Baeldung: Spring AI](https://www.baeldung.com/category/spring/spring-ai)
 
 - [Spring AI Reference](https://docs.spring.io/spring-ai/reference/index.html)
     - [Chat Models](https://docs.spring.io/spring-ai/reference/api/chatmodel.html)
-        - [DeepSeek](https://docs.spring.io/spring-ai/reference/api/chat/deepseek-chat.html) 
+        - [DeepSeek](https://docs.spring.io/spring-ai/reference/api/chat/deepseek-chat.html)
         - [OpenAI](https://docs.spring.io/spring-ai/reference/api/chat/openai-chat.html)
+
+- [Retrieval Augmented Generation](https://docs.spring.io/spring-ai/reference/api/retrieval-augmented-generation.html)
+    - [ETL Pipeline](https://docs.spring.io/spring-ai/reference/api/etl-pipeline.html)
+- []()
+- []()
 
 - Maven Repository
     - [spring-boot-starter-parent](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent)
@@ -75,4 +125,3 @@ sort: "sequence"
         - [spring-ai-starter-model-ollama](https://mvnrepository.com/artifact/org.springframework.ai/spring-ai-starter-model-ollama)
     - [spring-ai-alibaba-bom](https://mvnrepository.com/artifact/com.alibaba.cloud.ai/spring-ai-alibaba-bom)
         - [spring-ai-alibaba-starter-dashscope](https://mvnrepository.com/artifact/com.alibaba.cloud.ai/spring-ai-alibaba-starter-dashscope)
-
