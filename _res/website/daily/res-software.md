@@ -49,7 +49,9 @@ Email
 - [AB Download Manager](https://abdownloadmanager.com/)
     - [AB Download Manager](https://github.com/amir1376/ab-download-manager/releases)
     - [AB Download Manager Browser Integration](https://chromewebstore.google.com/detail/ab-download-manager-brows/bbobopahenonfdgjgaleledndnnfhooj)
-- [Internet Download Manager](https://lrepacks.net/repaki-programm-dlya-interneta/56-internet-download-manager-repack.html)
+- [Internet Download Manager]()
+    - [lrepacks.net](https://lrepacks.net/repaki-programm-dlya-interneta/56-internet-download-manager-repack.html)
+    - [puresys.net](https://www.puresys.net/336.html)
 - [迅雷不限速破解版 2024 附使用教程](https://www.ddooo.com/softdown/214258.htm)
 
 ### 图片

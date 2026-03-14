@@ -3,9 +3,12 @@ title: "Java Version"
 sequence: "101"
 ---
 
-
-
 ## Time
+
+- [JDK Releases](https://www.java.com/releases/)
+- [The Java Version Almanac](https://javaalmanac.io/)
+    - [JDK Releases](https://javaalmanac.io/jdk/)
+- [Java/Java SE Release History and End-of-Life Status](https://versionlog.com/java/)
 
 - 1996.01, Java 1
 - 1997.02, Java 1.1
@@ -20,15 +23,24 @@ sequence: "101"
 - 2014.03, Java 8(时隔 2 年 8 个月)
 - 2017.09, Java 9(时隔 3 年 6 个月)
 - 2018.03, Java 10(时隔 6 个月)
-- 2018.09, Java 11(时隔 6 个月)
+- 2018.09, Java 11 LTS(时隔 6 个月)
 - 2019.03, Java 12(时隔 6 个月)
 - 2019.09, Java 13(时隔 6 个月)
 - 2020.03, Java 14(时隔 6 个月)
 - 2020.09, Java 15(时隔 6 个月)
 - 2021.03, Java 16
-- 2021.09, Java 17
+- 2021.09, Java 17 LTS
+- 2022.03, Java 18
+- 2022.09, Java 19
+- 2023.03, Java 20
+- 2023.09, Java 21 LTS
+- 2024.03, Java 22
+- 2024.09, Java 23
+- 2025.03, Java 24
+- 2025.09, Java 25 LTS
 
-**Java 10** is the first release on the new six-month schedule, and it builds incrementally on the significant new functionality that appeared in Java 9, which had a multiyear gestation period.
+**Java 10** is the first release on the new six-month schedule, and it builds incrementally on the significant new
+functionality that appeared in Java 9, which had a multiyear gestation period.
 
 Newer Java versions now follow every 6 months.
 Hence, Java 16 is scheduled for March 2021, Java 17 for September 2021 and so on.

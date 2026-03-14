@@ -6,6 +6,10 @@ permalink: /java/java-concurrency-index.html
 
 Java Concurrency. The more ordering we can ensure, the better we can reason about the behaviour of the program.
 
+
+
+
+
 ## 基础
 
 <table>

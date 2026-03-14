@@ -704,5 +704,5 @@ sort: "sequence"
 - [Know thyself: how self-awareness helps you at work](https://www.atlassian.com/blog/teamwork/know-thyself-how-self-awareness-helps-you-at-work)
 - [How to Develop Self-Knowledge and Why it Matters](https://proveritas.com.au/blog-home/how-to-develop-self-knowledge-and-why-it-matters)
 
-- [Mental Models 思维模型](https://idtimw.com/tag/mental-models/)
-    - [思维模型03 - First Principle 第一性原理](https://idtimw.com/first-principle/)
+
+

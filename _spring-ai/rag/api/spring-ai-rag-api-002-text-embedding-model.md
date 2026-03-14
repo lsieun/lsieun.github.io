@@ -12,3 +12,7 @@ text content (input) ---> text embedding model ---> vector (output)
 ```text
 String ---> EmbeddingRequest --> EmbeddingModel --> EmbeddingResponse
 ```
+
+```text
+Instructions:T (input) --> ModelRequest --> Model --> ModelResponse --> ModelResult --> output:T
+```

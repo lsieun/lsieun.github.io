@@ -32,7 +32,7 @@ sequence: "301"
 
 检查GitHub状态
 
-- 访问 GitHub 的状态页面（`status.github.com`）以查看是否存在系统问题。
+- 访问 GitHub 的状态页面（`status.github.com` or `www.githubstatus.com`）以查看是否存在系统问题。
 
 使用命令行工具
 

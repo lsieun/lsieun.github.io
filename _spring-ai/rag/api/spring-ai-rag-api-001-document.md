@@ -27,6 +27,32 @@ Path(Java) --> Resource(Spring) --> DocumentReader(Spring) --> Document
             - text
             - media
         - metadata
+        - score
+
+```java
+public class Document {
+    private final String id;
+    private final String text;
+    private final Media media;
+    private final Map<String, Object> metadata;
+
+    @Nullable
+    private final Double score;
+}
+```
+
+## 使用
+
+```text
+Document.builder()
+.id(this.id)
+.text(this.text)
+.metadata(metadata)
+.score(score)
+.build();
+```
+
+
 
 ## 更高维度
 

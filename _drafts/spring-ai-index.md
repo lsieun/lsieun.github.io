@@ -103,6 +103,53 @@ sort: "sequence"
     </tbody>
 </table>
 
+## MCP
+
+MCP (Model Context Protocol)
+
+<table>
+    <thead>
+    <tr>
+        <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">API</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.spring-ai |
+where_exp: "item", "item.path contains 'spring-ai/mcp/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.spring-ai |
+where_exp: "item", "item.path contains 'spring-ai/mcp/api/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 ## Reference
 
 - [Baeldung: Spring AI](https://www.baeldung.com/category/spring/spring-ai)
@@ -114,8 +161,8 @@ sort: "sequence"
 
 - [Retrieval Augmented Generation](https://docs.spring.io/spring-ai/reference/api/retrieval-augmented-generation.html)
     - [ETL Pipeline](https://docs.spring.io/spring-ai/reference/api/etl-pipeline.html)
-- []()
-- []()
+- [Qwen](https://qwen.ai/)
+    - [Qwen3 Embedding：新一代文本表征与排序模型](https://qwen.ai/blog?id=qwen3-embedding)
 
 - Maven Repository
     - [spring-boot-starter-parent](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent)

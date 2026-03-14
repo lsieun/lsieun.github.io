@@ -19,15 +19,13 @@ $ sudo yum -y install yum-utils device-mapper-persistent-data lvm2
 第 2 步，添加 Docker repository：
 
 ```text
-$ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-$ sudo sed -i 's+https://download.docker.com+https://mirrors.tuna.tsinghua.edu.cn/docker-ce+' /etc/yum.repos.d/docker-ce.repo
-$ sudo yum makecache fast
+$ sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 ```
 
 第 3 步，安装 Docker Engine、containerd 和 Docker Compose：
 
 ```text
-$ sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+$ sudo yum -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
 第 4 步，启动
@@ -83,6 +81,110 @@ $ newgrp docker
 ```text
 $ docker run hello-world
 ```
+
+### 手动配置镜像加速
+
+```text
+# 创建配置目录
+sudo mkdir -p /etc/docker
+
+# 写入加速配置
+cat <<EOF | sudo tee /etc/docker/daemon.json
+{
+  "registry-mirrors": ["https://hub-mirror.c.163.com", "https://docker.xuanyuan.me"]
+}
+EOF
+
+# 重新加载配置并重启Docker
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+```text
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+```text
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors" : [
+    "https://docker.m.daocloud.io",
+    "https://mirror.aliyuncs.com"
+  ],
+  "insecure-registries" : [
+    "docker.mirrors.ustc.edu.cn"
+  ],
+  "debug": true,
+  "experimental": false
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+优先推荐（就近 + 稳定优先）
+
+```text
+https://docker.1ms.run
+https://docker-0.unsee.tech
+```
+
+
+其他备选（用户提供状态：均“正常”）
+
+```text
+https://docker.m.daocloud.io
+https://ccr.ccs.tencentyun.com
+https://hub.xdark.top
+https://dhub.kubesre.xyz
+https://docker.kejilion.pro
+https://docker.xuanyuan.me（入口：https://xuanyuan.cloud）
+https://docker.hlmirror.com
+https://run-docker.cn
+https://docker.sunzishaokao.com
+https://image.cloudlayer.icu
+https://docker.tbedu.top
+https://hub.crdz.gq
+https://docker.melikeme.cn
+https://docker.nju.edu.cn
+https://docker.mirrors.sjtug.sjtu.edu.cn
+"https://docker.registry.cyou",
+"https://docker-cf.registry.cyou",
+"https://dockercf.jsdelivr.fyi",
+"https://docker.jsdelivr.fyi",
+"https://dockertest.jsdelivr.fyi",
+"https://mirror.aliyuncs.com",
+"https://dockerproxy.com",
+"https://mirror.baidubce.com",
+"https://docker.m.daocloud.io",
+"https://docker.nju.edu.cn",
+"https://docker.mirrors.sjtug.sjtu.edu.cn",
+"https://docker.mirrors.ustc.edu.cn",
+"https://mirror.iscas.ac.cn",
+"https://docker.rainbond.cc",
+"https://do.nark.eu.org",
+"https://dc.j8.work",
+"https://dockerproxy.com",
+"https://gst6rzl9.mirror.aliyuncs.com",
+"https://registry.docker-cn.com",
+"http://hub-mirror.c.163.com",
+"http://mirrors.ustc.edu.cn/",
+"https://mirrors.tuna.tsinghua.edu.cn/",
+"http://mirrors.sohu.com/"
+```
+
+
+使用提示
+
+- 以上多为 DockerHub 反代/镜像，用于 `docker.io` 加速。
+- 建议同时配置 2–4 个镜像，并保留官方回源 `https://registry-1.docker.io`。
+- 访问最好的镜像放在最前；**不要在 URL 末尾加斜杠**。
 
 ### Registry
 
