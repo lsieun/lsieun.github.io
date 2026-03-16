@@ -249,7 +249,7 @@ java-agent-maven
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-assembly-plugin</artifactId>
-    <version>3.3.0</version>
+    <version>3.8.0</version>
     <configuration>
         <archive>
             <manifest>

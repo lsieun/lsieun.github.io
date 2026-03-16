@@ -213,6 +213,9 @@ collections:
     output: true
   nginx:
     output: true
+  nodejs:
+    output: true
+    permalink: /:collection/:name:output_ext
   office:
     output: true
   pki:
@@ -222,6 +225,9 @@ collections:
     permalink: /:collection/:name:output_ext
   protobuf:
     output: true
+  python:
+    output: true
+    permalink: /:collection/:name:output_ext
   reactor:
     output: true
   redis:
@@ -674,6 +680,11 @@ defaults:
       layout: "post"
   - scope:
       path: ""
+      type: "nodejs"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
       type: "office"
     values:
       layout: "post"
@@ -690,6 +701,11 @@ defaults:
   - scope:
       path: ""
       type: "protobuf"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "python"
     values:
       layout: "post"
   - scope:

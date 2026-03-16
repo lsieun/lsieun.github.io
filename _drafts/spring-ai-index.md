@@ -111,6 +111,8 @@ MCP (Model Context Protocol)
     <thead>
     <tr>
         <th style="text-align: center;">Basic</th>
+        <th style="text-align: center;">Stdio</th>
+        <th style="text-align: center;">Http</th>
         <th style="text-align: center;">API</th>
     </tr>
     </thead>
@@ -120,6 +122,36 @@ MCP (Model Context Protocol)
 {%
 assign filtered_posts = site.spring-ai |
 where_exp: "item", "item.path contains 'spring-ai/mcp/basic/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.spring-ai |
+where_exp: "item", "item.path contains 'spring-ai/mcp/stdio/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.spring-ai |
+where_exp: "item", "item.path contains 'spring-ai/mcp/http/'" |
 sort: "sequence"
 %}
 <ol>
@@ -172,3 +204,4 @@ sort: "sequence"
         - [spring-ai-starter-model-ollama](https://mvnrepository.com/artifact/org.springframework.ai/spring-ai-starter-model-ollama)
     - [spring-ai-alibaba-bom](https://mvnrepository.com/artifact/com.alibaba.cloud.ai/spring-ai-alibaba-bom)
         - [spring-ai-alibaba-starter-dashscope](https://mvnrepository.com/artifact/com.alibaba.cloud.ai/spring-ai-alibaba-starter-dashscope)
+
