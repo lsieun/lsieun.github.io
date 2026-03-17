@@ -6,14 +6,7 @@ sequence: "102"
 Many systems access the Web and sometimes other non-HTTP parts of the Internet through proxy servers.
 **A proxy server receives a request for a remote server from a local client.
 The proxy server makes the request to the remote server and forwards the result back to the local client**.
-Sometimes this is done for **security reasons**,
-such as to prevent remote hosts from learning private details about the local network configuration.
-Other times it's done to **prevent users from accessing forbidden sites**
-by filtering outgoing requests and limiting which sites can be viewed.
-For instance, an elementary school might want to block access to http://www.playboy.com.
-And still other times it's done purely for **performance**,
-to allow multiple users to retrieve the same popular documents from a local cache
-rather than making repeated downloads from the remote server.
+
 
 Java programs based on the `URL` class can work through most common proxy servers and protocols.
 Indeed, this is one reason you might want to choose to use the `URL` class
