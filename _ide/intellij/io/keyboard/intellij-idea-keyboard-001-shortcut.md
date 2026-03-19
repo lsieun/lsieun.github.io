@@ -114,26 +114,7 @@ Modify size of a dialog window
 - `Alt + F8`: Evaluate expression
 - `Alt + F9`: Run to cursor
 
-## Bookmark
 
-切换：
-
-- `F11`: Toggle bookmark
-- `Ctrl + F11`: Toggle bookmark with mnemonic
-
-切换和跳转：
-
-- `Ctrl + Shift + #[0-9]`: Toggle numbered bookmark
-- `Ctrl + #[0-9]`: Go to numbered bookmark
-
-查看：
-
-- `Shift + F11`: Show bookmarks
-- `Alt + 2`: Bookmarks tool window
-
-- 添加或移除 Bookmark: `Ctrl + Shift + 数字键 `
-- 跳转到指定的 Bookmark: `Ctrl + 数字键 `
-- 查看所有的 Bookmarks: `Alt + 2`
 
 ## Code
 

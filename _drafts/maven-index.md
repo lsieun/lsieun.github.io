@@ -311,6 +311,37 @@ sort: "sequence"
 
 ### 多模块
 
+<table>
+    <thead>
+    <tr>
+        <th>Dependency</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.maven |
+where_exp: "item", "item.path contains 'maven/multimodule/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td></td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+
 ## Deploy
 
 {%

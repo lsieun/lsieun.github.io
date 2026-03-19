@@ -14,6 +14,67 @@ IntelliJ IDEA is an integrated development environment written in Java for devel
 
 ## 主要内容
 
+### 代码
+
+<table>
+    <thead>
+    <tr>
+        <th>代码</th>
+        <th>操作</th>
+        <th>小工具</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+{%
+assign filtered_posts = site.ide |
+where_exp: "item", "item.path contains 'ide/intellij/content/code/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.ide |
+where_exp: "item", "item.path contains 'ide/intellij/content/text/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+        <td>
+{%
+assign filtered_posts = site.ide |
+where_exp: "item", "item.path contains 'ide/intellij/content/widget/'" |
+sort: "sequence"
+%}
+<ol>
+    {% for post in filtered_posts %}
+    {% assign num = post.sequence | abs %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ol>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 ### 窗口
 
 目标：将手放在键盘上，尽量不用鼠标
@@ -62,51 +123,6 @@ sort: "sequence"
 {%
 assign filtered_posts = site.ide |
 where_exp: "item", "item.path contains 'ide/intellij/window/tool/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-### 文本内容
-
-<table>
-    <thead>
-    <tr>
-        <th>代码</th>
-        <th>操作</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>
-{%
-assign filtered_posts = site.ide |
-where_exp: "item", "item.path contains 'ide/intellij/content/code/'" |
-sort: "sequence"
-%}
-<ol>
-    {% for post in filtered_posts %}
-    {% assign num = post.sequence | abs %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-</ol>
-        </td>
-        <td>
-{%
-assign filtered_posts = site.ide |
-where_exp: "item", "item.path contains 'ide/intellij/content/text/'" |
 sort: "sequence"
 %}
 <ol>

@@ -243,7 +243,7 @@ In Git, once a branch has been merged, the history of the branch is still visibl
 and the branch can be safely deleted, because a merged branch is, at that point,
 just a ref to an existing commit in the history of the branch it was merged into.
 
-### Rename
+### 重命名
 
 将 current branch 进行改名:
 
