@@ -3,7 +3,7 @@ title: "Information Addiction"
 sequence: "info-addict"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ## One
 

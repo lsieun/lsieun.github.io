@@ -3,7 +3,7 @@ title: "Why CHOSEN ONES SECRETLY Struggle with Lust"
 sequence: "info-addict"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ## Content
 

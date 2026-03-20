@@ -3,7 +3,7 @@ title: "如何避免色的勾引"
 sequence: "101"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 <p class="indented">
     Most people don't set out to cheat on their spouse.<br/>

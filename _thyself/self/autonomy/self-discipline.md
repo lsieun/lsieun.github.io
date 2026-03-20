@@ -3,7 +3,7 @@ title: "自律"
 sequence: "self-discipline"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ```text
 自律即自由

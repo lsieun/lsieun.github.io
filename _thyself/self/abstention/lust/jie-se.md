@@ -3,7 +3,7 @@ title: "戒色2年3个月的体悟（附：戒色的十个阶段）"
 sequence: "105"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 - [我戒色2年3个月的体悟（附：戒色的十个阶段）](https://jiese.kuaizhan.com/68/36/p21594404124029)
 

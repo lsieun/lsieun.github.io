@@ -3,7 +3,7 @@ title: "时间：未来"
 sequence: "time-future"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ## 未来的预见
 

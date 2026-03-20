@@ -3,7 +3,7 @@ title: "中医视角"
 sequence: "101"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 手淫傷腎，腎為五臟之根。
 

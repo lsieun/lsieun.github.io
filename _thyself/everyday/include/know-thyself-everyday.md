@@ -3,7 +3,7 @@ title: "Everyday"
 sequence: "103"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ## 做事
 
@@ -13,6 +13,12 @@ sequence: "103"
 The magic you are looking for
 is in the work you are avoiding.
 你所寻找的“魔法”，就藏在你所逃避的事情中
+```
+
+### 少而精
+
+```text
+少而得，多则惑
 ```
 
 ## 为人

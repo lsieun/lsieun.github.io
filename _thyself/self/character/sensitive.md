@@ -3,7 +3,7 @@ title: "敏感/善解人意"
 sequence: "sensitive"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ```text
 人生的磨难是很多的，所以我们不可对于每一件轻微的伤害都过于敏感。

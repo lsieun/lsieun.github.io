@@ -3,7 +3,7 @@ title: "思维模型"
 sequence: "102"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ## 核心思维模型
 

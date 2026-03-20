@@ -3,7 +3,7 @@ title: "How Words Shape Our Reality"
 sequence: "101"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ```text
 今天我想强调一个重要的心理现象，叫做自我实现的预言。

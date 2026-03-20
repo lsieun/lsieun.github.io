@@ -3,7 +3,7 @@ title: "Lust Tmp"
 sequence: "101"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ## One
 

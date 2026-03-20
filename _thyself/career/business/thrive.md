@@ -1,7 +1,9 @@
 ---
 title: "生意（生生不息之意）"
-sequence: "101"
+sequence: "102"
 ---
+
+[UP](/thyself/index.html)
 
 ```text
 人 （认知

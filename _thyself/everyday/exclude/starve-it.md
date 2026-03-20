@@ -3,7 +3,7 @@ title: "starve it"
 sequence: "999"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ```text
 Alan Watts

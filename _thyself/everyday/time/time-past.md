@@ -3,7 +3,7 @@ title: "时间：过去"
 sequence: "time-past"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ## 过去的错误
 

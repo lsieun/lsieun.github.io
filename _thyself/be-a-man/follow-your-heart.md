@@ -3,7 +3,7 @@ title: "Follow Your Heart"
 sequence: "follow-your-heart"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ```text
 Your brain is stupid.

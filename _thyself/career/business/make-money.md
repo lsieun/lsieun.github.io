@@ -1,7 +1,9 @@
 ---
 title: "赚钱"
-sequence: "102"
+sequence: "103"
 ---
+
+[UP](/thyself/index.html)
 
 ```text
 这个世界上是存在穷和富的

@@ -3,7 +3,7 @@ title: "学习之道"
 sequence: "101"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ## 负的方法：不去做什么
 

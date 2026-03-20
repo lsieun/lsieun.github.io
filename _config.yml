@@ -36,6 +36,9 @@ max_width: 1280
 show_excerpts: true
 permalink: none
 collections:
+  ai:
+    output: true
+    permalink: /:collection/:name:output_ext
   algorithm:
     output: true
     permalink: /:collection/:name:output_ext
@@ -291,6 +294,11 @@ defaults:
   - scope:
       path: ""
       type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "ai"
     values:
       layout: "post"
   - scope:

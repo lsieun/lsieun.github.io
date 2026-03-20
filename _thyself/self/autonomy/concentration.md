@@ -3,7 +3,7 @@ title: "专注"
 sequence: "concentration"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ```text
 你越专注自己

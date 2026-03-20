@@ -3,7 +3,7 @@ title: "戒断反应"
 sequence: "104"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 戒断反应（abstinence reaction）指停止使用药物或减少使用剂量或使用拮抗剂占据受体后所出现的特殊的心理症候群，
 其机制是由于长期用药后，突然停药引起的适应性反跳，不同药物所致的戒断症状因其药理特性不同而不同，一般表现为与所使用的药物作用相反的症状。

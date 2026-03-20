@@ -3,7 +3,7 @@ title: "税"
 sequence: "tax"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ```text
 Let us never forget this fundamental truth:

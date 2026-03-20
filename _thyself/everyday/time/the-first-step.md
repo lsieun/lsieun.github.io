@@ -3,7 +3,7 @@ title: "The First Step"
 sequence: "xing-dong"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ```text
 if something feels too hard to start

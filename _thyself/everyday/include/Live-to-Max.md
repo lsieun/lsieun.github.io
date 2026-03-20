@@ -3,7 +3,7 @@ title: "Live Life to the Max"
 sequence: "live"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 Live Life to the Max
 

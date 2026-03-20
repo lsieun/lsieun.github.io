@@ -3,6 +3,8 @@ title: "Man"
 sequence: "101"
 ---
 
+[UP](/thyself/index.html)
+
 <h2>长期主义者，都有这5个特质</h2>
 
 <ul>

@@ -18,6 +18,9 @@ sequence: "chrome"
 - [grammarly.com](https://www.grammarly.com/)
     - [在线编辑文档](https://app.grammarly.com/) ，英语语法检查
 
+- AI
+  - [Sider](https://chromewebstore.google.com/detail/sider-chat-with-all-ai-gp/difoiogjjojoaoomphldepapgpbgkhkb) Chat with all AI: GPT-5, Claude, DeepSeek, Gemini, Grok
+
 - 主题
     - [Dark Reader]()
 - 工具

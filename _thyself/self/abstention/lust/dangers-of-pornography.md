@@ -3,7 +3,7 @@ title: "Dangers of Pornography"
 sequence: "102"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 <p class="indented">
     There are some beautiful beaches in the world that have hidden dangers.

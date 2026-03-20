@@ -3,6 +3,8 @@ title: "7 Habits That Are Incredibly Hard to Do But Pay Off Forever"
 sequence: "102"
 ---
 
+[UP](/thyself/index.html)
+
 Life is f*%#ing hard.
 
 If it weren't, more people would've quit their jobs, traveled whenever they wanted,

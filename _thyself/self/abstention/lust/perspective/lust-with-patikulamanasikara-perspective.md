@@ -3,7 +3,7 @@ title: "不淨觀"
 sequence: "103"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ![](/assets/images/thyself/shi-ri-yi-guo.jpg)
 

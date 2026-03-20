@@ -3,7 +3,7 @@ title: "诺贝尔经济学奖"
 sequence: "nobel-memorial-prize-in-economic-sciences"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ```text
 为什么当2024年

@@ -3,7 +3,7 @@ title: "说话的内容"
 sequence: "102"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ## 我不如你
 

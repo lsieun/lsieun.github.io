@@ -3,7 +3,7 @@ title: "爱"
 sequence: "111"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ## 什么人最养你
 

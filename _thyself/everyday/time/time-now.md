@@ -3,7 +3,7 @@ title: "时间：此时此刻"
 sequence: "time-now"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ```text
 Now is not the time to think about what is missing.

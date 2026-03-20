@@ -3,7 +3,7 @@ title: "Every thought makes me."
 sequence: "every"
 ---
 
-[UP](/thyself/thyself-home.html)
+[UP](/thyself/index.html)
 
 ## AI
 
