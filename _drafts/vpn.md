@@ -8,19 +8,4 @@ permalink: /vpn.html
 A virtual private network extends a private network across a public network and enables users to send and receive data
 across shared or public networks as if their computing devices were directly connected to the private network.
 
-- [victor8886/shadowsockr-java](https://github.com/victor8886/shadowsockr-java)
 
-- [MahsaNG](https://github.com/GFW-knocker/MahsaNG)
-- [VpnHood](https://github.com/vpnhood/VpnHood)
-- [Bolt VPN](https://liteapks.com/bolt-vpn-super-vpn-proxy.html)
-- [Geph](https://geph.io/)
-
-- [nthLink](https://www.nthlink.com/)
-
-- [Edge VPN](https://liteapks.com/edge-vpn-super-vpn-proxy.html)
-- [Bolt VPN](https://liteapks.com/bolt-vpn-super-vpn-proxy.html)
-
-- [eycorsican/leafvpn-desktop](https://github.com/eycorsican/leafvpn-desktop)
-    - [releases](https://github.com/eycorsican/leafvpn-desktop/releases)
-
-- [NiceVPN123/NiceVPN](https://github.com/NiceVPN123/NiceVPN)

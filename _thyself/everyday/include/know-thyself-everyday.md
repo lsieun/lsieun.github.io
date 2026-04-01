@@ -21,6 +21,20 @@ is in the work you are avoiding.
 少而得，多则惑
 ```
 
+### 遇到问题
+
+- 认知问题（不理解、不明白怎么回事）
+    - 内求
+        - 升高一个维度
+            - 时间域扩大，更大的时间跨度
+            - 空间域扩大
+            - 概念域扩大
+                -信息本身是有缺失的
+        - 考虑更本质的东西（第一性原理）
+    - 外求
+        - 求助于别人
+        - 求助于时间（时间会慢慢帮助解决）
+
 ## 为人
 
 ```text
@@ -30,6 +44,17 @@ is in the work you are avoiding.
 选择一条别人认为对的、理当如此之路，还是一条自己觉得认为对的、困难险阻之路；
 选择成为一个怯懦之人，还是成为一个勇敢之人。
 ——2026-03-19
+```
+
+```text
+【主动选择】和【被动选择】是不一样的。
+虽然有时候表现的结果形式一样，但是其实质不同。
+【主动选择】，有可以选择的余地，是遵从自己的意志；
+【被动选择】，没有可以选择的余地，不得以而为之。
+就像睡觉，
+在别人的规则约束之下，到时间了，你要睡觉，即使睡不着，也要躺着；
+在自己的自由支配之下，睡不睡觉，自己说了算，半夜有手机和短视频，你还会按时睡觉吗？
+——2026-03-21
 ```
 
 ### 思想
@@ -80,6 +105,12 @@ Watch your character, for it becomes your destiny。
 上善若水，水利万物而不争
 
 破去我执，益而不争
+```
+
+```text
+Just believe.
+Nobody has met you by accident.
+God has planed everything.
 ```
 
 ### 处事
@@ -155,8 +186,6 @@ Watch your character, for it becomes your destiny。
 男女之前，一方是男人，另一方是女人。
 ```
 
-
-
 ```text
 凡事发生，皆有利于我。
 一定是让我学会什么东西
@@ -171,7 +200,6 @@ Watch your character, for it becomes your destiny。
 戒为良药，排除干扰，也是一项能力
 专注和排除干扰，是相辅相成的两面
 ```
-
 
 ```text
 You will continue to suffer
@@ -473,8 +501,6 @@ Remember that every person is deserving of respect and understanding.
 主要是 性本能 的能量。
 ```
 
-
-
 ```text
 真正的修行
 是允许一切发生
@@ -726,8 +752,6 @@ The only one to repair is yourself
 所有的人际关系，都是一面镜子，映射出你的信念、经历和未愈合的伤口。
 ```
 
-
-
 ## 观自在
 
 ```text
@@ -749,10 +773,6 @@ The only one to repair is yourself
 时刻关照自己的内心
 
 ```
-
-
-
-
 
 ## 不用去和别人比
 

@@ -89,6 +89,7 @@ and recommendation engines by analyzing data for patterns.
 - Free Ride - Unlimited Free AI
 - Fly Cursor
 
+- [Google Gemini](https://gemini.google.com/)
 - [Google NotebookLM](https://notebooklm.google.com/)
 
 ### AI 教学系统
