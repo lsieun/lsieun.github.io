@@ -18,6 +18,8 @@ sequence: "101"
 
 ## 国外
 
+- [RARGB](https://rargb.to/)
+- [movies2watch](https://www.movies2watch.tw/)
 - [努努影院](https://www.nnvod.com/)
 - [欧乐影院](https://olevod.com/)
     - [olehdtv.com](https://www.olehdtv.com/)

@@ -9,6 +9,7 @@ which is archived since February 2021.
 
 ## Reference
 
-- [Redis Server on Windows 7.2.3绿色版](https://masuit.com/130?kw=Redis&t=0HMVRRCAMO0VU)
+- [Install Redis on Windows](https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-redis/install-redis-on-windows/)
+- [Redis Server on Windows 绿色版](https://masuit.com/130?kw=Redis&t=0HMVRRCAMO0VU)
 
 [microsoft-archive-redis-url]: https://github.com/MicrosoftArchive/redis
