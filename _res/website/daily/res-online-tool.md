@@ -6,9 +6,22 @@ sequence: "online-tool"
 [UP](/res/res-index.html)
 
 
-加密和解密：
+## DNS/IP
+
+- [DNS在线解析](https://www.ip33.com/dns.html)
+- [IP归属地查询](https://tool.lu/ip/)
+- [IP地址查询](https://ip.cn/)
+
+## GitHub
+
+- [Fetch Github Hosts](https://hosts.gitcdn.top/)
+- [GitHub Status](https://www.githubstatus.com/)
+
+## 加密和解密
 
 - [Base64 在线编码解码](https://base64.us/)
+
+## Json
 
 - [Be JSON](https://www.bejson.com/)
 
