@@ -3,7 +3,7 @@ title: "English Math"
 sequence: "101"
 ---
 
-[UP](/english/english-index.html)
+[UP](/english/index.html)
 
 
 ## Basic

@@ -3,7 +3,7 @@ title: "moon"
 sequence: "101"
 ---
 
-[UP](/english/english-index.html)
+[UP](/english/index.html)
 
 
 英文单词的“偏旁部首”

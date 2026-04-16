@@ -3,7 +3,7 @@ title: "Transition Words"
 sequence: "101"
 ---
 
-[UP](/english/english-index.html)
+[UP](/english/index.html)
 
 
 Use **transition words** to **connect** the ideas and **show** what the **relationship** is **between** them.

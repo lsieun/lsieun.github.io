@@ -3,6 +3,6 @@ title: "Law"
 sequence: "103"
 ---
 
-[UP](/english/english-index.html)
+[UP](/english/index.html)
 
 

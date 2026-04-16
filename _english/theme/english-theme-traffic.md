@@ -3,7 +3,7 @@ title: "Traffic"
 sequence: "traffic"
 ---
 
-[UP](/english/english-index.html)
+[UP](/english/index.html)
 
 ```text
 traffic jam 交通堵塞
