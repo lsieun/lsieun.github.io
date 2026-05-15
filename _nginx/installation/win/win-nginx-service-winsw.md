@@ -25,7 +25,7 @@ https://github.com/winsw/winsw/releases/download/v2.12.0/WinSW-x64.exe
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
     <id>nginx</id>
-    <name>Nginx Service 1.26</name>
+    <name>Nginx Service</name>
     <description>Nginx Service Supported By WinSW</description>
     
     <executable>%BASE%/nginx.exe</executable>
@@ -43,7 +43,7 @@ https://github.com/winsw/winsw/releases/download/v2.12.0/WinSW-x64.exe
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
     <id>nginx</id>
-    <name>Nginx Service 1.26</name>
+    <name>Nginx Service</name>
     <description>Nginx Service Supported By WinSW</description>
     
     <executable>%BASE%/nginx.exe</executable>
